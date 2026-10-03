@@ -786,6 +786,12 @@ body.gready #lgload{display:none}
 #anntx .annsep{color:#ffd24a;margin:0 22px}
 @keyframes annmv{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 #annx{flex:none;width:24px;height:24px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#ffe08a;font-size:12px;cursor:pointer;padding:0}
+
+.olst{display:inline-flex;align-items:center;gap:3px;margin-left:6px;font-size:11px;font-weight:700;color:#8a939d;vertical-align:middle}
+.olst::before{content:"";width:7px;height:7px;border-radius:50%;background:#5b636d}
+.olst.on{color:#7ee2a8}.olst.on::before{background:#2fdc6a;box-shadow:0 0 6px #2fdc6a;animation:olp 1.6s ease-in-out infinite}
+@keyframes olp{50%{opacity:.45}}
+.lbonline{font-size:12px;color:#7ee2a8;margin:-2px 0 6px}
 </style>
 </head>
 <body>
@@ -806,7 +812,7 @@ body.gready #lgload{display:none}
    <div id="lgload"><i></i>遊戲載入中,請稍候…<small>🎉 遊戲剛改版,第一次打開需要比較久(約 3MB)<br>載入一次之後就會快很多</small></div>
    <button class="btn pri" id="lggo">開始上班</button>
    <div class="lgcloud" id="lgcloud" hidden></div>
-   <p class="lghint">暱稱會顯示在排行榜和農場上,<br><b style="color:#ffcf6a">設定後無法修改</b>,請慎重取名。</p>
+   <p class="lghint">暱稱會顯示在排行榜和農場上,<br>之後改名要花 <b style="color:#ffcf6a">1,000 金幣</b>,請慎重取名。</p>
   </div>
   <details class="lgsave" id="lgsave">
    <summary>💾 存檔須知<span>第一次玩請看</span></summary>
@@ -1476,17 +1482,19 @@ function lbOpen(){$('lbov').hidden=false;sfx('open');
   if(LB.sb)LB.unsub=LB.sb.sub(rows=>{LB.rows=rows;lbRender()},fail);
   else LB.unsub=LB.db.collection('leaderboard').orderBy('coin','desc').limit(200).onSnapshot(sn=>{LB.rows=sn.docs.map(d=>Object.assign({id:d.id},d.data()));lbRender()},fail)}
  else lbRender();lbMe();lbSync(true)}
-function lbMe(){$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <span class="muted" style="font-size:11px">(暱稱設定後無法修改)</span>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')+(LB.err&&LB.sb?'<span style="color:#ff9a8a;font-size:11px">成績上傳失敗:'+escH(String(LB.err.code||''))+' '+escH(String(LB.err.msg||'').slice(0,120))+'</span>':'')}
+function lbMe(){$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <button class="btn" id="lbname" style="padding:3px 10px;font-size:12px">改名(1,000 金幣)</button>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')+(LB.err&&LB.sb?'<span style="color:#ff9a8a;font-size:11px">成績上傳失敗:'+escH(String(LB.err.code||''))+' '+escH(String(LB.err.msg||'').slice(0,120))+'</span>':'')}
 const escH=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function lbAgo(ms){const d=ms/1000;if(d<3600)return Math.max(1,Math.floor(d/60))+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
+const lbOn=r=>r.id===LB.uid||(Date.now()-(+r.t||0))<150000;
 async function lbRender(){
  const rows=LB.rows.slice().sort((a,b)=>(+b[LB.sort]||0)-(+a[LB.sort]||0));
  if(!rows.length){$('lblist').innerHTML='<div class="lbmsg">還沒有人上榜,快來搶第一名!</div>';return}
  let ps={};try{if(LB.user&&!LB.sb)ps=await LB.user.profiles(rows.filter(r=>!r.nick).map(r=>r.id))||{}}catch(e){}
- const med=['🥇','🥈','🥉'];
- $('lblist').innerHTML=rows.map((r,i)=>{const nm=r.nick||(ps[r.id]&&ps[r.id].name)||'神秘玩家';
+ const med=['🥇','🥈','🥉'],onN=rows.filter(lbOn).length;
+ $('lblist').innerHTML='<div class="lbonline">🟢 目前在線 '+onN+' 人 · 共 '+rows.length+' 位玩家</div>'+rows.map((r,i)=>{const nm=r.nick||(ps[r.id]&&ps[r.id].name)||'神秘玩家';
   const eqs=(Array.isArray(r.eq)?r.eq:[]).map(e=>e&&typeof e.b==='string'?'<span class="tile q'+(+e.q|0)+'" title="'+escH(e.n||e.b)+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span>':'').join('');
   const rd=r.ride&&ART['ride-'+r.ride.id]?'<img class="rd" src="'+ART['ride-'+r.ride.id]+'" alt="" title="座駕 Lv.'+(+r.ride.lv|0)+'">':'';
-  return'<div class="lbr'+(r.id===LB.uid?' me':'')+(LB.open===r.id?' open':'')+'" data-uid="'+escH(r.id)+'"><div class="rk">'+(med[i]||(i+1))+'</div><div style="min-width:0"><div class="nm">'+escH(nm)+(r.id===LB.uid?' (你)':'')+'<span class="tap">▾ 裝備</span></div><div class="eqs">'+(eqs||'<span class="muted" style="font-size:12px">沒有裝備</span>')+rd+'</div></div>'+
+  return'<div class="lbr'+(r.id===LB.uid?' me':'')+(LB.open===r.id?' open':'')+'" data-uid="'+escH(r.id)+'"><div class="rk">'+(med[i]||(i+1))+'</div><div style="min-width:0"><div class="nm">'+escH(nm)+(r.id===LB.uid?' (你)':'')+(lbOn(r)?'<span class="olst on">在線</span>':'<span class="olst">離線</span>')+'<span class="tap">▾ 裝備</span></div><div class="eqs">'+(eqs||'<span class="muted" style="font-size:12px">沒有裝備</span>')+rd+'</div></div>'+
    '<div class="val">'+(LB.sort==='power'?'⚔️ '+fmt(+r.power||0)+'<small>💰 '+fmtC(+r.coin||0)+'</small>':'💰 '+fmtC(+r.coin||0)+'<small>⚔️ '+fmt(+r.power||0)+'</small>')+'</div>'+lbDet(r)+'</div>'}).join('')}
 
 
@@ -1500,7 +1508,7 @@ function showLogin(){const li=$('login');if(!li)return;mqBulbs();
  li.hidden=false;if($('lgsave'))$('lgsave').open=!back;if(!back)setTimeout(()=>$('lgname').focus(),300)}
 $('lggo').onclick=()=>{const inp=$('lgname'),v=(SAVE.pname||inp.value.trim()).slice(0,12);
  if(!v){inp.classList.remove('bad');void inp.offsetWidth;inp.classList.add('bad');inp.focus();$('lglab').textContent='⚠️ 請先輸入遊戲暱稱';return}
- if(!SAVE.pname&&!$('lggo').dataset.ok){audioUnlock();ask('暱稱設定後就「不能修改」了,\n確定要使用「'+v+'」嗎?',()=>{$('lggo').dataset.ok='1';$('lggo').click()});return}
+ if(!SAVE.pname&&!$('lggo').dataset.ok){audioUnlock();ask('之後要改名需要花 1,000 金幣,\n確定要使用「'+v+'」嗎?',()=>{$('lggo').dataset.ok='1';$('lggo').click()});return}
  audioUnlock();setTimeout(()=>{if(typeof fmSync==='function'&&FM.on)fmSync()},800);setTimeout(()=>{if(typeof verNotice==='function')verNotice()},2600);setTimeout(()=>sfx('start'),60);const first=!SAVE.pname,chg=SAVE.pname!==v;SAVE.pname=v;save();if(chg){lbMe();lbSync(true)}
  $('login').hidden=true;const q=[(first?'👋 歡迎,':'👋 歡迎回來,')+v+'!',...TQ];TQ=[];q.forEach((m,i)=>setTimeout(()=>toast(m),i*2300))};
 $('lgname').addEventListener('keydown',e=>{if(e.key==='Enter')$('lggo').click()});
@@ -1518,11 +1526,19 @@ function askName(req,cb){NAMECB=cb||null;$('namein').value=SAVE.pname||'';$('nam
  $('namehint').innerHTML=req?'進入遊戲前請先取一個名稱,會顯示在排行榜上。<br>之後想改名,到右上角「🏆 排行榜」<br>點<b style="color:#ffcf2e">「修改名稱」</b>即可。':'會顯示在排行榜上,之後隨時可以再修改。';
  $('nameov').hidden=false;setTimeout(()=>$('namein').focus(),50)}
 $('namein').addEventListener('keydown',e=>{if(e.key==='Enter')$('nameok').click()});
-$('nameok').onclick=()=>{const v=$('namein').value.trim().slice(0,12);if(!v){$('namein').focus();return}const first=!SAVE.pname;SAVE.pname=v;save();$('nameov').hidden=true;lbMe();lbSync(true);if(first)toast('👋 歡迎,'+v+'!');const cb=NAMECB;NAMECB=null;if(cb)cb()};
-$('namecancel').onclick=()=>{$('nameov').hidden=true};
+$('nameok').onclick=()=>{const v=$('namein').value.trim().slice(0,12);if(!v){$('namein').focus();return}
+ if(NRENAME){if(v===SAVE.pname){toast('名字一樣,不用改');return}if((SAVE.coin||0)<1000){sfx('error');toast('金幣不夠');return}
+  NRENAME=false;SAVE.coin-=1000;const old=SAVE.pname;SAVE.pname=v;save();$('nameov').hidden=true;$('nameok').textContent='確定';lbMe();lbSync(true);renderHome();
+  try{if(typeof FM!=='undefined'&&FM.on)fmSync()}catch(x){}sfx('coins');toast('✏️ 改名成功:'+old+' → '+v+'(−1,000 金幣)');return}
+ const first=!SAVE.pname;SAVE.pname=v;save();$('nameov').hidden=true;lbMe();lbSync(true);if(first)toast('👋 歡迎,'+v+'!');const cb=NAMECB;NAMECB=null;if(cb)cb()};
+$('namecancel').onclick=()=>{$('nameov').hidden=true;NRENAME=false;$('nameok').textContent='確定'};
 $('lbx').onclick=()=>{$('lbov').hidden=true;sfx('close')};
-$('lbme').onclick=e=>{if(e.target.id==='lbname')askName()};
+let NRENAME=false;
+function renameAsk(){if((SAVE.coin||0)<1000){sfx('error');toast('改名需要 1,000 金幣,金幣不夠喔');return}NRENAME=true;askName(false);$('namehint').innerHTML='改名需要花費 <b style="color:#ffcf2e">1,000 金幣</b><br>目前有 '+fmtC(SAVE.coin||0)+' 金幣';$('nameok').textContent='花 1,000 金幣改名'}
+$('lbme').onclick=e=>{if(e.target.id==='lbname')renameAsk()};
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='lbbtn')lbOpen()});
+setInterval(()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.pname&&LB.db&&!LB.busy){LB.last='';lbSync(true)}},60000);
+setInterval(()=>{if(!$('lbov').hidden&&LB.rows&&LB.rows.length)lbRender()},30000);
 
 /* ===== 住處介面 ===== */
 let sel=null,flt='all';
@@ -2443,7 +2459,7 @@ setInterval(potWatch,60000);setTimeout(potWatch,8000);
 
 
 /* ===== 改版公告 ===== */
-const GVER='2026.10.03';
+const GVER='2026.10.03b';
 const GNOTES=[['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
  ['☁️','雲端存檔帳號','登入畫面可以綁定帳號密碼,換手機、換瀏覽器都能接續進度'],
  ['🃏','射龍門改版','全伺服器共用池底,看門柱再決定射或放棄,還能「全包」押整個池底'],
@@ -2451,7 +2467,7 @@ const GNOTES=[['🌻','開心農場','新分頁!種下作物離線也會長大,�
  ['🙏','祈禱變簡單','點穿戴中的裝備就能直接祈禱升階,規則不變'],
  ['🛵','座駕顯示','抽到的代步車會顯示在角色裝備欄'],
  ['🔊','音效調整','整體音量調小,右上角喇叭可以隨時調整'],
- ['🔒','暱稱鎖定','暱稱設定後無法修改']];
+ ['✏️','改名','到排行榜按「改名」,花 1,000 金幣就能換暱稱'],['🟢','在線狀態','排行榜會顯示誰在線上、誰離線']];
 function verNotice(){let seen='';try{seen=localStorage.getItem('shechu-ver')||''}catch(e){}if(seen===GVER)return;
  const L=$('login');if(L&&!L.hidden){setTimeout(verNotice,800);return}
  if(document.querySelector('.fnov,.clov,.fsov')){setTimeout(verNotice,1500);return}
