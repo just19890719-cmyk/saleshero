@@ -840,6 +840,30 @@ body.gready #lgload{display:none}
 .fsts li span{flex:none;width:22px;height:22px;border-radius:50%;background:#ffd24a;color:#2a1d00;font-weight:900;font-size:12px;display:grid;place-items:center}
 .fstn{font-size:12px;color:#ffb3a3}
 #fstgo{justify-self:start}
+
+.castabs{display:flex;gap:6px;margin-bottom:10px}
+.castabs button{flex:1;padding:8px 6px;border-radius:10px;border:1px solid rgba(255,210,90,.35);background:rgba(0,0,0,.35);color:#c9d1dc;font-weight:900;font-size:15px;cursor:pointer}
+.castabs button.on{background:linear-gradient(#ffd24a,#e0a000);color:#2a1700;border-color:#ffd24a;box-shadow:0 0 12px rgba(255,210,74,.4)}
+.sbbox{background:radial-gradient(ellipse at 40% 40%,rgba(160,30,30,.5),rgba(60,8,8,.65) 70%),#2a0a0a!important;border-color:#8a5a1e!important}
+.sbres{display:flex;align-items:stretch;justify-content:center;gap:8px;width:100%}
+.sbside{flex:1;max-width:170px;min-height:74px;border-radius:10px;background:rgba(0,0,0,.35);padding:6px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.sbside small{font-size:11px;color:#c9d1dc}
+.sbvs{align-self:center;font-weight:900;color:#ffd24a;font-size:18px;text-shadow:0 0 8px rgba(255,180,40,.6)}
+.sbsc{font-size:20px;font-weight:900;color:#fff}.sbsc.k3{color:#ffd24a;text-shadow:0 0 10px #ff9a00;font-size:24px}.sbsc.e18{color:#ff7a5c;text-shadow:0 0 10px #ff3b1f}.sbsc.bg{color:#9ba4ae}
+.sbnone{font-size:14px;color:#ffb3a3;font-weight:800}
+.sbmini{display:flex;gap:3px}.sbmini .sbd{width:20px;height:20px;padding:2px;border-radius:4px}.sbmini .sbd i.p{width:4px;height:4px}
+.sbbowlw{width:100%;display:flex;justify-content:center}
+.sbbowl{position:relative;width:min(300px,52vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 48%,#fffaf0 0 46%,#efe6d2 56%,#d8c8a8 64%,#c42a2a 66%,#e04545 70%,#9a1414 76%,#5a0808 80%,rgba(0,0,0,0) 81%);box-shadow:0 10px 24px rgba(0,0,0,.55),inset 0 0 30px rgba(0,0,0,.25);overflow:hidden}
+.sbbowl::after{content:"";position:absolute;inset:7%;border-radius:50%;box-shadow:inset 0 8px 18px rgba(0,0,0,.18);pointer-events:none}
+.sbwho{position:absolute;left:50%;bottom:23%;transform:translateX(-50%);font-size:11px;color:rgba(120,90,60,.55);font-weight:800;letter-spacing:.2em;pointer-events:none}
+.sbdw{position:absolute;left:0;top:0;width:38px;height:38px;will-change:transform;filter:drop-shadow(2px 4px 3px rgba(0,0,0,.45))}
+.sbd{width:38px;height:38px;box-sizing:border-box;padding:5px;border-radius:8px;background:linear-gradient(145deg,#ffffff,#e8e2d6);box-shadow:inset -2px -3px 4px rgba(0,0,0,.18),inset 2px 2px 3px rgba(255,255,255,.9);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);place-items:center}
+.sbd i{width:7px;height:7px;border-radius:50%}
+.sbd i.p{background:#1a1a1a;box-shadow:inset 0 1px 1px rgba(255,255,255,.3)}
+.sbd i.p.r{background:#d62020}
+.sbd.one i.p{width:12px;height:12px}
+.sbmini .sbd.one i.p{width:6px;height:6px}
+@media(max-width:600px){.sbbox{grid-template-columns:1fr 92px!important;gap:4px!important;padding:10px 6px!important}.sbside{padding:4px 2px}.sbsc{font-size:16px}.sbsc.k3{font-size:19px}.sbmini{gap:2px}.sbmini .sbd{width:18px;height:18px;padding:2px;border-radius:3px}.sbmini .sbd i{width:3px;height:3px}.sbmini .sbd.one i.p{width:5px;height:5px}.sbdw,.sbdw .sbd{width:30px;height:30px}.sbdw .sbd{padding:4px}.sbdw .sbd i{width:5px;height:5px}.sbdw .sbd.one i.p{width:9px;height:9px}#sbchips button{padding:4px 7px}}
 </style>
 </head>
 <body>
@@ -968,6 +992,8 @@ body.gready #lgload{display:none}
   </div>
   <div class="tab" data-tab="dragon" hidden>
    <section style="margin-top:12px">
+    <div class="castabs" id="castabs"><button data-c="dragon" class="on">🃏 射龍門</button><button data-c="sib">🎲 十八仔</button></div>
+    <div id="casD">
     <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用池底 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
      <div class="dsign"><p>有人看海 有人被愛</p><p class="b">有人射龍門輸到不知悔改</p><small>— 本店名言 —</small></div>
@@ -997,6 +1023,31 @@ body.gready #lgload{display:none}
       <li>池底被挖到見底時,芳芳會自動補 1,000 進去,遊戲不會中斷。</li>
      </ol>
     </details>
+    </div>
+    <div id="casS" hidden>
+    <h2>十八仔 <span class="muted" style="font-size:13px;font-weight:400">跟企劃女神芳芳對賭 · 芳芳做莊</span></h2>
+    <div class="dbox sbbox">
+     <div class="dsign"><p>十八啦!一把翻身</p><p class="b">扁精啦~明天再來</p><small>— 芳芳的碗公 —</small></div>
+     <div class="dtable">
+      <div class="sbres"><div class="sbside"><small>你</small><div id="sbpr"></div></div><div class="sbvs">VS</div><div class="sbside"><small>芳芳(莊家)</small><div id="sbbr"></div></div></div>
+      <div class="sbbowlw"><div class="sbbowl" id="sbbowl"><span class="sbwho" id="sbwho">碗公</span></div></div>
+      <div class="dinfo" id="sbinfo">選好下注金額,按「擲骰」開始!</div>
+      <div class="dbet"><span>下注:</span><b id="sbbetv">100</b><span class="muted">金幣 <small id="sbbetm"></small></span></div>
+      <div class="dchips" id="sbchips"><button data-v="100">+100</button><button data-v="1000">+1千</button><button data-v="10000">+1萬</button><button data-v="-1" class="allin">梭哈</button><button data-v="0" class="clr">清除</button></div>
+      <div class="dact"><button class="btn pri" id="sbgo">🎲 擲骰</button></div>
+      <div class="muted dstat" id="sbstat"></div>
+     </div>
+     <div class="ghost dghost"><div class="bub" id="sbbub">來來來,擲一把!十八啦~</div><img id="sbhost" alt="企劃女神芳芳"><div><span class="hname">企劃女神芳芳</span></div></div>
+    </div>
+    <details class="drule"><summary>📖 十八仔玩法</summary><ol>
+     <li><b>擲 4 顆骰子</b>,要有<b>兩顆一樣(一對)</b>,另外兩顆加起來就是點數。沒有點數(四顆都不同或三顆一樣)會自動重擲。</li>
+     <li><b>兩對</b>(例如 3、3、5、5)取比較大的那一對,算 10 點。</li>
+     <li>牌型大小:<b>🏆 一色</b>(四顆一樣,通殺)> <b>🔥 十八</b>(12 點)> 11 點 > … > 4 點 > <b>💀 扁精</b>(3 點)。兩邊都一色時比骰子大小。</li>
+     <li>你先擲、芳芳後擲,點數大的人贏。</li>
+     <li><b>賠率</b>:一般贏 1 倍;用<b>十八</b>贏 <b>3 倍</b>;用<b>一色</b>贏 <b>5 倍</b>,還會上<b>全伺服器公告</b>!</li>
+     <li><b>平手莊家吃和</b>,算你輸。每局最多下注 50,000 金幣。</li>
+    </ol></details>
+    </div>
    </section>
   </div>
   <div class="tab" data-tab="tarot" hidden>
@@ -1020,7 +1071,7 @@ body.gready #lgload{display:none}
    <button data-t="eq"><span class="ti" id="tie">🎒</span>裝備</button>
    <button data-t="gacha"><span class="ti" id="tig">🎰</span>抽獎</button>
    <button data-t="farm"><span class="ti fic">🌻</span>農場</button>
-   <button data-t="dragon"><span class="ti">🃏</span>射龍門</button>
+   <button data-t="dragon"><span class="ti">🃏</span>賭場</button>
    <button data-t="tarot"><span class="ti">🔮</span>塔羅牌</button>
   </nav>
  </div>
@@ -1093,7 +1144,7 @@ body.gready #lgload{display:none}
 </div>
 
 <script src="assets.js?v=194df567"></script>
-<script src="sounds.js?v=e01b4c2c" async></script>
+<script src="sounds.js?v=bfff0792" async></script>
 <script>
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
    1. 排行榜連線:到 https://supabase.com 建立免費專案後,把網址與 anon key 貼在下面。
@@ -1282,7 +1333,7 @@ $('g1').onclick=()=>gacha(1);$('g10').onclick=()=>gacha(10);
 $('gagain').onclick=()=>gacha(gLast);$('gclose').onclick=()=>{$('gov').hidden=true;$('gov').classList.remove('gx');renderHome()};
 
 /* ===== 分頁 ===== */
-function setTab(t){if(t==='pray')t='eq';SAVE.tab=t;document.querySelectorAll('#home .tab').forEach(el=>el.hidden=el.dataset.tab!==t);document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('home').scrollTop=0;if(t==='eq')renderPray();if(t==='farm')renderFarm();if(t==='dragon')renderDragon();if(t==='tarot')renderTarot();save()}
+function setTab(t){if(t==='pray')t='eq';SAVE.tab=t;document.querySelectorAll('#home .tab').forEach(el=>el.hidden=el.dataset.tab!==t);document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('home').scrollTop=0;if(t==='eq')renderPray();if(t==='farm')renderFarm();if(t==='dragon'){if(typeof casSwitch==='function')casSwitch(SAVE.cas||'dragon');else renderDragon()}if(t==='tarot')renderTarot();save()}
 $('tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(b){audioUnlock();sfx('tab');setTab(b.dataset.t)}};
 (()=>{const im=(id,k)=>{if(ART[k])$(id).innerHTML='<img src="'+ART[k]+'" alt="">'};im('tie','我的ARMANI');im('tig','gacha-machine');
  for(const [t,k] of [['map','nav-map'],['eq','nav-eq'],['gacha','nav-gacha'],['farm','nav-farm'],['dragon','nav-dragon'],['tarot','nav-tarot']]){const b=$('tabs').querySelector('[data-t="'+t+'"] .ti');if(b&&ART[k])b.innerHTML='<img src="'+ART[k]+'" alt="">'}})();
@@ -2551,13 +2602,13 @@ function potShow(pot){let el=$('potann');if(!el){el=document.createElement('div'
  el.innerHTML='<img src="'+(ART['host-4']||ART['host-1']||'')+'" alt="芳芳"><div class="pa"><small>📢 伺服器公告 · 企劃女神芳芳</small>'+pickL(lines)+'</div><button class="btn pri" data-go="1">去射龍門</button><span class="x" data-x="1">✕</span>';
  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');setTimeout(()=>sfx('coins'),250);
  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),14000);
- el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');renderHome()}}
+ el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');if(typeof casSwitch==='function')casSwitch('dragon');renderHome()}}
 setInterval(potWatch,60000);setTimeout(potWatch,8000);
 
 
 /* ===== 改版公告 ===== */
-const GVER='2026.10.03b';
-const GNOTES=[['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
+const GVER='2026.10.04';
+const GNOTES=[['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
  ['☁️','雲端存檔帳號','登入畫面可以綁定帳號密碼,換手機、換瀏覽器都能接續進度'],
  ['🃏','射龍門改版','全伺服器共用池底,看門柱再決定射或放棄,還能「全包」押整個池底'],
  ['📢','芳芳伺服器公告','池底超過 5,000 金幣時會通知全伺服器'],
@@ -2590,6 +2641,76 @@ function annRender(){const bar=$('annbar');if(!bar)return;let closed='';try{clos
  if(mx>last){try{localStorage.setItem('shechu-annlast',String(mx))}catch(e){}if(last>0||true){const L=$('login');const nw=ANN.list.find(a=>+a.id===mx);if(nw&&!(L&&!L.hidden)){toast('📢 新公告:'+String(nw.msg).slice(0,40));sfx('open')}}}}
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#annx')){try{localStorage.setItem('shechu-annx',annSig())}catch(x){}$('annbar').hidden=true;sfx('close')}});
 setInterval(annFetch,30000);setTimeout(annFetch,2500);
+
+/* ===== 十八仔 ===== */
+const SBMAX=50000;
+const SBL={idle:['來來來,擲一把!十八啦~','莊家是我,有本事就來贏我','碗公已經準備好了,下注吧!'],
+ eighteen:['十八啦!!!','十八!這把是天選之人','哇~十八耶,手氣太旺了吧'],
+ bg:['扁精~哈哈哈哈','扁精啦~明天再來','這個點數…我都不好意思笑了(哈哈)'],
+ tie:['平手算我的喔~莊家吃和','一樣大?不好意思,和局莊家贏','平手~規矩就是規矩'],
+ win:['被你贏了…再來一把我一定扳回來','可惡,算你厲害','你今天是不是有去拜拜?'],
+ lose:['謝謝老闆~','我贏啦!再來再來','這把我收下了~'],
+ allsame:['一色!!!通殺!!!','一色耶!今天你最大!','四顆一樣…我要去跟全伺服器宣布!'],
+ hostall:['我一色!通殺!不好意思囉~','一色!莊家通殺!']};
+var SBS={ph:'idle',bet:100,p:null,b:null};
+function sbScore(d){const c={};d.forEach(v=>c[v]=(c[v]||0)+1);const ks=Object.keys(c).map(Number);
+ if(ks.length===1)return{k:3,v:d[0],n:'一色'};const pairs=ks.filter(v=>c[v]===2);
+ if(ks.length===2&&pairs.length===2){const v=Math.max(...pairs)*2;return{k:1,v,n:sbName(v)}}
+ if(ks.length===3&&pairs.length===1){const v=d.filter(x=>x!==pairs[0]).reduce((a,b)=>a+b,0);return{k:1,v,n:sbName(v)}}return null}
+const sbName=v=>v===12?'十八':v===3?'扁精':v+' 點';
+const sbRoll=()=>[1,2,3,4].map(()=>1+((Math.random()*6)|0));
+const sbCmp=(a,b)=>a.k!==b.k?a.k-b.k:a.v-b.v;
+const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+function sbDieH(v){const red=v===1||v===4;return'<div class="sbd'+(v===1?' one':'')+'">'+[0,1,2,3,4,5,6,7,8].map(i=>'<i'+(PIPS[v].includes(i)?' class="p'+(red?' r':'')+'"':'')+'></i>').join('')+'</div>'}
+function sbSay(k,img){$('sbbub').textContent=pickL(SBL[k]);$('sbhost').src=ART[img]||ART['host-1']||''}
+function sbMax(){return Math.max(0,Math.min(SBMAX,Math.floor((SAVE.coin||0)/100)*100))}
+function renderSib(){if(!$('sbhost'))return;if(!$('sbhost').getAttribute('src'))$('sbhost').src=ART['host-1']||'';
+ const mx=sbMax();if(SBS.bet>mx)SBS.bet=Math.max(100,mx);$('sbbetv').textContent=fmtC(SBS.bet);$('sbbetm').textContent='(上限 '+fmtC(Math.min(SBMAX,Math.max(mx,100)))+')';
+ const busy=SBS.ph==='rolling';$('sbgo').disabled=busy||(SAVE.coin||0)<SBS.bet||SBS.bet<100;$('sbgo').textContent=busy?'擲骰中…':'🎲 擲骰('+fmtC(SBS.bet)+')';
+ $('sbchips').style.pointerEvents=busy?'none':'auto';$('sbchips').style.opacity=busy?.4:1;
+ const st=SAVE.sstat||{w:0,l:0,net:0};$('sbstat').innerHTML='金幣 <b style="color:#ffd24a">'+fmtC(SAVE.coin||0)+'</b> · 戰績 '+st.w+' 勝 '+st.l+' 敗 · 累計 '+(st.net>=0?'<span class="up">+':'<span class="down">')+fmtC(st.net)+'</span>'}
+/* 骰子在碗裡彈跳的動畫 */
+function sbAnim(final,dur){return new Promise(res=>{const bowl=$('sbbowl');bowl.querySelectorAll('.sbd').forEach(e=>e.remove());const W=bowl.clientWidth,H=bowl.clientHeight,cx=W/2,cy=H/2,R=Math.min(W,H)*.32;
+ const ds=final.map((v,i)=>{const el=document.createElement('div');el.className='sbdw';el.innerHTML=sbDieH(1+((Math.random()*6)|0));bowl.appendChild(el);
+  const a=Math.random()*6.283;return{el,v,x:cx+Math.cos(a)*R*1.2,y:cy+Math.sin(a)*R*1.2,vx:(Math.random()-.5)*14,vy:(Math.random()-.5)*14,r:Math.random()*360,vr:(Math.random()-.5)*40,face:0}});
+ const t0=performance.now();let last=t0,lastF=0;
+ const step=now=>{const t=now-t0,dt=Math.min(32,now-last)/16;last=now;const k=Math.max(0,1-t/dur);
+  ds.forEach((d,i)=>{d.vx*=.985;d.vy*=.985;d.vr*=.97;d.x+=d.vx*dt*k*1.2;d.y+=d.vy*dt*k*1.2;d.r+=d.vr*dt*k;
+   const dx=d.x-cx,dy=d.y-cy,dist=Math.hypot(dx,dy),lim=R;if(dist>lim){const nx=dx/dist,ny=dy/dist,dot=d.vx*nx+d.vy*ny;d.vx-=2*dot*nx;d.vy-=2*dot*ny;d.x=cx+nx*lim;d.y=cy+ny*lim;if(k>.2&&Math.random()<.3)sfx('diceHit')}
+   ds.forEach((o,j)=>{if(j<=i)return;const ox=o.x-d.x,oy=o.y-d.y,dd=Math.hypot(ox,oy)||1;if(dd<34){const px=ox/dd*(34-dd)/2,py=oy/dd*(34-dd)/2;d.x-=px;d.y-=py;o.x+=px;o.y+=py;const t1=d.vx;d.vx=o.vx;o.vx=t1;const t2=d.vy;d.vy=o.vy;o.vy=t2}});
+   d.el.style.transform='translate('+(d.x-19)+'px,'+(d.y-19)+'px) rotate('+d.r+'deg) scale('+(1+.25*k*Math.abs(Math.sin(t/90+i)))+')'});
+  if(t-lastF>70&&k>.15){lastF=t;ds.forEach(d=>d.el.innerHTML=sbDieH(1+((Math.random()*6)|0)))}
+  if(t<dur)requestAnimationFrame(step);else{ds.forEach(d=>{d.el.innerHTML=sbDieH(d.v);d.r=Math.round(d.r/90)*90+(Math.random()-.5)*16;d.el.style.transform='translate('+(d.x-19)+'px,'+(d.y-19)+'px) rotate('+d.r+'deg)'});res()}};
+ requestAnimationFrame(step)})}
+async function sbThrow(who){const box=$(who==='p'?'sbpr':'sbbr');let tries=0,d,sc;
+ for(;;){d=sbRoll();sc=sbScore(d);tries++;if(!sc&&tries>=6){d=[1,1,1,2];sc=sbScore(d)}
+  sfx('diceShake');await new Promise(r=>setTimeout(r,tries===1?380:200));sfx('diceThrow');await sbAnim(d,tries===1?1300:750);
+  if(sc)break;box.innerHTML='<span class="sbnone">無點,重擲!</span>';sfx('error');await new Promise(r=>setTimeout(r,550))}
+ box.innerHTML='<b class="sbsc k'+sc.k+(sc.v===12?' e18':'')+(sc.v===3&&sc.k===1?' bg':'')+'">'+sc.n+'</b><span class="sbmini">'+d.map(sbDieH).join('')+'</span>';
+ if(sc.k===3){sfx('fan3');sbSay(who==='p'?'allsame':'hostall','host-4')}else if(sc.v===12){sfx('levelUp');if(who==='p')sbSay('eighteen','host-4')}else if(sc.v===3&&who==='p'){sfx('wahwah');sbSay('bg','host-3')}
+ await new Promise(r=>setTimeout(r,700));return sc}
+async function sbPlay(){if(SBS.ph==='rolling')return;const bet=SBS.bet;if((SAVE.coin||0)<bet||bet<100){sfx('error');return toast('金幣不夠')}
+ audioUnlock();SBS.ph='rolling';renderSib();$('sbinfo').innerHTML='你先擲!';$('sbpr').innerHTML='';$('sbbr').innerHTML='';$('sbwho').textContent='你的碗公';
+ const p=await sbThrow('p');$('sbwho').textContent='芳芳的碗公';$('sbinfo').innerHTML='換芳芳擲…';await new Promise(r=>setTimeout(r,400));
+ const b=await sbThrow('b');const c=sbCmp(p,b);let delta,msg;
+ if(c>0){const m=p.k===3?5:p.v===12?3:1;delta=bet*m;msg='<span class="up">你贏了!'+(m>1?'用「'+p.n+'」贏 '+m+' 倍,':'')+'+'+fmtC(delta)+' 金幣</span>';
+  if(p.k===3){sfx('fan4');try{sbAnnounce(delta)}catch(e){}}else{sfx('casinoWin');if(p.v!==12)sbSay('win','host-2')}}
+ else if(c===0){delta=-bet;msg='<span class="down">平手,莊家吃和,−'+fmtC(bet)+' 金幣</span>';sfx('casinoLose');sbSay('tie','host-4')}
+ else{delta=-bet;msg='<span class="down">芳芳贏了,−'+fmtC(bet)+' 金幣</span>';sfx('casinoLose');if(b.k!==3)sbSay('lose','host-4')}
+ SAVE.coin=Math.max(0,(SAVE.coin||0)+delta);const st=SAVE.sstat=SAVE.sstat||{w:0,l:0,net:0};st.net+=delta;if(delta>0)st.w++;else st.l++;save();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);
+ $('sbinfo').innerHTML=msg;SBS.ph='done';renderSib()}
+async function sbAnnounce(win){if(typeof ONLINE==='undefined'||!ONLINE.supabaseKey||(window.claude&&window.claude.use))return;
+ const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
+ await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/sib_announce',{method:'POST',headers:h,body:JSON.stringify({p_nick:SAVE.pname||'',p_win:Math.floor(win)})});setTimeout(()=>{try{annFetch()}catch(e){}},800)}
+$('sbchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||SBS.ph==='rolling')return;const v=+b.dataset.v,mx=sbMax();
+ if(v===-1)SBS.bet=Math.max(100,mx);else if(v===0)SBS.bet=100;else SBS.bet=Math.min(Math.max(100,mx),SBS.bet+v);audioUnlock();sfx(v?'chips':'chipsClear');renderSib()};
+$('sbgo').onclick=()=>sbPlay();
+function casSwitch(k){SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1')}else renderDragon();save()}
+$('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');casSwitch(b.dataset.c)};
+setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
+
+Object.assign(SFX,{diceShake:()=>{S('diceS',.55)||SYN.shuffle()},diceThrow:()=>{S('diceT',.6)||N('bandpass',1500,600,.2,.25,2)},diceHit:()=>{S('diceG',.22,0,R_(1.1,1.4))||T('triangle',R_(1800,2400),1200,.04,.06)}});
+SGAP.diceHit=.06;
 
 /* ===== 雲端存檔帳號 ===== */
 var CL={on:false,u:null,t:null,timer:null,busy:false,lastOk:0,err:'',ready:false,dirty:false};
