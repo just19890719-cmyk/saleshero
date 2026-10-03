@@ -864,6 +864,34 @@ body.gready #lgload{display:none}
 .sbd.one i.p{width:12px;height:12px}
 .sbmini .sbd.one i.p{width:6px;height:6px}
 @media(max-width:600px){.sbbox{grid-template-columns:1fr 92px!important;gap:4px!important;padding:10px 6px!important}.sbside{padding:4px 2px}.sbsc{font-size:16px}.sbsc.k3{font-size:19px}.sbmini{gap:2px}.sbmini .sbd{width:18px;height:18px;padding:2px;border-radius:3px}.sbmini .sbd i{width:3px;height:3px}.sbmini .sbd.one i.p{width:5px;height:5px}.sbdw,.sbdw .sbd{width:30px;height:30px}.sbdw .sbd{padding:4px}.sbdw .sbd i{width:5px;height:5px}.sbdw .sbd.one i.p{width:9px;height:9px}#sbchips button{padding:4px 7px}}
+
+/* ===== 賭場美術 ===== */
+.dchips{gap:6px!important;align-items:center}
+.dchips button[data-v]:not(.clr){width:54px;height:54px;padding:0!important;border:0!important;border-radius:50%;background:center/contain no-repeat!important;color:#1d1d1d!important;font-size:12px!important;font-weight:900;text-shadow:none;filter:drop-shadow(0 3px 3px rgba(0,0,0,.55));transition:transform .1s}
+.dchips button[data-v]:not(.clr):active{transform:scale(.9) translateY(2px)}
+.dchips button[data-v="100"]:not(.clr){background-image:var(--chip1)!important}
+.dchips button[data-v="1000"]:not(.clr){background-image:var(--chip2)!important}
+.dchips button[data-v="10000"]:not(.clr){background-image:var(--chip3)!important}
+.dchips button[data-v="100000"]:not(.clr){background-image:var(--chip4)!important;color:#ffe08a!important}
+.dchips button[data-v="-1"]:not(.clr){background-image:var(--chipgold)!important;color:#5a3a00!important}
+.dchips button.clr{width:auto;height:30px;font-size:12px!important}
+.dbet{display:flex;align-items:center;gap:6px;justify-content:center;white-space:nowrap;flex-wrap:wrap}
+.dbet::before{content:"";width:34px;height:36px;background:var(--chipstack) center/contain no-repeat;flex:none}
+.dpot{flex-direction:row!important;gap:10px!important;padding:6px 20px 6px 8px!important}
+.dpot::before{content:"";width:64px;height:58px;background:var(--potgold) center/contain no-repeat;flex:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5))}
+.dpot>small,.dpot>b,.dpot>span{display:block}
+.dpot .dpw{display:flex;flex-direction:column;align-items:center}
+#casD .dbox{border:30px solid transparent!important;border-radius:0!important;border-image:var(--feltg) 100 fill / 30px stretch!important;box-shadow:none!important;padding:8px!important}
+.sbbox{border:30px solid transparent!important;border-radius:0!important;border-image:var(--feltr) 100 fill / 30px stretch!important;box-shadow:none!important;padding:8px!important}
+.sbbowl{background:var(--bowl) center/100% 100% no-repeat!important;box-shadow:0 12px 26px rgba(0,0,0,.6)!important}
+.sbbowl::after{display:none}
+.sbdw{width:44px!important;height:46px!important}
+.sbdw img{width:100%;height:100%;object-fit:contain}
+.sbmini img{width:22px;height:23px;object-fit:contain}
+.castabs button img{height:26px;vertical-align:middle;margin-right:4px}
+.sbbig{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%) scale(.2);opacity:0;pointer-events:none;animation:sbbig 1.6s ease-out forwards;filter:drop-shadow(0 0 20px rgba(255,200,60,.9))}
+@keyframes sbbig{30%{transform:translate(-50%,-50%) scale(1.15);opacity:1}70%{transform:translate(-50%,-50%) scale(1) rotate(8deg);opacity:1}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
+@media(max-width:600px){.dchips button[data-v]:not(.clr){width:46px;height:46px;font-size:11px!important}.sbdw{width:34px!important;height:36px!important}.dpot::before{width:48px;height:44px}#casD .dbox,.sbbox{border-width:22px!important;border-image-width:22px!important}}
 </style>
 </head>
 <body>
@@ -992,12 +1020,12 @@ body.gready #lgload{display:none}
   </div>
   <div class="tab" data-tab="dragon" hidden>
    <section style="margin-top:12px">
-    <div class="castabs" id="castabs"><button data-c="dragon" class="on">🃏 射龍門</button><button data-c="sib">🎲 十八仔</button></div>
+    <div class="castabs" id="castabs"><button data-c="dragon" class="on"><span class="cti" data-k="cards-fan">🃏</span> 射龍門</button><button data-c="sib"><span class="cti" data-k="dice-gold">🎲</span> 十八仔</button></div>
     <div id="casD">
     <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用池底 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
      <div class="dsign"><p>有人看海 有人被愛</p><p class="b">有人射龍門輸到不知悔改</p><small>— 本店名言 —</small></div>
-     <div class="dpot"><small>💰 全伺服器池底</small><b id="dpotv">—</b><span id="dpotst">連線中…</span></div>
+     <div class="dpot"><div class="dpw"><small>💰 全伺服器池底</small><b id="dpotv">—</b><span id="dpotst">連線中…</span></div></div>
      <div class="dtable">
       <div class="dcards"><div class="dslot" id="dA"></div><div class="dslot mid" id="dC"></div><div class="dslot" id="dB"></div></div>
       <div class="dinfo" id="dinfo">每局丟底 100 金幣,看完門柱再決定要不要射</div>
@@ -1143,7 +1171,7 @@ body.gready #lgload{display:none}
  </div>
 </div>
 
-<script src="assets.js?v=194df567"></script>
+<script src="assets.js?v=e1e9286b"></script>
 <script src="sounds.js?v=bfff0792" async></script>
 <script>
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
@@ -1660,7 +1688,7 @@ let sel=null,flt='all';
 const STI={atk:'⚔️',hp:'❤️',def:'🛡️',aspd:'⚡',crit:'💥',spd:'👟',pick:'🧲',regen:'➕'};
 for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">';
 const skI=k=>ART['sk-'+k]?'<img src="'+ART['sk-'+k]+'" alt="">':'';
-(()=>{const R=document.documentElement.style,u=k=>ART[k]?'url('+ART[k]+')':'none';['fr-0','fr-1','fr-2','fr-3','fr-4'].forEach((k,i)=>R.setProperty('--fr'+i,u(k)));R.setProperty('--fre',u('fr-empty'));R.setProperty('--fr-1',u('fr-empty'));R.setProperty('--homebg',u('bg-home'));if(ART['farm-bg'])R.setProperty('--farmbg',u('farm-bg'));if(ART['login-bg'])R.setProperty('--loginbg',u('login-bg'));R.setProperty('--gstage',u('g-stage'));R.setProperty('--trback',u('tr-back'));
+(()=>{const R=document.documentElement.style,u=k=>ART[k]?'url('+ART[k]+')':'none';['fr-0','fr-1','fr-2','fr-3','fr-4'].forEach((k,i)=>R.setProperty('--fr'+i,u(k)));R.setProperty('--fre',u('fr-empty'));R.setProperty('--fr-1',u('fr-empty'));R.setProperty('--homebg',u('bg-home'));[['--chip1','chip-1'],['--chip2','chip-2'],['--chip3','chip-3'],['--chip4','chip-4'],['--chipgold','chip-gold'],['--chipstack','chip-stack'],['--potgold','pot-gold'],['--bowl','bowl'],['--feltg','felt-green'],['--feltr','felt-red']].forEach(([v,k])=>{if(ART[k])R.setProperty(v,u(k))});if(ART['farm-bg'])R.setProperty('--farmbg',u('farm-bg'));if(ART['login-bg'])R.setProperty('--loginbg',u('login-bg'));R.setProperty('--gstage',u('g-stage'));R.setProperty('--trback',u('tr-back'));
  if(ART['零件'])document.getElementById('phd').innerHTML='<img class="pico" src="'+(ART['金幣']||'')+'" alt="金幣"> <b id="hcoins">0</b><button class="volbtn" id="volbtn" aria-label="音效設定">🔊</button><button class="lbbtn" id="lbbtn">🏆 排行榜</button><div class="volpop" id="volpop" hidden><h4>🔊 音效設定</h4><div class="vr"><input type="range" id="vol3" min="0" max="100" step="5" value="50"><b id="vol3v">50%</b></div><label><input type="checkbox" id="mute3"> 關閉音效</label></div><b id="parts" hidden>0</b>'})();
 const better=it=>!isEq(it)&&score(it)>score(byId(SAVE.eq[slotFor(it)]))+.01;
 function tile(it,on,mark){return'<button class="tile q'+it.q+(on?' sel':'')+(isEq(it)?' eq':'')+(mark&&better(it)?' better':'')+'" data-id="'+it.id+'" aria-label="'+it.name+'">'+icon(it.b,it.e)+(it.up?'<b>+'+it.up+'</b>':'')+'</button>'}
@@ -2661,7 +2689,7 @@ const sbName=v=>v===12?'十八':v===3?'扁精':v+' 點';
 const sbRoll=()=>[1,2,3,4].map(()=>1+((Math.random()*6)|0));
 const sbCmp=(a,b)=>a.k!==b.k?a.k-b.k:a.v-b.v;
 const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
-function sbDieH(v){const red=v===1||v===4;return'<div class="sbd'+(v===1?' one':'')+'">'+[0,1,2,3,4,5,6,7,8].map(i=>'<i'+(PIPS[v].includes(i)?' class="p'+(red?' r':'')+'"':'')+'></i>').join('')+'</div>'}
+function sbDieH(v){if(ART['die-'+v])return'<img src="'+ART['die-'+v]+'" alt="'+v+'">';const red=v===1||v===4;return'<div class="sbd'+(v===1?' one':'')+'">'+[0,1,2,3,4,5,6,7,8].map(i=>'<i'+(PIPS[v].includes(i)?' class="p'+(red?' r':'')+'"':'')+'></i>').join('')+'</div>'}
 function sbSay(k,img){$('sbbub').textContent=pickL(SBL[k]);$('sbhost').src=ART[img]||ART['host-1']||''}
 function sbMax(){return Math.max(0,Math.min(SBMAX,Math.floor((SAVE.coin||0)/100)*100))}
 function renderSib(){if(!$('sbhost'))return;if(!$('sbhost').getAttribute('src'))$('sbhost').src=ART['host-1']||'';
@@ -2670,7 +2698,7 @@ function renderSib(){if(!$('sbhost'))return;if(!$('sbhost').getAttribute('src'))
  $('sbchips').style.pointerEvents=busy?'none':'auto';$('sbchips').style.opacity=busy?.4:1;
  const st=SAVE.sstat||{w:0,l:0,net:0};$('sbstat').innerHTML='金幣 <b style="color:#ffd24a">'+fmtC(SAVE.coin||0)+'</b> · 戰績 '+st.w+' 勝 '+st.l+' 敗 · 累計 '+(st.net>=0?'<span class="up">+':'<span class="down">')+fmtC(st.net)+'</span>'}
 /* 骰子在碗裡彈跳的動畫 */
-function sbAnim(final,dur){return new Promise(res=>{const bowl=$('sbbowl');bowl.querySelectorAll('.sbd').forEach(e=>e.remove());const W=bowl.clientWidth,H=bowl.clientHeight,cx=W/2,cy=H/2,R=Math.min(W,H)*.32;
+function sbAnim(final,dur){return new Promise(res=>{const bowl=$('sbbowl');bowl.querySelectorAll('.sbdw,.sbbig').forEach(e=>e.remove());const W=bowl.clientWidth,H=bowl.clientHeight,cx=W/2,cy=H/2,R=Math.min(W,H)*.27,hw=bowl.querySelector('.sbdw')?0:0;
  const ds=final.map((v,i)=>{const el=document.createElement('div');el.className='sbdw';el.innerHTML=sbDieH(1+((Math.random()*6)|0));bowl.appendChild(el);
   const a=Math.random()*6.283;return{el,v,x:cx+Math.cos(a)*R*1.2,y:cy+Math.sin(a)*R*1.2,vx:(Math.random()-.5)*14,vy:(Math.random()-.5)*14,r:Math.random()*360,vr:(Math.random()-.5)*40,face:0}});
  const t0=performance.now();let last=t0,lastF=0;
@@ -2678,16 +2706,16 @@ function sbAnim(final,dur){return new Promise(res=>{const bowl=$('sbbowl');bowl.
   ds.forEach((d,i)=>{d.vx*=.985;d.vy*=.985;d.vr*=.97;d.x+=d.vx*dt*k*1.2;d.y+=d.vy*dt*k*1.2;d.r+=d.vr*dt*k;
    const dx=d.x-cx,dy=d.y-cy,dist=Math.hypot(dx,dy),lim=R;if(dist>lim){const nx=dx/dist,ny=dy/dist,dot=d.vx*nx+d.vy*ny;d.vx-=2*dot*nx;d.vy-=2*dot*ny;d.x=cx+nx*lim;d.y=cy+ny*lim;if(k>.2&&Math.random()<.3)sfx('diceHit')}
    ds.forEach((o,j)=>{if(j<=i)return;const ox=o.x-d.x,oy=o.y-d.y,dd=Math.hypot(ox,oy)||1;if(dd<34){const px=ox/dd*(34-dd)/2,py=oy/dd*(34-dd)/2;d.x-=px;d.y-=py;o.x+=px;o.y+=py;const t1=d.vx;d.vx=o.vx;o.vx=t1;const t2=d.vy;d.vy=o.vy;o.vy=t2}});
-   d.el.style.transform='translate('+(d.x-19)+'px,'+(d.y-19)+'px) rotate('+d.r+'deg) scale('+(1+.25*k*Math.abs(Math.sin(t/90+i)))+')'});
+   const hs=d.el.offsetWidth/2||19;d.el.style.transform='translate('+(d.x-hs)+'px,'+(d.y-hs)+'px) rotate('+d.r+'deg) scale('+(1+.25*k*Math.abs(Math.sin(t/90+i)))+')'});
   if(t-lastF>70&&k>.15){lastF=t;ds.forEach(d=>d.el.innerHTML=sbDieH(1+((Math.random()*6)|0)))}
-  if(t<dur)requestAnimationFrame(step);else{ds.forEach(d=>{d.el.innerHTML=sbDieH(d.v);d.r=Math.round(d.r/90)*90+(Math.random()-.5)*16;d.el.style.transform='translate('+(d.x-19)+'px,'+(d.y-19)+'px) rotate('+d.r+'deg)'});res()}};
+  if(t<dur)requestAnimationFrame(step);else{ds.forEach(d=>{d.el.innerHTML=sbDieH(d.v);d.r=(Math.random()-.5)*24;const hs=d.el.offsetWidth/2||19;d.el.style.transform='translate('+(d.x-hs)+'px,'+(d.y-hs)+'px) rotate('+d.r+'deg)'});res()}};
  requestAnimationFrame(step)})}
 async function sbThrow(who){const box=$(who==='p'?'sbpr':'sbbr');let tries=0,d,sc;
  for(;;){d=sbRoll();sc=sbScore(d);tries++;if(!sc&&tries>=6){d=[1,1,1,2];sc=sbScore(d)}
   sfx('diceShake');await new Promise(r=>setTimeout(r,tries===1?380:200));sfx('diceThrow');await sbAnim(d,tries===1?1300:750);
   if(sc)break;box.innerHTML='<span class="sbnone">無點,重擲!</span>';sfx('error');await new Promise(r=>setTimeout(r,550))}
  box.innerHTML='<b class="sbsc k'+sc.k+(sc.v===12?' e18':'')+(sc.v===3&&sc.k===1?' bg':'')+'">'+sc.n+'</b><span class="sbmini">'+d.map(sbDieH).join('')+'</span>';
- if(sc.k===3){sfx('fan3');sbSay(who==='p'?'allsame':'hostall','host-4')}else if(sc.v===12){sfx('levelUp');if(who==='p')sbSay('eighteen','host-4')}else if(sc.v===3&&who==='p'){sfx('wahwah');sbSay('bg','host-3')}
+ if(sc.k===3){if(ART['dice-gold'])$('sbbowl').insertAdjacentHTML('beforeend','<img class="sbbig" src="'+ART['dice-gold']+'" alt="">');sfx('fan3');sbSay(who==='p'?'allsame':'hostall','host-4')}else if(sc.v===12){sfx('levelUp');if(who==='p')sbSay('eighteen','host-4')}else if(sc.v===3&&who==='p'){sfx('wahwah');sbSay('bg','host-3')}
  await new Promise(r=>setTimeout(r,700));return sc}
 async function sbPlay(){if(SBS.ph==='rolling')return;const bet=SBS.bet;if((SAVE.coin||0)<bet||bet<100){sfx('error');return toast('金幣不夠')}
  audioUnlock();SBS.ph='rolling';renderSib();$('sbinfo').innerHTML='你先擲!';$('sbpr').innerHTML='';$('sbbr').innerHTML='';$('sbwho').textContent='你的碗公';
@@ -2706,6 +2734,7 @@ $('sbchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||SBS.ph==='r
  if(v===-1)SBS.bet=Math.max(100,mx);else if(v===0)SBS.bet=100;else SBS.bet=Math.min(Math.max(100,mx),SBS.bet+v);audioUnlock();sfx(v?'chips':'chipsClear');renderSib()};
 $('sbgo').onclick=()=>sbPlay();
 function casSwitch(k){SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1')}else renderDragon();save()}
+document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});
 $('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');casSwitch(b.dataset.c)};
 setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
 
