@@ -628,6 +628,15 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
 .gr-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff9a3c,#e5303a);border-radius:4px}
 .gr-p small{color:#9ba4ae}.gr-p small b{color:#ff8a7a}
 .gr-n{margin:6px 0 0;padding-left:16px;color:#9ba4ae}.gr-n li{margin:1px 0}
+
+.lgsave{width:min(340px,92vw);box-sizing:border-box;margin-top:10px;border-radius:12px;background:rgba(10,14,24,.72);border:1px solid rgba(120,200,255,.35);color:#d7e3ef;text-align:left;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.lgsave summary{cursor:pointer;list-style:none;padding:9px 12px;font-weight:900;font-size:14px;color:#9fd8ff;display:flex;align-items:center;gap:8px}
+.lgsave summary::-webkit-details-marker{display:none}
+.lgsave summary::after{content:"▾";margin-left:auto;transition:transform .2s;color:#9fd8ff}
+.lgsave[open] summary::after{transform:rotate(180deg)}
+.lgsave summary span{font-size:11px;font-weight:700;color:#0b1a2a;background:#9fd8ff;border-radius:999px;padding:1px 8px}
+.lgsave ul{margin:0;padding:0 12px 10px 28px;font-size:12px;line-height:1.6}
+.lgsave li{margin:3px 0}.lgsave b{color:#ffe08a}
 </style>
 </head>
 <body>
@@ -648,6 +657,16 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
    <button class="btn pri" id="lggo">開始上班</button>
    <p class="lghint">名稱會顯示在排行榜上,之後想改名,<br>到右上角「🏆 排行榜」點「修改名稱」即可。</p>
   </div>
+  <details class="lgsave" id="lgsave">
+   <summary>💾 存檔須知<span>第一次玩請看</span></summary>
+   <ul>
+    <li>遊戲進度(裝備、金幣、座駕、通關紀錄)只存在<b>這支手機/這台電腦的這個瀏覽器</b>裡,不會存到雲端。</li>
+    <li><b>換手機、換瀏覽器、清除瀏覽器資料、用無痕模式</b>玩,進度都會從頭開始。</li>
+    <li>在 <b>LINE</b> 裡點連結會用 LINE 內建瀏覽器打開,存檔跟 Safari/Chrome 是分開的。請按右上角選<b>「用預設瀏覽器開啟」</b>,之後都用同一個瀏覽器玩。</li>
+    <li><b>iPhone</b> 請用 Safari 打開後,點下方分享鈕 →<b>「加入主畫面」</b>,桌面會出現遊戲圖示。Safari 超過 7 天沒開可能會自動清掉資料,加到主畫面比較不會被清。</li>
+    <li>排行榜的成績存在雲端,進度重來的話舊紀錄還會留著,只是會多一筆新的。</li>
+   </ul>
+  </details>
   <div class="lgfoot">
    <p>本遊戲為個人原創作品,僅供同事朋友休閒娛樂,不涉及任何金錢交易。<br>遊戲中的人物、團體、地點與情節皆屬虛構,劇情如有雷同,純屬巧合。</p>
    <div class="sig"><span>原創作者</span><svg viewBox="0 0 230 84" aria-label="Kao 簽名"><defs><linearGradient id="sgg" x1="0" x2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#ffd24a"/><stop offset="1" stop-color="#ff9c12"/></linearGradient></defs>
@@ -1242,7 +1261,7 @@ function showLogin(){const li=$('login');if(!li)return;mqBulbs();
  const ai=k=>ART[k]||'';$('lgh').src=ai('主角動畫-idle-1');$('lgz1').src=ai('奧客喪屍-atk-1');$('lgz2').src=ai('菜市場大媽喪屍-atk-1');
  if(!$('lgz1').src)$('lgz1').hidden=true;if(!$('lgz2').src)$('lgz2').hidden=true;
  const back=!!SAVE.pname;$('lgname').value=SAVE.pname||'';$('lglab').textContent=back?'歡迎回來!確認你的遊戲名稱':'輸入你的遊戲名稱';$('lggo').textContent=back?'繼續上班':'開始上班';
- li.hidden=false;if(!back)setTimeout(()=>$('lgname').focus(),300)}
+ li.hidden=false;if($('lgsave'))$('lgsave').open=!back;if(!back)setTimeout(()=>$('lgname').focus(),300)}
 $('lggo').onclick=()=>{const inp=$('lgname'),v=inp.value.trim().slice(0,12);
  if(!v){inp.classList.remove('bad');void inp.offsetWidth;inp.classList.add('bad');inp.focus();$('lglab').textContent='⚠️ 請先輸入遊戲名稱';return}
  audioUnlock();setTimeout(()=>sfx('start'),60);const first=!SAVE.pname,chg=SAVE.pname!==v;SAVE.pname=v;save();if(chg){lbMe();lbSync(true)}
