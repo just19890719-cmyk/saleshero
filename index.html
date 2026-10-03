@@ -813,6 +813,33 @@ body.gready #lgload{display:none}
 .tthink .tbr{font-size:12px;color:#bfaee8;letter-spacing:.3em;animation:tbreathT 3.2s ease-in-out infinite}
 @keyframes tbreathT{0%,100%{opacity:.4}50%{opacity:1}}
 .tthink .btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+
+.fsbox{max-width:560px!important}
+.fshead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:#c9d1dc;background:rgba(255,255,255,.06);padding:6px 10px;border-radius:8px}
+.fshead b{color:#ffd77a}
+.fslist{display:grid!important;grid-template-columns:1fr;gap:8px!important;max-height:62vh!important}
+.fsbox{max-width:460px!important}
+.fs2{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:center;text-align:left;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(rgba(70,110,40,.22),rgba(0,0,0,.35));color:#fff;cursor:pointer;transition:transform .1s,border-color .15s}
+.fs2:hover:not(:disabled){border-color:#ffd24a;transform:translateY(-2px)}
+.fs2:disabled{cursor:not-allowed;filter:grayscale(.85);opacity:.55}
+.fsimg{display:grid;place-items:center}.fsimg img{width:72px;height:66px;object-fit:contain;filter:drop-shadow(0 4px 4px rgba(0,0,0,.5))}.fsimg span{font-size:40px}
+.fsbody{display:grid;gap:6px;min-width:0}
+.fstt b{font-size:16px}.fstt small{display:block;font-size:11px;color:#9ba4ae}
+.fschips{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.fsc{display:flex;flex-direction:column;align-items:center;padding:3px 2px;border-radius:7px;background:rgba(0,0,0,.35);min-width:0}
+.fsc i{font-style:normal;font-size:10px;color:#9ba4ae;white-space:nowrap}
+.fsc b{font-size:12px;white-space:nowrap}
+.fsc.t b{color:#8fd3ff}.fsc.c b{color:#ffb38a}.fsc.v b{color:#7ee2a8}
+.fsnet{font-size:12px;color:#c9d1dc}.fsnet b{color:#7ee2a8;font-size:14px}.fsnet .poor{color:#ff9a8a;font-weight:700}
+.fswarn{margin:0;font-size:12px;color:#ffcf6a;text-align:center}
+.fsteal{margin-top:10px;padding:12px;border-radius:12px;background:linear-gradient(135deg,rgba(255,180,40,.16),rgba(0,0,0,.35));border:1px solid rgba(255,210,74,.45);display:grid;gap:8px}
+.fsth{display:flex;align-items:center;gap:10px}.fsth img{width:52px;height:auto;filter:drop-shadow(0 3px 3px rgba(0,0,0,.5))}
+.fsth b{font-size:15px;color:#ffd77a}.fsth small{display:block;font-size:12px;color:#c9d1dc}
+.fsts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:6px}
+.fsts li{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 8px;border-radius:8px;background:rgba(0,0,0,.3)}
+.fsts li span{flex:none;width:22px;height:22px;border-radius:50%;background:#ffd24a;color:#2a1d00;font-weight:900;font-size:12px;display:grid;place-items:center}
+.fstn{font-size:12px;color:#ffb3a3}
+#fstgo{justify-self:start}
 </style>
 </head>
 <body>
@@ -918,6 +945,17 @@ body.gready #lgload{display:none}
      <div class="fstat" id="fstat"></div>
      <div class="fgrid" id="fgrid"></div>
     </div>
+     <div class="fsteal">
+      <div class="fsth"><img id="fstimg" alt=""><div><b>🧺 偷偷採收別人的作物</b><small>成熟沒收的作物,誰都可以採走!</small></div></div>
+      <ol class="fsts">
+       <li><span>1</span>點右上角「🏆 排行榜」</li>
+       <li><span>2</span>點一位玩家,展開他的裝備</li>
+       <li><span>3</span>按「🌾 逛他的農場」</li>
+       <li><span>4</span>看到發光的作物按「🧺 採收」,金幣就是你的!</li>
+      </ol>
+      <div class="fstn">⚠️ 你的作物也一樣會被採走,成熟後記得快點收成。被採收時,下次上線會收到通知。</div>
+      <button class="btn pri" id="fstgo">🏆 打開排行榜去逛逛</button>
+     </div>
     <details class="drule fhelp"><summary>📖 農場說明</summary><ol>
      <li><b>種植</b>:點空地選作物,花金幣買種子。種完可以關掉遊戲,<b>離線也會繼續長大</b>。</li>
      <li><b>收成</b>:時間到作物會發光,點「收成」拿金幣。時間越長的作物賺越多。</li>
@@ -2448,7 +2486,7 @@ function fmPlotH(pl,i,visit){const st=fmState(pl);
  if(st.k==='ripe')return'<div class="fp ripe" data-i="'+i+'"><div class="fpw">'+(fmImg('fp-'+st.c.id)||'<span class="fe big">'+st.c.e+'</span>')+'</div><div class="finfo"><b>'+st.c.n+'</b><button class="btn pri" data-a="'+(visit?'pick':'harvest')+'" data-i="'+i+'">'+(visit?'🧺 採收':'收成')+' +'+fmtC(st.c.v)+'</button></div></div>';
  return'<div class="fp grow" data-i="'+i+'"><div class="fpw">'+(fmImg(st.pr<.5?'fp-s1':'fp-s2')||'<span class="fe">'+fmStage(st)+'</span>')+'</div><div class="finfo"><b>'+st.c.e+' '+st.c.n+'</b><div class="fbar"><i style="width:'+(st.pr*100).toFixed(1)+'%"></i></div><small>還要 '+fmT(st.left)+'</small>'+
   (!visit&&!pl.w?'<button class="btn fw" data-a="water" data-i="'+i+'">💧 澆水 −10%</button>':(!visit&&pl.w?'<small class="fwd">💧 已澆水</small>':''))+'</div></div>'}
-function renderFarm(){const g=$('fgrid');if(!g||!FM)return;if(!FM.plots){g.innerHTML='<div class="muted">農場載入中…</div>';fmSync();return}
+function renderFarm(){const g=$('fgrid');if(!g||!FM)return;const si=$('fstimg');if(si&&!si.src&&ART['bean-coin'])si.src=ART['bean-coin'];const sg=$('fstgo');if(sg)sg.hidden=!FM.on;if(!FM.plots){g.innerHTML='<div class="muted">農場載入中…</div>';fmSync();return}
  let h=FM.plots.slice(0,FM.size).map((pl,i)=>fmPlotH(pl,i,false)).join('');
  const n=FM.size;if(n<12)h+='<div class="fp lock" data-a="expand"><div class="fpw">'+(fmImg('fp-lock')||'<span class="fe">🔒</span>')+'</div><div class="finfo"><b>擴建第 '+(n+1)+' 塊地</b><button class="btn" data-a="expand"'+((SAVE.coin||0)<FEXP[n-4]?' disabled':'')+'>💰 '+fmtC(FEXP[n-4])+'</button></div></div>';
  g.innerHTML=h;
@@ -2467,7 +2505,10 @@ async function fmAct(a,i){if(FM.busy)return;audioUnlock();const pl=FM.plots&&FM.
  catch(e){sfx('error');toast(fmMsg(e));if(FM.on)fmSync()}
  FM.busy=false;renderFarm()}
 function fmSeedPick(i){const ov=document.createElement('div');ov.className='ov fsov';const coin=SAVE.coin||0;
- ov.innerHTML='<div class="box fsbox"><h2>🌱 選擇要種的作物</h2><p class="muted">金幣 '+fmtC(coin)+' · 時間到就能收成,種完可以關掉遊戲,離線也會長大</p><div class="fslist">'+CROPS.map(c=>'<button class="fs" data-c="'+c.id+'"'+(coin<c.cost?' disabled':'')+'><span class="fe">'+(fmImg('fp-'+c.id)||c.e)+'</span><span class="fsn"><b>'+c.n+'</b><small>'+c.d+'</small></span><span class="fsi">⏱ '+fmT(c.g)+'<br>種子 '+fmtC(c.cost)+' → <b class="up">'+fmtC(c.v)+'</b></span></button>').join('')+'</div><button class="btn" data-x="1">取消</button></div>';
+ ov.innerHTML='<div class="box fsbox"><h2>🌱 選擇要種的作物</h2><div class="fshead"><span>💰 你的金幣 <b>'+fmtC(coin)+'</b></span><span>種完可以關掉遊戲,<b>離線也會長大</b></span></div><div class="fslist">'+CROPS.map(c=>{const poor=coin<c.cost;
+  return'<button class="fs2" data-c="'+c.id+'"'+(poor?' disabled':'')+'><div class="fsimg">'+(fmImg('fp-'+c.id)||'<span>'+c.e+'</span>')+'</div><div class="fsbody"><div class="fstt"><b>'+c.n+'</b><small>'+c.d+'</small></div>'+
+   '<div class="fschips"><span class="fsc t"><i>⏱ 成熟時間</i><b>'+fmT(c.g)+'</b></span><span class="fsc c"><i>🌱 種子費用</i><b>'+fmtC(c.cost)+' 金幣</b></span><span class="fsc v"><i>🌾 收成可得</i><b>'+fmtC(c.v)+' 金幣</b></span></div>'+
+   '<div class="fsnet">'+(poor?'<span class="poor">🔒 金幣不足,還差 '+fmtC(c.cost-coin)+'</span>':'淨賺 <b>+'+fmtC(c.v-c.cost)+'</b> 金幣')+'</div></div></button>'}).join('')+'</div><p class="fswarn">⚠️ 成熟後要記得來收成,放著不收會被其他玩家採走!</p><button class="btn" data-x="1">取消</button></div>';
  document.body.appendChild(ov);sfx('open');
  ov.onclick=async e=>{const b=e.target.closest('[data-c]');if(!b){if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}return}
   const c=CROP[b.dataset.c];if((SAVE.coin||0)<c.cost)return;ov.remove();FM.busy=true;
@@ -2491,7 +2532,7 @@ function fmNotify(){if(!FM.logs.length)return;const L=$('login');if(L&&!L.hidden
  ov.innerHTML='<div class="box fnbox">'+(ART['bean-nap']?'<img class="fmasc" src="'+ART['bean-nap']+'" alt="">':'')+'<h2>😡 你的農場被採收了!</h2><p class="muted">你不在的時候,有同事來採走了成熟沒收的作物</p><div class="fnlist">'+logs.map(l=>{const c=CROP[l.crop]||{e:'🌱',n:l.crop};return'<div class="fnr"><span class="fe">'+(ART['fp-'+l.crop]?'<img src="'+ART['fp-'+l.crop]+'" alt="" style="width:34px;height:34px;object-fit:contain">':c.e)+'</span><span><b>'+escH(l.thief_nick||'神秘同事')+'</b> 採走了你的 '+c.n+'</span><b class="down">−'+fmtC(l.value)+'</b><small>'+dpAgo(l.t)+'</small></div>'}).join('')+'</div><p>總共損失 <b class="down">'+fmtC(tot)+'</b> 金幣。下次記得早點收成,或去排行榜找他報仇!</p><button class="btn pri" data-x="1">知道了</button></div>';
  document.body.appendChild(ov);sfx('wahwah');
  ov.onclick=e=>{if(!e.target.closest('[data-x]'))return;ov.remove();fmRpc('farm_seen',{p_id:fmId(),p_key:fmKey()}).catch(()=>{})}}
-document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('#fgrid');if(!g)return;const b=e.target.closest('[data-a]'),p=e.target.closest('.fp');
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#fstgo')){audioUnlock();lbOpen();return}const g=e.target.closest&&e.target.closest('#fgrid');if(!g)return;const b=e.target.closest('[data-a]'),p=e.target.closest('.fp');
  if(b)return fmAct(b.dataset.a,+b.dataset.i);if(p&&p.classList.contains('empty'))fmAct('plant',+p.dataset.i);else if(p&&p.classList.contains('lock'))fmAct('expand')});
 setInterval(()=>{if(SAVE&&SAVE.tab==='farm'&&!$('home').hidden&&FM.plots&&!FM.busy){renderFarm();if(Date.now()-FM.t>30000)fmSync()}},1000);
 
