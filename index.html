@@ -1171,7 +1171,8 @@ body.gready #lgload{display:none}
  </div>
 </div>
 
-<script src="assets.js?v=e1e9286b"></script>
+<script src="assets.js?v=99afb54b"></script>
+<script src="assets-extra.js?v=bc0366a8" async onload="window.__artExtra&&__artExtra()"></script>
 <script src="sounds.js?v=bfff0792" async></script>
 <script>
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
@@ -1287,11 +1288,11 @@ const power=()=>Math.round(Object.values(SAVE.eq).reduce((a,id)=>a+score(byId(id
 
 /* ===== 幸運抽獎:代步工具 ===== */
 const RIDES=[
- {id:'ubike',n:'YouBike 2.0',q:1,w:60,st:{spd:[8,2]},d:'城市通勤好夥伴'},
- {id:'gogoro',n:'Gogoro',q:2,w:28,st:{spd:[14,3],pick:[20,5]},d:'換電超方便,吸取範圍提升'},
- {id:'lexus',n:'LEXUS IS300h',q:3,w:9,st:{spd:[20,3],aspd:[10,3],regen:[.5,.2]},d:'油電混合,持續回復生命'},
- {id:'x5',n:'BMW X5',q:4,w:1.5,st:{spd:[22,3],hp:[80,20],def:[10,3]},d:'重裝休旅,生命與防禦大幅提升'},
- {id:'gle',n:'Benz GLE',q:4,w:1.5,st:{spd:[22,3],atk:[6,2],hp:[50,15]},d:'豪華休旅,攻擊與生命提升'}];
+ {id:'ubike',n:'城市共享單車',q:1,w:60,st:{spd:[8,2]},d:'城市通勤好夥伴'},
+ {id:'gogoro',n:'電動機車',q:2,w:28,st:{spd:[14,3],pick:[20,5]},d:'換電超方便,吸取範圍提升'},
+ {id:'lexus',n:'日系油電房車',q:3,w:9,st:{spd:[20,3],aspd:[10,3],regen:[.5,.2]},d:'油電混合,持續回復生命'},
+ {id:'x5',n:'德系豪華休旅',q:4,w:1.5,st:{spd:[22,3],hp:[80,20],def:[10,3]},d:'重裝休旅,生命與防禦大幅提升'},
+ {id:'gle',n:'德系尊榮休旅',q:4,w:1.5,st:{spd:[22,3],atk:[6,2],hp:[50,15]},d:'豪華休旅,攻擊與生命提升'}];
 const RMAX=5,G1=500,G10=4500,PITY=100;
 const rideLv=id=>(SAVE.rides||{})[id]||0;
 function rideBonus(r,lv){const o={};for(const k in r.st)o[k]=r.st[k][0]+r.st[k][1]*(lv-1);return o}
@@ -1305,7 +1306,7 @@ function rollRide(minQ){
  if(!lv){SAVE.rides[r.id]=1;res='NEW'}else if(lv<RMAX){SAVE.rides[r.id]=lv+1;res='Lv.'+(lv+1)}else{const c=20*r.q;SAVE.coin+=c;res='滿級 +'+c+'金幣'}
  if(!SAVE.ride)SAVE.ride=r.id;
  return {r,res}}
-const HOSTL={idle:['要不要試試手氣?','今天手氣應該不錯喔!','我是企劃女神芳芳,抽到 BMW 跟 Benz 是神話等級喔!','10 連抽保證稀有以上喔~','累計 100 抽必中神話喔!'],
+const HOSTL={idle:['要不要試試手氣?','今天手氣應該不錯喔!','我是企劃女神芳芳,抽到德系豪華休旅是神話等級喔!','10 連抽保證稀有以上喔~','累計 100 抽必中神話喔!'],
  big:['恭喜恭喜!大獎啦!','哇!今天你請客!','這台我也想要!'],mid:['還不錯喔!','有進步有進步!'],low:['下次一定更好!','沒關係,騎車也很健康~']};
 const pickL=a=>a[(Math.random()*a.length)|0];
 function renderGacha(){
@@ -1688,8 +1689,9 @@ let sel=null,flt='all';
 const STI={atk:'⚔️',hp:'❤️',def:'🛡️',aspd:'⚡',crit:'💥',spd:'👟',pick:'🧲',regen:'➕'};
 for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">';
 const skI=k=>ART['sk-'+k]?'<img src="'+ART['sk-'+k]+'" alt="">':'';
-(()=>{const R=document.documentElement.style,u=k=>ART[k]?'url('+ART[k]+')':'none';['fr-0','fr-1','fr-2','fr-3','fr-4'].forEach((k,i)=>R.setProperty('--fr'+i,u(k)));R.setProperty('--fre',u('fr-empty'));R.setProperty('--fr-1',u('fr-empty'));R.setProperty('--homebg',u('bg-home'));[['--chip1','chip-1'],['--chip2','chip-2'],['--chip3','chip-3'],['--chip4','chip-4'],['--chipgold','chip-gold'],['--chipstack','chip-stack'],['--potgold','pot-gold'],['--bowl','bowl'],['--feltg','felt-green'],['--feltr','felt-red']].forEach(([v,k])=>{if(ART[k])R.setProperty(v,u(k))});if(ART['farm-bg'])R.setProperty('--farmbg',u('farm-bg'));if(ART['login-bg'])R.setProperty('--loginbg',u('login-bg'));R.setProperty('--gstage',u('g-stage'));R.setProperty('--trback',u('tr-back'));
- if(ART['零件'])document.getElementById('phd').innerHTML='<img class="pico" src="'+(ART['金幣']||'')+'" alt="金幣"> <b id="hcoins">0</b><button class="volbtn" id="volbtn" aria-label="音效設定">🔊</button><button class="lbbtn" id="lbbtn">🏆 排行榜</button><div class="volpop" id="volpop" hidden><h4>🔊 音效設定</h4><div class="vr"><input type="range" id="vol3" min="0" max="100" step="5" value="50"><b id="vol3v">50%</b></div><label><input type="checkbox" id="mute3"> 關閉音效</label></div><b id="parts" hidden>0</b>'})();
+function artVars(first){const R=document.documentElement.style,u=k=>ART[k]?'url('+ART[k]+')':'none';['fr-0','fr-1','fr-2','fr-3','fr-4'].forEach((k,i)=>R.setProperty('--fr'+i,u(k)));R.setProperty('--fre',u('fr-empty'));R.setProperty('--fr-1',u('fr-empty'));R.setProperty('--homebg',u('bg-home'));[['--chip1','chip-1'],['--chip2','chip-2'],['--chip3','chip-3'],['--chip4','chip-4'],['--chipgold','chip-gold'],['--chipstack','chip-stack'],['--potgold','pot-gold'],['--bowl','bowl'],['--feltg','felt-green'],['--feltr','felt-red']].forEach(([v,k])=>{if(ART[k])R.setProperty(v,u(k))});if(ART['farm-bg'])R.setProperty('--farmbg',u('farm-bg'));if(ART['login-bg'])R.setProperty('--loginbg',u('login-bg'));R.setProperty('--gstage',u('g-stage'));R.setProperty('--trback',u('tr-back'));
+ if(first&&ART['零件'])document.getElementById('phd').innerHTML='<img class="pico" src="'+(ART['金幣']||'')+'" alt="金幣"> <b id="hcoins">0</b><button class="volbtn" id="volbtn" aria-label="音效設定">🔊</button><button class="lbbtn" id="lbbtn">🏆 排行榜</button><div class="volpop" id="volpop" hidden><h4>🔊 音效設定</h4><div class="vr"><input type="range" id="vol3" min="0" max="100" step="5" value="50"><b id="vol3v">50%</b></div><label><input type="checkbox" id="mute3"> 關閉音效</label></div><b id="parts" hidden>0</b>'}
+artVars(true);
 const better=it=>!isEq(it)&&score(it)>score(byId(SAVE.eq[slotFor(it)]))+.01;
 function tile(it,on,mark){return'<button class="tile q'+it.q+(on?' sel':'')+(isEq(it)?' eq':'')+(mark&&better(it)?' better':'')+'" data-id="'+it.id+'" aria-label="'+it.name+'">'+icon(it.b,it.e)+(it.up?'<b>+'+it.up+'</b>':'')+'</button>'}
 function slotHtml(k){const sl=SLOTS.find(x=>x.k===k),it=byId(SAVE.eq[k]);
@@ -2803,6 +2805,10 @@ async function clBoot(){clUI();if(!CL.on||!CL.u){CL.ready=true;return}
   CL.lastOk=Date.now();CL.err='';clUI()}
  catch(e){CL.err=clMsg(e);CL.ready=true;if(String(e.msg||'').includes('bad token')){clSet(null,null);toast('☁️ 雲端帳號登入已失效,請重新登入')}clUI()}}
 
+window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;Object.assign(ART,X);for(const k in X){const i=new Image();i.src=X[k];IMG[k]=i}
+ try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
+ try{if(!document.querySelector('#gov:not([hidden])')){renderHome();if(!$('home').hidden&&SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
+if(window.ART_EXTRA)window.__artExtra();
 lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 </body>
