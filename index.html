@@ -2751,21 +2751,21 @@ const clSyncGet=()=>+(localStorage.getItem('shechu-sync')||0),clSyncSet=v=>{try{
 async function clRpc(fn,body,keep){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
  const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(body),keepalive:!!keep});
  if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}return r.json()}
-const CLERR={'bad user':'帳號要 3~20 個英文字母、數字或底線','bad pass':'密碼要 4~40 個字','taken':'這個帳號已經有人用了,換一個吧','bad login':'帳號或密碼錯誤','bad token':'登入已失效,請重新登入','too big':'存檔太大,請先賣掉一些裝備'};
+const CLERR={'bad user':'帳號要 3~20 個英文字母、數字或底線','bad pass':'密碼要 4~40 個字','taken':'這個帳號已經有人用了,換一個吧','bad login':'帳號或密碼錯誤','bad token':'帳號已在其他裝置登入,請重新登入','too big':'存檔太大,請先賣掉一些裝備'};
 const clMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in CLERR)if(m.includes(k))return CLERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,80)};
 function clSet(u,t){CL.u=u;CL.t=t;try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
 function clSnap(){return JSON.parse(JSON.stringify(SAVE))}
 function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,3000)}
 async function clFlush(keep){if(!CL||!CL.on||!CL.u||CL.busy||CL.noflush)return;clearTimeout(CL.timer);CL.busy=true;
  try{const snap=clSnap(),body={p_user:CL.u,p_token:CL.t,p_save:snap};if(keep&&JSON.stringify(body).length>60000)keep=false;await clRpc('acct_save',body,keep);clSyncSet(snap._t);CL.lastOk=Date.now();CL.err=''}
- catch(e){CL.err=clMsg(e);if(String(e.msg||'').includes('bad token')){clSet(null,null);toast('☁️ 雲端帳號登入已失效,請重新登入')}}
+ catch(e){CL.err=clMsg(e);if(String(e.msg||'').includes('bad token'))clKick()}
  CL.busy=false;clUI()}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&CL.u)clFlush(true)});
 function clUI(){const el=$('lgcloud');if(!el)return;if(!CL.on){el.hidden=true;return}el.hidden=false;
  el.innerHTML=CL.u?'<div class="clst"><div>☁️ 雲端帳號:<b>'+escH(CL.u)+'</b></div><span>'+(CL.err?'<i class="down">'+escH(CL.err)+'</i>':'進度自動同步中')+'</span></div><button class="btn" id="clout">登出</button>'
   :'<div class="clst"><div>☁️ <b>雲端存檔</b></div><span>綁定帳號密碼,換手機、換瀏覽器都能接續進度</span></div><div class="clbtns"><button class="btn pri" id="clreg">建立帳號/綁定進度</button><button class="btn" id="clin">登入帳號</button></div>'}
 function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');ov.className='ov clov';
- ov.innerHTML='<div class="box clbox"><h2>'+(reg?'☁️ 建立雲端帳號':'☁️ 登入雲端帳號')+'</h2><p class="muted">'+(reg?'會把<b>這台裝置目前的進度</b>綁定到新帳號,之後在任何裝置登入都能接續。':'登入後會改用<b>雲端帳號的進度</b>。')+'</p>'+
+ ov.innerHTML='<div class="box clbox"><h2>'+(reg?'☁️ 建立雲端帳號':'☁️ 登入雲端帳號')+'</h2><p class="muted">'+(reg?'會把<b>這台裝置目前的進度</b>綁定到新帳號,之後在任何裝置登入都能接續。':'登入後會改用<b>雲端帳號的進度</b>。同一個帳號同時只能在一個地方登入,其他裝置會被登出。')+'</p>'+
   '<label>帳號<input id="clu" maxlength="20" autocomplete="username" autocapitalize="off" placeholder="英文字母、數字或底線,3~20 字"></label>'+
   '<label>密碼<input id="clp" type="password" maxlength="40" autocomplete="'+(reg?'new-password':'current-password')+'" placeholder="至少 4 個字"></label>'+
   (reg?'<label>再輸入一次密碼<input id="clp2" type="password" maxlength="40" autocomplete="new-password"></label><p class="clwarn">⚠️ 沒有綁 Email,<b>忘記密碼無法自己重設</b>,請記好或截圖保存。</p>':'')+
@@ -2776,7 +2776,7 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
  $('clx').onclick=close;
  $('clok').onclick=async()=>{const u=$('clu').value.trim().toLowerCase(),p=$('clp').value;
   if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<4)return err(CLERR['bad pass']);
-  if(reg&&p!==$('clp2').value)return err('兩次輸入的密碼不一樣');
+  if(reg&&p!==$('clp2').value)return err('兩次輸入的密碼不一樣');CL.kicked=false;
   const b=$('clok');b.disabled=true;b.textContent='處理中…';audioUnlock();
   try{if(reg){const nm=($('lgname').value.trim()||SAVE.pname||'').slice(0,12);if(!nm){b.disabled=false;b.textContent='建立並綁定';return err('請先在登入畫面輸入遊戲名稱')}
     SAVE.pname=nm;SAVE._t=Date.now();try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}
@@ -2792,6 +2792,11 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
 document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
  if(t.closest('#clreg'))clModal('reg');else if(t.closest('#clin'))clModal('in');
  else if(t.closest('#clout'))ask('確定要登出雲端帳號嗎?\n這台裝置的進度會保留,之後可以再登入。',async()=>{await clFlush();clSet(null,null);toast('已登出雲端帳號')})});
+
+function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);clSet(null,null);
+ const ov=document.createElement('div');ov.className='ov clov';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>⚠️ 帳號已在其他裝置登入</h2><p>你的雲端帳號剛剛在<b>另一個瀏覽器或裝置</b>登入了。<br>為了避免兩邊的進度互相覆蓋,這裡的進度<b>已停止上傳</b>。</p><p class="muted" style="font-size:12px">如果要改回在這台裝置玩,請重新登入,另一台就會被登出。</p><div class="clbtns"><button class="btn pri" data-a="re">重新登入</button><button class="btn" data-a="x">知道了</button></div></div>';
+ document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;if(b.dataset.a==='re')clModal('in')}}
+setInterval(async()=>{if(!CL.on||!CL.u||!CL.ready||CL.kicked||document.visibilityState!=='visible')return;try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false)clKick()}catch(e){}},30000);
 async function clBoot(){clUI();if(!CL.on||!CL.u){CL.ready=true;return}
  let just=false;try{just=sessionStorage.getItem('shechu-justlogin')==='1';sessionStorage.removeItem('shechu-justlogin')}catch(e){}
  if(just){CL.ready=true;toast('☁️ 已登入 '+CL.u+',雲端進度載入完成');return}
@@ -2803,7 +2808,7 @@ async function clBoot(){clUI();if(!CL.on||!CL.u){CL.ready=true;return}
   try{sessionStorage.removeItem('shechu-pull')}catch(e){}
   CL.ready=true;if(!r.save||(+(SAVE._t||0))>Math.max(ct,sy)+500||CL.dirty){CL.dirty=false;clFlush()}
   CL.lastOk=Date.now();CL.err='';clUI()}
- catch(e){CL.err=clMsg(e);CL.ready=true;if(String(e.msg||'').includes('bad token')){clSet(null,null);toast('☁️ 雲端帳號登入已失效,請重新登入')}clUI()}}
+ catch(e){CL.err=clMsg(e);CL.ready=true;if(String(e.msg||'').includes('bad token'))clKick();clUI()}}
 
 window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;Object.assign(ART,X);for(const k in X){const i=new Image();i.src=X[k];IMG[k]=i}
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
