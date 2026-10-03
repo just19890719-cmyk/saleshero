@@ -637,6 +637,17 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
 .lgsave summary span{font-size:11px;font-weight:700;color:#0b1a2a;background:#9fd8ff;border-radius:999px;padding:1px 8px}
 .lgsave ul{margin:0;padding:0 12px 10px 28px;font-size:12px;line-height:1.6}
 .lgsave li{margin:3px 0}.lgsave b{color:#ffe08a}
+
+#phd{position:relative;display:flex;align-items:center;gap:6px}
+.volbtn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,210,90,.5);background:linear-gradient(#3a2f12,#1f1a0c);font-size:16px;line-height:1;cursor:pointer;margin-left:8px;display:grid;place-items:center;padding:0}
+.lbbtn{margin-left:4px!important}
+.volpop{position:absolute;right:0;top:calc(100% + 8px);z-index:9;width:230px;box-sizing:border-box;padding:12px 14px;border-radius:12px;background:rgba(14,18,28,.97);border:1px solid rgba(255,210,90,.45);box-shadow:0 10px 30px rgba(0,0,0,.6);color:#ebe7dd;font-size:13px}
+.volpop::before{content:"";position:absolute;right:120px;top:-7px;width:12px;height:12px;background:rgba(14,18,28,.97);border-left:1px solid rgba(255,210,90,.45);border-top:1px solid rgba(255,210,90,.45);transform:rotate(45deg)}
+.volpop h4{margin:0 0 8px;font-size:14px;color:#ffd77a}
+.volpop .vr{display:flex;align-items:center;gap:8px}
+.volpop input[type=range]{flex:1;accent-color:#ffd24a;touch-action:pan-x}
+.volpop .vr b{min-width:40px;text-align:right;color:#ffd77a;font-variant-numeric:tabular-nums}
+.volpop label{display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -704,7 +715,7 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
      <span class="sellbar"><select id="sellq" aria-label="賣出範圍"><option value="-1">黑框</option><option value="0">銀框以下</option><option value="1" selected>綠框以下</option><option value="2">藍框以下</option><option value="3">黃金框以下</option></select><button class="btn" id="sellall">💰 一鍵賣出</button></span>
      <label><input type="checkbox" id="autoeq"> 出擊時自動換上更好的</label>
      <label><input type="checkbox" id="mute"> 關閉音效</label>
-     <label class="volw">🔊 音量 <input type="range" id="vol" min="0" max="100" step="5" value="80"><b id="volv">80%</b></label>
+     <label class="volw">🔊 音量 <input type="range" id="vol" min="0" max="100" step="5" value="50"><b id="volv">50%</b></label>
      <button class="btn" id="stest">🔊 測試音效</button>
     </div>
     <div class="chips" id="flt"></div>
@@ -810,7 +821,7 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
   <div class="pskl" id="pskl"></div>
   <button class="btn pri" id="resume">繼續</button>
   <button class="btn" id="retreat">撤退回家</button>
-  <p><label><input type="checkbox" id="mute2"> 關閉音效</label><br><label class="volw">🔊 音量 <input type="range" id="vol2" min="0" max="100" step="5" value="80"><b id="vol2v">80%</b></label></p>
+  <p><label><input type="checkbox" id="mute2"> 關閉音效</label><br><label class="volw">🔊 音量 <input type="range" id="vol2" min="0" max="100" step="5" value="50"><b id="vol2v">50%</b></label></p>
   <p class="muted">撤退也會保留已撿到的裝備。</p>
  </div>
 </div>
@@ -1293,7 +1304,7 @@ const STI={atk:'⚔️',hp:'❤️',def:'🛡️',aspd:'⚡',crit:'💥',spd:'�
 for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">';
 const skI=k=>ART['sk-'+k]?'<img src="'+ART['sk-'+k]+'" alt="">':'';
 (()=>{const R=document.documentElement.style,u=k=>ART[k]?'url('+ART[k]+')':'none';['fr-0','fr-1','fr-2','fr-3','fr-4'].forEach((k,i)=>R.setProperty('--fr'+i,u(k)));R.setProperty('--fre',u('fr-empty'));R.setProperty('--fr-1',u('fr-empty'));R.setProperty('--homebg',u('bg-home'));if(ART['login-bg'])R.setProperty('--loginbg',u('login-bg'));R.setProperty('--gstage',u('g-stage'));R.setProperty('--trback',u('tr-back'));
- if(ART['零件'])document.getElementById('phd').innerHTML='<img class="pico" src="'+(ART['金幣']||'')+'" alt="金幣"> <b id="hcoins">0</b><button class="lbbtn" id="lbbtn">🏆 排行榜</button><b id="parts" hidden>0</b>'})();
+ if(ART['零件'])document.getElementById('phd').innerHTML='<img class="pico" src="'+(ART['金幣']||'')+'" alt="金幣"> <b id="hcoins">0</b><button class="volbtn" id="volbtn" aria-label="音效設定">🔊</button><button class="lbbtn" id="lbbtn">🏆 排行榜</button><div class="volpop" id="volpop" hidden><h4>🔊 音效設定</h4><div class="vr"><input type="range" id="vol3" min="0" max="100" step="5" value="50"><b id="vol3v">50%</b></div><label><input type="checkbox" id="mute3"> 關閉音效</label></div><b id="parts" hidden>0</b>'})();
 const better=it=>!isEq(it)&&score(it)>score(byId(SAVE.eq[slotFor(it)]))+.01;
 function tile(it,on,mark){return'<button class="tile q'+it.q+(on?' sel':'')+(isEq(it)?' eq':'')+(mark&&better(it)?' better':'')+'" data-id="'+it.id+'" aria-label="'+it.name+'">'+icon(it.b,it.e)+(it.up?'<b>+'+it.up+'</b>':'')+'</button>'}
 function slotHtml(k){const sl=SLOTS.find(x=>x.k===k),it=byId(SAVE.eq[k]);
@@ -1364,10 +1375,14 @@ $('sellall').onclick=()=>{const mq=+$('sellq').value,list=SAVE.items.filter(i=>!
  SAVE.items=SAVE.items.filter(i=>!list.includes(i));SAVE.coin=(SAVE.coin||0)+tot;if(PSEL&&!byId(PSEL))PSEL=null;if(sel&&!byId(sel))sel=null;save();renderHome();audioUnlock();sfx('coinsMany');toast('賣出 '+list.length+' 件,獲得 '+tot+' 金幣')})};
 $('asky').onclick=()=>{$('ask').hidden=true;const f=ASKF;ASKF=null;if(f)f()};$('askn').onclick=()=>{$('ask').hidden=true;ASKF=null};
 $('autoeq').onchange=e=>{SAVE.auto=e.target.checked;save()};
-$('mute').onchange=$('mute2').onchange=e=>{SAVE.mute=e.target.checked;$('mute').checked=$('mute2').checked=SAVE.mute;save();if(SIL&&SAVE.mute)SIL.pause()};
-function volGet(){return SAVE.vol==null?80:SAVE.vol}
-function volApply(){if(MG)MG.gain.value=.75*volGet()/100}
-function volUI(){const v=volGet();for(const id of ['vol','vol2']){const e=$(id);if(e){e.value=v;$(id+'v').textContent=v+'%'}}}
+const muteSet=on=>{SAVE.mute=on;save();volUI();if(SIL&&SAVE.mute)SIL.pause()};
+$('mute').onchange=$('mute2').onchange=e=>muteSet(e.target.checked);
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='mute3'){muteSet(e.target.checked);if(!SAVE.mute){audioUnlock();setTimeout(()=>sfx('coins'),80)}}});
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='vol3'){SAVE.vol=+e.target.value;volUI();volApply();save();audioUnlock();const n=Date.now();if(n-VOLT>180){VOLT=n;sfx('coins')}}});
+document.addEventListener('click',e=>{const p=$('volpop');if(!p)return;if(e.target.closest&&e.target.closest('#volbtn')){p.hidden=!p.hidden;volUI();sfx(p.hidden?'close':'open');return}if(!p.hidden&&!(e.target.closest&&e.target.closest('#volpop')))p.hidden=true});
+function volGet(){if(!SAVE.vol50){SAVE.vol50=1;SAVE.vol=50}return SAVE.vol==null?50:SAVE.vol}
+function volApply(){const v=volGet()/100;if(OUT)OUT.gain.value=.4*Math.pow(v,1.7)}
+function volUI(){const v=volGet();for(const id of ['vol','vol2','vol3']){const e=$(id);if(e){e.value=v;$(id+'v').textContent=v+'%'}}const m=!!SAVE.mute;for(const id of ['mute','mute2','mute3']){const e=$(id);if(e)e.checked=m}const b=$('volbtn');if(b)b.textContent=m||v===0?'🔇':v<50?'🔉':'🔊'}
 let VOLT=0;$('vol').oninput=$('vol2').oninput=e=>{SAVE.vol=+e.target.value;volUI();volApply();save();audioUnlock();const n=Date.now();if(n-VOLT>180){VOLT=n;sfx('coins')}};
 $('stest').onclick=()=>{audioUnlock();const go=()=>{if(SAVE.mute){toast('音效已關閉,請先取消勾選');return}
  if(!AC){toast('這個瀏覽器不支援音效');return}
@@ -1382,7 +1397,7 @@ let G=null,running=false,keys={},joy=null,last=performance.now(),toastT=0;
 let TQ=[];function toast(t){const L=$('login');if(L&&!L.hidden){TQ.push(t);return}$('toast').textContent=t;$('toast').className='on';toastT=2}
 const needXp=l=>Math.floor(3+l*1.6+l*l*.03);
 function startRun(c){
- if(!SAVE.pname){askName(true,()=>startRun(c));return}
+ if(!SAVE.pname){askName(true,()=>startRun(c));return}if($('volpop'))$('volpop').hidden=true;
  SAVE.ch=c;save();
  G={c,dead:[],pt:[],dc:[],shk:0,t:0,x:0,y:0,face:1,lv:1,xp:0,kills:0,en:[],gems:[],drops:[],bul:[],lob:[],fx:[],orbs:[],wt:0,skt:{},atk:0,hurt:0,inv:0,shield:false,dealK:0,spawn:0,elite:45,boss:false,loot:[],moving:false,over:false};
   G.base=pstats(1);initSkills();
@@ -1404,8 +1419,8 @@ function aoe(x,y,R,dmg,kb){for(const e of G.en){const dx=e.x-x,dy=e.y-y;if(dx*dx
 function nearest(n,maxD){const m=(maxD||9e9)**2;if(n===1){let b=null,bd=m;for(const e of G.en){const d=(e.x-G.x)**2+(e.y-G.y)**2;if(d<bd){bd=d;b=e}}return b?[b]:[]}return G.en.map(e=>[e,(e.x-G.x)**2+(e.y-G.y)**2]).filter(a=>a[1]<m).sort((a,b)=>a[1]-b[1]).slice(0,n).map(a=>a[0])}
 function shoot(x,y,a,dmg,k,pr){G.bul.push({k,x,y,vx:Math.cos(a)*520,vy:Math.sin(a)*520,r:9,dmg,pr:pr||1,life:1.4,hit:new Set(),a})}
 /* ===== 音效(程式合成,不需音檔) ===== */
-let AC=null,MG=null,NB=null;const SFT={};
-function audioInit(){if(AC){if(AC.state==='suspended')AC.resume();return}try{AC=new(window.AudioContext||window.webkitAudioContext)();MG=AC.createGain();MG.gain.value=.6;{const cp=AC.createDynamicsCompressor();cp.threshold.value=-14;cp.knee.value=10;cp.ratio.value=6;cp.attack.value=.003;cp.release.value=.2;MG.connect(cp);cp.connect(AC.destination)}
+let AC=null,MG=null,NB=null,OUT=null;const SFT={};
+function audioInit(){if(AC){if(AC.state==='suspended')AC.resume();return}try{AC=new(window.AudioContext||window.webkitAudioContext)();MG=AC.createGain();MG.gain.value=.7;OUT=AC.createGain();OUT.gain.value=.08;{const cp=AC.createDynamicsCompressor();cp.threshold.value=-12;cp.knee.value=12;cp.ratio.value=4;cp.attack.value=.003;cp.release.value=.25;MG.connect(cp);cp.connect(OUT);OUT.connect(AC.destination)}
  NB=AC.createBuffer(1,AC.sampleRate,AC.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;revInit();sndLoad();if(typeof volApply==='function')volApply()}catch(e){AC=null}}
 function tone(type,f0,f1,dur,vol,t0){const t=AC.currentTime+(t0||0),o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(Math.max(20,f1),t+dur);
  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.006);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);o.connect(g);g.connect(MG);o.start(t);o.stop(t+dur+.02)}
