@@ -800,6 +800,19 @@ body.gready #lgload{display:none}
 @keyframes chcp{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
 .chgrid .c.won{outline:3px solid #ffd24a;outline-offset:-3px;box-shadow:0 0 14px rgba(255,210,74,.6);position:relative}
 .chgrid .c.won::after{content:attr(data-n);position:absolute;right:4px;top:4px;width:18px;height:18px;border-radius:50%;background:#ffd24a;color:#2a1d00;font-size:11px;font-weight:900;display:grid;place-items:center}
+
+.chgrid{grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(4,minmax(0,1fr))!important}
+.chgrid .c{min-height:0!important;overflow:hidden;justify-content:center!important}
+.chgrid .c img{width:auto!important;height:auto!important;max-width:60%!important;max-height:52%!important;flex:0 1 auto;min-height:0}
+.tbox{position:relative}.tthost{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.35);padding:4px 12px 4px 4px;border-radius:999px}.tthost img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid #b48cff;background:#1a0b2a}.tthost span{font-size:12px;color:#efe4ff}
+.tthink{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;text-align:center;border-radius:12px;background:radial-gradient(ellipse at 50% 40%,rgba(120,70,200,.55),rgba(10,4,24,.92) 75%);backdrop-filter:blur(2px)}
+.tthink .orb{font-size:54px;animation:tbreath 3.2s ease-in-out infinite;filter:drop-shadow(0 0 16px rgba(170,120,255,.9))}
+@keyframes tbreath{0%,100%{transform:scale(.9);opacity:.8}50%{transform:scale(1.12);opacity:1}}
+.tthink b{font-size:17px;color:#efe4ff;text-shadow:0 0 10px #a46bff}
+.tthink p{margin:0;font-size:13px;color:#d9ccf5;line-height:1.6}
+.tthink .tbr{font-size:12px;color:#bfaee8;letter-spacing:.3em;animation:tbreathT 3.2s ease-in-out infinite}
+@keyframes tbreathT{0%,100%{opacity:.4}50%{opacity:1}}
+.tthink .btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 </style>
 </head>
 <body>
@@ -950,7 +963,7 @@ body.gready #lgload{display:none}
   </div>
   <div class="tab" data-tab="tarot" hidden>
    <section style="margin-top:12px">
-    <h2>塔羅算命 <span class="muted" style="font-size:13px;font-weight:400">企劃女神芳芳為你解讀過去、現在與未來</span></h2>
+    <h2>塔羅牌 <span class="muted" style="font-size:13px;font-weight:400">企劃女神芳芳為你解讀過去、現在與未來</span></h2>
     <div class="tbox">
      <div class="dsign ts"><p>信者恆信 不信者恆抽</p><p class="b">抽到死神還說是轉機</p><small>— 芳芳的占卜室 —</small></div>
      <div class="tarea">
@@ -958,7 +971,7 @@ body.gready #lgload{display:none}
       <div class="tdeck" id="tdeck"></div>
       <div class="tctl"><button class="btn pri" id="tgo">🔮 開始占卜</button><span class="muted" id="tcost"></span></div>
      </div>
-     <div class="ghost tghost"><div class="bub" id="tbub">心誠則靈。想著你在意的事,抽三張牌,看看過去、現在與未來</div><img id="thost" alt="企劃女神芳芳"><div><span class="hname">企劃女神芳芳</span></div></div>
+     <div class="ghost tghost"><div class="bub" id="tbub">算塔羅牌之前,要先在心裡默想一件你在意的事情喔,想好了再按「開始占卜」</div><img id="thost" alt="企劃女神芳芳"><div><span class="hname">企劃女神芳芳</span></div></div>
     </div>
     <div class="tdeck2" id="tdeck2"></div>
     <div class="tread" id="tread"></div>
@@ -970,7 +983,7 @@ body.gready #lgload{display:none}
    <button data-t="gacha"><span class="ti" id="tig">🎰</span>抽獎</button>
    <button data-t="farm"><span class="ti fic">🌻</span>農場</button>
    <button data-t="dragon"><span class="ti">🃏</span>射龍門</button>
-   <button data-t="tarot"><span class="ti">🔮</span>塔羅</button>
+   <button data-t="tarot"><span class="ti">🔮</span>塔羅牌</button>
   </nav>
  </div>
 </div>
@@ -1445,11 +1458,16 @@ function renderTarot(){if(!$('thost').getAttribute('src'))$('thost').src=ART['ho
  const D=$('tdeck');if(TS.ph==='pick'){const n=TS.deck.length,w=D.clientWidth||300,cw=w<380?40:50,ch=cw*5/3,pad=Math.ceil(ch*Math.sin(22*Math.PI/180))+6;
   D.style.height=Math.round(ch+26)+'px';
   D.innerHTML=TS.deck.map((c,k)=>{const t=n>1?k/(n-1):.5,ang=-22+44*t,x=pad+t*(w-2*pad-cw),lift=(1-(2*t-1)**2)*16;return'<div class="dk tback'+(c.used?' used':'')+'" data-k="'+k+'" style="width:'+cw+'px;left:'+x.toFixed(1)+'px;bottom:'+lift.toFixed(1)+'px;transform:rotate('+ang.toFixed(1)+'deg)"></div>'}).join('')}else{D.innerHTML='';D.style.height=''}}
-$('tgo').onclick=()=>{const free=SAVE.tarotDay!==todayKey();if(!free){if((SAVE.coin||0)<100){toast('金幣不足 100');sfx('error');return}SAVE.coin-=100}else SAVE.tarotDay=todayKey();save();
+$('tgo').onclick=()=>{if(document.querySelector('.tthink'))return;const free=SAVE.tarotDay!==todayKey();if(!free&&(SAVE.coin||0)<100){toast('金幣不足 100');sfx('error');return}audioUnlock();
+ $('tbub').textContent='在抽牌之前,先閉上眼睛,在心裡默想一件你在意的事情,工作、感情、財運都可以…想好了再告訴我';$('thost').src=ART['host-1']||'';
+ const ov=document.createElement('div');ov.className='tthink';ov.innerHTML='<div class="tthost"><img src="'+(ART['host-2']||ART['host-1']||'')+'" alt=""><span>芳芳:閉上眼睛,想著那件事…</span></div><div class="orb">🔮</div><b>請在心中默想你在意的事情</b><p>工作、感情、財運、人際關係…<br>專心想著它,芳芳會透過塔羅牌給你指引</p><div class="tbr">吸氣 · · · 吐氣</div><div class="btns"><button class="btn pri" data-go="1">✨ 我想好了</button><button class="btn" data-x="1">取消</button></div>';
+ document.querySelector('.tbox').appendChild(ov);sfx('mystic');
+ ov.onclick=e=>{if(e.target.closest('[data-x]')){ov.remove();$('tbub').textContent='沒關係,想好了再來找我';sfx('close');return}if(e.target.closest('[data-go]')){ov.remove();tStart()}}};
+function tStart(){const free=SAVE.tarotDay!==todayKey();if(!free){if((SAVE.coin||0)<100){toast('金幣不足 100');sfx('error');return}SAVE.coin-=100}else SAVE.tarotDay=todayKey();save();
  if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);audioUnlock();
  TS={ph:'pick',picks:[],deck:[...Array(22).keys()].sort(()=>Math.random()-.5).map(i=>({i,used:false}))};$('tread').innerHTML='';
- $('tbub').textContent='牌已經洗好了…默想你的問題,憑直覺抽三張';$('thost').src=ART['host-2']||ART['host-1'];
- renderTarot();$('tdeck').classList.add('shuffle');sfx('shuffle');setTimeout(()=>{$('tdeck').classList.remove('shuffle')},1000)};
+ $('tbub').textContent='很好,繼續想著那件事…牌已經洗好了,憑直覺抽三張';$('thost').src=ART['host-2']||ART['host-1'];
+ renderTarot();$('tdeck').classList.add('shuffle');sfx('shuffle');setTimeout(()=>{$('tdeck').classList.remove('shuffle')},1000)}
 $('tdeck2').onclick=e=>$('tdeck').onclick(e);
 $('tdeck').onclick=e=>{const d=e.target.closest('[data-k]');if(!d||TS.ph!=='pick')return;const c=TS.deck[+d.dataset.k];if(c.used)return;c.used=true;
  TS.picks.push({i:c.i,rev:Math.random()<.3,open:false});sfx('cardDraw');renderTarot();
