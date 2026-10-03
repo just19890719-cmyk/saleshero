@@ -2537,7 +2537,7 @@ function loop(now){
  if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').className=''}
  if(G)draw();hudT-=dt;if(hudT<=0){hudT=.1;hud()}requestAnimationFrame(loop);
 }
-SAVE=load()||freshSave();if(SAVE._restore){try{restoreSave()}catch(e){console.error(e)}}for(const it of SAVE.items){if(it.sk&&!SK[it.sk])it.sk=pick(['coffee','clip','drone']);const nb=RENAME[it.b];if(nb){it.name=it.name.replace(it.b,nb);it.b=nb;const bb=BASES[it.type]&&BASES[it.type].find(x=>x.b===nb);if(bb)it.e=bb.e}}SAVE.coin=SAVE.coin||0;SAVE.rides=SAVE.rides||{};SAVE.pity=SAVE.pity||0;if(SAVE.ride===undefined)SAVE.ride=null;let GIFT=false;if(!SAVE.gift1){SAVE.gift1=1;SAVE.coin+=1000;GIFT=true}let GIFT2=false;if(TEST_COINS&&!SAVE.gift2){SAVE.gift2=1;SAVE.coin+=1000000;GIFT2=true}SAVE.unlock=Math.min(SAVE.unlock||1,CH.length);SAVE.clear=(SAVE.clear||[]).filter(c=>c<CH.length);if(!(SAVE.ch<CH.length)||CH[SAVE.ch].wip)SAVE.ch=0;save();renderHome();setTab(SAVE.tab||'map');/* ===== 開心農場 ===== */
+SAVE=load()||freshSave();if(SAVE._restore){try{restoreSave()}catch(e){console.error(e)}}for(const it of SAVE.items){if(it.sk&&!SK[it.sk])it.sk=pick(['coffee','clip','drone']);const nb=RENAME[it.b];if(nb){it.name=it.name.replace(it.b,nb);it.b=nb;const bb=BASES[it.type]&&BASES[it.type].find(x=>x.b===nb);if(bb)it.e=bb.e}}SAVE.coin=SAVE.coin||0;SAVE.rides=SAVE.rides||{};SAVE.pity=SAVE.pity||0;if(SAVE.ride===undefined)SAVE.ride=null;let GIFT=false;if(!SAVE.gift1){SAVE.gift1=1;SAVE.coin+=1000;GIFT=true}let GIFT2=false;if(TEST_COINS&&!SAVE.gift2){SAVE.gift2=1;SAVE.coin+=1000000;GIFT2=true}SAVE.unlock=Math.min(SAVE.unlock||1,CH.length);SAVE.clear=(SAVE.clear||[]).filter(c=>c<CH.length);if(!(SAVE.ch<CH.length)||CH[SAVE.ch].wip)SAVE.ch=0;save();try{renderHome()}catch(e){console.error(e)}try{setTab(SAVE.tab||'map')}catch(e){console.error(e)}/* ===== 開心農場 ===== */
 const CROPS=[{id:'pot',n:'辦公室小盆栽',e:'🪴',cost:100,g:300000,v:300,d:'上班空檔點一下'},{id:'chili',n:'朝天椒',e:'🌶️',cost:500,g:1800000,v:1500,d:'被主管罵的心情'},
  {id:'coffee',n:'咖啡樹',e:'☕',cost:1500,g:7200000,v:4000,d:'續命必備'},{id:'tea',n:'高山茶',e:'🍵',cost:2500,g:14400000,v:7000,d:'上班種、下班收'},
  {id:'berry',n:'草莓',e:'🍓',cost:4000,g:28800000,v:12000,d:'睡前種、起床收'},{id:'money',n:'搖錢樹',e:'💰',cost:10000,g:86400000,v:30000,d:'每天一次的期待'}];
@@ -2735,7 +2735,7 @@ async function sbAnnounce(win){if(typeof ONLINE==='undefined'||!ONLINE.supabaseK
 $('sbchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||SBS.ph==='rolling')return;const v=+b.dataset.v,mx=sbMax();
  if(v===-1)SBS.bet=Math.max(100,mx);else if(v===0)SBS.bet=100;else SBS.bet=Math.min(Math.max(100,mx),SBS.bet+v);audioUnlock();sfx(v?'chips':'chipsClear');renderSib()};
 $('sbgo').onclick=()=>sbPlay();
-function casSwitch(k){SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1')}else renderDragon();save()}
+function casSwitch(k){SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1')}else renderDragon()}catch(e){}save()}
 document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});
 $('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');casSwitch(b.dataset.c)};
 setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
@@ -2809,6 +2809,7 @@ window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDo
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
  try{if(!document.querySelector('#gov:not([hidden])')){renderHome();if(!$('home').hidden&&SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
 if(window.ART_EXTRA)window.__artExtra();
+try{if(SAVE.tab==='dragon')casSwitch(SAVE.cas||'dragon')}catch(e){}
 lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 </body>
