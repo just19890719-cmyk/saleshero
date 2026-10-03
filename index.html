@@ -1198,8 +1198,8 @@ var LB={db:null,user:null,uid:null,rows:[],unsub:null,last:'',busy:false,ro:fals
 function sbBackend(){const U=ONLINE.supabaseUrl.replace(/\/+$/,''),H={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))H.Authorization='Bearer '+ONLINE.supabaseKey;
  let uid=localStorage.getItem('clockin-uid');if(!uid){uid='p_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('clockin-uid',uid)}
  return{uid,
-  set:async p=>{const r=await fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p))});if(!r.ok)throw{code:'http_'+r.status}},
-  sub:(cb,err)=>{let stop=false;const pull=async()=>{if(stop)return;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok)throw 0;const rows=await r.json();cb(rows)}catch(e){err&&err(e)}if(!stop)setTimeout(pull,15000)};pull();return()=>{stop=true}}}}
+  set:async p=>{const r=await fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p))});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}},
+  sub:(cb,err)=>{let stop=false;const pull=async()=>{if(stop)return;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();cb(rows)}catch(e){err&&err(e)}if(!stop)setTimeout(pull,15000)};pull();return()=>{stop=true}}}}
 async function lbInit(){
  if(ONLINE.supabaseUrl&&ONLINE.supabaseKey&&!(window.claude&&window.claude.use)){const be=sbBackend();LB.sb=be;LB.uid=be.uid;LB.db=true;LB.ready=true;lbSync(true);if(!$('lbov').hidden)lbOpen();return}
  try{const c=window.claude;if(!c||!c.use){LB.ready=true;return}
@@ -1210,18 +1210,18 @@ function lbPayload(){const eq=SLOTS.map(sl=>{const it=byId(SAVE.eq[sl.k]);return
 function lbSync(now){clearTimeout(LB.t);LB.t=setTimeout(async()=>{
  if(!LB.db||!LB.uid||LB.ro||LB.busy||!SAVE.pname)return;const p=lbPayload(),k=JSON.stringify(p);if(k===LB.last)return;
  LB.busy=true;try{if(LB.sb)await LB.sb.set(Object.assign({},p,{t:Date.now()}));else await LB.db.collection('leaderboard').doc(LB.uid).set(Object.assign({},p,{t:Date.now()}));LB.last=k}
- catch(e){if(e&&(e.code==='not_granted'||e.code==='invalid_argument'||e.code==='permission_denied'))LB.ro=true}
+ catch(e){LB.err=e;if(e&&(e.code==='not_granted'||e.code==='invalid_argument'||e.code==='permission_denied'))LB.ro=true;try{lbMe()}catch(x){}}
  LB.busy=false;if(!LB.ro&&JSON.stringify(lbPayload())!==LB.last)lbSync()},now?300:2500)}
 function lbOpen(){$('lbov').hidden=false;sfx('open');
  if(!LB.ready){$('lblist').innerHTML='<div class="lbmsg">連線中…</div>';return}
  if(!LB.db){$('lblist').innerHTML='<div class="lbmsg">排行榜尚未連線。<br>網頁版需要在設定區填入 Supabase 連線資訊才能看到其他玩家。</div>';lbMe();return}
  if(!SAVE.pname){askName();}
  if(!LB.unsub){$('lblist').innerHTML='<div class="lbmsg">讀取排行榜中…</div>';
-  const fail=()=>{$('lblist').innerHTML='<div class="lbmsg">排行榜暫時無法讀取,請稍後再試。</div>'};
+  const fail=e=>{$('lblist').innerHTML='<div class="lbmsg">排行榜暫時無法讀取,請稍後再試。'+(e?'<br><small style="color:#ff9a8a">錯誤代碼:'+escH(String(e.code||e.message||e))+(e.msg?' '+escH(String(e.msg).slice(0,160)):'')+'</small>':'')+'</div>'};
   if(LB.sb)LB.unsub=LB.sb.sub(rows=>{LB.rows=rows;lbRender()},fail);
   else LB.unsub=LB.db.collection('leaderboard').orderBy('coin','desc').limit(200).onSnapshot(sn=>{LB.rows=sn.docs.map(d=>Object.assign({id:d.id},d.data()));lbRender()},fail)}
  else lbRender();lbMe();lbSync(true)}
-function lbMe(){$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <button class="btn" id="lbname" style="padding:3px 10px;font-size:12px">修改名稱</button>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')}
+function lbMe(){$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <button class="btn" id="lbname" style="padding:3px 10px;font-size:12px">修改名稱</button>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')+(LB.err&&LB.sb?'<span style="color:#ff9a8a;font-size:11px">成績上傳失敗:'+escH(String(LB.err.code||''))+' '+escH(String(LB.err.msg||'').slice(0,120))+'</span>':'')}
 const escH=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function lbRender(){
  const rows=LB.rows.slice().sort((a,b)=>(+b[LB.sort]||0)-(+a[LB.sort]||0));
