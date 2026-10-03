@@ -674,6 +674,20 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
 .dallov{z-index:9}
 .dlr.big{background:linear-gradient(90deg,rgba(255,180,40,.35),rgba(0,0,0,.28));border:1px solid rgba(255,200,60,.6)}
 .dlr .k.big{background:linear-gradient(#ffd24a,#e08a00);color:#2a1700;font-weight:900}
+
+.lgcloud{display:grid;gap:8px;padding:10px;border-radius:10px;background:rgba(80,160,255,.1);border:1px dashed rgba(120,190,255,.45);text-align:left}
+.lgcloud .clst{display:flex;flex-direction:column;gap:2px;font-size:13px;color:#cfe6ff}
+.lgcloud .clst b{color:#9fd8ff}.lgcloud .clst span{font-size:11px;color:#9ba4ae}
+.lgcloud .clbtns,.clbox .clbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.lgcloud .btn{font-size:14px!important;animation:none!important;letter-spacing:0!important;padding:3px 8px!important}
+.lgcloud #clout{justify-self:end}
+.clov{z-index:10}
+.clbox{max-width:360px;display:grid;gap:8px;text-align:left}
+.clbox h2{margin:0;text-align:center}
+.clbox label{display:grid;gap:4px;font-size:13px;font-weight:800;color:#ffe08a}
+.clbox input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;font-size:16px}
+.clwarn{margin:0;font-size:12px;color:#ffcf6a}.clerr{margin:0;min-height:18px;font-size:13px;color:#ff8a7a;font-weight:800}
+#ask{z-index:11}
 </style>
 </head>
 <body>
@@ -692,12 +706,14 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
    <label for="lgname" id="lglab">輸入你的遊戲名稱</label>
    <input id="lgname" maxlength="12" placeholder="例如:業績之王" autocomplete="off">
    <button class="btn pri" id="lggo">開始上班</button>
+   <div class="lgcloud" id="lgcloud" hidden></div>
    <p class="lghint">名稱會顯示在排行榜上,之後想改名,<br>到右上角「🏆 排行榜」點「修改名稱」即可。</p>
   </div>
   <details class="lgsave" id="lgsave">
    <summary>💾 存檔須知<span>第一次玩請看</span></summary>
    <ul>
-    <li>遊戲進度(裝備、金幣、座駕、通關紀錄)只存在<b>這支手機/這台電腦的這個瀏覽器</b>裡,不會存到雲端。</li>
+    <li><b>☁️ 建議綁定雲端帳號</b>:設定帳號密碼後,進度會自動存到雲端,換手機、換瀏覽器、清除資料都能登入接續。下面幾點是<b>沒有綁帳號</b>時要注意的。</li>
+    <li>沒綁帳號時,遊戲進度(裝備、金幣、座駕、通關紀錄)只存在<b>這支手機/這台電腦的這個瀏覽器</b>裡。</li>
     <li><b>換手機、換瀏覽器、清除瀏覽器資料、用無痕模式</b>玩,進度都會從頭開始。</li>
     <li>在 <b>LINE</b> 裡點連結會用 LINE 內建瀏覽器打開,存檔跟 Safari/Chrome 是分開的。請按右上角選<b>「用預設瀏覽器開啟」</b>,之後都用同一個瀏覽器玩。</li>
     <li><b>iPhone</b> 請用 Safari 打開後,點下方分享鈕 →<b>「加入主畫面」</b>,桌面會出現遊戲圖示。Safari 超過 7 天沒開可能會自動清掉資料,加到主畫面比較不會被清。</li>
@@ -979,7 +995,7 @@ const DUR=180;
 const KEY='clockin-hero-v1';let SAVE;
 function freshSave(){const s={items:[],eq:{},parts:0,unlock:1,clear:[],auto:true,ch:0};const u=makeItem(1,0,'wpn',BASES.wpn[0]);s.items.push(u);s.eq.wpn=u.id;return s}
 function load(){try{const j=localStorage.getItem(KEY);return j?JSON.parse(j):null}catch(e){return null}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}if(typeof lbSync==='function'&&typeof LB!=='undefined')lbSync()}
+function save(){try{SAVE._t=Date.now();localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}if(typeof cloudQueue==='function')cloudQueue();if(typeof lbSync==='function'&&typeof LB!=='undefined')lbSync()}
 const byId=id=>SAVE.items.find(i=>i.id===id);
 const isEq=it=>Object.values(SAVE.eq).includes(it.id);
 
@@ -2211,7 +2227,69 @@ function loop(now){
  if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').className=''}
  if(G)draw();hudT-=dt;if(hudT<=0){hudT=.1;hud()}requestAnimationFrame(loop);
 }
-SAVE=load()||freshSave();for(const it of SAVE.items){if(it.sk&&!SK[it.sk])it.sk=pick(['coffee','clip','drone']);const nb=RENAME[it.b];if(nb){it.name=it.name.replace(it.b,nb);it.b=nb;const bb=BASES[it.type]&&BASES[it.type].find(x=>x.b===nb);if(bb)it.e=bb.e}}SAVE.coin=SAVE.coin||0;SAVE.rides=SAVE.rides||{};SAVE.pity=SAVE.pity||0;if(SAVE.ride===undefined)SAVE.ride=null;let GIFT=false;if(!SAVE.gift1){SAVE.gift1=1;SAVE.coin+=1000;GIFT=true}let GIFT2=false;if(TEST_COINS&&!SAVE.gift2){SAVE.gift2=1;SAVE.coin+=1000000;GIFT2=true}SAVE.unlock=Math.min(SAVE.unlock||1,CH.length);SAVE.clear=(SAVE.clear||[]).filter(c=>c<CH.length);if(!(SAVE.ch<CH.length)||CH[SAVE.ch].wip)SAVE.ch=0;save();renderHome();setTab(SAVE.tab||'map');lbInit();requestAnimationFrame(loop);showLogin();if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
+SAVE=load()||freshSave();for(const it of SAVE.items){if(it.sk&&!SK[it.sk])it.sk=pick(['coffee','clip','drone']);const nb=RENAME[it.b];if(nb){it.name=it.name.replace(it.b,nb);it.b=nb;const bb=BASES[it.type]&&BASES[it.type].find(x=>x.b===nb);if(bb)it.e=bb.e}}SAVE.coin=SAVE.coin||0;SAVE.rides=SAVE.rides||{};SAVE.pity=SAVE.pity||0;if(SAVE.ride===undefined)SAVE.ride=null;let GIFT=false;if(!SAVE.gift1){SAVE.gift1=1;SAVE.coin+=1000;GIFT=true}let GIFT2=false;if(TEST_COINS&&!SAVE.gift2){SAVE.gift2=1;SAVE.coin+=1000000;GIFT2=true}SAVE.unlock=Math.min(SAVE.unlock||1,CH.length);SAVE.clear=(SAVE.clear||[]).filter(c=>c<CH.length);if(!(SAVE.ch<CH.length)||CH[SAVE.ch].wip)SAVE.ch=0;save();renderHome();setTab(SAVE.tab||'map');/* ===== 雲端存檔帳號 ===== */
+var CL={on:false,u:null,t:null,timer:null,busy:false,lastOk:0,err:'',ready:false,dirty:false};
+const clSyncGet=()=>+(localStorage.getItem('shechu-sync')||0),clSyncSet=v=>{try{localStorage.setItem('shechu-sync',String(+v||0))}catch(e){}};
+(function(){try{CL.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){CL.on=false}
+ try{const a=JSON.parse(localStorage.getItem('shechu-acct')||'null');if(a&&a.u&&a.t){CL.u=a.u;CL.t=a.t}}catch(e){}})();
+async function clRpc(fn,body,keep){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
+ const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(body),keepalive:!!keep});
+ if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}return r.json()}
+const CLERR={'bad user':'帳號要 3~20 個英文字母、數字或底線','bad pass':'密碼要 4~40 個字','taken':'這個帳號已經有人用了,換一個吧','bad login':'帳號或密碼錯誤','bad token':'登入已失效,請重新登入','too big':'存檔太大,請先賣掉一些裝備'};
+const clMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in CLERR)if(m.includes(k))return CLERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,80)};
+function clSet(u,t){CL.u=u;CL.t=t;try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
+function clSnap(){return JSON.parse(JSON.stringify(SAVE))}
+function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,3000)}
+async function clFlush(keep){if(!CL||!CL.on||!CL.u||CL.busy)return;clearTimeout(CL.timer);CL.busy=true;
+ try{const snap=clSnap(),body={p_user:CL.u,p_token:CL.t,p_save:snap};if(keep&&JSON.stringify(body).length>60000)keep=false;await clRpc('acct_save',body,keep);clSyncSet(snap._t);CL.lastOk=Date.now();CL.err=''}
+ catch(e){CL.err=clMsg(e);if(String(e.msg||'').includes('bad token')){clSet(null,null);toast('☁️ 雲端帳號登入已失效,請重新登入')}}
+ CL.busy=false;clUI()}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&CL.u)clFlush(true)});
+function clUI(){const el=$('lgcloud');if(!el)return;if(!CL.on){el.hidden=true;return}el.hidden=false;
+ el.innerHTML=CL.u?'<div class="clst"><div>☁️ 雲端帳號:<b>'+escH(CL.u)+'</b></div><span>'+(CL.err?'<i class="down">'+escH(CL.err)+'</i>':'進度自動同步中')+'</span></div><button class="btn" id="clout">登出</button>'
+  :'<div class="clst"><div>☁️ <b>雲端存檔</b></div><span>綁定帳號密碼,換手機、換瀏覽器都能接續進度</span></div><div class="clbtns"><button class="btn pri" id="clreg">建立帳號/綁定進度</button><button class="btn" id="clin">登入帳號</button></div>'}
+function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');ov.className='ov clov';
+ ov.innerHTML='<div class="box clbox"><h2>'+(reg?'☁️ 建立雲端帳號':'☁️ 登入雲端帳號')+'</h2><p class="muted">'+(reg?'會把<b>這台裝置目前的進度</b>綁定到新帳號,之後在任何裝置登入都能接續。':'登入後會改用<b>雲端帳號的進度</b>。')+'</p>'+
+  '<label>帳號<input id="clu" maxlength="20" autocomplete="username" autocapitalize="off" placeholder="英文字母、數字或底線,3~20 字"></label>'+
+  '<label>密碼<input id="clp" type="password" maxlength="40" autocomplete="'+(reg?'new-password':'current-password')+'" placeholder="至少 4 個字"></label>'+
+  (reg?'<label>再輸入一次密碼<input id="clp2" type="password" maxlength="40" autocomplete="new-password"></label><p class="clwarn">⚠️ 沒有綁 Email,<b>忘記密碼無法自己重設</b>,請記好或截圖保存。</p>':'')+
+  '<p class="clerr" id="clerr"></p><div class="clbtns"><button class="btn pri" id="clok">'+(reg?'建立並綁定':'登入')+'</button><button class="btn" id="clx">取消</button></div></div>';
+ document.body.appendChild(ov);setTimeout(()=>$('clu').focus(),50);
+ const err=t=>{$('clerr').textContent=t;sfx('error')},close=()=>{ov.remove()};
+ ov.addEventListener('keydown',e=>{if(e.key==='Enter')$('clok').click()});
+ $('clx').onclick=close;
+ $('clok').onclick=async()=>{const u=$('clu').value.trim().toLowerCase(),p=$('clp').value;
+  if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<4)return err(CLERR['bad pass']);
+  if(reg&&p!==$('clp2').value)return err('兩次輸入的密碼不一樣');
+  const b=$('clok');b.disabled=true;b.textContent='處理中…';audioUnlock();
+  try{if(reg){const nm=($('lgname').value.trim()||SAVE.pname||'').slice(0,12);if(!nm){b.disabled=false;b.textContent='建立並綁定';return err('請先在登入畫面輸入遊戲名稱')}
+    SAVE.pname=nm;SAVE._t=Date.now();try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}
+    const r=await clRpc('acct_register',{p_user:u,p_pass:p,p_save:clSnap(),p_lb:localStorage.getItem('clockin-uid')||''});
+    clSet(r.user,r.token);clSyncSet(SAVE._t);CL.ready=true;CL.lastOk=Date.now();close();sfx('levelUp');toast('☁️ 帳號 '+r.user+' 建立成功,進度已存到雲端!')}
+   else{const r=await clRpc('acct_login',{p_user:u,p_pass:p});
+    const apply=()=>{clSet(r.user,r.token);if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
+     if(r.save){try{localStorage.setItem(KEY,JSON.stringify(r.save))}catch(e){}clSyncSet(r.save._t||0)}else{CL.ready=true;clFlush()}
+     try{sessionStorage.setItem('shechu-justlogin','1')}catch(e){}close();location.reload()};
+    const hasLocal=(SAVE.items||[]).length>1||(SAVE.coin||0)>1000||(SAVE.clear||[]).length>0;
+    if(r.save&&hasLocal){close();ask('登入後會改用雲端帳號「'+r.user+'」的進度,\n這台裝置目前的進度會被取代,確定嗎?',apply)}else apply()}}
+  catch(e){b.disabled=false;b.textContent=reg?'建立並綁定':'登入';err(clMsg(e))}}}
+document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
+ if(t.closest('#clreg'))clModal('reg');else if(t.closest('#clin'))clModal('in');
+ else if(t.closest('#clout'))ask('確定要登出雲端帳號嗎?\n這台裝置的進度會保留,之後可以再登入。',async()=>{await clFlush();clSet(null,null);toast('已登出雲端帳號')})});
+async function clBoot(){clUI();if(!CL.on||!CL.u){CL.ready=true;return}
+ let just=false;try{just=sessionStorage.getItem('shechu-justlogin')==='1';sessionStorage.removeItem('shechu-justlogin')}catch(e){}
+ if(just){CL.ready=true;toast('☁️ 已登入 '+CL.u+',雲端進度載入完成');return}
+ try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});
+  if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
+  const ct=r.save?+(r.save._t||r.save_t||0):0,sy=clSyncGet();
+  if(r.save&&ct>sy+500){let g=false;try{g=sessionStorage.getItem('shechu-pull')==='1'}catch(e){}
+   if(!g){try{localStorage.setItem(KEY,JSON.stringify(r.save));sessionStorage.setItem('shechu-pull','1')}catch(e){}clSyncSet(ct);location.reload();return}}
+  try{sessionStorage.removeItem('shechu-pull')}catch(e){}
+  CL.ready=true;if(!r.save||(+(SAVE._t||0))>Math.max(ct,sy)+500||CL.dirty){CL.dirty=false;clFlush()}
+  CL.lastOk=Date.now();CL.err='';clUI()}
+ catch(e){CL.err=clMsg(e);CL.ready=true;if(String(e.msg||'').includes('bad token')){clSet(null,null);toast('☁️ 雲端帳號登入已失效,請重新登入')}clUI()}}
+
+lbInit();requestAnimationFrame(loop);showLogin();clBoot();if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 </body>
 </html>
