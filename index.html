@@ -648,6 +648,32 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
 .volpop input[type=range]{flex:1;accent-color:#ffd24a;touch-action:pan-x}
 .volpop .vr b{min-width:40px;text-align:right;color:#ffd77a;font-variant-numeric:tabular-nums}
 .volpop label{display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer}
+
+.dpot{grid-column:1/-1;justify-self:center;display:flex;flex-direction:column;align-items:center;gap:0;padding:8px 26px 6px;margin:-2px 0 2px;border-radius:14px;background:radial-gradient(ellipse at 50% 0,rgba(255,200,60,.25),rgba(0,0,0,.45) 70%);border:2px solid rgba(255,200,60,.55);box-shadow:0 0 18px rgba(255,180,40,.3)}
+.dpot small{font-size:12px;font-weight:800;color:#ffe08a;letter-spacing:.15em}
+.dpot b{font-size:clamp(26px,8vw,38px);font-weight:900;line-height:1.15;background:linear-gradient(#fff6c8,#ffd24a 50%,#ff9c12);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 8px rgba(255,190,60,.6));font-variant-numeric:tabular-nums}
+.dpot span{font-size:11px;color:#c9d1dc}
+.dlog{width:100%;max-width:420px;display:grid;gap:3px;margin-top:4px;text-align:left}
+.dlr{display:grid;grid-template-columns:auto auto 1fr auto;gap:6px;align-items:center;font-size:12px;padding:3px 8px;border-radius:6px;background:rgba(0,0,0,.28)}
+.dlr .nm{font-weight:800;color:#fff;max-width:7em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dlr .k{font-size:11px;padding:0 6px;border-radius:999px;background:rgba(255,255,255,.12);color:#ddd}
+.dlr .k.up{background:rgba(47,191,95,.25);color:#7ee2a8}.dlr .k.down{background:rgba(229,48,58,.25);color:#ff9a8a}
+.dlr .ag{color:#8a939d;font-size:11px}
+.dchips .allin{background:linear-gradient(#ffd24a,#e08a00)!important;color:#2a1700!important;border-color:#ffd24a!important}
+#dbetm{font-size:11px;color:#9ba4ae}
+
+.dallin{border-image:none!important;border:2px solid #ff6a3d!important;border-radius:10px!important;background:linear-gradient(#ff5a3c,#b8121a)!important;color:#fff!important;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.6);padding:6px 12px!important;box-shadow:0 0 14px rgba(255,80,40,.5);animation:dallp 1.3s ease-in-out infinite}
+.dallin:disabled{animation:none;filter:grayscale(.8) brightness(.7);box-shadow:none}
+@keyframes dallp{50%{box-shadow:0 0 22px rgba(255,120,40,.9)}}
+.dallnote{flex-basis:100%;font-size:11px;color:#ffb3a3}
+.dallbox{max-width:360px;text-align:center;border:2px solid #ff6a3d}
+.dallbox h2{color:#ffb070}
+.dallpot{font-size:40px;font-weight:900;background:linear-gradient(#fff6c8,#ffd24a 50%,#ff7a12);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(255,150,40,.6));font-variant-numeric:tabular-nums}
+.dallbox ul{text-align:left;margin:8px 0;padding-left:18px;font-size:14px;line-height:1.8}
+.dallbtns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.dallov{z-index:9}
+.dlr.big{background:linear-gradient(90deg,rgba(255,180,40,.35),rgba(0,0,0,.28));border:1px solid rgba(255,200,60,.6)}
+.dlr .k.big{background:linear-gradient(#ffd24a,#e08a00);color:#2a1700;font-weight:900}
 </style>
 </head>
 <body>
@@ -762,28 +788,33 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
   </div>
   <div class="tab" data-tab="dragon" hidden>
    <section style="margin-top:12px">
-    <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">企劃女神芳芳坐莊</span></h2>
+    <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用底池 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
      <div class="dsign"><p>有人看海 有人被愛</p><p class="b">有人射龍門輸到不知悔改</p><small>— 本店名言 —</small></div>
+     <div class="dpot"><small>💰 全伺服器底池</small><b id="dpotv">—</b><span id="dpotst">連線中…</span></div>
      <div class="dtable">
       <div class="dcards"><div class="dslot" id="dA"></div><div class="dslot mid" id="dC"></div><div class="dslot" id="dB"></div></div>
-      <div class="dinfo" id="dinfo">先選好下注金額,再按「發牌」</div>
-      <div class="dbet"><span>下注:</span><b id="dbetv">100</b><span class="muted">金幣</span></div>
-      <div class="dchips" id="dchips"><button data-v="100">+100</button><button data-v="1000">+1千</button><button data-v="10000">+1萬</button><button data-v="100000">+10萬</button><button data-v="0" class="clr">清除</button></div>
+      <div class="dinfo" id="dinfo">每局丟底 100 金幣,看完門柱再決定要不要射</div>
+      <div class="dbet"><span id="dbetl">底注:</span><b id="dbetv">100</b><span class="muted">金幣 <small id="dbetm"></small></span></div>
+      <div class="dchips" id="dchips"><button data-v="100">+100</button><button data-v="1000">+1千</button><button data-v="10000">+1萬</button><button data-v="100000">+10萬</button><button data-v="-1" class="allin">梭哈</button><button data-v="0" class="clr">清除</button></div>
       <div class="dact" id="dact"></div>
       <div class="muted dstat" id="dstat"></div>
+      <div class="dlog" id="dlog"></div>
      </div>
      <div class="ghost dghost"><div class="bub" id="dbub">來來來,射龍門!莊家今天手氣很好喔</div><img id="dhost" alt="企劃女神芳芳"><div><span class="hname">企劃女神芳芳</span></div></div>
     </div>
     <details class="drule" id="drule">
      <summary>📖 遊戲說明</summary>
      <ol>
-      <li><b>發門柱</b>:先下注,芳芳會翻開兩張牌當作「門柱」。A 最小算 1,K 最大算 13,不分花色。</li>
-      <li><b>決定要不要射</b>:看門柱夠不夠寬,可以選擇「射門」或「放棄」。放棄不用付錢,這局作廢。畫面會顯示這次的勝率給你參考。</li>
+      <li><b>全伺服器共用一個底池</b>:所有玩家都在搶同一個池子,上方會顯示目前底池金額和最近大家的戰況。</li>
+      <li><b>丟底發牌</b>:每局先丟 <b>100 金幣</b>底注進底池,芳芳翻開兩張牌當「門柱」。A 最小算 1,K 最大算 13,不分花色。</li>
+      <li><b>看門柱決定</b>:門夠寬就選好下注金額「射門」;門太窄就「放棄」,但<b>丟進去的底注會留在底池</b>,讓池子越滾越大。</li>
       <li><b>射門結果</b>:芳芳翻第三張牌——
-       <ul><li>落在兩根門柱<b>中間</b>:<span class="up">贏 1 倍</span></li><li>落在門柱<b>外面</b>:<span class="down">輸 1 倍</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">輸 2 倍</span></li></ul></li>
-      <li><b>兩根門柱一樣大</b>時,改成猜第三張牌「比門柱大」還是「比門柱小」:猜對贏 1 倍、猜錯輸 1 倍,如果又一樣大就是<span class="down">撞柱輸 3 倍</span>。</li>
-      <li>因為有撞柱的風險,身上的金幣至少要有下注金額的 3 倍才能發牌。</li>
+       <ul><li>落在兩根門柱<b>中間</b>:<span class="up">從底池贏走下注金額</span></li><li>落在門柱<b>外面</b>:<span class="down">下注金額丟進底池</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">丟 2 倍進底池</span></li></ul></li>
+      <li><b>兩根門柱一樣大</b>時,改成猜第三張「比門柱大」還是「比門柱小」:猜對從底池贏走下注金額,猜錯丟 1 倍,又一樣大就是<span class="down">撞柱丟 3 倍</span>。</li>
+      <li><b>💥 全包</b>:看完門柱也可以選「全包」,押上<b>整個底池</b>。射中就抱走整個底池;射偏賠一個底池;撞柱賠 2 倍(雙柱 3 倍),最多扣到身上金幣歸零。身上至少要有一個底池的金幣才能全包。</li>
+      <li><b>下注上限</b>:不能超過目前底池,身上金幣也要夠付撞柱的倍數。按「梭哈」可以一口氣押滿。</li>
+      <li>底池被挖到見底時,芳芳會自動補 1,000 進去,遊戲不會中斷。</li>
      </ol>
     </details>
    </section>
@@ -1134,40 +1165,104 @@ const cardH=(c,d)=>{const red=c.s==='♥'||c.s==='♦',si=SI(c.s);let f;
  return'<div class="pc" style="animation-delay:'+(d||0)+'s"><div class="k" style="background-image:url('+ART['pk-back']+')"></div>'+f+'</div>'};
 const backH='<div class="pc" style="animation:none"><div class="k" style="transform:none"></div></div>';
 function dSay(k,pose){$('dbub').textContent=pickL(DL[k]);$('dhost').src=ART[pose||'host-1']||ART['host-1']}
+/* ===== 射龍門:全伺服器共用底池 ===== */
+const DANTE=100;
+DL.idle=['來來來,丟個底就能射!底池越滾越大囉','底池現在多少?看了就心動吧','每局底注 100,射中的話底池分你'];
+DL.win=['可惡,被你從底池挖走了…','射中!底池的錢拿去','恭喜!大家的錢都被你贏走了','你是不是有偷練過?'];
+DL.lose=['謝謝贊助!錢已經丟進底池','射歪了,底池又變胖了','你的錢我會好好幫大家保管','差一點點…其實差很多'];
+DL.post=['撞柱!加倍丟進底池!','哈哈哈撞柱!底池爆肥','砰!門柱都被你撞歪了','撞柱的聲音,是底池長大的聲音'];
+DL.fold=['怕了喔?底留給大家囉','保守也是一種智慧啦','不射?那這 100 就留在池子裡','膽小鬼~底池謝謝你'];
+DL.allin=['全包?!你是認真的嗎…','全伺服器的錢都在你手上了,射吧!','包底耶!大家快來看!'];
+DL.allwin=['全包成功!!整個底池都被你抱走了!','不會吧…全包也能中?!今天你最大'];
+DL.alllose=['全包失敗~底池直接翻倍,謝謝老闆!','包底包到底,錢包也到底了'];
+DL.seed=['底池被掏空了!芳芳補 1,000 進去,繼續!','池子見底了,我先墊 1,000'];
+const DP={on:false,pot:null,log:[],busy:false,err:'',t:0};
+(function(){try{DP.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){DP.on=false}})();
+function dpH(){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;return h}
+const dpU=p=>ONLINE.supabaseUrl.replace(/\/+$/,'')+p;
+async function dpReq(path,body){const r=await fetch(dpU(path),body?{method:'POST',headers:dpH(),body:JSON.stringify(body)}:{headers:dpH()});
+ if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}return r.json()}
+const dpNick=()=>(SAVE.pname||'匿名社畜').slice(0,12);
+/* 本機底池(claude.ai 版或連不上時) */
+function dpLocal(){if(SAVE.dpot==null)SAVE.dpot=1000;if(!SAVE.dlog)SAVE.dlog=[];return SAVE}
+function dpLocalLog(kind,amount,pot){const s=dpLocal();s.dlog.unshift({nick:dpNick(),kind,amount,pot,t:new Date().toISOString()});s.dlog.length=Math.min(s.dlog.length,20)}
+async function dpFetch(){if(DP.on){const [p,l]=await Promise.all([dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot'),dpReq('/rest/v1/dragon_log?select=nick,kind,amount,pot,t&order=id.desc&limit=6')]);
+  DP.pot=p&&p[0]?+p[0].pot:null;DP.log=l||[]}else{const s=dpLocal();DP.pot=s.dpot;DP.log=s.dlog.slice(0,6)}DP.t=Date.now()}
+async function dpAnte(amt){if(DP.on){const v=await dpReq('/rest/v1/rpc/dragon_ante',{p_nick:dpNick(),p_amt:amt});DP.pot=+v;return DP.pot}
+ const s=dpLocal();s.dpot+=amt;DP.pot=s.dpot;save();return DP.pot}
+async function dpSettle(kind,amt){if(DP.on){let r;try{r=await dpReq('/rest/v1/rpc/dragon_settle',{p_nick:dpNick(),p_kind:kind,p_amt:amt})}catch(e){if(/^all/.test(kind)&&/bad kind/.test(String(e.msg||'')))r=await dpReq('/rest/v1/rpc/dragon_settle',{p_nick:dpNick(),p_kind:kind.slice(3)==='win'?'win':kind.slice(3),p_amt:amt});else throw e}DP.pot=+r.pot;return{paid:+r.paid,pot:+r.pot,seeded:!!r.seeded}}
+ const s=dpLocal();let paid=0,seeded=false;if(kind==='win'||kind==='allwin'){paid=Math.min(amt,s.dpot);s.dpot-=paid;if(s.dpot<100){s.dpot+=1000;seeded=true}}else if(['lose','post','alllose','allpost'].includes(kind)){s.dpot+=amt;paid=-amt}
+ dpLocalLog(kind,(kind==='win'||kind==='allwin')?paid:amt,s.dpot);if(seeded)dpLocalLog('seed',1000,s.dpot);DP.pot=s.dpot;save();return{paid,pot:s.dpot,seeded}}
+function dpAgo(t){const d=(Date.now()-new Date(t).getTime())/1000;if(!(d>=0))return'';if(d<60)return'剛剛';if(d<3600)return Math.floor(d/60)+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
+function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==null?'—':fmtC(DP.pot);
+ $('dpotst').innerHTML=DP.err?'<span style="color:#ff9a8a">連線失敗:'+escH(DP.err)+'</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機底池(網頁版才是全伺服器共用)';
+ const K={allwin:['💥全包成功','up big','+'],alllose:['💥全包失敗','down','+'],allpost:['💥全包撞柱','down','+'],win:['射中','up','+'],lose:['射偏','down','+'],post:['撞柱','down','+'],fold:['放棄','',''],seed:['芳芳補底','up','+']};
+ $('dlog').innerHTML=DP.log.length?DP.log.map(r=>{const k=K[r.kind]||[r.kind,'',''];const amt=+r.amount||0;
+  const txt=r.kind==='allwin'?'抱走整個底池 <b class="up">'+fmtC(amt)+'</b>':r.kind==='win'?'贏走 <b class="up">'+fmtC(amt)+'</b>':r.kind==='fold'?'底 '+fmtC(amt)+' 留在池裡':r.kind==='seed'?'補進 <b class="up">'+fmtC(amt)+'</b>':'丟進池裡 <b class="down">'+fmtC(amt)+'</b>';
+  return'<div class="dlr'+(r.kind==='allwin'?' big':'')+'"><span class="nm">'+escH(r.kind==='seed'?'芳芳':(r.nick||'?'))+'</span><span class="k '+k[1]+'">'+k[0]+'</span><span class="tx">'+txt+'</span><span class="ag">'+dpAgo(r.t)+'</span></div>'}).join(''):'<div class="muted" style="font-size:12px">還沒有人射過,第一槍就是你!</div>'}
+async function dpRefresh(){try{await dpFetch();DP.err=''}catch(e){DP.err=String(e.code||e.message||e)}dpRenderPot();renderDragon()}
+const dMult=()=>DS.ph==='pair'?3:2;
+function dMaxBet(){const pot=DP.pot||0,byCoin=Math.floor((SAVE.coin||0)/dMult()/100)*100;return Math.max(0,Math.min(pot,byCoin))}
 function renderDragon(){
- $('dhost').src=$('dhost').src||ART['host-1'];if(!$('dhost').getAttribute('src'))$('dhost').src=ART['host-1'];
- $('dbetv').textContent=fmtC(DS.bet);const st=SAVE.dstat||{w:0,l:0,n:0,net:0};
- $('dstat').innerHTML='金幣 <b style="color:#ffd24a">'+fmtC(SAVE.coin||0)+'</b> · 戰績 '+st.w+' 勝 '+st.l+' 敗 · 累計 '+(st.net>=0?'<span class="up">+':'<span class="down">')+fmt(st.net)+'</span>';
- const A=$('dact');
- if(DS.ph==='idle'||DS.ph==='done')A.innerHTML='<button class="btn pri" id="ddeal">🃏 發牌</button>';
- else if(DS.ph==='posts')A.innerHTML='<button class="btn pri" id="dshoot">🎯 射門</button><button class="btn" id="dfold">放棄</button>';
- else if(DS.ph==='pair')A.innerHTML='<button class="btn pri" id="dhi">⬆ 猜大</button><button class="btn pri" id="dlo">⬇ 猜小</button><button class="btn" id="dfold">放棄</button>';
- $('dchips').style.opacity=DS.ph==='posts'||DS.ph==='pair'?.4:1;
- if(!SAVE.drule){$('drule').open=true}}
-function dResult(delta,kind){SAVE.coin=Math.max(0,(SAVE.coin||0)+delta);const st=SAVE.dstat=SAVE.dstat||{w:0,l:0,n:0,net:0};st.n++;st.net+=delta;if(delta>0)st.w++;else st.l++;DS.ph='done';save();
- if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);audioUnlock();
- if(kind==='win'){sfx('casinoWin');dSay('win','host-4')}else if(kind==='post'){sfx('gong');dSay('post','host-3')}else{sfx('casinoLose');dSay('lose','host-2')}renderDragon()}
-$('dchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||DS.ph==='posts'||DS.ph==='pair')return;const v=+b.dataset.v;DS.bet=v?DS.bet+v:100;const mx=Math.max(100,Math.floor((SAVE.coin||0)/3/100)*100);if(DS.bet>mx){DS.bet=mx;toast('最多只能下注 '+fmtC(mx)+'(需保留 3 倍撞柱風險)')}audioUnlock();sfx(v?'chips':'chipsClear');renderDragon()};
-$('dact').onclick=e=>{const b=e.target.closest('button');if(!b)return;audioUnlock();
- if(b.id==='ddeal'){if((SAVE.coin||0)<DS.bet*3){sfx('error');dSay('broke','host-4');toast('金幣至少要有下注的 3 倍');return}
-  DS.a=drawC();DS.b=drawC();if(DS.a.r>DS.b.r)[DS.a,DS.b]=[DS.b,DS.a];DS.c=null;
-  $('dA').innerHTML=cardH(DS.a);$('dB').innerHTML=cardH(DS.b,.15);$('dC').innerHTML='';sfx('cardDeal');setTimeout(()=>sfx('cardDeal'),160);
+ if(!$('dhost').getAttribute('src'))$('dhost').src=ART['host-1'];
+ const inHand=DS.ph==='posts'||DS.ph==='pair';
+ if(inHand){const mx=dMaxBet();if(DS.bet>mx)DS.bet=mx;if(DS.bet<100&&mx>=100)DS.bet=100}
+ $('dbetv').textContent=inHand?fmtC(DS.bet):fmtC(DANTE);$('dbetl').textContent=inHand?'下注:':'底注:';
+ $('dbetm').textContent=inHand?'(最多 '+fmtC(dMaxBet())+')':'';
+ const st=SAVE.dstat||{w:0,l:0,n:0,net:0};
+ $('dstat').innerHTML='金幣 <b style="color:#ffd24a">'+fmtC(SAVE.coin||0)+'</b> · 戰績 '+st.w+' 勝 '+st.l+' 敗 · 累計 '+(st.net>=0?'<span class="up">+':'<span class="down">')+fmtC(st.net)+'</span>';
+ const A=$('dact'),dis=DP.busy?' disabled':'';
+ if(!inHand)A.innerHTML='<button class="btn pri" id="ddeal"'+dis+'>🃏 丟底 '+fmtC(DANTE)+' 發牌</button>';
+ else{const pot=DP.pot||0,canAll=(SAVE.coin||0)>=pot&&pot>0,allB='<button class="btn dallin" id="dall"'+(dis||(canAll?'':' disabled'))+'>💥 全包 '+fmtC(pot)+'</button>';
+  if(DS.ph==='posts')A.innerHTML='<button class="btn pri" id="dshoot"'+(dis||(DS.bet<100?' disabled':''))+'>🎯 射門 '+fmtC(DS.bet)+'</button>'+allB+'<button class="btn" id="dfold"'+dis+'>放棄</button>';
+  else A.innerHTML='<button class="btn pri" id="dhi"'+(dis||(DS.bet<100?' disabled':''))+'>⬆ 猜大</button><button class="btn pri" id="dlo"'+(dis||(DS.bet<100?' disabled':''))+'>⬇ 猜小</button>'+allB+'<button class="btn" id="dfold"'+dis+'>放棄</button>';
+  if(!canAll&&!DP.busy)A.insertAdjacentHTML('beforeend','<div class="dallnote">全包需要身上至少有 '+fmtC(pot)+' 金幣(一個底池)</div>')}
+ $('dchips').style.opacity=inHand&&!DP.busy?1:.35;$('dchips').style.pointerEvents=inHand&&!DP.busy?'auto':'none';
+ dpRenderPot();if(!SAVE.drule){$('drule').open=true}}
+function dStat(delta,kind){const st=SAVE.dstat=SAVE.dstat||{w:0,l:0,n:0,net:0};st.net+=delta;if(kind==='win'){st.n++;st.w++}else if(kind==='lose'||kind==='post'){st.n++;st.l++}}
+function dCoins(delta){SAVE.coin=Math.max(0,(SAVE.coin||0)+delta);save();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin)}
+$('dchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||!(DS.ph==='posts'||DS.ph==='pair')||DP.busy)return;const v=+b.dataset.v,mx=dMaxBet();
+ if(v===-1)DS.bet=mx;else if(v===0)DS.bet=Math.min(100,mx);else DS.bet=Math.min(mx,DS.bet+v);
+ if(v>0&&DS.bet===mx)toast('最多只能下注 '+fmtC(mx)+'(不能超過底池,也要保留 '+dMult()+' 倍撞柱風險)');
+ audioUnlock();sfx(v?'chips':'chipsClear');renderDragon()};
+$('dact').onclick=async e=>{const b=e.target.closest('button');if(!b||b.disabled||DP.busy)return;audioUnlock();
+ if(b.id==='ddeal'){if((SAVE.coin||0)<DANTE){sfx('error');dSay('broke','host-4');toast('金幣不夠丟底');return}
+  DP.busy=true;renderDragon();$('dinfo').textContent='丟底中…';
+  try{await dpAnte(DANTE);DP.err=''}catch(err){DP.busy=false;DP.err=String(err.code||err.message||err);$('dinfo').innerHTML='<span class="down">連不上底池,這局沒有扣錢</span>';sfx('error');renderDragon();return}
+  dCoins(-DANTE);dStat(-DANTE,'ante');sfx('chips');
+  DS.a=drawC();DS.b=drawC();if(DS.a.r>DS.b.r)[DS.a,DS.b]=[DS.b,DS.a];DS.c=null;DS.bet=100;
+  $('dA').innerHTML=cardH(DS.a);$('dB').innerHTML=cardH(DS.b,.15);$('dC').innerHTML='';setTimeout(()=>sfx('cardDeal'),120);setTimeout(()=>sfx('cardDeal'),280);
   const rest=DK.length;
   if(DS.a.r===DS.b.r){DS.ph='pair';const hi=DK.filter(c=>c.r>DS.a.r).length,lo=DK.filter(c=>c.r<DS.a.r).length,eq=DK.filter(c=>c.r===DS.a.r).length;
-   $('dinfo').innerHTML='兩根門柱都是 '+RANKN[DS.a.r]+'!<br><span class="muted">猜大勝率 '+Math.round(hi/rest*100)+'% · 猜小勝率 '+Math.round(lo/rest*100)+'% · 撞柱 '+Math.round(eq/rest*100)+'%</span>';dSay('pair','host-2')}
+   $('dinfo').innerHTML='兩根門柱都是 '+RANKN[DS.a.r]+'!選好下注再猜大小<br><span class="muted">猜大勝率 '+Math.round(hi/rest*100)+'% · 猜小勝率 '+Math.round(lo/rest*100)+'% · 撞柱 '+Math.round(eq/rest*100)+'%</span>';dSay('pair','host-2')}
   else{DS.ph='posts';const inn=DK.filter(c=>c.r>DS.a.r&&c.r<DS.b.r).length,eq=DK.filter(c=>c.r===DS.a.r||c.r===DS.b.r).length,gap=DS.b.r-DS.a.r-1;
-   $('dinfo').innerHTML='門柱 '+RANKN[DS.a.r]+' ~ '+RANKN[DS.b.r]+'(中間有 '+gap+' 種點數)<br><span class="muted">勝率 '+Math.round(inn/rest*100)+'% · 撞柱 '+Math.round(eq/rest*100)+'%</span>';dSay(gap>=7?'wide':gap>=4?'mid':'narrow','host-1')}
-  renderDragon()}
- else if(b.id==='dfold'){DS.ph='idle';$('dinfo').textContent='放棄這局,不扣金幣';dSay('fold','host-4');sfx('chipsClear');renderDragon()}
- else if(b.id==='dshoot'||b.id==='dhi'||b.id==='dlo'){DS.c=drawC();$('dC').innerHTML=cardH(DS.c);sfx('cardDeal');const c=DS.c.r,a=DS.a.r,bb=DS.b.r,bet=DS.bet;
-  setTimeout(()=>{
-   if(b.id==='dshoot'){if(c>a&&c<bb){$('dinfo').innerHTML='<span class="up">射中了!贏 '+fmtC(bet)+' 金幣</span>';dResult(bet,'win')}
-    else if(c===a||c===bb){$('dinfo').innerHTML='<span class="down">撞柱!輸 '+fmtC(bet*2)+' 金幣</span>';dResult(-bet*2,'post')}
-    else{$('dinfo').innerHTML='<span class="down">射偏了,輸 '+fmtC(bet)+' 金幣</span>';dResult(-bet,'lose')}}
-   else{const up=b.id==='dhi';if(c===a){$('dinfo').innerHTML='<span class="down">又一樣大!撞柱輸 '+fmtC(bet*3)+' 金幣</span>';dResult(-bet*3,'post')}
-    else if((c>a)===up){$('dinfo').innerHTML='<span class="up">猜對了!贏 '+fmtC(bet)+' 金幣</span>';dResult(bet,'win')}
-    else{$('dinfo').innerHTML='<span class="down">猜錯了,輸 '+fmtC(bet)+' 金幣</span>';dResult(-bet,'lose')}}
-  },550)}};
+   $('dinfo').innerHTML='門柱 '+RANKN[DS.a.r]+' ~ '+RANKN[DS.b.r]+'(中間有 '+gap+' 種點數)<br><span class="muted">勝率 '+Math.round(inn/rest*100)+'% · 撞柱 '+Math.round(eq/rest*100)+'% · 選好下注再射</span>';dSay(gap>=7?'wide':gap>=4?'mid':'narrow','host-1')}
+  DP.busy=false;renderDragon();dpRefresh()}
+ else if(b.id==='dfold'){DS.ph='idle';$('dinfo').textContent='放棄這局,底注 '+fmtC(DANTE)+' 留在底池';dSay('fold','host-4');sfx('chipsClear');renderDragon();
+  try{await dpSettle('fold',DANTE)}catch(err){}dpRefresh()}
+ else if(b.id==='dall'){dAllinAsk()}
+ else if(b.id==='dshoot'||b.id==='dhi'||b.id==='dlo'){dShoot(b.id,false)}};
+async function dShoot(bid,allin){const pair=DS.ph==='pair',bet=allin?(DP.pot||0):DS.bet,coin0=SAVE.coin||0;DP.busy=true;renderDragon();
+  DS.c=drawC();$('dC').innerHTML=cardH(DS.c);sfx('cardDeal');const c=DS.c.r,a=DS.a.r,bb=DS.b.r;
+  let kind,amt,msg;
+  if(!pair){if(c>a&&c<bb){kind='win';amt=bet}else if(c===a||c===bb){kind='post';amt=bet*2}else{kind='lose';amt=bet}}
+  else{const up=bid==='dhi';if(c===a){kind='post';amt=bet*3}else if((c>a)===up){kind='win';amt=bet}else{kind='lose';amt=bet}}
+  if(allin){if(kind==='post')amt=Math.min(amt,coin0);kind='all'+kind}
+  const isWin=kind==='win'||kind==='allwin';
+  await new Promise(r=>setTimeout(r,550));
+  let res;try{res=await dpSettle(kind,amt);DP.err=''}catch(err){DP.err=String(err.code||err.message||err);res=null}
+  DS.ph='done';DP.busy=false;
+  if(!res){if(!isWin){dCoins(-amt);dStat(-amt,kind)}$('dinfo').innerHTML='<span class="down">連線失敗,'+(isWin?'這把獎金沒有入帳':'已扣 '+fmtC(amt)+' 金幣')+'</span>';sfx('error');renderDragon();return}
+  if(isWin){dCoins(res.paid);dStat(res.paid,'win');msg='<span class="up">'+(allin?'💥 全包成功!抱走整個底池 ':(pair?'猜對了':'射中了')+'!從底池贏走 ')+fmtC(res.paid)+' 金幣</span>'+(res.paid<bet?'<br><span class="muted">底池被別人先挖走了,只剩這些</span>':'');sfx(allin?'fan4':'casinoWin');dSay(allin?'allwin':res.seeded?'seed':'win','host-4')}
+  else{dCoins(-amt);dStat(-amt,kind.replace('all',''));const kk=kind.replace('all','');msg='<span class="down">'+(allin?'💥 全包失敗!':'')+(kk==='post'?(pair?'又一樣大!撞柱':'撞柱!')+'丟 '+fmtC(amt)+' 進底池':(pair?'猜錯了':'射偏了')+',丟 '+fmtC(amt)+' 進底池')+'</span>';if(kk==='post'){sfx('gong');dSay(allin?'alllose':'post','host-3')}else{sfx('casinoLose');dSay(allin?'alllose':'lose','host-2')}}
+  $('dinfo').innerHTML=msg;renderDragon();dpRefresh()}
+setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&!DP.busy&&Date.now()-DP.t>5000)dpRefresh()},2000);
+
+function dAllinAsk(){const pot=DP.pot||0,pair=DS.ph==='pair',coin=SAVE.coin||0,post=Math.min(pot*(pair?3:2),coin);dSay('allin','host-2');sfx('open');
+ const ov=document.createElement('div');ov.className='ov dallov';ov.innerHTML='<div class="box dallbox"><h2>💥 全包底池?</h2><div class="dallpot">'+fmtC(pot)+'</div><p class="muted">押上整個底池,一把定輸贏</p>'+
+  '<ul><li><span class="up">'+(pair?'猜對':'射中')+'</span>:抱走整個底池 <b class="up">+'+fmtC(pot)+'</b></li><li><span class="down">'+(pair?'猜錯':'射偏')+'</span>:賠一個底池 <b class="down">−'+fmtC(pot)+'</b></li><li><span class="down">撞柱</span>:賠 '+(pair?3:2)+' 倍,最多扣到身上全部 <b class="down">−'+fmtC(post)+'</b></li></ul>'+
+  '<p class="muted" style="font-size:12px">你目前有 '+fmtC(coin)+' 金幣</p><div class="dallbtns">'+(pair?'<button class="btn pri" data-a="dhi">⬆ 全包猜大</button><button class="btn pri" data-a="dlo">⬇ 全包猜小</button>':'<button class="btn pri" data-a="dshoot">💥 確定全包射門</button>')+'<button class="btn" data-a="x">再想想</button></div></div>';
+ document.body.appendChild(ov);ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b&&e.target!==ov)return;ov.remove();if(!b||b.dataset.a==='x'){sfx('close');return}audioUnlock();dShoot(b.dataset.a,true)}}
 $('drule').addEventListener('toggle',()=>{if(!$('drule').open){SAVE.drule=1;save()}});
 
 /* ===== 塔羅 ===== */
