@@ -792,6 +792,14 @@ body.gready #lgload{display:none}
 .olst.on{color:#7ee2a8}.olst.on::before{background:#2fdc6a;box-shadow:0 0 6px #2fdc6a;animation:olp 1.6s ease-in-out infinite}
 @keyframes olp{50%{opacity:.45}}
 .lbonline{font-size:12px;color:#7ee2a8;margin:-2px 0 6px}
+
+.chcnt{text-align:center;font-weight:900;font-size:15px;color:#ffe08a;margin:0 0 8px;text-shadow:0 1px 3px #000}
+.chcnt b{font-size:22px;color:#ffd24a}
+.chcnt.multi{animation:chcp .6s ease-out}
+.chcnt span{display:block;font-size:12px;font-weight:700;color:#c9d1dc;margin-top:2px}
+@keyframes chcp{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+.chgrid .c.won{outline:3px solid #ffd24a;outline-offset:-3px;box-shadow:0 0 14px rgba(255,210,74,.6);position:relative}
+.chgrid .c.won::after{content:attr(data-n);position:absolute;right:4px;top:4px;width:18px;height:18px;border-radius:50%;background:#ffd24a;color:#2a1d00;font-size:11px;font-weight:900;display:grid;place-items:center}
 </style>
 </head>
 <body>
@@ -1010,7 +1018,7 @@ body.gready #lgload{display:none}
 </div>
 <div class="ov" id="chest" hidden>
  <div class="box chbox">
-  <div class="chgrid" id="chgrid"></div>
+  <div class="chcnt" id="chcnt"></div><div class="chgrid" id="chgrid"></div>
   <div class="chres" id="chres"></div>
   <button class="btn pri" id="chok" hidden>繼續</button>
  </div>
@@ -1989,12 +1997,20 @@ function openChest(){
  const icons=[...Object.keys(G.ws).map(k=>({i:wIcon(k),n:wName(k)})),...Object.keys(G.ss).map(k=>({i:ART[k],n:k})),{i:ART['麥當勞套餐'],n:'麥當勞套餐'},{i:ART['開工紅包'],n:'開工紅包$200'}].filter(o=>o.i);
  const ring=[0,1,2,3,7,11,15,14,13,12,8,4];let h='';for(let i=0;i<16;i++){if(i===5){h+='<div class="mid"><img src="'+(ART['業績獎金']||'')+'" alt=""></div>';continue}if([6,9,10].includes(i))continue;const ic=icons.length?pick(icons):{i:'',n:''};h+='<div class="c" data-p="'+i+'"><img src="'+ic.i+'" alt=""><span>'+ic.n+'</span></div>'}
  $('chgrid').innerHTML=h;$('chres').innerHTML='';$('chok').hidden=true;$('chest').hidden=false;
- const cells=ring.map(p=>$('chgrid').querySelector('[data-p="'+p+'"]'));let step=0,delay=40,total=26+((Math.random()*12)|0);
- {const fc=cells[(total-1)%cells.length],f0=res[0]&&res[0].f;if(fc&&f0)fc.innerHTML='<img src="'+(f0.ic||'')+'" alt=""><span>'+f0.n+'</span>';}
- const tick=()=>{cells.forEach(c=>c&&c.classList.remove('on'));const c=cells[step%cells.length];if(c)c.classList.add('on');sfx('roulette');step++;
-  if(step<total){delay*=1.07;setTimeout(tick,delay)}else{sfx('chestWin');
-   $('chres').innerHTML=res.map((x,i)=>'<div style="animation-delay:'+(i*.1)+'s"><img src="'+(x.f.ic||'')+'" alt=""><p class="ct"><b>'+x.f.n+(x.f.nw?' <small class="nw" style="display:inline">新技能</small>':'')+'</b><small>'+(x.f.d||'')+'</small>'+(x.f.cb?'<small class="cb">'+x.f.cb+'</small>':'')+'</p><span>'+(x.f.lv?starH(x.f.lv):x.f.lv<0?'突破':'')+'</span></div>').join('');$('chok').hidden=false}};
- tick()}
+ const cells=ring.map(p=>$('chgrid').querySelector('[data-p="'+p+'"]'));let step=0;const used=new Set();
+ const cnt=$('chcnt');cnt.innerHTML=n>1?'🎉 這次開出 <b>'+n+'</b> 項獎勵!<span id="chprog">第 1 / '+n+' 項</span>':'🎁 年終獎金開獎!';cnt.className='chcnt'+(n>1?' multi':'');
+ const rowH=x=>'<div><img src="'+(x.f.ic||'')+'" alt=""><p class="ct"><b>'+x.f.n+(x.f.nw?' <small class="nw" style="display:inline">新技能</small>':'')+'</b><small>'+(x.f.d||'')+'</small>'+(x.f.cb?'<small class="cb">'+x.f.cb+'</small>':'')+'</p><span>'+(x.f.lv?starH(x.f.lv):x.f.lv<0?'突破':'')+'</span></div>';
+ const spin=idx=>{let total=idx===0?26+((Math.random()*12)|0):9+((Math.random()*5)|0);while(used.has((step+total-1)%cells.length))total++;
+  const li=(step+total-1)%cells.length;used.add(li);const fc=cells[li],f=res[idx].f;if(fc)fc.innerHTML='<img src="'+(f.ic||'')+'" alt=""><span>'+f.n+'</span>';
+  if($('chprog'))$('chprog').textContent='第 '+(idx+1)+' / '+n+' 項';
+  let delay=idx===0?40:28;const end=step+total;
+  const tick=()=>{cells.forEach(c=>c&&c.classList.remove('on'));const c=cells[step%cells.length];if(c)c.classList.add('on');sfx('roulette');step++;
+   if(step<end){delay*=idx===0?1.07:1.15;setTimeout(tick,delay)}else{
+    if(fc){fc.classList.add('won');fc.dataset.n=idx+1}sfx(idx===n-1?'chestWin':'item');
+    $('chres').insertAdjacentHTML('beforeend',rowH(res[idx]));const rr=$('chres');rr.scrollTop=rr.scrollHeight;
+    if(idx<n-1)setTimeout(()=>{cells.forEach(c=>c&&c.classList.remove('on'));spin(idx+1)},600);else{if($('chprog'))$('chprog').textContent='全部開完!';$('chok').hidden=false}}};
+  tick()};
+ spin(0)}
 $('chok').onclick=()=>{$('chest').hidden=true;CHESTING=false;if(G&&G.lvq>0)openChoice();else{running=true;last=performance.now()}};
 function renderPauseSkills(){if(!G)return;const w=Object.keys(G.ws),sp=Object.keys(G.ss);
  const cell=(ic,lv,ev)=>'<div class="s">'+(ic?'<img src="'+ic+'" alt="">':'')+(lv?'<i>'+(ev?'突破':lv+'★')+'</i>':'')+'</div>';
