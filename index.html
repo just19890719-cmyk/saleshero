@@ -2598,13 +2598,17 @@ function fmSeedPick(i){const ov=document.createElement('div');ov.className='ov f
   FM.busy=false;renderFarm()}}
 async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人的農場');const ov=document.createElement('div');ov.className='ov fvov';
  ov.innerHTML='<div class="box fvbox">'+(ART['bean-coin']?'<img class="fmasc" src="'+ART['bean-coin']+'" alt="">':'')+'<h2>🌾 '+escH(nick||'同事')+' 的農場</h2><p class="muted" id="fvhint">讀取中…</p><div class="fgrid" id="fvgrid"></div><button class="btn" data-x="1">離開</button></div>';document.body.appendChild(ov);sfx('open');
- const load=async()=>{try{const r=await fmRpc('farm_view',{p_target:id});if(!r){$('fvhint').textContent='他還沒開墾農場';$('fvgrid').innerHTML='';return}
+ let prevR=new Set(),mine=-1,timer=0;
+ const load=async()=>{if(!document.body.contains(ov))return;try{const r=await fmRpc('farm_view',{p_target:id});if(!document.body.contains(ov))return;if(!r){$('fvhint').textContent='他還沒開墾農場';$('fvgrid').innerHTML='';return}
    FM.off=r.now-Date.now();FM.view={id,nick:r.nick||nick,plots:r.plots,size:r.size};
    const rp=r.plots.filter(p=>fmState(p).k==='ripe').length;$('fvhint').innerHTML=rp?'<b class="up">有 '+rp+' 塊成熟沒收的作物,可以採走!</b>':'目前沒有成熟的作物,晚點再來看看';
+   const nowR=new Set();r.plots.forEach((p,i)=>{if(fmState(p).k==='ripe')nowR.add(i)});let lost=0;prevR.forEach(i=>{if(!nowR.has(i)&&!r.plots[i]&&i!==mine)lost++});prevR=nowR;mine=-1;
+   if(lost){sfx('wahwah');toast('😱 慢了一步!有 '+lost+' 塊被別人搶先採走了')}
    $('fvgrid').innerHTML=r.plots.slice(0,r.size).map((pl,i)=>fmPlotH(pl,i,true)).join('')}catch(e){$('fvhint').innerHTML='<span class="down">'+escH(fmMsg(e))+'</span>'}};
- ov.onclick=async e=>{if(e.target.closest('[data-x]')||e.target===ov){ov.remove();FM.view=null;sfx('close');return}
+ timer=setInterval(()=>{if(!document.body.contains(ov)){clearInterval(timer);return}if(document.visibilityState==='visible')load()},3000);
+ ov.onclick=async e=>{if(e.target.closest('[data-x]')||e.target===ov){clearInterval(timer);ov.remove();FM.view=null;sfx('close');return}
   const b=e.target.closest('[data-a="pick"]');if(!b||b.disabled)return;b.disabled=true;audioUnlock();
-  try{await fmSync();const r=await fmRpc('farm_pick',{p_target:id,p_id:fmId(),p_key:fmKey(),p_nick:SAVE.pname||'',p_idx:+b.dataset.i});
+  mine=+b.dataset.i;try{await fmSync();const r=await fmRpc('farm_pick',{p_target:id,p_id:fmId(),p_key:fmKey(),p_nick:SAVE.pname||'',p_idx:+b.dataset.i});
    SAVE.coin=(SAVE.coin||0)+r.value;SAVE.fpick=(SAVE.fpick||0)+1;save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value)+' 金幣')}
   catch(e){sfx('error');toast(fmMsg(e))}load()};
  load()}
