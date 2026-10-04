@@ -955,6 +955,7 @@ body.gready #lgload{display:none}
 }
 @media(display-mode:standalone){#tabs{padding-bottom:max(6px,calc(env(safe-area-inset-bottom,0px) - 14px))!important}#home{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 80px)!important}}
 .mbub{display:none;grid-column:1/-1;justify-self:center;max-width:calc(100% - 80px);margin:0 76px 0 0;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.92);color:#222;font-size:11.5px;font-weight:700;text-align:center;line-height:1.35}
+.ripeann{top:calc(env(safe-area-inset-top,0px) + 84px)!important;border-color:#7ee2a8!important;background:linear-gradient(90deg,#123a1c,#0a2410)!important;box-shadow:0 0 22px rgba(80,220,120,.45),0 10px 30px rgba(0,0,0,.6)!important}.ripeann img{object-fit:contain!important;background:none!important;border:0!important}
 </style>
 </head>
 <body>
@@ -994,7 +995,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-I</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-K</span></small>
   </div>
  </div>
 </div>
@@ -1147,7 +1148,7 @@ body.gready #lgload{display:none}
    <section style="margin-top:12px">
     <h2>塔羅牌 <span class="muted" style="font-size:13px;font-weight:400">企劃女神芳芳為你解讀過去、現在與未來</span></h2>
     <div class="tbox">
-     <div class="dsign ts"><p>信者恆信 不信者恆抽</p><p class="b">抽到死神還說是轉機</p><small>— 芳芳的占卜室 —</small></div>
+     <div class="dsign ts"><p>抽到哪張都別慌張</p><p class="b">眼淚也是一種導航</p><small>— 芳芳的占卜室 —</small></div>
      <div class="tarea">
       <div class="tspread" id="tspread"></div>
       <div class="tdeck" id="tdeck"></div>
@@ -2725,7 +2726,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-I';
+const GBUILD='1004-K';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04b';
 const GNOTES=[['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
@@ -2901,6 +2902,19 @@ async function updReload(){try{save()}catch(e){}try{if(typeof clFlush==='functio
  try{const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs)await r.update()}catch(e){}location.reload()}
 setInterval(updCheck,90000);setTimeout(updCheck,4000);setTimeout(updCheck,20000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')updCheck()});
+
+
+/* ===== 搶收公告:別人作物成熟超過 5 分鐘沒收 ===== */
+async function fmRipeWatch(){try{if(!FM.on||!SAVE||!SAVE.pname||document.visibilityState!=='visible')return;const L=$('login');if(L&&!L.hidden)return;if(G&&running)return;if(document.querySelector('.fvov'))return;
+  const list=await fmRpc('farm_ripe_list',{p_id:fmId()});if(!Array.isArray(list)||!list.length)return;
+  let seen=[];try{seen=JSON.parse(localStorage.getItem('shechu-ripeann')||'[]')}catch(e){}
+  const it=list.find(x=>!seen.includes(x.id+':'+x.ripe_at));if(!it)return;
+  seen=[it.id+':'+it.ripe_at,...seen].slice(0,40);try{localStorage.setItem('shechu-ripeann',JSON.stringify(seen))}catch(e){}
+  const c=CROP[it.crop]||{e:'🌱',n:'作物'};let el=$('ripeann');if(!el){el=document.createElement('div');el.id='ripeann';el.className='potann ripeann';document.body.appendChild(el)}
+  el.innerHTML='<img src="'+(ART['bean-coin']||ART['host-4']||'')+'" alt=""><div class="pa"><small>📢 搶收公告 · 企劃女神芳芳</small>「<b>'+escH(it.nick||'某位同事')+'</b>」的 '+c.e+' '+c.n+' 成熟超過 5 分鐘還沒收'+(it.n>1?'(共 '+it.n+' 塊)':'')+',快去搶收!</div><button class="btn pri" data-go="1">🧺 去搶收</button><span class="x" data-x="1">✕</span>';
+  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),15000);
+  el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;audioUnlock();fmVisit(it.id,it.nick)}}catch(e){}}
+setInterval(fmRipeWatch,60000);setTimeout(fmRipeWatch,15000);
 
 /* ===== 雲端存檔帳號 ===== */
 var CL={on:false,u:null,t:null,timer:null,busy:false,lastOk:0,err:'',ready:false,dirty:false};
