@@ -1003,7 +1003,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-Q</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-R</span></small>
   </div>
  </div>
 </div>
@@ -1881,6 +1881,7 @@ let G=null,running=false,keys={},joy=null,last=performance.now(),toastT=0;
 let TQ=[];function toast(t){const L=$('login');if(L&&!L.hidden){TQ.push(t);return}$('toast').textContent=t;$('toast').className='on';toastT=2}
 const needXp=l=>Math.floor(3+l*1.6+l*l*.03);
 function startRun(c){
+ try{if(typeof clCheck==='function')clCheck()}catch(e){}
  if(!SAVE.pname){askName(true,()=>startRun(c));return}if($('volpop'))$('volpop').hidden=true;
  SAVE.ch=c;save();
  G={c,dead:[],pt:[],dc:[],shk:0,t:0,x:0,y:0,face:1,lv:1,xp:0,kills:0,en:[],gems:[],drops:[],bul:[],lob:[],fx:[],orbs:[],wt:0,skt:{},atk:0,hurt:0,inv:0,shield:false,dealK:0,spawn:0,elite:45,boss:false,loot:[],moving:false,over:false};
@@ -2877,7 +2878,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-Q';
+const GBUILD='1004-R';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04d';
 const GNOTES=[['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
@@ -3155,7 +3156,11 @@ document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
 function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);clSet(null,null);
  const ov=document.createElement('div');ov.className='ov clov';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>⚠️ 帳號已在其他裝置登入</h2><p>你的雲端帳號剛剛在<b>另一個瀏覽器或裝置</b>登入了。<br>為了避免兩邊的進度互相覆蓋,這裡的進度<b>已停止上傳</b>。</p><p class="muted" style="font-size:12px">如果要改回在這台裝置玩,請重新登入,另一台就會被登出。</p><div class="clbtns"><button class="btn pri" data-a="re">重新登入</button><button class="btn" data-a="x">知道了</button></div></div>';
  document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;if(b.dataset.a==='re')clModal('in')}}
-setInterval(async()=>{if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false){clKick();return}}catch(e){if(/token/i.test(String((e&&e.msg)||''))){clKick();return}}if(!CL.busy){CL.busy=true;await clGuard();CL.busy=false}},20000);
+async function clCheck(){if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false){clKick();return}}catch(e){if(/token/i.test(String((e&&e.msg)||''))){clKick();return}}if(!CL.busy){CL.busy=true;await clGuard();CL.busy=false}}
+setInterval(clCheck,20000);
+/* 切回遊戲、或按出擊時立刻檢查,不用等 20 秒 */
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(clCheck,300)});
+addEventListener('focus',()=>setTimeout(clCheck,300));
 async function clBoot(){clUI();if(!CL.on||!CL.u){CL.ready=true;return}
  let just=false;try{just=sessionStorage.getItem('shechu-justlogin')==='1';sessionStorage.removeItem('shechu-justlogin')}catch(e){}
  if(just){CL.ready=true;CL.gt=Date.now();toast('☁️ 已登入 '+CL.u+',雲端進度載入完成');return}
