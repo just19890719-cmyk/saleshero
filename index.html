@@ -1109,6 +1109,34 @@ body.gready #lgload{display:none}
 #login.poster .lgcloud{background:rgba(0,0,0,.35)!important;border:1px dashed rgba(57,232,255,.45)!important}
 #login.poster .lgcloud .btn{background:rgba(10,8,20,.7)!important;border:1.5px solid #39e8ff!important;border-image:none!important;border-radius:9px!important;color:#d9fbff!important;text-shadow:0 0 6px rgba(57,232,255,.8)!important;box-shadow:0 0 8px rgba(57,232,255,.45)!important}
 #login.poster .lgcloud .btn.pri{border-color:#ff3fb0!important;color:#ffe3f4!important;text-shadow:0 0 6px rgba(255,63,176,.9)!important;box-shadow:0 0 8px rgba(255,63,176,.55)!important}
+
+/* ===== 登入畫面:一頁塞滿、不用往下滑 ===== */
+#login.poster{overflow:hidden}
+#login.poster .lgin{height:100vh;height:100dvh;min-height:0!important;justify-content:flex-start!important;gap:4px!important;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px calc(env(safe-area-inset-bottom,0px) + 8px)!important;overflow:hidden}
+#login.poster .lghero{flex:1 1 auto;height:auto!important;min-height:0!important;margin:0!important}
+#login.poster .mqsign h1{font-size:clamp(34px,10vw,64px)!important}
+#login.poster .lgform{padding:12px 14px 10px!important;gap:7px!important;display:flex;flex-direction:column}
+#login.poster .lgform label{font-size:15px!important}
+#login.poster .lgform input{padding:9px!important;font-size:16px!important}
+#login.poster #lggo{font-size:18px!important;padding:5px 10px!important}
+#login.poster .lghint{font-size:10.5px!important;line-height:1.45!important}
+#login.poster .lgcloud{display:flex!important;align-items:center;gap:8px;padding:6px 8px!important}
+#login.poster .lgcloud .clst{flex:1;min-width:0;font-size:12px!important}
+#login.poster .lgcloud .clst span{font-size:10px!important}
+#login.poster .lgcloud:has(#clreg) .clst span{display:none}
+#login.poster .lgcloud .clbtns{flex-wrap:nowrap!important;gap:6px!important}
+#login.poster .lgcloud .btn{font-size:12px!important;padding:3px 7px!important;white-space:nowrap}
+#login.poster .lgsave{width:auto!important;margin-top:4px!important;background:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+#login.poster .lgsave summary{display:inline-flex!important;padding:4px 12px!important;font-size:12px!important;border-radius:999px;background:rgba(10,8,20,.65);border:1px solid rgba(255,63,176,.55);box-shadow:0 0 8px rgba(255,63,176,.35)}
+#login.poster .lgsave summary::after{display:none}
+#login.poster .lgsave[open]::before{content:'';position:fixed;inset:0;background:rgba(3,4,8,.72);z-index:19}
+#login.poster .lgsave[open] ul{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(380px,90vw);max-height:76vh;overflow:auto;z-index:20;margin:0;padding:16px 16px 16px 30px;border-radius:14px;background:rgba(10,12,22,.97);border:2px solid #ff3fb0;box-shadow:0 0 20px rgba(255,63,176,.5);font-size:13px;line-height:1.65;text-align:left}
+#login.poster .lgsave .lgdisc{list-style:none;margin:10px 0 0 -14px;padding-top:8px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:rgba(235,220,226,.6)}
+#login.poster .lgfoot{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:2px!important;flex-wrap:wrap}
+#login.poster .lgfoot .sig{margin:0!important}
+#login.poster .lgfoot .sig svg{width:78px!important}
+#login.poster .lgfoot small{display:inline!important}
+@media (max-height:600px){#login.poster{overflow:auto}#login.poster .lgin{height:auto;min-height:100%!important}#login.poster .lghero{flex:0 0 120px}}
 </style>
 </head>
 <body>
@@ -1140,15 +1168,14 @@ body.gready #lgload{display:none}
     <li>在 <b>LINE</b> 裡點連結會用 LINE 內建瀏覽器打開,存檔跟 Safari/Chrome 是分開的。請按右上角選<b>「用預設瀏覽器開啟」</b>,之後都用同一個瀏覽器玩。</li>
     <li><b>加入手機桌面</b>:iPhone 用 Safari 點分享鈕 →「加入主畫面」;Android 用 Chrome 點選單 →「加到主畫面」,桌面就會出現遊戲圖示。<b>iPhone 加到主畫面後,存檔會跟 Safari 分開</b>,請先綁定雲端帳號再加入,才不會看起來像進度不見。</li>
     <li>排行榜的成績存在雲端,進度重來的話舊紀錄還會留著,只是會多一筆新的。</li>
-   </ul>
+   <li class="lgdisc">本遊戲為個人原創作品,僅供同事朋友休閒娛樂,不涉及任何金錢交易。<br>遊戲中的人物、團體、地點與情節皆屬虛構,劇情如有雷同,純屬巧合。</li></ul>
   </details>
   <div class="lgfoot">
-   <p>本遊戲為個人原創作品,僅供同事朋友休閒娛樂,不涉及任何金錢交易。<br>遊戲中的人物、團體、地點與情節皆屬虛構,劇情如有雷同,純屬巧合。</p>
    <div class="sig"><span>原創作者</span><svg viewBox="0 0 230 84" aria-label="Kao 簽名"><defs><linearGradient id="sgg" x1="0" x2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#ffd24a"/><stop offset="1" stop-color="#ff9c12"/></linearGradient></defs>
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-ZR</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-ZS</span></small>
   </div>
  </div>
 </div>
@@ -1918,7 +1945,7 @@ function showLogin(){const li=$('login');if(!li)return;mqBulbs();
  const ai=k=>ART[k]||'';$('lgh').src=ai(HERO_HD?'主角HD-idle-1':'主角動畫-idle-1');$('lgz1').src=ai('奧客喪屍-atk-1');$('lgz2').src=ai('菜市場大媽喪屍-atk-1');
  if(!$('lgz1').src)$('lgz1').hidden=true;if(!$('lgz2').src)$('lgz2').hidden=true;
  const back=!!SAVE.pname;$('lgname').value=SAVE.pname||'';$('lgname').readOnly=back;$('lglab').textContent=back?'歡迎回來!':'設定你的遊戲暱稱';$('lggo').textContent=back?'繼續上班':'開始上班';
- li.hidden=false;if($('lgsave'))$('lgsave').open=!back;if(!back)setTimeout(()=>$('lgname').focus(),300)}
+ li.hidden=false;if($('lgsave'))$('lgsave').open=false;if(!back)setTimeout(()=>$('lgname').focus(),300)}
 /* ===== 暱稱登記:不可與他人重複、改名後 7 天內不能再改 ===== */
 var NK={on:false},NFREE=false;
 (function(){try{NK.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){}})();
@@ -1941,6 +1968,7 @@ $('lggo').onclick=()=>{const inp=$('lgname'),v=(SAVE.pname||inp.value.trim()).sl
  $('login').hidden=true;const q=[(first?'👋 歡迎,':'👋 歡迎回來,')+v+'!',...TQ];TQ=[];q.forEach((m,i)=>setTimeout(()=>toast(m),i*2300))};
 $('lgname').addEventListener('keydown',e=>{if(e.key==='Enter')$('lggo').click()});
 let NAMECB=null;
+document.addEventListener('click',e=>{const d=$('lgsave');if(d&&d.open&&!e.target.closest('#lgsave ul')&&!e.target.closest('#lgsave summary')){d.open=false}});
 function lbDet(r){const eq=Array.isArray(r.eq)?r.eq:[];
  const items=SLOTS.map((sl,j)=>{const e=eq[j];if(!e||typeof e.b!=='string')return'<div class="lbdi no"><span class="tile empty"></span><div><small>'+sl.n+'</small><b>(空)</b></div></div>';
   const q=Math.max(-1,Math.min(4,+e.q|0)),rr=RAR[q]||RAR[0];
@@ -3088,7 +3116,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-ZR';
+const GBUILD='1004-ZS';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04e';
 const GNOTES=[['🪪','暱稱不能重複','暱稱改成全伺服器唯一,改名後 7 天內不能再改;如果你的暱稱被別人先登記了,可以免費換一個'],['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
@@ -3409,8 +3437,7 @@ try{if('serviceWorker' in navigator&&location.protocol==='https:'&&typeof ONLINE
  b.onclick=()=>{try{save()}catch(e){}const go=async()=>{try{if(typeof clFlush==='function'&&CL&&CL.u)await clFlush()}catch(e){}try{localStorage.setItem('shechu-phone','1')}catch(e){}location.reload()};
   if(G&&running&&!G.over){ask('目前正在戰鬥中,切換會中斷這一局,\n確定要切換成手機面板嗎?',go);return}go()};
  setInterval(()=>{b.hidden=!!(G&&!G.over)},500)})();
-try{heroHD()}catch(e){}(function(){const fit=()=>{const L=$('login'),h=L&&L.querySelector('.lghero');if(!h||!L.classList.contains('poster'))return;h.style.setProperty('height','0px','important');const top=h.getBoundingClientRect().top+L.scrollTop;const want=Math.max(60,Math.round(innerHeight*.56-top));h.style.setProperty('height',want+'px','important')};addEventListener('resize',fit);setTimeout(fit,50);setTimeout(fit,600);window.__lgfit=fit})();
-lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
+try{heroHD()}catch(e){}lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
