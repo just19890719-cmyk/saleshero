@@ -1531,9 +1531,12 @@ async function dShoot(bid,allin){const pair=DS.ph==='pair',bet=allin?(DP.pot||0)
   if(isWin){dCoins(res.paid);dStat(res.paid,'win');msg='<span class="up">'+(allin?'💥 全包成功!抱走整個池底 ':(pair?'猜對了':'射中了')+'!從池底贏走 ')+fmtC(res.paid)+' 金幣</span>'+(res.paid<bet?'<br><span class="muted">池底被別人先挖走了,只剩這些</span>':'');sfx(allin?'fan4':'casinoWin');dSay(allin?'allwin':res.seeded?'seed':'win','host-4')}
   else{dCoins(-amt);dStat(-amt,kind.replace('all',''));const kk=kind.replace('all','');msg='<span class="down">'+(allin?'💥 全包失敗!':'')+(kk==='post'?(pair?'又一樣大!撞柱':'撞柱!')+'丟 '+fmtC(amt)+' 進池底':(pair?'猜錯了':'射偏了')+',丟 '+fmtC(amt)+' 進池底')+'</span>';if(kk==='post'){sfx('gong');dSay(allin?'alllose':'post','host-3')}else{sfx('casinoLose');dSay(allin?'alllose':'lose','host-2')}}
   $('dinfo').innerHTML=msg;renderDragon();dpRefresh()}
-setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&!DP.busy&&Date.now()-DP.t>5000)dpRefresh()},2000);
+setInterval(()=>{if(document.visibilityState==='visible'&&!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas!=='sib'&&!DP.busy&&Date.now()-DP.t>5000)dpRefresh()},2000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.tab==='dragon'&&!$('home').hidden&&!DP.busy)dpRefresh()});
 
-function dAllinAsk(){const pot=DP.pot||0,pair=DS.ph==='pair',coin=SAVE.coin||0,post=Math.min(pot*(pair?3:2),coin);dSay('allin','host-2');sfx('open');
+async function dAllinAsk(){if(DP.busy)return;DP.busy=true;renderDragon();try{await dpFetch();DP.err=''}catch(e){}DP.busy=false;renderDragon();
+ if(!(DS.ph==='posts'||DS.ph==='pair'))return;if((SAVE.coin||0)<(DP.pot||0)){sfx('error');toast('池底剛剛變成 '+fmtC(DP.pot)+',身上金幣不夠全包了');return}
+ const pot=DP.pot||0,pair=DS.ph==='pair',coin=SAVE.coin||0,post=Math.min(pot*(pair?3:2),coin);dSay('allin','host-2');sfx('open');
  const ov=document.createElement('div');ov.className='ov dallov';ov.innerHTML='<div class="box dallbox"><h2>💥 全包池底?</h2><div class="dallpot">'+fmtC(pot)+'</div><p class="muted">押上整個池底,一把定輸贏</p>'+
   '<ul><li><span class="up">'+(pair?'猜對':'射中')+'</span>:抱走整個池底 <b class="up">+'+fmtC(pot)+'</b></li><li><span class="down">'+(pair?'猜錯':'射偏')+'</span>:賠一個池底 <b class="down">−'+fmtC(pot)+'</b></li><li><span class="down">撞柱</span>:賠 '+(pair?3:2)+' 倍,最多扣到身上全部 <b class="down">−'+fmtC(post)+'</b></li></ul>'+
   '<p class="muted" style="font-size:12px">你目前有 '+fmtC(coin)+' 金幣</p><div class="dallbtns">'+(pair?'<button class="btn pri" data-a="dhi">⬆ 全包猜大</button><button class="btn pri" data-a="dlo">⬇ 全包猜小</button>':'<button class="btn pri" data-a="dshoot">💥 確定全包射門</button>')+'<button class="btn" data-a="x">再想想</button></div></div>';
@@ -1604,7 +1607,9 @@ function sbBackend(){const U=ONLINE.supabaseUrl.replace(/\/+$/,''),H={apikey:ONL
  let uid=localStorage.getItem('clockin-uid');if(!uid){uid='p_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('clockin-uid',uid)}
  return{uid,
   set:async p=>{const r=await fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p))});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}},
-  sub:(cb,err)=>{let stop=false;const pull=async()=>{if(stop)return;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();cb(rows)}catch(e){err&&err(e)}if(!stop)setTimeout(pull,15000)};pull();return()=>{stop=true}}}}
+  sub:(cb,err)=>{let stop=false,last=0,busy=false;const pull=async()=>{if(stop||busy)return;busy=true;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();last=Date.now();cb(rows)}catch(e){err&&err(e)}busy=false};
+  const loop=()=>{if(stop)return;const lb=document.getElementById('lbov');if(lb&&!lb.hidden&&document.visibilityState==='visible'&&Date.now()-last>15000)pull();setTimeout(loop,2000)};LB.pullNow=()=>{if(Date.now()-last>3000)pull()};pull();setTimeout(loop,2000);return()=>{stop=true}},
+  off:p=>{try{fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',keepalive:true,headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p,{t:1}))})}catch(e){}}}}
 async function lbInit(){
  if(ONLINE.supabaseUrl&&ONLINE.supabaseKey&&!(window.claude&&window.claude.use)){const be=sbBackend();LB.sb=be;LB.uid=be.uid;LB.db=true;LB.ready=true;lbSync(true);if(!$('lbov').hidden)lbOpen();return}
  try{const c=window.claude;if(!c||!c.use){LB.ready=true;return}
@@ -1613,7 +1618,7 @@ function lbPayload(){const eq=SLOTS.map(sl=>{const it=byId(SAVE.eq[sl.k]);return
  const rl=SAVE.ride&&rideLv(SAVE.ride)?{id:SAVE.ride,lv:rideLv(SAVE.ride)}:null;
  return{nick:(SAVE.pname||'').slice(0,12),coin:Math.floor(SAVE.coin||0),power:power(),eq,ride:rl,clear:(SAVE.clear||[]).length}}
 function lbSync(now){clearTimeout(LB.t);LB.t=setTimeout(async()=>{
- if(!LB.db||!LB.uid||LB.ro||LB.busy||!SAVE.pname)return;const p=lbPayload(),k=JSON.stringify(p);if(k===LB.last)return;
+ if(document.visibilityState==='hidden'&&LB.sb)return;if(!LB.db||!LB.uid||LB.ro||LB.busy||!SAVE.pname)return;const p=lbPayload(),k=JSON.stringify(p);if(k===LB.last)return;
  LB.busy=true;try{if(LB.sb)await LB.sb.set(Object.assign({},p,{t:Date.now()}));else await LB.db.collection('leaderboard').doc(LB.uid).set(Object.assign({},p,{t:Date.now()}));LB.last=k}
  catch(e){LB.err=e;if(e&&(e.code==='not_granted'||e.code==='invalid_argument'||e.code==='permission_denied'))LB.ro=true;try{lbMe()}catch(x){}}
  LB.busy=false;if(!LB.ro&&JSON.stringify(lbPayload())!==LB.last)lbSync()},now?300:2500)}
@@ -1621,6 +1626,7 @@ function lbOpen(){$('lbov').hidden=false;sfx('open');
  if(!LB.ready){$('lblist').innerHTML='<div class="lbmsg">連線中…</div>';return}
  if(!LB.db){$('lblist').innerHTML='<div class="lbmsg">排行榜尚未連線。<br>網頁版需要在設定區填入 Supabase 連線資訊才能看到其他玩家。</div>';lbMe();return}
  if(!SAVE.pname){askName();}
+ if(LB.unsub&&LB.pullNow)LB.pullNow();
  if(!LB.unsub){$('lblist').innerHTML='<div class="lbmsg">讀取排行榜中…</div>';
   const fail=e=>{$('lblist').innerHTML='<div class="lbmsg">排行榜暫時無法讀取,請稍後再試。'+(e?'<br><small style="color:#ff9a8a">錯誤代碼:'+escH(String(e.code||e.message||e))+(e.msg?' '+escH(String(e.msg).slice(0,160)):'')+'</small>':'')+'</div>'};
   if(LB.sb)LB.unsub=LB.sb.sub(rows=>{LB.rows=rows;lbRender()},fail);
@@ -1629,7 +1635,7 @@ function lbOpen(){$('lbov').hidden=false;sfx('open');
 function lbMe(){$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <button class="btn" id="lbname" style="padding:3px 10px;font-size:12px">改名(1,000 金幣)</button>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')+(LB.err&&LB.sb?'<span style="color:#ff9a8a;font-size:11px">成績上傳失敗:'+escH(String(LB.err.code||''))+' '+escH(String(LB.err.msg||'').slice(0,120))+'</span>':'')}
 const escH=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function lbAgo(ms){const d=ms/1000;if(d<3600)return Math.max(1,Math.floor(d/60))+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
-const lbOn=r=>r.id===LB.uid||(Date.now()-(+r.t||0))<150000;
+const lbOn=r=>r.id===LB.uid||(Date.now()-(+r.t||0))<75000;
 async function lbRender(){
  const rows=LB.rows.slice().sort((a,b)=>(+b[LB.sort]||0)-(+a[LB.sort]||0));
  if(!rows.length){$('lblist').innerHTML='<div class="lbmsg">還沒有人上榜,快來搶第一名!</div>';return}
@@ -1681,7 +1687,10 @@ let NRENAME=false;
 function renameAsk(){if((SAVE.coin||0)<1000){sfx('error');toast('改名需要 1,000 金幣,金幣不夠喔');return}NRENAME=true;askName(false);$('namehint').innerHTML='改名需要花費 <b style="color:#ffcf2e">1,000 金幣</b><br>目前有 '+fmtC(SAVE.coin||0)+' 金幣';$('nameok').textContent='花 1,000 金幣改名'}
 $('lbme').onclick=e=>{if(e.target.id==='lbname')renameAsk()};
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='lbbtn')lbOpen()});
-setInterval(()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.pname&&LB.db&&!LB.busy){LB.last='';lbSync(true)}},60000);
+setInterval(()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.pname&&LB.db&&!LB.busy){LB.last='';lbSync(true)}},30000);
+function lbGoOff(){try{clearTimeout(LB.t);if(LB.sb&&SAVE&&SAVE.pname&&LB.uid){LB.last='';LB.sb.off(lbPayload())}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')lbGoOff();else if(SAVE&&SAVE.pname&&LB.db){LB.last='';lbSync(true)}});
+window.addEventListener('pagehide',lbGoOff);
 setInterval(()=>{if(!$('lbov').hidden&&LB.rows&&LB.rows.length)lbRender()},30000);
 
 /* ===== 住處介面 ===== */
@@ -2619,8 +2628,8 @@ function fmNotify(){if(!FM.logs.length)return;const L=$('login');if(L&&!L.hidden
  ov.onclick=e=>{if(!e.target.closest('[data-x]'))return;ov.remove();fmRpc('farm_seen',{p_id:fmId(),p_key:fmKey()}).catch(()=>{})}}
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#fstgo')){audioUnlock();lbOpen();return}const g=e.target.closest&&e.target.closest('#fgrid');if(!g)return;const b=e.target.closest('[data-a]'),p=e.target.closest('.fp');
  if(b)return fmAct(b.dataset.a,+b.dataset.i);if(p&&p.classList.contains('empty'))fmAct('plant',+p.dataset.i);else if(p&&p.classList.contains('lock'))fmAct('expand')});
-setInterval(()=>{if(SAVE&&SAVE.tab==='farm'&&!$('home').hidden&&FM.plots&&!FM.busy){renderFarm();if(Date.now()-FM.t>10000)fmSync()}},1000);
-setInterval(()=>{if(FM.on&&SAVE&&SAVE.pname&&SAVE.tab!=='farm'&&document.visibilityState==='visible'&&!FM.busy&&Date.now()-FM.t>60000){const L=$('login');if(!(L&&!L.hidden))fmSync()}},15000);
+setInterval(()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.tab==='farm'&&!$('home').hidden&&FM.plots&&!FM.busy){renderFarm();if(Date.now()-FM.t>10000)fmSync()}},1000);
+setInterval(()=>{if(FM.on&&SAVE&&SAVE.pname&&SAVE.tab!=='farm'&&document.visibilityState==='visible'&&!FM.busy&&Date.now()-FM.t>30000){const L=$('login');if(!(L&&!L.hidden))fmSync()}},15000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&FM.on&&SAVE&&SAVE.pname&&!FM.busy&&Date.now()-FM.t>3000)fmSync()});
 
 
@@ -2639,7 +2648,7 @@ function potShow(pot){let el=$('potann');if(!el){el=document.createElement('div'
  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');setTimeout(()=>sfx('coins'),250);
  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),14000);
  el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');if(typeof casSwitch==='function')casSwitch('dragon');renderHome()}}
-setInterval(potWatch,60000);setTimeout(potWatch,8000);
+setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setTimeout(potWatch,8000);
 
 
 /* ===== 改版公告 ===== */
@@ -2676,7 +2685,7 @@ function annRender(){const bar=$('annbar');if(!bar)return;let closed='';try{clos
  let last=0;try{last=+(localStorage.getItem('shechu-annlast')||0)}catch(e){}const mx=Math.max(...ANN.list.map(a=>+a.id));
  if(mx>last){try{localStorage.setItem('shechu-annlast',String(mx))}catch(e){}if(last>0||true){const L=$('login');const nw=ANN.list.find(a=>+a.id===mx);if(nw&&!(L&&!L.hidden)){toast('📢 新公告:'+String(nw.msg).slice(0,40));sfx('open')}}}}
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#annx')){try{localStorage.setItem('shechu-annx',annSig())}catch(x){}$('annbar').hidden=true;sfx('close')}});
-setInterval(annFetch,30000);setTimeout(annFetch,2500);
+setInterval(()=>{if(document.visibilityState==='visible')annFetch()},15000);setTimeout(annFetch,2500);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')annFetch()});
 
 /* ===== 十八仔 ===== */
 const SBMAX=50000;
