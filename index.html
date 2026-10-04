@@ -997,7 +997,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-L</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-N</span></small>
   </div>
  </div>
 </div>
@@ -2736,7 +2736,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-L';
+const GBUILD='1004-N';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04c';
 const GNOTES=[['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
@@ -2914,15 +2914,20 @@ setInterval(updCheck,90000);setTimeout(updCheck,4000);setTimeout(updCheck,20000)
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')updCheck()});
 
 
-/* ===== 搶收公告:別人作物成熟超過 5 分鐘沒收 ===== */
+/* ===== 搶收公告:別人作物成熟超過 1 小時沒收 ===== */
+const RIPEANN_MS=3600000;
+function ripeAt(v){if(v==null)return NaN;if(typeof v==='number'||/^\d+(\.\d+)?$/.test(String(v))){const n=+v;return n<1e12?n*1000:n}return new Date(v).getTime()}
 async function fmRipeWatch(){try{if(!FM.on||!SAVE||!SAVE.pname||document.visibilityState!=='visible')return;const L=$('login');if(L&&!L.hidden)return;if(G&&running)return;if(document.querySelector('.fvov'))return;
-  const list=await fmRpc('farm_ripe_list',{p_id:fmId()});if(!Array.isArray(list)||!list.length)return;
+  let list=await fmRpc('farm_ripe_list',{p_id:fmId()});if(!Array.isArray(list))return;list=list.filter(x=>{const r=ripeAt(x.ripe_at);return r>0&&fmNow()-r>=RIPEANN_MS});if(!list.length)return;
   let seen=[];try{seen=JSON.parse(localStorage.getItem('shechu-ripeann')||'[]')}catch(e){}
   const vis=ripeVisGet(),nowT=Date.now();const it=list.find(x=>!seen.includes(x.id+':'+x.ripe_at)&&!(vis[x.id]&&nowT-vis[x.id]<600000));if(!it)return;
   if(document.querySelector('.stealann.on'))return;
+  let n=0;try{const v=await fmRpc('farm_view',{p_target:it.id});const nw=v&&v.now?+v.now:fmNow();
+   n=(v&&Array.isArray(v.plots)?v.plots.slice(0,v.size||v.plots.length):[]).filter(pl=>pl&&pl.c===it.crop&&nw-(pl.p+pl.g)>=RIPEANN_MS).length}catch(e){n=+it.n||1}
+  if(!n)return;if((G&&running)||document.querySelector('.fvov'))return;
   seen=[it.id+':'+it.ripe_at,...seen].slice(0,40);try{localStorage.setItem('shechu-ripeann',JSON.stringify(seen))}catch(e){}
   const c=CROP[it.crop]||{e:'🌱',n:'作物'};let el=$('ripeann');if(!el){el=document.createElement('div');el.id='ripeann';el.className='potann ripeann';document.body.appendChild(el)}
-  el.innerHTML='<img src="'+(ART['bean-coin']||ART['host-4']||'')+'" alt=""><div class="pa"><small>📢 搶收公告 · 企劃女神芳芳</small>「<b>'+escH(it.nick||'某位同事')+'</b>」的 '+c.e+' '+c.n+' 成熟超過 5 分鐘還沒收'+(it.n>1?'(共 '+it.n+' 塊)':'')+',快去搶收!</div><button class="btn pri" data-go="1">🧺 去搶收</button><span class="x" data-x="1">✕</span>';
+  el.innerHTML='<img src="'+(ART['bean-coin']||ART['host-4']||'')+'" alt=""><div class="pa"><small>📢 搶收公告 · 企劃女神芳芳</small>「<b>'+escH(it.nick||'某位同事')+'</b>」的 '+c.e+' '+c.n+' 成熟超過 1 小時還沒收'+(n>1?'(共 '+n+' 塊)':'')+',快去搶收!</div><button class="btn pri" data-go="1">🧺 去搶收</button><span class="x" data-x="1">✕</span>';
   requestAnimationFrame(()=>el.classList.add('on'));sfx('open');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),15000);
   el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;audioUnlock();fmVisit(it.id,it.nick)}}catch(e){}}
 setInterval(fmRipeWatch,60000);setTimeout(fmRipeWatch,15000);
