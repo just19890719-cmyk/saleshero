@@ -1362,7 +1362,7 @@ $('g1').onclick=()=>gacha(1);$('g10').onclick=()=>gacha(10);
 $('gagain').onclick=()=>gacha(gLast);$('gclose').onclick=()=>{$('gov').hidden=true;$('gov').classList.remove('gx');renderHome()};
 
 /* ===== 分頁 ===== */
-function setTab(t){if(t==='pray')t='eq';SAVE.tab=t;document.querySelectorAll('#home .tab').forEach(el=>el.hidden=el.dataset.tab!==t);document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('home').scrollTop=0;if(t==='eq')renderPray();if(t==='farm')renderFarm();if(t==='dragon'){if(typeof casSwitch==='function')casSwitch(SAVE.cas||'dragon');else renderDragon()}if(t==='tarot')renderTarot();save()}
+function setTab(t){if(t==='pray')t='eq';SAVE.tab=t;document.querySelectorAll('#home .tab').forEach(el=>el.hidden=el.dataset.tab!==t);document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('home').scrollTop=0;if(t==='eq')renderPray();if(t==='farm'){renderFarm();try{if(FM&&FM.on&&FM.plots&&Date.now()-FM.t>3000)fmSync()}catch(e){}}if(t==='dragon'){if(typeof casSwitch==='function')casSwitch(SAVE.cas||'dragon');else renderDragon()}if(t==='tarot')renderTarot();save()}
 $('tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(b){audioUnlock();sfx('tab');setTab(b.dataset.t)}};
 (()=>{const im=(id,k)=>{if(ART[k])$(id).innerHTML='<img src="'+ART[k]+'" alt="">'};im('tie','我的ARMANI');im('tig','gacha-machine');
  for(const [t,k] of [['map','nav-map'],['eq','nav-eq'],['gacha','nav-gacha'],['farm','nav-farm'],['dragon','nav-dragon'],['tarot','nav-tarot']]){const b=$('tabs').querySelector('[data-t="'+t+'"] .ti');if(b&&ART[k])b.innerHTML='<img src="'+ART[k]+'" alt="">'}})();
@@ -2615,7 +2615,9 @@ function fmNotify(){if(!FM.logs.length)return;const L=$('login');if(L&&!L.hidden
  ov.onclick=e=>{if(!e.target.closest('[data-x]'))return;ov.remove();fmRpc('farm_seen',{p_id:fmId(),p_key:fmKey()}).catch(()=>{})}}
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#fstgo')){audioUnlock();lbOpen();return}const g=e.target.closest&&e.target.closest('#fgrid');if(!g)return;const b=e.target.closest('[data-a]'),p=e.target.closest('.fp');
  if(b)return fmAct(b.dataset.a,+b.dataset.i);if(p&&p.classList.contains('empty'))fmAct('plant',+p.dataset.i);else if(p&&p.classList.contains('lock'))fmAct('expand')});
-setInterval(()=>{if(SAVE&&SAVE.tab==='farm'&&!$('home').hidden&&FM.plots&&!FM.busy){renderFarm();if(Date.now()-FM.t>30000)fmSync()}},1000);
+setInterval(()=>{if(SAVE&&SAVE.tab==='farm'&&!$('home').hidden&&FM.plots&&!FM.busy){renderFarm();if(Date.now()-FM.t>10000)fmSync()}},1000);
+setInterval(()=>{if(FM.on&&SAVE&&SAVE.pname&&SAVE.tab!=='farm'&&document.visibilityState==='visible'&&!FM.busy&&Date.now()-FM.t>60000){const L=$('login');if(!(L&&!L.hidden))fmSync()}},15000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&FM.on&&SAVE&&SAVE.pname&&!FM.busy&&Date.now()-FM.t>3000)fmSync()});
 
 
 /* ===== 池底公告 ===== */
