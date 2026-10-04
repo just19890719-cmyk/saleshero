@@ -892,6 +892,7 @@ body.gready #lgload{display:none}
 .sbbig{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%) scale(.2);opacity:0;pointer-events:none;animation:sbbig 1.6s ease-out forwards;filter:drop-shadow(0 0 20px rgba(255,200,60,.9))}
 @keyframes sbbig{30%{transform:translate(-50%,-50%) scale(1.15);opacity:1}70%{transform:translate(-50%,-50%) scale(1) rotate(8deg);opacity:1}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
 @media(max-width:600px){.dchips button[data-v]:not(.clr){width:46px;height:46px;font-size:11px!important}.sbdw{width:34px!important;height:36px!important}.dpot::before{width:48px;height:44px}#casD .dbox,.sbbox{border-width:22px!important;border-image-width:22px!important}}
+.sblog{width:100%;max-width:420px;display:grid;gap:3px;margin-top:4px;text-align:left}.sblh{font-size:12px;font-weight:800;color:#ffe08a;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -1064,6 +1065,7 @@ body.gready #lgload{display:none}
       <div class="dchips" id="sbchips"><button data-v="100">+100</button><button data-v="1000">+1千</button><button data-v="10000">+1萬</button><button data-v="-1" class="allin">梭哈</button><button data-v="0" class="clr">清除</button></div>
       <div class="dact"><button class="btn pri" id="sbgo">🎲 擲骰</button></div>
       <div class="muted dstat" id="sbstat"></div>
+      <div class="sblog" id="sblog"></div>
      </div>
      <div class="ghost dghost"><div class="bub" id="sbbub">來來來,擲一把!十八啦~</div><img id="sbhost" alt="企劃女神芳芳"><div><span class="hname">企劃女神芳芳</span></div></div>
     </div>
@@ -2743,20 +2745,36 @@ async function sbPlay(){if(SBS.ph==='rolling')return;const bet=SBS.bet;if((SAVE.
  else if(c===0){delta=-bet;msg='<span class="down">平手,莊家吃和,−'+fmtC(bet)+' 金幣</span>';sfx('casinoLose');sbSay('tie','host-4')}
  else{delta=-bet;msg='<span class="down">芳芳贏了,−'+fmtC(bet)+' 金幣</span>';sfx('casinoLose');if(b.k!==3)sbSay('lose','host-4')}
  SAVE.coin=Math.max(0,(SAVE.coin||0)+delta);const st=SAVE.sstat=SAVE.sstat||{w:0,l:0,net:0};st.net+=delta;if(delta>0)st.w++;else st.l++;save();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);
- $('sbinfo').innerHTML=msg;SBS.ph='done';renderSib()}
+ $('sbinfo').innerHTML=msg;SBS.ph='done';renderSib();
+ try{const kind=c>0?(p.k===3?'winall':p.v===12?'win18':'win'):c===0?'tie':(b.k===3?'hostall':'lose');sbLogAdd(kind,Math.abs(delta),c>0?p.n:c<0?p.n+' vs '+b.n:p.n)}catch(e){}}
 async function sbAnnounce(win){if(typeof ONLINE==='undefined'||!ONLINE.supabaseKey||(window.claude&&window.claude.use))return;
  const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
  await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/sib_announce',{method:'POST',headers:h,body:JSON.stringify({p_nick:SAVE.pname||'',p_win:Math.floor(win)})});setTimeout(()=>{try{annFetch()}catch(e){}},800)}
 $('sbchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||SBS.ph==='rolling')return;const v=+b.dataset.v,mx=sbMax();
  if(v===-1)SBS.bet=Math.max(100,mx);else if(v===0)SBS.bet=100;else SBS.bet=Math.min(Math.max(100,mx),SBS.bet+v);audioUnlock();sfx(v?'chips':'chipsClear');renderSib()};
 $('sbgo').onclick=()=>sbPlay();
-function casSwitch(k){SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1')}else renderDragon()}catch(e){}save()}
+function casSwitch(k){SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
 document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});
 $('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');casSwitch(b.dataset.c)};
 setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
 
 Object.assign(SFX,{diceShake:()=>{S('diceS',.55)||SYN.shuffle()},diceThrow:()=>{S('diceT',.6)||N('bandpass',1500,600,.2,.25,2)},diceHit:()=>{S('diceG',.22,0,R_(1.1,1.4))||T('triangle',R_(1800,2400),1200,.04,.06)}});
 SGAP.diceHit=.06;
+/* 十八仔 全伺服器戰況 */
+var SBLOG={list:[],t:0};
+const sbOn=()=>{try{return typeof ONLINE!=='undefined'&&!!ONLINE.supabaseKey&&!(window.claude&&window.claude.use)}catch(e){return false}};
+async function sbRpc(fn,body){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
+ const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(body||{})});if(!r.ok)throw r.status;const t=await r.text();return t?JSON.parse(t):null}
+async function sbLogAdd(kind,amount,pts){const row={nick:SAVE.pname||'',kind,amount,pts,t:new Date().toISOString()};
+ if(sbOn()){try{await sbRpc('sib_log_add',{p_nick:row.nick,p_kind:kind,p_amount:Math.floor(amount),p_pts:pts})}catch(e){}sbLogFetch()}
+ else{SAVE.sblog=[row,...(SAVE.sblog||[])].slice(0,6);save();SBLOG.list=SAVE.sblog;sbLogRender()}}
+async function sbLogFetch(){if(!sbOn()){SBLOG.list=SAVE.sblog||[];sbLogRender();return}try{const l=await sbRpc('sib_log_list');SBLOG.list=Array.isArray(l)?l:[];SBLOG.t=Date.now()}catch(e){}sbLogRender()}
+function sbLogRender(){const el=$('sblog');if(!el)return;const K={winall:['🏆一色','up big'],win18:['🔥十八','up'],win:['贏','up'],lose:['輸','down'],tie:['平手','down'],hostall:['芳芳一色','down']};
+ el.innerHTML=(SBLOG.list.length?'<div class="sblh">🎲 '+(sbOn()?'全伺服器戰況':'最近戰況')+'</div>':'')+(SBLOG.list.length?SBLOG.list.map(r=>{const k=K[r.kind]||[r.kind,''];const a=+r.amount||0;
+  const tx=r.kind.startsWith('win')?(r.pts?'擲出 '+escH(r.pts)+',':'')+'贏走 <b class="up">'+fmtC(a)+'</b>':r.kind==='tie'?'莊家吃和,輸 <b class="down">'+fmtC(a)+'</b>':r.kind==='hostall'?'被芳芳通殺,輸 <b class="down">'+fmtC(a)+'</b>':(r.pts?'擲出 '+escH(r.pts)+',':'')+'輸給芳芳 <b class="down">'+fmtC(a)+'</b>';
+  return'<div class="dlr'+(r.kind==='winall'?' big':'')+'"><span class="nm">'+escH(r.nick||'?')+'</span><span class="k '+k[1]+'">'+k[0]+'</span><span class="tx">'+tx+'</span><span class="ag">'+dpAgo(r.t)+'</span></div>'}).join(''):'<div class="muted" style="font-size:12px">還沒有人擲過,第一把就是你!</div>')}
+setInterval(()=>{if(document.visibilityState==='visible'&&!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&Date.now()-SBLOG.t>10000)sbLogFetch()},2000);
+
 
 /* ===== 雲端存檔帳號 ===== */
 var CL={on:false,u:null,t:null,timer:null,busy:false,lastOk:0,err:'',ready:false,dirty:false};
