@@ -3,6 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<script>
+/* ===== 電腦版:手機面板預覽(只在電腦瀏覽器顯示) ===== */
+(function(){try{
+ var desk=matchMedia('(hover:hover) and (pointer:fine)').matches,web=/^https?:$/.test(location.protocol),top1=window.top===window;
+ window.__PHONECAN=desk&&web&&top1;
+ window.__PHONEHOST=window.__PHONECAN&&localStorage.getItem('shechu-phone')==='1';
+}catch(e){window.__PHONECAN=false;window.__PHONEHOST=false}
+if(!window.__PHONEHOST)return;
+var DEV={iphone:[390,844,'iPhone 14/15'],small:[375,667,'iPhone SE'],android:[412,915,'Android 大螢幕'],max:[430,932,'iPhone Pro Max']};
+document.write('<style>body>*:not(#phhost){display:none!important}html,body{margin:0;height:100%;background:#15181d;overflow:hidden}'+
+ '#phhost{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;font-family:system-ui,sans-serif;color:#fff}'+
+ '#phbar{display:flex;gap:8px;align-items:center;padding:8px 12px;flex:none}#phbar b{font-size:14px;margin-right:6px}'+
+ '#phbar select,#phbar button{font:inherit;font-size:13px;padding:5px 10px;border-radius:8px;border:1px solid #444;background:#262b33;color:#fff;cursor:pointer}'+
+ '#phbar button.pri{background:#f2b21c;color:#2a1a00;border-color:#f2b21c;font-weight:800}#phbar small{color:#9aa3ad;font-size:12px}'+
+ '#phwrap{flex:1;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}'+
+ '#phdev{position:relative;border-radius:44px;padding:14px;background:#000;box-shadow:0 0 0 2px #3a3f47,0 20px 60px rgba(0,0,0,.6);transform-origin:center center}'+
+ '#phdev iframe{display:block;border:0;border-radius:30px;background:#000}</style>');
+function build(){if(document.getElementById('phhost'))return;var h=document.createElement('div');h.id='phhost';
+ var cur=localStorage.getItem('shechu-phdev')||'iphone';if(!DEV[cur])cur='iphone';
+ h.innerHTML='<div id="phbar"><b>📱 手機面板預覽</b><select id="phsel">'+Object.keys(DEV).map(function(k){return'<option value="'+k+'"'+(k===cur?' selected':'')+'>'+DEV[k][2]+'('+DEV[k][0]+'×'+DEV[k][1]+')</option>'}).join('')+'</select>'+
+  '<button id="phrel">🔄 重新整理</button><button class="pri" id="phback">🖥️ 回到電腦版</button><small>用滑鼠拖曳 = 手指操作</small></div><div id="phwrap"><div id="phdev"><iframe id="phif" allow="autoplay"></iframe></div></div>';
+ document.body.appendChild(h);
+ var f=document.getElementById('phif'),dv=document.getElementById('phdev');
+ function size(){var d=DEV[document.getElementById('phsel').value]||DEV.iphone;f.style.width=d[0]+'px';f.style.height=d[1]+'px';
+  var wr=document.getElementById('phwrap'),s=Math.min(1,(wr.clientHeight-16)/(d[1]+28),(wr.clientWidth-16)/(d[0]+28));dv.style.transform='scale('+s+')'}
+ f.src=location.pathname+'?inframe=1';size();addEventListener('resize',size);
+ document.getElementById('phsel').onchange=function(){localStorage.setItem('shechu-phdev',this.value);size();setTimeout(function(){try{f.contentWindow.dispatchEvent(new Event('resize'))}catch(e){}},50)};
+ document.getElementById('phrel').onclick=function(){f.src=location.pathname+'?inframe=1&r='+Date.now()};
+ document.getElementById('phback').onclick=function(){localStorage.removeItem('shechu-phone');location.reload()};
+ f.addEventListener('load',function(){try{f.focus()}catch(e){}})}
+document.addEventListener('DOMContentLoaded',build);
+})();
+</script>
 <title>社畜英雄</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -62,7 +95,10 @@ section{background:var(--panel);border:1px solid var(--line);border-radius:8px;p
 .tile .bt{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);font-style:normal;font-size:9px;font-weight:900;line-height:1.3;padding:0 4px;border-radius:4px;background:linear-gradient(#ffe36a,#f2a91c);color:#3a2000;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.4)}
 @keyframes bossi{0%,100%{box-shadow:0 0 6px rgba(255,200,60,.6),inset 0 0 6px rgba(255,210,80,.35)}50%{box-shadow:0 0 18px rgba(255,190,40,1),inset 0 0 12px rgba(255,220,100,.7)}}
 .bossnote{color:#c08400;font-weight:900;font-size:13px;margin:2px 0 4px}
-.mon.boss{border-color:rgba(255,200,60,.85)!important;box-shadow:0 0 16px rgba(255,190,40,.45)!important}.mon.boss .tg{background:linear-gradient(#ffe36a,#f2a91c)!important;color:#3a2000!important}
+.mon.boss{border-color:rgba(255,200,60,.85)!important;box-shadow:0 0 16px rgba(255,190,40,.45)!important}
+.mon.boss .pic{background:radial-gradient(ellipse at 50% 100%,rgba(255,196,60,.55),transparent 70%),radial-gradient(circle at 50% 30%,rgba(255,230,150,.18),transparent 60%),linear-gradient(#2c2412,#110c04)!important}
+.mon.boss .pic img{filter:drop-shadow(0 0 7px rgba(255,200,70,.95)) drop-shadow(0 4px 4px rgba(0,0,0,.6))!important}
+.mon .tags .tg{flex:none;white-space:nowrap}.mon .tags .rt{min-width:0}.mon.boss .tg{background:linear-gradient(#ffe36a,#f2a91c)!important;color:#3a2000!important}
 .t1{color:var(--c1)}.t2{color:var(--c2)}.t3{color:var(--c3)}.t4{color:var(--c4)}
 .doll{display:grid;grid-template-columns:70px 1fr 70px;gap:8px;align-items:center}
 .dcol{display:grid;gap:10px;justify-items:center}
@@ -497,6 +533,10 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
 #hpi,#xpi{display:block;height:100%;width:0;transition:width .15s}
 #hpi{background:linear-gradient(#ff9a7a,#e8382c 55%,#a8160f)!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.35)}
 #xpi{background:linear-gradient(#fff3a0,#f5c02a 60%,#c58a00)!important}
+.trk b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;line-height:1;white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums;text-shadow:0 0 2px #000,0 1px 2px #000,0 0 3px #000}
+.trk.hp b{font-size:clamp(9px,2.6vw,12px)}
+.trk.xp{overflow:visible!important}.trk.xp>#xpi{border-radius:4px}
+.trk.xp b{font-size:clamp(8px,2.2vw,10px);letter-spacing:.02em}
 #timer{flex:none;width:min(21vw,96px);aspect-ratio:160/57;background:var(--hud-timer) center/100% 100% no-repeat;display:flex;align-items:center;justify-content:center;padding-left:calc(min(21vw,96px)*.27);box-sizing:border-box;font-size:clamp(12px,3.4vw,16px);filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
 #hud .hrow{margin-top:2px;font-size:12px}
 #pbtn{top:calc(env(safe-area-inset-top,0px) + 6px)!important;width:40px!important;height:40px!important;background:var(--hud-pause) center/contain no-repeat!important;color:transparent!important;font-size:0!important;border-radius:50%!important;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
@@ -969,7 +1009,7 @@ body.gready #lgload{display:none}
 <body>
 <canvas id="c"></canvas>
 <div id="hud" hidden>
-  <div class="htop"><div class="hpw"><span class="trk hp"><i id="hpi"></i></span><span class="trk xp"><i id="xpi"></i></span></div><span id="timer"></span></div>
+  <div class="htop"><div class="hpw"><span class="trk hp"><i id="hpi"></i><b id="hpt"></b></span><span class="trk xp"><i id="xpi"></i><b id="xpt"></b></span></div><span id="timer"></span></div>
   <div class="hrow"><span id="hch"></span><span id="hk"></span></div>
 </div>
 <button id="pbtn" hidden aria-label="暫停">⏸</button>
@@ -984,7 +1024,7 @@ body.gready #lgload{display:none}
    <div id="lgload"><i></i>遊戲載入中,請稍候…<small>🎉 遊戲剛改版,第一次打開需要比較久(約 3MB)<br>載入一次之後就會快很多</small></div>
    <button class="btn pri" id="lggo">開始上班</button>
    <div class="lgcloud" id="lgcloud" hidden></div>
-   <p class="lghint">暱稱會顯示在排行榜和農場上,<br>之後改名要花 <b style="color:#ffcf6a">1,000 金幣</b>,請慎重取名。</p>
+   <p class="lghint">暱稱會顯示在排行榜和農場上,不能跟別人重複。<br>之後改名要花 <b style="color:#ffcf6a">1,000 金幣</b>,改名後 7 天內不能再改。</p>
   </div>
   <details class="lgsave" id="lgsave">
    <summary>💾 存檔須知<span>第一次玩請看</span></summary>
@@ -1003,7 +1043,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-R</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-U</span></small>
   </div>
  </div>
 </div>
@@ -1245,9 +1285,9 @@ body.gready #lgload{display:none}
  </div>
 </div>
 
-<script src="assets.js?v=1004P"></script>
-<script src="sounds.js?v=1004P" async></script>
+<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1004P"><\/script><script src="sounds.js?v=1004P" async><\/script>')</script>
 <script>
+if(window.__PHONEHOST)throw new Error("phone-host");
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
    1. 排行榜連線:到 https://supabase.com 建立免費專案後,把網址與 anon key 貼在下面。
       留空的話,遊戲仍可正常遊玩,只是排行榜會顯示離線模式。
@@ -1714,7 +1754,7 @@ function lbOpen(){$('lbov').hidden=false;sfx('open');
   if(LB.sb)LB.unsub=LB.sb.sub(rows=>{LB.rows=rows;lbRender()},fail);
   else LB.unsub=LB.db.collection('leaderboard').orderBy('coin','desc').limit(200).onSnapshot(sn=>{LB.rows=sn.docs.map(d=>Object.assign({id:d.id},d.data()));lbRender()},fail)}
  else lbRender();lbMe();lbSync(true)}
-function lbMe(){$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <button class="btn" id="lbname" style="padding:3px 10px;font-size:12px">改名(1,000 金幣)</button>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')+(LB.err&&LB.sb?'<span style="color:#ff9a8a;font-size:11px">成績上傳失敗:'+escH(String(LB.err.code||''))+' '+escH(String(LB.err.msg||'').slice(0,120))+'</span>':'')}
+function lbMe(){$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <button class="btn" id="lbname" style="padding:3px 10px;font-size:12px">'+(nkLeft()>0?'改名('+nkDays(nkLeft())+'後可改)':'改名(1,000 金幣)')+'</button>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')+(LB.err&&LB.sb?'<span style="color:#ff9a8a;font-size:11px">成績上傳失敗:'+escH(String(LB.err.code||''))+' '+escH(String(LB.err.msg||'').slice(0,120))+'</span>':'')}
 const escH=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function lbAgo(ms){const d=ms/1000;if(d<3600)return Math.max(1,Math.floor(d/60))+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
 const lbOn=r=>r.id===LB.uid||(Date.now()-(+r.t||0))<75000;
@@ -1739,10 +1779,25 @@ function showLogin(){const li=$('login');if(!li)return;mqBulbs();
  if(!$('lgz1').src)$('lgz1').hidden=true;if(!$('lgz2').src)$('lgz2').hidden=true;
  const back=!!SAVE.pname;$('lgname').value=SAVE.pname||'';$('lgname').readOnly=back;$('lglab').textContent=back?'歡迎回來!':'設定你的遊戲暱稱';$('lggo').textContent=back?'繼續上班':'開始上班';
  li.hidden=false;if($('lgsave'))$('lgsave').open=!back;if(!back)setTimeout(()=>$('lgname').focus(),300)}
+/* ===== 暱稱登記:不可與他人重複、改名後 7 天內不能再改 ===== */
+var NK={on:false},NFREE=false;
+(function(){try{NK.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){}})();
+const NKERR={'nick taken':'這個暱稱已經有人用了,換一個吧','nick cooldown':'改名後 7 天內不能再改','bad nick':'暱稱不能空白','bad key':'暱稱驗證失敗,請重新整理後再試'};
+const nkMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in NKERR)if(m.includes(k))return NKERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,60)};
+const nkLeft=()=>Math.max(0,(SAVE.nnext||0)-Date.now());
+const nkDays=ms=>{const h=Math.ceil(ms/3600000);return h>=24?Math.ceil(h/24)+' 天':Math.max(1,h)+' 小時'};
+async function nkClaim(n){if(!NK.on)return{nick:n,next:null};
+ try{const r=await fmRpc('nick_claim',{p_owner:fmId(),p_key:fmKey(),p_nick:n});SAVE.nnext=r&&r.next?+r.next:0;save();return r}
+ catch(e){const cm=String((e&&e.msg)||'').match(/nick cooldown (\d+)/);if(cm){SAVE.nnext=+cm[1];save()}throw e}}
+async function nkCheck(){if(!NK.on||!SAVE.pname)return;if(G&&running){setTimeout(nkCheck,8000);return}
+ try{await nkClaim(SAVE.pname);try{lbMe()}catch(x){}}catch(e){if(String((e&&e.msg)||'').includes('nick taken')){NFREE=true;askName(true);$('nameok').textContent='確定改名';
+  $('namehint').innerHTML='你的暱稱「<b>'+escH(SAVE.pname)+'</b>」已經被其他同事先登記了,<br>請換一個新暱稱(這次<b style="color:#7ee2a8">免費</b>)。';sfx('error')}}}
 $('lggo').onclick=()=>{const inp=$('lgname'),v=(SAVE.pname||inp.value.trim()).slice(0,12);
  if(!v){inp.classList.remove('bad');void inp.offsetWidth;inp.classList.add('bad');inp.focus();$('lglab').textContent='⚠️ 請先輸入遊戲暱稱';return}
- if(!SAVE.pname&&!$('lggo').dataset.ok){audioUnlock();ask('之後要改名需要花 1,000 金幣,\n確定要使用「'+v+'」嗎?',()=>{$('lggo').dataset.ok='1';$('lggo').click()});return}
- audioUnlock();setTimeout(()=>{if(typeof fmSync==='function'&&FM.on)fmSync()},800);setTimeout(()=>{if(typeof verNotice==='function')verNotice()},2600);setTimeout(()=>sfx('start'),60);const first=!SAVE.pname,chg=SAVE.pname!==v;SAVE.pname=v;save();if(chg){lbMe();lbSync(true)}
+ if(!SAVE.pname&&!$('lggo').dataset.ok){audioUnlock();ask('之後要改名需要花 1,000 金幣,改名後 7 天內不能再改,\n確定要使用「'+v+'」嗎?',()=>{$('lggo').dataset.ok='1';$('lggo').click()});return}
+ if(!SAVE.pname&&NK.on&&$('lggo').dataset.nk!==v){const b=$('lggo'),tx=b.textContent;b.disabled=true;b.textContent='確認暱稱中…';
+  nkClaim(v).then(()=>{b.disabled=false;b.textContent=tx;b.dataset.nk=v;b.click()}).catch(e=>{b.disabled=false;b.textContent=tx;delete b.dataset.ok;sfx('error');inp.classList.remove('bad');void inp.offsetWidth;inp.classList.add('bad');$('lglab').textContent='⚠️ '+nkMsg(e);inp.focus()});return}
+ audioUnlock();setTimeout(()=>{if(typeof fmSync==='function'&&FM.on)fmSync()},800);setTimeout(()=>{if(typeof verNotice==='function')verNotice()},2600);setTimeout(()=>sfx('start'),60);const first=!SAVE.pname,chg=SAVE.pname!==v;SAVE.pname=v;save();if(chg){lbMe();lbSync(true)}if(!first&&NK.on)setTimeout(nkCheck,1500);
  $('login').hidden=true;const q=[(first?'👋 歡迎,':'👋 歡迎回來,')+v+'!',...TQ];TQ=[];q.forEach((m,i)=>setTimeout(()=>toast(m),i*2300))};
 $('lgname').addEventListener('keydown',e=>{if(e.key==='Enter')$('lggo').click()});
 let NAMECB=null;
@@ -1759,15 +1814,20 @@ function askName(req,cb){NAMECB=cb||null;$('namein').value=SAVE.pname||'';$('nam
  $('namehint').innerHTML=req?'進入遊戲前請先取一個名稱,會顯示在排行榜上。<br>之後想改名,到右上角「🏆 排行榜」<br>點<b style="color:#ffcf2e">「修改名稱」</b>即可。':'會顯示在排行榜上,之後隨時可以再修改。';
  $('nameov').hidden=false;setTimeout(()=>$('namein').focus(),50)}
 $('namein').addEventListener('keydown',e=>{if(e.key==='Enter')$('nameok').click()});
-$('nameok').onclick=()=>{const v=$('namein').value.trim().slice(0,12);if(!v){$('namein').focus();return}
- if(NRENAME){if(v===SAVE.pname){toast('名字一樣,不用改');return}if((SAVE.coin||0)<1000){sfx('error');toast('金幣不夠');return}
+$('nameok').onclick=async()=>{const v=$('namein').value.trim().slice(0,12);if(!v){$('namein').focus();return}
+ if(NRENAME){if(v===SAVE.pname){toast('名字一樣,不用改');return}if((SAVE.coin||0)<1000){sfx('error');toast('金幣不夠');return}const L=nkLeft();if(L>0){sfx('error');toast('改名後 7 天內不能再改,還要 '+nkDays(L));return}}
+ if(NK.on&&(v!==SAVE.pname||NFREE)){const b=$('nameok'),tx=b.textContent;b.disabled=true;b.textContent='確認中…';
+  try{await nkClaim(v)}catch(e){b.disabled=false;b.textContent=tx;sfx('error');$('namehint').innerHTML='<b style="color:#ff8a7a">⚠️ '+escH(nkMsg(e))+'</b>'+(String((e&&e.msg)||'').includes('cooldown')&&nkLeft()?'<br>還要 '+nkDays(nkLeft())+'才能再改':'');return}
+  b.disabled=false;b.textContent=tx}
+ if(NFREE){NFREE=false;const old=SAVE.pname;SAVE.pname=v;save();$('nameov').hidden=true;$('nameok').textContent='確定';lbMe();lbSync(true);renderHome();try{if(typeof FM!=='undefined'&&FM.on)fmSync()}catch(x){}toast('✏️ 暱稱已改成「'+v+'」');const cb=NAMECB;NAMECB=null;if(cb)cb();return}
+ if(NRENAME){
   NRENAME=false;SAVE.coin-=1000;const old=SAVE.pname;SAVE.pname=v;save();$('nameov').hidden=true;$('nameok').textContent='確定';lbMe();lbSync(true);renderHome();
-  try{if(typeof FM!=='undefined'&&FM.on)fmSync()}catch(x){}sfx('coins');toast('✏️ 改名成功:'+old+' → '+v+'(−1,000 金幣)');return}
+  try{if(typeof FM!=='undefined'&&FM.on)fmSync()}catch(x){}sfx('coins');toast('✏️ 改名成功:'+old+' → '+v+'(−1,000 金幣),7 天後才能再改');return}
  const first=!SAVE.pname;SAVE.pname=v;save();$('nameov').hidden=true;lbMe();lbSync(true);if(first)toast('👋 歡迎,'+v+'!');const cb=NAMECB;NAMECB=null;if(cb)cb()};
-$('namecancel').onclick=()=>{$('nameov').hidden=true;NRENAME=false;$('nameok').textContent='確定'};
+$('namecancel').onclick=()=>{$('nameov').hidden=true;NRENAME=false;NFREE=false;$('nameok').textContent='確定'};
 $('lbx').onclick=()=>{$('lbov').hidden=true;sfx('close')};
 let NRENAME=false;
-function renameAsk(){if((SAVE.coin||0)<1000){sfx('error');toast('改名需要 1,000 金幣,金幣不夠喔');return}NRENAME=true;askName(false);$('namehint').innerHTML='改名需要花費 <b style="color:#ffcf2e">1,000 金幣</b><br>目前有 '+fmtC(SAVE.coin||0)+' 金幣';$('nameok').textContent='花 1,000 金幣改名'}
+function renameAsk(){{const L=nkLeft();if(L>0){sfx('error');toast('改名後 7 天內不能再改,還要 '+nkDays(L));return}}if((SAVE.coin||0)<1000){sfx('error');toast('改名需要 1,000 金幣,金幣不夠喔');return}NRENAME=true;askName(false);$('namehint').innerHTML='改名需要花費 <b style="color:#ffcf2e">1,000 金幣</b><br>目前有 '+fmtC(SAVE.coin||0)+' 金幣';$('namehint').innerHTML+='<br><small style="color:#9ba4ae">暱稱不能跟別人重複,改名後 7 天內不能再改</small>';$('nameok').textContent='花 1,000 金幣改名'}
 $('lbme').onclick=e=>{if(e.target.id==='lbname')renameAsk()};
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='lbbtn')lbOpen()});
 setInterval(()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.pname&&LB.db&&!LB.busy){LB.last='';lbSync(true)}},30000);
@@ -1793,7 +1853,7 @@ const MONINFO={'奧客喪屍':{d:'生前每天來店裡殺價、要贈品,死了
  '菜市場大媽喪屍':{d:'提著塑膠袋橫衝直撞,搶特價的氣勢喪屍化之後一點都沒少。皮厚、走得慢,被甩到很痛。',s:[4,2,4],tip:'💡 走得慢,邊跑邊打就好'},
  '吸毒喪屍':{d:'動作抽搐又飄忽,速度是全場最快,但身體很脆,一碰就倒。',s:[2,5,2],tip:'💡 小心從背後被包圍'},
  '暴怒奧客喪屍':{d:'被店員拒絕退貨後徹底暴走的奧客,體型更大、血量是一般的 7 倍。',s:[5,4,5],tip:'🎁 擊倒必掉「年終獎金」寶箱',el:1,t:'每 45 秒出現'},
- '捷運站長喪屍':{d:'死了還在吹哨維持秩序的站長。會衝刺、吹出震波,還會叫列車進站撞人;血量剩一半時進入「末班車」暴走。',s:[5,3,5],tip:'👑 擊倒有機會掉落首領專屬裝備',boss:1,t:'撐過 3 分鐘後出現'}};
+ '捷運站長喪屍':{d:'死了還在吹哨維持秩序的站長。會衝刺、吹出震波,還會叫列車進站撞人;血量剩一半時進入「末班車」暴走。',s:[5,3,5],tip:'👑 擊倒有機會掉落首領專屬裝備',boss:1,t:'3 分鐘後出現'}};
 function monCard(n,rate){const m=MONINFO[n]||{d:'',s:[3,3,3]},img=ART[(n==='暴怒奧客喪屍'?'奧客喪屍':n)+'-walk-1']||'';
  const bar=(lb,v,c)=>'<div class="sr"><span>'+lb+'</span><i style="--pc:'+c+'">'+[1,2,3,4,5].map(k=>'<u'+(k<=v?' class="on"':'')+'></u>').join('')+'</i></div>';
  return'<div class="mon'+(m.el||m.boss?' el':'')+(m.boss?' boss':'')+'"><div class="pic">'+(img?'<img src="'+img+'" alt="'+n+'">':'')+'</div>'+
@@ -2477,6 +2537,13 @@ function bossDrawGround(){
  if(G.bw)for(const w of G.bw){if(w.t<0)continue;const p=w.t/w.d,Rc=w.R*(.15+.85*p),fi=Math.min(5,Math.floor(p*6));
   if(!bfx('bw-'+(fi+1),w.x,w.y-6,Rc/BWF[fi],0,1-p*.4,false,.6)){ctx.strokeStyle='rgba(120,230,255,'+(1-p)+')';ctx.lineWidth=8*(1-p)+2;ctx.beginPath();ctx.ellipse(w.x,w.y,Rc,Rc*.6,0,0,6.283);ctx.stroke()}
   ctx.strokeStyle='rgba(200,250,255,'+(.7*(1-p))+')';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(w.x,w.y,Rc,Rc*.6,0,0,6.283);ctx.stroke()}}
+function drawBeam(x,y,col,h,w){const t=G.t,fl=.82+.18*Math.sin(t*9+x*.13);ctx.save();ctx.globalCompositeOperation='lighter';
+ const rg=ctx.createRadialGradient(x,y,0,x,y,w*2.8);rg.addColorStop(0,hexA(col,.6*fl));rg.addColorStop(1,hexA(col,0));ctx.fillStyle=rg;ctx.beginPath();ctx.ellipse(x,y,w*2.8,w*1.1,0,0,6.283);ctx.fill();
+ const g=ctx.createLinearGradient(0,y-h,0,y);g.addColorStop(0,hexA(col,0));g.addColorStop(.55,hexA(col,.16*fl));g.addColorStop(1,hexA(col,.42*fl));ctx.fillStyle=g;
+ ctx.fillRect(x-w,y-h*.85,w*2,h*.85);ctx.fillRect(x-w*.6,y-h,w*1.2,h);ctx.fillRect(x-w*.32,y-h,w*.64,h);
+ const g2=ctx.createLinearGradient(0,y-h*.92,0,y);g2.addColorStop(0,'rgba(255,255,255,0)');g2.addColorStop(1,'rgba(255,255,255,'+(.5*fl)+')');ctx.fillStyle=g2;ctx.fillRect(x-w*.14,y-h*.92,w*.28,h*.92);
+ for(let i=0;i<5;i++){const p=(t*.55+i*.2+x*.0137)%1;ctx.fillStyle=hexA(col,.9*(1-p));const px=x+Math.sin(i*2.3+t*2.2)*w*.75,py=y-6-p*h*.75;ctx.fillRect(px-1,py-1,2.2,2.2)}
+ ctx.restore()}
 function bossDrawTop(){if(G.lanes)for(const L of G.lanes)if(L.go)drawTrain(L.x,L.y+40,105)}
 function drawGlow(x,y,col,big){const t=G.t,cy=y-16;ctx.save();ctx.globalCompositeOperation='lighter';
  const R=big?78:46,pu=.75+.25*Math.sin(t*4);
@@ -2694,12 +2761,11 @@ function draw(){
   for(const g of G.gems){ctx.fillStyle=g.v>=10?'#ffb43b':g.v>1?'#7cf0c8':'#4fc3ff';ctx.beginPath();ctx.moveTo(g.x,g.y-7);ctx.lineTo(g.x+5,g.y);ctx.lineTo(g.x,g.y+7);ctx.lineTo(g.x-5,g.y);ctx.closePath();ctx.fill()}
  for(const d of G.drops){
   if(d.heal){drawImg('麥當勞套餐','🍔',d.x,d.y,30);continue}
-  if(d.chest){const b=Math.abs(Math.sin(G.t*4))*6;ctx.globalAlpha=.5+.3*Math.sin(G.t*6);ctx.fillStyle='#ffd43b';ctx.beginPath();ctx.ellipse(d.x,d.y,30,12,0,0,6.283);ctx.fill();ctx.globalAlpha=1;drawImg('業績獎金','💰',d.x,d.y-b,40);continue}
+  if(d.chest){drawBeam(d.x,d.y,'#ffcf3a',200,12);const b=Math.abs(Math.sin(G.t*4))*6;ctx.globalAlpha=.5+.3*Math.sin(G.t*6);ctx.fillStyle='#ffd43b';ctx.beginPath();ctx.ellipse(d.x,d.y,30,12,0,0,6.283);ctx.fill();ctx.globalAlpha=1;drawImg('業績獎金','💰',d.x,d.y-b,40);continue}
   if(d.boss){let x=d.x,y=d.y,hh=0;if(d.pt<1){x=d.sx+(d.x-d.sx)*d.pt;y=d.sy+(d.y-d.sy)*d.pt;hh=Math.sin(d.pt*Math.PI)*110}
-   const big=d.boss===2,col=big?(d.it.q>=4?'#ff4a3a':'#ffd24a'):RAR[d.it.q].c;if(d.pt>=1||hh<40)drawGlow(x,y,col,big);drawImg(d.it.b,d.it.e,x,y+4-hh,big?42:34,false,big&&d.pt<1?d.pt*12:0);continue}
-  const c=RAR[d.it.q].c,gr=ctx.createLinearGradient(0,d.y-70,0,d.y);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,c);
-  ctx.fillStyle=gr;ctx.globalAlpha=.55+.25*Math.sin(G.t*5);ctx.fillRect(d.x-5,d.y-70,10,70);ctx.globalAlpha=1;
-  drawImg(d.it.b,d.it.e,d.x,d.y+4,30);
+   const big=d.boss===2,col=big?(d.it.q>=4?'#ff4a3a':'#ffd24a'):RAR[d.it.q].c;if(d.pt>=1){drawBeam(x,y,col,big?260:190,big?14:10)}if(d.pt>=1||hh<40)drawGlow(x,y,col,big);drawImg(d.it.b,d.it.e,x,y+4-hh,big?42:34,false,big&&d.pt<1?d.pt*12:0);continue}
+  {const q=d.it.q,hi=q>=3;drawBeam(d.x,d.y,q<0?'#d6e0ec':RAR[q].c,hi?210:150,hi?11:8)}
+  drawImg(d.it.b,d.it.e,d.x,d.y+2-Math.abs(Math.sin(G.t*3+d.x*.05))*3,30);
  }
  for(const f of G.fx){const p=f.t/f.d;
   if(f.k==='csplash'){const S=f.R*2.3;let ok;if(p<.72)ok=fxImg('coffee-'+Math.min(6,1+Math.floor(p/.72*6)),f.x,f.y,S,0,1,true);else ok=fxImg(p<.86?'coffee-7':'coffee-8',f.x,f.y,S,0,1-(p-.72)/.28*.8,true);
@@ -2746,6 +2812,7 @@ function draw(){
 function hud(){
  if(!G)return;
  $('hpi').style.width=Math.max(0,G.hp/G.S.hp*100)+'%';$('xpi').style.width=Math.min(100,G.xp/needXp(G.lv)*100)+'%';
+ {const ht=Math.max(0,Math.ceil(G.hp))+' / '+Math.ceil(G.S.hp),xt='Lv.'+G.lv;if($('hpt')&&$('hpt').textContent!==ht)$('hpt').textContent=ht;if($('xpt')&&$('xpt').textContent!==xt)$('xpt').textContent=xt}
  {const rem=Math.ceil(DUR-G.t);if(rem<=10&&rem>0&&rem!==G.tw&&running){G.tw=rem;sfx('warn')}}
  $('timer').textContent=G.t>=DUR?(BOSS[CH[G.c].boss]?'首領戰':'00:00'):fmtT(DUR-G.t);$('hk').textContent='Lv.'+G.lv+' 擊倒 '+G.kills;
 }
@@ -2878,10 +2945,10 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-R';
+const GBUILD='1004-U';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.04d';
-const GNOTES=[['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
+const GVER='2026.10.04e';
+const GNOTES=[['🪪','暱稱不能重複','暱稱改成全伺服器唯一,改名後 7 天內不能再改;如果你的暱稱被別人先登記了,可以免費換一個'],['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
  ['☁️','雲端存檔帳號','登入畫面可以綁定帳號密碼,換手機、換瀏覽器都能接續進度'],
  ['🃏','射龍門改版','全伺服器共用池底,看門柱再決定射或放棄,還能「全包」押整個池底'],
  ['📢','芳芳伺服器公告','池底超過 5,000 金幣時會通知全伺服器'],
@@ -3181,10 +3248,17 @@ window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDo
 if(window.ART_EXTRA)window.__artExtra();
 try{if(SAVE.tab==='dragon')casSwitch(SAVE.cas||'dragon')}catch(e){}
 try{if('serviceWorker' in navigator&&location.protocol==='https:'&&typeof ONLINE!=='undefined'&&ONLINE.supabaseKey&&!(window.claude&&window.claude.use))navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
+/* ===== 電腦版:切換成手機面板的按鈕 ===== */
+(function(){if(!window.__PHONECAN||window.__PHONEHOST)return;
+ const st=document.createElement('style');st.textContent='#phtog{position:fixed;left:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:40;font:inherit;font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(20,24,30,.82);color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}#phtog:hover{background:#f2b21c;color:#2a1a00}';
+ document.head.appendChild(st);const b=document.createElement('button');b.id='phtog';b.textContent='📱 切換手機面板';b.title='電腦版專用:用手機尺寸預覽遊戲畫面';document.body.appendChild(b);
+ b.onclick=()=>{try{save()}catch(e){}const go=async()=>{try{if(typeof clFlush==='function'&&CL&&CL.u)await clFlush()}catch(e){}try{localStorage.setItem('shechu-phone','1')}catch(e){}location.reload()};
+  if(G&&running&&!G.over){ask('目前正在戰鬥中,切換會中斷這一局,\n確定要切換成手機面板嗎?',go);return}go()};
+ setInterval(()=>{b.hidden=!!(G&&!G.over)},500)})();
 lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 <script>
-(function(){function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
+(function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
 function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1004P',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
