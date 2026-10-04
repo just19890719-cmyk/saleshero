@@ -1079,7 +1079,7 @@ body.gready #lgload{display:none}
       <li><b>兩根門柱一樣大</b>時,改成猜第三張「比門柱大」還是「比門柱小」:猜對從池底贏走下注金額,猜錯丟 1 倍,又一樣大就是<span class="down">撞柱丟 3 倍</span>。</li>
       <li><b>💥 全包</b>:看完門柱也可以選「全包」,押上<b>整個池底</b>。射中就抱走整個池底;射偏賠一個池底;撞柱賠 2 倍(雙柱 3 倍),最多扣到身上金幣歸零。身上至少要有一個池底的金幣才能全包。</li>
       <li><b>下注上限</b>:不能超過目前池底,身上金幣也要夠付撞柱的倍數;金幣不夠時至少可以押 100,撞柱最多扣到身上金幣歸零。<b>開局至少要有 200 金幣</b>(底注 100+最低下注 100)。</li>
-      <li>池底被挖到見底時,芳芳會自動補 1,000 進去,遊戲不會中斷。</li>
+      <li>池底被挖空時會從 0 開始,大家丟的底注會再把池底養起來。</li>
      </ol>
     </details>
     </div>
@@ -1499,7 +1499,7 @@ async function dpFetch(){if(DP.on){const [p,l]=await Promise.all([dpReq('/rest/v
 async function dpAnte(amt){if(DP.on){const v=await dpReq('/rest/v1/rpc/dragon_ante',{p_nick:dpNick(),p_amt:amt});DP.pot=+v;return DP.pot}
  const s=dpLocal();s.dpot+=amt;DP.pot=s.dpot;save();return DP.pot}
 async function dpSettle(kind,amt){if(DP.on){let r;try{r=await dpReq('/rest/v1/rpc/dragon_settle',{p_nick:dpNick(),p_kind:kind,p_amt:amt})}catch(e){if(/^all/.test(kind)&&/bad kind/.test(String(e.msg||'')))r=await dpReq('/rest/v1/rpc/dragon_settle',{p_nick:dpNick(),p_kind:kind.slice(3)==='win'?'win':kind.slice(3),p_amt:amt});else throw e}DP.pot=+r.pot;return{paid:+r.paid,pot:+r.pot,seeded:!!r.seeded}}
- const s=dpLocal();let paid=0,seeded=false;if(kind==='win'||kind==='allwin'){paid=Math.min(amt,s.dpot);s.dpot-=paid;if(s.dpot<100){s.dpot+=1000;seeded=true}}else if(['lose','post','alllose','allpost'].includes(kind)){s.dpot+=amt;paid=-amt}
+ const s=dpLocal();let paid=0,seeded=false;if(kind==='win'||kind==='allwin'){paid=Math.min(amt,s.dpot);s.dpot-=paid}else if(['lose','post','alllose','allpost'].includes(kind)){s.dpot+=amt;paid=-amt}
  dpLocalLog(kind,(kind==='win'||kind==='allwin')?paid:amt,s.dpot);if(seeded)dpLocalLog('seed',1000,s.dpot);DP.pot=s.dpot;save();return{paid,pot:s.dpot,seeded}}
 function dpAgo(t){const d=(Date.now()-new Date(t).getTime())/1000;if(!(d>=0))return'';if(d<60)return'剛剛';if(d<3600)return Math.floor(d/60)+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
 function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==null?'—':fmtC(DP.pot);
