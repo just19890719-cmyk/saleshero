@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>社畜英雄</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="theme-color" content="#2a0408">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="社畜英雄">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1d232b;--panel:#fbfaf6;--line:#dcd7cb;--dim:#6b717a;--accent:#f2b632;--c0:#b8bec8;--c1:#2fbf5f;--c2:#3b82f6;--c3:#f2b632;--c4:#e5303a}
@@ -906,6 +915,13 @@ body.gready #lgload{display:none}
 #tutbar.on{transform:translate(-50%,0);opacity:1}
 .lbmine{font-size:13px;color:#ffd77a;font-weight:800;margin:-2px 0 6px}
 #over .obtns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
+#updbar{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 8px);transform:translate(-50%,-150%);z-index:13;width:min(520px,94vw);box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:linear-gradient(90deg,#0f3a5a,#0b2238);border:2px solid #4fc3ff;box-shadow:0 0 20px rgba(79,195,255,.45),0 10px 30px rgba(0,0,0,.6);color:#fff;transition:transform .45s cubic-bezier(.2,1.4,.4,1)}
+#updbar.on{transform:translate(-50%,0)}
+#updbar .ui{font-size:24px;animation:updspin 2s linear infinite}@keyframes updspin{to{transform:rotate(360deg)}}
+#updbar .ut{flex:1;min-width:0}#updbar .ut b{display:block;font-size:14px}#updbar .ut small{font-size:12px;color:#bfe6ff}
+#updbar .btn{flex:none;font-size:13px!important;padding:3px 10px!important}
+#updbar .ux{cursor:pointer;color:#bfe6ff;padding:4px;font-size:14px}
 </style>
 </head>
 <body>
@@ -935,7 +951,7 @@ body.gready #lgload{display:none}
     <li>沒綁帳號時,遊戲進度(裝備、金幣、座駕、通關紀錄)只存在<b>這支手機/這台電腦的這個瀏覽器</b>裡。</li>
     <li><b>換手機、換瀏覽器、清除瀏覽器資料、用無痕模式</b>玩,進度都會從頭開始。</li>
     <li>在 <b>LINE</b> 裡點連結會用 LINE 內建瀏覽器打開,存檔跟 Safari/Chrome 是分開的。請按右上角選<b>「用預設瀏覽器開啟」</b>,之後都用同一個瀏覽器玩。</li>
-    <li><b>iPhone</b> 請用 Safari 打開後,點下方分享鈕 →<b>「加入主畫面」</b>,桌面會出現遊戲圖示。Safari 超過 7 天沒開可能會自動清掉資料,加到主畫面比較不會被清。</li>
+    <li><b>加入手機桌面</b>:iPhone 用 Safari 點分享鈕 →「加入主畫面」;Android 用 Chrome 點選單 →「加到主畫面」,桌面就會出現遊戲圖示。<b>iPhone 加到主畫面後,存檔會跟 Safari 分開</b>,請先綁定雲端帳號再加入,才不會看起來像進度不見。</li>
     <li>排行榜的成績存在雲端,進度重來的話舊紀錄還會留著,只是會多一筆新的。</li>
    </ul>
   </details>
@@ -1062,7 +1078,7 @@ body.gready #lgload{display:none}
        <ul><li>落在兩根門柱<b>中間</b>:<span class="up">從池底贏走下注金額</span></li><li>落在門柱<b>外面</b>:<span class="down">下注金額丟進池底</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">丟 2 倍進池底</span></li></ul></li>
       <li><b>兩根門柱一樣大</b>時,改成猜第三張「比門柱大」還是「比門柱小」:猜對從池底贏走下注金額,猜錯丟 1 倍,又一樣大就是<span class="down">撞柱丟 3 倍</span>。</li>
       <li><b>💥 全包</b>:看完門柱也可以選「全包」,押上<b>整個池底</b>。射中就抱走整個池底;射偏賠一個池底;撞柱賠 2 倍(雙柱 3 倍),最多扣到身上金幣歸零。身上至少要有一個池底的金幣才能全包。</li>
-      <li><b>下注上限</b>:不能超過目前池底,身上金幣也要夠付撞柱的倍數。按「梭哈」可以一口氣押滿。</li>
+      <li><b>下注上限</b>:不能超過目前池底,身上金幣也要夠付撞柱的倍數;金幣不夠時至少可以押 100,撞柱最多扣到身上金幣歸零。<b>開局至少要有 200 金幣</b>(底注 100+最低下注 100)。</li>
       <li>池底被挖到見底時,芳芳會自動補 1,000 進去,遊戲不會中斷。</li>
      </ol>
     </details>
@@ -1494,7 +1510,7 @@ function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==nul
   return'<div class="dlr'+(r.kind==='allwin'?' big':'')+'"><span class="nm">'+escH(r.kind==='seed'?'芳芳':(r.nick||'?'))+'</span><span class="k '+k[1]+'">'+k[0]+'</span><span class="tx">'+txt+'</span><span class="ag">'+dpAgo(r.t)+'</span></div>'}).join(''):'<div class="muted" style="font-size:12px">還沒有人射過,第一槍就是你!</div>'}
 async function dpRefresh(){try{await dpFetch();DP.err=''}catch(e){DP.err=String(e.code||e.message||e)}dpRenderPot();renderDragon()}
 const dMult=()=>DS.ph==='pair'?3:2;
-function dMaxBet(){const pot=DP.pot||0,byCoin=Math.floor((SAVE.coin||0)/dMult()/100)*100;return Math.max(0,Math.min(pot,byCoin))}
+function dMaxBet(){const pot=DP.pot||0,c=SAVE.coin||0;let byCoin=Math.floor(c/dMult()/100)*100;if(byCoin<100&&c>=100)byCoin=100;return Math.max(0,Math.min(pot,byCoin))}
 function renderDragon(){
  if(!$('dhost').getAttribute('src'))$('dhost').src=ART['host-1'];
  const inHand=DS.ph==='posts'||DS.ph==='pair';
@@ -1518,7 +1534,7 @@ $('dchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||!(DS.ph==='p
  if(v>0&&DS.bet===mx)toast('最多只能下注 '+fmtC(mx)+'(不能超過池底,也要保留 '+dMult()+' 倍撞柱風險)');
  audioUnlock();sfx(v?'chips':'chipsClear');renderDragon()};
 $('dact').onclick=async e=>{const b=e.target.closest('button');if(!b||b.disabled||DP.busy)return;audioUnlock();
- if(b.id==='ddeal'){if((SAVE.coin||0)<DANTE){sfx('error');dSay('broke','host-4');toast('金幣不夠丟底');return}
+ if(b.id==='ddeal'){if((SAVE.coin||0)<DANTE+100){sfx('error');dSay('broke','host-4');toast('至少要有 '+fmtC(DANTE+100)+' 金幣才能玩(底注 100+最低下注 100)');return}
   DP.busy=true;renderDragon();$('dinfo').textContent='丟底中…';
   try{await dpAnte(DANTE);DP.err=''}catch(err){DP.busy=false;DP.err=String(err.code||err.message||err);$('dinfo').innerHTML='<span class="down">連不上池底,這局沒有扣錢</span>';sfx('error');renderDragon();return}
   dCoins(-DANTE);dStat(-DANTE,'ante');sfx('chips');
@@ -1539,7 +1555,7 @@ async function dShoot(bid,allin){const pair=DS.ph==='pair',bet=allin?(DP.pot||0)
   let kind,amt,msg;
   if(!pair){if(c>a&&c<bb){kind='win';amt=bet}else if(c===a||c===bb){kind='post';amt=bet*2}else{kind='lose';amt=bet}}
   else{const up=bid==='dhi';if(c===a){kind='post';amt=bet*3}else if((c>a)===up){kind='win';amt=bet}else{kind='lose';amt=bet}}
-  if(allin){if(kind==='post')amt=Math.min(amt,coin0);kind='all'+kind}
+  if(kind==='post')amt=Math.min(amt,coin0);if(allin)kind='all'+kind;
   const isWin=kind==='win'||kind==='allwin';
   await new Promise(r=>setTimeout(r,550));
   let res;try{res=await dpSettle(kind,amt);DP.err=''}catch(err){DP.err=String(err.code||err.message||err);res=null}
@@ -2828,6 +2844,24 @@ function tutTick(){if(!G||!running||SAVE.tut)return;G.tutI=G.tutI||0;while(G.tut
 function tutShow(t){let el=$('tutbar');if(!el){el=document.createElement('div');el.id='tutbar';document.body.appendChild(el)}el.textContent=t;el.classList.remove('on');void el.offsetWidth;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),5200)}
 setInterval(tutTick,300);
 try{if(SAVE&&!SAVE.tut&&((SAVE.clear||[]).length||(SAVE.items||[]).length>3))SAVE.tut=1;renderDaily()}catch(e){}
+
+
+/* ===== 新版本偵測 ===== */
+var UPD={tag:null,shown:false,on:false};
+(function(){try{UPD.on=location.protocol.startsWith('http')&&typeof ONLINE!=='undefined'&&!!ONLINE.supabaseKey&&!(window.claude&&window.claude.use)}catch(e){}})();
+async function updCheck(){if(!UPD.on||UPD.shown||document.visibilityState!=='visible')return;try{
+  const r=await fetch(location.pathname+'?updcheck='+Date.now(),{method:'HEAD',cache:'no-store'});if(!r.ok)return;
+  const tag=r.headers.get('etag')||r.headers.get('last-modified')||'';if(!tag)return;
+  if(UPD.tag===null){UPD.tag=tag;return}if(tag!==UPD.tag)updShow()}catch(e){}}
+function updShow(){if(UPD.shown)return;UPD.shown=true;let el=$('updbar');if(!el){el=document.createElement('div');el.id='updbar';document.body.appendChild(el)}
+ el.innerHTML='<span class="ui">🔄</span><div class="ut"><b>社畜英雄有新版本了!</b><small>請重新整理頁面,取得最新內容</small></div><button class="btn pri" id="updgo">立即更新</button><span class="ux" id="updx">✕</span>';
+ requestAnimationFrame(()=>el.classList.add('on'));sfx('open');toast('🔄 遊戲有新版本,請重新整理頁面');
+ el.onclick=e=>{if(e.target.id==='updx'){el.classList.remove('on');setTimeout(()=>{UPD.shown=false},600000);return}
+  if(e.target.id==='updgo'){if(G&&running&&!G.over){ask('目前正在戰鬥中,重新整理會中斷這一局,\n確定要現在更新嗎?',()=>updReload());return}updReload()}}}
+async function updReload(){try{save()}catch(e){}try{if(typeof clFlush==='function'&&CL&&CL.u)await clFlush()}catch(e){}
+ try{const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs)await r.update()}catch(e){}location.reload()}
+setInterval(updCheck,90000);setTimeout(updCheck,4000);setTimeout(updCheck,20000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')updCheck()});
 
 /* ===== 雲端存檔帳號 ===== */
 var CL={on:false,u:null,t:null,timer:null,busy:false,lastOk:0,err:'',ready:false,dirty:false};
