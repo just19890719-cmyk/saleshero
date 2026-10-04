@@ -1003,7 +1003,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-P</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-Q</span></small>
   </div>
  </div>
 </div>
@@ -2877,7 +2877,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-P';
+const GBUILD='1004-Q';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04d';
 const GNOTES=[['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
@@ -3107,9 +3107,17 @@ const clMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in
 function clSet(u,t){CL.u=u;CL.t=t;try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
 function clSnap(){return JSON.parse(JSON.stringify(SAVE))}
 function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,3000)}
-async function clFlush(keep){if(!CL||!CL.on||!CL.u||CL.busy||CL.noflush)return;clearTimeout(CL.timer);CL.busy=true;
+/* 防止多裝置互相覆蓋:雲端存檔若被別台裝置寫過,這台就停止上傳並登出 */
+async function clGuard(){if(!CL.on||!CL.u||!CL.ready||CL.kicked)return false;
+ try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});if(CL.kicked)return false;CL.gt=Date.now();
+  const ct=r&&r.save?+(r.save._t||r.save_t||0):0,sy=clSyncGet();
+  if(ct&&sy&&Math.abs(ct-sy)>1){clKick();return false}return true}
+ catch(e){if(/token/i.test(String((e&&e.msg)||'')))clKick();return false}}
+async function clFlush(keep){if(!CL||!CL.on||!CL.u||CL.noflush||CL.kicked)return;clearTimeout(CL.timer);if(CL.busy){if(!keep)CL.timer=setTimeout(clFlush,2000);return}
+ if(Date.now()-(CL.gt||0)>30000){if(keep)return;CL.busy=true;const ok=await clGuard();CL.busy=false;if(!ok)return}
+ CL.busy=true;
  try{const snap=clSnap(),body={p_user:CL.u,p_token:CL.t,p_save:snap};if(keep&&JSON.stringify(body).length>60000)keep=false;await clRpc('acct_save',body,keep);clSyncSet(snap._t);CL.lastOk=Date.now();CL.err=''}
- catch(e){CL.err=clMsg(e);if(String(e.msg||'').includes('bad token'))clKick()}
+ catch(e){CL.err=clMsg(e);if(/token/i.test(String(e.msg||'')))clKick()}
  CL.busy=false;clUI()}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&CL.u)clFlush(true)});
 function clUI(){const el=$('lgcloud');if(!el)return;if(!CL.on){el.hidden=true;return}el.hidden=false;
@@ -3147,19 +3155,20 @@ document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
 function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);clSet(null,null);
  const ov=document.createElement('div');ov.className='ov clov';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>⚠️ 帳號已在其他裝置登入</h2><p>你的雲端帳號剛剛在<b>另一個瀏覽器或裝置</b>登入了。<br>為了避免兩邊的進度互相覆蓋,這裡的進度<b>已停止上傳</b>。</p><p class="muted" style="font-size:12px">如果要改回在這台裝置玩,請重新登入,另一台就會被登出。</p><div class="clbtns"><button class="btn pri" data-a="re">重新登入</button><button class="btn" data-a="x">知道了</button></div></div>';
  document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;if(b.dataset.a==='re')clModal('in')}}
-setInterval(async()=>{if(!CL.on||!CL.u||!CL.ready||CL.kicked||document.visibilityState!=='visible')return;try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false)clKick()}catch(e){}},30000);
+setInterval(async()=>{if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false){clKick();return}}catch(e){if(/token/i.test(String((e&&e.msg)||''))){clKick();return}}if(!CL.busy){CL.busy=true;await clGuard();CL.busy=false}},20000);
 async function clBoot(){clUI();if(!CL.on||!CL.u){CL.ready=true;return}
  let just=false;try{just=sessionStorage.getItem('shechu-justlogin')==='1';sessionStorage.removeItem('shechu-justlogin')}catch(e){}
- if(just){CL.ready=true;toast('☁️ 已登入 '+CL.u+',雲端進度載入完成');return}
+ if(just){CL.ready=true;CL.gt=Date.now();toast('☁️ 已登入 '+CL.u+',雲端進度載入完成');return}
  try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});
   if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
   const ct=r.save?+(r.save._t||r.save_t||0):0,sy=clSyncGet();
   if(r.save&&ct>sy+500){let g=false;try{g=sessionStorage.getItem('shechu-pull')==='1'}catch(e){}
    if(!g){try{localStorage.setItem(KEY,JSON.stringify(r.save));sessionStorage.setItem('shechu-pull','1')}catch(e){}clSyncSet(ct);location.reload();return}}
   try{sessionStorage.removeItem('shechu-pull')}catch(e){}
-  CL.ready=true;if(!r.save||(+(SAVE._t||0))>Math.max(ct,sy)+500||CL.dirty){CL.dirty=false;clFlush()}
+  CL.ready=true;CL.gt=Date.now();if(r.save&&!(ct>sy+500)&&Math.abs(ct-sy)>1&&!((+(SAVE._t||0))>Math.max(ct,sy)+500))clSyncSet(ct);
+  if(!r.save||(+(SAVE._t||0))>Math.max(ct,sy)+500||CL.dirty){CL.dirty=false;clFlush()}
   CL.lastOk=Date.now();CL.err='';clUI()}
- catch(e){CL.err=clMsg(e);CL.ready=true;if(String(e.msg||'').includes('bad token'))clKick();clUI()}}
+ catch(e){CL.err=clMsg(e);CL.ready=true;if(/token/i.test(String(e.msg||'')))clKick();clUI()}}
 
 window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;Object.assign(ART,X);for(const k in X){const i=new Image();i.src=X[k];IMG[k]=i}
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
