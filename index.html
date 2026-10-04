@@ -374,11 +374,16 @@ section{background:var(--panel);border:1px solid var(--line);border-radius:8px;p
 .lbme{font-size:13px;color:#b7bec7;margin-bottom:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .lbme b{color:#ffd77a}
 .lbmt{flex-basis:100%;display:flex;gap:6px;align-items:center;min-width:0;flex-wrap:nowrap}
-.lbmt .lbmtl{flex:none;color:#b7bec7}.lbmt .lbmtv{min-width:0;flex:1;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lbmt .lbmtv.none{color:#7d8794;font-style:italic}
+.lbmt .lbmtl{flex:none;color:#b7bec7}
+.lbmt .lbmtv{min-width:0;flex:0 1 auto;max-width:100%;color:#9fe8ff;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 9px;border-radius:7px;border:1px solid rgba(110,210,255,.75);background:rgba(20,60,90,.45);box-shadow:0 0 8px rgba(90,200,255,.45),inset 0 0 6px rgba(90,200,255,.2);animation:mtglow 2.4s ease-in-out infinite}
+.lbmt .lbmtv.none{color:#7d8794;font-style:italic;border-color:rgba(255,255,255,.15);background:none;box-shadow:none;animation:none}
 .lbmt .btn{flex:none;padding:3px 10px!important;font-size:12px!important}
+.lbpen{flex:none;background:none;border:0;padding:2px 4px;font-size:15px;line-height:1;cursor:pointer;opacity:.85}.lbpen:hover{opacity:1;transform:scale(1.15)}
+@keyframes mtglow{50%{box-shadow:0 0 14px rgba(90,200,255,.8),inset 0 0 8px rgba(90,200,255,.3)}}
 .lbmt input{flex:1;min-width:0;font:inherit;font-size:13px;padding:4px 8px;border-radius:6px;border:1px solid #555;background:#10141b;color:#fff}
 .lbmt small{flex:none;color:#8a94a0;font-size:11px}
-.lbr .mt{font-size:12px;color:#b9c2cc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:1px 0 2px}
+.lbr .mt{display:flex;min-width:0;margin:3px 0 4px}
+.lbr .mt span{min-width:0;max-width:100%;font-size:12px;font-weight:700;color:#9fe8ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:1px 9px;border-radius:7px;border:1px solid rgba(110,210,255,.7);background:rgba(20,60,90,.45);box-shadow:0 0 8px rgba(90,200,255,.4),inset 0 0 6px rgba(90,200,255,.18);animation:mtglow 2.4s ease-in-out infinite}
 .lblist{overflow:auto;display:grid;gap:6px;padding-right:2px}
 .lbr{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;background:rgba(255,255,255,.05);border-radius:10px;padding:8px;border:1px solid transparent}
 .lbr.me{border-color:#ffd24a;background:rgba(255,210,74,.1)}
@@ -546,10 +551,12 @@ button.tile img{width:84%!important;height:84%!important;margin:0!important;obje
 #timer{flex:none;width:min(21vw,96px);aspect-ratio:160/57;background:var(--hud-timer) center/100% 100% no-repeat;display:flex;align-items:center;justify-content:center;padding-left:calc(min(21vw,96px)*.27);box-sizing:border-box;font-size:clamp(12px,3.4vw,16px);filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
 #hud .hrow{margin-top:2px;font-size:12px}
 .hkw{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
-#hloot{display:flex;gap:3px;align-items:center;min-height:0}#hloot:empty{display:none}
-#hloot i{width:20px;height:20px;border-radius:5px;border:2px solid #888;background:rgba(0,0,0,.55);display:grid;place-items:center;overflow:hidden;font-style:normal;font-size:12px}
-#hloot i img{width:100%;height:100%;object-fit:contain}#hloot b{font-size:12px;color:#fff;margin-left:1px}
-#hloot.pop i:last-of-type{animation:kpop .3s ease-out}
+#hloot{display:flex;flex-direction:column;align-items:flex-end;gap:1px;max-width:min(46vw,220px)}#hloot:empty{display:none}
+#hloot .hlh{display:flex;align-items:center;gap:3px;font-size:11px;color:#f1d7a6;font-weight:800}
+#hloot .hli{max-width:100%;font-size:12px;font-weight:800;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 0 2px #000,0 1px 2px #000,0 0 4px #000}
+#hloot .hli:nth-child(n+4){opacity:.85}#hloot .hli:nth-child(n+6){opacity:.65}
+#hloot .hli.nw{animation:lootin .35s ease-out}#hloot .hli.bs{text-shadow:0 0 6px rgba(255,190,40,.9),0 1px 2px #000}
+@keyframes lootin{0%{transform:translateX(18px) scale(1.15);opacity:0}100%{transform:none;opacity:1}}
 #hk{display:inline-block;transform-origin:100% 50%;font-variant-numeric:tabular-nums}#hk b{font-size:14px;color:#fff}
 #hk.pop{animation:kpop .22s ease-out}#hk.big{animation:kbig .32s ease-out}
 @keyframes kpop{0%{transform:scale(1.55)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
@@ -1076,7 +1083,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-Z</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-ZA</span></small>
   </div>
  </div>
 </div>
@@ -1790,7 +1797,7 @@ function lbOpen(){$('lbov').hidden=false;sfx('open');
 const MOTTOMAX=20;
 const mottoClean=t=>Array.from(String(t||'').replace(/[\r\n\t]+/g,' ').replace(/\s{2,}/g,' ').trim()).slice(0,MOTTOMAX).join('');
 function lbMe(){const mt=SAVE.motto||'';$('lbme').innerHTML='我的名稱:<b>'+(SAVE.pname?escH(SAVE.pname):'(尚未設定)')+'</b> <button class="btn" id="lbname" style="padding:3px 10px;font-size:12px">'+(nkLeft()>0?'改名('+nkDays(nkLeft())+'後可改)':'改名(1,000 金幣)')+'</button>'+(LB.ro?'<span style="color:#ff9a8a">你目前只有檢視權限,成績不會上傳</span>':'')+(LB.err&&LB.sb?'<span style="color:#ff9a8a;font-size:11px">成績上傳失敗:'+escH(String(LB.err.code||''))+' '+escH(String(LB.err.msg||'').slice(0,120))+'</span>':'')+
- '<div class="lbmt" id="lbmtw"><span class="lbmtl">個人銘言:</span><span class="lbmtv'+(mt?'':' none')+'">'+(mt?'「'+escH(mt)+'」':'還沒寫,說點什麼吧')+'</span><button class="btn" id="lbmted">✏️ 編輯</button></div>'}
+ '<div class="lbmt" id="lbmtw"><span class="lbmtl">個人銘言:</span><span class="lbmtv'+(mt?'':' none')+'">'+(mt?escH(mt):'還沒寫,說點什麼吧')+'</span><button class="lbpen" id="lbmted" title="編輯個人銘言" aria-label="編輯個人銘言">✏️</button></div>'}
 document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
  if(t.closest('#lbmted')){const w=$('lbmtw');w.innerHTML='<span class="lbmtl">個人銘言:</span><input id="lbmtin" maxlength="'+MOTTOMAX+'" placeholder="最多 '+MOTTOMAX+' 個字"><small id="lbmtc"></small><button class="btn pri" id="lbmtok">儲存</button><button class="btn" id="lbmtx">取消</button>';
   const i=$('lbmtin');i.value=SAVE.motto||'';const upd=()=>{$('lbmtc').textContent=Array.from(i.value).length+'/'+MOTTOMAX};i.oninput=()=>{if(Array.from(i.value).length>MOTTOMAX)i.value=Array.from(i.value).slice(0,MOTTOMAX).join('');upd()};upd();i.focus();
@@ -1809,7 +1816,7 @@ async function lbRender(){
  $('lblist').innerHTML='<div class="lbonline">🟢 目前在線 '+onN+' 人 · 共 '+rows.length+' 位玩家</div>'+(myI>=0?'<div class="lbmine">🏅 你目前'+(LB.sort==='power'?'戰力':'金幣')+'排第 '+(myI+1)+' 名</div>':'')+rows.map((r,i)=>{const nm=r.nick||(ps[r.id]&&ps[r.id].name)||'神秘玩家';
   const eqs=(Array.isArray(r.eq)?r.eq:[]).map(e=>e&&typeof e.b==='string'?'<span class="tile q'+(+e.q|0)+'" title="'+escH(e.n||e.b)+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span>':'').join('');
   const rd=r.ride&&ART['ride-'+r.ride.id]?'<img class="rd" src="'+ART['ride-'+r.ride.id]+'" alt="" title="座駕 Lv.'+(+r.ride.lv|0)+'">':'';
-  return'<div class="lbr'+(r.id===LB.uid?' me':'')+(LB.open===r.id?' open':'')+'" data-uid="'+escH(r.id)+'"><div class="rk">'+(med[i]||(i+1))+'</div><div style="min-width:0"><div class="nm">'+escH(nm)+(r.id===LB.uid?' (你)':'')+(lbOn(r)?'<span class="olst on">在線</span>':'<span class="olst">離線</span>')+'<span class="tap">▾ 裝備</span></div>'+((r.id===LB.uid?SAVE.motto:r.motto)?'<div class="mt">「'+escH(mottoClean(r.id===LB.uid?SAVE.motto:r.motto))+'」</div>':'')+'<div class="eqs">'+(eqs||'<span class="muted" style="font-size:12px">沒有裝備</span>')+rd+'</div></div>'+
+  return'<div class="lbr'+(r.id===LB.uid?' me':'')+(LB.open===r.id?' open':'')+'" data-uid="'+escH(r.id)+'"><div class="rk">'+(med[i]||(i+1))+'</div><div style="min-width:0"><div class="nm">'+escH(nm)+(r.id===LB.uid?' (你)':'')+(lbOn(r)?'<span class="olst on">在線</span>':'<span class="olst">離線</span>')+'<span class="tap">▾ 裝備</span></div>'+((r.id===LB.uid?SAVE.motto:r.motto)?'<div class="mt"><span>'+escH(mottoClean(r.id===LB.uid?SAVE.motto:r.motto))+'</span></div>':'')+'<div class="eqs">'+(eqs||'<span class="muted" style="font-size:12px">沒有裝備</span>')+rd+'</div></div>'+
    '<div class="val">'+(LB.sort==='power'?'⚔️ '+fmt(+r.power||0)+'<small>💰 '+fmtC(+r.coin||0)+'</small>':'💰 '+fmtC(+r.coin||0)+'<small>⚔️ '+fmt(+r.power||0)+'</small>')+'</div>'+lbDet(r)+'</div>'}).join('')}
 
 
@@ -2009,9 +2016,10 @@ function hit(e,dmg,kb,ang){
  if(kb&&e.kind!=='boss'){const k=e.kind==='elite'?kb*.3:kb;e.kx+=Math.cos(ang)*k;e.ky+=Math.sin(ang)*k}
  if(Q.nums&&G.fx.length<60)G.fx.push({k:'num',x:e.x+rnd(-10,10),y:e.y-e.r*2.4,v:fmt(dmg),cr,t:0,d:cr?.75:.6});
 }
+const BAGSVG='<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M9 6V4.5A3 3 0 0 1 15 4.5V6" fill="none" stroke="#e0b46a" stroke-width="2"/><rect x="4" y="6" width="16" height="15" rx="4" fill="#b07a3a" stroke="#5a3a14" stroke-width="1.2"/><rect x="7" y="12" width="10" height="6" rx="1.5" fill="#8a5a24" stroke="#5a3a14" stroke-width="1"/><rect x="11" y="11" width="2" height="3" rx=".6" fill="#ffd27a"/></svg>';
+const LOOTC=q=>q<0?'#aab2bd':q===0?'#e6eaf0':(RAR[q]||RAR[0]).c;
 function hlootRender(pop){const el=$('hloot');if(!el)return;const L=(G&&G.loot)||[];if(!L.length){el.innerHTML='';return}
- const last=L.slice(-5);el.innerHTML='<b>🎒 '+L.length+'</b>'+last.map(it=>'<i style="border-color:'+(RAR[it.q]||RAR[0]).c+(it.boss?';box-shadow:0 0 6px #ffcf3a':'')+'">'+(ART[it.b]?'<img src="'+ART[it.b]+'" alt="">':it.e)+'</i>').join('');
- if(pop){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}}
+ const last=L.slice(-5).reverse();el.innerHTML='<div class="hlh">'+BAGSVG+'<span>戰利品 '+L.length+'</span></div>'+last.map((it,i)=>'<div class="hli'+(i===0&&pop?' nw':'')+(it.boss?' bs':'')+'" style="color:'+(it.boss?'#ffe27a':LOOTC(it.q))+'">'+(it.boss?'👑 ':'')+escH(it.name)+'</div>').join('')}
 function hitStop(t){if(G)G.hs=Math.max(G.hs||0,t)}
 function aoe(x,y,R,dmg,kb){for(const e of G.en){const dx=e.x-x,dy=e.y-y;if(dx*dx+dy*dy<(R+e.r)**2)hit(e,dmg,kb,Math.atan2(dy,dx))}}
 function nearest(n,maxD){const m=(maxD||9e9)**2;if(n===1){let b=null,bd=m;for(const e of G.en){const d=(e.x-G.x)**2+(e.y-G.y)**2;if(d<bd){bd=d;b=e}}return b?[b]:[]}return G.en.map(e=>[e,(e.x-G.x)**2+(e.y-G.y)**2]).filter(a=>a[1]<m).sort((a,b)=>a[1]-b[1]).slice(0,n).map(a=>a[0])}
@@ -3009,7 +3017,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-Z';
+const GBUILD='1004-ZA';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04e';
 const GNOTES=[['🪪','暱稱不能重複','暱稱改成全伺服器唯一,改名後 7 天內不能再改;如果你的暱稱被別人先登記了,可以免費換一個'],['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
