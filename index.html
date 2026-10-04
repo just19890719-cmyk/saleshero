@@ -1014,6 +1014,18 @@ body.gready #lgload{display:none}
 .mbub{display:none;grid-column:1/-1;justify-self:center;max-width:calc(100% - 80px);margin:0 76px 0 0;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.92);color:#222;font-size:11.5px;font-weight:700;text-align:center;line-height:1.35}
 .ripeann{top:calc(env(safe-area-inset-top,0px) + 84px)!important;border-color:#7ee2a8!important;background:linear-gradient(90deg,#123a1c,#0a2410)!important;box-shadow:0 0 22px rgba(80,220,120,.45),0 10px 30px rgba(0,0,0,.6)!important}.ripeann img{object-fit:contain!important;background:none!important;border:0!important}
 .stealann{top:calc(env(safe-area-inset-top,0px) + 84px)!important;border-color:#ff9a6a!important;background:linear-gradient(90deg,#3e1a08,#241004)!important;box-shadow:0 0 22px rgba(255,140,60,.45),0 10px 30px rgba(0,0,0,.6)!important}.stealann img{object-fit:contain!important;background:none!important;border:0!important}.stealann .pa b.v{color:#7ee2a8}
+
+/* 裝備詳情:改成畫面中央的彈出視窗 */
+#dback{position:fixed;inset:0;background:rgba(5,8,12,.68);z-index:60}
+#ask{z-index:70!important}#toast{z-index:80!important}
+#detail:not(.open){display:none!important}
+#detail.open{box-sizing:border-box!important;color:#ebe7dd!important}#detail.open ul li,#detail.open ul li span{color:#e6e9ee!important}#detail.open ul li b{color:#fff!important}#detail.open .muted{color:#aab3bf!important}
+#detail.open{position:fixed!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%);width:min(460px,94vw)!important;max-height:88vh!important;overflow:auto!important;z-index:61!important;margin:0!important;border-radius:16px!important;padding:14px 14px 16px!important;background:linear-gradient(#212938,#151a23)!important;border:2px solid #f2c14a!important;box-shadow:0 20px 50px rgba(0,0,0,.65)!important;animation:dpop .16s ease-out}
+#detail.open #dclose{display:block!important;position:absolute;right:10px;top:6px;font-size:26px;background:none;border:0;color:#fff;z-index:2}
+#detail.open .card{position:relative}
+@keyframes dpop{from{transform:translate(-50%,-46%);opacity:.4}to{transform:translate(-50%,-50%);opacity:1}}
+.dtag{display:inline-block;font-size:12px;font-weight:900;padding:2px 10px;border-radius:999px;margin:0 0 8px}
+.dtag.on{background:linear-gradient(#ffe36a,#f2a91c);color:#3a2000}.dtag.st{background:#3a4456;color:#dfe6ef}
 </style>
 </head>
 <body>
@@ -1053,7 +1065,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-X</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-Y</span></small>
   </div>
  </div>
 </div>
@@ -1091,7 +1103,7 @@ body.gready #lgload{display:none}
     </div>
     <div class="chips" id="flt"></div>
     <div class="tiles" id="stash"></div>
-    <div id="detail"><span class="muted">點選裝備查看詳細資訊。</span></div>
+    <div id="dback" hidden></div><div id="detail"><span class="muted">點選裝備查看詳細資訊。</span></div>
    </section>
    
   </div>
@@ -1837,6 +1849,9 @@ $('nameok').onclick=async()=>{const v=$('namein').value.trim().slice(0,12);if(!v
 $('namecancel').onclick=()=>{$('nameov').hidden=true;NRENAME=false;NFREE=false;$('nameok').textContent='確定'};
 $('lbx').onclick=()=>{$('lbov').hidden=true;sfx('close')};
 let NRENAME=false;
+try{document.body.appendChild($('dback'));document.body.appendChild($('detail'))}catch(e){}
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='dback'){sel=null;sfx('close');renderHome()}});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&sel&&$('detail')&&$('detail').classList.contains('open')&&!G){sel=null;renderHome()}});
 function renameAsk(){{const L=nkLeft();if(L>0){sfx('error');toast('改名後 7 天內不能再改,還要 '+nkDays(L));return}}if((SAVE.coin||0)<1000){sfx('error');toast('改名需要 1,000 金幣,金幣不夠喔');return}NRENAME=true;askName(false);$('namehint').innerHTML='改名需要花費 <b style="color:#ffcf2e">1,000 金幣</b><br>目前有 '+fmtC(SAVE.coin||0)+' 金幣';$('namehint').innerHTML+='<br><small style="color:#9ba4ae">暱稱不能跟別人重複,改名後 7 天內不能再改</small>';$('nameok').textContent='花 1,000 金幣改名'}
 $('lbme').onclick=e=>{if(e.target.id==='lbname')renameAsk()};
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='lbbtn')lbOpen()});
@@ -1893,13 +1908,14 @@ function renderHome(){
 }
 function detail(){
  const d=$('detail'),it=sel&&byId(sel);
-  d.classList.toggle('open',!!it);
+  d.classList.toggle('open',!!it);if($('dback'))$('dback').hidden=!it;
   if(!it){d.innerHTML='<span class="muted">點選裝備查看詳細資訊。綠色 ▲ 代表比目前穿的更好。</span>';return}
  const eq=isEq(it),cmp=eq?null:byId(SAVE.eq[slotFor(it)]);
  const keys=[...new Set([...Object.keys(it.st),...(cmp?Object.keys(cmp.st):[])])];
   const li=keys.map(k=>{const a=it.st[k]?ist(it,k):0,b=cmp?ist(cmp,k):a,df=a-b;const vv=(k==='regen'?a.toFixed(1):Math.round(a))+(STAT[k].p?'%':'');return'<li><span>'+STI[k]+' '+STAT[k].n+'</span><span><b>+'+vv+'</b>'+(cmp&&Math.abs(df)>=.05?' <span class="'+(df>0?'up':'down')+'">'+(df>0?'▲':'▼')+(k==='regen'?Math.abs(df).toFixed(1):Math.round(Math.abs(df)))+'</span>':'')+'</span></li>'}).join('');
  const ds=cmp?Math.round((score(it)-score(cmp))*10):null;
-  d.innerHTML='<div class="card"><button id="dclose" data-a="close" aria-label="關閉">×</button><div class="ch2" style="background:linear-gradient(120deg,'+RAR[it.q].c+',#1a1f28)"><div class="ic" style="background-image:var(--fr'+it.q+')">'+icon(it.b,it.e)+'</div><div><b>'+it.name+(it.up?' +'+it.up:'')+'</b><small>'+RAR[it.q].n+' '+TYPEN[it.type]+' · 物品等級 '+it.il+(eq?' · 穿戴中':'')+'</small>'+(it.w?'<br><small>攻擊方式:'+WPN[it.w]+'</small>':'')+'</div></div>'+
+  const slk=eq?Object.keys(SAVE.eq).find(k=>SAVE.eq[k]===it.id):null,sln=slk?(SLOTS.find(x=>x.k===slk)||{}).n:'';
+ d.innerHTML='<div class="card"><button id="dclose" data-a="close" aria-label="關閉">×</button><div class="dtag '+(eq?'on':'st')+'">'+(eq?'🧍 身上穿戴中'+(sln?' · '+sln:''):'📦 倉庫裡的裝備')+'</div><div class="ch2" style="background:linear-gradient(120deg,'+RAR[it.q].c+',#1a1f28)"><div class="ic" style="background-image:var(--fr'+it.q+')">'+icon(it.b,it.e)+'</div><div><b>'+it.name+(it.up?' +'+it.up:'')+'</b><small>'+RAR[it.q].n+' '+TYPEN[it.type]+' · 物品等級 '+it.il+(eq?' · 穿戴中':'')+'</small>'+(it.w?'<br><small>攻擊方式:'+WPN[it.w]+'</small>':'')+'</div></div>'+
   (it.egg?'<div class="muted">✨ 生活彩蛋裝備</div>':'')+(it.boss?'<div class="bossnote">👑 首領專屬裝備 · 捷運站長喪屍掉落</div>':'')+'<ul>'+li+'</ul>'+
   (it.sk?'<div class="skill">'+skI(it.sk)+'<span>技能「'+SK[it.sk].n+'」Lv.'+it.skl+':'+SK[it.sk].d+'</span></div>':'')+
   (cmp?'<div class="muted">與目前穿戴相比,戰力 <b class="'+(ds>=0?'up':'down')+'">'+(ds>=0?'+':'')+fmt(ds)+'</b></div>':'')+
@@ -2619,10 +2635,10 @@ function update(dt){
  const pk=40*(1+S.pick/100),gk=100*(1+S.pick/100);
  for(let i=G.gems.length-1;i>=0;i--){const g=G.gems[i],dx=G.x-g.x,dy=G.y-20-g.y,d=Math.hypot(dx,dy)||1;
   if(d<gk||g.m){g.m=1;const v=Math.max(320,720-d);g.x+=dx/d*v*dt;g.y+=dy/d*v*dt}
-  if(d<20){G.gems.splice(i,1);G.xp+=g.v*(S.xpm||1);sfx('xp');if(S.sk.card){G.cardT=1.2;G.hp=Math.min(S.hp,G.hp+S.hp*.002*S.sk.card)}}}
+  if(d<20){G.gems.splice(i,1);if(!G.bossDown)G.xp+=g.v*(S.xpm||1);sfx('xp');if(S.sk.card){G.cardT=1.2;G.hp=Math.min(S.hp,G.hp+S.hp*.002*S.sk.card)}}}
  for(let i=G.drops.length-1;i>=0;i--){const d=G.drops[i];if(d.pt!==undefined&&d.pt<1)continue;if(Math.hypot(G.x-d.x,G.y-d.y)<pk){G.drops.splice(i,1);if(d.heal){G.hp=S.hp;sfx('heal');toast('撿到麥當勞套餐!生命回滿')}else if(d.chest){sfx('chestOpen');openChest();return}else takeItem(d.it)}}
  for(let i=G.dead.length-1;i>=0;i--){G.dead[i].t+=dt;if(G.dead[i].t>(G.dead[i].b?4.2:1))G.dead.splice(i,1)}
- {let up=0;while(G.xp>=needXp(G.lv)*(G.mod.xp||1)){G.xp-=needXp(G.lv)*(G.mod.xp||1);G.lv++;up++}if(up){G.hp=Math.min(G.S.hp,G.hp+G.S.hp*.1);G.lvq+=up-1;queueLevel();return}}
+ {let up=0;while(!G.bossDown&&G.xp>=needXp(G.lv)*(G.mod.xp||1)){G.xp-=needXp(G.lv)*(G.mod.xp||1);G.lv++;up++}if(up){G.hp=Math.min(G.S.hp,G.hp+G.S.hp*.1);G.lvq+=up-1;queueLevel();return}}
   for(let i=G.fx.length-1;i>=0;i--){const f=G.fx[i];f.t+=dt;if(f.t>=f.d)G.fx.splice(i,1)}
   for(let i=G.pt.length-1;i>=0;i--){const q=G.pt[i];q.m+=dt;if(q.m>=q.l){G.pt[i]=G.pt[G.pt.length-1];G.pt.pop();continue}q.vy+=q.g*dt;q.vx*=q.dr;q.vy*=q.k==='drop'?1:q.dr;q.x+=q.vx*dt;q.y+=q.vy*dt}
   for(let i=G.dc.length-1;i>=0;i--){G.dc[i].t+=dt;if(G.dc[i].t>4)G.dc.splice(i,1)}
@@ -2770,7 +2786,7 @@ function drawFx(){
  ctx.globalAlpha=1}
 function draw(){
  if(!G){ctx.fillStyle='#2b3036';ctx.fillRect(0,0,W,H);return}
-  const cx=G.x-W/2+(G.shk?rnd(-G.shk,G.shk):0),cy=G.y-H/2+(G.shk?rnd(-G.shk,G.shk):0);drawGround(cx,cy);
+  const shk=(running&&!G.over)?G.shk:0,cx=G.x-W/2+(shk?rnd(-shk,shk):0),cy=G.y-H/2+(shk?rnd(-shk,shk):0);drawGround(cx,cy);
   ctx.save();ctx.translate(-cx,-cy);
   for(const d of G.dc){const al=d.t>3?4-d.t:1;ctx.globalAlpha=al*(d.k==='scorch'?.55:.7);
    const dcv=decalCanvas(d.k,Math.round(d.R));if(dcv)ctx.drawImage(dcv,d.x-dcv.width/2,d.y-dcv.height/2);
@@ -2968,7 +2984,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-X';
+const GBUILD='1004-Y';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04e';
 const GNOTES=[['🪪','暱稱不能重複','暱稱改成全伺服器唯一,改名後 7 天內不能再改;如果你的暱稱被別人先登記了,可以免費換一個'],['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
