@@ -1077,7 +1077,7 @@ body.gready #lgload{display:none}
 .dallbox .sqskip{margin:4px 0 2px}
 
 #castabs button.closed{position:relative;cursor:not-allowed;color:#7d8590!important}#castabs button.closed .cti{filter:grayscale(1) brightness(.7)}
-#castabs .cclosed{position:absolute;right:6px;top:-9px;font-size:10px;font-weight:900;padding:1px 7px;border-radius:999px;background:linear-gradient(#ffe36a,#f2a91c);color:#3a2000;filter:none;white-space:nowrap;box-shadow:0 2px 5px rgba(0,0,0,.5)}
+#castabs .cclosed{position:absolute;right:4px;top:-13px;font-size:13px;font-weight:900;padding:2px 10px;border-radius:999px;background:linear-gradient(#ffe36a,#f2a91c);color:#3a2000;filter:none;white-space:nowrap;box-shadow:0 2px 5px rgba(0,0,0,.5)}
 </style>
 </head>
 <body>
@@ -1117,7 +1117,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-ZF</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1004-ZM</span></small>
   </div>
  </div>
 </div>
@@ -1381,7 +1381,7 @@ const ATKD=.36;
 const EA0={"walk": ["奧客喪屍-walk-1", "奧客喪屍-walk-2", "奧客喪屍-walk-3", "奧客喪屍-walk-4", "奧客喪屍-walk-5", "奧客喪屍-walk-6", "奧客喪屍-walk-7", "奧客喪屍-walk-8"], "atk": ["奧客喪屍-atk-1", "奧客喪屍-atk-2", "奧客喪屍-atk-3", "奧客喪屍-atk-4", "奧客喪屍-atk-5", "奧客喪屍-atk-6", "奧客喪屍-atk-7", "奧客喪屍-atk-8"], "die": ["奧客喪屍-die-1", "奧客喪屍-die-2", "奧客喪屍-die-3", "奧客喪屍-die-4", "奧客喪屍-die-5", "奧客喪屍-die-6", "奧客喪屍-die-7", "奧客喪屍-die-8"]};
 const EANIM={'奧客喪屍':Object.assign({faceR:true},EA0),'暴怒奧客喪屍':Object.assign({faceR:true},EA0),'吸毒喪屍':Object.assign({faceR:true},{"walk": ["吸毒喪屍-walk-1", "吸毒喪屍-walk-2", "吸毒喪屍-walk-3", "吸毒喪屍-walk-4", "吸毒喪屍-walk-5", "吸毒喪屍-walk-6", "吸毒喪屍-walk-7", "吸毒喪屍-walk-8"], "atk": ["吸毒喪屍-atk-1", "吸毒喪屍-atk-2", "吸毒喪屍-atk-3", "吸毒喪屍-atk-4", "吸毒喪屍-atk-5", "吸毒喪屍-atk-6", "吸毒喪屍-atk-7", "吸毒喪屍-atk-8"], "die": ["吸毒喪屍-die-1", "吸毒喪屍-die-2", "吸毒喪屍-die-3", "吸毒喪屍-die-4", "吸毒喪屍-die-5", "吸毒喪屍-die-6", "吸毒喪屍-die-7", "吸毒喪屍-die-8"]}),'菜市場大媽喪屍':Object.assign({faceR:true},{"walk": ["菜市場大媽喪屍-walk-1", "菜市場大媽喪屍-walk-2", "菜市場大媽喪屍-walk-3", "菜市場大媽喪屍-walk-4", "菜市場大媽喪屍-walk-5", "菜市場大媽喪屍-walk-6", "菜市場大媽喪屍-walk-7", "菜市場大媽喪屍-walk-8"], "atk": ["菜市場大媽喪屍-atk-1", "菜市場大媽喪屍-atk-2", "菜市場大媽喪屍-atk-3", "菜市場大媽喪屍-atk-4", "菜市場大媽喪屍-atk-5", "菜市場大媽喪屍-atk-6", "菜市場大媽喪屍-atk-7", "菜市場大媽喪屍-atk-8"], "die": ["菜市場大媽喪屍-die-1", "菜市場大媽喪屍-die-2", "菜市場大媽喪屍-die-3", "菜市場大媽喪屍-die-4", "菜市場大媽喪屍-die-5", "菜市場大媽喪屍-die-6", "菜市場大媽喪屍-die-7", "菜市場大媽喪屍-die-8"]})};
 const $=id=>document.getElementById(id);
-EANIM['捷運站長喪屍']={faceR:true,walk:["捷運站長喪屍-walk-1", "捷運站長喪屍-walk-2", "捷運站長喪屍-walk-3", "捷運站長喪屍-walk-4", "捷運站長喪屍-walk-5", "捷運站長喪屍-walk-6", "捷運站長喪屍-walk-7", "捷運站長喪屍-walk-8", "捷運站長喪屍-walk-9", "捷運站長喪屍-walk-10"],atk:["捷運站長喪屍-atk-1", "捷運站長喪屍-atk-2", "捷運站長喪屍-atk-3", "捷運站長喪屍-atk-4", "捷運站長喪屍-atk-5", "捷運站長喪屍-atk-6"],cast:["捷運站長喪屍-atk-7", "捷運站長喪屍-atk-8", "捷運站長喪屍-atk-9", "捷運站長喪屍-atk-10"],die:["捷運站長喪屍-die-1", "捷運站長喪屍-die-2", "捷運站長喪屍-die-3", "捷運站長喪屍-die-4", "捷運站長喪屍-die-5", "捷運站長喪屍-die-6", "捷運站長喪屍-die-7", "捷運站長喪屍-die-8", "捷運站長喪屍-die-9"]};
+EANIM['捷運站長喪屍']={faceR:true,walk:["捷運站長喪屍-walk-1", "捷運站長喪屍-walk-2", "捷運站長喪屍-walk-3", "捷運站長喪屍-walk-4", "捷運站長喪屍-walk-5", "捷運站長喪屍-walk-6"],atk:["捷運站長喪屍-atk-1", "捷運站長喪屍-atk-2", "捷運站長喪屍-atk-3", "捷運站長喪屍-atk-4", "捷運站長喪屍-atk-5", "捷運站長喪屍-atk-6"],cast:["捷運站長喪屍-cast-1", "捷運站長喪屍-cast-2", "捷運站長喪屍-cast-3", "捷運站長喪屍-cast-4", "捷運站長喪屍-cast-5"],die:["捷運站長喪屍-die-1", "捷運站長喪屍-die-2", "捷運站長喪屍-die-3", "捷運站長喪屍-die-4", "捷運站長喪屍-die-5", "捷運站長喪屍-die-6", "捷運站長喪屍-die-7", "捷運站長喪屍-die-8", "捷運站長喪屍-die-9"]};
 const IMG={};for(const k in ART){const i=new Image();i.src=ART[k];IMG[k]=i}
 (()=>{const R=document.documentElement.style;for(const k of ['hud-hp','hud-timer','hud-pause','btn-gold','btn-navy','btn-gray'])if(ART[k])R.setProperty('--'+k,'url('+ART[k]+')')})();
 if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h){this.rect(x,y,w,h)};
@@ -1884,7 +1884,7 @@ function mqBulbs(){const sg=document.querySelector('.mqsign');if(!sg||sg.dataset
  const nx=14,ny=4;for(let i=0;i<=nx;i++)add(3+i*94/nx,6);for(let i=1;i<=ny;i++)add(97,6+i*88/(ny+1));for(let i=nx;i>=0;i--)add(3+i*94/nx,94);for(let i=ny;i>=1;i--)add(3,6+i*88/(ny+1));
  sg.insertAdjacentHTML('beforeend',h+'<span class="st l">✦</span><span class="st r">✦</span>')}
 function showLogin(){const li=$('login');if(!li)return;mqBulbs();
- const ai=k=>ART[k]||'';$('lgh').src=ai('主角動畫-idle-1');$('lgz1').src=ai('奧客喪屍-atk-1');$('lgz2').src=ai('菜市場大媽喪屍-atk-1');
+ const ai=k=>ART[k]||'';$('lgh').src=ai(HERO_HD?'主角HD-idle-1':'主角動畫-idle-1');$('lgz1').src=ai('奧客喪屍-atk-1');$('lgz2').src=ai('菜市場大媽喪屍-atk-1');
  if(!$('lgz1').src)$('lgz1').hidden=true;if(!$('lgz2').src)$('lgz2').hidden=true;
  const back=!!SAVE.pname;$('lgname').value=SAVE.pname||'';$('lgname').readOnly=back;$('lglab').textContent=back?'歡迎回來!':'設定你的遊戲暱稱';$('lggo').textContent=back?'繼續上班':'開始上班';
  li.hidden=false;if($('lgsave'))$('lgsave').open=!back;if(!back)setTimeout(()=>$('lgname').focus(),300)}
@@ -2664,10 +2664,14 @@ function bossHud(){if(!G)return;
  ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(x-3,y-3,w+6,22);ctx.fillStyle='rgba(255,255,255,.55)';ctx.fillRect(x,y,w*Math.max(v,G.bhpD),16);
  const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,'#ff3b2f');g.addColorStop(1,e.b.p2?'#ff9a2f':'#c81e1e');ctx.fillStyle=g;ctx.fillRect(x,y,w*v,16);
  ctx.fillStyle='#fff';ctx.font='bold 12px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('👮 捷運站長喪屍'+(e.b.p2?' · 🚨末班車':'')+'  '+Math.ceil(v*100)+'%',W/2,y+8)}
-window.__artPack=function(X){if(!X)return;Object.assign(ART,X);for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();
+var HERO_HD=false;
+function heroHD(){if(!ART['主角HD-idle-1'])return;const L=p=>{const a=[];for(let i=1;ART['主角HD-'+p+'-'+i];i++)a.push('主角HD-'+p+'-'+i);return a};
+ const idle=L('idle'),run=L('run'),atk=L('atk');if(!idle.length||!run.length||!atk.length)return;
+ ANIM.idle=idle;ANIM.run=run;ANIM.atk=atk;HERO_HD=true;SC.clear();try{if($('lgh'))$('lgh').src=ART['主角HD-idle-1']}catch(e){}}
+window.__artPack=function(X){if(!X)return;Object.assign(ART,X);for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();if(X['主角HD-idle-1'])heroHD();
  try{if(!$('home').hidden&&SAVE.tab==='map')renderHome()}catch(e){}};
 function update(dt){
- const S=G.S;G.t+=dt;G.atk-=dt;G.hurt-=dt;G.inv-=dt;
+ const S=G.S;G.t+=dt;G.dtl=dt;G.atk-=dt;G.hurt-=dt;G.inv-=dt;
  let mx=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0),my=(keys.ArrowDown||keys.s?1:0)-(keys.ArrowUp||keys.w?1:0);
  if(joy){mx=joy.dx;my=joy.dy}
  const ml=Math.hypot(mx,my);G.moving=ml>.05;
@@ -2778,7 +2782,7 @@ function drawHero(){
  if(ANIM.idle.every(k=>IMG[k])){
   let arr,i;
   if(G.atk>0){arr=ANIM.atk;i=Math.min(arr.length-1,Math.floor((1-G.atk/ATKD)*arr.length))}
-  else if(G.moving){arr=ANIM.run;i=Math.floor(G.t*13)%arr.length}
+  else if(G.moving){arr=ANIM.run;i=Math.floor(G.t*(HERO_HD?14:13))%arr.length}
   else{arr=ANIM.idle;i=Math.floor(G.t*5)%arr.length}
   shadow(G.x,G.y,22);
   if(G.shield){ctx.strokeStyle='rgba(120,200,255,.8)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(G.x,G.y-50,48,0,Math.PI*2);ctx.stroke()}
@@ -3053,7 +3057,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1004-ZF';
+const GBUILD='1004-ZM';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04e';
 const GNOTES=[['🪪','暱稱不能重複','暱稱改成全伺服器唯一,改名後 7 天內不能再改;如果你的暱稱被別人先登記了,可以免費換一個'],['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
@@ -3374,11 +3378,11 @@ try{if('serviceWorker' in navigator&&location.protocol==='https:'&&typeof ONLINE
  b.onclick=()=>{try{save()}catch(e){}const go=async()=>{try{if(typeof clFlush==='function'&&CL&&CL.u)await clFlush()}catch(e){}try{localStorage.setItem('shechu-phone','1')}catch(e){}location.reload()};
   if(G&&running&&!G.over){ask('目前正在戰鬥中,切換會中斷這一局,\n確定要切換成手機面板嗎?',go);return}go()};
  setInterval(()=>{b.hidden=!!(G&&!G.over)},500)})();
-lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
+try{heroHD()}catch(e){}lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1004ZE',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)})},600)}
+function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1004ZH',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1004ZM',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
