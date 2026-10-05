@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZE">
+<meta name="gbuild" content="1005-ZF">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1224,7 +1224,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZE</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZF</span></small>
   </div>
  </div>
 </div>
@@ -2021,13 +2021,14 @@ const NKERR={'nick taken':'這個暱稱已經有人用了,換一個吧','nick co
 const nkMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in NKERR)if(m.includes(k))return NKERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,60)};
 const nkLeft=()=>Math.max(0,(SAVE.nnext||0)-Date.now());
 const nkDays=ms=>{const h=Math.ceil(ms/3600000);return h>=24?Math.ceil(h/24)+' 天':Math.max(1,h)+' 小時'};
+function nkClean(v){try{v=String(v||'').normalize('NFKC')}catch(e){v=String(v||'')}return v.replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF\u00AD\u3164\u115F\u1160]/g,'').replace(/[\x00-\x1F\x7F]/g,'').replace(/\s+/g,' ').trim().slice(0,12)}
 async function nkClaim(n){if(!NK.on)return{nick:n,next:null};
  try{const r=await fmRpc('nick_claim',{p_owner:fmId(),p_key:fmKey(),p_nick:n});SAVE.nnext=r&&r.next?+r.next:0;save();return r}
  catch(e){const cm=String((e&&e.msg)||'').match(/nick cooldown (\d+)/);if(cm){SAVE.nnext=+cm[1];save()}throw e}}
 async function nkCheck(){if(!NK.on||!SAVE.pname)return;if(G&&running){setTimeout(nkCheck,8000);return}
  try{await nkClaim(SAVE.pname);try{lbMe()}catch(x){}}catch(e){if(String((e&&e.msg)||'').includes('nick taken')){NFREE=true;askName(true);$('nameok').textContent='確定改名';
   $('namehint').innerHTML='你的暱稱「<b>'+escH(SAVE.pname)+'</b>」已經被其他同事先登記了,<br>請換一個新暱稱(這次<b style="color:#7ee2a8">免費</b>)。';sfx('error')}}}
-$('lggo').onclick=()=>{if(typeof CL!=='undefined'&&CL.on&&!CL.u){audioUnlock();sfx('error');toast('🔒 請先登入帳號,或建立帳號綁定進度,才能開始遊戲');try{clModal(SAVE.pname?'reg':'reg')}catch(e){}return}const inp=$('lgname'),v=(SAVE.pname||inp.value.trim()).slice(0,12);
+$('lggo').onclick=()=>{if(typeof CL!=='undefined'&&CL.on&&!CL.u){audioUnlock();sfx('error');toast('🔒 請先登入帳號,或建立帳號綁定進度,才能開始遊戲');try{clModal(SAVE.pname?'reg':'reg')}catch(e){}return}const inp=$('lgname'),v=SAVE.pname||nkClean(inp.value);
  if(!v){inp.classList.remove('bad');void inp.offsetWidth;inp.classList.add('bad');inp.focus();$('lglab').textContent='⚠️ 請先輸入遊戲暱稱';return}
  if(!SAVE.pname&&!$('lggo').dataset.ok){audioUnlock();ask('之後要改名需要花 1,000 金幣,改名後 7 天內不能再改,\n確定要使用「'+v+'」嗎?',()=>{$('lggo').dataset.ok='1';$('lggo').click()});return}
  if(!SAVE.pname&&NK.on&&$('lggo').dataset.nk!==v){const b=$('lggo'),tx=b.textContent;b.disabled=true;b.textContent='確認暱稱中…';
@@ -2050,7 +2051,7 @@ function askName(req,cb){NAMECB=cb||null;$('namein').value=SAVE.pname||'';$('nam
  $('namehint').innerHTML=req?'進入遊戲前請先取一個名稱,會顯示在排行榜上。<br>之後想改名,到右上角「🏆 排行榜」<br>點<b style="color:#ffcf2e">「修改名稱」</b>即可。':'會顯示在排行榜上,之後隨時可以再修改。';
  $('nameov').hidden=false;setTimeout(()=>$('namein').focus(),50)}
 $('namein').addEventListener('keydown',e=>{if(e.key==='Enter')$('nameok').click()});
-$('nameok').onclick=async()=>{const v=$('namein').value.trim().slice(0,12);if(!v){$('namein').focus();return}
+$('nameok').onclick=async()=>{const v=nkClean($('namein').value);if(!v){$('namein').focus();return}
  if(NRENAME){if(v===SAVE.pname){toast('名字一樣,不用改');return}if((SAVE.coin||0)<1000){sfx('error');toast('金幣不夠');return}const L=nkLeft();if(L>0){sfx('error');toast('改名後 7 天內不能再改,還要 '+nkDays(L));return}}
  if(NK.on&&(v!==SAVE.pname||NFREE)){const b=$('nameok'),tx=b.textContent;b.disabled=true;b.textContent='確認中…';
   try{await nkClaim(v)}catch(e){b.disabled=false;b.textContent=tx;sfx('error');$('namehint').innerHTML='<b style="color:#ff8a7a">⚠️ '+escH(nkMsg(e))+'</b>'+(String((e&&e.msg)||'').includes('cooldown')&&nkLeft()?'<br>還要 '+nkDays(nkLeft())+'才能再改':'');return}
@@ -3209,7 +3210,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZE';
+const GBUILD='1005-ZF';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.05b';
 const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
@@ -3451,7 +3452,7 @@ async function clRpc(fn,body,keep){const h={apikey:ONLINE.supabaseKey,'Content-T
  if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}return r.json()}
 const CLERR={'bad user':'帳號要 3~20 個英文字母、數字或底線','bad pass':'密碼要 4~40 個字','taken':'這個帳號已經有人用了,換一個吧','bad login':'帳號或密碼錯誤','bad token':'帳號已在其他裝置登入,請重新登入','too big':'存檔太大,請先賣掉一些裝備'};
 const clMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in CLERR)if(m.includes(k))return CLERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,80)};
-function clSet(u,t){CL.u=u;CL.t=t;try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
+function clSet(u,t){CL.u=u;CL.t=t;try{if(u&&SAVE&&SAVE.acct!==u){SAVE.acct=u;localStorage.setItem(KEY,JSON.stringify(SAVE))}}catch(e){}try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
 function clSnap(){return JSON.parse(JSON.stringify(SAVE))}
 function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,3000)}
 /* 防止多裝置互相覆蓋:雲端存檔若被別台裝置寫過,這台就停止上傳並登出 */
@@ -3473,7 +3474,7 @@ function clUI(){const el=$('lgcloud');if(!el)return;try{$('lggo').classList.togg
 function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');ov.className='ov clov';
  ov.innerHTML='<div class="box clbox"><h2>'+(reg?'☁️ 建立雲端帳號':'☁️ 登入雲端帳號')+'</h2><p class="muted">'+(reg?'會把<b>這台裝置目前的進度</b>綁定到新帳號,之後在任何裝置登入都能接續。':'登入後會改用<b>雲端帳號的進度</b>。同一個帳號同時只能在一個地方登入,其他裝置會被登出。')+'</p>'+
   '<label>帳號<input id="clu" maxlength="20" autocomplete="username" autocapitalize="off" placeholder="英文字母、數字或底線,3~20 字"></label>'+
-  '<label>密碼<input id="clp" type="password" maxlength="40" autocomplete="'+(reg?'new-password':'current-password')+'" placeholder="至少 4 個字"></label>'+
+  '<label>密碼<input id="clp" type="password" maxlength="40" autocomplete="'+(reg?'new-password':'current-password')+'" placeholder="'+(reg?'至少 6 個字':'')+'"></label>'+
   (reg?'<label>再輸入一次密碼<input id="clp2" type="password" maxlength="40" autocomplete="new-password"></label><p class="clwarn">⚠️ 沒有綁 Email,<b>忘記密碼無法自己重設</b>,請記好或截圖保存。</p>':'')+
   '<p class="clerr" id="clerr"></p><div class="clbtns"><button class="btn pri" id="clok">'+(reg?'建立並綁定':'登入')+'</button><button class="btn" id="clx">取消</button></div></div>';
  document.body.appendChild(ov);setTimeout(()=>$('clu').focus(),50);
@@ -3481,10 +3482,12 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
  ov.addEventListener('keydown',e=>{if(e.key==='Enter')$('clok').click()});
  $('clx').onclick=close;
  $('clok').onclick=async()=>{const u=$('clu').value.trim().toLowerCase(),p=$('clp').value;
-  if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<4)return err(CLERR['bad pass']);
+  if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<(reg?6:4))return err(reg?'密碼至少要 6 個字':CLERR['bad pass']);
+  if(reg&&SAVE.acct&&SAVE.acct!==u)return err('這台裝置的進度已經綁定帳號「'+SAVE.acct+'」,請直接登入那個帳號,不能再綁到新帳號');
   if(reg&&p!==$('clp2').value)return err('兩次輸入的密碼不一樣');CL.kicked=false;
   const b=$('clok');b.disabled=true;b.textContent='處理中…';audioUnlock();
-  try{if(reg){const nm=($('lgname').value.trim()||SAVE.pname||'').slice(0,12);if(!nm){b.disabled=false;b.textContent='建立並綁定';return err('請先在登入畫面輸入遊戲名稱')}
+  try{if(reg){const nm=SAVE.pname||nkClean($('lgname').value);if(!nm){b.disabled=false;b.textContent='建立並綁定';return err('請先在登入畫面輸入遊戲名稱')}
+    if(!SAVE.pname&&NK.on){try{await nkClaim(nm)}catch(e){b.disabled=false;b.textContent='建立並綁定';return err(nkMsg(e))}}
     SAVE.pname=nm;SAVE._t=Date.now();try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}
     const r=await clRpc('acct_register',{p_user:u,p_pass:p,p_save:clSnap(),p_lb:localStorage.getItem('clockin-uid')||''});
     clSet(r.user,r.token);clSyncSet(SAVE._t);CL.ready=true;CL.lastOk=Date.now();close();sfx('levelUp');toast('☁️ 帳號 '+r.user+' 建立成功,進度已存到雲端!')}
@@ -3507,7 +3510,7 @@ setInterval(clCheck,20000);
 /* 切回遊戲、或按出擊時立刻檢查,不用等 20 秒 */
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(clCheck,300)});
 addEventListener('focus',()=>setTimeout(clCheck,300));
-async function clBoot(){clUI();if(!CL.on||!CL.u){CL.ready=true;return}
+async function clBoot(){clUI();try{if(CL.u&&SAVE.acct!==CL.u){SAVE.acct=CL.u;save()}}catch(e){}if(!CL.on||!CL.u){CL.ready=true;return}
  let just=false;try{just=sessionStorage.getItem('shechu-justlogin')==='1';sessionStorage.removeItem('shechu-justlogin')}catch(e){}
  if(just){CL.ready=true;CL.gt=Date.now();toast('☁️ 已登入 '+CL.u+',雲端進度載入完成');return}
  try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});
