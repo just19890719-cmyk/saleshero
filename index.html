@@ -1176,6 +1176,10 @@ body.gready #lgload{display:none}
 .lbr .eqs .tile{width:min(30px,calc((100% - 60px)/7))!important;height:auto!important;aspect-ratio:1;flex:none}
 .lbr .eqs .rd{width:42px!important;height:28px!important;flex:none}
 .lbr .lbd{grid-row:4}
+
+/* 底部選單延伸到螢幕最底(避免手機底部露出灰色) */
+html{background:#0c1018}
+#tabs::after{content:'';position:absolute;left:0;right:0;top:100%;height:120px;background:rgba(12,16,24,.98);pointer-events:none}
 </style>
 </head>
 <body>
@@ -1214,7 +1218,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-X</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-Y</span></small>
   </div>
  </div>
 </div>
@@ -2805,7 +2809,7 @@ function hdN(){for(const n in HDN)for(const a in HDN[n]){const k=n+'-'+a+'-1';if
 function heroHD(){if(!ART['主角HD-idle-1'])return;const L=p=>{const a=[];for(let i=1;ART['主角HD-'+p+'-'+i];i++)a.push('主角HD-'+p+'-'+i);return a};
  const idle=L('idle'),run=L('run'),atk=L('atk');if(!idle.length||!run.length||!atk.length)return;
  ANIM.idle=idle;ANIM.run=run;ANIM.atk=atk;HERO_HD=true;SC.clear();try{if($('lgh'))$('lgh').src=ART['主角HD-idle-1']}catch(e){}}
-window.__artPack=function(X){if(!X)return;Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();if(X['主角HD-idle-1'])heroHD();try{hdN()}catch(e){}
+window.__artPack=function(X){if(!X)return;Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();if(X['主角HD-idle-1'])heroHD();try{if(X['st-atk'])for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">'}catch(e){}try{hdN()}catch(e){}
  try{if(X['bg-home'])document.documentElement.style.setProperty('--homebg','url('+X['bg-home']+')')}catch(e){}try{document.querySelectorAll('img.pico').forEach(i=>{if(ART['金幣'])i.src=ART['金幣']});if(!$('home').hidden)renderHome()}catch(e){}try{if(!$('lbov').hidden&&LB.rows&&LB.rows.length)lbRender()}catch(e){}};
 function update(dt){
  const S=G.S;G.t+=dt;G.dtl=dt;G.atk-=dt;G.hurt-=dt;G.inv-=dt;
@@ -3199,7 +3203,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-X';
+const GBUILD='1005-Y';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.05b';
 const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
@@ -3526,7 +3530,7 @@ try{heroHD()}catch(e){}try{if(ART['__hdsingle']){for(const n in HDN)ART['__hd_'+
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005J',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005P',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
+function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005J',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
