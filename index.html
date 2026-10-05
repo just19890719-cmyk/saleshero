@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZG">
+<meta name="gbuild" content="1005-ZK">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -746,6 +746,7 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 .dallin:disabled{animation:none;filter:grayscale(.8) brightness(.7);box-shadow:none}
 @keyframes dallp{50%{box-shadow:0 0 22px rgba(255,120,40,.9)}}
 .dallnote{flex-basis:100%;font-size:11px;color:#ffb3a3}
+.dsqn{flex-basis:100%;font-size:12px;margin-top:2px}
 .dallbox{max-width:360px;text-align:center;border:2px solid #ff6a3d}
 .dallbox h2{color:#ffb070}
 .dallpot{font-size:40px;font-weight:900;background:linear-gradient(#fff6c8,#ffd24a 50%,#ff7a12);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(255,150,40,.6));font-variant-numeric:tabular-nums}
@@ -1158,6 +1159,9 @@ body.gready #lgload{display:none}
 #lggo.lock::before{content:'🔒 '}
 #lggo.lock{filter:saturate(.75)}
 
+/* 瞇牌字型:Liberation Serif Bold(SIL OFL 1.1)只取 A2-10JQK,讓每台裝置看到的牌頭形狀都一樣 */
+@font-face{font-family:SqRank;src:url(data:font/woff;base64,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) format('woff');font-display:block}
+.sqcard .pc .f .r,.sqcard .pc .f .r2{font-family:SqRank,Georgia,serif!important;font-size:calc(var(--cw)*.19)!important}
 /* 瞇牌 v3:用另一張牌往下推開來瞇 */
 .sqcard .pc .k{display:none!important}
 .sqtop{position:absolute;inset:0;z-index:3;border-radius:7px;background:center/100% 100% no-repeat;box-shadow:0 -5px 10px rgba(0,0,0,.45),0 10px 22px rgba(0,0,0,.55);will-change:transform}
@@ -1224,7 +1228,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZG</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZK</span></small>
   </div>
  </div>
 </div>
@@ -1809,7 +1813,8 @@ function renderDragon(){
   const dead=DS.ph==='posts'&&dWinMax()<=0;
   if(DS.ph==='posts')A.innerHTML=(dead?'<button class="btn pri" id="dshoot" disabled>🚫 這門射不進去</button>':'<button class="btn pri" id="dshoot"'+(dis||(DS.bet<dMinBet()||DS.bet<=0?' disabled':''))+'>🎯 射門 '+fmtC(DS.bet)+'</button>')+allB+'<button class="btn" id="dfold"'+dis+'>放棄</button>';
   else A.innerHTML='<button class="btn pri" id="dhi"'+(dis||(DS.bet<dMinBet()||DS.bet<=0?' disabled':''))+'>⬆ 猜大</button><button class="btn pri" id="dlo"'+(dis||(DS.bet<dMinBet()||DS.bet<=0?' disabled':''))+'>⬇ 猜小</button>'+allB+'<button class="btn" id="dfold"'+dis+'>放棄</button>';
-  if(!canAll&&!DP.busy)A.insertAdjacentHTML('beforeend','<div class="dallnote">🔒 '+why+'</div>')}
+  if(!canAll&&!DP.busy)A.insertAdjacentHTML('beforeend','<div class="dallnote">🔒 '+why+'</div>');
+  A.insertAdjacentHTML('beforeend','<label class="sqskip dsqn"><input type="checkbox" id="dsqn"'+(SAVE.sqSkipN?' checked':'')+'> 一般射門跳過瞇牌動畫</label>');$('dsqn').onchange=e=>{SAVE.sqSkipN=e.target.checked;save()}}
  $('dchips').style.opacity=inHand&&!DP.busy?1:.35;$('dchips').style.pointerEvents=inHand&&!DP.busy?'auto':'none';
  dpRenderPot();if(!SAVE.drule){$('drule').open=true}}
 function dStat(delta,kind){const st=SAVE.dstat=SAVE.dstat||{w:0,l:0,n:0,net:0};st.net+=delta;if(kind==='win'){st.n++;st.w++}else if(kind==='lose'||kind==='post'){st.n++;st.l++}}
@@ -1835,38 +1840,55 @@ $('dact').onclick=async e=>{const b=e.target.closest('button');if(!b||b.disabled
   try{await dpSettle('fold',DANTE)}catch(err){}dpRefresh()}
  else if(b.id==='dall'){dAllinAsk()}
  else if(b.id==='dshoot'||b.id==='dhi'||b.id==='dlo'){dShoot(b.id,false)}};
-/* ===== 射龍門:全包瞇牌動畫 ===== */
-function dSqueeze(c){return new Promise(done=>{
- const red=c.s==='♥'||c.s==='♦';const html=cardH(c);
+/* ===== 射龍門:瞇牌判斷 =====
+   瞇牌是從上往下推開,先看到點數的「上半部」。這張牌上半部的形狀如果跟任何一張「會中的點數」長得像,就瞇牌;
+   所以會中的牌一定瞇,長得像的不會中的牌也會瞇(瞇牌≠穩中)。上半部跟會中的牌都不像(一眼就知道沒中)就直接開牌。 */
+/* 牌頭分組(瞇牌時人頭牌也先用字母顯示,開牌才換成插畫) */
+/* J、K(平頂太短)、6、10 一露頭就認得出來,沒有混淆性 → 永遠不瞇、也不會帶動別的牌瞇 */
+const DSHAPE={1:'尖頂',4:'尖頂',2:'圓頂',3:'圓頂',8:'圓頂',9:'圓頂',12:'圓頂',5:'平頂',7:'平頂'};
+/* 防露餡:如果「會瞇的牌」幾乎都是會中的牌,瞇牌本身就等於報答案。
+   所以當 會中/會瞇 超過 DSQMAX 時,不像的牌也會隨機瞇幾把(假瞇),把瞇牌後的中獎機率壓回 DSQMAX 左右 */
+const DSQMAX=.5;
+function dSqPlan(bid){let W=0,S=0,O=0;for(const x of DK){if(!DSHAPE[x.r])continue;const lk=dLooksWin(x,bid);if(lk&&dWinR(x.r,bid))W++;if(lk)S++;else O++}
+ const q=W<=0?0:(S&&W/S>DSQMAX&&O?Math.min(1,(W/DSQMAX-S)/O):0);return{can:W>0,q}}
+function dWinR(r,bid){const a=DS.a.r,b=DS.b.r;return DS.ph==='pair'?(r!==a&&(r>a)===(bid==='dhi')):(r>a&&r<b)}
+function dLooksWin(c,bid){const g=DSHAPE[c.r];if(!g)return false;for(let r=1;r<=13;r++)if(DSHAPE[r]===g&&dWinR(r,bid))return true;return false}
+/* 瞇牌用的牌面:人頭牌先畫成字母牌,開牌時才換成插畫,避免一推開就看到人頭圖 */
+function dTxtCard(c){if(c.r<11)return cardH(c);const red=c.s==='♥'||c.s==='♦',si=SI(c.s);
+ return'<div class="pc"><div class="k" style="background-image:url('+ART['pk-back']+')"></div><div class="f '+(red?'red':'blk')+'" style="background-image:url('+ART['pk-front']+')"><span class="r">'+RANKN[c.r]+(si?'<img src="'+si+'" alt="">':'<small>'+c.s+'</small>')+'</span><span class="r2">'+RANKN[c.r]+(si?'<img src="'+si+'" alt="">':'')+'</span>'+(si?'<img class="s" src="'+si+'" alt="'+c.s+'">':'<span class="s">'+c.s+'</span>')+'</div></div>'}
+/* ===== 射龍門:瞇牌動畫(全包=長版,一般射門=短版) ===== */
+function dSqueeze(c,o){o=o||{};const ALL=!!o.allin,SK=ALL?'sqSkip':'sqSkipN',PR=DS.ph==='pair',UP=o.bid==='dhi';return new Promise(done=>{
+ const red=c.s==='♥'||c.s==='♦';const html=dTxtCard(c);
  const ov=document.createElement('div');ov.className='ov sqov';
- ov.innerHTML=(ART['sq-bg']?'<div class="sqbg" style="background-image:url('+ART['sq-bg']+')"></div>':'')+'<div class="sqbox"><div class="sqt">💥 全包!</div>'+
+ ov.innerHTML=(ART['sq-bg']?'<div class="sqbg" style="background-image:url('+ART['sq-bg']+')"></div>':'')+'<div class="sqbox"><div class="sqt">'+(ALL?'💥 全包!':(PR?(UP?'⬆ 猜大 ':'⬇ 猜小 '):'🎯 射門 ')+fmtC(o.bet||0))+'</div>'+
   '<div class="sqposts"><div class="sqmini">'+cardH(DS.a)+'</div><span>~</span><div class="sqmini">'+cardH(DS.b)+'</div></div>'+
   '<div class="sqwrap" id="sqw"><div class="sqcard" id="sqc">'+html+'<div class="sqcurl"></div><div class="sqtop" id="sqtop" style="background-image:url('+ART['pk-back']+')"></div></div></div>'+
   '<div class="sqsay" id="sqsay">瞇…</div><div class="sqbtns"><button class="btn pri" id="sqgo">直接開牌</button></div>'+
-  '<label class="sqskip"><input type="checkbox" id="sqsk"'+(SAVE.sqSkip?' checked':'')+'> 之後全包跳過瞇牌動畫</label></div>';
+  '<label class="sqskip"><input type="checkbox" id="sqsk"'+(SAVE[SK]?' checked':'')+'> '+(ALL?'之後全包跳過瞇牌動畫':'之後一般射門跳過瞇牌動畫')+'</label></div>';
  document.body.appendChild(ov);sfx('cardDeal');
  const card=$('sqc'),pc=card.querySelector('.pc'),k=pc.querySelector('.k'),curl=card.querySelector('.sqcurl');pc.style.animation='none';
- $('sqsk').onchange=e=>{SAVE.sqSkip=e.target.checked;save()};
+ $('sqsk').onchange=e=>{SAVE[SK]=e.target.checked;save()};
  const lines=['瞇…','慢慢來…','穩住…','看到邊了…','是大還是小…','心跳好快…','再一點點…','快出來了…'];let p=0,t0=performance.now(),fin=false,lastBeat=0,li=0;
  const top=$('sqtop');const set=v=>{p=v;top.style.transform='translateY('+(v*100).toFixed(2)+'%)';curl.style.opacity=0};
- const KEY=[[0,0],[900,0],[2600,.05],[3700,.05],[5200,.11],[6300,.11],[7300,.17],[8300,.17]];
+ /* 牌頭只露一點點:.089≈點數最上緣、.097≈上方約 1/5、.105≈上方約 1/4(全包才到這段),之後直接開牌 */
+ const KEY=ALL?[[0,0],[900,0],[2400,.089],[3600,.089],[5000,.097],[6300,.097],[7500,.105],[8700,.105]]:[[0,0],[600,0],[1800,.089],[2800,.089],[4000,.097],[5200,.097]],END=KEY[KEY.length-1][0];
  const val=t=>{for(let i=1;i<KEY.length;i++){const a=KEY[i-1],b=KEY[i];if(t<=b[0]){const u=(t-a[0])/(b[0]-a[0]);const e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;return a[1]+(b[1]-a[1])*e}}return KEY[KEY.length-1][1]};
- const finish=()=>{if(fin)return;fin=true;top.classList.add('away');card.classList.add('rev');$('sqw').classList.add('rev');sfx('cardFlip');
-  const a=DS.a.r,b=DS.b.r,v=c.r,pair=DS.ph==='pair';let good=pair?null:(v>a&&v<b);if(good!==null)card.classList.add(good?'win':'lose');
-  $('sqsay').textContent=good===null?'開牌!':good?'中了!!!':v===a||v===b?'撞柱…':'射偏了…';
+ const finish=()=>{if(fin)return;fin=true;if(c.r>=11){const op=card.querySelector('.pc');if(op){op.outerHTML=cardH(c);const np=card.querySelector('.pc');if(np)np.style.animation='none'}}top.classList.add('away');card.classList.add('rev');$('sqw').classList.add('rev');sfx('cardFlip');
+  const a=DS.a.r,b=DS.b.r,v=c.r;const good=PR?(v!==a&&(v>a)===UP):(v>a&&v<b);card.classList.add(good?'win':'lose');
+  $('sqsay').textContent=good?(PR?'猜對了!!!':'中了!!!'):v===a||v===b?'撞柱…':(PR?'猜錯了…':'射偏了…');
   setTimeout(()=>{ov.classList.add('out');setTimeout(()=>{ov.remove();done()},260)},1100)};
  $('sqgo').onclick=()=>{audioUnlock();finish()};
  const step=now=>{if(fin)return;const t=now-t0;set(val(t));
-  const hold=KEY.some((q,i)=>i>0&&KEY[i-1][1]===q[1]&&q[1]>0&&t>KEY[i-1][0]&&t<q[0]),tense=Math.min(1,t/8300);
+  const hold=KEY.some((q,i)=>i>0&&KEY[i-1][1]===q[1]&&q[1]>0&&t>KEY[i-1][0]&&t<q[0]),tense=Math.min(1,t/END);
   const jit=hold?(Math.random()-.5)*(1+tense*2.5):0,zm=1+tense*.07;
   card.style.transform='scale('+zm.toFixed(3)+') rotate('+(Math.sin(t/180)*.8+jit*.3).toFixed(2)+'deg) translate('+jit.toFixed(1)+'px,'+(Math.sin(t/260)*2).toFixed(1)+'px)';
   ov.style.setProperty('--vg',(.35+tense*.45+(hold?Math.sin(t/90)*.05:0)).toFixed(3));
   const beatGap=820-tense*430;
   if(t-lastBeat>beatGap&&t>700){lastBeat=t;sfx('heart');ov.classList.remove('beat');void ov.offsetWidth;ov.classList.add('beat');if(li<lines.length&&(t>900+li*950))$('sqsay').textContent=lines[li++]}
-  if(t>=KEY[KEY.length-1][0]){finish();return}requestAnimationFrame(step)};
+  if(t>=END){finish();return}requestAnimationFrame(step)};
  set(0);requestAnimationFrame(step)})}
 async function dShoot(bid,allin){const pair=DS.ph==='pair',bet=allin?(DP.pot||0):DS.bet,coin0=SAVE.coin||0;DP.busy=true;renderDragon();
-  DS.c=drawC();if(allin&&!SAVE.sqSkip){$('dC').innerHTML='';await dSqueeze(DS.c)}$('dC').innerHTML=cardH(DS.c);sfx('cardDeal');const c=DS.c.r,a=DS.a.r,bb=DS.b.r;
+  if(DK.length<8)newDeck();const SQ=dSqPlan(bid);DS.c=drawC();if(SQ.can&&DSHAPE[DS.c.r]&&(dLooksWin(DS.c,bid)||Math.random()<SQ.q)&&!(allin?SAVE.sqSkip:SAVE.sqSkipN)){$('dC').innerHTML='';await dSqueeze(DS.c,{allin,bid,bet})}$('dC').innerHTML=cardH(DS.c);sfx('cardDeal');const c=DS.c.r,a=DS.a.r,bb=DS.b.r;
   let kind,amt,msg;
   if(!pair){if(c>a&&c<bb){kind='win';amt=bet}else if(c===a||c===bb){kind='post';amt=bet*2}else{kind='lose';amt=bet}}
   else{const up=bid==='dhi';if(c===a){kind='post';amt=bet*3}else if((c>a)===up){kind='win';amt=bet}else{kind='lose';amt=bet}}
@@ -3210,10 +3232,11 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZG';
+const GBUILD='1005-ZK';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.05b';
-const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
+const GVER='2026.10.05c';
+const GNOTES=[['👀','射龍門一般射門也會瞇牌','不用全包也能瞇牌!牌頭看起來像會中的點數就會慢慢瞇,一次只露出一點點,長得像不代表真的中;不想看可以勾選跳過'],
+ ['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
  ['🔒','需要帳號才能開始','開始遊戲前要先登入或建立帳號;老玩家按「建立帳號/綁定進度」,原本的進度會直接綁進帳號,不會重來'],
  ['🎨','全新插畫畫風','主角、三隻喪屍、首領站長、38 個道具圖示、戰鬥地板、主畫面背景、關卡縮圖全部重畫'],
  ['👑','首領裝備發光','首領專屬裝備會有彩虹發光外框,背包、排行榜都看得到'],
