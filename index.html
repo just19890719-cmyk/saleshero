@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZK">
+<meta name="gbuild" content="1005-ZM">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1228,7 +1228,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZK</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZM</span></small>
   </div>
  </div>
 </div>
@@ -2055,7 +2055,7 @@ $('lggo').onclick=()=>{if(typeof CL!=='undefined'&&CL.on&&!CL.u){audioUnlock();s
  if(!SAVE.pname&&!$('lggo').dataset.ok){audioUnlock();ask('之後要改名需要花 1,000 金幣,改名後 7 天內不能再改,\n確定要使用「'+v+'」嗎?',()=>{$('lggo').dataset.ok='1';$('lggo').click()});return}
  if(!SAVE.pname&&NK.on&&$('lggo').dataset.nk!==v){const b=$('lggo'),tx=b.textContent;b.disabled=true;b.textContent='確認暱稱中…';
   nkClaim(v).then(()=>{b.disabled=false;b.textContent=tx;b.dataset.nk=v;b.click()}).catch(e=>{b.disabled=false;b.textContent=tx;delete b.dataset.ok;sfx('error');inp.classList.remove('bad');void inp.offsetWidth;inp.classList.add('bad');$('lglab').textContent='⚠️ '+nkMsg(e);inp.focus()});return}
- audioUnlock();setTimeout(()=>{if(typeof fmSync==='function'&&FM.on)fmSync()},800);setTimeout(()=>{if(typeof verNotice==='function')verNotice()},2600);setTimeout(()=>sfx('start'),60);const first=!SAVE.pname,chg=SAVE.pname!==v;SAVE.pname=v;save();if(chg){lbMe();lbSync(true)}if(!first&&NK.on)setTimeout(nkCheck,1500);
+ audioUnlock();setTimeout(()=>{if(typeof fmSync==='function'&&FM.on)fmSync()},800);setTimeout(()=>{if(typeof verNotice==='function')verNotice()},2600);setTimeout(()=>{if(typeof giftCheck==='function')giftCheck()},3400);setTimeout(()=>sfx('start'),60);const first=!SAVE.pname,chg=SAVE.pname!==v;SAVE.pname=v;save();if(chg){lbMe();lbSync(true)}if(!first&&NK.on)setTimeout(nkCheck,1500);
  $('login').hidden=true;const q=[(first?'👋 歡迎,':'👋 歡迎回來,')+v+'!',...TQ];TQ=[];q.forEach((m,i)=>setTimeout(()=>toast(m),i*2300))};
 $('lgname').addEventListener('keydown',e=>{if(e.key==='Enter')$('lggo').click()});
 let NAMECB=null;
@@ -3232,10 +3232,12 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZK';
+const GBUILD='1005-ZM';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.05c';
-const GNOTES=[['👀','射龍門一般射門也會瞇牌','不用全包也能瞇牌!牌頭看起來像會中的點數就會慢慢瞇,一次只露出一點點,長得像不代表真的中;不想看可以勾選跳過'],
+const GVER='2026.10.05e';
+const GNOTES=[['🥮','中秋節賭金 10,000','全伺服器每個帳號送 10,000 金幣,今晚 12 點前上線就能領取,新帳號也有'],
+ ['🎉','新帳號開局獎金 8,888','新建立的帳號直接送 8,888 金幣當開局獎金'],
+ ['👀','射龍門一般射門也會瞇牌','不用全包也能瞇牌!牌頭看起來像會中的點數就會慢慢瞇,一次只露出一點點,長得像不代表真的中;不想看可以勾選跳過'],
  ['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
  ['🔒','需要帳號才能開始','開始遊戲前要先登入或建立帳號;老玩家按「建立帳號/綁定進度」,原本的進度會直接綁進帳號,不會重來'],
  ['🎨','全新插畫畫風','主角、三隻喪屍、首領站長、38 個道具圖示、戰鬥地板、主畫面背景、關卡縮圖全部重畫'],
@@ -3246,6 +3248,20 @@ const GNOTES=[['👀','射龍門一般射門也會瞇牌','不用全包也能瞇
  ['🏦','射龍門池底更容易長大','射中時贏的 10% 會留在池底;門越寬能押的上限越低,池底不會一下被挖空'],
  ['📈','升級節奏調整','前期升級一樣快,後期每一級需要的經驗變多,技能要慢慢養大'],
  ['🎲','十八仔暫停營業','經營不善,改建成 21 點中,敬請期待']];
+/* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
+   存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
+   中秋節賭金:老帳號、新帳號都能領,只到 2026/10/06 00:00(台灣時間)前上線跳出通知為止;開局獎金沒有期限。 */
+const GIFT_NEW=8888,GIFT_MID=10000,GIFT_MID_END=Date.parse('2026-10-06T00:00:00+08:00');
+function giftBox(icon,title,amt,sub,btn,onOk){const ov=document.createElement('div');ov.className='ov vnov giftov';
+ ov.innerHTML='<div class="box vnbox" style="text-align:center">'+(ART['bean-cheer']?'<img class="fmasc" src="'+ART['bean-cheer']+'" alt="">':'')+'<h2>'+icon+' '+title+'</h2><div class="dallpot" style="color:#ffd24a">+'+fmtC(amt)+'</div><p class="muted" style="font-size:13px">'+sub+'</p><button class="btn pri" data-ok="1">'+btn+'</button></div>';
+ document.body.appendChild(ov);sfx('open');ov.onclick=e=>{if(!e.target.closest('[data-ok]'))return;ov.remove();onOk()}}
+function giftGrant(amt){SAVE.coin=(SAVE.coin||0)+amt;save();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);try{renderHome()}catch(e){}sfx('casinoWin')}
+function giftCheck(now){if(!SAVE)return;const wantNew=SAVE.gNewP&&!SAVE.gNew,wantMid=!SAVE.gMid&&(Date.now()+(window.__gskew||0))<GIFT_MID_END;if(!wantNew&&!wantMid)return;
+ const online=typeof CL!=='undefined'&&CL.on;if(online&&(!CL.u||CL.kicked))return;if(online&&!CL.ready){setTimeout(()=>giftCheck(now),1500);return}
+ const L=$('login');if((!now&&L&&!L.hidden)||document.querySelector('.vnov:not(.giftov),.clov,.fnov,.fsov')){setTimeout(()=>giftCheck(now),1200);return}
+ if(document.querySelector('.giftov'))return;
+ if(wantNew){giftBox('🎉','開局獎金',GIFT_NEW,'歡迎加入社畜特攻隊!新帳號送你開局獎金','領取 '+fmtC(GIFT_NEW)+' 金幣',()=>{if(SAVE.gNew)return;SAVE.gNew=1;giftGrant(GIFT_NEW);toast('🎉 已領取開局獎金 '+fmtC(GIFT_NEW)+' 金幣');setTimeout(giftCheck,800)});return}
+ giftBox('🥮','中秋節賭金',GIFT_MID,'中秋節快樂!全伺服器每個帳號都有一份(今晚 12 點前上線才領得到),拿去射龍門試試手氣吧','領取 '+fmtC(GIFT_MID)+' 金幣',()=>{if(SAVE.gMid)return;SAVE.gMid=1;giftGrant(GIFT_MID);toast('🥮 已領取中秋節賭金 '+fmtC(GIFT_MID)+' 金幣')})}
 function verNotice(){let seen='';try{seen=localStorage.getItem('shechu-ver')||''}catch(e){}if(seen===GVER)return;
  const L=$('login');if(L&&!L.hidden){setTimeout(verNotice,800);return}
  if(document.querySelector('.fnov,.clov,.fsov')){setTimeout(verNotice,1500);return}
@@ -3517,7 +3533,8 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
     if(!SAVE.pname&&NK.on){try{await nkClaim(nm)}catch(e){b.disabled=false;b.textContent='建立並綁定';return err(nkMsg(e))}}
     SAVE.pname=nm;SAVE._t=Date.now();try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}
     const r=await clRpc('acct_register',{p_user:u,p_pass:p,p_save:clSnap(),p_lb:localStorage.getItem('clockin-uid')||''});
-    clSet(r.user,r.token);clSyncSet(SAVE._t);CL.ready=true;CL.lastOk=Date.now();close();sfx('levelUp');toast('☁️ 帳號 '+r.user+' 建立成功,進度已存到雲端!')}
+    clSet(r.user,r.token);clSyncSet(SAVE._t);CL.ready=true;CL.lastOk=Date.now();close();sfx('levelUp');toast('☁️ 帳號 '+r.user+' 建立成功,進度已存到雲端!');
+    if(!SAVE.gNew&&!SAVE.gNewP){SAVE.gNewP=1;save();setTimeout(()=>giftCheck(true),900)}}
    else{const r=await clRpc('acct_login',{p_user:u,p_pass:p});
     const apply=()=>{CL.noflush=true;clearTimeout(CL.timer);clSet(r.user,r.token);if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
      if(r.save){try{localStorage.setItem(KEY,JSON.stringify(r.save))}catch(e){}clSyncSet(r.save._t||0)}else{CL.ready=true;clFlush()}
