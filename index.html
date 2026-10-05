@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZM">
+<meta name="gbuild" content="1005-ZN">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -747,6 +747,7 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 @keyframes dallp{50%{box-shadow:0 0 22px rgba(255,120,40,.9)}}
 .dallnote{flex-basis:100%;font-size:11px;color:#ffb3a3}
 .dsqn{flex-basis:100%;font-size:12px;margin-top:2px}
+.dtax{font-size:11px;color:#ffd9a0}.dtax b{color:#ffd24a}
 .dallbox{max-width:360px;text-align:center;border:2px solid #ff6a3d}
 .dallbox h2{color:#ffb070}
 .dallpot{font-size:40px;font-weight:900;background:linear-gradient(#fff6c8,#ffd24a 50%,#ff7a12);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(255,150,40,.6));font-variant-numeric:tabular-nums}
@@ -1228,7 +1229,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZM</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZN</span></small>
   </div>
  </div>
 </div>
@@ -1766,6 +1767,7 @@ DL.lose=DL.lose.concat(['沒事沒事,下一把就回本了','輸了不要緊,�
 DL.post=DL.post.concat(['撞柱是池底長大的養分,謝謝你的貢獻','痛…但下一把一定會回來的','撞柱代表你手感有了,再來!']);
 DL.fold=DL.fold.concat(['就這?','保守的人,永遠在上班','你這樣放棄,池底會哭的','下一把門一定更好,吧?']);
 DL.allin=(DL.allin||[]).concat(['梭哈是一種智慧!','全包!!這就是男人的浪漫','全伺服器都在看你,穩住!']);
+DL.idle=DL.idle.concat(['偷菜的贓款稅抽兩成,芳芳最討厭小偷了(但錢照收)','大家的稅金都在這池子裡,不射回來嗎?','打怪、賣裝、收菜都有抽一成,池底只會越來越肥','芳芳收稅,天經地義(並沒有)']);
 DL.broke=DL.broke.concat(['沒錢了?去打幾隻喪屍就有了,快去快回','錢包空空,夢想還在,先去上班吧']);
 const DP={on:false,pot:null,log:[],busy:false,err:'',t:0};
 (function(){try{DP.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){DP.on=false}})();
@@ -1777,8 +1779,10 @@ const dpNick=()=>(SAVE.pname||'匿名社畜').slice(0,12);
 /* 本機池底(claude.ai 版或連不上時) */
 function dpLocal(){if(SAVE.dpot==null)SAVE.dpot=1000;if(!SAVE.dlog)SAVE.dlog=[];return SAVE}
 function dpLocalLog(kind,amount,pot){const s=dpLocal();s.dlog.unshift({nick:dpNick(),kind,amount,pot,t:new Date().toISOString()});s.dlog.length=Math.min(s.dlog.length,20)}
-async function dpFetch(){if(DP.on){const [p,l]=await Promise.all([dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot'),dpReq('/rest/v1/dragon_log?select=nick,kind,amount,pot,t&order=id.desc&limit=6')]);
-  DP.pot=p&&p[0]?+p[0].pot:null;DP.log=l||[]}else{const s=dpLocal();DP.pot=s.dpot;DP.log=s.dlog.slice(0,6)}DP.t=Date.now()}
+async function dpFetch(){if(DP.on){const potQ=()=>DP.taxCol===false?dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot'):dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot,tax_day,tax_amt').then(r=>{DP.taxCol=true;return r},e=>{DP.taxCol=false;return dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot')});
+  const [p,l]=await Promise.all([potQ(),dpReq('/rest/v1/dragon_log?select=nick,kind,amount,pot,t&order=id.desc&limit=6')]);
+  DP.pot=p&&p[0]?+p[0].pot:null;DP.log=l||[];if(p&&p[0]&&'tax_amt' in p[0]){const td=new Date(Date.now()+8*3600e3).toISOString().slice(0,10);DP.tax=p[0].tax_day===td?+(p[0].tax_amt||0):0}}
+ else{const s=dpLocal();DP.pot=s.dpot;DP.log=s.dlog.slice(0,6);DP.tax=s.dtaxD===new Date().toDateString()?(s.dtax||0):0}DP.t=Date.now()}
 async function dpAnte(amt){if(DP.on){const v=await dpReq('/rest/v1/rpc/dragon_ante',{p_nick:dpNick(),p_amt:amt});DP.pot=+v;return DP.pot}
  const s=dpLocal();s.dpot+=amt;DP.pot=s.dpot;save();return DP.pot}
 async function dpSettle(kind,amt){if(DP.on){let r;try{r=await dpReq('/rest/v1/rpc/dragon_settle',{p_nick:dpNick(),p_kind:kind,p_amt:amt})}catch(e){if(/^all/.test(kind)&&/bad kind/.test(String(e.msg||'')))r=await dpReq('/rest/v1/rpc/dragon_settle',{p_nick:dpNick(),p_kind:kind.slice(3)==='win'?'win':kind.slice(3),p_amt:amt});else throw e}DP.pot=+r.pot;return{paid:+r.paid,pot:+r.pot,seeded:!!r.seeded}}
@@ -1786,11 +1790,27 @@ async function dpSettle(kind,amt){if(DP.on){let r;try{r=await dpReq('/rest/v1/rp
  dpLocalLog(kind,(kind==='win'||kind==='allwin')?paid:amt,s.dpot);if(seeded)dpLocalLog('seed',1000,s.dpot);DP.pot=s.dpot;save();return{paid,pot:s.dpot,seeded}}
 function dpAgo(t){const d=(Date.now()-new Date(t).getTime())/1000;if(!(d>=0))return'';if(d<60)return'剛剛';if(d<3600)return Math.floor(d/60)+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
 function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==null?'—':fmtC(DP.pot);
- $('dpotst').innerHTML=DP.err?'<span style="color:#ff9a8a">連線失敗:'+escH(DP.err)+'</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機池底(網頁版才是全伺服器共用)';
+ $('dpotst').innerHTML=(DP.err?'<span style="color:#ff9a8a">連線失敗:'+escH(DP.err)+'</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機池底(網頁版才是全伺服器共用)')+(DP.tax!=null?'<br><span class="dtax">🧾 今日芳芳稅收 <b>+'+fmtC(DP.tax)+'</b></span>':'');
  const K={allwin:['💥全包成功','up big','+'],alllose:['💥全包失敗','down','+'],allpost:['💥全包撞柱','down','+'],win:['射中','up','+'],lose:['射偏','down','+'],post:['撞柱','down','+'],fold:['放棄','',''],seed:['芳芳補底','up','+']};
  $('dlog').innerHTML=DP.log.length?DP.log.map(r=>{const k=K[r.kind]||[r.kind,'',''];const amt=+r.amount||0;
   const txt=r.kind==='allwin'?'抱走整個池底 <b class="up">'+fmtC(amt)+'</b>':r.kind==='win'?'贏走 <b class="up">'+fmtC(amt)+'</b>':r.kind==='fold'?'底 '+fmtC(amt)+' 留在池裡':r.kind==='seed'?'補進 <b class="up">'+fmtC(amt)+'</b>':'丟進池裡 <b class="down">'+fmtC(amt)+'</b>';
   return'<div class="dlr'+(r.kind==='allwin'?' big':'')+'"><span class="nm">'+escH(r.kind==='seed'?'芳芳':(r.nick||'?'))+'</span><span class="k '+k[1]+'">'+k[0]+'</span><span class="tx">'+txt+'</span><span class="ag">'+dpAgo(r.t)+'</span></div>'}).join(''):'<div class="muted" style="font-size:12px">還沒有人射過,第一槍就是你!</div>'}
+/* ===== 芳芳收稅:戰鬥收成、賣裝備、採收自己的農作物都抽 10%,補進射龍門池底 =====
+   稅金先記在存檔 SAVE.taxQ,累積後一次送到伺服器(省流量),送成功才扣掉;斷線也不會弄丟。 */
+const TAXR=.1,TAXSTEAL=.2;DP.tax=null;/* 偷菜的「贓款稅」20% */
+function taxIncome(gross,rate){gross=Math.max(0,Math.floor(gross||0));const t=Math.floor(gross*(rate||TAXR));if(t>0){SAVE.taxQ=(SAVE.taxQ||0)+t;SAVE.taxTot=(SAVE.taxTot||0)+t;clearTimeout(DP.taxT);DP.taxT=setTimeout(taxFlush,4000)}return t}
+const taxTxt=t=>t>0?'(芳芳抽稅 '+fmtC(t)+',已丟進射龍門池底)':'';
+async function taxFlush(){const q=Math.floor(SAVE.taxQ||0);if(q<=0||DP.taxBusy)return;DP.taxBusy=true;const amt=Math.min(q,50000);
+ try{if(DP.on){const r=await dpReq('/rest/v1/rpc/dragon_tax',{p_amt:amt});if(r&&r.pot!=null)DP.pot=+r.pot;if(r&&r.tax!=null)DP.tax=+r.tax}
+  else{const s=dpLocal(),d=new Date().toDateString();s.dpot+=amt;if(s.dtaxD!==d){s.dtaxD=d;s.dtax=0}s.dtax+=amt;DP.pot=s.dpot;DP.tax=s.dtax}
+  SAVE.taxQ=Math.max(0,(SAVE.taxQ||0)-amt);save();try{dpRenderPot()}catch(e){}
+  if((SAVE.taxQ||0)>0){DP.taxBusy=false;setTimeout(taxFlush,1500);return}}
+ catch(e){}DP.taxBusy=false}
+setInterval(()=>{try{if(SAVE&&(SAVE.taxQ||0)>0&&document.visibilityState==='visible')taxFlush()}catch(e){}},60000);
+/* 關掉或切走網頁時,把還沒送出的稅金用 keepalive 送出(先送再扣;若沒送到,下次上線會再補) */
+document.addEventListener('visibilitychange',()=>{try{if(document.visibilityState!=='hidden'||!DP.on||DP.taxBusy)return;const q=Math.min(Math.floor(SAVE.taxQ||0),50000);if(q<=0)return;
+ clearTimeout(DP.taxT);fetch(dpU('/rest/v1/rpc/dragon_tax'),{method:'POST',headers:dpH(),body:JSON.stringify({p_amt:q}),keepalive:true}).then(r=>{if(r.ok){SAVE.taxQ=Math.max(0,(SAVE.taxQ||0)-q);save()}}).catch(()=>{})}catch(e){}});
+setTimeout(()=>{try{if(SAVE&&(SAVE.taxQ||0)>0)taxFlush()}catch(e){}},8000);
 async function dpRefresh(){try{await dpFetch();DP.err=''}catch(e){DP.err=String(e.code||e.message||e)}dpRenderPot();renderDragon()}
 const dMult=()=>DS.ph==='pair'?3:2;
 const DMINB=1000,DALLPOT=3000,DALLWIN=.5,DRAKE=.1;
@@ -2170,13 +2190,13 @@ $('detail').onclick=e=>{
   if(a==='close')sel=null;
   else if(a==='eq'){equip(it);sel=null;audioUnlock();sfx('equip')}
   else if(a==='un'){for(const k in SAVE.eq)if(SAVE.eq[k]===it.id)delete SAVE.eq[k];sel=null;audioUnlock();sfx('unequip')}
-  else if(a==='sell'){if(isEq(it))return;const doSell=()=>{const pr=sellPrice(it);SAVE.coin=(SAVE.coin||0)+pr;SAVE.items=SAVE.items.filter(i=>i!==it);if(PSEL===it.id)PSEL=null;sel=null;save();renderHome();toast('賣出「'+it.name+'」,獲得 '+pr+' 金幣');audioUnlock();sfx('coins')};if(it.q>=3){ask('確定要賣出'+TIERQ(it.q)+'「'+it.name+'」嗎?\n可獲得 '+sellPrice(it)+' 金幣',doSell);return}doSell();return}
+  else if(a==='sell'){if(isEq(it))return;const doSell=()=>{const pr=sellPrice(it),t=taxIncome(pr);SAVE.coin=(SAVE.coin||0)+pr-t;SAVE.items=SAVE.items.filter(i=>i!==it);if(PSEL===it.id)PSEL=null;sel=null;save();renderHome();toast('賣出「'+it.name+'」,獲得 '+fmtC(pr-t)+' 金幣'+taxTxt(t));audioUnlock();sfx('coins')};if(it.q>=3){ask('確定要賣出'+TIERQ(it.q)+'「'+it.name+'」嗎?\n可獲得 '+fmtC(sellPrice(it)-Math.floor(sellPrice(it)*TAXR))+' 金幣(已扣芳芳稅 10%)',doSell);return}doSell();return}
  save();renderHome();
 };
 $('sellall').onclick=()=>{const mq=+$('sellq').value,list=SAVE.items.filter(i=>!isEq(i)&&i.q<=mq);
  if(!list.length){toast('沒有可以賣出的'+TIERQ(mq)+(mq>-1?'以下':'')+'裝備');return}
- const tot=list.reduce((a,i)=>a+sellPrice(i),0);ask('要賣出 '+list.length+' 件'+TIERQ(mq)+(mq>-1?'以下':'')+'的裝備,\n共獲得 '+tot+' 金幣嗎?\n(穿戴中的裝備不會被賣出)',()=>{
- SAVE.items=SAVE.items.filter(i=>!list.includes(i));SAVE.coin=(SAVE.coin||0)+tot;if(PSEL&&!byId(PSEL))PSEL=null;if(sel&&!byId(sel))sel=null;save();renderHome();audioUnlock();sfx('coinsMany');toast('賣出 '+list.length+' 件,獲得 '+tot+' 金幣')})};
+ const tot=list.reduce((a,i)=>a+sellPrice(i),0);ask('要賣出 '+list.length+' 件'+TIERQ(mq)+(mq>-1?'以下':'')+'的裝備,\n共獲得 '+fmtC(tot-Math.floor(tot*TAXR))+' 金幣嗎?(已扣芳芳稅 10%)\n(穿戴中的裝備不會被賣出)',()=>{
+ SAVE.items=SAVE.items.filter(i=>!list.includes(i));const tt=taxIncome(tot);SAVE.coin=(SAVE.coin||0)+tot-tt;if(PSEL&&!byId(PSEL))PSEL=null;if(sel&&!byId(sel))sel=null;save();renderHome();audioUnlock();sfx('coinsMany');toast('賣出 '+list.length+' 件,獲得 '+fmtC(tot-tt)+' 金幣'+taxTxt(tt))})};
 $('asky').onclick=()=>{$('ask').hidden=true;const f=ASKF;ASKF=null;if(f)f()};$('askn').onclick=()=>{$('ask').hidden=true;ASKF=null};
 $('besteq').onclick=()=>{audioUnlock();let n=0;
  for(const t of ['wpn','off','head','coat','shoe']){const it=SAVE.items.filter(i=>i.type===t).sort((a,b)=>score(b)-score(a))[0];const cur=byId(SAVE.eq[t]);if(it&&it!==cur&&score(it)>score(cur)){equip(it,t);n++}}
@@ -2891,12 +2911,12 @@ function update(dt){
 }
 function endRun(win){
  if(!G||G.over)return;G.over=true;running=false;joy=null;
- const coinG=Math.round(G.kills+G.t/3+(win?100*(G.c+1):0)+(win&&G.bossFirst?1000:0));SAVE.coin=(SAVE.coin||0)+coinG;
+ const coinG=Math.round(G.kills+G.t/3+(win?100*(G.c+1):0)+(win&&G.bossFirst?1000:0)),coinT=taxIncome(coinG+(G.coinB||0));SAVE.coin=Math.max(0,(SAVE.coin||0)+coinG-coinT);
  try{dqAdd('runs');dqAdd('kills',G.kills);if(win)dqAdd('win');SAVE.tut=1}catch(e){}
  if(win){if(!SAVE.clear.includes(G.c))SAVE.clear.push(G.c);SAVE.unlock=Math.max(SAVE.unlock,Math.min(CH.length,G.c+2))}
  save();
  $('otitle').textContent=win?'🎉 通關!準時下班!':win===false?'倒下了…明天再來':'撤退回家';
- $('ores').innerHTML='<span>區域</span><b>'+CH[G.c].n+'</b><span>撐過時間</span><b>'+fmtT(G.t)+'</b><span>擊倒怪物</span><b>'+G.kills+'</b><span>獲得金幣</span><b style="color:#ffd77a">+'+coinG+'</b><span>撿到裝備</span><b>'+G.loot.length+' 件</b><span>等級</span><b>Lv.'+G.lv+'</b><span>技能</span><b>'+Object.keys(G.ws).map(k=>wName(k)+' '+G.ws[k]+'★').join('、')+'</b>';$('oloot').innerHTML=G.loot.length?G.loot.slice(0,30).map(it=>tile(it,false)).join(''):'<span class="muted">這局沒有撿到裝備。</span>';
+ $('ores').innerHTML='<span>區域</span><b>'+CH[G.c].n+'</b><span>撐過時間</span><b>'+fmtT(G.t)+'</b><span>擊倒怪物</span><b>'+G.kills+'</b><span>獲得金幣</span><b style="color:#ffd77a">+'+fmtC(coinG+(G.coinB||0))+'</b>'+(coinT>0?'<span>芳芳收稅</span><b style="color:#ff9a8a">−'+fmtC(coinT)+' <small style="color:#cfd6de;font-weight:400">→ 射龍門池底</small></b>':'')+'<span>撿到裝備</span><b>'+G.loot.length+' 件</b><span>等級</span><b>Lv.'+G.lv+'</b><span>技能</span><b>'+Object.keys(G.ws).map(k=>wName(k)+' '+G.ws[k]+'★').join('、')+'</b>';$('oloot').innerHTML=G.loot.length?G.loot.slice(0,30).map(it=>tile(it,false)).join(''):'<span class="muted">這局沒有撿到裝備。</span>';
  
  $('over').hidden=false;$('pause').hidden=true;$('pbtn').hidden=true;toastT=0;$('toast').className='';if(win)sfx('win');else if(win===false){sfx('die');setTimeout(()=>sfx('lose'),700)}else sfx('retreat');
 }
@@ -3162,7 +3182,7 @@ async function fmAct(a,i){if(FM.busy)return;audioUnlock();const pl=FM.plots&&FM.
  FM.busy=true;
  try{if(a==='water'){if(FM.on)fmApply(await fmRpc('farm_water',{p_id:fmId(),p_key:fmKey(),p_idx:i}));else{pl.p-=Math.floor(pl.g/10);pl.w=true;save()}sfx('splat');toast('💧 澆水完成,成長時間縮短 10%')}
   else if(a==='harvest'){let v,c;if(FM.on){const r=await fmRpc('farm_harvest',{p_id:fmId(),p_key:fmKey(),p_idx:i});fmApply(r);v=r.value;c=CROP[r.crop]}else{const st=fmState(pl);if(st.k!=='ripe')throw{msg:'not ripe'};v=st.c.v;c=st.c;fmLocal().plots[i]=null;FM.plots=fmLocal().plots}
-   SAVE.coin=(SAVE.coin||0)+v;SAVE.fharv=(SAVE.fharv||0)+1;dqAdd('harv');save();sfx('coins');toast((c?c.e+' ':'')+'收成 +'+fmtC(v)+' 金幣');renderHome()}}
+   const vt=taxIncome(v);SAVE.coin=(SAVE.coin||0)+v-vt;SAVE.fharv=(SAVE.fharv||0)+1;dqAdd('harv');save();sfx('coins');toast((c?c.e+' ':'')+'收成 +'+fmtC(v-vt)+' 金幣'+taxTxt(vt));renderHome()}}
  catch(e){sfx('error');toast(fmMsg(e));if(FM.on)fmSync()}
  FM.busy=false;renderFarm()}
 function fmSeedPick(i){const ov=document.createElement('div');ov.className='ov fsov';const coin=SAVE.coin||0;
@@ -3189,7 +3209,7 @@ async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人
  ov.onclick=async e=>{if(e.target.closest('[data-x]')||e.target===ov){clearInterval(timer);ov.remove();FM.view=null;ripeVisited(id);sfx('close');return}
   const b=e.target.closest('[data-a="pick"]');if(!b||b.disabled)return;b.disabled=true;audioUnlock();
   mine=+b.dataset.i;try{await fmSync();const r=await fmRpc('farm_pick',{p_target:id,p_id:fmId(),p_key:fmKey(),p_nick:SAVE.pname||'',p_idx:+b.dataset.i});
-   SAVE.coin=(SAVE.coin||0)+r.value;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value)+' 金幣');
+   const st=taxIncome(r.value,TAXSTEAL);SAVE.coin=(SAVE.coin||0)+r.value-st;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value-st)+' 金幣'+(st>0?'(芳芳抽贓款稅 20%:'+fmtC(st)+',已丟進射龍門池底)':''));
    ripeHide();fmFeedAdd(id,(FM.view&&FM.view.nick)||nick,r.crop,r.value)}
   catch(e){sfx('error');toast(fmMsg(e))}load()};
  load()}
@@ -3232,10 +3252,11 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZM';
+const GBUILD='1005-ZN';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.05e';
-const GNOTES=[['🥮','中秋節賭金 10,000','全伺服器每個帳號送 10,000 金幣,今晚 12 點前上線就能領取,新帳號也有'],
+const GVER='2026.10.05f';
+const GNOTES=[['🧾','芳芳開始收稅','戰鬥收成、賣裝備、採收自己的農作物都會被芳芳抽 10%,偷別人的菜抽 20% 贓款稅,全部丟進射龍門池底'],
+ ['🥮','中秋節賭金 10,000','全伺服器每個帳號送 10,000 金幣,今晚 12 點前上線就能領取,新帳號也有'],
  ['🎉','新帳號開局獎金 8,888','新建立的帳號直接送 8,888 金幣當開局獎金'],
  ['👀','射龍門一般射門也會瞇牌','不用全包也能瞇牌!牌頭看起來像會中的點數就會慢慢瞇,一次只露出一點點,長得像不代表真的中;不想看可以勾選跳過'],
  ['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
@@ -3268,7 +3289,7 @@ function verNotice(){let seen='';try{seen=localStorage.getItem('shechu-ver')||''
  try{localStorage.setItem('shechu-ver',GVER)}catch(e){}
  const ov=document.createElement('div');ov.className='ov vnov';
  ov.innerHTML='<div class="box vnbox">'+(ART['bean-cheer']?'<img class="fmasc" src="'+ART['bean-cheer']+'" alt="">':'')+'<h2>🎉 社畜特攻隊 改版更新</h2><p class="muted">這次更新內容比較多,遊戲檔案變大,第一次打開會比較久,之後就會快很多。</p><div class="vnlist">'+
-  GNOTES.map(n=>'<div class="vnr"><span>'+n[0]+'</span><div><b>'+n[1]+'</b><small>'+n[2]+'</small></div></div>').join('')+'</div><button class="btn pri" data-x="1">開始上班!</button></div>';
+  GNOTES.filter(n=>!(n[0]==='🥮'&&Date.now()>=GIFT_MID_END)).map(n=>'<div class="vnr"><span>'+n[0]+'</span><div><b>'+n[1]+'</b><small>'+n[2]+'</small></div></div>').join('')+'</div><button class="btn pri" data-x="1">開始上班!</button></div>';
  document.body.appendChild(ov);sfx('open');ov.onclick=e=>{if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}}}
 
 
