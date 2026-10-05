@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZN">
+<meta name="gbuild" content="1005-ZR">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -747,7 +747,9 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 @keyframes dallp{50%{box-shadow:0 0 22px rgba(255,120,40,.9)}}
 .dallnote{flex-basis:100%;font-size:11px;color:#ffb3a3}
 .dsqn{flex-basis:100%;font-size:12px;margin-top:2px}
-.dtax{font-size:11px;color:#ffd9a0}.dtax b{color:#ffd24a}
+.dghost img.wide{max-width:none!important;margin:0 -55%;position:relative;z-index:2}
+.dpot .dtax{font-size:11px;color:#ffd9a0;white-space:nowrap;margin-top:1px}.dpot .dtax:empty{display:none}.dpot .dtax i{font-style:normal;font-weight:800;color:#ffd24a}
+.dpot #dpotst{white-space:nowrap}
 .dallbox{max-width:360px;text-align:center;border:2px solid #ff6a3d}
 .dallbox h2{color:#ffb070}
 .dallpot{font-size:40px;font-weight:900;background:linear-gradient(#fff6c8,#ffd24a 50%,#ff7a12);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(255,150,40,.6));font-variant-numeric:tabular-nums}
@@ -1229,7 +1231,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZN</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZR</span></small>
   </div>
  </div>
 </div>
@@ -1324,7 +1326,7 @@ html.ios-app body{min-height:100vh}
     <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用池底 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
      <div class="dsign"><p>有人看海 有人被愛</p><p class="b">有人射龍門輸到不知悔改</p><small>— 本店名言 —</small></div>
-     <div class="mbub" id="dmbub"></div><div class="dpot"><div class="dpw"><small>💰 全伺服器池底</small><b id="dpotv">—</b><span id="dpotst">連線中…</span></div></div>
+     <div class="mbub" id="dmbub"></div><div class="dpot"><div class="dpw"><small>💰 全伺服器池底</small><b id="dpotv">—</b><span id="dpotst">連線中…</span><span id="dptax" class="dtax"></span></div></div>
      <div class="dtable">
       <div class="dcards"><div class="dslot" id="dA"></div><div class="dslot mid" id="dC"></div><div class="dslot" id="dB"></div></div>
       <div class="dinfo" id="dinfo">每局丟底 100 金幣,看完門柱再決定要不要射</div>
@@ -1744,7 +1746,9 @@ const cardH=(c,d)=>{const red=c.s==='♥'||c.s==='♦',si=SI(c.s);let f;
  return'<div class="pc" style="animation-delay:'+(d||0)+'s"><div class="k" style="background-image:url('+ART['pk-back']+')"></div>'+f+'</div>'};
 const backH='<div class="pc" style="animation:none"><div class="k" style="transform:none"></div></div>';
 setInterval(()=>{try{if($('home').hidden||SAVE.tab!=='dragon'||SAVE.cas!=='dragon'||DP.busy||document.querySelector('.sqov'))return;if(DS.ph!=='idle')return;if(Math.random()<.6)dSay('idle',Math.random()<.5?'host-1':'host-4')}catch(e){}},9000);
-function dSay(k,pose){$('dbub').textContent=pickL(DL[k]);if($('dmbub'))$('dmbub').textContent='芳芳:'+$('dbub').textContent;$('dhost').src=ART[pose||'host-1']||ART['host-1']}
+function dSay(k,pose){$('dbub').textContent=pickL(DL[k]);if($('dmbub'))$('dmbub').textContent='芳芳:'+$('dbub').textContent;$('dhost').src=ART[pose||'host-1']||ART['host-1'];$('dhost').classList.toggle('wide',pose==='host-3')}
+/* 芳芳閃身步:4 格動畫(準備→扭腰→閃出去→站定)。back=true 時閃完回到叉腰 */
+
 /* ===== 射龍門:全伺服器共用池底 ===== */
 const DANTE=100;
 DL.idle=['來來來,丟個底就能射!池底越滾越大囉','池底現在多少?看了就心動吧','每局底注 100,射中的話池底分你'];
@@ -1790,7 +1794,7 @@ async function dpSettle(kind,amt){if(DP.on){let r;try{r=await dpReq('/rest/v1/rp
  dpLocalLog(kind,(kind==='win'||kind==='allwin')?paid:amt,s.dpot);if(seeded)dpLocalLog('seed',1000,s.dpot);DP.pot=s.dpot;save();return{paid,pot:s.dpot,seeded}}
 function dpAgo(t){const d=(Date.now()-new Date(t).getTime())/1000;if(!(d>=0))return'';if(d<60)return'剛剛';if(d<3600)return Math.floor(d/60)+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
 function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==null?'—':fmtC(DP.pot);
- $('dpotst').innerHTML=(DP.err?'<span style="color:#ff9a8a">連線失敗:'+escH(DP.err)+'</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機池底(網頁版才是全伺服器共用)')+(DP.tax!=null?'<br><span class="dtax">🧾 今日芳芳稅收 <b>+'+fmtC(DP.tax)+'</b></span>':'');
+ $('dpotst').innerHTML=(DP.err?'<span style="color:#ff9a8a">連線失敗:'+escH(DP.err)+'</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機池底(網頁版才是全伺服器共用)');if($('dptax'))$('dptax').innerHTML=DP.tax!=null?'🧾 今日芳芳稅收 <i>+'+fmtC(DP.tax)+'</i>':'';
  const K={allwin:['💥全包成功','up big','+'],alllose:['💥全包失敗','down','+'],allpost:['💥全包撞柱','down','+'],win:['射中','up','+'],lose:['射偏','down','+'],post:['撞柱','down','+'],fold:['放棄','',''],seed:['芳芳補底','up','+']};
  $('dlog').innerHTML=DP.log.length?DP.log.map(r=>{const k=K[r.kind]||[r.kind,'',''];const amt=+r.amount||0;
   const txt=r.kind==='allwin'?'抱走整個池底 <b class="up">'+fmtC(amt)+'</b>':r.kind==='win'?'贏走 <b class="up">'+fmtC(amt)+'</b>':r.kind==='fold'?'底 '+fmtC(amt)+' 留在池裡':r.kind==='seed'?'補進 <b class="up">'+fmtC(amt)+'</b>':'丟進池裡 <b class="down">'+fmtC(amt)+'</b>';
@@ -3252,10 +3256,11 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZN';
+const GBUILD='1005-ZR';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.05f';
-const GNOTES=[['🧾','芳芳開始收稅','戰鬥收成、賣裝備、採收自己的農作物都會被芳芳抽 10%,偷別人的菜抽 20% 贓款稅,全部丟進射龍門池底'],
+const GVER='2026.10.05j';
+const GNOTES=[['💃','芳芳換上本尊造型','射龍門的芳芳照本人重畫:齊瀏海、金框眼鏡、低馬尾,四個動作全部換新'],
+ ['🧾','芳芳開始收稅','戰鬥收成、賣裝備、採收自己的農作物都會被芳芳抽 10%,偷別人的菜抽 20% 贓款稅,全部丟進射龍門池底'],
  ['🥮','中秋節賭金 10,000','全伺服器每個帳號送 10,000 金幣,今晚 12 點前上線就能領取,新帳號也有'],
  ['🎉','新帳號開局獎金 8,888','新建立的帳號直接送 8,888 金幣當開局獎金'],
  ['👀','射龍門一般射門也會瞇牌','不用全包也能瞇牌!牌頭看起來像會中的點數就會慢慢瞇,一次只露出一點點,長得像不代表真的中;不想看可以勾選跳過'],
@@ -3612,7 +3617,7 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005J',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
+function go(){add('assets-extra.js?v=1005ZR',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005J',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
