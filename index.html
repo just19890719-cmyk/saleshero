@@ -1176,7 +1176,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-B</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-C</span></small>
   </div>
  </div>
 </div>
@@ -1933,7 +1933,7 @@ async function lbRender(){
  const med=['🥇','🥈','🥉'],onN=rows.filter(lbOn).length;
  const myI=rows.findIndex(r=>r.id===LB.uid);
  $('lblist').innerHTML='<div class="lbonline">🟢 目前在線 '+onN+' 人 · 共 '+rows.length+' 位玩家</div>'+(myI>=0?'<div class="lbmine">🏅 你目前'+(LB.sort==='power'?'戰力':'金幣')+'排第 '+(myI+1)+' 名</div>':'')+rows.map((r,i)=>{const nm=r.nick||(ps[r.id]&&ps[r.id].name)||'神秘玩家';
-  const eqs=(Array.isArray(r.eq)?r.eq:[]).map(e=>e&&typeof e.b==='string'?'<span class="tile q'+(+e.q|0)+'" title="'+escH(e.n||e.b)+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span>':'').join('');
+  const eqs=(Array.isArray(r.eq)?r.eq:[]).map(e=>e&&typeof e.b==='string'?'<span class="tile q'+(+e.q|0)+(BOSSI.some(x=>x.b===e.b)?' bossi':'')+'" title="'+escH(e.n||e.b)+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span>':'').join('');
   const rd=r.ride&&ART['ride-'+r.ride.id]?'<img class="rd" src="'+ART['ride-'+r.ride.id]+'" alt="" title="座駕 Lv.'+(+r.ride.lv|0)+'">':'';
   return'<div class="lbr'+(r.id===LB.uid?' me':'')+(LB.open===r.id?' open':'')+'" data-uid="'+escH(r.id)+'"><div class="rk">'+(med[i]||(i+1))+'</div><div style="min-width:0"><div class="nm">'+escH(nm)+(r.id===LB.uid?' (你)':'')+(lbOn(r)?'<span class="olst on">在線</span>':'<span class="olst">離線</span>')+'<span class="tap">▾ 裝備</span></div>'+((r.id===LB.uid?SAVE.motto:r.motto)?'<div class="mt"><span>'+escH(mottoClean(r.id===LB.uid?SAVE.motto:r.motto))+'</span></div>':'')+'<div class="eqs">'+(eqs||'<span class="muted" style="font-size:12px">沒有裝備</span>')+rd+'</div></div>'+
    '<div class="val">'+(LB.sort==='power'?'⚔️ '+fmt(+r.power||0)+'<small>💰 '+fmtC(+r.coin||0)+'</small>':'💰 '+fmtC(+r.coin||0)+'<small>⚔️ '+fmt(+r.power||0)+'</small>')+'</div>'+lbDet(r)+'</div>'}).join('')}
@@ -1973,7 +1973,7 @@ document.addEventListener('click',e=>{const d=$('lgsave');if(d&&d.open&&!e.targe
 function lbDet(r){const eq=Array.isArray(r.eq)?r.eq:[];
  const items=SLOTS.map((sl,j)=>{const e=eq[j];if(!e||typeof e.b!=='string')return'<div class="lbdi no"><span class="tile empty"></span><div><small>'+sl.n+'</small><b>(空)</b></div></div>';
   const q=Math.max(-1,Math.min(4,+e.q|0)),rr=RAR[q]||RAR[0];
-  return'<div class="lbdi"><span class="tile q'+q+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span><div><small>'+sl.n+'</small><b style="color:'+rr.c+'">'+escH(e.n||e.b)+'</b><i style="color:'+rr.c+'">'+rr.n+'</i></div></div>'}).join('');
+  return'<div class="lbdi"><span class="tile q'+q+(BOSSI.some(x=>x.b===e.b)?' bossi':'')+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span><div><small>'+sl.n+'</small><b style="color:'+rr.c+'">'+escH(e.n||e.b)+'</b><i style="color:'+rr.c+'">'+rr.n+'</i></div></div>'}).join('');
  const rd=r.ride&&typeof r.ride.id==='string'?(()=>{const R0=RIDES.find(x=>x.id===r.ride.id);return'<div class="lbdi"><span class="tile q'+(R0?R0.q:0)+'">'+(ART['ride-'+r.ride.id]?'<img src="'+ART['ride-'+r.ride.id]+'" alt="">':'')+'</span><div><small>座駕</small><b>'+escH(R0?R0.n:r.ride.id)+'</b><i>Lv.'+(+r.ride.lv|0)+'</i></div></div>'})():'';
  return'<div class="lbd">'+items+rd+((typeof FM!=='undefined'&&FM.on&&r.id!==LB.uid)?'<button class="btn lbfarm" data-farm="'+escH(r.id)+'" data-nick="'+escH(r.nick||'')+'">🌾 逛他的農場</button>':'')+'</div>'}
 $('lblist').onclick=e=>{const fb=e.target.closest('[data-farm]');if(fb){fmVisit(fb.dataset.farm,fb.dataset.nick);return}const row=e.target.closest('.lbr');if(!row)return;const id=row.dataset.uid;LB.open=LB.open===id?null:id;
@@ -2729,7 +2729,7 @@ function heroHD(){if(!ART['主角HD-idle-1'])return;const L=p=>{const a=[];for(l
  const idle=L('idle'),run=L('run'),atk=L('atk');if(!idle.length||!run.length||!atk.length)return;
  ANIM.idle=idle;ANIM.run=run;ANIM.atk=atk;HERO_HD=true;SC.clear();try{if($('lgh'))$('lgh').src=ART['主角HD-idle-1']}catch(e){}}
 window.__artPack=function(X){if(!X)return;Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();if(X['主角HD-idle-1'])heroHD();try{hdN()}catch(e){}
- try{document.querySelectorAll('img.pico').forEach(i=>{if(ART['金幣'])i.src=ART['金幣']});if(!$('home').hidden)renderHome()}catch(e){}};
+ try{document.querySelectorAll('img.pico').forEach(i=>{if(ART['金幣'])i.src=ART['金幣']});if(!$('home').hidden)renderHome()}catch(e){}try{if(!$('lbov').hidden&&LB.rows&&LB.rows.length)lbRender()}catch(e){}};
 function update(dt){
  const S=G.S;G.t+=dt;G.dtl=dt;G.atk-=dt;G.hurt-=dt;G.inv-=dt;
  let mx=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0),my=(keys.ArrowDown||keys.s?1:0)-(keys.ArrowUp||keys.w?1:0);
@@ -3117,7 +3117,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-B';
+const GBUILD='1005-C';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.04e';
 const GNOTES=[['🪪','暱稱不能重複','暱稱改成全伺服器唯一,改名後 7 天內不能再改;如果你的暱稱被別人先登記了,可以免費換一個'],['👮','第一關首領登場','撐過 3 分鐘後「捷運站長喪屍」出現!會衝刺、吹震波、叫列車進站,擊倒有機會掉落發光的首領專屬裝備'],['🧺','搶收快報','偷採成功會通知全伺服器「誰採了誰的作物」;被採通知改成一次看完,不用一直按'],['📋','每日任務','地圖頁新增每日任務,完成可以領金幣,全部完成再加碼'],['🙏','祈禱改版','越高階越貴、成功率越低,紅框裝備更珍貴'],['⚔️','再打一場','結算畫面可以直接再打一場'],['🎲','賭場新遊戲:十八仔','射龍門分頁改名「賭場」,新增十八仔!擲出一色還會上全伺服器公告'],['🌻','開心農場','新分頁!種下作物離線也會長大,成熟沒收會被同事從排行榜採走,被採會收到通知'],
