@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZR">
+<meta name="gbuild" content="1005-ZY">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -748,7 +748,13 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 .dallnote{flex-basis:100%;font-size:11px;color:#ffb3a3}
 .dsqn{flex-basis:100%;font-size:12px;margin-top:2px}
 .dghost img.wide{max-width:none!important;margin:0 -55%;position:relative;z-index:2}
-.dpot .dtax{font-size:11px;color:#ffd9a0;white-space:nowrap;margin-top:1px}.dpot .dtax:empty{display:none}.dpot .dtax i{font-style:normal;font-weight:800;color:#ffd24a}
+.dpot .dmore{margin-top:8px}.dmore summary{cursor:pointer}
+.dmy{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.dmy div{background:rgba(255,255,255,.05);border-radius:8px;padding:6px 8px}.dmy small{display:block;font-size:11px;color:#9aa4b2}.dmy b{font-size:15px}
+.dgw{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}.dgw th,.dgw td{padding:4px 6px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08)}.dgw th{color:#9aa4b2;font-weight:600}.dgw td:first-child{text-align:left}
+.dlbt{display:flex;gap:6px;margin:8px 0}.dlbt button{flex:1;padding:6px;border-radius:8px;border:1px solid rgba(255,210,74,.35);background:rgba(0,0,0,.25);color:#e8ecf2;font-size:12px;cursor:pointer}.dlbt button.on{background:linear-gradient(#ffd24a,#e0a21a);color:#2a1d00;font-weight:800}
+.dlbr{display:grid;grid-template-columns:28px 1fr auto;gap:6px;align-items:center;padding:6px 4px;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}.dlbr .rk{font-weight:900;text-align:center}.dlbr .am{font-weight:800;color:#ffd24a}.dlbr small{display:block;color:#9aa4b2;font-size:11px}
+.dstk{display:inline-block;margin-top:3px;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:800}.dstk.hot{background:rgba(255,120,40,.2);color:#ffb070}.dstk.cold{background:rgba(90,150,255,.18);color:#9cc3ff}
+.dtax{font-size:11px;color:#ffd9a0;white-space:nowrap;margin-top:1px}.dpot .dtax:empty{display:none}.dpot .dtax i{font-style:normal;font-weight:800;color:#ffd24a}
 .dpot #dpotst{white-space:nowrap}
 .dallbox{max-width:360px;text-align:center;border:2px solid #ff6a3d}
 .dallbox h2{color:#ffb070}
@@ -963,7 +969,7 @@ body.gready #lgload{display:none}
 .dchips button[data-v="100"]:not(.clr){background-image:var(--chip1)!important}
 .dchips button[data-v="1000"]:not(.clr){background-image:var(--chip2)!important}
 .dchips button[data-v="10000"]:not(.clr){background-image:var(--chip3)!important}
-.dchips button[data-v="100000"]:not(.clr){background-image:var(--chip4)!important;color:#ffe08a!important}
+.dchips button[data-v="100000"]:not(.clr){background-image:var(--chip4)!important;color:#1d1d1d!important;font-size:10.5px!important;letter-spacing:-.03em}
 .dchips button[data-v="-1"]:not(.clr){background-image:var(--chipgold)!important;color:#5a3a00!important}
 .dchips button.clr{width:auto;height:30px;font-size:12px!important}
 .dbet{display:flex;align-items:center;gap:6px;justify-content:center;white-space:nowrap;flex-wrap:wrap}
@@ -1159,6 +1165,10 @@ body.gready #lgload{display:none}
 .sqcard .pc .f img.s{width:52%!important}
 .sqsay{font-size:22px!important;letter-spacing:.06em}
 
+/* 新牌圖圓角(1005-ZV):牌面、牌背、瞇牌蓋牌的圓角統一,不再露出白角 */
+.pc .f,.pc .k,.sqtop{border-radius:5.3%/3.7%!important}
+.sqtop{background-color:#5c0611!important;overflow:hidden}
+.sqtop::before{border-radius:0!important;height:6%!important;background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,0))!important}
 #lggo.lock::before{content:'🔒 '}
 #lggo.lock{filter:saturate(.75)}
 
@@ -1231,7 +1241,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZR</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZY</span></small>
   </div>
  </div>
 </div>
@@ -1338,6 +1348,8 @@ html.ios-app body{min-height:100vh}
      </div>
      <div class="ghost dghost"><div class="bub" id="dbub">來來來,射龍門!莊家今天手氣很好喔</div><img id="dhost" alt="企劃女神芳芳"><div><span class="hname">企劃女神芳芳</span></div></div>
     </div>
+    <details class="drule dmore" id="dmy"><summary>📊 我的射龍門戰績</summary><div id="dmyb"></div></details>
+    <details class="drule dmore" id="dlb"><summary>🏆 射龍門排行榜</summary><div class="dlbt"><button data-l="today" class="on">今日最大一把</button><button data-l="hall">💥 全包名人堂</button></div><div id="dlbb"><div class="muted">讀取中…</div></div></details>
     <details class="drule" id="drule">
      <summary>📖 遊戲說明</summary>
      <ol>
@@ -1571,8 +1583,8 @@ function makeItem(il,q,type,force){
 }
 let ASKF=null;
 function ask(msg,yes){$('askm').textContent=msg;ASKF=yes;$('ask').hidden=false}
-const SELLP={'-1':8,0:15,1:30,2:70,3:180,4:450};
-const sellPrice=it=>Math.round(SELLP[it.q]*(1+(it.il||1)*.04)*(1+(it.up||0)*.15));
+const SELLP={'-1':15,0:30,1:50,2:70,3:180,4:450};/* 1005-ZS:黑框 8→15、銀框 15→30、綠框 30→50 */
+const sellPrice=it=>Math.round(SELLP[it.q]*(1+(it.il||1)*.08)*(1+(it.up||0)*.15));/* 裝備等級加成每級 +8%(原本 +4%) */
 const TIERQ=q=>['黑框','銀框','綠框','藍框','黃金框','紅框'][q+1];
 const ist=(it,k)=>(it.st[k]||0)*(1+.1*it.up);
 const fv=(k,v)=>STAT[k].n+' +'+(k==='regen'?v.toFixed(1):Math.round(v))+(STAT[k].p?'%':'');
@@ -1924,6 +1936,7 @@ async function dShoot(bid,allin){const pair=DS.ph==='pair',bet=allin?(DP.pot||0)
   if(!res){if(!isWin){dCoins(-amt);dStat(-amt,kind)}$('dinfo').innerHTML='<span class="down">連線失敗,'+(isWin?'這把獎金沒有入帳':'已扣 '+fmtC(amt)+' 金幣')+'</span>';sfx('error');renderDragon();return}
   if(isWin){dCoins(res.paid);dStat(res.paid,'win');msg='<span class="up">'+(allin?'💥 全包成功!抱走整個池底 ':(pair?'猜對了':'射中了')+'!從池底贏走 ')+fmtC(res.paid)+' 金幣</span>'+(!allin?'<br><span class="muted">贏的 10% 留在池底,讓池底繼續長大</span>':'')+(res.paid<amt?'<br><span class="muted">池底被別人先挖走了,只剩這些</span>':'');sfx(allin?'fan4':'casinoWin');dSay(allin?'allwin':res.seeded?'seed':'win','host-4')}
   else{dCoins(-amt);dStat(-amt,kind.replace('all',''));const kk=kind.replace('all','');msg='<span class="down">'+(allin?'💥 全包失敗!':'')+(kk==='post'?(pair?'又一樣大!撞柱':'撞柱!')+'丟 '+fmtC(amt)+' 進池底':(pair?'猜錯了':'射偏了')+',丟 '+fmtC(amt)+' 進池底')+'</span>';if(kk==='post'){sfx('gong');dSay(allin?'alllose':'post','host-3')}else{sfx('casinoLose');dSay(allin?'alllose':'lose','host-2')}}
+  try{msg+=dTrack(isWin,isWin?res.paid:amt,pair,allin)}catch(e){console.error(e)}
   $('dinfo').innerHTML=msg;renderDragon();dpRefresh()}
 setInterval(()=>{if(document.visibilityState==='visible'&&!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas!=='sib'&&!DP.busy&&Date.now()-DP.t>5000)dpRefresh()},2000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.tab==='dragon'&&!$('home').hidden&&!DP.busy)dpRefresh()});
@@ -1935,6 +1948,47 @@ async function dAllinAsk(){if(DP.busy)return;DP.busy=true;renderDragon();try{awa
   '<ul><li><span class="up">'+(pair?'猜對':'射中')+'</span>:抱走整個池底 <b class="up">+'+fmtC(pot)+'</b></li><li><span class="down">'+(pair?'猜錯':'射偏')+'</span>:賠一個池底 <b class="down">−'+fmtC(pot)+'</b></li><li><span class="down">撞柱</span>:賠 '+(pair?3:2)+' 倍,最多扣到身上全部 <b class="down">−'+fmtC(post)+'</b></li></ul>'+
   '<p class="muted" style="font-size:12px">你目前有 '+fmtC(coin)+' 金幣</p><label class="sqskip"><input type="checkbox" id="dallsk"'+(SAVE.sqSkip?' checked':'')+'> 跳過瞇牌動畫</label><div class="dallbtns">'+(pair?'<button class="btn pri" data-a="dhi">⬆ 全包猜大</button><button class="btn pri" data-a="dlo">⬇ 全包猜小</button>':'<button class="btn pri" data-a="dshoot">💥 確定全包射門</button>')+'<button class="btn" data-a="x">再想想</button></div></div>';
  document.body.appendChild(ov);$('dallsk').onchange=e=>{SAVE.sqSkip=e.target.checked;save()};ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b&&e.target!==ov)return;ov.remove();if(!b||b.dataset.a==='x'){sfx('close');return}audioUnlock();dShoot(b.dataset.a,true)}}
+/* ===== 射龍門:連勝連敗、個人戰績 ===== */
+DL.hot=['連贏 {n} 把了!芳芳要報警了','{n} 連勝?你是不是偷偷出老千','手氣這麼燙,不全包一把嗎?','再贏下去芳芳要被老闆罵了','{n} 連勝!池底在發抖'];
+DL.cold=['連輸 {n} 把…芳芳都不好意思收了','{n} 連敗,下一把一定轉運(芳芳說的)','輸成這樣,要不要先去打幾隻喪屍?','沒關係,池底會記得你的貢獻','{n} 連敗也是一種紀錄啦'];
+function dMyS(){const s=SAVE.dmy=SAVE.dmy||{};s.g=s.g||{narrow:[0,0],mid:[0,0],wide:[0,0],pair:[0,0]};s.al=s.al||[0,0];return s}
+function dTrack(win,amt,pair,allin){const s=dMyS(),gap=DS.b.r-DS.a.r-1,cat=pair?'pair':gap>=7?'wide':gap>=4?'mid':'narrow';
+ s.g[cat][0]++;if(win)s.g[cat][1]++;if(allin){s.al[0]++;if(win)s.al[1]++}
+ if(win)s.big=Math.max(s.big||0,amt);else s.bigL=Math.max(s.bigL||0,amt);
+ const k=SAVE.dstk||0;SAVE.dstk=win?(k>0?k+1:1):(k<0?k-1:-1);s.maxW=Math.max(s.maxW||0,SAVE.dstk);s.maxL=Math.max(s.maxL||0,-SAVE.dstk);save();
+ const n=Math.abs(SAVE.dstk);let h='';
+ if(n>=3){const hot=SAVE.dstk>0,t=pickL(DL[hot?'hot':'cold']).replace('{n}',n);$('dbub').textContent=t;if($('dmbub'))$('dmbub').textContent='芳芳:'+t;h='<br><span class="dstk '+(hot?'hot':'cold')+'">'+(hot?'🔥 連勝 ':'🥶 連敗 ')+n+' 把</span>'}
+ if($('dmy')&&$('dmy').open)dMyRender();return h}
+function dMyRender(){const s=dMyS(),st=SAVE.dstat||{w:0,l:0,n:0,net:0},N={narrow:'窄門(中間 1~3 種)',mid:'中門(4~6 種)',wide:'寬門(7 種以上)',pair:'雙柱猜大小'};
+ const pct=(w,n)=>n?Math.round(w/n*100)+'%':'—',tot=Object.values(s.g).reduce((a,v)=>a+v[0],0);
+ const SN={narrow:'窄門',mid:'中門',wide:'寬門',pair:'雙柱'};let fav='—',lucky='—',fn=0,lr=-1;for(const k in s.g){const [n,w]=s.g[k];if(n>fn){fn=n;fav=SN[k]}if(n>=5&&w/n>lr){lr=w/n;lucky=SN[k]+' '+Math.round(w/n*100)+'%'}}
+ const cur=SAVE.dstk||0;
+ $('dmyb').innerHTML='<div class="dmy"><div><small>射門次數</small><b>'+fmtC(tot)+'</b></div><div><small>勝率</small><b>'+pct(st.w,st.w+st.l)+'</b></div>'+
+  '<div><small>累計輸贏</small><b class="'+(st.net>=0?'up':'down')+'">'+(st.net>=0?'+':'')+fmtC(st.net)+'</b></div><div><small>目前</small><b>'+(cur>0?'🔥 連勝 '+cur:cur<0?'🥶 連敗 '+(-cur):'—')+'</b></div>'+
+  '<div><small>單把最大贏</small><b class="up">+'+fmtC(s.big||0)+'</b></div><div><small>單把最大輸</small><b class="down">−'+fmtC(s.bigL||0)+'</b></div>'+
+  '<div><small>最長連勝 / 連敗</small><b>'+(s.maxW||0)+' / '+(s.maxL||0)+'</b></div><div><small>💥 全包</small><b>'+s.al[0]+' 次,成功 '+s.al[1]+'</b></div>'+
+  '<div><small>最常射的門</small><b>'+fav+'</b></div><div><small>最旺的門(5 把以上)</small><b>'+lucky+'</b></div></div>'+
+  '<table class="dgw"><tr><th>門的寬度</th><th>次數</th><th>射中</th><th>勝率</th></tr>'+Object.keys(N).map(k=>'<tr><td>'+N[k]+'</td><td>'+s.g[k][0]+'</td><td>'+s.g[k][1]+'</td><td>'+pct(s.g[k][1],s.g[k][0])+'</td></tr>').join('')+'</table>'+
+  '<p class="muted" style="font-size:11px;margin:6px 0 0">戰績從這次更新後開始記錄(勝率和累計輸贏包含之前的紀錄)</p>'}
+$('dmy').addEventListener('toggle',()=>{if($('dmy').open)dMyRender()});
+/* ===== 射龍門排行榜:今日最大一把、全包名人堂(打開時才讀,省流量) ===== */
+const DLB={tab:'today',t:{},d:{}};
+function dLbDay(){const n=new Date(Date.now()+8*3600e3);n.setUTCHours(0,0,0,0);return new Date(n.getTime()-8*3600e3).toISOString()}
+async function dLbLoad(tab,force){if(!force&&DLB.d[tab]&&Date.now()-(DLB.t[tab]||0)<30000)return DLB.d[tab];let rows=[];
+ if(DP.on){const q=tab==='today'?'kind=in.(win,allwin)&t=gte.'+encodeURIComponent(dLbDay())+'&order=amount.desc&limit=10':'kind=eq.allwin&order=amount.desc&limit=10';
+  rows=await dpReq('/rest/v1/dragon_log?select=nick,amount,kind,t&'+q)}
+ else{const L=(SAVE.dlog||[]),d0=dLbDay();rows=L.filter(r=>tab==='today'?((r.kind==='win'||r.kind==='allwin')&&r.t>=d0):r.kind==='allwin').sort((a,b)=>b.amount-a.amount).slice(0,10)}
+ DLB.d[tab]=rows||[];DLB.t[tab]=Date.now();return DLB.d[tab]}
+async function dLbRender(){const tab=DLB.tab,el=$('dlbb');document.querySelectorAll('#dlb .dlbt button').forEach(b=>b.classList.toggle('on',b.dataset.l===tab));
+ if(!DLB.d[tab])el.innerHTML='<div class="muted">讀取中…</div>';
+ let rows;try{rows=await dLbLoad(tab)}catch(e){el.innerHTML='<div class="down">排行榜讀取失敗,稍後再試</div>';return}
+ if(tab!==DLB.tab)return;
+ if(!rows.length){el.innerHTML='<div class="muted" style="padding:8px 0">'+(tab==='today'?'今天還沒有人射中,第一個就是你!':'還沒有人全包成功過,名人堂等你來寫!')+'</div>';return}
+ const med=['🥇','🥈','🥉'];
+ el.innerHTML=rows.map((r,i)=>'<div class="dlbr"><span class="rk">'+(med[i]||(i+1))+'</span><span>'+escH(r.nick||'?')+(r.kind==='allwin'&&tab==='today'?' 💥':'')+'<small>'+(tab==='today'?dpAgo(r.t):new Date(r.t).toLocaleDateString('zh-TW'))+'</small></span><span class="am">+'+fmtC(+r.amount||0)+'</span></div>').join('')+
+  '<p class="muted" style="font-size:11px;margin:6px 0 0">'+(tab==='today'?'今天(台灣時間)單把贏最多的前 10 名':'史上全包成功抱走最多的前 10 名')+'</p>'}
+$('dlb').addEventListener('toggle',()=>{if($('dlb').open)dLbRender()});
+$('dlb').querySelector('.dlbt').onclick=e=>{const b=e.target.closest('[data-l]');if(!b)return;DLB.tab=b.dataset.l;sfx('tab');dLbRender()};
 $('drule').addEventListener('toggle',()=>{if(!$('drule').open){SAVE.drule=1;save()}});
 
 /* ===== 塔羅 ===== */
@@ -2138,7 +2192,7 @@ function slotHtml(k){const sl=SLOTS.find(x=>x.k===k),it=byId(SAVE.eq[k]);
 const MONINFO={'奧客喪屍':{d:'生前每天來店裡殺價、要贈品,死了還是不肯放過你。數量最多,各方面都很普通。',s:[3,3,3],tip:'💡 一直出現,範圍技能清最快'},
  '菜市場大媽喪屍':{d:'提著塑膠袋橫衝直撞,搶特價的氣勢喪屍化之後一點都沒少。皮厚、走得慢,被甩到很痛。',s:[4,2,4],tip:'💡 走得慢,邊跑邊打就好'},
  '吸毒喪屍':{d:'動作抽搐又飄忽,速度是全場最快,但身體很脆,一碰就倒。',s:[2,5,2],tip:'💡 小心從背後被包圍'},
- '暴怒奧客喪屍':{d:'被店員拒絕退貨後徹底暴走的奧客,體型更大、血量是一般的 7 倍。',s:[5,4,5],tip:'🎁 擊倒必掉「年終獎金」寶箱',el:1,t:'每 45 秒出現'},
+ '暴怒奧客喪屍':{d:'被店員拒絕退貨後徹底暴走的奧客,體型更大、血量是一般的 7 倍。',s:[5,4,5],tip:'🎁 擊倒必掉「年終獎金」寶箱和一件銀框以上裝備',el:1,t:'每 45 秒出現'},
  '捷運站長喪屍':{d:'死了還在吹哨維持秩序的站長。會衝刺、吹出震波,還會叫列車進站撞人;血量剩一半時進入「末班車」暴走。',s:[5,3,5],tip:'👑 擊倒有機會掉落首領專屬裝備',boss:1,t:'3 分鐘後出現'}};
 function monCard(n,rate){const m=MONINFO[n]||{d:'',s:[3,3,3]},img=ART[(n==='暴怒奧客喪屍'?'奧客喪屍':n)+'-walk-1']||'';
  const bar=(lb,v,c)=>'<div class="sr"><span>'+lb+'</span><i style="--pc:'+c+'">'+[1,2,3,4,5].map(k=>'<u'+(k<=v?' class="on"':'')+'></u>').join('')+'</i></div>';
@@ -2713,11 +2767,12 @@ function projectiles(dt){
     part(l.x1,l.y1-14,7,{c:'rgba(90,90,90,.55)',k:'smoke',v0:15,v1:60,up:30,l0:.6,l1:1,s:16});decal(l.x1,l.y1,'scorch',60);shake(6);G.lob.splice(i,1)}}
 }
 function dropLoot(e){
- const w=e.kind==='boss'?[0,0,45,45,10]:e.kind==='elite'?[0,40,40,17,3]:[70,22,7,1,0];
+ /* 精英怪(1005-ZT):銀框 40%、綠框 40%、藍框 17%、黃金框 3%(陣列順序:銀、綠、藍、黃金、紅) */
+ const w=e.kind==='boss'?[0,0,45,45,10]:e.kind==='elite'?[40,40,17,3,0]:[70,22,7,1,0];
  const n=e.kind==='boss'?3:e.kind==='elite'?1:(Math.random()<.04?1:0);
  const il=G.c*6+1+Math.floor(G.t/45);
  if(e.kind==='boss'){bossDrops(e,il);return}
- for(let i=0;i<n;i++)G.drops.push({x:e.x+rnd(-20,20),y:e.y+rnd(-10,10),it:makeItem(il,-1)}); /* 打怪掉落的裝備一律為黑框 */
+ for(let i=0;i<n;i++)G.drops.push({x:e.x+rnd(-20,20),y:e.y+rnd(-10,10),it:makeItem(il,e.kind==='elite'?rollQ(w):-1)}); /* 小怪一律黑框;精英怪掉銀框以上 */
   if(e.kind==='elite'){G.drops.push({x:e.x,y:e.y+14,chest:1});toast('精英怪掉落「年終獎金」,快去撿!');if(Math.random()<.35)G.drops.push({x:e.x+30,y:e.y+20,heal:1})}
 }
 function takeItem(it){
@@ -3256,10 +3311,14 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZR';
+const GBUILD='1005-ZY';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.05j';
-const GNOTES=[['💃','芳芳換上本尊造型','射龍門的芳芳照本人重畫:齊瀏海、金框眼鏡、低馬尾,四個動作全部換新'],
+const GVER='2026.10.05n';
+const GNOTES=[['🏆','射龍門排行榜+個人戰績','新增「今日最大一把」和「全包名人堂」排行榜;還能看自己的勝率、各種門的戰績;連勝連敗芳芳也會有反應'],
+ ['🃏','賭場換新裝','牌桌、瞇牌畫面、撲克牌、籌碼全部重畫;人頭牌藏了彩蛋:J 是主角、Q 是芳芳、K 是捷運站長喪屍'],
+ ['😡','精英怪掉好裝備','暴怒奧客喪屍改成必掉一件銀框以上的裝備,有機會開出藍框、黃金框'],
+ ['💰','裝備賣價調高','黑框賣價將近翻倍、銀框和綠框也調高,越後面關卡掉的裝備越值錢;一場打下來賣裝備的收入大約多一倍'],
+ ['💃','芳芳換上本尊造型','射龍門的芳芳照本人重畫:齊瀏海、金框眼鏡、低馬尾,四個動作全部換新'],
  ['🧾','芳芳開始收稅','戰鬥收成、賣裝備、採收自己的農作物都會被芳芳抽 10%,偷別人的菜抽 20% 贓款稅,全部丟進射龍門池底'],
  ['🥮','中秋節賭金 10,000','全伺服器每個帳號送 10,000 金幣,今晚 12 點前上線就能領取,新帳號也有'],
  ['🎉','新帳號開局獎金 8,888','新建立的帳號直接送 8,888 金幣當開局獎金'],
@@ -3617,7 +3676,7 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1005ZR',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005J',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
+function go(){add('assets-extra.js?v=1005ZY',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
