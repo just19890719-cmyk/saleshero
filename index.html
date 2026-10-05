@@ -1214,7 +1214,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-O</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-Q</span></small>
   </div>
  </div>
 </div>
@@ -2594,7 +2594,7 @@ function combat(dt){
  }
  // 迴紋針
  G.orbs=[];const cl=G.ws.clip;
- if(cl){const ev=G.evo.clip,n=(2+(cl>=2)+(cl>=4))*(ev?2:1),R=76*(cl>=5?1.2:1)*(ev?1.4:1)*ar,dm=A*.4*(cl>=3?1.3:1);G.oa=(G.oa||0)+dt*3.2*(cl>=5?1.3:1);
+ if(cl){const ev=G.evo.clip,n=(2+(cl>=2)+(cl>=4))*(ev?2:1),R=72*(cl>=5?1.2:1)*(ev?1.4:1)*ar,dm=A*.4*(cl>=3?1.3:1);G.oa=(G.oa||0)+dt*3.2*(cl>=5?1.3:1);
   for(let i=0;i<n;i++){const a=G.oa+i*Math.PI*2/n,ox=G.x+Math.cos(a)*R,oy=G.y-26+Math.sin(a)*R;G.orbs.push({x:ox,y:oy,a});
    for(const e of G.en){if(e.oh>G.t)continue;const dx=e.x-ox,dy=e.y-e.r-oy;if(dx*dx+dy*dy<(e.r+16)**2){hit(e,dm,100,Math.atan2(e.y-G.y,e.x-G.x));e.oh=G.t+.5;sfx('clip')}}}}
  // 首領專屬裝備技能
@@ -3024,7 +3024,7 @@ function draw(){
   if(e.kind!=='n')hbar(e.x,e.y-h-10,e.kind==='boss'?90:50,e.hp/e.max,'#ff5a3c');
  }
   for(const q of G.pd){const al=Math.min(1,(q.d-q.t)/.5)*.55;if(q.cf&&fxImg('coffee-7',q.x,q.y,q.R*2.6,0,Math.min(1,al*1.7),true,.55))continue;if(q.fire){drawGroundFire(q,Math.min(1,(q.d-q.t)/.5));continue}ctx.globalAlpha=al*(q.fire?1.3:1);ctx.fillStyle=q.fire?'#c2410c':'#6b3a16';ctx.beginPath();ctx.ellipse(q.x,q.y,q.R*(q.fire?1+.05*Math.sin(G.t*20):1),q.R*.5,0,0,6.283);ctx.fill();ctx.fillStyle=q.fire?'#fbbf24':'#b5651d';ctx.beginPath();ctx.ellipse(q.x,q.y,q.R*.6,q.R*.3,0,0,6.283);ctx.fill();ctx.globalAlpha=1}
-  {const fk='clipfx-'+(1+(Math.floor(G.t*12)%8)),ev=G.evo&&G.evo.clip;for(const o of G.orbs){const sz=ev?78:68;if(!fxImg('cfx-'+(1+((Math.floor(G.t*12+(o.a||0)*3)%8)+8)%8),o.x,o.y,sz,(o.a||0)+G.t*6)){const im=IMG['迴紋針'];ctx.save();const gr=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,sz*.5);gr.addColorStop(0,'rgba(190,110,255,.75)');gr.addColorStop(.55,'rgba(120,50,230,.35)');gr.addColorStop(1,'rgba(90,30,200,0)');ctx.fillStyle=gr;ctx.beginPath();ctx.arc(o.x,o.y,sz*.5,0,6.283);ctx.fill();ctx.restore();if(im&&im.naturalWidth){const h=sz*.62,w=h*im.naturalWidth/im.naturalHeight;ctx.save();ctx.translate(o.x,o.y);ctx.rotate((o.a||0)+G.t*6);ctx.shadowColor='rgba(170,80,255,1)';ctx.shadowBlur=12;ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore()}}}}
+  {const fk='clipfx-'+(1+(Math.floor(G.t*12)%8)),ev=G.evo&&G.evo.clip;for(const o of G.orbs){const sz=ev?56:52;if(!fxImg('cfx-'+(1+((Math.floor(G.t*8+(o.a||0)*3)%8)+8)%8),o.x,o.y,sz,Math.sin(G.t*3+(o.a||0))*.18)){const im=IMG['迴紋針'];ctx.save();const gr=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,sz*.5);gr.addColorStop(0,'rgba(190,110,255,.75)');gr.addColorStop(.55,'rgba(120,50,230,.35)');gr.addColorStop(1,'rgba(90,30,200,0)');ctx.fillStyle=gr;ctx.beginPath();ctx.arc(o.x,o.y,sz*.5,0,6.283);ctx.fill();ctx.restore();if(im&&im.naturalWidth){const h=sz*.62,w=h*im.naturalWidth/im.naturalHeight;ctx.save();ctx.translate(o.x,o.y);ctx.rotate(Math.sin(G.t*3+(o.a||0))*.18);ctx.shadowColor='rgba(170,80,255,1)';ctx.shadowBlur=12;ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore()}}}}
   if(G.ws&&G.ws.drone){const nd=G.evo.drone?3:1;for(let i=0;i<nd;i++){const p=dronePos(i,nd);if(!fxImg('drone-'+(1+(Math.floor(G.t*24+i)%4)),p.x,p.y,74,Math.sin(G.t*3+i)*.08,1,true))fxImg('sk-drone',p.x,p.y,34,0,1)}}
  for(const b of G.bul){
   if(b.k==='train'){drawTrain(b.x-40,b.y+40,96);continue}
@@ -3179,7 +3179,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-O';
+const GBUILD='1005-Q';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.05a';
 const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
@@ -3505,7 +3505,7 @@ try{heroHD()}catch(e){}try{if(ART['__hdsingle']){for(const n in HDN)ART['__hd_'+
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005J',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005J',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
+function go(){add('assets-extra.js?v=1004P',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005J',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005P',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
