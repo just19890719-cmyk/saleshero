@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded',build);
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
-<meta name="theme-color" content="#0e1218">
+<meta name="theme-color" content="#0c1018">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1178,8 +1178,11 @@ body.gready #lgload{display:none}
 .lbr .lbd{grid-row:4}
 
 /* 底部選單延伸到螢幕最底(避免手機底部露出灰色) */
-html{background:#0c1018}
-#tabs::after{content:'';position:absolute;left:0;right:0;top:100%;height:120px;background:rgba(12,16,24,.98);pointer-events:none}
+html,body{background:#0c1018!important;background-color:#0c1018!important}
+html{height:100%;min-height:-webkit-fill-available}
+#tabs{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 6px)!important;background:#0c1018!important}
+#tabs::after{content:'';position:absolute;left:0;right:0;top:100%;height:200px;background:#0c1018;pointer-events:none}
+#home{background-color:#0c1018}
 </style>
 </head>
 <body>
@@ -1218,7 +1221,7 @@ html{background:#0c1018}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-Y</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-Z</span></small>
   </div>
  </div>
 </div>
@@ -3203,7 +3206,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-Y';
+const GBUILD='1005-Z';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.05b';
 const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
