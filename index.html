@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZF">
+<meta name="gbuild" content="1005-ZG">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1224,7 +1224,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZF</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZG</span></small>
   </div>
  </div>
 </div>
@@ -1956,7 +1956,7 @@ function sbBackend(){const U=ONLINE.supabaseUrl.replace(/\/+$/,''),H={apikey:ONL
  return{uid,
   set:async p=>{const r=await fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p))});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}},
   sub:(cb,err)=>{let stop=false,last=0,busy=false;const pull=async()=>{if(stop||busy)return;busy=true;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();last=Date.now();cb(rows)}catch(e){err&&err(e)}busy=false};
-  const loop=()=>{if(stop)return;const lb=document.getElementById('lbov');if(lb&&!lb.hidden&&document.visibilityState==='visible'&&Date.now()-last>15000)pull();setTimeout(loop,2000)};LB.pullNow=()=>{if(Date.now()-last>3000)pull()};pull();setTimeout(loop,2000);return()=>{stop=true}},
+  const loop=()=>{if(stop)return;const lb=document.getElementById('lbov');if(lb&&!lb.hidden&&document.visibilityState==='visible'&&Date.now()-last>30000)pull();setTimeout(loop,2000)};LB.pullNow=()=>{if(Date.now()-last>3000)pull()};pull();setTimeout(loop,2000);return()=>{stop=true}},
   off:p=>{try{fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',keepalive:true,headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p,{t:1}))})}catch(e){}}}}
 async function lbInit(){
  if(ONLINE.supabaseUrl&&ONLINE.supabaseKey&&!(window.claude&&window.claude.use)){const be=sbBackend();LB.sb=be;LB.uid=be.uid;LB.db=true;LB.ready=true;lbSync(true);if(!$('lbov').hidden)lbOpen();return}
@@ -3206,11 +3206,11 @@ function potShow(pot){let el=$('potann');if(!el){el=document.createElement('div'
  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');setTimeout(()=>sfx('coins'),250);
  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),14000);
  el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');if(typeof casSwitch==='function')casSwitch('dragon');renderHome()}}
-setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setTimeout(potWatch,8000);
+setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch()},45000);setTimeout(potWatch,8000);
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZF';
+const GBUILD='1005-ZG';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.05b';
 const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
@@ -3247,7 +3247,7 @@ function annRender(){const bar=$('annbar');if(!bar)return;let closed='';try{clos
  let last=0;try{last=+(localStorage.getItem('shechu-annlast')||0)}catch(e){}const mx=Math.max(...ANN.list.map(a=>+a.id));
  if(mx>last){try{localStorage.setItem('shechu-annlast',String(mx))}catch(e){}if(last>0||true){const L=$('login');const nw=ANN.list.find(a=>+a.id===mx);if(nw&&!(L&&!L.hidden)){toast('📢 新公告:'+String(nw.msg).slice(0,40));sfx('open')}}}}
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#annx')){try{localStorage.setItem('shechu-annx',annSig())}catch(x){}$('annbar').hidden=true;sfx('close')}});
-setInterval(()=>{if(document.visibilityState==='visible')annFetch()},15000);setTimeout(annFetch,2500);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')annFetch()});
+setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))annFetch()},30000);setTimeout(annFetch,2500);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')annFetch()});
 
 /* ===== 十八仔 ===== */
 const SBMAX=50000;
@@ -3440,7 +3440,7 @@ function fmFeedNext(){if(FF.busy||!FF.q.length)return;const L=$('login');if((L&&
  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');clearTimeout(el._t);
  const done=()=>{el.classList.remove('on');clearTimeout(el._t);setTimeout(()=>{FF.busy=false;fmFeedNext()},700)};
  el._t=setTimeout(done,7000);el.onclick=done}
-setInterval(fmFeedWatch,20000);setTimeout(fmFeedWatch,9000);
+setInterval(()=>{if(!(G&&running))fmFeedWatch()},40000);setTimeout(fmFeedWatch,9000);
 
 /* ===== 雲端存檔帳號 ===== */
 var CL={on:false,u:null,t:null,timer:null,busy:false,lastOk:0,err:'',ready:false,dirty:false};
@@ -3456,9 +3456,13 @@ function clSet(u,t){CL.u=u;CL.t=t;try{if(u&&SAVE&&SAVE.acct!==u){SAVE.acct=u;loc
 function clSnap(){return JSON.parse(JSON.stringify(SAVE))}
 function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,3000)}
 /* 防止多裝置互相覆蓋:雲端存檔若被別台裝置寫過,這台就停止上傳並登出 */
+/* 省流量:只向伺服器問「存檔時間」,不下載整份存檔(需要 acct_stamp;伺服器沒有時自動改回舊方式) */
+async function clStamp(){if(CL.stampOK!==false){try{const r=await clRpc('acct_stamp',{p_user:CL.u,p_token:CL.t});CL.stampOK=true;return{t:+((r&&r.save_t)||0)}}
+  catch(e){const m=String((e&&e.msg)||'')+' '+String((e&&e.code)||'');if(/token/i.test(m))throw e;if(/http_404|Could not find|does not exist|PGRST202/i.test(m))CL.stampOK=false;else throw e}}
+ const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});return{t:r&&r.save?+(r.save._t||r.save_t||0):0}}
 async function clGuard(){if(!CL.on||!CL.u||!CL.ready||CL.kicked)return false;
- try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});if(CL.kicked)return false;CL.gt=Date.now();
-  const ct=r&&r.save?+(r.save._t||r.save_t||0):0,sy=clSyncGet();
+ try{const r=await clStamp();if(CL.kicked)return false;CL.gt=Date.now();
+  const ct=r.t,sy=clSyncGet();
   if(ct&&sy&&Math.abs(ct-sy)>1){clKick();return false}return true}
  catch(e){if(/token/i.test(String((e&&e.msg)||'')))clKick();return false}}
 async function clFlush(keep){if(!CL||!CL.on||!CL.u||CL.noflush||CL.kicked)return;clearTimeout(CL.timer);if(CL.busy){if(!keep)CL.timer=setTimeout(clFlush,2000);return}
@@ -3505,8 +3509,10 @@ document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
 function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);clSet(null,null);
  const ov=document.createElement('div');ov.className='ov clov';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>⚠️ 帳號已在其他裝置登入</h2><p>你的雲端帳號剛剛在<b>另一個瀏覽器或裝置</b>登入了。<br>為了避免兩邊的進度互相覆蓋,這裡的進度<b>已停止上傳</b>。</p><p class="muted" style="font-size:12px">如果要改回在這台裝置玩,請重新登入,另一台就會被登出。</p><div class="clbtns"><button class="btn pri" data-a="re">重新登入</button><button class="btn" data-a="x">知道了</button></div></div>';
  document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;if(b.dataset.a==='re')clModal('in')}}
-async function clCheck(){if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false){clKick();return}}catch(e){if(/token/i.test(String((e&&e.msg)||''))){clKick();return}}if(!CL.busy){CL.busy=true;await clGuard();CL.busy=false}}
-setInterval(clCheck,20000);
+async function clCheck(){if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;if(Date.now()-(CL.ct||0)<8000)return;CL.ct=Date.now();
+ if(CL.stampOK===false){try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false){clKick();return}}catch(e){if(/token/i.test(String((e&&e.msg)||''))){clKick();return}}}
+ if(!CL.busy){CL.busy=true;await clGuard();CL.busy=false}}
+setInterval(clCheck,30000);
 /* 切回遊戲、或按出擊時立刻檢查,不用等 20 秒 */
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(clCheck,300)});
 addEventListener('focus',()=>setTimeout(clCheck,300));
