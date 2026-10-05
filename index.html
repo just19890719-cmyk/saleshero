@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZC">
+<meta name="gbuild" content="1005-ZE">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1177,6 +1177,15 @@ body.gready #lgload{display:none}
 .lbr .eqs .tile{width:min(30px,calc((100% - 60px)/7))!important;height:auto!important;aspect-ratio:1;flex:none}
 .lbr .eqs .rd{width:42px!important;height:28px!important;flex:none}
 .lbr .lbd{grid-row:4}
+
+/* 修正:標語後面的深色方框、金色按鈕文字的白色殘影 */
+#login.poster .mqrib p{box-shadow:none!important;background:none!important}
+.btn.pri:not(#lggo){text-shadow:none!important}
+
+/* iPhone 主畫面 App 模式專用:用螢幕全高定位底部選單(瀏覽器模式不受影響) */
+html.ios-app #tabs{top:100vh!important;bottom:auto!important;transform:translateY(-100%)}
+html.ios-app .page{bottom:auto!important;height:100vh!important;box-sizing:border-box}
+html.ios-app body{min-height:100vh}
 </style>
 </head>
 <body>
@@ -1215,7 +1224,7 @@ body.gready #lgload{display:none}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZC</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZE</span></small>
   </div>
  </div>
 </div>
@@ -3200,7 +3209,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZC';
+const GBUILD='1005-ZE';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.05b';
 const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
@@ -3526,6 +3535,9 @@ try{if('serviceWorker' in navigator&&location.protocol==='https:'&&typeof ONLINE
   if(G&&running&&!G.over){ask('目前正在戰鬥中,切換會中斷這一局,\n確定要切換成手機面板嗎?',go);return}go()};
  setInterval(()=>{b.hidden=!!(G&&!G.over)},500)})();
 try{heroHD()}catch(e){}try{if(ART['__hdsingle']){for(const n in HDN)ART['__hd_'+n]=1;hdN()}}catch(e){}
+(function(){try{if(navigator.standalone===true)document.documentElement.classList.add('ios-app')}catch(e){}
+ document.addEventListener('click',e=>{if(!(e.target&&e.target.id==='gbuild'))return;const f=arguments.callee;window.__gbn=(window.__gbn||0)+1;clearTimeout(window.__gbt);window.__gbt=setTimeout(()=>window.__gbn=0,1500);
+  if(window.__gbn>=3){window.__gbn=0;const t=$('tabs').getBoundingClientRect();alert('App模式:'+(navigator.standalone===true)+'\n畫面高 innerHeight:'+innerHeight+'\n100vh:'+(()=>{const d=document.createElement('div');d.style.cssText='position:fixed;top:0;height:100vh;width:1px';document.body.appendChild(d);const h=d.offsetHeight;d.remove();return h})()+'\n螢幕:'+screen.width+'x'+screen.height+'\n選單底部:'+Math.round(t.bottom)+' 高:'+Math.round(t.height))}})})();
 lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 <script>
