@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZZL">
+<meta name="gbuild" content="1005-ZZQ">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -754,7 +754,21 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 .dlbt{display:flex;gap:6px;margin:8px 0}.dlbt button{flex:1;padding:6px;border-radius:8px;border:1px solid rgba(255,210,74,.35);background:rgba(0,0,0,.25);color:#e8ecf2;font-size:12px;cursor:pointer}.dlbt button.on{background:linear-gradient(#ffd24a,#e0a21a);color:#2a1d00;font-weight:800}
 .dlbr{display:grid;grid-template-columns:28px 1fr auto;gap:6px;align-items:center;padding:6px 4px;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}.dlbr .rk{font-weight:900;text-align:center}.dlbr .am{font-weight:800;color:#ffd24a}.dlbr small{display:block;color:#9aa4b2;font-size:11px}
 .dstk{display:inline-block;margin-top:3px;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:800}.dstk.hot{background:rgba(255,120,40,.2);color:#ffb070}.dstk.cold{background:rgba(90,150,255,.18);color:#9cc3ff}
-.dtax{font-size:11px;color:#ffd9a0;white-space:nowrap;margin-top:1px}.dpot .dtax:empty{display:none}.dpot .dtax i{font-style:normal;font-weight:800;color:#ffd24a}
+.dtax{font-size:11px;color:#ffd9a0;white-space:nowrap;margin-top:1px}
+#casT .trpanel{display:grid;gap:10px;padding:12px;border-radius:16px;background:radial-gradient(ellipse at 50% 0,rgba(255,200,60,.12),rgba(0,0,0,.35) 70%),linear-gradient(#1b2230,#121722);border:1px solid rgba(255,210,74,.35)}
+#casT .trbest{display:grid;justify-items:center;gap:2px;padding:10px;border-radius:12px;background:rgba(0,0,0,.3)}#casT .trbest small{font-size:12px;color:#9aa4b2}#casT .trbest b{font-size:30px;font-weight:900;color:#ffd24a;font-variant-numeric:tabular-nums}#casT .trbest span{font-size:12px;color:#cfd6de}
+#casT .trgo{font-size:18px;padding:12px}
+#casT .trrules,#casT .trtiers{display:grid;gap:5px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);font-size:12.5px;line-height:1.45}#casT .trrules b,#casT .trtiers>b{color:#ffe08a;font-size:13px}#casT .trrules span::before{content:'・'}
+#casT .trt{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:4px 0;border-bottom:1px dashed rgba(255,255,255,.08)}#casT .trt b{color:#7ee08a;min-width:70px;text-align:right}#casT .trt.fin{border:0}#casT .trt.fin b{color:#ffd24a}
+#casT .trlbw{display:grid;gap:6px}#casT .trlbh{display:flex;align-items:center;justify-content:space-between;gap:8px}#casT .trlbh b{color:#ffe08a}#casT .trlbh .trbtabs{flex:0 0 150px}#casT .trlbh .trbtabs button{padding:5px 4px;font-size:12px}#casT .trbbody{max-height:none}
+.trbov{z-index:9}.trbbox{max-width:420px;width:94vw;box-sizing:border-box;display:grid;gap:8px}.trbbox h2{margin:0;text-align:center}
+.trbtabs{display:flex;gap:6px}.trbtabs button{flex:1;padding:8px 4px;border-radius:10px;border:1px solid #556;background:#222a38;color:#cfd6de;font-weight:800;font-size:13px}.trbtabs button.on{background:linear-gradient(#ffe08a,#e8a923);color:#3a2600;border-color:#ffd24a}
+.trbbody{max-height:54vh;overflow:auto;display:grid;gap:5px;align-content:start}
+.trbr{display:grid;grid-template-columns:30px minmax(0,1fr) auto;column-gap:8px;align-items:center;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.05)}
+.trbr.me{background:rgba(255,210,74,.16);outline:1px solid rgba(255,210,74,.5)}
+.trbr .rk{text-align:center;font-weight:900}.trbr .nm{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.trbr .am{color:#ffd24a;font-weight:900;font-variant-numeric:tabular-nums}
+.trbr small{grid-column:2/4!important;grid-row:2;color:#9aa4b2!important;font-size:11px!important;display:block}
+.dpot .dtax:empty{display:none}.dpot .dtax i{font-style:normal;font-weight:800;color:#ffd24a}
 .dpot #dpotst{white-space:nowrap}
 .dallbox{max-width:360px;text-align:center;border:2px solid #ff6a3d}
 .dallbox h2{color:#ffb070}
@@ -1267,7 +1281,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZZL</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZZQ</span></small>
   </div>
  </div>
 </div>
@@ -1357,7 +1371,7 @@ html.ios-app body{min-height:100vh}
   </div>
   <div class="tab" data-tab="dragon" hidden>
    <section style="margin-top:12px">
-    <div class="castabs" id="castabs"><button data-c="dragon" class="on"><span class="cti" data-k="cards-fan">🃏</span> 射龍門</button><button data-c="sib" class="closed"><span class="cti" data-k="dice-gold">🎲</span> 十八仔<small class="cclosed">🚧 經營不善 改建21點</small></button></div>
+    <div class="castabs" id="castabs"><button data-c="dragon" class="on"><span class="cti" data-k="cards-fan">🃏</span> 射龍門</button><button data-c="train"><span class="cti">🚇</span> 無限列車</button><button data-c="sib" class="closed"><span class="cti" data-k="dice-gold">🎲</span> 十八仔<small class="cclosed">🚧 經營不善 改建21點</small></button></div>
     <div id="casD">
     <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用池底 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
@@ -1390,6 +1404,17 @@ html.ios-app body{min-height:100vh}
       <li>池底被挖空時會從 0 開始,大家丟的底注會再把池底養起來。</li>
      </ol>
     </details>
+    </div>
+    <div id="casT" hidden>
+    <h2>賭徒下場 無限列車 <span class="muted" style="font-size:13px;font-weight:400">輸光的賭徒,只能跑給列車追</span></h2>
+    <div class="trpanel">
+     <div class="dsign"><p>沒錢還賭債?</p><p class="b">那就拿命跑給列車追</p><small>— 站長名言 —</small></div>
+     <div class="trbest" id="trbest"></div>
+     <button class="btn pri trgo" id="trgo">🚇 開始挑戰</button>
+     <div class="trrules"><b>規則</b><span>不能攻擊、只能在月台內上下左右閃;3 顆心,撐滿 2 分鐘通關</span><span>🐢 慢車停留久、⚡ 快車一閃就過,看清警示箭頭再跑</span><span>裝備、座駕都不算,大家同樣的移動速度</span></div>
+     <div class="trtiers" id="trtiers"></div>
+     <div class="trlbw"><div class="trlbh"><b>🏆 列車排行榜</b><div class="trbtabs" id="trtabs"><button data-t="day" class="on">今日</button><button data-t="all">歷史</button></div></div><div class="trbbody" id="trlb">讀取中…</div></div>
+    </div>
     </div>
     <div id="casS" hidden>
     <h2>十八仔 <span class="muted" style="font-size:13px;font-weight:400">跟企劃女神芳芳對賭 · 芳芳做莊</span></h2>
@@ -2021,6 +2046,100 @@ $('drule').addEventListener('toggle',()=>{if(!$('drule').open){SAVE.drule=1;save
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hero]');if(!b)return;const v=b.dataset.hero==='f'?'f':'m';if((SAVE.hero||'m')===v)return;
  if(v==='f'&&!ART['女主角-idle-1']){toast('女主角圖片載入中,請稍等幾秒再試');return}
  SAVE.hero=v;save();audioUnlock();sfx('equip');renderHome();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(x){}toast(v==='f'?'👠 換成女主角,開局技能:高跟鞋踢擊':'👊 換成男主角,開局技能:空手揮拳')});
+/* ===== 1005-ZZM:賭徒下場 無限列車(純躲列車小遊戲) =====
+   不能攻擊、沒有喪屍;3 顆心、撐 2 分鐘,五個等級(每班 +50/70/100/130/170);撐完 +400。裝備與座駕屬性不算,大家同樣的移動速度 */
+const TR={win:400,dur:120,lim:250};/* lim:月台上下邊界(只能在 ±250 之間移動) */
+const TRTAUNT=['欠芳芳的錢還沒還,先跑給列車追吧','賭輸了還想搭車?站長說:用跑的!','十賭九輸,剩下那一次是被列車撞','還債路上,請退到黃線後方'];
+function startTrain(){window.__TR=1;startRun(0)}
+function trInit(){G.tr={hp:3,inv:0,nx:1.4,n:0,coins:0,last:0};G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.ws={};G.ss={};G.evo={};
+ G.S=Object.assign({},G.S,{spd:0,regen:0,hp:3,def:0,dr:0,sk:{}});G.hp=3;G.lanes=[];G.mod={n:'',d:''};try{$('modb').hidden=true}catch(e){}
+ $('hch').textContent='🚇 賭徒下場 無限列車';toast('🚇 '+pickL(TRTAUNT));sfx('warn')}
+/* 1005-ZZP:總長 2 分鐘,五個等級 普通→困難→非常困難→地獄級別→終極煉獄;每班 50/70/100/130/170 */
+const TRT=[{to:15,nm:'普通',ic:'🟡',coin:50,gap:1.9,n:[1,1,2],warn:1.15,sp:1.05,vert:0,slow:.2,fast:.2},
+ {to:30,nm:'困難',ic:'🟠',coin:70,gap:1.7,n:[1,2,2,3],warn:1.05,sp:1.12,vert:.3,slow:.3,fast:.3},
+ {to:60,nm:'非常困難',ic:'🔴',coin:100,gap:1.5,n:[2,2,3],warn:.95,sp:1.2,vert:.45,slow:.3,fast:.35},
+ {to:90,nm:'地獄級別',ic:'🔥',coin:130,gap:1.25,n:[2,3,3],warn:.85,sp:1.3,vert:.55,slow:.25,fast:.45},
+ {to:999,nm:'終極煉獄',ic:'💀',coin:170,gap:1.1,n:[2,3,3,3],warn:.78,sp:1.4,vert:.6,slow:.2,fast:.5}];
+function trLevel(t){return TRT.find(v=>t<v.to)}
+/* 確保每一波都留有跑得到的安全空間:平行軌道至少間隔 130,並檢查玩家在警示時間內跑得到的範圍裡有空隙 */
+function trBlocked(v,extra){const B=[];for(const L of (G.trL||[]))if(L.v===v&&!L.done&&!L.hit)B.push(L.p);for(const p of extra)B.push(p);return B}
+function trSafeReach(v,ps,warn){const c=v?G.x:G.y,reach=150*warn*.75,lo=v?c-reach:Math.max(-TR.lim,c-reach),hi=v?c+reach:Math.min(TR.lim,c+reach),B=trBlocked(v,ps);
+ for(let y=lo;y<=hi;y+=6){if(B.every(p=>Math.abs(y-p)>52))return true}return false}
+function trWave(){const L=trLevel(G.t),n=pick(L.n),used=[];
+ for(let i=0;i<n;i++){const v=Math.random()<L.vert;const c=v?G.x:G.y;let p,ok=false;
+  for(let k=0;k<20&&!ok;k++){p=c+(i===0?rnd(-25,25):(Math.random()<.5?-1:1)*rnd(130,220));if(!v)p=Math.max(-TR.lim+10,Math.min(TR.lim-10,p));
+   const same=used.filter(u=>u.v===v).map(u=>u.p);ok=same.every(q=>Math.abs(q-p)>=130)&&trBlocked(v,[]).every(q=>Math.abs(q-p)>=110)&&trSafeReach(v,same.concat([p]),L.warn)}
+  if(!ok)continue;used.push({v,p});G.tr.last++;
+  const r=Math.random(),ty=r<L.slow?'slow':r<L.slow+L.fast?'fast':'n',spm=ty==='slow'?.42:ty==='fast'?1.55:1,wm=ty==='fast'?.85:ty==='slow'?1.1:1;
+  (G.trL=G.trL||[]).push({v,p,t:0,warn:(L.warn+i*.12)*wm,go:false,s:0,dir:Math.random()<.5?-1:1,sp:2100*L.sp*spm,ty,hit:false,done:false})}
+ if(used.length)sfx('warn')}
+function trTick(dt){const T=G.tr;if(!T||G.over)return;T.inv-=dt;T.nx-=dt;G.y=Math.max(-TR.lim,Math.min(TR.lim,G.y));
+ if(G.t>=TR.dur){trEnd(true);return}
+ {const lv=trLevel(G.t);if(T.lv!==lv.nm){const first=!T.lv;T.lv=lv.nm;if(!first){toast(lv.ic+' 進入'+lv.nm+'!每閃過一班 +'+lv.coin);sfx(lv.nm==='地獄級別'||lv.nm==='終極煉獄'?'roar':'warn');shake(lv.nm==='終極煉獄'?12:lv.nm==='地獄級別'?9:4)}}}
+ if(T.nx<=0){trWave();T.nx=trLevel(G.t).gap*rnd(.85,1.15)}
+ const TL=trainLen(105),HW=W/2+80,HH=H/2+120;
+ for(let i=(G.trL||[]).length-1;i>=0;i--){const L=G.trL[i];L.t+=dt;
+  if(!L.go){if(L.t>=L.warn){L.go=true;L.s=(L.v?G.y:G.x)-L.dir*((L.v?HH:HW));sfx('car');setTimeout(()=>sfx('boom'),110);shake(4)}continue}
+  L.s+=L.dir*L.sp*dt;const head=L.s,tail=L.s-L.dir*TL,lo=Math.min(head,tail),hi=Math.max(head,tail);
+  const along=L.v?G.y:G.x,cross=L.v?G.x:G.y;
+  if(!L.hit&&Math.abs(cross-L.p)<(L.v?36:40)&&along>lo-12&&along<hi+12){L.hit=true;
+   if(T.inv<=0){T.hp--;T.inv=1.2;G.hp=T.hp;G.hurt=.3;sfx('hurt');sfx('hurtThud');sfx('impact');shake(12);hitStop(.08);
+    if(T.hp<=0){trEnd(false);return}toast(T.hp===1?'💔 只剩最後一顆心!':'💥 被列車撞到了!')}}
+  if(!L.done&&!L.hit&&(L.dir>0?tail>along+20:tail<along-20)){L.done=true;T.n++;G.kills=T.n;const cc=trLevel(G.t).coin;T.coins+=cc;G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'+'+cc,t:0,d:.8})}
+  if((L.dir>0?tail>(L.v?G.y+HH:G.x+HW):tail<(L.v?G.y-HH:G.x-HW)))G.trL.splice(i,1)}}
+function trDrawGround(){
+ /* 月台邊界:上下各一條黃色警戒線,外面是軌道碎石區 */
+ {const x0=G.x-W/2-40,w=W+80,top=G.y-H/2-40,lim=TR.lim+46;ctx.fillStyle='rgba(28,24,20,.86)';ctx.fillRect(x0,top,w,(-lim)-top);ctx.fillRect(x0,lim,w,G.y+H/2+40-lim);ctx.fillStyle='rgba(150,150,160,.55)';for(const yy of[-lim-40,-lim-70,lim+40,lim+70])ctx.fillRect(x0,yy,w,4);ctx.fillStyle='rgba(90,70,50,.6)';for(let xx=Math.floor(x0/46)*46;xx<x0+w;xx+=46){ctx.fillRect(xx,-lim-78,10,46);ctx.fillRect(xx,lim+32,10,46)}
+  ctx.fillStyle='#e8c21a';ctx.fillRect(x0,-lim-8,w,8);ctx.fillRect(x0,lim,w,8);ctx.fillStyle='rgba(0,0,0,.35)';for(let xx=Math.floor(x0/28)*28;xx<x0+w;xx+=28){ctx.fillRect(xx,-lim-8,14,8);ctx.fillRect(xx,lim,14,8)}}
+ for(const L of (G.trL||[])){const hh=74;const x0=G.x-W/2-30,y0=G.y-H/2-30,w=W+60,h=H+60;
+ if(!L.go){const p=Math.min(1,L.t/L.warn),fl=(Math.sin(L.t*(9+p*16))+1)/2;
+  ctx.globalAlpha=.16+.22*fl;ctx.fillStyle='#ffd400';if(L.v)ctx.fillRect(L.p-hh/2,y0,hh,h);else ctx.fillRect(x0,L.p-hh/2,w,hh);
+  ctx.globalAlpha=.4;ctx.fillStyle='#ff3b2f';if(L.v){const yy=L.dir>0?y0:y0+h-h*p;ctx.fillRect(L.p-hh/2,yy,hh,h*p)}else{const xx=L.dir>0?x0:x0+w-w*p;ctx.fillRect(xx,L.p-hh/2,w*p,hh)}
+  ctx.globalAlpha=.8+.2*fl;ctx.strokeStyle='#ffd400';ctx.lineWidth=4;ctx.setLineDash([22,12]);ctx.lineDashOffset=-G.t*80;ctx.beginPath();
+  if(L.v){ctx.moveTo(L.p-hh/2,y0);ctx.lineTo(L.p-hh/2,y0+h);ctx.moveTo(L.p+hh/2,y0);ctx.lineTo(L.p+hh/2,y0+h)}else{ctx.moveTo(x0,L.p-hh/2);ctx.lineTo(x0+w,L.p-hh/2);ctx.moveTo(x0,L.p+hh/2);ctx.lineTo(x0+w,L.p+hh/2)}
+  ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+  ctx.font='bold 26px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#fff';ctx.strokeStyle='rgba(0,0,0,.7)';ctx.lineWidth=4;
+  const ax=L.v?L.p:(L.dir>0?G.x-W/2+34:G.x+W/2-34),ay=L.v?(L.dir>0?G.y-H/2+90:G.y+H/2-60):L.p,ar=L.v?(L.dir>0?'⬇':'⬆'):(L.dir>0?'➡':'⬅'),lb=(L.ty==='slow'?'🐢':L.ty==='fast'?'⚡':'⚠')+ar;if(L.ty==='fast')ctx.fillStyle='#ff6a5a';else if(L.ty==='slow')ctx.fillStyle='#8fe3ff';ctx.strokeText(lb,ax,ay);ctx.fillText(lb,ax,ay);ctx.fillStyle='#fff'}}
+ ctx.globalAlpha=1}
+function trDrawTop(){const TL=trainLen(105);for(const L of (G.trL||[])){if(!L.go)continue;ctx.save();
+ if(L.v){ctx.translate(L.p,L.s);ctx.rotate(L.dir>0?Math.PI/2:-Math.PI/2);ctx.translate(-TL,0);drawTrain(0,40,105)}
+ else{ctx.translate(L.s,L.p);if(L.dir>0){ctx.scale(-1,1)}drawTrain(0,40,105)}
+ ctx.restore()}
+
+ /* 站長在畫面右上角吹哨叫車 */
+ const warnNow=(G.trL||[]).some(L=>!L.go),k=warnNow?'捷運站長喪屍-cast-'+(1+Math.floor(G.t*10)%5):'捷運站長喪屍-walk-1';
+ if(IMG[k])drawImg(k,'👮',G.x+W/2-62,G.y-H/2+250,120,true,0,.95);
+ if(warnNow){ctx.font='bold 18px system-ui';ctx.textAlign='center';ctx.fillStyle='#ffe08a';ctx.strokeStyle='rgba(0,0,0,.7)';ctx.lineWidth=4;ctx.strokeText('嗶——!',G.x+W/2-62,G.y-H/2+120);ctx.fillText('嗶——!',G.x+W/2-62,G.y-H/2+120)} }
+function trEnd(win){if(!G||G.over)return;const T=G.tr;G.over=true;running=false;joy=null;try{trSubmit(Math.min(TR.dur,G.t),T.n)}catch(e){}
+ const gross=T.coins+(win?TR.win:0),tax=taxIncome(gross);SAVE.coin=Math.max(0,(SAVE.coin||0)+gross-tax);
+ const b=SAVE.trBest||{t:0,n:0};const nb=G.t>b.t+.01||(Math.abs(G.t-b.t)<.01&&T.n>b.n);if(nb)SAVE.trBest={t:Math.min(TR.dur,G.t),n:T.n};save();
+ $('otitle').textContent=win?'🎉 撐過無限列車!賭債暫時跑掉了':pickL(['被列車撞飛…賭債還是沒還完','💥 下車!這班不收賭徒','站長:請退到黃線後方(已經來不及了)']);
+ $('ores').innerHTML='<span>模式</span><b>🚇 賭徒下場 無限列車</b><span>撐過時間</span><b>'+fmtT(Math.min(TR.dur,G.t))+'</b><span>到達等級</span><b>'+trLevel(Math.min(G.t,TR.dur-.01)).ic+' '+trLevel(Math.min(G.t,TR.dur-.01)).nm+'</b><span>閃過列車</span><b>'+T.n+' 班</b><span>獲得金幣</span><b style="color:#ffd77a">+'+fmtC(gross)+'</b>'+(tax>0?'<span>芳芳收稅</span><b style="color:#ff9a8a">−'+fmtC(tax)+' <small style="color:#cfd6de;font-weight:400">→ 射龍門池底</small></b>':'')+'<span>個人最佳</span><b>'+(nb?'🆕 ':'')+fmtT(SAVE.trBest.t)+' / '+SAVE.trBest.n+' 班</b>';
+ $('oloot').innerHTML='<button class="btn" onclick="trBoard()" style="margin-bottom:6px">🏆 看列車排行榜</button><br><span class="muted">'+(win?'跑完全程!芳芳:「下次記得留點錢搭計程車」':'芳芳:「跑不贏列車,就別跟池底賭了」')+'</span>';
+ $('over').hidden=false;$('pause').hidden=true;$('pbtn').hidden=true;toastT=0;$('toast').className='';if(win)sfx('win');else{sfx('die');setTimeout(()=>sfx('lose'),700)}
+ if($('home'))try{renderHome()}catch(e){}}
+/* ===== 列車排行榜(今日、歷史);每人只留最佳一筆,先比撐過時間、再比閃過班數 ===== */
+const trDay=()=>new Date(Date.now()+8*3600e3).toISOString().slice(0,10);
+async function trSubmit(t,n){const r={t:+t.toFixed(2),n,d:trDay()};const L=SAVE.trRuns=SAVE.trRuns||[];L.push(Object.assign({nick:dpNick()},r));SAVE.trRuns=L.sort((a,b)=>b.t-a.t||b.n-a.n).slice(0,20);save();
+ if(DP.on)try{await dpReq('/rest/v1/rpc/train_submit',{p_id:fmId(),p_nick:dpNick(),p_t:r.t,p_n:n})}catch(e){}TRLB.t={}}
+const TRLB={tab:'day',d:{},t:{}};
+async function trLbRows(tab){if(TRLB.d[tab]&&Date.now()-(TRLB.t[tab]||0)<20000)return TRLB.d[tab];let rows;
+ if(DP.on)rows=tab==='day'?await dpReq('/rest/v1/train_scores?select=nick,t:day_t,n:day_n&day=eq.'+trDay()+'&order=day_t.desc,day_n.desc&limit=20'):await dpReq('/rest/v1/train_scores?select=nick,t:best_t,n:best_n&order=best_t.desc,best_n.desc&limit=20');
+ else rows=(SAVE.trRuns||[]).filter(r=>r.t<=TR.dur+.01&&(tab==='all'||r.d===trDay())).slice(0,20);
+ TRLB.d[tab]=rows;TRLB.t[tab]=Date.now();return rows}
+async function trLbInto(el,tab){el.textContent='讀取中…';let rows;const me=dpNick(),med=['🥇','🥈','🥉'];
+ try{rows=await trLbRows(tab)}catch(e){el.innerHTML='<p class="muted">'+(/404|PGRST|does not exist/i.test(String((e&&e.code)||'')+String((e&&e.msg)||''))?'排行榜需要伺服器更新,請管理員執行 1005-ZZP 的 SQL':'讀取失敗,稍後再試')+'</p>';return}
+ el.innerHTML=rows.length?rows.map((r,i)=>'<div class="trbr'+(r.nick===me?' me':'')+'"><span class="rk">'+(med[i]||(i+1))+'</span><span class="nm">'+escH(r.nick||'?')+'</span><span class="am">'+fmtT(+r.t||0)+'</span><small>閃過 '+(+r.n||0)+' 班'+((+r.t||0)>=TR.dur-.01?' · ✅ 撐完全程':' · 到達 '+trLevel(+r.t||0).ic+trLevel(+r.t||0).nm)+'</small></div>').join(''):'<p class="muted">'+(tab==='day'?'今天還沒有人挑戰,第一名就是你!':'還沒有紀錄,快去跑給列車追!')+'</p>'}
+function trPanel(){if(SAVE.trBest&&SAVE.trBest.t>TR.dur+.01){delete SAVE.trBest;save()}
+ const b=SAVE.trBest;$('trbest').innerHTML=b?'<small>我的最佳</small><b>'+fmtT(b.t)+'</b><span>閃過 '+b.n+' 班 · '+(b.t>=TR.dur-.01?'✅ 撐完全程':'到達 '+trLevel(b.t).ic+trLevel(b.t).nm)+'</span>':'<small>我的最佳</small><b>—</b><span>還沒挑戰過</span>';
+ let a=0;$('trtiers').innerHTML='<b>五個等級</b>'+TRT.map(v=>{const s=a,e=Math.min(v.to,TR.dur);a=e;return'<div class="trt"><span>'+v.ic+' '+v.nm+'</span><span class="muted">'+fmtT(s)+'～'+fmtT(e)+'</span><b>每班 +'+v.coin+'</b></div>'}).join('')+'<div class="trt fin"><span>🏁 撐完 2 分鐘</span><span></span><b>+'+TR.win+'</b></div>';
+ document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===TRLB.tab));trLbInto($('trlb'),TRLB.tab)}
+$('trgo').onclick=()=>{audioUnlock();startTrain()};
+$('trtabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;TRLB.tab=b.dataset.t;sfx('tab');document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x===b));trLbInto($('trlb'),TRLB.tab)};
+async function trBoard(){sfx('open');const ov=document.createElement('div');ov.className='ov trbov';
+ ov.innerHTML='<div class="box trbbox"><h2>🏆 列車排行榜</h2><div class="trbtabs"><button data-t="day" class="on">今日</button><button data-t="all">歷史</button></div><div class="trbbody" id="trbb"></div><button class="btn" data-x="1">關閉</button></div>';
+ document.body.appendChild(ov);let tab='day';TRLB.t={};const show=()=>{ov.querySelectorAll('.trbtabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));trLbInto($('trbb'),tab)};
+ ov.onclick=e=>{const b=e.target.closest('[data-t]');if(b){tab=b.dataset.t;sfx('tab');show();return}if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}};show()}
 /* ===== 塔羅 ===== */
 const TAROT=[['0','愚者','🃏','新的開始正在展開,帶著純真與好奇心踏出第一步,不必害怕未知','行事過於魯莽衝動,缺乏計畫,小心因一時興起而付出代價',4,2],
  ['I','魔術師','🪄','你已擁有所需的資源與能力,只要專注行動,就能把想法化為現實','才能尚未發揮,或身邊有人言行不一,需留意表面話語背後的意圖',5,2],
@@ -2250,7 +2369,7 @@ function renderHome(){
   $('stash').innerHTML=list.length?list.map(it=>tile(it,sel===it.id,1)).join(''):'<span class="muted">'+(all.length?'這個分類沒有裝備。':'倉庫是空的,出擊打怪就會掉裝備。')+'</span>';
  $('mute').checked=$('mute2').checked=!!SAVE.mute;volUI();
  $('chs').innerHTML=CH.map((c,i)=>'<button class="ch'+(SAVE.ch===i?' cur':'')+'" data-c="'+i+'"'+(ART['stage-'+i]?' style="--stg:url('+ART['stage-'+i]+')"':'')+(i>=SAVE.unlock||c.wip?' disabled':'')+'><b>'+(i+1)+'. '+c.n+(c.final?' 👑':'')+'</b><span class="muted">'+(c.wip?'🚧 製作中,敬請期待':i>=SAVE.unlock?'🔒 通關上一區解鎖':SAVE.clear.includes(i)?'✅ 已通關,點擊出擊':'點擊出擊')+'</span></button>').join('');
- detail();renderMons();try{renderDaily()}catch(e){}
+   detail();renderMons();try{renderDaily()}catch(e){}
 }
 function detail(){
  const d=$('detail'),it=sel&&byId(sel);
@@ -2326,6 +2445,7 @@ function startRun(c){
   G.base=pstats(1);initSkills();try{hlootRender()}catch(e){}
  $('home').hidden=true;$('hud').hidden=false;$('pbtn').hidden=false;$('hch').textContent=(c+1)+'. '+CH[c].n;sfx('clockIn');G.tw=-1;
  running=true;last=performance.now();
+ if(window.__TR){window.__TR=0;trInit()}
 }
 const mult=()=>Math.pow(1.7,G.c);
 function spawn(def,kind){
@@ -2990,7 +3110,7 @@ function update(dt){
  if(G.moving){const k=Math.min(1,ml)/ml,sp=150*(1+S.spd/100)*(G.cardT>0?1.25+.08*(S.sk.card||0):1);G.x+=mx*k*sp*dt;G.y+=my*k*sp*dt;if(G.atk<=0&&Math.abs(mx)>.1)G.face=mx>0?1:-1}
  G.hp=Math.min(S.hp,G.hp+S.regen*dt);
  const ch=CH[G.c];
- if(G.t<DUR){
+ if(G.tr){trTick(dt)}else if(G.t<DUR){
   G.spawn+=dt*(1.6+G.t/12);while(G.spawn>=1){G.spawn--;if(G.en.length<Q.cap)spawn(ENE[pick(ch.pool)],'n')}
   if(G.t>=G.elite){G.elite+=45;spawn(pick(ELITE),'elite');toast('精英怪出現!');sfx('roar')}
  }else if(!G.boss){G.boss=true;const b=BOSS[CH[G.c].boss];if(!b){toast('撐過 3 分鐘,通關!');endRun(true);return}spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*260)*mult();bossInit(be)}
@@ -3032,6 +3152,7 @@ function update(dt){
   G.shk*=Math.pow(.02,dt);if(G.shk<.2)G.shk=0;
 }
 function endRun(win){
+ if(G&&G.tr&&!G.over){trEnd(win===true);return}
  if(!G||G.over)return;G.over=true;running=false;joy=null;
  const coinG=Math.round(G.kills+G.t/3+(win?100*(G.c+1):0)+(win&&G.bossFirst?1000:0)),coinT=taxIncome(coinG+(G.coinB||0));SAVE.coin=Math.max(0,(SAVE.coin||0)+coinG-coinT);
  try{dqAdd('runs');dqAdd('kills',G.kills);if(win)dqAdd('win');SAVE.tut=1}catch(e){}
@@ -3043,7 +3164,7 @@ function endRun(win){
  $('over').hidden=false;$('pause').hidden=true;$('pbtn').hidden=true;toastT=0;$('toast').className='';if(win)sfx('win');else if(win===false){sfx('die');setTimeout(()=>sfx('lose'),700)}else sfx('retreat');
 }
 $('gohome').onclick=()=>{CHOOSING=CHESTING=false;$('lvup').hidden=true;$('chest').hidden=true;G=null;$('over').hidden=true;$('hud').hidden=true;$('home').hidden=false;renderHome()};
-$('replay').onclick=()=>{const c=G?G.c:(SAVE.ch||0);$('gohome').onclick();audioUnlock();startRun(c)};
+$('replay').onclick=()=>{const c=G?G.c:(SAVE.ch||0),wt=!!(G&&G.tr);$('gohome').onclick();audioUnlock();if(wt)startTrain();else startRun(c)};
 function setPause(p){if(!G||G.over||CHOOSING||CHESTING)return;running=!p;sfx(p?'open':'close');$('pause').hidden=!p;if(p)renderPauseSkills()}
 $('pbtn').onclick=()=>setPause(true);$('resume').onclick=()=>setPause(false);
 $('retreat').onclick=()=>{$('pause').hidden=true;endRun(null)};
@@ -3187,7 +3308,7 @@ function draw(){
    else if(d.k==='scorch'){const g=ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.R);g.addColorStop(0,'rgba(40,25,15,.9)');g.addColorStop(.6,'rgba(60,35,20,.5)');g.addColorStop(1,'rgba(60,35,20,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(d.x,d.y,d.R,d.R*.55,0,0,6.283);ctx.fill()}
    else{ctx.fillStyle=d.k==='gold'?'#d9a42a':'#1f3d8f';for(let i=0;i<4;i++){const a=d.r+i*1.7,rr=d.R*(i?.35:.7);ctx.beginPath();ctx.ellipse(d.x+Math.cos(a)*d.R*.6*(i?1:0),d.y+Math.sin(a)*d.R*.3*(i?1:0),rr,rr*.6,0,0,6.283);ctx.fill()}}}
   ctx.globalAlpha=1;
-  bossDrawGround();
+  bossDrawGround();if(G.tr)trDrawGround();
   for(const f of G.fx)if(f.k==='bwave')wvDraw(f.x,f.y-6,f.R,f.t/f.d);
   if(IMG['xp寶石']&&IMG['xp寶石'].naturalWidth)for(const g of G.gems)drawImg('xp寶石','',g.x,g.y+7,g.v>=10?22:g.v>1?17:13);else
   for(const g of G.gems){ctx.fillStyle=g.v>=10?'#ffb43b':g.v>1?'#7cf0c8':'#4fc3ff';ctx.beginPath();ctx.moveTo(g.x,g.y-7);ctx.lineTo(g.x+5,g.y);ctx.lineTo(g.x,g.y+7);ctx.lineTo(g.x-5,g.y);ctx.closePath();ctx.fill()}
@@ -3202,6 +3323,7 @@ function draw(){
  for(const f of G.fx){const p=f.t/f.d;
   if(f.k==='csplash'){const S=f.R*2.3;let ok;if(p<.72)ok=fxImg('coffee-'+Math.min(6,1+Math.floor(p/.72*6)),f.x,f.y,S,0,1,true);else ok=fxImg(p<.86?'coffee-7':'coffee-8',f.x,f.y,S,0,1-(p-.72)/.28*.8,true);
    if(!ok){ctx.strokeStyle='rgba(170,110,50,'+(1-p)+')';ctx.lineWidth=6*(1-p)+1;ctx.beginPath();ctx.arc(f.x,f.y,f.R*(.3+.7*p),0,Math.PI*2);ctx.stroke()}}
+  else if(f.k==='txt'){ctx.globalAlpha=1-p;ctx.font='bold 22px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=4;ctx.strokeStyle='rgba(0,0,0,.7)';ctx.fillStyle='#ffd24a';const yy=f.y-p*40;ctx.strokeText(f.s,f.x,yy);ctx.fillText(f.s,f.x,yy);ctx.globalAlpha=1}
   else if(f.k==='streak'){const L=f.L*(.5+.5*Math.min(1,p*2.2)),al=1-p;ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.a);const g=ctx.createLinearGradient(0,0,L,0);g.addColorStop(0,'rgba('+f.c+',0)');g.addColorStop(1,'rgba('+f.c+','+al+')');ctx.strokeStyle=g;ctx.lineCap='round';ctx.lineWidth=7*(1-p)+2;ctx.beginPath();ctx.moveTo(L*.15,0);ctx.lineTo(L,0);ctx.stroke();ctx.restore()}
   else if(f.k==='swirl'){ctx.save();ctx.lineCap='round';for(let q=0;q<3;q++){const r=f.R*(.75+.18*q),a0=-Math.PI/2+f.dir*(p*Math.PI*2.2-q*.5);ctx.strokeStyle='rgba('+f.c+','+((1-p)*(.85-.22*q))+')';ctx.lineWidth=(9-2.5*q)*(1-p*.6);ctx.beginPath();ctx.arc(f.x,f.y,r,a0-f.dir*1.9,a0,f.dir<0);ctx.stroke()}ctx.restore()}
   else if(f.k==='ring'){ctx.strokeStyle='rgba('+(f.c||'255,230,120')+','+(1-p)+')';ctx.lineWidth=6*(1-p)+1;ctx.beginPath();ctx.arc(f.x,f.y,f.R*(.3+.7*p),0,Math.PI*2);ctx.stroke()}
@@ -3234,7 +3356,7 @@ function draw(){
   for(const l of G.lob){const p=l.t/l.d,x=l.x0+(l.x1-l.x0)*p,y=l.y0+(l.y1-l.y0)*p-Math.sin(p*Math.PI)*90;
    ctx.strokeStyle='rgba(230,60,40,'+(.25+.5*p)+')';ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();ctx.ellipse(l.x1,l.y1,75*(1.15-.15*p),75*.5*(1.15-.15*p),0,0,6.283);ctx.stroke();ctx.setLineDash([]);
    shadow(x,l.y0+(l.y1-l.y0)*p,10);drawThermos(x,y,p*12)}
-  bossDrawTop();drawFx();
+  bossDrawTop();if(G.tr)trDrawTop();drawFx();
  if(G.drops.length)for(const d of G.drops)if(d.it&&(d.it.q>=3||d.boss===2)&&!(d.pt<1)){ctx.fillStyle=d.boss===2?'#ffe27a':RAR[d.it.q].c;ctx.font='bold '+(d.boss===2?14:12)+'px system-ui';ctx.textAlign='center';if(d.boss===2){ctx.strokeStyle='rgba(0,0,0,.8)';ctx.lineWidth=3;ctx.strokeText('👑 '+d.it.name,d.x,d.y-120)}ctx.fillText((d.boss===2?'👑 ':'')+d.it.name,d.x,d.y-(d.boss===2?120:76))}
  ctx.textAlign='center';ctx.textBaseline='middle';
  for(const f of G.fx)if(f.k==='num'){const p=f.t/f.d,sc=p<.16?(f.cr?2.1:1.6)-(f.cr?1.1:.6)*(p/.16):1,yy=f.y-(1-Math.pow(1-p,2.2))*(f.cr?34:26),fs=Math.round((f.cr?20:13)*sc);
@@ -3247,9 +3369,9 @@ function draw(){
 function hud(){
  if(!G)return;
  $('hpi').style.width=Math.max(0,G.hp/G.S.hp*100)+'%';$('xpi').style.width=Math.min(100,G.xp/needXp(G.lv)*100)+'%';
- {const ht=fmt(Math.max(0,Math.ceil(G.hp)))+' / '+fmt(Math.ceil(G.S.hp)),xt='Lv.'+G.lv;if($('hpt')&&$('hpt').textContent!==ht)$('hpt').textContent=ht;if($('xpt')&&$('xpt').textContent!==xt)$('xpt').textContent=xt}
- {const rem=Math.ceil(DUR-G.t);if(rem<=10&&rem>0&&rem!==G.tw&&running){G.tw=rem;sfx('warn')}}
- $('timer').textContent=G.t>=DUR?(BOSS[CH[G.c].boss]?'首領戰':'00:00'):fmtT(DUR-G.t);{const hk=$('hk');if(hk&&hk._k!==G.kills){const d=G.kills-(hk._k||0);hk._k=G.kills;hk.innerHTML='擊倒 <b>'+G.kills+'</b>';hk.classList.remove('pop','big');void hk.offsetWidth;hk.classList.add(d>=5?'big':'pop')}}
+ {const ht=G.tr?'❤️'.repeat(Math.max(0,G.tr.hp))+'🖤'.repeat(Math.max(0,3-G.tr.hp)):fmt(Math.max(0,Math.ceil(G.hp)))+' / '+fmt(Math.ceil(G.S.hp)),xt=G.tr?(trLevel(Math.min(G.t,TR.dur-.01)).ic+' '+trLevel(Math.min(G.t,TR.dur-.01)).nm):'Lv.'+G.lv;if($('hpt')&&$('hpt').textContent!==ht)$('hpt').textContent=ht;if($('xpt')&&$('xpt').textContent!==xt)$('xpt').textContent=xt}
+ {const rem=Math.ceil((G.tr?TR.dur:DUR)-G.t);if(rem<=10&&rem>0&&rem!==G.tw&&running){G.tw=rem;sfx('warn')}}
+ $('timer').textContent=G.tr?fmtT(Math.max(0,TR.dur-G.t)):G.t>=DUR?(BOSS[CH[G.c].boss]?'首領戰':'00:00'):fmtT(DUR-G.t);{const hk=$('hk');if(hk&&hk._k!==G.kills){const d=G.kills-(hk._k||0);hk._k=G.kills;hk.innerHTML=(G.tr?'閃過 ':'擊倒 ')+'<b>'+G.kills+'</b>';hk.classList.remove('pop','big');void hk.offsetWidth;hk.classList.add(d>=5?'big':'pop')}}
 }
 let hudT=0,ftAvg=.016,slowT=0;
 function quality(raw,dt){
@@ -3380,10 +3502,11 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZZL';
+const GBUILD='1005-ZZQ';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.05r';
-const GNOTES=[['🔊','打擊音效升級','男女主角的拳腳換成更有打擊感的音效;打倒精英怪和首領也有專屬音效(音效:小森平「無料効果音で遊ぼう！」)'],
+const GVER='2026.10.05s';
+const GNOTES=[['🚇','賭場新玩法:賭徒下場 無限列車','賭場新增「無限列車」分頁,拿命還賭債!不能攻擊、只能在月台上下範圍內走位,有慢車🐢和快車⚡;3 顆心撐 2 分鐘,從普通一路到終極煉獄,越後面每閃過一班金幣越多;還有全伺服器列車排行榜'],
+ ['🔊','打擊音效升級','男女主角的拳腳換成更有打擊感的音效;打倒精英怪和首領也有專屬音效(音效:小森平「無料効果音で遊ぼう！」)'],
  ['👊','男主角換新裝+三段連擊','男主角換成插畫風;空手揮拳改成左刺拳、右直拳、上鉤拳三段連擊,第三拳特別痛'],
  ['👠','新角色:女主角','裝備頁可以切換男/女主角,裝備和進度共用;女主角是三段連踢(前踢、側踢、迴旋踢),範圍大、擊退遠,第三下打周圍一圈,適合被包圍時'],
  ['🐹','新吉祥物「皮過敏」','超貪吃的土撥鼠皮過敏接替咖啡豆寶寶,會在農場睡覺、偷吃、咬金幣'],
@@ -3512,7 +3635,7 @@ $('sbchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||SBS.ph==='r
  if(v===-1)SBS.bet=Math.max(1000,mx);else if(v===0)SBS.bet=1000;else SBS.bet=Math.min(Math.max(1000,mx),SBS.bet+v);audioUnlock();sfx(v?'chips':'chipsClear');renderSib()};
 $('sbgo').onclick=()=>sbPlay();
 const SIB_CLOSED=true;
-function casSwitch(k){if(k==='sib'&&SIB_CLOSED){k='dragon'}SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
+function casSwitch(k){if(k==='sib'&&SIB_CLOSED){k='dragon'}SAVE.cas=k;$('casD').hidden=k!=='dragon';$('casS').hidden=k!=='sib';if($('casT'))$('casT').hidden=k!=='train';if(k==='train'){try{trPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
 document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});
 $('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();if(b.dataset.c==='sib'&&SIB_CLOSED){sfx('error');toast('🚧 經營不善,改建 21 點中');return}sfx('tab');casSwitch(b.dataset.c)};
 setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
