@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZB">
+<meta name="gbuild" content="1005-ZC">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
-<meta name="theme-color" content="#0c1018">
+<meta name="theme-color" content="#0e1218">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1177,15 +1177,6 @@ body.gready #lgload{display:none}
 .lbr .eqs .tile{width:min(30px,calc((100% - 60px)/7))!important;height:auto!important;aspect-ratio:1;flex:none}
 .lbr .eqs .rd{width:42px!important;height:28px!important;flex:none}
 .lbr .lbd{grid-row:4}
-
-/* 底部選單延伸到螢幕最底(避免手機底部露出灰色) */
-html,body{background:#0c1018!important;background-color:#0c1018!important}
-html{height:100%;min-height:-webkit-fill-available}
-#tabs{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 6px)!important;background:#0c1018!important}
-#tabs::after{content:'';position:absolute;left:0;right:0;top:100%;height:200px;background:#0c1018;pointer-events:none}
-#home{background-color:#0c1018}
-#tabs{transform:translateY(var(--botgap,0px))}
-.page{bottom:calc(0px - var(--botgap,0px))!important}
 </style>
 </head>
 <body>
@@ -1224,7 +1215,7 @@ html{height:100%;min-height:-webkit-fill-available}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZB</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZC</span></small>
   </div>
  </div>
 </div>
@@ -3209,7 +3200,7 @@ setInterval(()=>{if(document.visibilityState==='visible')potWatch()},30000);setT
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZB';
+const GBUILD='1005-ZC';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.05b';
 const GNOTES=[['🔥','遊戲改名「社畜特攻隊」','全新電影海報風封面、霓虹招牌登入畫面,一頁就能看完不用往下滑'],
@@ -3535,16 +3526,6 @@ try{if('serviceWorker' in navigator&&location.protocol==='https:'&&typeof ONLINE
   if(G&&running&&!G.over){ask('目前正在戰鬥中,切換會中斷這一局,\n確定要切換成手機面板嗎?',go);return}go()};
  setInterval(()=>{b.hidden=!!(G&&!G.over)},500)})();
 try{heroHD()}catch(e){}try{if(ART['__hdsingle']){for(const n in HDN)ART['__hd_'+n]=1;hdN()}}catch(e){}
-/* iPhone 主畫面 App 模式:畫面高度被系統少算時,把底部選單推到真正的螢幕最底(用 100lvh 量測,較準確) */
-(function(){const pr=document.createElement('div');pr.style.cssText='position:fixed;left:0;top:0;width:1px;height:100lvh;visibility:hidden;pointer-events:none';
- const sb=document.createElement('div');sb.style.cssText='position:fixed;left:0;bottom:0;width:1px;height:env(safe-area-inset-bottom,0px);visibility:hidden;pointer-events:none';
- function fix(){try{if(!pr.isConnected)document.body.appendChild(pr);if(!sb.isConnected)document.body.appendChild(sb);
-  const st=navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;let g=0;
-  const L=pr.offsetHeight,ih=document.documentElement.clientHeight||innerHeight;
-  if(st&&L>0&&L>ih)g=Math.round(L-ih);if(g>140)g=0;
-  document.documentElement.style.setProperty('--botgap',g+'px');window.__vp={L,ih,inner:innerHeight,scr:screen.height,sab:sb.offsetHeight,g,st}}catch(e){}}
- fix();addEventListener('resize',fix);addEventListener('orientationchange',()=>setTimeout(fix,300));setTimeout(fix,500);setTimeout(fix,2000);
- document.addEventListener('click',e=>{if(e.target&&e.target.id==='gbuild'){fix.n=(fix.n||0)+1;if(fix.n>=3){fix.n=0;const v=window.__vp||{};toast('畫面 '+v.inner+'/'+v.ih+' · 全高 '+v.L+' · 螢幕 '+v.scr+' · 底部安全區 '+v.sab+' · 修正 '+v.g)}}})})();
 lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 <script>
