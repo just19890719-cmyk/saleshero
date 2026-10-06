@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-G">
+<meta name="gbuild" content="1007-I">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -975,6 +975,8 @@ img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 #gLot .gbox{grid-template-columns:1fr!important;align-items:center;justify-items:center}
 #gLot .gmach{width:100%;padding-top:6px}#gLot .gmach img{height:auto!important;width:min(94%,440px)!important;max-height:400px}
 #gLot .gctl{width:100%;max-width:520px}
+/* 1007-I 抽獎揭幕也不再出現芳芳 */
+#gov .ghost2{display:none!important}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1516,7 +1518,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-G</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-I</span></small>
   </div>
  </div>
 </div>
@@ -2019,7 +2021,7 @@ function gacha(n){if(!ART['gr-frame']||!ART['uv-tt']){toast('🚪 車庫還在�
    if(best>=3)setTimeout(()=>{let h='';for(let i=0;i<46;i++){const c=pick([col,'#ffffff','#ffd24a',col]);h+='<i style="left:'+rnd(0,100)+'%;background:'+c+';animation-delay:'+rnd(0,1.4)+'s;animation-duration:'+rnd(2,3.4)+'s;transform:rotate('+rnd(0,360)+'deg)"></i>'}$('gxcf').innerHTML=h;setTimeout(()=>sfx('confetti'),300)},(GR&&n===10)?Math.max(0,(window.__g10T||0)-650):0)
   },380);
   setTimeout(()=>{st.insertAdjacentHTML('beforeend','<img class="ghost2'+(best>=3?' hop':'')+'" src="'+(ART[best>=3?'host-3':best>=2?'host-2':'host-4']||ART['host-1']||'')+'" alt="企劃女神芳芳">');
-   $('gline').textContent='企劃女神芳芳:'+pickL(best>=3?HOSTL.big:best>=2?HOSTL.mid:HOSTL.low);
+   $('gline').textContent=pickL(best>=3?HOSTL.big:best>=2?HOSTL.mid:HOSTL.low);
    $('gagain').textContent=(n===10?'再 10 連抽':'再抽一次')+'('+fmtC(n===10?G10:G1)+')';$('gagain').disabled=(SAVE.coin||0)<cost;$('gbtns').hidden=false},n===1?1300:(GR?Math.max(1900,(window.__g10T||0)+500):1900))}
 }
 
@@ -2106,7 +2108,9 @@ const cardH=(c,d)=>{const red=c.s==='♥'||c.s==='♦',si=SI(c.s);let f;
  return'<div class="pc" style="animation-delay:'+(d||0)+'s"><div class="k" style="background-image:url('+ART['pk-back']+')"></div>'+f+'</div>'};
 const backH='<div class="pc" style="animation:none"><div class="k" style="transform:none"></div></div>';
 setInterval(()=>{try{if($('home').hidden||SAVE.tab!=='dragon'||SAVE.cas!=='dragon'||DP.busy||document.querySelector('.sqov'))return;if(DS.ph!=='idle')return;if(Math.random()<.6)dSay('idle',Math.random()<.5?'host-1':'host-4')}catch(e){}},9000);
-function dSay(k,pose){$('dbub').textContent=pickL(DL[k]);if($('dmbub'))$('dmbub').textContent='芳芳:'+$('dbub').textContent;$('dhost').src=ART[pose||'host-1']||ART['host-1'];$('dhost').classList.toggle('wide',pose==='host-3')}
+/* 1007-H 芳芳換裝:遊戲場穿荷官服(fd-*)、塔羅牌穿占卜師服(ft-*),沒載到就用原本的上班服 */
+function HI(k,set){const n=String(k).split('-')[1];return ART[set+'-'+n]||ART[k]||ART['host-1']||''}
+function dSay(k,pose){$('dbub').textContent=pickL(DL[k]);if($('dmbub'))$('dmbub').textContent='芳芳:'+$('dbub').textContent;$('dhost').src=HI(pose||'host-1','fd');$('dhost').classList.toggle('wide',pose==='host-3')}
 /* 芳芳閃身步:4 格動畫(準備→扭腰→閃出去→站定)。back=true 時閃完回到叉腰 */
 
 /* ===== 射龍門:全伺服器共用池底 ===== */
@@ -2195,7 +2199,7 @@ const dPayTxt=m=>'1 賠 '+(m>=10?m.toFixed(0):m>=2?m.toFixed(1):m.toFixed(2));fu
 function dMaxBet(){const pot=DP.pot||0,c=SAVE.coin||0;let byCoin=Math.floor(c/dMult()/100)*100;if(byCoin<DMINB&&c>=DMINB)byCoin=DMINB;let byPot=pot;const inHand=DS.ph==='posts'||DS.ph==='pair';
  if(inHand){byPot=dBetCap().mx;if(byPot<DMINB)byPot=Math.min(pot,DMINB)}return Math.max(0,Math.min(byPot,byCoin))}
 function renderDragon(){
- if(!$('dhost').getAttribute('src'))$('dhost').src=ART['host-1'];
+ {const s0=$('dhost').getAttribute('src');if(!s0||s0===ART['host-1'])$('dhost').src=HI('host-1','fd')}
  const inHand=DS.ph==='posts'||DS.ph==='pair';
  if(inHand){const mx=dMaxBet(),mn=dMinBet();if(DS.bet>mx)DS.bet=mx;if(DS.bet<mn&&mx>=mn)DS.bet=mn}
  const cd=$('casD');if(cd)cd.classList.toggle('hand-off',!inHand);
@@ -2633,7 +2637,7 @@ const TPOS=['過去','現在','未來'];
 const TSUM={5:['牌面的能量非常正向,順著心意前進,美好的事正在靠近','星辰與你同行,此刻是展開行動的好時機'],4:['整體趨勢良好,保持行動力,機會就在眼前','光明多於陰影,相信自己的判斷'],3:['吉凶參半,關鍵在於你的選擇,靜下心傾聽內在','事情仍在變化之中,保持彈性,答案會慢慢浮現'],2:['目前阻礙較多,不妨放慢腳步,先處理好心中的不安','這是需要耐心的時期,別急著做重大決定'],1:['能量較為低迷,這是休養與反省的時期','暫時退一步並不是失敗,好好照顧自己,等待轉機']};
 let TS={ph:'idle',picks:[],deck:[]};
 const todayKey=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
-function renderTarot(){if(!$('thost').getAttribute('src'))$('thost').src=ART['host-1'];
+function renderTarot(){{const s0=$('thost').getAttribute('src');if(!s0||s0===ART['host-1'])$('thost').src=HI('host-1','ft')}
  const free=SAVE.tarotDay!==todayKey();$('tcost').textContent=TS.ph==='pick'?'請憑直覺抽 '+(3-TS.picks.length)+' 張':free?'今天免費一次':'再算一次 100 金幣';
  $('tgo').disabled=TS.ph==='pick'||TS.ph==='reveal';$('tgo').textContent=TS.ph==='done'?'🔮 再算一次':'🔮 開始占卜';
  $('tspread').innerHTML=TPOS.map((p,i)=>{const pk=TS.picks[i];return'<div class="tslot"><div class="tc">'+(pk?'<div class="tcard'+(pk.open?' open':'')+'"><div class="tback"></div><div class="tface'+(pk.rev?' rev':'')+'"><div class="art" style="background-image:url('+ART['tr-'+pk.i]+')"></div><span class="nm">'+TAROT[pk.i][0]+' '+TAROT[pk.i][1]+'</span></div></div><div class="rvl">'+(pk.rev?'逆位':'正位')+'</div>':'')+'</div>'+p+'</div>'}).join('');
@@ -2643,14 +2647,14 @@ function renderTarot(){if(!$('thost').getAttribute('src'))$('thost').src=ART['ho
   D.style.height=Math.round(ch+26)+'px';
   D.innerHTML=TS.deck.map((c,k)=>{const t=n>1?k/(n-1):.5,ang=-22+44*t,x=pad+t*(w-2*pad-cw),lift=(1-(2*t-1)**2)*16;return'<div class="dk tback'+(c.used?' used':'')+'" data-k="'+k+'" style="width:'+cw+'px;left:'+x.toFixed(1)+'px;bottom:'+lift.toFixed(1)+'px;transform:rotate('+ang.toFixed(1)+'deg)"></div>'}).join('')}else{D.innerHTML='';D.style.height=''}}
 $('tgo').onclick=()=>{if(document.querySelector('.tthink'))return;const free=SAVE.tarotDay!==todayKey();if(!free&&(SAVE.coin||0)<100){toast('金幣不足 100');sfx('error');return}audioUnlock();
- $('tbub').textContent='在抽牌之前,先閉上眼睛,在心裡默想一件你在意的事情,工作、感情、財運都可以…想好了再告訴我';$('thost').src=ART['host-1']||'';
- const ov=document.createElement('div');ov.className='tthink';ov.innerHTML='<div class="tthost"><img src="'+(ART['host-2']||ART['host-1']||'')+'" alt=""><span>芳芳:閉上眼睛,想著那件事…</span></div><div class="orb">🔮</div><b>請在心中默想你在意的事情</b><p>工作、感情、財運、人際關係…<br>專心想著它,芳芳會透過塔羅牌給你指引</p><div class="tbr">吸氣 · · · 吐氣</div><div class="btns"><button class="btn pri" data-go="1">✨ 我想好了</button><button class="btn" data-x="1">取消</button></div>';
+ $('tbub').textContent='在抽牌之前,先閉上眼睛,在心裡默想一件你在意的事情,工作、感情、財運都可以…想好了再告訴我';$('thost').src=HI('host-1','ft');
+ const ov=document.createElement('div');ov.className='tthink';ov.innerHTML='<div class="tthost"><img src="'+HI('host-2','ft')+'" alt=""><span>芳芳:閉上眼睛,想著那件事…</span></div><div class="orb">🔮</div><b>請在心中默想你在意的事情</b><p>工作、感情、財運、人際關係…<br>專心想著它,芳芳會透過塔羅牌給你指引</p><div class="tbr">吸氣 · · · 吐氣</div><div class="btns"><button class="btn pri" data-go="1">✨ 我想好了</button><button class="btn" data-x="1">取消</button></div>';
  document.querySelector('.tbox').appendChild(ov);sfx('mystic');
  ov.onclick=e=>{if(e.target.closest('[data-x]')){ov.remove();$('tbub').textContent='沒關係,想好了再來找我';sfx('close');return}if(e.target.closest('[data-go]')){ov.remove();tStart()}}};
 function tStart(){const free=SAVE.tarotDay!==todayKey();if(!free){if((SAVE.coin||0)<100){toast('金幣不足 100');sfx('error');return}SAVE.coin-=100}else SAVE.tarotDay=todayKey();save();
  if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);audioUnlock();
  TS={ph:'pick',picks:[],deck:[...Array(22).keys()].sort(()=>Math.random()-.5).map(i=>({i,used:false}))};$('tread').innerHTML='';
- $('tbub').textContent='很好,繼續想著那件事…牌已經洗好了,憑直覺抽三張';$('thost').src=ART['host-2']||ART['host-1'];
+ $('tbub').textContent='很好,繼續想著那件事…牌已經洗好了,憑直覺抽三張';$('thost').src=HI('host-2','ft');
  renderTarot();$('tdeck').classList.add('shuffle');sfx('shuffle');setTimeout(()=>{$('tdeck').classList.remove('shuffle')},1000)}
 $('tdeck2').onclick=e=>$('tdeck').onclick(e);
 $('tdeck').onclick=e=>{const d=e.target.closest('[data-k]');if(!d||TS.ph!=='pick')return;const c=TS.deck[+d.dataset.k];if(c.used)return;c.used=true;
@@ -2661,7 +2665,7 @@ function tReading(){TS.ph='done';
  const sc=TS.picks.map(pk=>TAROT[pk.i][pk.rev?6:5]),avg=Math.max(1,Math.min(5,Math.round(sc.reduce((a,b)=>a+b,0)/3)));
  $('tread').innerHTML=TS.picks.map((pk,k)=>{const t=TAROT[pk.i];return'<div class="tr" style="animation-delay:'+(k*.12)+'s"><div class="em"><img src="'+ART['tr-'+pk.i]+'" alt="" style="'+(pk.rev?'transform:rotate(180deg)':'')+'"></div><div><b>'+TPOS[k]+':'+t[1]+'('+(pk.rev?'逆位':'正位')+')</b><p>'+(pk.rev?t[4]:t[3])+'</p></div></div>'}).join('')+
   '<div class="sum">整體能量 <span class="stars">'+'★'.repeat(avg)+'☆'.repeat(5-avg)+'</span><br><b style="color:#ffd77a">企劃女神芳芳的解讀:</b>'+pickL(TSUM[avg])+'</div>';
- $('tbub').textContent=pickL(TSUM[avg]);$('thost').src=ART[avg>=4?'host-3':avg<=2?'host-4':'host-1']||ART['host-1'];
+ $('tbub').textContent=pickL(TSUM[avg]);$('thost').src=HI(avg>=4?'host-3':avg<=2?'host-4':'host-1','ft');
  sfx('mystic');renderTarot()}
 
 /* ===== 排行榜(共用資料庫) ===== */
@@ -3332,8 +3336,8 @@ function combat(dt){
    if(st===2){sfx('swish');G.fx.push({k:'swirl',x:G.x,y:G.y-40,R:RR*.75,t:0,d:.32,dir:G.face,c:'255,170,220'})}
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.f[st]-.06),f:()=>sfx(st===2?'spinKick':'kickHit')});
    G.dh.push({t:HHIT.f[st],f:()=>{let nh=0;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y;if(Math.hypot(dx,dy)<RR+e.r&&Math.abs(angD(Math.atan2(dy,dx),a))<arc){hit(e,dmg,kb,Math.atan2(dy,dx));nh++}}
-    G.fx.push({k:'punch',x:G.x+Math.cos(a)*R*.8,y:G.y-40+Math.sin(a)*R*.8,a,t:0,d:.3});
-    if(st===2){G.fx.push({k:'himg',img:'hx-swoosh',x:G.x+G.face*10,y:G.y-50,S:RR*2.1,t:0,d:.3,add:1,flip:G.face<0});G.fx.push({k:'himg',img:'hx-pring',x:G.x,y:G.y,S:RR*2.2,t:0,d:.38,flat:1,add:1,s0:.4,s1:1.2})}else if(nh)G.fx.push({k:'himg',img:st===0?'hx-fk':'hx-sk',x:G.x+Math.cos(a)*R*.85,y:G.y-44+Math.sin(a)*R*.8,S:st===0?64:88,t:0,d:.26,add:1,flip:G.face<0});
+    if(nh)G.fx.push({k:'punch',x:G.x+Math.cos(a)*R*.8,y:G.y-40+Math.sin(a)*R*.8,a,t:0,d:.3});
+    if(st===2){G.fx.push({k:'himg',img:'hx-swoosh',x:G.x+G.face*10,y:G.y-50,S:RR*2.1,t:0,d:.22,add:1,flip:G.face<0,s0:.9,s1:1.05});if(nh)G.fx.push({k:'himg',img:'hx-pring',x:G.x,y:G.y,S:RR*2.2,t:0,d:.38,flat:1,add:1,s0:.4,s1:1.2})}else if(nh)G.fx.push({k:'himg',img:st===0?'hx-fk':'hx-sk',x:G.x+Math.cos(a)*R*.85,y:G.y-44+Math.sin(a)*R*.8,S:st===0?64:88,t:0,d:.26,add:1,flip:G.face<0});
     if(st===2)G.fx.push({k:'ring',x:G.x,y:G.y-30,R:RR,t:0,d:.35,c:'255,170,220'});else G.fx.push({k:'streak',x:G.x+Math.cos(a)*14,y:G.y-(st===0?42:58),a,L:R,t:0,d:.16,c:'255,200,235'});
     if(nh){shake(st===2?3:2);try{hitStop(st===2?.06:.035)}catch(e){}}}});
    cd(k,[.5,.6,.95][st]*cdm*(lv>=5?.6:1))}
@@ -3343,7 +3347,7 @@ function combat(dt){
    const a=Math.atan2(t.y-t.r-(G.y-30),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=G.cbD;const mul=[1,1,1.6][st],kb=[80,90,210][st],dmg=A*.6*mul*(1+.3*((lv>=2)+(lv>=4)));
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.m[st]-.06),f:()=>sfx(['jab','cross','upper'][st])});if(st===2)sfx('swish');
    G.dh.push({t:HHIT.m[st],f:()=>{let nh=0;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y;if(Math.hypot(dx,dy)<R+e.r&&Math.abs(angD(Math.atan2(dy,dx),a))<1.3){hit(e,dmg,kb,Math.atan2(dy,dx));nh++}}
-    const fx=G.x+Math.cos(a)*R*.8,fy=G.y-30+Math.sin(a)*R*.8;G.fx.push({k:'punch',x:fx,y:fy-10,a,t:0,d:.3});if(nh){G.fx.push({k:'himg',img:['hx-jab','hx-cross','hx-upper'][st],x:fx,y:fy-(st===2?24:12),S:[62,84,96][st],t:0,d:.26,add:1,flip:G.face<0});if(st===2)G.fx.push({k:'himg',img:'hx-ring',x:fx,y:G.y,S:110,t:0,d:.35,flat:1,add:1,s0:.5,s1:1.3})}G.fx.push({k:'streak',x:G.x+Math.cos(a)*18,y:G.y-(st===2?40:48),a:st===2?a-Math.PI/2*G.face*.0-Math.PI*.38:a,L:R*.9,t:0,d:.16,c:st===2?'255,220,120':'255,255,255'});
+    const fx=G.x+Math.cos(a)*R*.8,fy=G.y-30+Math.sin(a)*R*.8;if(nh){G.fx.push({k:'punch',x:fx,y:fy-10,a,t:0,d:.3});G.fx.push({k:'himg',img:['hx-jab','hx-cross','hx-upper'][st],x:fx,y:fy-(st===2?24:12),S:[62,84,96][st],t:0,d:.26,add:1,flip:G.face<0});if(st===2)G.fx.push({k:'himg',img:'hx-ring',x:fx,y:G.y,S:110,t:0,d:.35,flat:1,add:1,s0:.5,s1:1.3})}G.fx.push({k:'streak',x:G.x+Math.cos(a)*18,y:G.y-(st===2?40:48),a:st===2?a-Math.PI/2*G.face*.0-Math.PI*.38:a,L:R*.9,t:0,d:.16,c:st===2?'255,220,120':'255,255,255'});
     if(st===2)G.fx.push({k:'ring',x:fx,y:fy-6,R:R*.5,t:0,d:.3,c:'255,220,120'});if(nh){shake(st===2?3:1.5);try{hitStop(st===2?.06:.035)}catch(e){}}}});
    cd(k,[.45,.55,.9][st]*cdm*(lv>=5?.6:1))}
   else if(k==='umb'){if(!rdy(k))continue;const R=(100+(lv>=3?20:0))*ar*(ev?1.25:1),t=nearest(1,R+40)[0];if(!t){G.wt[k]=0;continue}
@@ -4052,7 +4056,7 @@ async function potWatch(){try{if(typeof DP==='undefined')return;let pot=null;
   st={p:pot,t:now};try{localStorage.setItem('shechu-potann',JSON.stringify(st))}catch(e){}potShow(pot)}catch(e){}}
 function potShow(pot){let el=$('potann');if(!el){el=document.createElement('div');el.id='potann';el.className='potann';document.body.appendChild(el)}
  const lines=['池底已經滾到 <b>'+fmtC(pot)+'</b> 金幣了!誰要來挑戰?','<b>'+fmtC(pot)+'</b> 金幣躺在池底等人帶走,全包的勇者在哪裡?','池底 <b>'+fmtC(pot)+'</b>!射中一把直接下班!'];
- el.innerHTML='<img src="'+(ART['host-4']||ART['host-1']||'')+'" alt="芳芳"><div class="pa"><small>📢 伺服器公告 · 企劃女神芳芳</small>'+pickL(lines)+'</div><button class="btn pri" data-go="1">去射龍門</button><span class="x" data-x="1">✕</span>';
+ el.innerHTML='<img src="'+HI('host-4','fd')+'" alt="芳芳"><div class="pa"><small>📢 伺服器公告 · 企劃女神芳芳</small>'+pickL(lines)+'</div><button class="btn pri" data-go="1">去射龍門</button><span class="x" data-x="1">✕</span>';
  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');setTimeout(()=>sfx('coins'),250);
  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),14000);
  el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');if(typeof casSwitch==='function')casSwitch('dragon');renderHome()}}
@@ -4060,10 +4064,11 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-G';
+const GBUILD='1007-I';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['🔊','音效升級','第二關怪物攻擊、首領登場、精英怪出現、撿金幣、升級、抽到好車、按鈕、引擎聲,換成真實錄製的音效'],
+const GNOTES=[['🎭','芳芳換裝','遊戲場的芳芳換上荷官制服,塔羅牌的芳芳換上占卜師長袍;抽獎機主畫面拿掉芳芳、車庫放大;主角揮空時不再閃白光,打中才有特效'],
+ ['🔊','音效升級','第二關怪物攻擊、首領登場、精英怪出現、撿金幣、升級、抽到好車、按鈕、引擎聲,換成真實錄製的音效'],
  ['🗺️','地圖操作調整','點關卡卡片改成查看怪物情報(還沒解鎖的關卡也能先看),按卡片上的「⚔️ 出擊」才會開始;第二關的 4 種精英怪也加進怪物情報'],
  ['💰','第二關獎勵提高','辦公大樓的金幣多 6 成、小怪掉裝備機率提高、精英怪可能掉 2 件且品質更好、首領掉 4 件且黃金框以上機率大增;首次通關獎金 2,000。情緒勒索改成地上浮現紫色愁雲'],
  ['👶','巨嬰慣老闆專屬裝備','打倒第二關首領有機會掉落:黃金奶嘴(巨嬰大哭)、慣老闆口水巾(情緒勒索)、搖搖奶瓶(奶瓶亂丟),第一次打倒保證掉一件。發火主管的丟火球、雷隊友的倒下動作也重畫了'],
@@ -4201,9 +4206,9 @@ const sbRoll=()=>[1,2,3,4].map(()=>1+((Math.random()*6)|0));
 const sbCmp=(a,b)=>a.k!==b.k?a.k-b.k:a.v-b.v;
 const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
 function sbDieH(v){if(ART['die-'+v])return'<img src="'+ART['die-'+v]+'" alt="'+v+'">';const red=v===1||v===4;return'<div class="sbd'+(v===1?' one':'')+'">'+[0,1,2,3,4,5,6,7,8].map(i=>'<i'+(PIPS[v].includes(i)?' class="p'+(red?' r':'')+'"':'')+'></i>').join('')+'</div>'}
-function sbSay(k,img){$('sbbub').textContent=pickL(SBL[k]);if($('sbmbub'))$('sbmbub').textContent='芳芳:'+$('sbbub').textContent;$('sbhost').src=ART[img]||ART['host-1']||''}
+function sbSay(k,img){$('sbbub').textContent=pickL(SBL[k]);if($('sbmbub'))$('sbmbub').textContent='芳芳:'+$('sbbub').textContent;$('sbhost').src=HI(img,'fd')}
 function sbMax(){return Math.max(0,Math.min(SBMAX,Math.floor((SAVE.coin||0)/100)*100))}
-function renderSib(){if(!$('sbhost'))return;if(!$('sbhost').getAttribute('src'))$('sbhost').src=ART['host-1']||'';
+function renderSib(){if(!$('sbhost'))return;if(!$('sbhost').getAttribute('src'))$('sbhost').src=HI('host-1','fd');
  const mx=sbMax();if(SBS.bet>mx)SBS.bet=Math.max(1000,mx);if(SBS.bet<1000)SBS.bet=1000;$('sbbetv').textContent=fmtC(SBS.bet);$('sbbetm').textContent='(上限 '+fmtC(Math.min(SBMAX,Math.max(mx,100)))+')';
  const busy=SBS.ph==='rolling';$('sbgo').disabled=busy||(SAVE.coin||0)<SBS.bet||SBS.bet<1000;$('sbgo').textContent=busy?'擲骰中…':'🎲 擲骰('+fmtC(SBS.bet)+')';
  $('sbchips').style.pointerEvents=busy?'none':'auto';$('sbchips').style.opacity=busy?.4:1;
@@ -4510,7 +4515,7 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1006S',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)});add('assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)});add('assets-stage2.js?v=1007B',function(){if(window.__artPack&&window.ART_STAGE2){window.__artPack(window.ART_STAGE2);try{if(!$('home').hidden)renderHome()}catch(e){}}});add('assets-cars.js?v=1006K',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}});add('assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}})},600)}
+function go(){add('assets-extra.js?v=1007H',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)});add('assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)});add('assets-stage2.js?v=1007B',function(){if(window.__artPack&&window.ART_STAGE2){window.__artPack(window.ART_STAGE2);try{if(!$('home').hidden)renderHome()}catch(e){}}});add('assets-cars.js?v=1006K',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}});add('assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
