@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-I">
+<meta name="gbuild" content="1007-L">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -977,6 +977,9 @@ img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 #gLot .gctl{width:100%;max-width:520px}
 /* 1007-I 抽獎揭幕也不再出現芳芳 */
 #gov .ghost2{display:none!important}
+#updov{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:rgba(5,6,10,.88);backdrop-filter:blur(4px)}
+#updov .updbox{width:min(360px,88vw);padding:22px 18px;border-radius:18px;background:linear-gradient(180deg,#232c3d,#151a24);border:1.5px solid rgba(255,210,74,.6);box-shadow:0 10px 40px rgba(0,0,0,.6);text-align:center;color:#ebe7dd}
+#updov .updic{font-size:44px}#updov h2{margin:6px 0 8px;color:#ffd24a}#updov p{margin:6px 0;font-size:14px;line-height:1.55}#updov .btn{margin-top:12px;width:100%;font-size:17px;padding:11px}#updov .updst{margin-top:8px;font-size:12px;color:#9aa4b2;min-height:1em}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1518,7 +1521,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-I</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-L</span></small>
   </div>
  </div>
 </div>
@@ -1840,7 +1843,7 @@ const ENE=[{n:'奧客喪屍',e:'🧟',hp:20,sp:46,r:20,dmg:9},{n:'菜市場大�
  {n:'雷隊友',e:'⚡',hp:22,sp:50,r:20,dmg:10,ai:'zap'},{n:'發火主管',e:'🔥',hp:26,sp:36,r:22,dmg:9,ai:'fire'},{n:'八卦同事',e:'🔮',hp:20,sp:48,r:20,dmg:9,ai:'bagua'},{n:'混水合夥人',e:'💧',hp:30,sp:38,r:22,dmg:10,ai:'water'}];
 const ELITE=[{n:'暴怒奧客喪屍',e:'😡',hp:30,sp:60,r:20,dmg:12}];
 const BOSS=[{n:'捷運站長喪屍',e:'👮',hp:2600,sp:44,r:40,dmg:15},{n:'巨嬰慣老闆',e:'👶',hp:3600,sp:40,r:46,dmg:18}];
-const CH=[{n:'捷運站',g:'#565c64',bg:'bg-mrt',bgS:460,pool:[0,0,1,2],boss:0},{n:'辦公大樓',g:'#4a5560',bg:'bg-office',bgS:640,pool:[3,3,4,5,6],elite:[3,4,5,6],boss:1,m:1.35,bA:260,rw:{coin:1.6,drop:1.75,eliteW:[20,38,30,11,1],bossW:[0,0,30,52,18],bossN:4,first:2000,win:400}},{n:'夜市',g:'#5a4950',pool:[0],boss:null,final:1,wip:1}];
+const CH=[{n:'捷運站',g:'#565c64',bg:'bg-mrt',bgS:460,pool:[0,0,1,2],boss:0},{n:'辦公大樓',g:'#4a5560',bg:'bg-office',bgS:640,pool:[3,3,4,5,6],elite:[3,4,5,6],boss:1,m:2.7,bA:260,rw:{coin:1.6,drop:1.75,eliteW:[20,38,30,11,1],bossW:[0,0,30,52,18],bossN:4,first:2000,win:400}},{n:'夜市',g:'#5a4950',pool:[0],boss:null,final:1,wip:1}];
 const DUR=180;
 
 /* ===== 存檔 ===== */
@@ -1956,6 +1959,27 @@ const EMJRE=/(?:[\u{1F300}-\u{1FAFF}\u2600-\u27BF\u2B50\u2B05-\u2B07\u231A\u23F1
 function emjConvert(root){if(!Object.keys(EMJ).length)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|TITLE)$/.test(p.nodeName)||p.closest&&p.closest('canvas'))return NodeFilter.FILTER_REJECT;EMJRE.lastIndex=0;return EMJRE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
  const L=[];while(w.nextNode())L.push(w.currentNode);for(const n of L){const t=n.nodeValue;EMJRE.lastIndex=0;if(![...t.matchAll(EMJRE)].some(m=>emjKey(m[0])&&ART[emjKey(m[0])]))continue;const f=document.createDocumentFragment();let last=0;for(const m of t.matchAll(EMJRE)){const k=emjKey(m[0]);if(!k||!ART[k])continue;if(m.index>last)f.appendChild(document.createTextNode(t.slice(last,m.index)));const im=document.createElement('img');im.className='emj';im.src=ART[k];im.alt=m[0];f.appendChild(im);last=m.index+m[0].length}if(last<t.length)f.appendChild(document.createTextNode(t.slice(last)));n.parentNode.replaceChild(f,n)}}
 try{new MutationObserver(ms=>{if(!Object.keys(EMJ).length)return;for(const m of ms)for(const n of m.addedNodes){if(n.nodeType===1)emjConvert(n);else if(n.nodeType===3&&n.parentNode)emjConvert(n.parentNode)}}).observe(document.body,{childList:true,subtree:true,characterData:false})}catch(e){}
+/* ===== 1007-J 強制更新:偵測到新版本就鎖住畫面,必須更新才能繼續玩(戰鬥中會等這場打完) ===== */
+const FUPD={remote:null,shown:false,busy:false};try{UPD.on=false}catch(e){}/* 關掉舊的「可關閉」更新提示,改用強制更新 */
+async function fupdCheck(){if(FUPD.busy||location.protocol==='file:')return;FUPD.busy=true;
+ try{const r=await fetch(location.pathname+'?vcheck='+Date.now(),{cache:'no-store'});if(r.ok){const t=await r.text(),m=t.match(/<meta name="gbuild" content="([^"]+)"/);if(m&&m[1]&&m[1]!==GBUILD){FUPD.remote=m[1];fupdShow()}}}catch(e){}FUPD.busy=false}
+function fupdShow(){if(!FUPD.remote||FUPD.shown)return;if(typeof running!=='undefined'&&running&&G&&!G.over)return;FUPD.shown=true;
+ try{save()}catch(e){}
+ const ov=document.createElement('div');ov.id='updov';ov.innerHTML='<div class="updbox"><div class="updic">🚀</div><h2>有新版本囉!</h2><p>目前版本 <b>'+GBUILD+'</b> → 最新版本 <b>'+FUPD.remote+'</b></p><p class="muted">遊戲已經更新,請先更新才能繼續玩。<br>你的進度都已經存好了,不會不見。</p><button class="btn pri" id="fupdgo">立即更新</button><div class="updst" id="updst"></div></div>';
+ document.body.appendChild(ov);try{sfx('open')}catch(e){}
+ $('fupdgo').onclick=fupdGo}
+async function fupdGo(){try{save()}catch(e){}try{if(typeof clFlush==='function'&&CL&&CL.u)await clFlush()}catch(e){}const b=$('fupdgo');if(b){b.disabled=true;b.textContent='更新中…'}
+ try{sessionStorage.setItem('shechu-upd-to',FUPD.remote||'');sessionStorage.setItem('shechu-upd-n',String((+sessionStorage.getItem('shechu-upd-n')||0)+1))}catch(e){}
+ try{if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(e){}
+ try{if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.update().catch(()=>{})))}}catch(e){}
+ location.replace(location.pathname+'?u='+Date.now())}
+/* 更新後如果 CDN 還沒換成新版,自動稍等再試,避免一直重複跳更新 */
+(function(){let to='',n=0;try{to=sessionStorage.getItem('shechu-upd-to')||'';n=+sessionStorage.getItem('shechu-upd-n')||0}catch(e){}
+ if(!to)return;if(to===GBUILD){try{sessionStorage.removeItem('shechu-upd-to');sessionStorage.removeItem('shechu-upd-n')}catch(e){}setTimeout(()=>{try{toast('✅ 已更新到最新版本 '+GBUILD)}catch(e){}},1500);return}
+ if(n>=5){try{sessionStorage.removeItem('shechu-upd-to');sessionStorage.removeItem('shechu-upd-n')}catch(e){}return}
+ FUPD.remote=to;setTimeout(()=>{fupdShow();const st=$('updst');if(st)st.textContent='新版本還在發布中,15 秒後自動再試一次…';setTimeout(fupdGo,15000)},800)})();
+setTimeout(fupdCheck,4000);setInterval(()=>{if(document.visibilityState==='visible')fupdCheck()},90000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')fupdCheck()});
 /* ===== 1006-L 車行跑馬燈:買到典藏車、改裝到 Lv.5 → 全伺服器公告 ===== */
 async function carNews(kind,id){try{if(!DP.on)return;await fmRpc('car_news_add',{p_id:fmId(),p_nick:dpNick(),p_kind:kind,p_car:id});setTimeout(()=>{try{annFetch()}catch(e){}},800)}catch(e){}}
 function carNewsMsg(n){const r=RIDES.find(x=>x.id===n.car),cn=r?r.n:n.car;return n.kind==='buy'?'🚗 '+n.nick+' 從夢想車庫開走了一台「'+cn+'」!':'🔧 '+n.nick+' 的「'+cn+'」改裝到 Lv.5,性能滿分!'}
@@ -1984,7 +2008,7 @@ document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest
    save();renderHome();renderShop()});return}});
 setInterval(()=>{try{if(!$('home').hidden&&SAVE.tab==='gacha'&&!$('gShop').hidden&&Math.random()<.5)sSay('idle',1)}catch(e){}},7000);
 let gLast=1;
-function gacha(n){if(!ART['gr-frame']||!ART['uv-tt']){toast('🚪 車庫還在準備中,請稍等幾秒再抽');return}
+function gacha(n){/* 1007-K 揭幕動畫進行中不能再抽(避免連點重複扣款) */if(!$('gov').hidden&&$('gbtns').hidden)return;if(gacha.lock&&Date.now()-gacha.lock<600)return;gacha.lock=Date.now();if(!ART['gr-frame']||!ART['uv-tt']){toast('🚪 車庫還在準備中,請稍等幾秒再抽');return}
  const cost=n===10?G10:G1;if((SAVE.coin||0)<cost){sfx('error');return}audioUnlock();SAVE.coin-=cost;gLast=n;sfx('gachaStart');dqAdd('gacha');
  const out=[];for(let i=0;i<n;i++)out.push(rollRide(n===10&&i===9&&!out.some(o=>o.r.q>=2)?2:0));save();
  const best=out.reduce((a,o)=>o.r.q>a?o.r.q:a,0),col=RAR[best].c,bo=out.find(o=>o.r.q===best);
@@ -2826,7 +2850,7 @@ function monCard(n,rate,EL){let m=MONINFO[n]||{d:'',s:[3,3,3]};const img=ART[(n=
 function renderMons(){const el=$('mons');if(!el)return;let ci=window.__mv!=null?window.__mv:(SAVE.ch||0);if(!CH[ci]||CH[ci].wip)ci=0;const c=CH[ci],cnt={};const lockedV=ci>=SAVE.unlock;
  c.pool.forEach(i=>cnt[i]=(cnt[i]||0)+1);
  el.innerHTML='<h3>📋 怪物情報:'+(ci+1)+'. '+c.n+(lockedV?' <span class="mlock">🔒 尚未解鎖</span>':'')+'<small>出擊前先認識一下敵人'+(c.elite?'・每種都可能變成更大更強的精英怪':'')+'</small></h3><div class="mgrid">'+Object.keys(cnt).map(i=>monCard(ENE[i].n,Math.round(cnt[i]/c.pool.length*100))).join('')+(c.elite?[...new Set(c.elite)].map(i=>monCard(ENE[i].n,0,1)).join(''):ELITE.map(e=>monCard(e.n)).join(''))+(c.boss!=null&&BOSS[c.boss]?monCard(BOSS[c.boss].n):'')+'</div>'}
-function migItems(){try{for(const it of (SAVE&&SAVE.items)||[]){const nb=RENAME[it.b];if(nb){it.name=it.name.replace(it.b,nb);it.b=nb;const bb=BASES[it.type]&&BASES[it.type].find(x=>x.b===nb);if(bb)it.e=bb.e}}}catch(e){}}
+function migItems(){try{for(const it of (SAVE&&SAVE.items)||[]){/* 1007-K 舊存檔欄位補齊,避免屬性變成 NaN */it.up=+it.up||0;it.il=+it.il||1;if(!Number.isFinite(+it.q))it.q=0;if(it.st)for(const k in it.st)if(!Number.isFinite(+it.st[k]))it.st[k]=0;const nb=RENAME[it.b];if(nb){it.name=it.name.replace(it.b,nb);it.b=nb;const bb=BASES[it.type]&&BASES[it.type].find(x=>x.b===nb);if(bb)it.e=bb.e}}}catch(e){}}
 function renderHome(){migItems();
  if($('parts'))$('parts').textContent=fmt(SAVE.parts||0);renderGacha();if(SAVE.tab==='eq')renderPray();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin||0);
   const s=pstats(1),wi=byId(SAVE.eq.wpn);
@@ -3302,7 +3326,7 @@ function beam(ox,oy,a,L,wd,dmg){const cx=Math.cos(a),cy=Math.sin(a);
  for(const e of G.en){const px=e.x-ox,py=e.y-e.r-oy,pr=px*cx+py*cy;if(pr<0||pr>L)continue;if(Math.abs(px*cy-py*cx)<wd+e.r){hit(e,dmg,90,a);if(G.fx.length<40)G.fx.push({k:'zap',x:e.x,y:e.y-e.r*1.8,s:54,t:0,d:.3})}}
  G.fx.push({k:'beam',x:ox+cx*18,y:oy+cy*18,a,L,t:0,d:.32,wd});for(let i=0;i<NP(6);i++){const r=rnd(20,L);part(ox+cx*r,oy+cy*r,1,{c:'#c8fbff',v0:20,v1:90,l0:.2,l1:.4,s:2})}}
 function slashAt(a,R,dmg,kb){let nh=0;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y,d=Math.hypot(dx,dy);if(d<R+e.r&&Math.abs(angD(Math.atan2(dy,dx),a))<1.3){hit(e,dmg,kb,Math.atan2(dy,dx));nh++}}
- G.fx.push({k:'slash',x:G.x,y:G.y-34,a,R:R+10,t:0,d:.32});return nh}
+ if(nh)G.fx.push({k:'slash',x:G.x,y:G.y-34,a,R:R+10,t:0,d:.32});return nh}
 const seedOf=q=>(q.seed=q.seed||Math.random()*100);
 function drawGroundFire(q,fade){const R=q.R,x=q.x,y=q.y,t=G.t,a=Math.min(1,q.t/.15)*fade;if(a<=0)return;ctx.save();
  /* 焦黑地面 */
@@ -3333,12 +3357,12 @@ function combat(dt){
    const R=75*ar*(lv>=3?1.2:1),t=nearest(1,R+40)[0];if(!t){G.wt[k]=0;continue}
    if(G.t-(G.cbt||-9)>1.5)G.cb=0;const st=G.cb||0;G.cbs=st;G.cbAt=G.t;G.cbt=G.t;G.cb=(st+1)%3;G.cbD=seqDur(HSEQ.f[st]);
    const a=Math.atan2(t.y-t.r-(G.y-30),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=G.cbD;const mul=[1,1,1.4][st],kb=[130,150,260][st],arc=st===2?9:1.6,RR=st===2?R*1.05:R,dmg=A*.53*mul*(1+.3*((lv>=2)+(lv>=4)));
-   if(st===2){sfx('swish');G.fx.push({k:'swirl',x:G.x,y:G.y-40,R:RR*.75,t:0,d:.32,dir:G.face,c:'255,170,220'})}
+   if(st===2){sfx('swish')}
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.f[st]-.06),f:()=>sfx(st===2?'spinKick':'kickHit')});
    G.dh.push({t:HHIT.f[st],f:()=>{let nh=0;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y;if(Math.hypot(dx,dy)<RR+e.r&&Math.abs(angD(Math.atan2(dy,dx),a))<arc){hit(e,dmg,kb,Math.atan2(dy,dx));nh++}}
     if(nh)G.fx.push({k:'punch',x:G.x+Math.cos(a)*R*.8,y:G.y-40+Math.sin(a)*R*.8,a,t:0,d:.3});
-    if(st===2){G.fx.push({k:'himg',img:'hx-swoosh',x:G.x+G.face*10,y:G.y-50,S:RR*2.1,t:0,d:.22,add:1,flip:G.face<0,s0:.9,s1:1.05});if(nh)G.fx.push({k:'himg',img:'hx-pring',x:G.x,y:G.y,S:RR*2.2,t:0,d:.38,flat:1,add:1,s0:.4,s1:1.2})}else if(nh)G.fx.push({k:'himg',img:st===0?'hx-fk':'hx-sk',x:G.x+Math.cos(a)*R*.85,y:G.y-44+Math.sin(a)*R*.8,S:st===0?64:88,t:0,d:.26,add:1,flip:G.face<0});
-    if(st===2)G.fx.push({k:'ring',x:G.x,y:G.y-30,R:RR,t:0,d:.35,c:'255,170,220'});else G.fx.push({k:'streak',x:G.x+Math.cos(a)*14,y:G.y-(st===0?42:58),a,L:R,t:0,d:.16,c:'255,200,235'});
+    if(st===2&&nh){G.fx.push({k:'himg',img:'hx-swoosh',x:G.x+G.face*10,y:G.y-50,S:RR*2.1,t:0,d:.22,add:1,flip:G.face<0,s0:.9,s1:1.05});G.fx.push({k:'himg',img:'hx-pring',x:G.x,y:G.y,S:RR*2.2,t:0,d:.38,flat:1,add:1,s0:.4,s1:1.2})}else if(nh)G.fx.push({k:'himg',img:st===0?'hx-fk':'hx-sk',x:G.x+Math.cos(a)*R*.85,y:G.y-44+Math.sin(a)*R*.8,S:st===0?64:88,t:0,d:.26,add:1,flip:G.face<0});
+    if(nh){if(st===2){G.fx.push({k:'ring',x:G.x,y:G.y-30,R:RR,t:0,d:.35,c:'255,170,220'});G.fx.push({k:'swirl',x:G.x,y:G.y-40,R:RR*.75,t:0,d:.32,dir:G.face,c:'255,170,220'})}else G.fx.push({k:'streak',x:G.x+Math.cos(a)*14,y:G.y-(st===0?42:58),a,L:R,t:0,d:.16,c:'255,200,235'})}
     if(nh){shake(st===2?3:2);try{hitStop(st===2?.06:.035)}catch(e){}}}});
    cd(k,[.5,.6,.95][st]*cdm*(lv>=5?.6:1))}
   else if(k==='fist'){if(!rdy(k))continue;const R=65*ar*(lv>=3?1.2:1),t=nearest(1,R+40)[0];if(!t){G.wt[k]=0;continue}
@@ -3347,8 +3371,8 @@ function combat(dt){
    const a=Math.atan2(t.y-t.r-(G.y-30),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=G.cbD;const mul=[1,1,1.6][st],kb=[80,90,210][st],dmg=A*.6*mul*(1+.3*((lv>=2)+(lv>=4)));
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.m[st]-.06),f:()=>sfx(['jab','cross','upper'][st])});if(st===2)sfx('swish');
    G.dh.push({t:HHIT.m[st],f:()=>{let nh=0;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y;if(Math.hypot(dx,dy)<R+e.r&&Math.abs(angD(Math.atan2(dy,dx),a))<1.3){hit(e,dmg,kb,Math.atan2(dy,dx));nh++}}
-    const fx=G.x+Math.cos(a)*R*.8,fy=G.y-30+Math.sin(a)*R*.8;if(nh){G.fx.push({k:'punch',x:fx,y:fy-10,a,t:0,d:.3});G.fx.push({k:'himg',img:['hx-jab','hx-cross','hx-upper'][st],x:fx,y:fy-(st===2?24:12),S:[62,84,96][st],t:0,d:.26,add:1,flip:G.face<0});if(st===2)G.fx.push({k:'himg',img:'hx-ring',x:fx,y:G.y,S:110,t:0,d:.35,flat:1,add:1,s0:.5,s1:1.3})}G.fx.push({k:'streak',x:G.x+Math.cos(a)*18,y:G.y-(st===2?40:48),a:st===2?a-Math.PI/2*G.face*.0-Math.PI*.38:a,L:R*.9,t:0,d:.16,c:st===2?'255,220,120':'255,255,255'});
-    if(st===2)G.fx.push({k:'ring',x:fx,y:fy-6,R:R*.5,t:0,d:.3,c:'255,220,120'});if(nh){shake(st===2?3:1.5);try{hitStop(st===2?.06:.035)}catch(e){}}}});
+    const fx=G.x+Math.cos(a)*R*.8,fy=G.y-30+Math.sin(a)*R*.8;if(nh){G.fx.push({k:'punch',x:fx,y:fy-10,a,t:0,d:.3});G.fx.push({k:'himg',img:['hx-jab','hx-cross','hx-upper'][st],x:fx,y:fy-(st===2?24:12),S:[62,84,96][st],t:0,d:.26,add:1,flip:G.face<0});if(st===2)G.fx.push({k:'himg',img:'hx-ring',x:fx,y:G.y,S:110,t:0,d:.35,flat:1,add:1,s0:.5,s1:1.3})}/* 1007-L 揮空(包含遠距離自動出手)不顯示任何光效,打中才有 */if(nh){G.fx.push({k:'streak',x:G.x+Math.cos(a)*18,y:G.y-(st===2?40:48),a:st===2?a-Math.PI/2*G.face*.0-Math.PI*.38:a,L:R*.9,t:0,d:.16,c:st===2?'255,220,120':'255,255,255'});
+    if(st===2)G.fx.push({k:'ring',x:fx,y:fy-6,R:R*.5,t:0,d:.3,c:'255,220,120'})}if(nh){shake(st===2?3:1.5);try{hitStop(st===2?.06:.035)}catch(e){}}}});
    cd(k,[.45,.55,.9][st]*cdm*(lv>=5?.6:1))}
   else if(k==='umb'){if(!rdy(k))continue;const R=(100+(lv>=3?20:0))*ar*(ev?1.25:1),t=nearest(1,R+40)[0];if(!t){G.wt[k]=0;continue}
    const a=Math.atan2(t.y-t.r-(G.y-30),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=ATKD;const dm=A*1.3*(1+.25*((lv>=2)+(lv>=4)))*(ev?1.3:1);
@@ -3395,10 +3419,10 @@ function weapon_OLD(dt){
  const a=Math.atan2(t.y-t.r-(G.y-30),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=ATKD;
  if(melee){
    let nh=0;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y,d=Math.hypot(dx,dy);if(d<R+e.r&&Math.abs(angD(Math.atan2(dy,dx),a))<1.3){hit(e,A*(w==='umb'?1.3:.6),w==='umb'?200:80,Math.atan2(dy,dx));nh++}}
-   if(w==='umb'){sfx('swing');if(nh)setTimeout(()=>sfx('thud'),60);G.fx.push({k:'slash',x:G.x,y:G.y-34,a,R:R+10,t:0,d:.32,dir:G.face});
-    for(let i=0;i<NP(8);i++){const aa=a-1.2+2.4*i/7;part(G.x+Math.cos(aa)*R*.9,G.y-34+Math.sin(aa)*R*.9,1,{a:aa,sp:.3,v0:80,v1:180,c:'#8fd0ff',k:'drop',g:500,s:3,l0:.3,l1:.5})}
+   if(w==='umb'){sfx('swing');if(nh)setTimeout(()=>sfx('thud'),60);if(nh)G.fx.push({k:'slash',x:G.x,y:G.y-34,a,R:R+10,t:0,d:.32,dir:G.face});
+    if(nh)for(let i=0;i<NP(8);i++){const aa=a-1.2+2.4*i/7;part(G.x+Math.cos(aa)*R*.9,G.y-34+Math.sin(aa)*R*.9,1,{a:aa,sp:.3,v0:80,v1:180,c:'#8fd0ff',k:'drop',g:500,s:3,l0:.3,l1:.5})}
     if(nh)shake(3)}
-   else{sfx('punch');G.fx.push({k:'punch',x:t.x,y:t.y-t.r*1.8,a,t:0,d:.3});part(t.x,t.y-t.r*1.8,6,{a:a,sp:.9,v0:120,v1:300,c:'#fff',l0:.1,l1:.22});if(nh)shake(1.5)}
+   else{sfx('punch');if(nh){G.fx.push({k:'punch',x:t.x,y:t.y-t.r*1.8,a,t:0,d:.3});part(t.x,t.y-t.r*1.8,6,{a:a,sp:.9,v0:120,v1:300,c:'#fff',l0:.1,l1:.22});shake(1.5)}}
    G.wt=(w==='umb'?.8:.7)*cdm;
  }else if(w==='pen'){sfx('throw');shoot(G.x,G.y-34,a,A,'pen');G.wt=.55*cdm}
  else if(w==='thermos'){sfx('lob');G.lob.push({x0:G.x,y0:G.y-34,x1:t.x,y1:t.y,t:0,d:.5,dmg:A*2.2});G.wt=1.5*cdm}
@@ -3698,7 +3722,7 @@ function update(dt){
   for(let i=G.dc.length-1;i>=0;i--){G.dc[i].t+=dt;if(G.dc[i].t>4)G.dc.splice(i,1)}
   G.shk*=Math.pow(.02,dt);if(G.shk<.2)G.shk=0;
 }
-function endRun(win){
+function endRun(win){setTimeout(()=>{try{if(FUPD.remote)fupdShow()}catch(e){}},2500);
  if(G&&G.tr&&!G.over){trEnd(win===true);return}
  if(!G||G.over)return;try{$('olh').hidden=false;$('oloot').hidden=false;$('over').classList.remove('trover');$('replay').textContent='⚔️ 再打一場'}catch(e){}G.over=true;running=false;joy=null;
  const RW=CH[G.c].rw||{};const coinG=Math.round(((G.kills+G.t/3)*(RW.coin||1)+(win?(RW.win||100*(G.c+1)):0)+(win&&G.bossFirst?(RW.first||1000):0))*(SAVE.ride==='gold'&&rideLv('gold')?1.05:1)),coinT=taxIncome(coinG+(G.coinB||0));SAVE.coin=Math.max(0,(SAVE.coin||0)+coinG-coinT);
@@ -4064,10 +4088,12 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-I';
+const GBUILD='1007-L';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['🎭','芳芳換裝','遊戲場的芳芳換上荷官制服,塔羅牌的芳芳換上占卜師長袍;抽獎機主畫面拿掉芳芳、車庫放大;主角揮空時不再閃白光,打中才有特效'],
+const GNOTES=[['💪','第二關怪物強化','辦公大樓的怪物、精英怪和首領,血量和攻擊力都提高為 2 倍;主角揮空(包含遠距離自動出手)時不再出現任何光效'],
+ ['🚀','自動檢查更新','遊戲有新版本時會跳出提示,按「立即更新」就會自動載入最新版本(戰鬥中會等這場打完才跳出)'],
+ ['🎭','芳芳換裝','遊戲場的芳芳換上荷官制服,塔羅牌的芳芳換上占卜師長袍;抽獎機主畫面拿掉芳芳、車庫放大;主角揮空時不再閃白光,打中才有特效'],
  ['🔊','音效升級','第二關怪物攻擊、首領登場、精英怪出現、撿金幣、升級、抽到好車、按鈕、引擎聲,換成真實錄製的音效'],
  ['🗺️','地圖操作調整','點關卡卡片改成查看怪物情報(還沒解鎖的關卡也能先看),按卡片上的「⚔️ 出擊」才會開始;第二關的 4 種精英怪也加進怪物情報'],
  ['💰','第二關獎勵提高','辦公大樓的金幣多 6 成、小怪掉裝備機率提高、精英怪可能掉 2 件且品質更好、首領掉 4 件且黃金框以上機率大增;首次通關獎金 2,000。情緒勒索改成地上浮現紫色愁雲'],
