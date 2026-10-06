@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1006-C">
+<meta name="gbuild" content="1006-U">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -805,6 +805,156 @@ header .annbtn{position:relative;display:inline-flex;align-items:center;gap:4px;
 .annbox{max-width:440px;width:94vw;box-sizing:border-box;display:grid;gap:8px}.annbox h2{margin:0;text-align:center}.annbody{max-height:58vh;overflow:auto;display:grid;gap:6px;align-content:start}
 .annr{display:grid;gap:1px;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.05);font-size:13px;line-height:1.4}.annr small{color:#9aa4b2;font-size:11px}
 .trres .trupl{text-align:center;font-size:12px;padding:6px;border-radius:8px;background:rgba(255,255,255,.05);color:#cfd6de}.trres .trupl.ok{color:#7ee08a;background:rgba(126,224,138,.1)}.trres .trupl.nofn,.trres .trupl.err{color:#ff9a8a;background:rgba(229,48,58,.1)}
+/* 1006-G 座駕 */
+.gtabs{display:flex;gap:6px;margin:6px 0 10px}.gtabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 6px;border-radius:12px;border:1px solid #556;background:#222a38;color:#cfd6de;font-weight:900;font-size:14px}.gtabs button.on{background:linear-gradient(#ffe08a,#e8a923);color:#3a2600;border-color:#ffd24a}.gtabs .gti img{height:28px;width:auto;vertical-align:middle}
+.shero{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/8;background:#111}.shero .sbg{width:100%;height:100%;object-fit:cover;display:block}.shero .sdl{position:absolute;left:3%;bottom:0;height:88%;width:auto;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6))}.shero .sdl.pop{animation:sdlpop .4s ease-out}@keyframes sdlpop{0%{transform:scale(.9)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+.shero .sbub{position:absolute;left:33%;top:10%;right:4%;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.95);color:#222;font-weight:800;font-size:13px;box-shadow:0 3px 10px rgba(0,0,0,.4)}
+.scol{margin:8px 0;padding:8px 12px;border-radius:10px;background:rgba(180,108,255,.12);border:1px solid rgba(180,108,255,.4);font-size:12.5px;text-align:center;color:#e6d4ff}.scol b{color:#ffcf4a}
+.scars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}@media(min-width:620px){.scars{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.scar{position:relative;display:grid;gap:4px;padding:10px 8px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(0,0,0,.25));border:2px solid var(--rc);text-align:center}
+.scar.q5{box-shadow:0 0 12px rgba(180,108,255,.35)}.scar.q6{background:linear-gradient(180deg,#2a2210,#0d0b06);box-shadow:0 0 16px rgba(255,207,74,.45);animation:sgold 3s ease-in-out infinite}@keyframes sgold{50%{box-shadow:0 0 26px rgba(255,207,74,.75)}}
+.scar.on{outline:3px solid #7ee08a}.scar .sq{position:absolute;left:8px;top:8px;font-size:11px;font-weight:900;color:#fff;background:var(--rc);padding:1px 8px;border-radius:999px}.scar.q6 .sq{color:#2a1d00}.scar .slv{position:absolute;right:8px;top:8px;font-size:12px;font-weight:900;color:#ffcf4a}
+.scar .sim{height:86px;display:grid;place-items:center;margin-top:14px}.scar .sim img{max-width:100%;max-height:86px}.scar .sn{font-size:14px;color:var(--rc)}.scar .sd{font-size:11px;color:#9aa4b2}.scar .sst{font-size:11.5px;color:#cfd6de;line-height:1.4}.scar .ssp{color:#ffcf4a;font-weight:800}
+.scar .sbt{display:grid;gap:5px;margin-top:2px}.scar .sbt .btn{padding:6px 4px;font-size:12.5px}.scar .sbt small{display:block;font-size:10.5px;opacity:.85}
+.srule{margin-top:10px;border-radius:12px;background:rgba(255,255,255,.04)}.srule summary{cursor:pointer;padding:10px 12px;font-weight:800;color:#ffe08a;font-size:13px}.srule ul{margin:0 10px 10px 26px;font-size:12.5px;line-height:1.6}
+/* 1006-H 車庫鐵捲門揭幕 */
+.uv-scene.grs .gr-wrap{position:absolute;left:50%;bottom:6%;width:min(520px,86%);aspect-ratio:841/779;transform:translateX(-50%)}
+.gr-hole{position:absolute;left:17.12%;top:34.15%;width:65.99%;height:65.85%;overflow:hidden;background:#141418}
+.gr-int{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55);transition:filter .6s}.uv-scene.reveal .gr-int{filter:brightness(.95)}
+.gr-hole .uv-car{position:absolute;left:50%;bottom:7%;width:92%;max-height:70%;object-fit:contain;transform:translateX(-50%) scale(.85);opacity:0;transition:opacity .35s,transform .7s cubic-bezier(.2,1.4,.4,1);filter:drop-shadow(0 10px 10px rgba(0,0,0,.6))}
+.gr-hole .uv-car.on{opacity:1;transform:translateX(-50%) scale(1)}
+.gr-leak{position:absolute;left:0;right:0;bottom:0;height:16%;background:radial-gradient(ellipse at 50% 100%,var(--rc),transparent 70%);opacity:.9;animation:grleak 1s ease-in-out infinite;mix-blend-mode:screen}.uv-scene.reveal .gr-leak{animation:none;opacity:0;transition:opacity .4s}
+@keyframes grleak{50%{opacity:.45}}
+.gr-door{position:absolute;left:0;top:0;width:100%;height:100%;transform:translateY(-4%);transition:transform 1.15s cubic-bezier(.55,0,.3,1)}
+.gr-door.wig{animation:grwig .5s ease-in-out infinite}@keyframes grwig{0%,100%{transform:translateY(-4%)}25%{transform:translate(-.6%,-4.6%)}75%{transform:translate(.6%,-3.6%)}}
+.gr-door.off{animation:none;transform:translateY(-104%)}
+.gr-hl{position:absolute;left:0;right:0;bottom:22%;height:30%;opacity:0;background:radial-gradient(circle at 30% 50%,rgba(255,250,220,.95) 0,rgba(255,240,180,.5) 9%,transparent 22%),radial-gradient(circle at 70% 50%,rgba(255,250,220,.95) 0,rgba(255,240,180,.5) 9%,transparent 22%);mix-blend-mode:screen}
+.uv-scene.reveal .gr-hl{animation:grhl 1.4s .55s ease-out forwards}@keyframes grhl{0%{opacity:0}15%{opacity:1}35%{opacity:.4}50%{opacity:1}100%{opacity:.25}}
+.gr-smk{position:absolute;bottom:-12%;width:58%;opacity:0;pointer-events:none}.gr-smk.l{left:-14%}.gr-smk.r{right:-14%;transform:scaleX(-1)}
+.gr-smk.fly{animation:grsmk 1.6s .35s ease-out forwards}.gr-smk.r.fly{animation-name:grsmkr}
+@keyframes grsmk{0%{opacity:0;transform:scale(.5) translate(0,20%)}25%{opacity:.95}100%{opacity:0;transform:scale(1.3) translate(-25%,-25%)}}
+@keyframes grsmkr{0%{opacity:0;transform:scaleX(-1) scale(.5) translate(0,20%)}25%{opacity:.95}100%{opacity:0;transform:scaleX(-1) scale(1.3) translate(-25%,-25%)}}
+.gr-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.gr-box{position:absolute;left:15.2%;top:28.6%;width:69.9%;pointer-events:none;filter:drop-shadow(0 4px 4px rgba(0,0,0,.5))}
+.gr-sign{position:absolute;left:12%;right:12%;top:5.5%;height:14%;display:grid;place-items:center;font-weight:900;font-size:clamp(18px,5.4vw,30px);letter-spacing:.3em;color:#3a3a3a;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.uv-scene.reveal .gr-sign{color:var(--rc);text-shadow:0 0 10px var(--rc),0 1px 0 #000}
+.uv-scene.grs.many .gr-wrap{opacity:0;transition:opacity .4s}
+.uv-mini.grm .grmh{position:relative;width:100%;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#141418;border:2px solid #5a5f68;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6)}
+.uv-mini.grm .grmh .gi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
+.uv-mini.grm .grmh .car{position:absolute;left:50%;bottom:6%;width:92%;max-height:78%;object-fit:contain;transform:translateX(-50%)}
+.uv-mini.grm .grmh .gd{position:absolute;left:0;top:0;width:100%;height:100%;animation:grmd .7s ease-in forwards}@keyframes grmd{to{transform:translateY(-105%)}}
+.uv-mini.grm .grmh::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--rc);box-shadow:0 0 8px var(--rc)}
+/* 1006-I 修正:車庫揭幕背景、鐵捲門寬度、十連抽小卡排版 */
+.gr-bgblur{position:absolute;inset:-6%;width:112%;height:112%;object-fit:cover;filter:blur(6px) brightness(.32) saturate(.8);z-index:0}
+.uv-scene.grs>*:not(.gr-bgblur){z-index:1}.uv-scene.grs .uv-spot{opacity:.25}
+.gr-door{left:-3%!important;width:106%!important}
+.uv-mini.grm{justify-content:flex-start}.uv-mini.grm .grmh{margin-bottom:28px}
+.uv-mini.grm .grmh .gi{filter:brightness(1.05)}
+.uv-mini.grm .grmh .car{right:auto!important;top:auto!important;height:auto!important;max-height:82%;width:94%!important;bottom:4%!important;object-position:50% 100%;filter:drop-shadow(0 0 8px var(--rc)) drop-shadow(0 4px 4px rgba(0,0,0,.6))}
+.uv-mini.grm span{position:static;display:block;margin-top:3px}.uv-mini.grm .grmh{margin-bottom:0!important}
+.uv-scene.grs .uv-grid{align-content:center;grid-template-rows:auto auto;gap:16px 6px}
+.uv-scene.many~.ghost2{display:none}
+/* 1006-J 揭幕再調整:整個抽獎視窗不再出現展示間背景、車名移到車庫下方、十連抽只顯示車 */
+#gov.gx .box.grbox{background:radial-gradient(ellipse at 50% 35%,#2a2620 0,#141216 55%,#09080b 100%)!important}
+.uv-scene.grs .gr-wrap{bottom:17%!important;width:min(470px,80%)!important}
+.uv-scene.grs .uv-plaque{bottom:1%!important}
+.uv-scene.grs .uv-plaque b{font-size:clamp(18px,5vw,26px)}
+.uv-mini.grm .grmh{background:none!important;border:0!important;box-shadow:none!important;overflow:visible!important;aspect-ratio:4/3}
+.uv-mini.grm .grmh .car{bottom:8%!important;max-height:86%!important}
+.uv-mini.grm .grmh::after{left:10%;right:10%;bottom:2%;height:4px;border-radius:4px}
+/* 1006-K */
+.uv-scene.grs .gx-halo,.uv-scene.grs .gx-burst{display:none!important}
+.gbox.grbg{background:linear-gradient(180deg,rgba(12,10,14,.35),rgba(12,10,14,.82)),var(--grint) center 60%/cover no-repeat!important}
+.uv-mini.grm.seq{opacity:1;animation:none}
+.uv-mini.grm.seq .grmh{background:rgba(0,0,0,.35)!important;border-radius:10px}
+.uv-mini.grm.seq .car{opacity:0;transform:translateX(-50%) scale(.6);transition:opacity .25s,transform .35s cubic-bezier(.2,1.5,.4,1)}
+.uv-mini.grm.seq>span{opacity:0;transition:opacity .25s .1s}
+.uv-mini.grm.seq .gq{position:absolute;inset:0;display:grid;place-items:center;font:900 26px system-ui;color:rgba(255,255,255,.35);transition:opacity .2s}
+.uv-mini.grm.seq .grmh::after{opacity:0}
+.uv-mini.grm.seq.on .car{opacity:1;transform:translateX(-50%) scale(1)}.uv-mini.grm.seq.on>span{opacity:1}.uv-mini.grm.seq.on .gq{opacity:0}.uv-mini.grm.seq.on .grmh::after{opacity:1}
+.uv-mini.grm.seq.charge .grmh{animation:gcharge .3s ease-in-out infinite;box-shadow:0 0 18px var(--rc),inset 0 0 18px var(--rc)!important}.uv-mini.grm.seq.charge .gq{color:var(--rc);text-shadow:0 0 10px var(--rc)}
+@keyframes gcharge{50%{transform:scale(1.08)}}
+.uv-mini.grm.seq.big .grmh{animation:gbig .6s ease-out}@keyframes gbig{0%{transform:scale(1.35)}100%{transform:scale(1)}}
+/* 1006-L 車庫邊緣淡出、至尊/典藏等級辨識 */
+#gmach{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 10%,#000 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 10%,#000 100%);mask-composite:intersect;filter:drop-shadow(0 14px 18px rgba(0,0,0,.7))}
+.uv-scene.grs .gr-frame{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,transparent 0,#000 9%,#000 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,transparent 0,#000 9%,#000 100%);mask-composite:intersect}
+.t5{color:#c89bff!important}.t6{background:linear-gradient(90deg,#fff3c4,#ffcf4a,#b8862b,#ffe9a8);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+.rqb{display:inline-block;margin-left:4px;padding:0 7px;border-radius:999px;font-size:10.5px;font-weight:900;vertical-align:2px;-webkit-text-fill-color:initial}
+.rqb5{background:#b46cff;color:#fff}.rqb6{background:linear-gradient(#2a2210,#0d0b06);color:#ffcf4a;border:1px solid #ffcf4a}
+.rslot .wn{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+.rslot.rq5{border-color:#b46cff!important;box-shadow:0 0 14px rgba(180,108,255,.45),inset 0 0 0 1px rgba(180,108,255,.4)}
+.rslot.rq5 .rimg{border-color:#b46cff!important;background:radial-gradient(circle,#3b2160,#1a1030)!important}
+.rslot.rq6{border-color:#ffcf4a!important;background:linear-gradient(180deg,#221b0c,#0b0906)!important;animation:sgold 3s ease-in-out infinite}
+.rslot.rq6 .rimg{border-color:#ffcf4a!important;background:radial-gradient(circle,#3a2d10,#0b0906)!important;box-shadow:0 0 12px rgba(255,207,74,.6)}
+.tile.q5{border-color:#b46cff!important;box-shadow:0 0 8px rgba(180,108,255,.5)}.tile.q6{border-color:#ffcf4a!important;background:#0d0b06!important;box-shadow:0 0 10px rgba(255,207,74,.6)}
+/* 1006-M 至尊/典藏圖示高級感:流動光框、掃光、閃爍星光、皇冠 */
+.rslot.rq5 .rimg,.rslot.rq6 .rimg,.scar.q6 .sim,.tile.q5,.tile.q6{position:relative;isolation:isolate}
+.tile.q5,.tile.q6{overflow:hidden}
+.rslot.rq5 .rimg,.rslot.rq6 .rimg{border:0!important;width:60px!important;height:60px!important;padding:3px;box-sizing:border-box;background:none!important;overflow:visible!important}
+.rqclip{position:absolute;inset:0;border-radius:10px;overflow:hidden;z-index:0}
+.rqclip::before,.tile.q5::before,.tile.q6::before{content:'';position:absolute;inset:-60%;z-index:-2;animation:rqspin 3.2s linear infinite}
+.rq5 .rqclip::before,.tile.q5::before{background:conic-gradient(from 0deg,#5b2a9e,#d6a8ff,#7c3aed,#f0d9ff,#5b2a9e)}
+.rq6 .rqclip::before,.tile.q6::before{background:conic-gradient(from 0deg,#5a3d00,#fff6c8,#ffcf4a,#fff,#b8862b,#3a2600,#ffcf4a,#5a3d00)}
+@keyframes rqspin{to{transform:rotate(360deg)}}
+.rqclip::after,.tile.q5::after,.tile.q6::after{content:'';position:absolute;inset:3px;border-radius:8px;z-index:-1}
+.rq5 .rqclip::after,.tile.q5::after{background:radial-gradient(circle at 50% 40%,#4b2a7a,#170b2b 75%)}
+.rq6 .rqclip::after,.tile.q6::after{background:radial-gradient(circle at 50% 35%,#4a3810 0,#120d04 70%),repeating-linear-gradient(45deg,rgba(255,207,74,.1) 0 2px,transparent 2px 9px)}
+.rslot.rq6 .rimg{box-shadow:0 0 18px rgba(255,207,74,.8),0 0 4px #fff!important;border-radius:10px}
+.rslot.rq5 .rimg{box-shadow:0 0 14px rgba(180,108,255,.7)!important;border-radius:10px}
+.rslot.rq5 .rimg img,.rslot.rq6 .rimg img{position:relative;z-index:1;max-width:100%;max-height:100%}
+.rslot.rq6 .rimg img,.scar.q6 .sim img{animation:rqshine 2.6s ease-in-out infinite}
+@keyframes rqshine{0%,100%{filter:drop-shadow(0 0 3px rgba(255,220,120,.7)) brightness(1)}50%{filter:drop-shadow(0 0 10px rgba(255,230,150,1)) brightness(1.18)}}
+.rqs{position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:10px;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.75) 46%,rgba(255,240,190,.4) 52%,transparent 66%);background-size:250% 100%;animation:rqsweep 2.4s ease-in-out infinite;mix-blend-mode:screen}
+.rq5 .rqs{background:linear-gradient(115deg,transparent 35%,rgba(230,200,255,.55) 50%,transparent 65%);background-size:250% 100%;animation-duration:3s}
+@keyframes rqsweep{0%{background-position:150% 0}60%,100%{background-position:-60% 0}}
+.rqspark{position:absolute;z-index:3;font-size:11px;font-style:normal;color:#fff6c8;text-shadow:0 0 6px #ffcf4a;animation:rqtw 1.8s ease-in-out infinite;pointer-events:none}
+.rqspark.a{left:4%;top:6%}.rqspark.b{right:6%;top:28%;animation-delay:.6s;font-size:9px}.rqspark.c{left:22%;bottom:6%;animation-delay:1.2s;font-size:10px}
+@keyframes rqtw{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(90deg)}}
+.rqcrown{position:absolute;z-index:4;left:-9px;top:-12px;font-size:19px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.7));transform:rotate(-18deg)}
+
+/* 1006-N 裝備格背景:改成暗黑風石紋底色(依稀有度上色),取代菱格紋;黑框/普通用較亮的石灰底,深色裝備也看得清楚 */
+:root{--tnz:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.tile.q-1,.tile.q0,.tile.q1,.tile.q2,.tile.q3,.tile.q4,.tile.q5,.tile.q6,button.tile.q-1,button.tile.q0,button.tile.q1,button.tile.q2,button.tile.q3,button.tile.q4{border:2px solid var(--tb)!important;border-radius:9px!important;background:var(--tnz),radial-gradient(circle at 50% 42%,var(--tl) 0,var(--td) 78%)!important;background-size:140px 140px,100% 100%!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 12px rgba(0,0,0,.45)!important;filter:none!important}
+.tile.q-1{--tl:#6e6467;--td:#3b3436;--tb:#4a3f42}
+.tile.q0{--tl:#8a8e95;--td:#4b4f56;--tb:#9aa1ab}
+.tile.q1{--tl:#4f7a5b;--td:#1f3a27;--tb:#2fbf5f}
+.tile.q2{--tl:#3d64a6;--td:#16284d;--tb:#4a8cff}
+.tile.q3{--tl:#a8833a;--td:#4d3a14;--tb:#f2b632}
+.tile.q4{--tl:#9a3036;--td:#3f0f13;--tb:#ff4a55}
+.tile.q5{--tl:#6a3fa0;--td:#24123f;--tb:#b46cff}
+.tile.q6{--tl:#4a3810;--td:#0d0b06;--tb:#ffcf4a}
+.tile.q-1 img,.tile.q0 img{filter:drop-shadow(0 0 1.5px rgba(255,255,255,.75)) drop-shadow(0 2px 3px rgba(0,0,0,.6))!important}
+.tile.q1 img,.tile.q2 img,.tile.q3 img,.tile.q4 img{filter:drop-shadow(0 0 1px rgba(255,255,255,.35)) drop-shadow(0 2px 3px rgba(0,0,0,.6))!important}
+.tile.q3{box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -6px 12px rgba(0,0,0,.4),0 0 6px rgba(242,182,50,.45)!important}
+.tile.q4{box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -6px 12px rgba(0,0,0,.4),0 0 7px rgba(255,74,85,.5)!important}
+/* 1006-O 座駕也套用石紋底色(裝備頁座駕格、抽獎機車款卡、車行車款卡) */
+.rq0{--tl:#8a8e95;--td:#4b4f56;--tb:#9aa1ab}.rq1{--tl:#4f7a5b;--td:#1f3a27;--tb:#2fbf5f}.rq2{--tl:#3d64a6;--td:#16284d;--tb:#4a8cff}.rq3{--tl:#a8833a;--td:#4d3a14;--tb:#f2b632}.rq4{--tl:#9a3036;--td:#3f0f13;--tb:#ff4a55}
+.rq5,.scar.q5{--tl:#6a3fa0;--td:#24123f;--tb:#b46cff}.rq6,.scar.q6{--tl:#4a3810;--td:#0d0b06;--tb:#ffcf4a}
+.rslot.rq0 .rimg,.rslot.rq1 .rimg,.rslot.rq2 .rimg,.rslot.rq3 .rimg,.rslot.rq4 .rimg{border:2px solid var(--tb)!important;border-radius:9px!important;background:var(--tnz),radial-gradient(circle at 50% 42%,var(--tl) 0,var(--td) 78%)!important;background-size:140px 140px,100% 100%!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 12px rgba(0,0,0,.45)!important}
+.rslot.rq3 .rimg{box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 -6px 12px rgba(0,0,0,.4),0 0 6px rgba(242,182,50,.45)!important}.rslot.rq4 .rimg{box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 -6px 12px rgba(0,0,0,.4),0 0 7px rgba(255,74,85,.5)!important}
+.rq5 .rqclip::after,.rq6 .rqclip::after{background:var(--tnz),radial-gradient(circle at 50% 40%,var(--tl) 0,var(--td) 78%)!important;background-size:140px 140px,100% 100%!important}
+.rslot .rimg img{filter:drop-shadow(0 0 1px rgba(255,255,255,.4)) drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+.ride .rimw{display:block;width:100%}.ride .rimw img{display:block;width:100%;margin:0}
+.ride.rq0 .rimw,.ride.rq1 .rimw,.ride.rq2 .rimw,.ride.rq3 .rimw,.ride.rq4 .rimw{box-sizing:border-box;border:2px solid var(--tb);border-radius:9px;padding:6px;background:var(--tnz),radial-gradient(circle at 50% 42%,var(--tl) 0,var(--td) 78%);background-size:140px 140px,100% 100%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 -6px 12px rgba(0,0,0,.45)}
+.ride.lock .rimw{background:var(--tnz),radial-gradient(circle at 50% 42%,#6f747c 0,#3c4046 78%)!important;background-size:140px 140px,100% 100%!important;border-color:rgba(255,255,255,.22)!important}.ride.lock .rimw img{opacity:.6!important}
+.scar .sim{border:2px solid var(--tb);border-radius:10px;background:var(--tnz),radial-gradient(circle at 50% 42%,var(--tl) 0,var(--td) 78%);background-size:140px 140px,100% 100%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 -6px 12px rgba(0,0,0,.45);overflow:hidden;padding:4px}
+/* 1006-P 裝備格材質:琺瑯底+金屬框(取代石紋)。裝備、倉庫、詳細資訊、座駕、抽獎機、車行全部一致 */
+.tile.q-1,button.tile.q-1,.mq-1{--e1:#5a4f52;--e2:#221c1e;--m1:#c9b8a6;--m2:#6a5a4c;--m3:#e6d6c4;--m4:#3a2f28}
+.tile.q0,button.tile.q0,.mq0,.rq0{--e1:#6e7682;--e2:#2c323b;--m1:#ffffff;--m2:#9aa3ad;--m3:#e8ecf0;--m4:#4f5761}
+.tile.q1,button.tile.q1,.mq1,.rq1{--e1:#2f7a4a;--e2:#0d3a1e;--m1:#e2ffec;--m2:#3fbf6a;--m3:#c4f5d4;--m4:#16602f}
+.tile.q2,button.tile.q2,.mq2,.rq2{--e1:#3264bd;--e2:#0c2252;--m1:#e2edff;--m2:#4a8cff;--m3:#c7dcff;--m4:#1a4494}
+.tile.q3,button.tile.q3,.mq3,.rq3{--e1:#a87a22;--e2:#3a2706;--m1:#fff6cc;--m2:#f2b632;--m3:#ffe594;--m4:#7e520c}
+.tile.q4,button.tile.q4,.mq4,.rq4{--e1:#a6262f;--e2:#36080c;--m1:#ffe0dc;--m2:#ff4a55;--m3:#ffc4b0;--m4:#721016}
+.tile.q5,button.tile.q5,.mq5,.rq5,.scar.q5{--e1:#6a3fa0;--e2:#1c0d36;--m1:#f3e2ff;--m2:#b46cff;--m3:#e6c9ff;--m4:#55279a}
+.tile.q6,button.tile.q6,.mq6,.rq6,.scar.q6{--e1:#46360f;--e2:#0a0804;--m1:#fffbe0;--m2:#ffcf4a;--m3:#fff0b0;--m4:#7a5208}
+.tile.q-1,button.tile.q-1,.tile.q0,button.tile.q0,.tile.q1,button.tile.q1,.tile.q2,button.tile.q2,.tile.q3,button.tile.q3,.tile.q4,button.tile.q4,.tile.q5,button.tile.q5,.tile.q6,button.tile.q6,.rslot.rq0 .rimg,.rslot.rq1 .rimg,.rslot.rq2 .rimg,.rslot.rq3 .rimg,.rslot.rq4 .rimg,.ride.rq0 .rimw,.ride.rq1 .rimw,.ride.rq2 .rimw,.ride.rq3 .rimw,.ride.rq4 .rimw,.scar .sim,.ic.icm,.ride.lock .rimw{border:3px solid transparent!important;border-radius:10px!important;background:linear-gradient(165deg,rgba(255,255,255,.24) 0,rgba(255,255,255,.07) 28%,transparent 46%) padding-box,radial-gradient(circle at 50% 40%,var(--e1) 0,var(--e2) 84%) padding-box,linear-gradient(145deg,var(--m1) 0,var(--m2) 30%,var(--m3) 55%,var(--m4) 88%) border-box!important;background-size:auto!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.2),inset 0 -8px 14px rgba(0,0,0,.45),0 2px 5px rgba(0,0,0,.45)!important;filter:none!important}
+.ride.lock{--e1:#6f747c;--e2:#3a3e44;--m1:#9aa0a8;--m2:#5a5f66;--m3:#8a9098;--m4:#3a3e44}
+.tile.q3,button.tile.q3{box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.22),inset 0 -8px 14px rgba(0,0,0,.4),0 0 8px rgba(242,182,50,.5)!important}
+.tile.q4,button.tile.q4{box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.22),inset 0 -8px 14px rgba(0,0,0,.4),0 0 9px rgba(255,74,85,.55)!important}
+.rq5 .rqclip::after,.rq6 .rqclip::after{background:linear-gradient(165deg,rgba(255,255,255,.24) 0,transparent 42%),radial-gradient(circle at 50% 40%,var(--e1) 0,var(--e2) 84%)!important;background-size:auto!important}
+.tile.q5::after,.tile.q6::after{background:linear-gradient(165deg,rgba(255,255,255,.24) 0,transparent 42%),radial-gradient(circle at 50% 40%,var(--e1) 0,var(--e2) 84%)!important}
+.ic.icm{background-image:none}
+img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1346,7 +1496,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1006-C</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1006-U</span></small>
   </div>
  </div>
 </div>
@@ -1392,7 +1542,9 @@ html.ios-app body{min-height:100vh}
   </div>
   <div class="tab" data-tab="gacha" hidden>
    <section style="margin-top:12px" id="gsec">
-    <h2>幸運抽獎 <span class="muted" style="font-size:13px;font-weight:400">新車揭幕!花金幣抽代步工具,裝上就能跑更快</span></h2>
+    <h2>座駕 <span class="muted" style="font-size:13px;font-weight:400">抽獎機抽代步車,夢想車庫直接買超跑</span></h2>
+    <div class="gtabs" id="gtabs"><button data-g="lot" class="on"><span class="gti" data-k="gtab-lot">🎁</span>抽獎機</button><button data-g="shop"><span class="gti" data-k="gtab-shop">🏎️</span>夢想車庫</button></div>
+    <div id="gLot">
     <div class="gbox">
      <div class="gmach"><img id="gmach" alt="抽獎機"></div>
      <div class="gctl">
@@ -1404,6 +1556,13 @@ html.ios-app body{min-height:100vh}
      <div class="ghost"><div class="bub" id="gbub">要不要試試手氣?</div><img id="ghost" alt="企劃女神芳芳"><div><span class="hname">企劃女神芳芳</span></div></div>
     </div>
     <div class="rides" id="rides"></div>
+    </div>
+    <div id="gShop" hidden>
+     <div class="shero" id="shero"><img class="sbg" id="sbg" alt=""><img class="sdl" id="sdl" alt="車行店長"><div class="sbub" id="sbub">歡迎光臨!今天想看哪一台?</div></div>
+     <div class="scol" id="scol"></div>
+     <div class="scars" id="scars"></div>
+     <details class="srule"><summary>📖 車行規則</summary><ul><li>車行的車不用抽,直接用金幣購買。</li><li><b>改裝</b>可以把車升到 Lv.5:費用是售價的 10% / 20% / 30% / 40%,成功率 100% / 80% / 60% / 40%。</li><li>改裝失敗不會降級,只會花掉金幣,而且下次成功率 +10%(成功後歸零)。</li><li><b>車庫收藏加成</b>:每擁有一台車行的車,攻擊、生命、防禦、回復再 +1%(最多 +6%),不用裝備也有效。</li></ul></details>
+    </div>
    </section>
   </div>
   <div class="tab" data-tab="farm" hidden>
@@ -1466,7 +1625,7 @@ html.ios-app body{min-height:100vh}
       <li><b>丟底發牌</b>:每局先丟 <b>100 金幣</b>底注進池底,芳芳翻開兩張牌當「門柱」。A 最小算 1,K 最大算 13,不分花色。</li>
       <li><b>看門柱決定</b>:門夠寬就選好下注金額「射門」;門太窄就「放棄」,但<b>丟進去的底注會留在池底</b>,讓池子越滾越大。</li>
       <li><b>射門結果</b>:芳芳翻第三張牌——
-       <ul><li>落在兩根門柱<b>中間</b>:<span class="up">依本門賠率從池底贏錢</span>:門越窄賠越多(最高 1 賠 15)、門越寬賠越少,發牌後會顯示賠率</li><li>落在門柱<b>外面</b>:<span class="down">下注金額丟進池底</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">丟 2 倍進池底</span></li></ul></li>
+       <ul><li>落在兩根門柱<b>中間</b>:<span class="up">依本門賠率從池底贏錢</span>:門越窄賠越多(最高 1 賠 15)、門越寬賠越少,發牌後會顯示賠率。每一把最多只能贏走池底的一部分:勝率 80% 以上 5%、65% 以上 8%、50% 以上 15%、更低 30%(全包除外)</li><li>落在門柱<b>外面</b>:<span class="down">下注金額丟進池底</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">丟 2 倍進池底</span></li></ul></li>
       <li><b>兩根門柱一樣大</b>時,改成猜第三張「比門柱大」還是「比門柱小」:猜對從池底贏走下注金額的 90%,猜錯丟 1 倍,又一樣大就是<span class="down">撞柱丟 3 倍</span>。</li>
       <li><b>💥 全包</b>:看完門柱也可以選「全包」,押上<b>整個池底</b>。射中就抱走整個池底;射偏賠一個池底;撞柱賠 2 倍(雙柱 3 倍),最多扣到身上金幣歸零。<b>限制:池底要滿 3,000、而且這一門的勝率不能超過 50%</b>(太寬的門不能全包),身上也要有一個池底的金幣。</li>
       <li><b>下注上限</b>:不能超過目前池底;<b>門越寬押得越少</b>:勝率 50% 以上最多押池底 50%、65% 以上最多 35%、80% 以上最多 20%;身上金幣也要夠付撞柱的倍數;金幣不夠時至少可以押 1,000,撞柱最多扣到身上金幣歸零。<b>開局至少要有 1,100 金幣</b>(底注 100+最低下注 1,000)。</li>
@@ -1511,9 +1670,9 @@ html.ios-app body{min-height:100vh}
   <nav id="tabs">
    <button data-t="map"><span class="ti">🗺️</span>地圖</button>
    <button data-t="eq"><span class="ti" id="tie">🎒</span>裝備</button>
-   <button data-t="gacha"><span class="ti" id="tig">🎰</span>抽獎</button>
+   <button data-t="gacha"><span class="ti" id="tig">🎰</span>車庫</button>
    <button data-t="farm"><span class="ti fic">🌻</span>農場</button>
-   <button data-t="dragon"><span class="ti">🃏</span>賭場</button>
+   <button data-t="dragon"><span class="ti">🃏</span>遊戲場</button>
    <button data-t="tarot"><span class="ti">🔮</span>塔羅牌</button>
   </nav>
  </div>
@@ -1585,7 +1744,7 @@ html.ios-app body{min-height:100vh}
  </div>
 </div>
 
-<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1004P"><\/script><script src="sounds.js?v=1005ZZL" async><\/script>')</script>
+<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1006Q"><\/script><script src="sounds.js?v=1005ZZL" async><\/script>')</script>
 <script>
 if(window.__PHONEHOST)throw new Error("phone-host");
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
@@ -1608,6 +1767,7 @@ const EA0={"walk": ["奧客喪屍-walk-1", "奧客喪屍-walk-2", "奧客喪屍-
 const EANIM={'奧客喪屍':Object.assign({faceR:true},EA0),'暴怒奧客喪屍':Object.assign({faceR:true},EA0),'吸毒喪屍':Object.assign({faceR:true},{"walk": ["吸毒喪屍-walk-1", "吸毒喪屍-walk-2", "吸毒喪屍-walk-3", "吸毒喪屍-walk-4", "吸毒喪屍-walk-5", "吸毒喪屍-walk-6", "吸毒喪屍-walk-7", "吸毒喪屍-walk-8"], "atk": ["吸毒喪屍-atk-1", "吸毒喪屍-atk-2", "吸毒喪屍-atk-3", "吸毒喪屍-atk-4", "吸毒喪屍-atk-5", "吸毒喪屍-atk-6", "吸毒喪屍-atk-7", "吸毒喪屍-atk-8"], "die": ["吸毒喪屍-die-1", "吸毒喪屍-die-2", "吸毒喪屍-die-3", "吸毒喪屍-die-4", "吸毒喪屍-die-5", "吸毒喪屍-die-6", "吸毒喪屍-die-7", "吸毒喪屍-die-8"]}),'菜市場大媽喪屍':Object.assign({faceR:true},{"walk": ["菜市場大媽喪屍-walk-1", "菜市場大媽喪屍-walk-2", "菜市場大媽喪屍-walk-3", "菜市場大媽喪屍-walk-4", "菜市場大媽喪屍-walk-5", "菜市場大媽喪屍-walk-6", "菜市場大媽喪屍-walk-7", "菜市場大媽喪屍-walk-8"], "atk": ["菜市場大媽喪屍-atk-1", "菜市場大媽喪屍-atk-2", "菜市場大媽喪屍-atk-3", "菜市場大媽喪屍-atk-4", "菜市場大媽喪屍-atk-5", "菜市場大媽喪屍-atk-6", "菜市場大媽喪屍-atk-7", "菜市場大媽喪屍-atk-8"], "die": ["菜市場大媽喪屍-die-1", "菜市場大媽喪屍-die-2", "菜市場大媽喪屍-die-3", "菜市場大媽喪屍-die-4", "菜市場大媽喪屍-die-5", "菜市場大媽喪屍-die-6", "菜市場大媽喪屍-die-7", "菜市場大媽喪屍-die-8"]})};
 const $=id=>document.getElementById(id);
 EANIM['捷運站長喪屍']={faceR:true,walk:["捷運站長喪屍-walk-1", "捷運站長喪屍-walk-2", "捷運站長喪屍-walk-3", "捷運站長喪屍-walk-4", "捷運站長喪屍-walk-5", "捷運站長喪屍-walk-6"],atk:["捷運站長喪屍-atk-1", "捷運站長喪屍-atk-2", "捷運站長喪屍-atk-3", "捷運站長喪屍-atk-4", "捷運站長喪屍-atk-5", "捷運站長喪屍-atk-6"],cast:["捷運站長喪屍-cast-1", "捷運站長喪屍-cast-2", "捷運站長喪屍-cast-3", "捷運站長喪屍-cast-4", "捷運站長喪屍-cast-5"],die:["捷運站長喪屍-die-1", "捷運站長喪屍-die-2", "捷運站長喪屍-die-3", "捷運站長喪屍-die-4", "捷運站長喪屍-die-5", "捷運站長喪屍-die-6", "捷運站長喪屍-die-7", "捷運站長喪屍-die-8", "捷運站長喪屍-die-9"]};
+for(const [o,n] of [['萬寶龍鋼筆','萬能鋼筆'],['寶格麗公事包','名牌公事包'],['Ray-Ban墨鏡','老大墨鏡'],['Airpods耳機','藍牙耳機'],['我的ARMANI','我的訂製西裝'],['On球鞋','氣墊球鞋'],['舉手之勞力士','舉手之勞金錶'],['LV老花皮帶','老花紋皮帶'],['I Phone DUO','摺疊手機'],['JBL喇叭','藍牙喇叭'],['百威啤酒','冰涼啤酒'],['七星香菸','下班一根菸'],['麥當勞套餐','速食套餐'],['猛健樂','維他命針']])if(ART[o]&&!ART[n])ART[n]=ART[o];
 const IMG={};for(const k in ART){const i=new Image();i.src=ART[k];IMG[k]=i}
 (()=>{const R=document.documentElement.style;for(const k of ['hud-hp','hud-timer','hud-pause','btn-gold','btn-navy','btn-gray'])if(ART[k])R.setProperty('--'+k,'url('+ART[k]+')')})();
 if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h){this.rect(x,y,w,h)};
@@ -1626,14 +1786,16 @@ const fmt=n=>n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e4?(n/1e3).toFixed(1)+'K':String(
 const SLOTS=[{k:'wpn',t:'wpn',n:'武器',e:'⚔️'},{k:'off',t:'off',n:'副手',e:'🛡️'},{k:'head',t:'head',n:'帽子',e:'🧢'},{k:'coat',t:'coat',n:'外套',e:'🧥'},{k:'shoe',t:'shoe',n:'鞋子',e:'👟'},{k:'acc1',t:'acc',n:'飾品',e:'💍'},{k:'acc2',t:'acc',n:'飾品',e:'💍'}];
 const TYPEN={wpn:'武器',off:'副手',head:'帽子',coat:'外套',shoe:'鞋子',acc:'飾品'};
 const BASES={
- wpn:[{b:'晴雨窗光劍',e:'🗡️',w:'umb'},{b:'萬寶龍鋼筆',e:'🖋️',w:'pen'},{b:'梵谷打火機',e:'🔥',w:'thermos'},{b:'單眼相機',e:'📷',w:'laptop'}],
- off:[{b:'寶格麗公事包',e:'💼'},{b:'不明的桌曆',e:'📅'},{b:'超厚型錄',e:'📚'}],
- head:[{b:'Ray-Ban墨鏡',e:'🕶️'},{b:'Airpods耳機',e:'🎧'},{b:'安全帽',e:'⛑️'}],
- coat:[{b:'我的ARMANI',e:'🧥'},{b:'連帽外套',e:'🥼'},{b:'LED反光背心',e:'🦺'}],
- shoe:[{b:'香港腳皮鞋',e:'👞'},{b:'On球鞋',e:'👟'},{b:'監獄藍白拖',e:'🩴'}],
- acc:[{b:'舉手之勞力士',e:'⌚'},{b:'LV老花皮帶',e:'👜'},{b:'I Phone DUO',e:'📱'}]};
-const RENAME={'雨傘':'晴雨窗光劍','原子筆':'萬寶龍鋼筆','保溫瓶':'梵谷打火機','筆電':'單眼相機','公事包':'寶格麗公事包','資料夾':'不明的桌曆','便當袋':'超厚型錄','鴨舌帽':'Ray-Ban墨鏡','耳機':'Airpods耳機',
- '西裝外套':'我的ARMANI','反光背心':'LED反光背心','皮鞋':'香港腳皮鞋','球鞋':'On球鞋','藍白拖':'監獄藍白拖','識別證':'I Phone DUO','手錶':'舉手之勞力士','幸運御守':'LV老花皮帶'};
+ wpn:[{b:'晴雨窗光劍',e:'🗡️',w:'umb'},{b:'萬能鋼筆',e:'🖋️',w:'pen'},{b:'梵谷打火機',e:'🔥',w:'thermos'},{b:'單眼相機',e:'📷',w:'laptop'}],
+ off:[{b:'名牌公事包',e:'💼'},{b:'不明的桌曆',e:'📅'},{b:'超厚型錄',e:'📚'}],
+ head:[{b:'老大墨鏡',e:'🕶️'},{b:'藍牙耳機',e:'🎧'},{b:'安全帽',e:'⛑️'}],
+ coat:[{b:'我的訂製西裝',e:'🧥'},{b:'連帽外套',e:'🥼'},{b:'LED反光背心',e:'🦺'}],
+ shoe:[{b:'香港腳皮鞋',e:'👞'},{b:'氣墊球鞋',e:'👟'},{b:'監獄藍白拖',e:'🩴'}],
+ acc:[{b:'舉手之勞金錶',e:'⌚'},{b:'老花紋皮帶',e:'👜'},{b:'摺疊手機',e:'📱'}]};
+/* 1006-Q 拿掉真實品牌名稱:舊名稱 → 新名稱(舊存檔自動改名,圖片沿用) */
+const BRANDREN=[['萬寶龍鋼筆','萬能鋼筆'],['寶格麗公事包','名牌公事包'],['Ray-Ban墨鏡','老大墨鏡'],['Airpods耳機','藍牙耳機'],['我的ARMANI','我的訂製西裝'],['On球鞋','氣墊球鞋'],['舉手之勞力士','舉手之勞金錶'],['LV老花皮帶','老花紋皮帶'],['I Phone DUO','摺疊手機'],['JBL喇叭','藍牙喇叭'],['百威啤酒','冰涼啤酒'],['七星香菸','下班一根菸'],['麥當勞套餐','速食套餐'],['猛健樂','維他命針']];
+const RENAME={'雨傘':'晴雨窗光劍','原子筆':'萬能鋼筆','保溫瓶':'梵谷打火機','筆電':'單眼相機','公事包':'名牌公事包','資料夾':'不明的桌曆','便當袋':'超厚型錄','鴨舌帽':'老大墨鏡','耳機':'藍牙耳機',
+ '西裝外套':'我的訂製西裝','反光背心':'LED反光背心','皮鞋':'香港腳皮鞋','球鞋':'氣墊球鞋','藍白拖':'監獄藍白拖','識別證':'摺疊手機','手錶':'舉手之勞金錶','幸運御守':'老花紋皮帶','萬寶龍鋼筆':'萬能鋼筆','寶格麗公事包':'名牌公事包','Ray-Ban墨鏡':'老大墨鏡','Airpods耳機':'藍牙耳機','我的ARMANI':'我的訂製西裝','On球鞋':'氣墊球鞋','舉手之勞力士':'舉手之勞金錶','LV老花皮帶':'老花紋皮帶','I Phone DUO':'摺疊手機','JBL喇叭':'藍牙喇叭','百威啤酒':'冰涼啤酒','七星香菸':'下班一根菸','麥當勞套餐':'速食套餐','猛健樂':'維他命針'};
 /* 生活彩蛋:只會以傳說、神話稀有度出現 */
 const EGGS=[{t:'wpn',b:'成交之筆',e:'🖋️',w:'pen',sk:'deal'}];
 /* 首領專屬裝備:只會從對應首領掉落(bi=BOSS 編號) */
@@ -1643,7 +1805,7 @@ const STAT={atk:{n:'攻擊',w:3},hp:{n:'生命',w:.6},def:{n:'防禦',w:2.5},asp
 const PRIM={wpn:'atk',off:'def',head:'crit',coat:'hp',shoe:'spd'};
 const ACCST=['aspd','pick','regen','crit'];
 const RAR=[{n:'普通',m:1,c:'#b8bec8'},{n:'優良',m:1.15,c:'#2fbf5f'},{n:'稀有',m:1.3,c:'#3b82f6'},{n:'傳說',m:1.6,c:'#f2b632'},{n:'神話',m:2,c:'#e5303a'}];
-RAR[-1]={n:'破損',m:.85,c:'#6b7079'};
+RAR[-1]={n:'破損',m:.85,c:'#6b7079'};RAR[5]={n:'至尊',m:2.4,c:'#b46cff'};RAR[6]={n:'典藏',m:3,c:'#ffcf4a'};
 const SK={
  coffee:{n:'熱咖啡潑灑',d:'定時灼燒周圍的敵人'},clip:{n:'咒術迴針',d:'灌注咒力的迴針繞著你旋轉'},
  drone:{n:'外送無人機',d:'無人機自動射擊敵人'}, 
@@ -1698,57 +1860,114 @@ function pstats(lv){
  const s={atk:12,hp:130,def:0,aspd:0,crit:5,spd:0,pick:0,regen:0,sk:{},wpn:heroF()?'kick':'fist'};
  for(const k in SAVE.eq){const it=byId(SAVE.eq[k]);if(!it)continue;for(const st in it.st)s[st]+=ist(it,st);if(it.sk)s.sk[it.sk]=(s.sk[it.sk]||0)+it.skl;if(k==='wpn')s.wpn=it.w}
  const rd=RIDES.find(r=>r.id===SAVE.ride),rl=rd&&rideLv(rd.id);if(rd&&rl){const b=rideBonus(rd,rl);for(const k in b)s[k]+=b[k];}
+ {const n=shopOwned();if(n){const m=1+.01*n;s.atk*=m;s.hp*=m;s.def*=m;s.regen*=m}}
  s.aspd=Math.min(s.aspd,200);s.crit=Math.min(s.crit,75);s.spd=Math.min(s.spd,100);
  return s;
 }
 const power=()=>Math.round(Object.values(SAVE.eq).reduce((a,id)=>a+score(byId(id)),0)*10+(SAVE.ride&&rideLv(SAVE.ride)?(RIDES.find(r=>r.id===SAVE.ride).q+1)*120*rideLv(SAVE.ride):0));
 
 /* ===== 幸運抽獎:代步工具 ===== */
+/* 1006-G 座駕擴充:抽獎機 14 台(普通~神話)+夢想車庫 6 台(至尊、典藏,直接購買、可改裝) */
 const RIDES=[
- {id:'ubike',n:'城市共享單車',q:1,w:60,st:{spd:[8,2]},d:'城市通勤好夥伴'},
- {id:'gogoro',n:'電動機車',q:2,w:28,st:{spd:[14,3],pick:[20,5]},d:'換電超方便,吸取範圍提升'},
- {id:'lexus',n:'日系油電房車',q:3,w:9,st:{spd:[20,3],aspd:[10,3],regen:[.5,.2]},d:'油電混合,持續回復生命'},
- {id:'x5',n:'德系豪華休旅',q:4,w:1.5,st:{spd:[22,3],hp:[80,20],def:[10,3]},d:'重裝休旅,生命與防禦大幅提升'},
- {id:'gle',n:'德系尊榮休旅',q:4,w:1.5,st:{spd:[22,3],atk:[6,2],hp:[50,15]},d:'豪華休旅,攻擊與生命提升'}];
+ {id:'bike',n:'淑女腳踏車',q:0,w:17.3,st:{spd:[5,1]},d:'買菜通勤兩相宜'},
+ {id:'kick',n:'電動滑板車',q:0,w:17.3,st:{spd:[6,1]},d:'輕巧好收納'},
+ {id:'scoot',n:'二手小綿羊',q:0,w:17.4,st:{spd:[4,1],hp:[10,3]},d:'雖然舊,但很耐操'},
+ {id:'ubike',n:'城市共享單車',q:1,w:9.33,st:{spd:[8,2]},d:'城市通勤好夥伴'},
+ {id:'moto',n:'輕檔重機',q:1,w:9.33,st:{spd:[10,2]},d:'油門一催就走'},
+ {id:'kei',n:'國民小車',q:1,w:9.34,st:{spd:[6,1],hp:[20,5]},d:'小小一台超好停'},
+ {id:'gogoro',n:'電動機車',q:2,w:4.33,st:{spd:[14,3],pick:[20,5]},d:'換電超方便,吸取範圍提升'},
+ {id:'cuv',n:'國民休旅',q:2,w:4.33,st:{spd:[12,3],hp:[40,10]},d:'全家出遊首選'},
+ {id:'hatch',n:'熱血小鋼砲',q:2,w:4.34,st:{spd:[16,3],crit:[3,1]},d:'彎道小霸王,暴擊提升'},
+ {id:'lexus',n:'日系油電房車',q:3,w:1.67,st:{spd:[20,3],aspd:[10,3],regen:[.5,.2]},d:'油電混合,持續回復生命'},
+ {id:'muscle',n:'美式肌肉車',q:3,w:1.67,st:{spd:[22,3],atk:[4,1]},d:'大排氣量,攻擊提升'},
+ {id:'roadster',n:'雙門敞篷跑車',q:3,w:1.66,st:{spd:[24,3],pick:[30,5]},d:'吹著風收寶石,吸取範圍提升'},
+ {id:'x5',n:'德系豪華休旅',q:4,w:1,st:{spd:[22,3],hp:[80,20],def:[10,3]},d:'重裝休旅,生命與防禦大幅提升'},
+ {id:'gle',n:'德系尊榮休旅',q:4,w:1,st:{spd:[22,3],atk:[6,2],hp:[50,15]},d:'豪華休旅,攻擊與生命提升'},
+ {id:'italia',n:'義式超跑',q:5,shop:300000,st:{spd:[30,4],crit:[8,2],aspd:[10,3]},d:'紅色閃電,暴擊與攻速大幅提升'},
+ {id:'limo',n:'英式豪華轎車',q:5,shop:500000,st:{spd:[24,3],hp:[120,30],regen:[1,.3]},d:'皇室座駕,生命與回復大幅提升'},
+ {id:'ev',n:'電動超跑',q:5,shop:800000,st:{spd:[32,4],aspd:[15,3],pick:[40,10]},d:'零到百 2 秒,攻速與吸取範圍提升'},
+ {id:'offroad',n:'越野霸主',q:5,shop:1200000,st:{spd:[26,3],def:[15,4],hp:[150,30]},d:'坦克般的防禦與生命'},
+ {id:'classic',n:'經典古董跑車',q:6,shop:3000000,st:{spd:[30,4],atk:[10,3],crit:[10,2]},sp:'開場自帶護盾,擋一次傷害',d:'傳奇特務的座駕'},
+ {id:'gold',n:'鍍金限量超跑',q:6,shop:8000000,st:{spd:[34,4],atk:[12,3],aspd:[15,3],pick:[50,10]},sp:'戰鬥金幣 +5%',d:'全世界最閃亮的車'}];
+const GRIDES=RIDES.filter(r=>!r.shop),SRIDES=RIDES.filter(r=>r.shop);
+const TUNE={cost:[.1,.2,.3,.4],rate:[1,.8,.6,.4],pity:.1};
+const shopOwned=()=>SRIDES.filter(r=>rideLv(r.id)).length;
 const RMAX=5,G1=500,G10=4500,PITY=100;
 const rideLv=id=>(SAVE.rides||{})[id]||0;
 function rideBonus(r,lv){const o={};for(const k in r.st)o[k]=r.st[k][0]+r.st[k][1]*(lv-1);return o}
 function rideText(r,lv){const b=rideBonus(r,Math.max(1,lv));return Object.entries(b).map(([k,v])=>STAT[k].n+'+'+(k==='regen'?v.toFixed(1):Math.round(v))+(STAT[k].p?'%':'')).join('、')}
 function rollRide(minQ){
- SAVE.pity=(SAVE.pity||0)+1;let pool=RIDES.filter(r=>r.q>=(minQ||0));
- if(SAVE.pity>=PITY)pool=RIDES.filter(r=>r.q>=4);
+ SAVE.pity=(SAVE.pity||0)+1;let pool=GRIDES.filter(r=>r.q>=(minQ||0));
+ if(SAVE.pity>=PITY)pool=GRIDES.filter(r=>r.q>=4);
  let t=pool.reduce((a,r)=>a+r.w,0),x=Math.random()*t,r=pool[0];for(const c of pool){x-=c.w;if(x<=0){r=c;break}}
  if(r.q>=4)SAVE.pity=0;
  const lv=rideLv(r.id);let res;
- if(!lv){SAVE.rides[r.id]=1;res='NEW'}else if(lv<RMAX){SAVE.rides[r.id]=lv+1;res='Lv.'+(lv+1)}else{const c=20*r.q;SAVE.coin+=c;res='滿級 +'+c+'金幣'}
+ if(!lv){SAVE.rides[r.id]=1;res='NEW'}else if(lv<RMAX){SAVE.rides[r.id]=lv+1;res='Lv.'+(lv+1)}else{const c=[50,100,200,400,800][r.q]||50;SAVE.coin+=c;res='滿級 +'+c+'金幣'}
  if(!SAVE.ride)SAVE.ride=r.id;
  return {r,res}}
-const HOSTL={idle:['要不要試試手氣?','今天手氣應該不錯喔!','我是企劃女神芳芳,抽到德系豪華休旅是神話等級喔!','10 連抽保證稀有以上喔~','累計 100 抽必中神話喔!'],
+const HOSTL={idle:['要不要試試手氣?','今天手氣應該不錯喔!','我是企劃女神芳芳,抽獎機現在有 14 台車喔!','想要超跑?去隔壁夢想車庫看看~','10 連抽保證稀有以上喔~','累計 100 抽必中神話喔!'],
  big:['恭喜恭喜!大獎啦!','哇!今天你請客!','這台我也想要!'],mid:['還不錯喔!','有進步有進步!'],low:['下次一定更好!','沒關係,騎車也很健康~']};
 const pickL=a=>a[(Math.random()*a.length)|0];
-function renderGacha(){
- $('ghost').src=ART['host-1']||'';$('gmach').src=ART['uv-show']||'';$('gcoinimg').src=ART['金幣']||'';
+function renderGacha(){try{if(ART['gr-int']){const g=document.querySelector('#gLot .gbox');if(g){g.classList.add('grbg');g.style.setProperty('--grint','url('+ART['gr-int']+')')}}}catch(e){}try{document.querySelectorAll('#gtabs .gti[data-k]').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});if(SAVE.gtab==='shop'&&$('gShop').hidden)gTab('shop');else if(!$('gShop').hidden)renderShop()}catch(e){}
+ $('ghost').src=ART['host-1']||'';$('gmach').src=ART['gr-closed']||ART['uv-show']||'';$('gcoinimg').src=ART['金幣']||'';
  $('coins').textContent=fmtC(SAVE.coin||0);$('g1').disabled=(SAVE.coin||0)<G1;$('g10').disabled=(SAVE.coin||0)<G10;
- const tw=RIDES.reduce((a,r)=>a+r.w,0);
- {const byQ={};RIDES.forEach(r=>{(byQ[r.q]=byQ[r.q]||[]).push(r)});const pc=v=>(v/tw*100).toFixed(1)+'%',pt=SAVE.pity||0,left=Math.max(0,PITY-pt);
+ const tw=GRIDES.reduce((a,r)=>a+r.w,0);
+ {const byQ={};GRIDES.forEach(r=>{(byQ[r.q]=byQ[r.q]||[]).push(r)});const pc=v=>(v/tw*100).toFixed(1)+'%',pt=SAVE.pity||0,left=Math.max(0,PITY-pt);
  $('grate').innerHTML='<div class="gr-h">🎯 機率說明</div>'+Object.keys(byQ).sort((a,b)=>b-a).map(q=>{const rs=byQ[q],sum=rs.reduce((a,r)=>a+r.w,0);
   return'<div class="gr-r"><span class="gr-q" style="background:'+RAR[q].c+'">'+RAR[q].n+'</span><b>'+pc(sum)+'</b><span class="gr-c">'+rs.map(r=>'<i class="t'+r.q+'">'+r.n+'</i>'+(rs.length>1?' '+pc(r.w):'')).join('、')+'</span></div>'}).join('')+
   '<div class="gr-p"><div class="gr-pt"><span>🔥 保底:累計 '+PITY+' 抽必中神話</span><b>'+pt+' / '+PITY+'</b></div><div class="gr-bar"><i style="width:'+Math.min(100,pt/PITY*100)+'%"></i></div><small>還差 <b>'+left+'</b> 抽 · 抽到神話後重新計算</small></div>'+
   '<ul class="gr-n"><li>10 連抽保證至少 1 台<b class="t2">稀有</b>以上</li><li>重複抽到同一台會升級,最高 Lv.'+RMAX+'</li><li>滿級後再抽到會換成金幣</li></ul>'}
- $('rides').innerHTML=RIDES.map(r=>{const lv=rideLv(r.id),on=SAVE.ride===r.id;
-  return '<div class="ride'+(lv?'':' lock')+(on?' on':'')+'" style="border-color:'+(lv?RAR[r.q].c:'rgba(255,255,255,.1)')+'">'+(lv?'<span class="lv">Lv.'+lv+'</span>':'')+'<img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"><b>'+(lv?r.n:'???')+'</b><div class="bn">'+(lv?rideText(r,lv):RAR[r.q].n)+'</div>'+
+ $('rides').innerHTML=GRIDES.map(r=>{const lv=rideLv(r.id),on=SAVE.ride===r.id;
+  return '<div class="ride rq'+r.q+(lv?'':' lock')+(on?' on':'')+'" style="border-color:'+(lv?RAR[r.q].c:'rgba(255,255,255,.1)')+'">'+(lv?'<span class="lv">Lv.'+lv+'</span>':'')+'<span class="rimw"><img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"></span><b>'+(lv?r.n:'???')+'</b><div class="bn">'+(lv?rideText(r,lv):RAR[r.q].n)+'</div>'+
    (lv?(on?'<button class="btn" data-ride="">使用中(點擊卸下)</button>':'<button class="btn pri" data-ride="'+r.id+'">裝備</button>'):'')+'</div>'}).join('')}
 $('rides').onclick=e=>{const b=e.target.closest('[data-ride]');if(!b)return;SAVE.ride=b.dataset.ride||null;audioUnlock();sfx(SAVE.ride?'engine':'unequip');save();renderHome()};
 setInterval(()=>{if(!$('home').hidden&&$('gov').hidden)$('gbub').textContent=pickL(HOSTL.idle)},6000);
+/* 1006-R 表情符號→美術圖:畫面上的表情符號,有對應美術圖的會自動換成圖片(之後補圖只要加進 EMJ 對照表) */
+const EMJ={"⚔": "emj-0", "💰": "emj-1", "💥": "emj-2", "🏆": "emj-3", "⚠": "emj-4", "🛡": "emj-5", "👑": "emj-6", "🚇": "emj-7", "🎉": "emj-8", "📢": "emj-9", "🌱": "emj-10", "🔒": "emj-11", "🔊": "emj-12", "🔥": "emj-13", "⚡": "emj-14", "🧺": "emj-15", "🌾": "emj-16", "✨": "emj-17", "🎁": "emj-18", "🔮": "emj-19", "💼": "emj-20", "📖": "emj-21", "😡": "emj-22", "🏁": "emj-23", "🏋": "emj-24", "😈": "emj-25", "🎲": "emj-26", "📜": "emj-27", "🎯": "emj-28", "🙏": "emj-29", "💀": "emj-30", "🎟": "emj-31", "✅": "emj-32", "💧": "emj-33", "🔧": "emj-34", "🏎": "emj-35", "🧾": "emj-36", "💡": "emj-37", "📋": "emj-38", "🥇": "emj-39", "🥈": "emj-40", "🥉": "emj-41", "💙": "emj-42", "⏱": "emj-43", "🚨": "emj-44", "🚗": "emj-35", "⏳": "emj-43"};
+function emjKey(ch){return EMJ[ch]||EMJ[ch.replace(/\uFE0F/g,'')]}
+const EMJRE=/(?:[\u{1F300}-\u{1FAFF}\u2600-\u27BF\u2B50\u2B05-\u2B07\u231A\u23F1\u23F3])\uFE0F?/gu;
+function emjConvert(root){if(!Object.keys(EMJ).length)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|TITLE)$/.test(p.nodeName)||p.closest&&p.closest('canvas'))return NodeFilter.FILTER_REJECT;EMJRE.lastIndex=0;return EMJRE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const L=[];while(w.nextNode())L.push(w.currentNode);for(const n of L){const t=n.nodeValue;EMJRE.lastIndex=0;if(![...t.matchAll(EMJRE)].some(m=>emjKey(m[0])&&ART[emjKey(m[0])]))continue;const f=document.createDocumentFragment();let last=0;for(const m of t.matchAll(EMJRE)){const k=emjKey(m[0]);if(!k||!ART[k])continue;if(m.index>last)f.appendChild(document.createTextNode(t.slice(last,m.index)));const im=document.createElement('img');im.className='emj';im.src=ART[k];im.alt=m[0];f.appendChild(im);last=m.index+m[0].length}if(last<t.length)f.appendChild(document.createTextNode(t.slice(last)));n.parentNode.replaceChild(f,n)}}
+try{new MutationObserver(ms=>{if(!Object.keys(EMJ).length)return;for(const m of ms)for(const n of m.addedNodes){if(n.nodeType===1)emjConvert(n);else if(n.nodeType===3&&n.parentNode)emjConvert(n.parentNode)}}).observe(document.body,{childList:true,subtree:true,characterData:false})}catch(e){}
+/* ===== 1006-L 車行跑馬燈:買到典藏車、改裝到 Lv.5 → 全伺服器公告 ===== */
+async function carNews(kind,id){try{if(!DP.on)return;await fmRpc('car_news_add',{p_id:fmId(),p_nick:dpNick(),p_kind:kind,p_car:id});setTimeout(()=>{try{annFetch()}catch(e){}},800)}catch(e){}}
+function carNewsMsg(n){const r=RIDES.find(x=>x.id===n.car),cn=r?r.n:n.car;return n.kind==='buy'?'🚗 '+n.nick+' 從夢想車庫開走了一台「'+cn+'」!':'🔧 '+n.nick+' 的「'+cn+'」改裝到 Lv.5,性能滿分!'}
+/* ===== 1006-G 夢想車庫 ===== */
+const DEALL={idle:['歡迎光臨!今天想看哪一台?','這台跑車,開出去回頭率百分百!','老闆有眼光,這台很適合你!','改裝一下,性能直接升級!','現金付款還能幫你洗車喔(騙你的)'],
+ buy:['恭喜交車!開出去小心點啊~','大老闆!這台是你的了!','謝謝惠顧!要不要順便改裝?'],ok:['改裝成功!性能飆升!','完美!這台現在是怪物!'],fail:['啊…零件裝壞了…','這…再試一次一定會成功的!','失敗了…別生氣,下次成功率會提高!']};
+function gTab(t){SAVE.gtab=t;document.querySelectorAll('#gtabs button').forEach(b=>b.classList.toggle('on',b.dataset.g===t));$('gLot').hidden=t!=='lot';$('gShop').hidden=t!=='shop';if(t==='shop')renderShop();else if(!gTab.busy){gTab.busy=1;try{renderGacha()}catch(e){}gTab.busy=0}}
+function tuneRate(id){const lv=rideLv(id);if(lv<1||lv>=RMAX)return 0;return Math.min(1,TUNE.rate[lv-1]+((SAVE.tp||{})[id]||0)*TUNE.pity)}
+function tuneCost(r){const lv=rideLv(r.id);return lv>=1&&lv<RMAX?Math.round(r.shop*TUNE.cost[lv-1]):0}
+function sSay(k,pose){const el=$('sbub');if(el)el.textContent=pickL(DEALL[k]);const im=$('sdl');if(im){const key=pose===2?'dealer-2':'dealer-1';if(ART[key])im.src=ART[key];im.classList.remove('pop');void im.offsetWidth;im.classList.add('pop')}}
+function renderShop(){if(!$('scars'))return;if(ART['showroom-bg'])$('sbg').src=ART['showroom-bg'];if(!$('sdl').src&&ART['dealer-1'])$('sdl').src=ART['dealer-1'];
+ const n=shopOwned();$('scol').innerHTML='🏆 車庫收藏 <b>'+n+' / '+SRIDES.length+'</b> · 加成:攻擊、生命、防禦、回復 <b>+'+n+'%</b>';
+ $('scars').innerHTML=SRIDES.map(r=>{const lv=rideLv(r.id),on=SAVE.ride===r.id,c=RAR[r.q].c,price=r.shop,canBuy=(SAVE.coin||0)>=price,tc=tuneCost(r),tr=tuneRate(r.id);
+  return'<div class="scar q'+r.q+(lv?' own':'')+(on?' on':'')+'" style="--rc:'+c+'"><span class="sq">'+(r.q===6?'👑 ':'')+RAR[r.q].n+'</span>'+(lv?'<span class="slv">Lv.'+lv+'</span>':'')+
+   '<div class="sim">'+(r.q>=6?'<span class="rqs"></span><i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+'<img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"></div><b class="sn">'+r.n+'</b><small class="sd">'+r.d+'</small><div class="sst">'+rideText(r,Math.max(1,lv))+(r.sp?'<br><span class="ssp">✨ '+r.sp+'</span>':'')+'</div>'+
+   (lv?'<div class="sbt">'+(on?'<button class="btn" data-ride="">使用中</button>':'<button class="btn pri" data-ride="'+r.id+'">裝備</button>')+(lv<RMAX?'<button class="btn stune" data-tune="'+r.id+'"'+((SAVE.coin||0)<tc?' disabled':'')+'>🔧 改裝 Lv.'+(lv+1)+'<small>💰'+fmtC(tc)+' · 成功率 '+Math.round(tr*100)+'%</small></button>':'<button class="btn" disabled>🏁 已改滿</button>')+'</div>'
+   :'<div class="sbt"><button class="btn pri sbuy" data-buy="'+r.id+'"'+(canBuy?'':' disabled')+'>購買<small>💰 '+fmtC(price)+'</small></button></div>')+'</div>'}).join('')}
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#gtabs [data-g]');if(t){audioUnlock();sfx('tab');gTab(t.dataset.g);return}
+ const rb=e.target.closest&&e.target.closest('#scars [data-ride]');if(rb){SAVE.ride=rb.dataset.ride||null;audioUnlock();sfx(SAVE.ride?'engine':'unequip');save();renderHome();renderShop();return}
+ const bb=e.target.closest&&e.target.closest('[data-buy]');if(bb&&!bb.disabled){const r=RIDES.find(x=>x.id===bb.dataset.buy);if(!r||rideLv(r.id))return;audioUnlock();
+  ask('確定花 '+fmtC(r.shop)+' 金幣購買「'+r.n+'」嗎?',()=>{if((SAVE.coin||0)<r.shop){sfx('error');toast('金幣不夠');return}SAVE.coin-=r.shop;SAVE.rides=SAVE.rides||{};SAVE.rides[r.id]=1;if(!SAVE.ride||RIDES.find(x=>x.id===SAVE.ride).q<r.q)SAVE.ride=r.id;save();sfx('casinoWin');sfx('engine');sSay('buy',1);toast('🚗 交車!「'+r.n+'」是你的了');if(r.q>=6)carNews('buy',r.id);renderHome();renderShop()});return}
+ const tb=e.target.closest&&e.target.closest('[data-tune]');if(tb&&!tb.disabled){const r=RIDES.find(x=>x.id===tb.dataset.tune);const lv=rideLv(r.id);if(!r||lv<1||lv>=RMAX)return;const cost=tuneCost(r),rate=tuneRate(r.id);audioUnlock();
+  ask('花 '+fmtC(cost)+' 金幣改裝「'+r.n+'」到 Lv.'+(lv+1)+'?\n成功率 '+Math.round(rate*100)+'%,失敗不會降級,下次成功率 +10%',()=>{if((SAVE.coin||0)<cost){sfx('error');toast('金幣不夠');return}SAVE.coin-=cost;SAVE.tp=SAVE.tp||{};
+   if(Math.random()<rate){SAVE.rides[r.id]=lv+1;SAVE.tp[r.id]=0;if(lv+1>=RMAX)carNews('tune5',r.id);sfx('evo');sSay('ok',1);toast('🔧 改裝成功!「'+r.n+'」升到 Lv.'+(lv+1)+(lv+1>=RMAX?',已改滿!':''))}
+   else{SAVE.tp[r.id]=(SAVE.tp[r.id]||0)+1;sfx('wahwah');sSay('fail',2);toast('💥 改裝失敗…下次成功率 +10%')}
+   save();renderHome();renderShop()});return}});
+setInterval(()=>{try{if(!$('home').hidden&&SAVE.tab==='gacha'&&!$('gShop').hidden&&Math.random()<.5)sSay('idle',1)}catch(e){}},7000);
 let gLast=1;
-function gacha(n){
+function gacha(n){if(!ART['gr-frame']||!ART['uv-tt']){toast('🚪 車庫還在準備中,請稍等幾秒再抽');return}
  const cost=n===10?G10:G1;if((SAVE.coin||0)<cost){sfx('error');return}audioUnlock();SAVE.coin-=cost;gLast=n;sfx('gachaStart');dqAdd('gacha');
  const out=[];for(let i=0;i<n;i++)out.push(rollRide(n===10&&i===9&&!out.some(o=>o.r.q>=2)?2:0));save();
  const best=out.reduce((a,o)=>o.r.q>a?o.r.q:a,0),col=RAR[best].c,bo=out.find(o=>o.r.q===best);
- const st=$('gstage');$('gbtns').hidden=true;$('gline').textContent='';$('gov').classList.add('gx');
+ const st=$('gstage');try{$('gov').querySelector('.box').classList.toggle('grbox',!!(ART['gr-frame']&&ART['gr-door']&&ART['gr-int']))}catch(e){}$('gbtns').hidden=true;$('gline').textContent='';$('gov').classList.add('gx');
  const sp=c=>'<div class="uv-spot '+c+'"></div>';
- st.innerHTML='<div class="uv-scene" style="--rc:'+col+'">'+sp('l')+sp('r')+sp('c')+'<div class="gx-halo"></div>'+
-  '<img class="uv-tt" src="'+ART['uv-tt']+'" alt=""><img class="uv-car" id="uvcar" alt=""><img class="uv-cover" id="uvcov" src="'+ART['uv-cover']+'" alt=""><img class="uv-cloth" id="uvclo" src="'+ART['uv-cloth']+'" alt="">'+
+ /* 1006-H 揭幕動畫改成「車庫鐵捲門」:門縫透出稀有度顏色的光 → 鐵捲門捲上去 → 車燈亮、煙霧噴出 */
+ const GR=!!(ART['gr-frame']&&ART['gr-door']&&ART['gr-int']);
+ st.innerHTML='<div class="uv-scene'+(GR?' grs':'')+'" style="--rc:'+col+'">'+sp('l')+sp('r')+sp('c')+'<div class="gx-halo"></div>'+
+  (GR?'<img class="gr-bgblur" src="'+ART['gr-int']+'" alt=""><div class="gr-wrap"><div class="gr-hole"><img class="gr-int" src="'+ART['gr-int']+'" alt=""><img class="uv-car" id="uvcar" alt=""><div class="gr-hl"></div><div class="gr-leak"></div><img class="gr-door wig" id="uvcov" src="'+ART['gr-door']+'" alt=""><img class="gr-smk l" id="uvclo" src="'+ART['gr-smoke']+'" alt=""><img class="gr-smk r" src="'+ART['gr-smoke']+'" alt=""></div><img class="gr-frame" src="'+ART['gr-frame']+'" alt=""><img class="gr-box" src="'+ART['gr-box']+'" alt=""></div>'
+   :'<img class="uv-tt" src="'+ART['uv-tt']+'" alt=""><img class="uv-car" id="uvcar" alt=""><img class="uv-cover" id="uvcov" src="'+ART['uv-cover']+'" alt=""><img class="uv-cloth" id="uvclo" src="'+ART['uv-cloth']+'" alt="">')+
   '<div class="gx-burst" id="gxb" style="top:52%"><img class="w" alt=""><div class="c"></div></div><div class="gx-flash" id="gxf"></div>'+
   '<div class="uv-plaque" id="uvpl"><b></b><small></small></div><div class="uv-grid" id="uvgr"></div><div class="gx-conf" id="gxcf"></div></div><button class="uv-go" id="gxs">✨ 點擊揭幕 ✨</button>';
  $('gov').hidden=false;
@@ -1756,23 +1975,27 @@ function gacha(n){
  st.querySelectorAll('.uv-spot').forEach(e=>{e.style.webkitMaskImage=e.style.maskImage='url('+ART['uv-spot']+')'});
  let phase='wait',timers=[];const T=(f,ms)=>timers.push(setTimeout(f,ms));
  let gap=520,drum=true,rc=0;const roll=()=>{if(!drum)return;sfx('drum');rc++;gap=rc>16?900:Math.max(240,gap*.93);setTimeout(roll,gap)};setTimeout(roll,500);
- let ready=false;T(()=>{ready=true;$('gxs').classList.add('show')},700);
+ let ready=false;T(()=>{ready=true;$('gxs').classList.add('show')},700);if(GR){const rr=setInterval(()=>{if(phase!=='wait'){clearInterval(rr);return}sfx('shutterRattle')},650);timers.push(rr)}
  st.onclick=()=>{if(phase==='wait'&&ready){timers.forEach(clearTimeout);unveil()}};
  function unveil(){if(phase!=='wait')return;phase='open';drum=false;st.onclick=null;$('gxs').hidden=true;
+  window.__g10T=380+250+out.reduce((s,o)=>s+330+(o.r.q>=3?900:0),0);
   sfx('reveal');setTimeout(()=>sfx('fan'+Math.max(0,Math.min(4,best))),180);
-  $('uvcov').classList.remove('wig');$('uvcov').classList.add('off');$('uvclo').classList.add('fly');scene.classList.add('reveal','tint');
+  $('uvcov').classList.remove('wig');$('uvcov').classList.add('off');$('uvclo').classList.add('fly');st.querySelectorAll('.gr-smk').forEach(e=>e.classList.add('fly'));scene.classList.add('reveal','tint');if(GR){sfx('shutter');setTimeout(()=>sfx('engine'),1100);setTimeout(()=>sfx('impact'),1250)}
   $('gxf').classList.add('on');const bw=st.querySelector('.gx-burst .w'),bc=st.querySelector('.gx-burst .c');st.querySelector('.gx-burst').classList.add('run');
   let k=1;const play=()=>{const u=ART['gb-'+k];bw.src=u;bc.style.webkitMaskImage=bc.style.maskImage='url('+u+')';k++;if(k<=8)setTimeout(play,80);else st.querySelector('.gx-burst').classList.add('done')};play();
   setTimeout(()=>{halo.classList.add('on');
    if(n===1){const car=$('uvcar');car.src=ART['ride-'+bo.r.id]||'';car.classList.add('on');
     const pl=$('uvpl');pl.querySelector('b').textContent=bo.r.n;pl.querySelector('b').style.color=col;pl.querySelector('small').textContent=RAR[bo.r.q].n+' · '+bo.res;setTimeout(()=>pl.classList.add('on'),350)}
-   else{scene.classList.add('many');$('uvgr').innerHTML=out.map((o,i)=>'<div class="uv-mini" style="--rc:'+RAR[o.r.q].c+';animation-delay:'+(i*.12)+'s"><img class="tt" src="'+ART['uv-tt']+'" alt=""><img class="car" src="'+(ART['ride-'+o.r.id]||'')+'" alt=""><span><b style="color:'+RAR[o.r.q].c+'">'+o.r.n+'</b><i>'+RAR[o.r.q].n+' · '+o.res+'</i></span></div>').join('');
-    for(let i=0;i<n;i++)setTimeout(()=>sfx('cardFlip'),i*120)}
-   if(best>=3){let h='';for(let i=0;i<46;i++){const c=pick([col,'#ffffff','#ffd24a',col]);h+='<i style="left:'+rnd(0,100)+'%;background:'+c+';animation-delay:'+rnd(0,1.4)+'s;animation-duration:'+rnd(2,3.4)+'s;transform:rotate('+rnd(0,360)+'deg)"></i>'}$('gxcf').innerHTML=h;setTimeout(()=>sfx('confetti'),300)}
+   else{scene.classList.add('many');
+    /* 1006-K 十連抽:一台一台亮燈揭曉;傳說以上會先蓄光停頓一下再揭曉 */
+    $('uvgr').innerHTML=out.map((o,i)=>'<div class="uv-mini'+(GR?' grm seq':'')+'" style="--rc:'+RAR[o.r.q].c+';animation-delay:'+(GR?0:i*.12)+'s">'+(GR?'<div class="grmh"><span class="gq">?</span><img class="car" src="'+(ART['ride-'+o.r.id]||'')+'" alt=""></div>':'<img class="tt" src="'+ART['uv-tt']+'" alt=""><img class="car" src="'+(ART['ride-'+o.r.id]||'')+'" alt="">')+'<span><b style="color:'+RAR[o.r.q].c+'">'+o.r.n+'</b><i>'+RAR[o.r.q].n+' · '+o.res+'</i></span></div>').join('');
+    if(GR){const cards=[...$('uvgr').children];let tt=250;out.forEach((o,i)=>{const c=cards[i];if(o.r.q>=3){setTimeout(()=>{c.classList.add('charge');sfx('drum')},tt);tt+=900;setTimeout(()=>{c.classList.remove('charge');c.classList.add('on','big');sfx('casinoWin');sfx('impact')},tt)}else{setTimeout(()=>{c.classList.add('on');sfx('cardFlip')},tt)}tt+=330})}
+    else for(let i=0;i<n;i++)setTimeout(()=>sfx('cardFlip'),i*120)}
+   if(best>=3)setTimeout(()=>{let h='';for(let i=0;i<46;i++){const c=pick([col,'#ffffff','#ffd24a',col]);h+='<i style="left:'+rnd(0,100)+'%;background:'+c+';animation-delay:'+rnd(0,1.4)+'s;animation-duration:'+rnd(2,3.4)+'s;transform:rotate('+rnd(0,360)+'deg)"></i>'}$('gxcf').innerHTML=h;setTimeout(()=>sfx('confetti'),300)},(GR&&n===10)?Math.max(0,(window.__g10T||0)-650):0)
   },380);
   setTimeout(()=>{st.insertAdjacentHTML('beforeend','<img class="ghost2'+(best>=3?' hop':'')+'" src="'+(ART[best>=3?'host-3':best>=2?'host-2':'host-4']||ART['host-1']||'')+'" alt="企劃女神芳芳">');
    $('gline').textContent='企劃女神芳芳:'+pickL(best>=3?HOSTL.big:best>=2?HOSTL.mid:HOSTL.low);
-   $('gagain').textContent=(n===10?'再 10 連抽':'再抽一次')+'('+fmtC(n===10?G10:G1)+')';$('gagain').disabled=(SAVE.coin||0)<cost;$('gbtns').hidden=false},n===1?1300:1900)}
+   $('gagain').textContent=(n===10?'再 10 連抽':'再抽一次')+'('+fmtC(n===10?G10:G1)+')';$('gagain').disabled=(SAVE.coin||0)<cost;$('gbtns').hidden=false},n===1?1300:(GR?Math.max(1900,(window.__g10T||0)+500):1900))}
 }
 
 $('g1').onclick=()=>gacha(1);$('g10').onclick=()=>gacha(10);
@@ -1781,7 +2004,7 @@ $('gagain').onclick=()=>gacha(gLast);$('gclose').onclick=()=>{$('gov').hidden=tr
 /* ===== 分頁 ===== */
 function setTab(t){if(t==='pray')t='eq';SAVE.tab=t;document.querySelectorAll('#home .tab').forEach(el=>el.hidden=el.dataset.tab!==t);document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('home').scrollTop=0;if(t==='eq')renderPray();if(t==='farm'){renderFarm();try{if(FM&&FM.on&&FM.plots&&Date.now()-FM.t>3000)fmSync()}catch(e){}}if(t==='dragon'){if(typeof casSwitch==='function')casSwitch(SAVE.cas||'dragon');else renderDragon()}if(t==='tarot')renderTarot();save()}
 $('tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(b){audioUnlock();sfx('tab');setTab(b.dataset.t)}};
-(()=>{const im=(id,k)=>{if(ART[k])$(id).innerHTML='<img src="'+ART[k]+'" alt="">'};im('tie','我的ARMANI');im('tig','gacha-machine');
+(()=>{const im=(id,k)=>{if(ART[k])$(id).innerHTML='<img src="'+ART[k]+'" alt="">'};im('tie','我的訂製西裝');im('tig','gacha-machine');
  for(const [t,k] of [['map','nav-map'],['eq','nav-eq'],['gacha','nav-gacha'],['farm','nav-farm'],['dragon','nav-dragon'],['tarot','nav-tarot']]){const b=$('tabs').querySelector('[data-t="'+t+'"] .ti');if(b&&ART[k])b.innerHTML='<img src="'+ART[k]+'" alt="">'}})();
 /* ===== 祈禱 ===== */
 const TIERN=['黑框','銀框','綠框','藍框','黃金框','紅框'];
@@ -1939,16 +2162,20 @@ function dPayMult(bid){const rest=DK.length||1;if(!DS.a||!DS.b)return 1;let p,pp
  if(DS.ph==='pair'){const up=bid==='dhi';p=DK.filter(c=>up?c.r>DS.a.r:c.r<DS.a.r).length/rest;pp=DK.filter(c=>c.r===DS.a.r).length/rest;K=3}
  else{p=DK.filter(c=>c.r>DS.a.r&&c.r<DS.b.r).length/rest;pp=DK.filter(c=>c.r===DS.a.r||c.r===DS.b.r).length/rest;K=2}
  if(p<=0)return 0;const m=(1-p-pp+K*pp-DEDGE)/p;return Math.max(.1,Math.min(15,Math.round(m*100)/100))}
+/* 1006-D:每一把最多只能贏走池底的一定比例,勝率越高比例越小,避免有錢玩家一直射寬門把池底清空 */
+function dWinP(bid){const rest=DK.length||1;if(!DS.a||!DS.b)return 0;if(DS.ph==='pair'){const up=bid==='dhi';return DK.filter(c=>up?c.r>DS.a.r:c.r<DS.a.r).length/rest}return DK.filter(c=>c.r>DS.a.r&&c.r<DS.b.r).length/rest}
+const dWinCap=p=>p>=.8?.05:p>=.65?.08:p>=.5?.15:.3;
+function dBetCap(){const pot=DP.pot||0,ids=DS.ph==='pair'?['dhi','dlo']:['dshoot'];let mx=Infinity,cap=1;for(const b of ids){const m=dPayMult(b),p=dWinP(b);if(m<=0)continue;const c=dWinCap(p);mx=Math.min(mx,Math.floor(pot*c/m/100)*100);cap=Math.min(cap,c)}return{mx:mx===Infinity?pot:mx,cap}}
 const dPayTxt=m=>'1 賠 '+(m>=10?m.toFixed(0):m>=2?m.toFixed(1):m.toFixed(2));function dCapF(){const inHand=DS.ph==='posts'||DS.ph==='pair';if(!inHand)return 1;const w=dWinMax();return w>=.8?.2:w>=.65?.35:w>=.5?.5:1}
 function dMaxBet(){const pot=DP.pot||0,c=SAVE.coin||0;let byCoin=Math.floor(c/dMult()/100)*100;if(byCoin<DMINB&&c>=DMINB)byCoin=DMINB;let byPot=pot;const inHand=DS.ph==='posts'||DS.ph==='pair';
- if(inHand){const m=DS.ph==='pair'?Math.max(dPayMult('dhi'),dPayMult('dlo')):dPayMult('dshoot');if(m>0){byPot=Math.floor(pot/m/100)*100;if(byPot<DMINB)byPot=Math.min(pot,DMINB)}}return Math.max(0,Math.min(byPot,byCoin))}
+ if(inHand){byPot=dBetCap().mx;if(byPot<DMINB)byPot=Math.min(pot,DMINB)}return Math.max(0,Math.min(byPot,byCoin))}
 function renderDragon(){
  if(!$('dhost').getAttribute('src'))$('dhost').src=ART['host-1'];
  const inHand=DS.ph==='posts'||DS.ph==='pair';
  if(inHand){const mx=dMaxBet(),mn=dMinBet();if(DS.bet>mx)DS.bet=mx;if(DS.bet<mn&&mx>=mn)DS.bet=mn}
  const cd=$('casD');if(cd)cd.classList.toggle('hand-off',!inHand);
  $('dbetv').textContent=inHand?fmtC(DS.bet):fmtC(DANTE);$('dbetl').textContent=inHand?'下注:':'底注:';
- $('dbetm').textContent=inHand?'(最多 '+fmtC(dMaxBet())+',贏的錢不會超過池底)':'';
+ $('dbetm').textContent=inHand?'(最多 '+fmtC(dMaxBet())+',這門最多贏走池底 '+Math.round(dBetCap().cap*100)+'%)':'';
  const st=SAVE.dstat||{w:0,l:0,n:0,net:0};
  $('dstat').innerHTML='金幣 <b style="color:#ffd24a">'+fmtC(SAVE.coin||0)+'</b> · 戰績 '+st.w+' 勝 '+st.l+' 敗 · 累計 '+(st.net>=0?'<span class="up">+':'<span class="down">')+fmtC(st.net)+'</span>';
  const A=$('dact'),dis=DP.busy?' disabled':'';
@@ -2210,7 +2437,7 @@ function trEnd(win){if(!G||G.over)return;const T=G.tr;G.over=true;running=false;
   $('ores').innerHTML='<div class="trres"><div class="trhero"><small>撐過時間</small><b>'+fmtT(tt)+'</b><span class="trlv">'+(win?'🏁 撐完全程':'到達 '+lv.ic+' '+lv.nm)+'</span>'+(nb?'<span class="trnew">🆕 個人新紀錄!</span>':'')+'</div>'+
   '<div class="trrows"><div><span>🚆 閃過列車</span><b>'+T.n+' 班</b></div>'+(T.prac?'<div><span>🏋️ 練習場</span><b>不計金幣(明天再領)</b></div>':T.duel?'<div><span>📏 平均閃避距離 <small>平手時越近越強</small></span><b>'+(T.g>=999?'—':Math.round(T.g)+' 公分')+'</b></div><div><span>⚔️ 挑戰賽</span><b>不計金幣,輸贏看戰帖</b></div>':'<div><span>💰 列車金幣</span><b class="g">+'+fmtC(T.coins)+'</b></div>'+(win?'<div><span>🏁 通關獎金</span><b class="g">+'+fmtC(TR.win)+'</b></div>':''))+
   (tax>0?'<div><span>🧾 芳芳收稅 <small>→ 射龍門池底</small></span><b class="r">−'+fmtC(tax)+'</b></div>':'')+((T.duel||T.prac)?'':'<div class="tot"><span>實得金幣</span><b>+'+fmtC(gross-tax)+'</b></div><div><span>🎟️ 今日有獎場次</span><b>剩 '+trDailyLeft()+' / '+TR.daily+'</b></div>')+'</div>'+
-  '<div class="trbestl">個人最佳 '+fmtT(bt.t)+' · 閃過 '+bt.n+' 班</div><div class="trupl" id="trupl">⏳ 成績上傳排行榜中…</div>'+(T.duel?'<div class="trduelsent">⚔️ 挑戰書成績已送出,到賭場「無限列車」看結果</div>':'')+
+  '<div class="trbestl">個人最佳 '+fmtT(bt.t)+' · 閃過 '+bt.n+' 班</div><div class="trupl" id="trupl">⏳ 成績上傳排行榜中…</div>'+(T.duel?'<div class="trduelsent">⚔️ 挑戰書成績已送出,到遊戲場「無限列車」看結果</div>':'')+
   '<p class="trtaunt">'+(win?'芳芳:「跑完全程?下次記得留點錢搭計程車」':'芳芳:「跑不贏列車,就別跟池底賭了」')+'</p>'+
   '<button class="btn" onclick="trBoard()">🏆 看列車排行榜</button></div>';
   $('olh').hidden=true;$('oloot').hidden=true;$('oloot').innerHTML='';$('over').classList.add('trover');$('replay').textContent='🚇 再挑戰一次'}
@@ -2555,7 +2782,7 @@ function slotHtml(k){const sl=SLOTS.find(x=>x.k===k),it=byId(SAVE.eq[k]);
 const MONINFO={'奧客喪屍':{d:'生前每天來店裡殺價、要贈品,死了還是不肯放過你。數量最多,各方面都很普通。',s:[3,3,3],tip:'💡 一直出現,範圍技能清最快'},
  '菜市場大媽喪屍':{d:'提著塑膠袋橫衝直撞,搶特價的氣勢喪屍化之後一點都沒少。皮厚、走得慢,被甩到很痛。',s:[4,2,4],tip:'💡 走得慢,邊跑邊打就好'},
  '吸毒喪屍':{d:'動作抽搐又飄忽,速度是全場最快,但身體很脆,一碰就倒。',s:[2,5,2],tip:'💡 小心從背後被包圍'},
- '暴怒奧客喪屍':{d:'被店員拒絕退貨後徹底暴走的奧客,體型更大、血量是一般的 7 倍。',s:[5,4,5],tip:'🎁 擊倒必掉「年終獎金」寶箱和一件銀框以上裝備',el:1,t:'每 45 秒出現'},
+ '暴怒奧客喪屍':{d:'被店員拒絕退貨後徹底暴走的奧客,體型更大、血量是一般的 8 倍。',s:[5,4,5],tip:'🎁 擊倒必掉「年終獎金」寶箱和一件銀框以上裝備',el:1,t:'每 35 秒出現'},
  '捷運站長喪屍':{d:'死了還在吹哨維持秩序的站長。會衝刺、吹出震波,還會叫列車進站撞人;血量剩一半時進入「末班車」暴走。',s:[5,3,5],tip:'👑 擊倒有機會掉落首領專屬裝備',boss:1,t:'3 分鐘後出現'}};
 function monCard(n,rate){const m=MONINFO[n]||{d:'',s:[3,3,3]},img=ART[(n==='暴怒奧客喪屍'?'奧客喪屍':n)+'-walk-1']||'';
  const bar=(lb,v,c)=>'<div class="sr"><span>'+lb+'</span><i style="--pc:'+c+'">'+[1,2,3,4,5].map(k=>'<u'+(k<=v?' class="on"':'')+'></u>').join('')+'</i></div>';
@@ -2564,15 +2791,16 @@ function monCard(n,rate){const m=MONINFO[n]||{d:'',s:[3,3,3]},img=ART[(n==='暴�
 function renderMons(){const el=$('mons');if(!el)return;let ci=SAVE.ch||0;if(!CH[ci]||CH[ci].wip||ci>=SAVE.unlock)ci=0;const c=CH[ci],cnt={};
  c.pool.forEach(i=>cnt[i]=(cnt[i]||0)+1);
  el.innerHTML='<h3>📋 怪物情報:'+(ci+1)+'. '+c.n+'<small>出擊前先認識一下敵人</small></h3><div class="mgrid">'+Object.keys(cnt).map(i=>monCard(ENE[i].n,Math.round(cnt[i]/c.pool.length*100))).join('')+ELITE.map(e=>monCard(e.n)).join('')+(c.boss!=null&&BOSS[c.boss]?monCard(BOSS[c.boss].n):'')+'</div>'}
-function renderHome(){
+function migItems(){try{for(const it of (SAVE&&SAVE.items)||[]){const nb=RENAME[it.b];if(nb){it.name=it.name.replace(it.b,nb);it.b=nb;const bb=BASES[it.type]&&BASES[it.type].find(x=>x.b===nb);if(bb)it.e=bb.e}}}catch(e){}}
+function renderHome(){migItems();
  if($('parts'))$('parts').textContent=fmt(SAVE.parts||0);renderGacha();if(SAVE.tab==='eq')renderPray();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin||0);
   const s=pstats(1),wi=byId(SAVE.eq.wpn);
   $('slots').innerHTML='<div class="doll"><div class="dcol">'+['head','coat','shoe'].map(slotHtml).join('')+'</div>'+
    '<div class="dhero"><div class="pw"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div>'+icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>')+'</div>'+
    '<div class="dcol">'+['off','acc1','acc2'].map(slotHtml).join('')+'</div></div>'+
    '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()?'':' class="on"')+'>👔 男主角・揮拳</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角・踢擊</button></div>'+
-   '<div class="wrrow"><div class="wslot">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name+(wi.up?' +'+wi.up:''):(heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+WPN[s.wpn]+'</div></div></div>'+
-   (()=>{const R0=SAVE.ride&&RIDES.find(r=>r.id===SAVE.ride),lv=R0?rideLv(R0.id):0;return'<div class="wslot rslot" data-goride="1" style="--rc:'+(R0?RAR[R0.q].c:'rgba(255,255,255,.2)')+'"><div class="rimg">'+(R0&&ART['ride-'+R0.id]?'<img src="'+ART['ride-'+R0.id]+'" alt="">':'<span>🚲</span>')+'</div><div><div class="muted">座駕</div><div class="wn'+(R0?' t'+R0.q:'')+'">'+(R0?R0.n+' Lv.'+lv:'尚未裝備座駕')+'</div><div class="muted">'+(R0?rideText(R0,lv):'點這裡去抽獎頁抽代步車')+'</div></div></div>'})()+'</div>';
+   '<div class="wrrow"><div class="wslot">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name+(wi.up?' +'+wi.up:''):(heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
+   (()=>{const R0=SAVE.ride&&RIDES.find(r=>r.id===SAVE.ride),lv=R0?rideLv(R0.id):0;return'<div class="wslot rslot'+(R0?' rq'+R0.q:'')+'" data-goride="1" style="--rc:'+(R0?RAR[R0.q].c:'rgba(255,255,255,.2)')+'"><div class="rimg">'+(R0&&R0.q>=5?'<span class="rqclip"></span><span class="rqs"></span>':'')+(R0&&R0.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+(R0&&ART['ride-'+R0.id]?'<img src="'+ART['ride-'+R0.id]+'" alt="">':'<span>🚲</span>')+'</div><div><div class="muted">座駕</div><div class="wn'+(R0?' t'+R0.q:'')+'">'+(R0?R0.n+' Lv.'+lv+(R0.q>=5?' <span class="rqb rqb'+R0.q+'">'+RAR[R0.q].n+'</span>':''):'尚未裝備座駕')+'</div><div class="muted">'+(R0?rideText(R0,lv):'點這裡去車庫抽代步車')+'</div></div></div>'})()+'</div>';
   const sv2=(k,v)=>'<div class="stat"><span>'+STI[k]+' '+STAT[k].n+'</span><b>'+v+'</b></div>';
   $('pst').innerHTML=sv2('atk',Math.round(s.atk))+sv2('hp',Math.round(s.hp))+sv2('def',Math.round(s.def))+sv2('aspd','+'+Math.round(s.aspd)+'%')+sv2('crit',Math.round(s.crit)+'%')+sv2('spd','+'+Math.round(s.spd)+'%')+sv2('pick','+'+Math.round(s.pick)+'%')+sv2('regen',s.regen.toFixed(1));
   const sk=Object.entries(s.sk);$('psk').innerHTML=sk.length?sk.map(([k,l])=>'<span>'+skI(k)+SK[k].n+' Lv.'+l+'</span>').join(''):'<span class="muted" style="background:none;font-weight:400;padding:0">尚未擁有技能,稀有以上的裝備有機會附帶技能。</span>';
@@ -2594,7 +2822,7 @@ function detail(){
   const li=keys.map(k=>{const a=it.st[k]?ist(it,k):0,b=cmp?ist(cmp,k):a,df=a-b;const vv=(k==='regen'?a.toFixed(1):Math.round(a))+(STAT[k].p?'%':'');return'<li><span>'+STI[k]+' '+STAT[k].n+'</span><span><b>+'+vv+'</b>'+(cmp&&Math.abs(df)>=.05?' <span class="'+(df>0?'up':'down')+'">'+(df>0?'▲':'▼')+(k==='regen'?Math.abs(df).toFixed(1):Math.round(Math.abs(df)))+'</span>':'')+'</span></li>'}).join('');
  const ds=cmp?Math.round((score(it)-score(cmp))*10):null;
   const slk=eq?Object.keys(SAVE.eq).find(k=>SAVE.eq[k]===it.id):null,sln=slk?(SLOTS.find(x=>x.k===slk)||{}).n:'';
- d.innerHTML='<div class="card"><button id="dclose" data-a="close" aria-label="關閉">×</button><div class="dtag '+(eq?'on':'st')+'">'+(eq?'🧍 身上穿戴中'+(sln?' · '+sln:''):'📦 倉庫裡的裝備')+'</div><div class="ch2" style="background:linear-gradient(120deg,'+RAR[it.q].c+',#1a1f28)"><div class="ic'+(it.boss?' bossi':'')+'" style="background-image:var(--fr'+it.q+')">'+icon(it.b,it.e)+'</div><div><b>'+it.name+(it.up?' +'+it.up:'')+'</b><small>'+RAR[it.q].n+' '+TYPEN[it.type]+' · 物品等級 '+it.il+(eq?' · 穿戴中':'')+'</small>'+(it.w?'<br><small>攻擊方式:'+WPN[it.w]+'</small>':'')+'</div></div>'+
+ d.innerHTML='<div class="card"><button id="dclose" data-a="close" aria-label="關閉">×</button><div class="dtag '+(eq?'on':'st')+'">'+(eq?'🧍 身上穿戴中'+(sln?' · '+sln:''):'📦 倉庫裡的裝備')+'</div><div class="ch2" style="background:linear-gradient(120deg,'+RAR[it.q].c+',#1a1f28)"><div class="ic icm mq'+it.q+(it.boss?' bossi':'')+'">'+icon(it.b,it.e)+'</div><div><b>'+it.name+(it.up?' +'+it.up:'')+'</b><small>'+RAR[it.q].n+' '+TYPEN[it.type]+' · 物品等級 '+it.il+(eq?' · 穿戴中':'')+'</small>'+(it.w?'<br><small>攻擊方式:'+WPN[it.w]+'</small>':'')+'</div></div>'+
   (it.egg?'<div class="muted">✨ 生活彩蛋裝備</div>':'')+(it.boss?'<div class="bossnote">👑 首領專屬裝備 · 捷運站長喪屍掉落</div>':'')+'<ul>'+li+'</ul>'+
   (it.sk?'<div class="skill">'+skI(it.sk)+'<span>技能「'+SK[it.sk].n+'」Lv.'+it.skl+':'+SK[it.sk].d+'</span></div>':'')+
   (cmp?'<div class="muted">與目前穿戴相比,戰力 <b class="'+(ds>=0?'up':'down')+'">'+(ds>=0?'+':'')+fmt(ds)+'</b></div>':'')+
@@ -2663,9 +2891,11 @@ function startRun(c){
  if(window.__TR){window.__TR=0;trInit()}
 }
 const mult=()=>Math.pow(1.7,G.c);
+/* 1006-E 難度調校參數:第一關不要太簡單,但保留刷怪爽度(血量成長溫和、傷害與密度提高) */
+var BAL={hp:.7,hpG:.5,dmg:1.15,dmgG:150,spawn:2.0,spawnG:10,elite:35,eliteHp:8,bossAtk:380};
 function spawn(def,kind){
- const a=Math.random()*Math.PI*2,d=Math.hypot(W,H)/2+60,s=kind==='boss'?mult():mult()*.7*(1+G.t/60*.36)*(kind==='elite'?7:1);
- G.en.push({x:G.x+Math.cos(a)*d,y:G.y+Math.sin(a)*d,hp:def.hp*s,max:def.hp*s,sp:def.sp,r:def.r*(kind==='elite'?1.5:1),dmg:def.dmg*.75*mult()*(1+G.t/260),n:def.n,e:def.e,kind,fl:0,kx:0,ky:0,oh:0,ph:Math.random()*8,at:0});
+ const a=Math.random()*Math.PI*2,d=Math.hypot(W,H)/2+60,s=kind==='boss'?mult():mult()*BAL.hp*(1+G.t/60*BAL.hpG)*(kind==='elite'?BAL.eliteHp:1);
+ G.en.push({x:G.x+Math.cos(a)*d,y:G.y+Math.sin(a)*d,hp:def.hp*s,max:def.hp*s,sp:def.sp,r:def.r*(kind==='elite'?1.5:1),dmg:def.dmg*BAL.dmg*mult()*(1+G.t/BAL.dmgG),n:def.n,e:def.e,kind,fl:0,kx:0,ky:0,oh:0,ph:Math.random()*8,at:0});
 }
 function hit(e,dmg,kb,ang){
  if(e.hp<=0)return;const cr=Math.random()*100<G.S.crit;if(cr)dmg*=1.8;sfx(cr?'crit':'zbHit');
@@ -2821,6 +3051,9 @@ function sndLoad(){if(!AC||sndLoad.done)return;if(typeof SND==='undefined'){clea
   AC.decodeAudioData(u.buffer,buf=>{try{const d=buf.getChannelData(0);let s=0;while(s<d.length&&Math.abs(d[s])<.004)s++;s=Math.max(0,s-32);
    if(s>0&&s<d.length-64){const nb=AC.createBuffer(buf.numberOfChannels,buf.length-s,buf.sampleRate);for(let c=0;c<buf.numberOfChannels;c++)nb.getChannelData(c).set(buf.getChannelData(c).subarray(s));buf=nb}}catch(e){}SB[g].push(buf)},()=>{})}catch(e){}}}}
 function S(g,vol,t0,rate,rv){const a=SB[g];if(!AC||!a||!a.length)return false;try{const b=a[(Math.random()*a.length)|0],src=AC.createBufferSource(),gn=AC.createGain();src.buffer=b;src.playbackRate.value=rate||1;gn.gain.value=vol==null?.7:vol;src.connect(gn);_out(gn,rv);src.start(AC.currentTime+(t0||0));return true}catch(e){return false}}
+/* 1006-K 鐵捲門音效(程式合成,不需下載):嘎啦嘎啦往上捲,最後「哐」一聲 */
+SFX.shutter=()=>{if(!AC)return;const n=22;let t=0;for(let i=0;i<n;i++){const gap=.075-i*.0022;noise('bandpass',1500+Math.random()*900,900,.045,.22,5,t);tone('square',150-i*2,95,.035,.05,t);t+=gap}noise('lowpass',900,120,.25,.5,1,t);tone('sine',90,45,.3,.35,t)};
+SFX.shutterRattle=()=>{if(!AC)return;for(let i=0;i<3;i++){noise('bandpass',1700+Math.random()*600,1000,.035,.12,6,i*.06)}};
 const SYN=Object.assign({},SFX);
 Object.assign(SFX,{
  punch:()=>{S('punch',.8,0,R_(.95,1.1))||SYN.punch()},
@@ -2927,17 +3160,17 @@ const angD=(a,b)=>{let d=a-b;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*
 const WS={
  fist:{n:'空手揮拳',ic:'sk-fist',d:['三段連擊:左刺拳、右直拳、上鉤拳,單體傷害高,適合打首領','傷害 +30%','範圍 +20%','傷害 +30%','攻速 +40%']},
  kick:{n:'高跟鞋踢擊',ic:'sk-kick',d:['三段連踢:前踢、側踢、迴旋踢(第三下打周圍一圈),範圍大、擊退遠,適合被包圍時','傷害 +30%','範圍 +20%','傷害 +30%','攻速 +40%']},
- umb:{n:'晴雨窗光劍',ic:'晴雨窗光劍',d:['揮出光劍斬擊前方扇形範圍','傷害 +25%','斬擊範圍 +20%','傷害 +25%、冷卻縮短','前後雙向斬擊'],evo:{n:'絕地晴雨窗',ic:'evo-umb',w:'猛健樂',d:'360 度光劍旋風斬,大幅擊退周圍敵人'}},
- pen:{n:'萬寶龍鋼筆',ic:'萬寶龍鋼筆',d:['朝最近的敵人射出鋼筆','每次多射 1 支','傷害 +30%','每次多射 1 支','可穿透 3 個敵人'],evo:{n:'成交之筆',ic:'成交之筆',w:'行動電源',d:'扇形射出金色鋼筆並觸發成交爆發'}},
- thermos:{n:'梵谷打火機',ic:'梵谷打火機',d:['投擲打火機,落地爆炸','爆炸範圍 +20%','每次多丟 1 個','傷害 +30%','每次多丟 1 個'],evo:{n:'星夜烈焰',ic:'evo-thermos',w:'七星香菸',d:'爆炸後留下持續燃燒的火焰'}},
+ umb:{n:'晴雨窗光劍',ic:'晴雨窗光劍',d:['揮出光劍斬擊前方扇形範圍','傷害 +25%','斬擊範圍 +20%','傷害 +25%、冷卻縮短','前後雙向斬擊'],evo:{n:'絕地晴雨窗',ic:'evo-umb',w:'維他命針',d:'360 度光劍旋風斬,大幅擊退周圍敵人'}},
+ pen:{n:'萬能鋼筆',ic:'萬能鋼筆',d:['朝最近的敵人射出鋼筆','每次多射 1 支','傷害 +30%','每次多射 1 支','可穿透 3 個敵人'],evo:{n:'成交之筆',ic:'成交之筆',w:'行動電源',d:'扇形射出金色鋼筆並觸發成交爆發'}},
+ thermos:{n:'梵谷打火機',ic:'梵谷打火機',d:['投擲打火機,落地爆炸','爆炸範圍 +20%','每次多丟 1 個','傷害 +30%','每次多丟 1 個'],evo:{n:'星夜烈焰',ic:'evo-thermos',w:'下班一根菸',d:'爆炸後留下持續燃燒的火焰'}},
  laptop:{n:'單眼相機',ic:'單眼相機',d:['閃光燈射出貫穿光束','傷害 +30%','光束加寬','冷卻縮短 20%','同時向後方發射'],evo:{n:'高速連拍',ic:'evo-laptop',w:'刮刮樂',d:'同時射出 4 道閃光光束'}},
  coffee:{n:'熱咖啡潑灑',ic:'sk-coffee',d:['定時灼燒周圍的敵人','範圍 +15%','傷害 +30%','冷卻縮短','範圍 +15%、傷害 +30%'],evo:{n:'咖啡外帶杯',ic:'evo-coffee',w:'威士忌',d:'移動時沿路留下灼燒的咖啡'}},
  clip:{n:'咒術迴針',ic:'sk-clip',d:['2 根咒術迴針繞身旋轉','多 1 根迴針','咒力傷害 +30%','多 1 根迴針','轉速與範圍提升'],evo:{n:'長尾夾風暴',ic:'evo-clip',w:'情人的祝福',d:'迴紋針數量加倍,旋轉範圍擴大'}},
- drone:{n:'外送無人機',ic:'sk-drone',d:['無人機自動射擊最近的敵人(可穿透 2 隻)','射速提升','傷害 +30%、每次發射 2 發','射速提升','每次發射 3 發'],evo:{n:'無人機艦隊',ic:'evo-drone',w:'JBL喇叭',d:'3 台無人機同時開火'}},};
+ drone:{n:'外送無人機',ic:'sk-drone',d:['無人機自動射擊最近的敵人(可穿透 2 隻)','射速提升','傷害 +30%、每次發射 2 發','射速提升','每次發射 3 發'],evo:{n:'無人機艦隊',ic:'evo-drone',w:'藍牙喇叭',d:'3 台無人機同時開火'}},};
 const WKEYS=['umb','pen','thermos','laptop','coffee','clip','drone'];
-const SUP={'百威啤酒':{d:'攻速 +8%',e:'🍺'},'威士忌':{d:'移速 +8%',e:'🥃'},'猛健樂':{d:'生命上限 +12%',e:'💉'},'情人的祝福':{d:'受到傷害 -6%',e:'💝'},'行動電源':{d:'吸取範圍 +30%',e:'🔋'},
- '七星香菸':{d:'每秒回復 0.5% 生命',e:'🚬'},'刮刮樂':{d:'暴擊率 +5%',e:'🎟️'},'前輩的寶典':{d:'經驗獲得 +10%',e:'📖'},'JBL喇叭':{d:'技能範圍 +8%',e:'🔊'},'加薪通知單':{d:'攻擊 +10%',e:'💌'}};
-(()=>{SUP['麥當勞套餐']={e:'🍔',x:1};SUP['開工紅包']={e:'🧧',x:1};for(const k in SUP)if(!ART[k]){try{const c=document.createElement('canvas');c.width=c.height=96;const x=c.getContext('2d');x.font='72px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(SUP[k].e,48,54);ART[k]=c.toDataURL()}catch(e){}}delete SUP['麥當勞套餐'];delete SUP['開工紅包']})();
+const SUP={'冰涼啤酒':{d:'攻速 +8%',e:'🍺'},'威士忌':{d:'移速 +8%',e:'🥃'},'維他命針':{d:'生命上限 +12%',e:'💉'},'情人的祝福':{d:'受到傷害 -6%',e:'💝'},'行動電源':{d:'吸取範圍 +30%',e:'🔋'},
+ '下班一根菸':{d:'每秒回復 0.5% 生命',e:'🚬'},'刮刮樂':{d:'暴擊率 +5%',e:'🎟️'},'前輩的寶典':{d:'經驗獲得 +10%',e:'📖'},'藍牙喇叭':{d:'技能範圍 +8%',e:'🔊'},'加薪通知單':{d:'攻擊 +10%',e:'💌'}};
+(()=>{SUP['速食套餐']={e:'🍔',x:1};SUP['開工紅包']={e:'🧧',x:1};for(const k in SUP)if(!ART[k]){try{const c=document.createElement('canvas');c.width=c.height=96;const x=c.getContext('2d');x.font='72px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(SUP[k].e,48,54);ART[k]=c.toDataURL()}catch(e){}}delete SUP['速食套餐'];delete SUP['開工紅包']})();
 const SKEYS=Object.keys(SUP);
 const MODS=[{n:'主管請假',d:'升級需要的經驗降低 30%',xp:.7},{n:'發薪日',d:'攻擊 +20%',f:s=>{s.atk*=1.2}},{n:'雙倍濃縮',d:'攻速 +20%',f:s=>{s.aspd+=20}},
  {n:'準時下班魂',d:'移速 +20%',f:s=>{s.spd+=20}},{n:'年終入帳',d:'技能刷新次數 +2',ref:2},{n:'健檢過關',d:'生命上限 +25%',f:s=>{s.hp*=1.25}}];
@@ -2945,15 +3178,17 @@ const wIcon=k=>{const d=WS[k],ic=(G&&G.evo[k]&&d.evo&&d.evo.ic)||d.ic;return ART
 const wName=k=>G&&G.evo[k]&&WS[k].evo?WS[k].evo.n:WS[k].n;
 function runStats(){
  const b=G.base,s=Object.assign({},b),L=k=>G.ss[k]||0;s.sk=Object.assign({},b.sk);
- s.aspd+=8*L('百威啤酒');s.spd+=8*L('威士忌');s.hp=b.hp*(1+.12*L('猛健樂'));s.dr=Math.min(.6,.06*L('情人的祝福'));s.pick+=30*L('行動電源');
- s.crit+=5*L('刮刮樂');s.xpm=1+.1*L('前輩的寶典');s.area=1+.08*L('JBL喇叭');s.atk=b.atk*(1+.1*L('加薪通知單'));
- if(G.mod.f)G.mod.f(s);s.regen=b.regen+s.hp*.005*L('七星香菸');
+ s.aspd+=8*L('冰涼啤酒');s.spd+=8*L('威士忌');s.hp=b.hp*(1+.12*L('維他命針'));s.dr=Math.min(.6,.06*L('情人的祝福'));s.pick+=30*L('行動電源');
+ s.crit+=5*L('刮刮樂');s.xpm=1+.1*L('前輩的寶典');s.area=1+.08*L('藍牙喇叭');s.atk=b.atk*(1+.1*L('加薪通知單'));
+ if(G.mod.f)G.mod.f(s);s.regen=b.regen+s.hp*.005*L('下班一根菸');
  if(G.evo.pen)s.sk.deal=Math.max(s.sk.deal||0,3);
  s.aspd=Math.min(s.aspd,250);s.crit=Math.min(s.crit,80);s.spd=Math.min(s.spd,120);return s}
 function refreshStats(){const r=G.hp/G.S.hp,old=G.S.hp;G.S=runStats();G.hp=Math.min(G.S.hp,Math.max(G.S.hp*r,G.hp+(G.S.hp-old)))}
 function initSkills(){
  G.ws={};G.ss={};G.evo={};G.wt={};G.lvq=0;G.pd=[];G.dh=[];G.cbD=0;G.shield=0;G.mod=pick(MODS);G.ref=3+(G.mod.ref||0);
- G.ws[G.base.wpn||(heroF()?'kick':'fist')]=1;
+ /* 1006-F:空手連擊(男:三段拳/女:三段踢)永遠保留;有裝武器的話,武器技能另外再加一格 */
+ if(SAVE.ride==='classic'&&rideLv('classic'))G.shield=(G.shield||0)+1;
+ G.ws[heroF()?'kick':'fist']=1;if(G.base.wpn&&G.base.wpn!=='fist'&&G.base.wpn!=='kick')G.ws[G.base.wpn]=1;
  for(const k in G.base.sk)if(WKEYS.includes(k)&&Object.keys(G.ws).length<6)G.ws[k]=Math.min(5,G.base.sk[k]);
  G.S=runStats();G.hp=G.S.hp;
  const mb=$('modb');mb.innerHTML='<b>'+G.mod.n+'</b><small>'+G.mod.d+'</small>';mb.hidden=false;mb.style.opacity=1;
@@ -2974,7 +3209,7 @@ function rollOpts(n,forChest){
  if(!out.length)out.push({t:'heal'},{t:'coin'});
  return out}
 function optInfo(o){
- if(o.t==='heal')return{n:'麥當勞套餐',ic:ART['麥當勞套餐'],d:'吃飽有力氣,生命完全回復',lv:0,cls:'sup'};
+ if(o.t==='heal')return{n:'速食套餐',ic:ART['速食套餐'],d:'吃飽有力氣,生命完全回復',lv:0,cls:'sup'};
  if(o.t==='coin')return{n:'開工紅包$200',ic:ART['開工紅包'],d:'金幣 +200',lv:0,cls:'sup'};
  if(o.t==='evo'){const e=WS[o.k].evo;return{n:e.n,ic:ART[e.ic||WS[o.k].ic],d:'突破!'+e.d,lv:-1,cls:'evo'}}
  if(o.t==='w'){const c=G.ws[o.k]||0,d=WS[o.k];const ev=d.evo?'突破組合:'+d.n+' 5★ + '+d.evo.w:'';return{n:wName(o.k),ic:wIcon(o.k),d:d.d[c],lv:c+1,nw:!c,cls:'',cb:ev}}
@@ -3006,7 +3241,7 @@ function openChest(){
  if(!G||G.over)return;CHESTING=true;running=false;joy=null;
  const r=Math.random(),n=r<.55?1:r<.85?2:3,res=[];
  for(let i=0;i<n;i++){const o=rollOpts(1,true)[0];res.push({o,f:optInfo(o)});applyOpt(o)}
- const icons=[...Object.keys(G.ws).map(k=>({i:wIcon(k),n:wName(k)})),...Object.keys(G.ss).map(k=>({i:ART[k],n:k})),{i:ART['麥當勞套餐'],n:'麥當勞套餐'},{i:ART['開工紅包'],n:'開工紅包$200'}].filter(o=>o.i);
+ const icons=[...Object.keys(G.ws).map(k=>({i:wIcon(k),n:wName(k)})),...Object.keys(G.ss).map(k=>({i:ART[k],n:k})),{i:ART['速食套餐'],n:'速食套餐'},{i:ART['開工紅包'],n:'開工紅包$200'}].filter(o=>o.i);
  const ring=[0,1,2,3,7,11,15,14,13,12,8,4];let h='';for(let i=0;i<16;i++){if(i===5){h+='<div class="mid"><img src="'+(ART['業績獎金']||'')+'" alt=""></div>';continue}if([6,9,10].includes(i))continue;const ic=icons.length?pick(icons):{i:'',n:''};h+='<div class="c" data-p="'+i+'"><img src="'+ic.i+'" alt=""><span>'+ic.n+'</span></div>'}
  $('chgrid').innerHTML=h;$('chres').innerHTML='';$('chok').hidden=true;$('chest').hidden=false;
  const cells=ring.map(p=>$('chgrid').querySelector('[data-p="'+p+'"]'));let step=0;const used=new Set();
@@ -3257,7 +3492,7 @@ function bossDrawGround(){
    ctx.globalAlpha=.35;ctx.fillStyle='#ff3b2f';ctx.fillRect(G.x+W/2+30-w*p,L.y-hh/2,w*p,hh);
    ctx.globalAlpha=.75+.25*fl;ctx.strokeStyle='#ffd400';ctx.lineWidth=4;ctx.setLineDash([22,12]);ctx.lineDashOffset=-G.t*80;
    ctx.beginPath();ctx.moveTo(x0,L.y-hh/2);ctx.lineTo(x0+w,L.y-hh/2);ctx.moveTo(x0,L.y+hh/2);ctx.lineTo(x0+w,L.y+hh/2);ctx.stroke();ctx.setLineDash([]);
-   ctx.globalAlpha=.6+.4*fl;ctx.fillStyle='#fff';ctx.font='bold 15px system-ui';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText('⚠️ 列車進站',G.x+W/2-12,L.y);ctx.globalAlpha=1}
+   ctx.globalAlpha=.6+.4*fl;ctx.fillStyle='#fff';ctx.font='bold 15px system-ui';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText('列車進站',G.x+W/2-12,L.y);if(IMG['tr-sign-n']){const tw=ctx.measureText('列車進站').width;ctx.drawImage(IMG['tr-sign-n'],G.x+W/2-12-tw-30,L.y-13,26,26)}ctx.globalAlpha=1}
   else{ctx.globalAlpha=.12;ctx.fillStyle='#ffd400';ctx.fillRect(x0,L.y-hh/2,w,hh);ctx.globalAlpha=1}}
  const e=G.bossE;if(e&&e.b&&e.b.st==='tele'){const B=e.b,p=Math.min(1,B.t/B.dur),fl=(Math.sin(B.t*30)+1)/2;
   ctx.save();ctx.translate(e.x,e.y);ctx.rotate(B.a);ctx.globalAlpha=.18+.14*fl;ctx.fillStyle='#ff2a1f';ctx.fillRect(0,-e.r,B.len+e.r,e.r*2);
@@ -3287,12 +3522,12 @@ function drawGlow(x,y,col,big){const t=G.t,cy=y-16;ctx.save();ctx.globalComposit
 function bossHud(){if(!G)return;
  if(G.bIntro>0){const p=1-G.bIntro/2.8,al=Math.min(1,p*6,G.bIntro*2),y=H*.2;ctx.globalAlpha=al;
   ctx.fillStyle='rgba(140,10,10,.78)';ctx.fillRect(0,y-30,W,60);ctx.fillStyle='#ffd400';for(let x=-((G.t*90)%40);x<W;x+=40){ctx.fillRect(x,y-30,20,5);ctx.fillRect(x+20,y+25,20,5)}
-  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 '+Math.min(26,W/14)+'px system-ui';ctx.fillText('⚠️ 列車即將進站 ⚠️',W/2,y-7);
+  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 '+Math.min(26,W/14)+'px system-ui';ctx.fillText('列車即將進站',W/2,y-7);if(IMG['tr-sign-n']){const tw=ctx.measureText('列車即將進站').width,sz=Math.min(30,W/12);ctx.drawImage(IMG['tr-sign-n'],W/2-tw/2-sz-8,y-7-sz/2,sz,sz);ctx.drawImage(IMG['tr-sign-n'],W/2+tw/2+8,y-7-sz/2,sz,sz)}
   ctx.font='bold 13px system-ui';ctx.fillStyle='#ffe08a';ctx.fillText('首領「捷運站長喪屍」出現!',W/2,y+14);ctx.globalAlpha=1}
  const e=G.bossE;if(!e||e.hp<=0)return;const w=Math.min(420,W-110),x=(W-w)/2,y=(G.hudB||70)+8,v=Math.max(0,e.hp/e.max);
  ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(x-3,y-3,w+6,22);ctx.fillStyle='rgba(255,255,255,.55)';ctx.fillRect(x,y,w*Math.max(v,G.bhpD),16);
  const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,'#ff3b2f');g.addColorStop(1,e.b.p2?'#ff9a2f':'#c81e1e');ctx.fillStyle=g;ctx.fillRect(x,y,w*v,16);
- ctx.fillStyle='#fff';ctx.font='bold 12px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('👮 捷運站長喪屍'+(e.b.p2?' · 🚨末班車':'')+'  '+Math.ceil(v*100)+'%',W/2,y+8)}
+ ctx.fillStyle='#fff';ctx.font='bold 12px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';{const t='捷運站長喪屍'+(e.b.p2?' · 末班車暴走':'')+'  '+Math.ceil(v*100)+'%';ctx.fillText(t,W/2,y+8);const hk='捷運站長喪屍-walk-1';if(IMG[hk]&&IMG[hk].naturalWidth){const tw=ctx.measureText(t).width,im=IMG[hk],hh=26,ww=hh*im.naturalWidth/im.naturalHeight;ctx.save();ctx.beginPath();ctx.rect(W/2-tw/2-ww-6,y-6,ww,hh*.62);ctx.clip();ctx.drawImage(im,W/2-tw/2-ww-6,y-6,ww,hh);ctx.restore()}if(e.b.p2&&IMG['tr-sign-f']){const tw=ctx.measureText(t).width;ctx.drawImage(IMG['tr-sign-f'],W/2+tw/2+6,y-1,18,18)}}}
 var HERO_HD=false;
 /* 1005-ZZC:女主角(高跟鞋踢擊)。SAVE.hero='f' 為女主角 */
 const heroF=()=>!!(typeof SAVE!=='undefined'&&SAVE&&SAVE.hero==='f');
@@ -3315,7 +3550,7 @@ function hdN(){for(const n in HDN)for(const a in HDN[n]){const k=n+'-'+a+'-1';if
 function heroHD(){if(!ART['主角HD-idle-1'])return;const L=p=>{const a=[];for(let i=1;ART['主角HD-'+p+'-'+i];i++)a.push('主角HD-'+p+'-'+i);return a};
  const idle=L('idle'),run=L('run'),atk=L('atk');if(!idle.length||!run.length||!atk.length)return;
  ANIM.idle=idle;ANIM.run=run;ANIM.atk=atk;HERO_HD=true;SC.clear();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(e){}}
-window.__artPack=function(X){if(!X)return;Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();if(X['主角HD-idle-1'])heroHD();try{if(X['st-atk'])for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">'}catch(e){}try{hdN()}catch(e){}
+window.__artPack=function(X){if(!X)return;/* 1006-R 新版美術(n2- 開頭)優先,之後載入的舊圖不能蓋掉 */const NL=window.__NL||(window.__NL=new Set());for(const k in X)if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k];X['__n2_'+r]=1}for(const r of NL)if(!X['__n2_'+r])delete X[r];for(const k in X)if(k.startsWith('__n2_'))delete X[k];try{for(const [o,n] of BRANDREN)if(X[o]&&!X[n]&&!ART[n])X[n]=X[o]}catch(e){}Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();if(X['主角HD-idle-1'])heroHD();try{if(X['st-atk'])for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">'}catch(e){}try{hdN()}catch(e){}
  try{if(X['bg-home'])document.documentElement.style.setProperty('--homebg','url('+X['bg-home']+')')}catch(e){}try{document.querySelectorAll('img.pico').forEach(i=>{if(ART['金幣'])i.src=ART['金幣']});if(!$('home').hidden)renderHome()}catch(e){}try{if(!$('lbov').hidden&&LB.rows&&LB.rows.length)lbRender()}catch(e){}};
 function update(dt){
  const S=G.S;G.t+=dt;G.dtl=dt;G.atk-=dt;if(G.dh&&G.dh.length)for(let i=G.dh.length-1;i>=0;i--){if((G.dh[i].t-=dt)<=0){const f=G.dh[i].f;G.dh.splice(i,1);try{f()}catch(e){}}}G.hurt-=dt;G.inv-=dt;
@@ -3326,9 +3561,9 @@ function update(dt){
  G.hp=Math.min(S.hp,G.hp+S.regen*dt);
  const ch=CH[G.c];
  if(G.tr){trTick(dt)}else if(G.t<DUR){
-  G.spawn+=dt*(1.6+G.t/12);while(G.spawn>=1){G.spawn--;if(G.en.length<Q.cap)spawn(ENE[pick(ch.pool)],'n')}
-  if(G.t>=G.elite){G.elite+=45;spawn(pick(ELITE),'elite');toast('精英怪出現!');sfx('roar')}
- }else if(!G.boss){G.boss=true;const b=BOSS[CH[G.c].boss];if(!b){toast('撐過 3 分鐘,通關!');endRun(true);return}spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*260)*mult();bossInit(be)}
+  G.spawn+=dt*(BAL.spawn+G.t/BAL.spawnG);while(G.spawn>=1){G.spawn--;if(G.en.length<Q.cap)spawn(ENE[pick(ch.pool)],'n')}
+  if(G.t>=G.elite){G.elite+=BAL.elite;spawn(pick(ELITE),'elite');toast('精英怪出現!');sfx('roar')}
+ }else if(!G.boss){G.boss=true;const b=BOSS[CH[G.c].boss];if(!b){toast('撐過 3 分鐘,通關!');endRun(true);return}spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*BAL.bossAtk)*mult();bossInit(be)}
   combat(dt);projectiles(dt);
  const far=Math.hypot(W,H)*.9;
  for(const e of G.en){
@@ -3358,7 +3593,7 @@ function update(dt){
  for(let i=G.gems.length-1;i>=0;i--){const g=G.gems[i],dx=G.x-g.x,dy=G.y-20-g.y,d=Math.hypot(dx,dy)||1;
   if(d<gk||g.m){g.m=1;const v=Math.max(320,720-d);g.x+=dx/d*v*dt;g.y+=dy/d*v*dt}
   if(d<20){G.gems.splice(i,1);if(!G.bossDown)G.xp+=g.v*(S.xpm||1);sfx('xp');if(S.sk.card){G.cardT=1.2;G.hp=Math.min(S.hp,G.hp+S.hp*.002*S.sk.card)}}}
- for(let i=G.drops.length-1;i>=0;i--){const d=G.drops[i];if(d.pt!==undefined&&d.pt<1)continue;if(Math.hypot(G.x-d.x,G.y-d.y)<pk){G.drops.splice(i,1);if(d.heal){G.hp=S.hp;sfx('heal');toast('撿到麥當勞套餐!生命回滿')}else if(d.chest){sfx('chestOpen');openChest();return}else takeItem(d.it)}}
+ for(let i=G.drops.length-1;i>=0;i--){const d=G.drops[i];if(d.pt!==undefined&&d.pt<1)continue;if(Math.hypot(G.x-d.x,G.y-d.y)<pk){G.drops.splice(i,1);if(d.heal){G.hp=S.hp;sfx('heal');toast('撿到速食套餐!生命回滿')}else if(d.chest){sfx('chestOpen');openChest();return}else takeItem(d.it)}}
  for(let i=G.dead.length-1;i>=0;i--){G.dead[i].t+=dt;if(G.dead[i].t>(G.dead[i].b?4.2:1))G.dead.splice(i,1)}
  {let up=0;while(!G.bossDown&&G.xp>=needXp(G.lv)*(G.mod.xp||1)){G.xp-=needXp(G.lv)*(G.mod.xp||1);G.lv++;up++}if(up){G.hp=Math.min(G.S.hp,G.hp+G.S.hp*.1);G.lvq+=up-1;queueLevel();return}}
   for(let i=G.fx.length-1;i>=0;i--){const f=G.fx[i];f.t+=dt;if(f.t>=f.d)G.fx.splice(i,1)}
@@ -3369,7 +3604,7 @@ function update(dt){
 function endRun(win){
  if(G&&G.tr&&!G.over){trEnd(win===true);return}
  if(!G||G.over)return;try{$('olh').hidden=false;$('oloot').hidden=false;$('over').classList.remove('trover');$('replay').textContent='⚔️ 再打一場'}catch(e){}G.over=true;running=false;joy=null;
- const coinG=Math.round(G.kills+G.t/3+(win?100*(G.c+1):0)+(win&&G.bossFirst?1000:0)),coinT=taxIncome(coinG+(G.coinB||0));SAVE.coin=Math.max(0,(SAVE.coin||0)+coinG-coinT);
+ const coinG=Math.round((G.kills+G.t/3+(win?100*(G.c+1):0)+(win&&G.bossFirst?1000:0))*(SAVE.ride==='gold'&&rideLv('gold')?1.05:1)),coinT=taxIncome(coinG+(G.coinB||0));SAVE.coin=Math.max(0,(SAVE.coin||0)+coinG-coinT);
  try{dqAdd('runs');dqAdd('kills',G.kills);if(win)dqAdd('win');SAVE.tut=1}catch(e){}
  if(win){if(!SAVE.clear.includes(G.c))SAVE.clear.push(G.c);SAVE.unlock=Math.max(SAVE.unlock,Math.min(CH.length,G.c+2))}
  save();
@@ -3404,6 +3639,10 @@ function sprite(k,em,h,flip){
   if(ok){x.drawImage(im,0,0,w,h);if(flip&&flip.w){x.globalCompositeOperation='source-atop';x.fillStyle='rgba(255,255,255,.85)';x.fillRect(0,0,w,h)}}else if(em){x.font=Math.round(h*.8)+'px serif';x.textAlign='center';x.textBaseline='bottom';x.fillText(em,w/2,h)}
  c.w=w;if(SC.size>800)SC.clear();SC.set(key,c);return c;
 }
+/* 1006-P 戰鬥掉落的裝備:依圖片實際內容裁切,統一用同樣大小顯示(不會長的變小、寬的變大) */
+const IBB={};function imgBB(k){if(IBB[k])return IBB[k];const im=IMG[k];if(!im||!im.naturalWidth)return null;try{const c=document.createElement('canvas'),w=c.width=Math.min(128,im.naturalWidth),h=c.height=Math.round(w*im.naturalHeight/im.naturalWidth),g=c.getContext('2d');g.drawImage(im,0,0,w,h);const a=g.getImageData(0,0,w,h).data;let x0=w,y0=h,x1=0,y1=0;for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(a[(y*w+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+ if(x1<x0){IBB[k]={x:0,y:0,w:im.naturalWidth,h:im.naturalHeight};return IBB[k]}const f=im.naturalWidth/w;IBB[k]={x:x0*f,y:y0*f,w:(x1-x0+1)*f,h:(y1-y0+1)*f}}catch(e){IBB[k]={x:0,y:0,w:im.naturalWidth,h:im.naturalHeight}}return IBB[k]}
+function drawItemFit(k,em,x,y,S){const im=IMG[k],b=im&&imgBB(k);if(!b){drawImg(k,em,x,y,S);return}const s=S/Math.max(b.w,b.h),dw=b.w*s,dh=b.h*s;ctx.drawImage(im,b.x,b.y,b.w,b.h,x-dw/2,y-dh,dw,dh)}
 function drawImg(k,em,x,y,h,flip,rot,alpha,sx,sy){
  h=Math.round(h);const c=sprite(k,em,h,flip);if(!c)return;
  if(alpha!==undefined&&alpha!==1)ctx.globalAlpha=alpha;
@@ -3528,12 +3767,12 @@ function draw(){
   if(IMG['xp寶石']&&IMG['xp寶石'].naturalWidth)for(const g of G.gems)drawImg('xp寶石','',g.x,g.y+7,g.v>=10?22:g.v>1?17:13);else
   for(const g of G.gems){ctx.fillStyle=g.v>=10?'#ffb43b':g.v>1?'#7cf0c8':'#4fc3ff';ctx.beginPath();ctx.moveTo(g.x,g.y-7);ctx.lineTo(g.x+5,g.y);ctx.lineTo(g.x,g.y+7);ctx.lineTo(g.x-5,g.y);ctx.closePath();ctx.fill()}
  for(const d of G.drops){
-  if(d.heal){drawImg('麥當勞套餐','🍔',d.x,d.y,30);continue}
+  if(d.heal){drawImg('速食套餐','🍔',d.x,d.y,30);continue}
   if(d.chest){drawBeam(d.x,d.y,'#ffcf3a',200,12);const b=Math.abs(Math.sin(G.t*4))*6;ctx.globalAlpha=.5+.3*Math.sin(G.t*6);ctx.fillStyle='#ffd43b';ctx.beginPath();ctx.ellipse(d.x,d.y,30,12,0,0,6.283);ctx.fill();ctx.globalAlpha=1;drawImg('業績獎金','💰',d.x,d.y-b,40);continue}
   if(d.boss){let x=d.x,y=d.y,hh=0;if(d.pt<1){x=d.sx+(d.x-d.sx)*d.pt;y=d.sy+(d.y-d.sy)*d.pt;hh=Math.sin(d.pt*Math.PI)*110}
    const big=d.boss===2,col=big?(d.it.q>=4?'#ff4a3a':'#ffd24a'):RAR[d.it.q].c;if(d.pt>=1){drawBeam(x,y,col,big?260:190,big?14:10)}if(d.pt>=1||hh<40)drawGlow(x,y,col,big);if(big){ctx.save();ctx.shadowColor='hsl('+((G.t*240)%360)+',100%,62%)';ctx.shadowBlur=18;drawImg(d.it.b,d.it.e,x,y+4-hh,46,false,d.pt<1?d.pt*12:0);ctx.shadowColor='hsl('+((G.t*240+180)%360)+',100%,62%)';ctx.shadowBlur=10;drawImg(d.it.b,d.it.e,x,y+4-hh,46,false,d.pt<1?d.pt*12:0);ctx.restore()}else drawImg(d.it.b,d.it.e,x,y+4-hh,34,false,0);continue}
   {const q=d.it.q,hi=q>=3;drawBeam(d.x,d.y,q<0?'#d6e0ec':RAR[q].c,hi?210:150,hi?11:8)}
-  drawImg(d.it.b,d.it.e,d.x,d.y+2-Math.abs(Math.sin(G.t*3+d.x*.05))*3,30);
+  drawItemFit(d.it.b,d.it.e,d.x,d.y+2-Math.abs(Math.sin(G.t*3+d.x*.05))*3,34);
  }
  for(const f of G.fx){const p=f.t/f.d;
   if(f.k==='csplash'){const S=f.R*2.3;let ok;if(p<.72)ok=fxImg('coffee-'+Math.min(6,1+Math.floor(p/.72*6)),f.x,f.y,S,0,1,true);else ok=fxImg(p<.86?'coffee-7':'coffee-8',f.x,f.y,S,0,1-(p-.72)/.28*.8,true);
@@ -3572,7 +3811,7 @@ function draw(){
    ctx.strokeStyle='rgba(230,60,40,'+(.25+.5*p)+')';ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();ctx.ellipse(l.x1,l.y1,75*(1.15-.15*p),75*.5*(1.15-.15*p),0,0,6.283);ctx.stroke();ctx.setLineDash([]);
    shadow(x,l.y0+(l.y1-l.y0)*p,10);drawThermos(x,y,p*12)}
   bossDrawTop();if(G.tr)trDrawTop();drawFx();
- if(G.drops.length)for(const d of G.drops)if(d.it&&(d.it.q>=3||d.boss===2)&&!(d.pt<1)){ctx.fillStyle=d.boss===2?'#ffe27a':RAR[d.it.q].c;ctx.font='bold '+(d.boss===2?14:12)+'px system-ui';ctx.textAlign='center';if(d.boss===2){ctx.strokeStyle='rgba(0,0,0,.8)';ctx.lineWidth=3;ctx.strokeText('👑 '+d.it.name,d.x,d.y-120)}ctx.fillText((d.boss===2?'👑 ':'')+d.it.name,d.x,d.y-(d.boss===2?120:76))}
+ if(G.drops.length)for(const d of G.drops)if(d.it&&(d.it.q>=3||d.boss===2)&&!(d.pt<1)){ctx.fillStyle=d.boss===2?'#ffe27a':RAR[d.it.q].c;ctx.font='bold '+(d.boss===2?14:12)+'px system-ui';ctx.textAlign='center';if(d.boss===2){ctx.strokeStyle='rgba(0,0,0,.8)';ctx.lineWidth=3;ctx.strokeText('★ '+d.it.name,d.x,d.y-120)}ctx.fillText((d.boss===2?'★ ':'')+d.it.name,d.x,d.y-(d.boss===2?120:76))}
  ctx.textAlign='center';ctx.textBaseline='middle';
  for(const f of G.fx)if(f.k==='num'){const p=f.t/f.d,sc=p<.16?(f.cr?2.1:1.6)-(f.cr?1.1:.6)*(p/.16):1,yy=f.y-(1-Math.pow(1-p,2.2))*(f.cr?34:26),fs=Math.round((f.cr?20:13)*sc);
   ctx.globalAlpha=p>.6?1-(p-.6)/.4:1;ctx.font='900 '+fs+'px system-ui';ctx.lineWidth=f.cr?4:3;ctx.strokeStyle='rgba(0,0,0,.85)';ctx.strokeText(f.v,f.x,yy);ctx.fillStyle=f.cr?(p<.16?'#fff6c0':'#ffb020'):'#fff';ctx.fillText(f.v,f.x,yy)}
@@ -3722,10 +3961,21 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1006-C';
+const GBUILD='1006-U';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.06c';
-const GNOTES=[['↩️','戰帖可以取消','對方還沒接受前,可以按「取消戰帖」把押金拿回來;列車結算畫面也會顯示成績有沒有成功上傳排行榜'],
+const GVER='2026.10.06d';
+const GNOTES=[['🚗','名稱調整','下方選單「抽獎」改名為「車庫」、「賭場」改名為「遊戲場」;車庫裡的「業務車行」改名為「夢想車庫」'],
+ ['✨','介面圖示升級','選單、按鈕、通知裡常用的 45 種表情符號,全部換成遊戲風格的美術圖示'],
+ ['🎨','裝備換新圖','改名的 13 件裝備換成新插畫(耳機、手機、喇叭、皮帶、球鞋、墨鏡、背心、啤酒、速食、香菸、威士忌、金錶、鋼筆),三段拳、三段踢的技能圖示也重畫了;首領放大招的警示改成車站標誌圖'],
+ ['🏷️','裝備改名','拿掉真實品牌名稱:萬能鋼筆、名牌公事包、老大墨鏡、藍牙耳機、我的訂製西裝、氣墊球鞋、舉手之勞金錶、老花紋皮帶、摺疊手機、藍牙喇叭、冰涼啤酒、下班一根菸、速食套餐、維他命針;身上和倉庫的裝備會自動改成新名字,能力不變'],
+ ['💎','裝備格換新材質','所有裝備格、座駕格改成琺瑯底＋金屬框,稀有度越高金屬越亮;戰鬥中掉落的裝備大小也統一了'],
+ ['👑','至尊、典藏辨識度','裝備頁、排行榜也看得出車行的車:至尊是紫色光框,典藏是黑金框會發光呼吸;買到典藏車、改裝到 Lv.5 會上全伺服器跑馬燈'],
+ ['🚪','新的揭幕動畫:幸運車庫','抽獎改成「一車傳三代・人走車還在」老車庫揭幕:門縫透出的光就是稀有度的預告,鐵捲門嘎啦嘎啦捲上去、車燈一亮,新車登場;十連抽一台一台亮燈揭曉,抽到傳說以上會先蓄光再登場'],
+ ['🏎️','座駕大擴充','抽獎機擴充到 14 台車(新增 9 台,傳說等級 3 台);新增「夢想車庫」可以直接買 6 台超跑(至尊、典藏),還能花錢改裝到 Lv.5,擁有越多車行的車,車庫收藏加成越高'],
+ ['👊','空手連擊永遠保留','裝上武器後,三段拳/三段踢不會消失:開局同時擁有空手連擊和武器技能,打擊感和武器威力都有'],
+ ['⚔️','第一關難度調整','捷運站變難了:喪屍更多、攻擊更痛,精英怪改成每 35 秒出現,首領血量更厚;喪屍數量變多,刷怪更爽,裝備越好越輕鬆'],
+ ['🛡️','射龍門池底保護','每一把最多只能贏走池底的一部分(勝率越高比例越小:5%/8%/15%/30%),有錢也沒辦法一直射寬門把池底清空;全包規則不變'],
+ ['↩️','戰帖可以取消','對方還沒接受前,可以按「取消戰帖」把押金拿回來;列車結算畫面也會顯示成績有沒有成功上傳排行榜'],
  ['💸','戰帖押金檢查','對方金幣不夠付押金,就不能對他下這個金額的戰帖(名單上會變灰、寫「金幣不足」)'],
  ['😈','仇人名單','偷你菜的人會列入仇人名單 24 小時;他的作物一成熟就通知你;報仇時無視他的皮過敏守衛、不收贓款稅,報仇成功他的日誌會顯示「被你報仇了」'],
  ['🎟️','無限列車每日有獎場次','每天前 5 場給金幣,之後變練習場(不給金幣,排行榜照算),每天 00:00 恢復'],
@@ -3737,17 +3987,17 @@ const GNOTES=[['↩️','戰帖可以取消','對方還沒接受前,可以按「
  ['🛡️','農場守衛皮過敏','付站崗費(8 小時 3,000)叫醒守衛皮過敏;小偷被牠擋下的那一塊作物就偷不走了,只能去採別塊或等你收成'],
  ['📜','農場日誌','農場新增日誌:誰偷了你什麼、誰被皮過敏趕跑、你自己的種植收成,通通查得到,還能直接按報仇'],
  ['🚆','無限列車換新裝','賭徒被丟到軌道區,上下是爬不上去的月台;三種列車:一般捷運、生鏽慢車、白色快車,都在軌道上跑'],
- ['🎲','十八仔先收起來','十八仔暫停營業,賭場只留射龍門和無限列車'],
+ ['🎲','十八仔先收起來','十八仔暫停營業,遊戲場只留射龍門和無限列車'],
  ['⚔️','玩家互動升級','無限列車可以下戰帖指定同事對決;被偷菜可以一鍵報仇;農場新增本週神偷榜/苦主榜,還能付站崗費請農場守衛皮過敏顧農場'],
  ['🎯','射龍門賠率改版','賠率依門寬浮動:門越窄賠越多(最高 1 賠 15)、越寬賠越少,發牌後會顯示本門賠率'],
- ['🚇','賭場新玩法:賭徒下場 無限列車','賭場新增「無限列車」分頁,拿命還賭債!不能攻擊、只能在月台上下範圍內走位,有慢車🐢和快車⚡;一條命撐 2 分鐘,從普通一路到終極煉獄,越後面每閃過一班金幣越多;還有全伺服器列車排行榜'],
+ ['🚇','遊戲場新玩法:賭徒下場 無限列車','遊戲場新增「無限列車」分頁,拿命還賭債!不能攻擊、只能在月台上下範圍內走位,有慢車🐢和快車⚡;一條命撐 2 分鐘,從普通一路到終極煉獄,越後面每閃過一班金幣越多;還有全伺服器列車排行榜'],
  ['🔊','打擊音效升級','男女主角的拳腳換成更有打擊感的音效;打倒精英怪和首領也有專屬音效(音效:小森平「無料効果音で遊ぼう！」)'],
  ['👊','男主角換新裝+三段連擊','男主角換成插畫風;空手揮拳改成左刺拳、右直拳、上鉤拳三段連擊,第三拳特別痛'],
  ['👠','新角色:女主角','裝備頁可以切換男/女主角,裝備和進度共用;女主角是三段連踢(前踢、側踢、迴旋踢),範圍大、擊退遠,第三下打周圍一圈,適合被包圍時'],
  ['🐹','新吉祥物「皮過敏」','超貪吃的土撥鼠皮過敏接替咖啡豆寶寶,會在農場睡覺、偷吃、咬金幣'],
  ['🌱','農場換新裝','頂樓菜園背景、田地、六種作物和收成籃全部重畫'],
  ['🏆','射龍門排行榜+個人戰績','新增「今日最大一把」和「全包名人堂」排行榜;還能看自己的勝率、各種門的戰績;連勝連敗芳芳也會有反應'],
- ['🃏','賭場換新裝','牌桌、瞇牌畫面、撲克牌、籌碼全部重畫;人頭牌藏了彩蛋:J 是主角、Q 是芳芳、K 是捷運站長喪屍'],
+ ['🃏','遊戲場換新裝','牌桌、瞇牌畫面、撲克牌、籌碼全部重畫;人頭牌藏了彩蛋:J 是主角、Q 是芳芳、K 是捷運站長喪屍'],
  ['😡','精英怪掉好裝備','暴怒奧客喪屍改成必掉一件銀框以上的裝備,有機會開出藍框、黃金框'],
  ['💰','裝備賣價調高','黑框賣價將近翻倍、銀框和綠框也調高,越後面關卡掉的裝備越值錢;一場打下來賣裝備的收入大約多一倍'],
  ['💃','芳芳換上本尊造型','射龍門的芳芳照本人重畫:齊瀏海、金框眼鏡、低馬尾,四個動作全部換新'],
@@ -3802,7 +4052,9 @@ setTimeout(()=>{const b=$('annbtn');if(b)b.onclick=()=>{audioUnlock();annOpen()}
 var ANN={list:[],on:false};
 (function(){try{ANN.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){}})();
 async function annFetch(){if(!ANN.on)return;try{const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
-  const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/ann_list',{method:'POST',headers:h,body:'{}'});if(!r.ok)return;const l=await r.json();ANN.list=Array.isArray(l)?l:[];annRender()}catch(e){}}
+  const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/ann_list',{method:'POST',headers:h,body:'{}'});if(!r.ok)return;const l=await r.json();ANN.list=Array.isArray(l)?l:[];
+   try{const r2=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/car_news_list',{method:'POST',headers:h,body:'{}'});if(r2.ok){const c=await r2.json();if(Array.isArray(c))c.forEach(n=>ANN.list.push({id:1e9+(+n.id),msg:carNewsMsg(n)}))}}catch(e){}
+   annRender()}catch(e){}}
 function annSig(){return ANN.list.map(a=>a.id).join(',')}
 function annRender(){const bar=$('annbar');if(!bar)return;let closed='';try{closed=localStorage.getItem('shechu-annx')||''}catch(e){}
  if(!ANN.list.length||closed===annSig()){bar.hidden=true;return}
@@ -3924,7 +4176,7 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!$('home').hidden&&SAV
 /* ===== 每日任務 ===== */
 const DQ={
  runs:{n:'打 3 場戰鬥',t:3,r:300,e:'⚔️'},kills:{n:'擊倒 1,000 隻喪屍',t:1000,r:300,e:'🧟'},win:{n:'通關 1 次',t:1,r:500,e:'🏁'},
- harv:{n:'在農場收成 3 次',t:3,r:300,e:'🌾'},cas:{n:'在賭場玩 3 把',t:3,r:200,e:'🎲'},gacha:{n:'抽獎 1 次',t:1,r:200,e:'🚗'},
+ harv:{n:'在農場收成 3 次',t:3,r:300,e:'🌾'},cas:{n:'在遊戲場玩 3 把',t:3,r:200,e:'🎲'},gacha:{n:'抽獎 1 次',t:1,r:200,e:'🚗'},
  pray:{n:'祈禱升階 1 次',t:1,r:150,e:'🙏'},steal:{n:'採收別人的作物 1 次',t:1,r:300,e:'🧺'}};
 const DQBONUS=500;
 const dqToday=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
@@ -3950,7 +4202,7 @@ setInterval(()=>{if(SAVE&&SAVE.daily&&SAVE.daily.d!==dqToday()){renderDaily()}},
 
 /* ===== 新手教學(第一場戰鬥) ===== */
 const TUT=[[0.6,'👆 按住畫面拖曳就能移動(電腦用 WASD 或方向鍵)'],[6,'⚔️ 攻擊是自動的,你只要專心走位、閃開喪屍'],[12,'💎 打倒喪屍會掉藍色寶石,撿起來就能升級'],
- [20,'⭐ 升級時選一個技能;武器 5 星再拿到對應補給,就能「突破」'],[40,'😡 每 45 秒會出現精英怪,打倒會掉「年終獎金」寶箱'],[70,'⏱️ 撐過 3 分鐘、打倒首領,就能準時下班!']];
+ [20,'⭐ 升級時選一個技能;武器 5 星再拿到對應補給,就能「突破」'],[40,'😡 每 35 秒會出現精英怪,打倒會掉「年終獎金」寶箱'],[70,'⏱️ 撐過 3 分鐘、打倒首領,就能準時下班!']];
 function tutTick(){if(!G||!running||SAVE.tut)return;G.tutI=G.tutI||0;while(G.tutI<TUT.length&&G.t>=TUT[G.tutI][0]){tutShow(TUT[G.tutI][1]);G.tutI++}}
 function tutShow(t){let el=$('tutbar');if(!el){el=document.createElement('div');el.id='tutbar';document.body.appendChild(el)}el.textContent=t;el.classList.remove('on');void el.offsetWidth;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),5200)}
 setInterval(tutTick,300);
@@ -4105,7 +4357,7 @@ async function clBoot(){clUI();try{if(CL.u&&SAVE.acct!==CL.u){SAVE.acct=CL.u;sav
   CL.lastOk=Date.now();CL.err='';clUI()}
  catch(e){CL.err=clMsg(e);CL.ready=true;if(/token/i.test(String(e.msg||'')))clKick();clUI()}}
 
-window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;Object.assign(ART,X);for(const k in X){const i=new Image();i.src=X[k];IMG[k]=i}
+window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;{const NL=window.__NL||(window.__NL=new Set());for(const k of Object.keys(X))if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k]}}Object.assign(ART,X);try{SC.clear()}catch(e){}setTimeout(()=>{try{emjConvert(document.body)}catch(e){}},50);for(const k in X){const i=new Image();i.src=X[k];IMG[k]=i}
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
  try{if(!document.querySelector('#gov:not([hidden])')){renderHome();if(!$('home').hidden&&SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
 if(window.ART_EXTRA)window.__artExtra();
@@ -4126,7 +4378,7 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1005ZZZB',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)});add('assets-hero2.js?v=1005ZZK',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)});add('assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}})},600)}
+function go(){add('assets-extra.js?v=1006S',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)});add('assets-hero2.js?v=1005ZZK',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)});add('assets-cars.js?v=1006K',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}});add('assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}})},600)}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
