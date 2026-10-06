@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-D">
+<meta name="gbuild" content="1007-G">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -961,6 +961,20 @@ img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 .ch.lock{filter:grayscale(.85) brightness(.62)}.ch.lock.cur{filter:grayscale(.5) brightness(.8)}
 .ch .go{position:absolute;right:10px;bottom:10px;padding:6px 14px;border-radius:999px;background:linear-gradient(#ffe08a,#e8a923);color:#3a2600;font-weight:900;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,.45)}
 .ch .go:active{transform:scale(.95)}.mlock{font-size:12px;color:#ff9a8a;margin-left:6px}
+/* 1007-E 按鈕改用 CSS 繪製(取代切片圖),手機 App 不會再出現細黑線;出擊按鈕文字去掉模糊陰影 */
+.btn{border-image:none!important;border:1.5px solid rgba(150,180,230,.5)!important;border-radius:10px!important;background:linear-gradient(180deg,#34497a 0%,#22335a 55%,#1a2746 100%)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -2px 0 rgba(0,0,0,.28),0 2px 5px rgba(0,0,0,.35);padding:7.5px 14px}
+.btn.pri,.btn.sell{border-color:#b27a10!important;background:linear-gradient(180deg,#fff0a8 0%,#ffd24a 38%,#f0aa1e 72%,#d98d10 100%)!important;color:#2a1d00!important;text-shadow:0 1px 0 rgba(255,255,255,.4)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -2px 0 rgba(120,70,0,.3),0 2px 6px rgba(0,0,0,.35)}
+.btn:disabled,.btn.pri:disabled,.gctl .btn:disabled{border-color:rgba(255,255,255,.18)!important;background:linear-gradient(180deg,#7c8088,#55595f)!important;color:#e8e8e8!important;text-shadow:0 1px 2px rgba(0,0,0,.5)!important;opacity:.85}
+.btn:active:not(:disabled){filter:brightness(.92);transform:translateY(1px)}
+.ch .go{text-shadow:none!important;-webkit-font-smoothing:antialiased;border:1px solid #b27a10;background:linear-gradient(180deg,#fff0a8,#ffd24a 40%,#e8a01a)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 2px 6px rgba(0,0,0,.45)!important;line-height:1.2}
+.ch .go img.emj{filter:none}
+.ch .go{top:8px!important;bottom:auto!important;right:8px!important;padding:5px 12px!important;font-size:13px!important}
+.shero{max-height:340px}.shero .sbg{object-position:50% 60%}
+/* 1007-G 抽獎機主畫面拿掉芳芳,車庫鐵捲門放大置中 */
+#gLot .gbox>.ghost{display:none!important}
+#gLot .gbox{grid-template-columns:1fr!important;align-items:center;justify-items:center}
+#gLot .gmach{width:100%;padding-top:6px}#gLot .gmach img{height:auto!important;width:min(94%,440px)!important;max-height:400px}
+#gLot .gctl{width:100%;max-width:520px}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1502,7 +1516,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-D</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-G</span></small>
   </div>
  </div>
 </div>
@@ -1750,7 +1764,7 @@ html.ios-app body{min-height:100vh}
  </div>
 </div>
 
-<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1006Q"><\/script><script src="sounds.js?v=1005ZZL" async><\/script>')</script>
+<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1006Q"><\/script><script src="sounds.js?v=1007F" async><\/script>')</script>
 <script>
 if(window.__PHONEHOST)throw new Error("phone-host");
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
@@ -1990,7 +2004,7 @@ function gacha(n){if(!ART['gr-frame']||!ART['uv-tt']){toast('🚪 車庫還在�
  st.onclick=()=>{if(phase==='wait'&&ready){timers.forEach(clearTimeout);unveil()}};
  function unveil(){if(phase!=='wait')return;phase='open';drum=false;st.onclick=null;$('gxs').hidden=true;
   window.__g10T=380+250+out.reduce((s,o)=>s+330+(o.r.q>=3?900:0),0);
-  sfx('reveal');setTimeout(()=>sfx('fan'+Math.max(0,Math.min(4,best))),180);
+  sfx('reveal');setTimeout(()=>sfx('fan'+Math.max(0,Math.min(4,best))),180);if(best>=3)setTimeout(()=>sfx('goodPull'),(GR&&n===10)?Math.max(0,(window.__g10T||0)-400):420);
   $('uvcov').classList.remove('wig');$('uvcov').classList.add('off');$('uvclo').classList.add('fly');st.querySelectorAll('.gr-smk').forEach(e=>e.classList.add('fly'));scene.classList.add('reveal','tint');if(GR){sfx('shutter');setTimeout(()=>sfx('engine'),1100);setTimeout(()=>sfx('impact'),1250)}
   $('gxf').classList.add('on');const bw=st.querySelector('.gx-burst .w'),bc=st.querySelector('.gx-burst .c');st.querySelector('.gx-burst').classList.add('run');
   let k=1;const play=()=>{const u=ART['gb-'+k];bw.src=u;bc.style.webkitMaskImage=bc.style.maskImage='url('+u+')';k++;if(k<=8)setTimeout(play,80);else st.querySelector('.gx-burst').classList.add('done')};play();
@@ -2827,7 +2841,7 @@ function renderHome(){migItems();
   $('sth').textContent='倉庫 ('+all.length+')';
   $('stash').innerHTML=list.length?list.map(it=>tile(it,sel===it.id,1)).join(''):'<span class="muted">'+(all.length?'這個分類沒有裝備。':'倉庫是空的,出擊打怪就會掉裝備。')+'</span>';
  $('mute').checked=$('mute2').checked=!!SAVE.mute;volUI();
- {const mv=window.__mv!=null?window.__mv:(SAVE.ch||0);$('chs').innerHTML=CH.map((c,i)=>{const lk=i>=SAVE.unlock;return'<button class="ch'+(mv===i?' cur':'')+(lk&&!c.wip?' lock':'')+'" data-c="'+i+'"'+(ART['stage-'+i]?' style="--stg:url('+ART['stage-'+i]+')"':'')+(c.wip?' disabled':'')+'><b>'+(i+1)+'. '+c.n+(c.final?' 👑':'')+'</b><span class="muted">'+(c.wip?'🚧 製作中,敬請期待':lk?'🔒 通關上一區解鎖・點擊看怪物情報':SAVE.clear.includes(i)?'✅ 已通關・點擊看怪物情報':'點擊看怪物情報')+'</span>'+(!lk&&!c.wip?'<span class="go" data-go="'+i+'">⚔️ 出擊</span>':'')+'</button>'}).join('')}
+ {const mv=window.__mv!=null?window.__mv:(SAVE.ch||0);$('chs').innerHTML=CH.map((c,i)=>{const lk=i>=SAVE.unlock;return'<button class="ch'+(mv===i?' cur':'')+(lk&&!c.wip?' lock':'')+(!lk&&!c.wip?' hasgo':'')+'" data-c="'+i+'"'+(ART['stage-'+i]?' style="--stg:url('+ART['stage-'+i]+')"':'')+(c.wip?' disabled':'')+'><b>'+(i+1)+'. '+c.n+(c.final?' 👑':'')+'</b><span class="muted">'+(c.wip?'🚧 製作中,敬請期待':lk?'🔒 通關上一區解鎖・點擊看情報':SAVE.clear.includes(i)?'✅ 已通關':'點擊看情報')+'</span>'+(!lk&&!c.wip?'<span class="go" data-go="'+i+'">⚔️ 出擊</span>':'')+'</button>'}).join('')}
    detail();renderMons();try{renderDaily()}catch(e){}
 }
 function detail(){
@@ -3435,8 +3449,8 @@ const hexA=(h,a)=>{const n=parseInt(h.slice(1),16);return'rgba('+(n>>16&255)+','
 function makeBossItem(il,q,base){const it=makeItem(il,q,base.t,base);it.boss=1;it.name=base.b;it.sk=base.sk;it.skl=q>=4?3:q>=3?2:1;return it}
 function bossInit(e){const a=Math.random()*Math.PI*2,dd=Math.min(W,H)/2+50;e.x=G.x+Math.cos(a)*dd;e.y=G.y+Math.sin(a)*dd;
  e.b={st:'walk',t:0,cd:3.4,mcd:1,seq:0,p2:false};G.bossE=e;G.lanes=[];G.bw=[];G.bIntro=2.8;G.bhpD=1;
- try{G.hudB=$('hud').getBoundingClientRect().bottom}catch(x){G.hudB=70}sfx('roar');setTimeout(()=>sfx('warn'),300);shake(6)}
-function babyCry(){const c=G&&G.S&&G.S.sk&&G.S.sk.cry;if(!c||Math.random()>=.2+.1*c)return;const R=(120+20*c)*(G.S.area||1);aoe(G.x,G.y,R,G.S.atk*(1+.4*c),320);G.fx.push({k:'himg',img:'e2-ring',x:G.x,y:G.y,S:R*2,t:0,d:.4,flat:1,add:1,s0:.3,s1:1.1});G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'哇~~!',t:0,d:.8});sfx('roar');shake(4)}
+ try{G.hudB=$('hud').getBoundingClientRect().bottom}catch(x){G.hudB=70}sfx('bossRoar');setTimeout(()=>sfx('warn'),300);shake(6)}
+function babyCry(){const c=G&&G.S&&G.S.sk&&G.S.sk.cry;if(!c||Math.random()>=.2+.1*c)return;const R=(120+20*c)*(G.S.area||1);aoe(G.x,G.y,R,G.S.atk*(1+.4*c),320);G.fx.push({k:'himg',img:'e2-ring',x:G.x,y:G.y,S:R*2,t:0,d:.4,flat:1,add:1,s0:.3,s1:1.1});G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'哇~~!',t:0,d:.8});sfx('b2cry');shake(4)}
 function pHurt(dmg,snd){if(!G||G.over||G.inv>0)return false;const S=G.S;
  if(G.shield>0){G.shield--;G.inv=.5;sfx('shieldHit');G.fx.push({k:'ring',x:G.x,y:G.y-30,R:50,t:0,d:.3,c:'120,200,255'});return false}
  G.hp-=dmg*100/(100+S.def)*(1-(S.dr||0));G.inv=.6;sfx(snd||'zbAtk1');sfx('hurt');sfx('hurtThud');G.hurt=.2;hitStop(.06);shake(5);if(G.hp<=0){endRun(false);return true}babyCry();return false}
@@ -3461,21 +3475,21 @@ function e2AI(e,dt,dx,dy,d){const el=e.kind==='elite',C=E2C[e.ai];e.fl-=dt;e.at-
   const gs=guiltSlow(d);e.x+=(dx/d*e.sp*want*gs+e.kx)*dt;e.y+=(dy/d*e.sp*want*gs+e.ky)*dt;
   const onScr=Math.abs(e.x-G.x)<W/2-10&&Math.abs(e.y-G.y)<H/2-10,busy=rangedAI&&(G.ep.length+G.ejet.length*2>=7);
   if(e.cd<=0&&d<C.rng*(el?1.15:1)&&onScr&&!busy){e.cast=C.cast;e.at=e.ad=C.cast+.3;e.aa='atk';e.cd=C.cd*(el?.75:1);e.ca=Math.atan2(dy,dx);
-   if(e.ai==='bagua'){G.etel.push({k:'bagua',x:e.x,y:e.y,R:110*(el?1.35:1),t:0,d:C.cast});sfx('mystic')}
+   if(e.ai==='bagua'){G.etel.push({k:'bagua',x:e.x,y:e.y,R:110*(el?1.35:1),t:0,d:C.cast});sfx('e2bagua')}
    else if(e.ai==='zap'){G.etel.push({k:'zap',x:e.x,y:e.y,R:95*(el?1.3:1),t:0,d:C.cast,src:e})}
-   else if(e.ai==='water')sfx('splat')}}
+   }}
  if(d<e.r+16&&G.inv<=0){if(pHurt(e.dmg,'zbAtk1'))return true}
  if(d>Math.hypot(W,H)*.9){const a=Math.random()*Math.PI*2,dd=Math.hypot(W,H)/2+40;e.x=G.x+Math.cos(a)*dd;e.y=G.y+Math.sin(a)*dd}
  return false}
 function e2Fire(e,dx,dy,d,el){
- if(e.ai==='zap'){const R=95*(el?1.3:1);G.e2fx.push({img:'e2-zap',x:e.x,y:e.y-e.r*1.6,S:R*2.3,t:0,d:.4});sfx('laser');shake(3);if(d<R+10)pHurt(e.dmg*E2C.zap.m,'zbAtk3')}
- else if(e.ai==='bagua'){const R=110*(el?1.35:1);G.e2fx.push({img:'e2-bagua',x:e.x,y:e.y,S:R*2.1,t:0,d:.3,flat:1,flash:1});sfx('impact');if(Math.hypot(G.x-e.x,(G.y-e.y)/.62)<R)pHurt(e.dmg*E2C.bagua.m,'zbAtk2')}
- else if(e.ai==='fire'){const n=el?2:1;for(let i=0;i<n;i++){const a=e.ca+(i-(n-1)/2)*.3;G.ep.push({x:e.x+Math.cos(a)*24,y:e.y-e.r*2.4,vx:Math.cos(a)*200,vy:Math.sin(a)*200,img:'e2-fireball',S:36,dmg:e.dmg*E2C.fire.m,life:2.4,boom:'e2-boom',face:1})}sfx('lighter')}
- else if(e.ai==='water'){G.ejet.push({x:e.x+Math.cos(e.ca)*20,y:e.y-e.r*1.8,a:e.ca,L:300*(el?1.2:1),w:26*(el?1.3:1),t:0,d:.45,dmg:e.dmg*E2C.water.m,hit:false});sfx('splat')}}
+ if(e.ai==='zap'){const R=95*(el?1.3:1);G.e2fx.push({img:'e2-zap',x:e.x,y:e.y-e.r*1.6,S:R*2.3,t:0,d:.4});sfx('e2zap');shake(3);if(d<R+10)pHurt(e.dmg*E2C.zap.m,'zbAtk3')}
+ else if(e.ai==='bagua'){const R=110*(el?1.35:1);G.e2fx.push({img:'e2-bagua',x:e.x,y:e.y,S:R*2.1,t:0,d:.3,flat:1,flash:1});sfx('e2baguaHit');if(Math.hypot(G.x-e.x,(G.y-e.y)/.62)<R)pHurt(e.dmg*E2C.bagua.m,'zbAtk2')}
+ else if(e.ai==='fire'){const n=el?2:1;for(let i=0;i<n;i++){const a=e.ca+(i-(n-1)/2)*.3;G.ep.push({x:e.x+Math.cos(a)*24,y:e.y-e.r*2.4,vx:Math.cos(a)*200,vy:Math.sin(a)*200,img:'e2-fireball',S:36,dmg:e.dmg*E2C.fire.m,life:2.4,boom:'e2-boom',face:1})}sfx('e2fire')}
+ else if(e.ai==='water'){G.ejet.push({x:e.x+Math.cos(e.ca)*20,y:e.y-e.r*1.8,a:e.ca,L:300*(el?1.2:1),w:26*(el?1.3:1),t:0,d:.45,dmg:e.dmg*E2C.water.m,hit:false});sfx('e2water')}}
 function e2Update(dt){if(!G)return false;
  for(let i=G.etel.length-1;i>=0;i--){const T=G.etel[i];T.t+=dt;if(T.src){T.x=T.src.x;T.y=T.src.y}if(T.t>=T.d)G.etel.splice(i,1)}
  for(let i=G.ep.length-1;i>=0;i--){const p=G.ep[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;p.rt=(p.rt||0)+dt;
-  if(Math.hypot(G.x-p.x,G.y-30-p.y)<19){G.ep.splice(i,1);G.e2fx.push({img:p.boom||'e2-spark',x:p.x,y:p.y,S:p.boom?70:46,t:0,d:.35});if(pHurt(p.dmg,'zbAtk2'))return true;continue}
+  if(Math.hypot(G.x-p.x,G.y-30-p.y)<19){G.ep.splice(i,1);if(p.boom)sfx('e2boom');G.e2fx.push({img:p.boom||'e2-spark',x:p.x,y:p.y,S:p.boom?70:46,t:0,d:.35});if(pHurt(p.dmg,'zbAtk2'))return true;continue}
   if(p.life<=0){if(p.boom)G.e2fx.push({img:p.boom,x:p.x,y:p.y,S:50,t:0,d:.3});G.ep.splice(i,1)}}
  for(let i=G.ejet.length-1;i>=0;i--){const J=G.ejet[i];J.t+=dt;
   if(!J.hit&&J.t>.05){const ex=J.x+Math.cos(J.a)*J.L*Math.min(1,J.t/.15),ey=J.y+Math.sin(J.a)*J.L*Math.min(1,J.t/.15),px=G.x-J.x,py=G.y-30-J.y,vx=ex-J.x,vy=ey-J.y,l2=vx*vx+vy*vy||1,u=Math.max(0,Math.min(1,(px*vx+py*vy)/l2)),qx=J.x+vx*u-G.x,qy=J.y+vy*u-(G.y-30);
@@ -3498,7 +3512,7 @@ function e2DrawTop(){if(!G||!G.ep)return;
  for(const f of G.e2fx)if(!f.flat){const p=f.t/f.d;e2Img(f.img,f.x,f.y,f.S*(.8+.3*p),f.S*(.8+.3*p),0,1-p*p)}}
 /* ===== 1006-Y 第二關首領 巨嬰慣老闆:近身跺腳震波、遠距離丟奶瓶玩具,血量一半暴走 ===== */
 function boss2Tick(e,dt,dx,dy,d){const B=e.b;B.t+=dt;B.cd-=dt;e.fl-=dt;e.at-=dt;e.ws=7;
- if(!B.p2&&e.hp<e.max*.5){B.p2=true;e.sp*=1.3;toast('😭 巨嬰慣老闆暴走大哭!');sfx('roar');sfx('impact');shake(9);hitStop(.15);B.cd=Math.min(B.cd,1)}
+ if(!B.p2&&e.hp<e.max*.5){B.p2=true;e.sp*=1.3;toast('😭 巨嬰慣老闆暴走大哭!');sfx('b2cry');sfx('impact');shake(9);hitStop(.15);B.cd=Math.min(B.cd,1)}
  const sp=e.sp*(G.bIntro>0?2:1);
  if(B.st==='walk'){if(d>e.r+30){e.x+=dx/d*sp*dt;e.y+=dy/d*sp*dt}
   if(B.cd<=0&&G.bIntro<=0){B.t=0;B.f1=0;if(d<260){B.st='stomp';e.at=e.ad=.95;e.aa='atk';sfx('roar')}else{B.st='throw';e.at=e.ad=.8;e.aa='cast'}B.cd=B.p2?2.1:3.1}}
@@ -3639,7 +3653,7 @@ function update(dt){
  const ch=CH[G.c];
  if(G.tr){trTick(dt)}else if(G.t<DUR){
   G.spawn+=dt*(BAL.spawn+G.t/BAL.spawnG);while(G.spawn>=1){G.spawn--;if(G.en.length<Q.cap)spawn(ENE[pick(ch.pool)],'n')}
-  if(G.t>=G.elite){G.elite+=BAL.elite;spawn(ch.elite?ENE[pick(ch.elite)]:pick(ELITE),'elite');toast('精英怪出現!');sfx('roar')}
+  if(G.t>=G.elite){G.elite+=BAL.elite;spawn(ch.elite?ENE[pick(ch.elite)]:pick(ELITE),'elite');toast('精英怪出現!');sfx('eliteRoar')}
  }else if(!G.boss){G.boss=true;const b=BOSS[CH[G.c].boss];if(!b){toast('撐過 3 分鐘,通關!');endRun(true);return}spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*(CH[G.c].bA||BAL.bossAtk))*mult();bossInit(be);be.b.k=CH[G.c].boss}
   combat(dt);projectiles(dt);
  const far=Math.hypot(W,H)*.9;
@@ -4046,10 +4060,11 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-D';
+const GBUILD='1007-G';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['🗺️','地圖操作調整','點關卡卡片改成查看怪物情報(還沒解鎖的關卡也能先看),按卡片上的「⚔️ 出擊」才會開始;第二關的 4 種精英怪也加進怪物情報'],
+const GNOTES=[['🔊','音效升級','第二關怪物攻擊、首領登場、精英怪出現、撿金幣、升級、抽到好車、按鈕、引擎聲,換成真實錄製的音效'],
+ ['🗺️','地圖操作調整','點關卡卡片改成查看怪物情報(還沒解鎖的關卡也能先看),按卡片上的「⚔️ 出擊」才會開始;第二關的 4 種精英怪也加進怪物情報'],
  ['💰','第二關獎勵提高','辦公大樓的金幣多 6 成、小怪掉裝備機率提高、精英怪可能掉 2 件且品質更好、首領掉 4 件且黃金框以上機率大增;首次通關獎金 2,000。情緒勒索改成地上浮現紫色愁雲'],
  ['👶','巨嬰慣老闆專屬裝備','打倒第二關首領有機會掉落:黃金奶嘴(巨嬰大哭)、慣老闆口水巾(情緒勒索)、搖搖奶瓶(奶瓶亂丟),第一次打倒保證掉一件。發火主管的丟火球、雷隊友的倒下動作也重畫了'],
  ['🏢','辦公大樓換新地板','第二關地板換成更乾淨的辦公室地磚,污漬變淡、分散,不會再一直重複'],
@@ -4252,6 +4267,23 @@ Object.assign(SFX,{
  spinKick:()=>{if(!S('tk_spin',.75,0,R_(.97,1.03)))SYN.punch();S('lowboom',.35,.02)},
  swish:()=>{S('tk_swish',.42,0,R_(.95,1.08))},
  ko:()=>{S('tk_ko',.55)}});
+/* 1007-F 換成小森平的真實音效;沒載到時退回原本的合成音 */
+Object.assign(SFX,{
+ e2zap:()=>{S('tk2_lightning',.55,0,R_(.95,1.05))||SYN.flash&&SYN.flash()},
+ e2fire:()=>{S('tk2_fire1',.6,0,R_(.95,1.05))||SYN.lighter()},
+ e2boom:()=>{S('tk2_game_explosion5',.55,0,R_(.92,1.08))||SYN.boom()},
+ e2bagua:()=>{S('tk2_dark_magic1',.55)||SYN.mystic()},
+ e2baguaHit:()=>{S('tk2_magic_wave4',.6)||SFX.impact()},
+ e2water:()=>{S('tk2_bubble_attack1',.6,0,R_(.95,1.05))||SYN.splat()},
+ b2cry:()=>{S('tk2_monster_grief',.7)||SYN.roar()},
+ eliteRoar:()=>{S('tk2_browbeat1',.65)||SYN.roar()},
+ bossRoar:()=>{S('tk2_devil_groaning1',.7)||SYN.roar()},
+ coins:()=>{S('tk2_coin03',.5,0,R_(.97,1.04))||SYN.coins()},
+ levelUp:()=>{S('tk2_powerup04',.6)||SYN.levelUp()},
+ goodPull:()=>{S('tk2_powerup09',.6)},
+ error:()=>{S('tk2_blip01',.5)||SYN.error()},
+ tab:()=>{S('tk2_select05',.45)||SYN.tab()},
+ engine:()=>{S('tk2_small_car_engine1',.55)||SYN.engine()}});
 Object.assign(SGAP,{impact:.12,hurtThud:.25,combo:.04});
 SFX.heart=()=>{const r=S('softH',.95,0,.62)&&S('soft',.75,.19,.58);T('sine',62,38,.13,r?.45:.7);T('sine',58,36,.11,r?.32:.5,.19);if(!r){T('sine',130,70,.16,.11);T('triangle',95,55,.12,.13);T('sine',120,65,.12,.1,.19);T('triangle',88,50,.1,.12,.19)}};SGAP.heart=.3;
 SFX.combo=()=>{const t=Math.min(8,G&&G.comboT2||1),f=NT(76+t*2);T('triangle',f,f,.13,.2,0,{rv:.35});T('sine',f*2,f*2,.11,.08,.05,{rv:.35});if(t>=4)T('triangle',f*1.5,f*1.5,.1,.08,.1,{rv:.35})};
