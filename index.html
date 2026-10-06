@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1005-ZZZE">
+<meta name="gbuild" content="1006-C">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -771,6 +771,7 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 .dusend .dupl{display:flex;flex-wrap:wrap;gap:6px;max-height:30vh;overflow:auto;padding:2px}
 .dusend .dupl button,.dusend .dustk button{padding:7px 12px;border-radius:999px;border:1px solid #556;background:#222a38;color:#e8ecf2;font-size:13px;font-weight:700}
 .dusend .dupl button.on,.dusend .dustk button.on{background:linear-gradient(#ffe08a,#e8a923);color:#3a2600;border-color:#ffd24a}
+.dusend .dupl button.poor{opacity:.45;cursor:not-allowed}.dusend .dupl button small{display:block;font-size:10px;font-weight:600;color:#ff9a8a}
 .dusend .dustk{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.dusend .dubtns{display:grid;grid-template-columns:1fr 2fr;gap:8px}
 .trres .trduelsent{text-align:center;font-size:12px;color:#ffe08a;padding:6px;border-radius:8px;background:rgba(255,210,74,.1)}
 .fnr .fnrv{grid-column:1/-1;justify-self:end;padding:4px 12px;font-size:12px;margin-top:2px}
@@ -786,6 +787,11 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 .fbox .fp .btn{padding:4px 6px!important;font-size:11.5px!important;min-height:0!important;white-space:nowrap}
 .fbox .fp .fbar{height:5px!important;margin:1px 0!important}.fbox .fp .fpadd span{font-size:22px!important}.fbox .fp .fpadd small{font-size:10.5px!important}
 .fbox .fp .finfo{display:grid;gap:2px;justify-items:center;width:100%}
+.ffoe{display:grid;gap:6px;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(229,48,58,.08);border:1px solid rgba(229,48,58,.3)}.ffoe .trlbh{display:flex;align-items:center;justify-content:space-between;gap:8px}.ffoe .trlbh b{color:#ff9a8a}.ffoe>small{font-size:11px}
+.foer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.05);font-size:13px}.foer small{display:block;color:#9aa4b2;font-size:11px}.foer.hot{background:rgba(255,170,60,.15);outline:1px solid rgba(255,170,60,.5)}.foer.hot small{color:#ffd9a0}.foer .btn{padding:6px 12px;font-size:13px}
+.fvrv{margin:-4px 0 6px;padding:6px 10px;border-radius:8px;background:rgba(229,48,58,.18);color:#ffd0c8;font-size:12px;text-align:center}
+#casT .trdaily{padding:8px 12px;border-radius:10px;background:rgba(255,210,74,.1);border:1px solid rgba(255,210,74,.3);font-size:12.5px;color:#ffe9b0;text-align:center;line-height:1.5}#casT .trdaily b{color:#ffd24a}
+#casT .trauto{font-size:11px;color:#7ee08a;font-weight:800}
 .flog{display:grid;gap:8px;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05)}.flog .trlbh{display:flex;align-items:center;justify-content:space-between;gap:8px}.flog .trlbh b{color:#ffe08a}
 .flog .trbtabs button{padding:5px 2px;font-size:12px}.flognew{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:#e5303a;color:#fff;font-size:11px;font-weight:900;vertical-align:2px}
 .flogl{display:grid;gap:4px;max-height:300px;overflow:auto}
@@ -798,6 +804,7 @@ header .annbtn{position:relative;display:inline-flex;align-items:center;gap:4px;
 .anndot{position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:#e5303a;box-shadow:0 0 0 2px #1a1f2b}
 .annbox{max-width:440px;width:94vw;box-sizing:border-box;display:grid;gap:8px}.annbox h2{margin:0;text-align:center}.annbody{max-height:58vh;overflow:auto;display:grid;gap:6px;align-content:start}
 .annr{display:grid;gap:1px;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.05);font-size:13px;line-height:1.4}.annr small{color:#9aa4b2;font-size:11px}
+.trres .trupl{text-align:center;font-size:12px;padding:6px;border-radius:8px;background:rgba(255,255,255,.05);color:#cfd6de}.trres .trupl.ok{color:#7ee08a;background:rgba(126,224,138,.1)}.trres .trupl.nofn,.trres .trupl.err{color:#ff9a8a;background:rgba(229,48,58,.1)}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1339,7 +1346,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1005-ZZZE</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1006-C</span></small>
   </div>
  </div>
 </div>
@@ -1407,6 +1414,7 @@ html.ios-app body{min-height:100vh}
      <div class="fgrid" id="fgrid"></div>
     </div>
     <div class="fguard" id="fguard"></div>
+    <div class="ffoe" id="ffoe" hidden></div>
     <div class="flog"><div class="trlbh"><b>📜 農場日誌 <span class="flognew" id="flognew" hidden></span></b><button class="btn trrf" id="flogread">全部已讀</button></div><div class="trbtabs" id="flogtabs"><button data-t="all" class="on">全部</button><button data-t="stolen">被偷</button><button data-t="steal">我偷</button><button data-t="mine">種植收成</button></div><div class="flogl" id="flogl"></div></div>
     <div class="fwb"><div class="trlbh"><b>🏆 本週偷菜榜</b><div class="trbtabs" id="fwbtabs"><button data-t="thieves" class="on">神偷榜</button><button data-t="victims">苦主榜</button></div></div><div class="trbbody" id="fwbl"></div><small class="muted">每週一 00:00 重新計算</small></div>
      <div class="fsteal">
@@ -1472,11 +1480,12 @@ html.ios-app body{min-height:100vh}
      <div class="dsign" id="trsign"><p>沒錢還賭債?</p><p class="b">那就拿命跑給列車追</p><small>— 站長名言 —</small></div>
      <div class="trbanner" id="trbanner" hidden><img id="trbnimg" alt=""><div class="trbt"><b>沒錢還賭債?</b><span>那就拿命跑給列車追</span></div></div>
      <div class="trbest" id="trbest"></div>
+     <div class="trdaily" id="trdaily"></div>
      <div class="trbtns"><button class="btn pri trgo" id="trgo">🚇 開始挑戰</button><button class="btn trduelb" id="trduelb">⚔️ 下戰帖</button></div>
-     <div class="trduelw"><div class="trlbh"><b>⚔️ 我的挑戰書</b><button class="btn trrf" id="trduelrf">🔄 更新狀態</button></div><div id="trduel"></div></div>
+     <div class="trduelw"><div class="trlbh"><b>⚔️ 我的挑戰書</b><span class="trauto">● 自動更新</span></div><div id="trduel"></div></div>
      <div class="trlbw"><div class="trlbh"><b>🏆 列車排行榜</b><div class="trbtabs" id="trtabs"><button data-t="day" class="on">今日</button><button data-t="all">歷史</button></div></div><div class="trbbody" id="trlb">讀取中…</div></div>
      <details class="trmore"><summary>📖 規則與五個等級</summary>
-     <div class="trrules"><b>規則</b><span>賭徒被丟到軌道區,上下是爬不上去的月台;不能攻擊,只能閃;只有一條命,碰到列車就出局,撐滿 2 分鐘通關</span><span>🐢 慢車停留久、⚡ 快車一閃就過,看清警示箭頭再跑</span><span>裝備、座駕都不算,大家同樣的移動速度</span></div>
+     <div class="trrules"><b>規則</b><span>賭徒被丟到軌道區,上下是爬不上去的月台;不能攻擊,只能閃;只有一條命,碰到列車就出局,撐滿 2 分鐘通關</span><span>🐢 慢車停留久、⚡ 快車一閃就過,看清警示箭頭再跑</span><span>裝備、座駕都不算,大家同樣的移動速度</span><span>每天前 5 場有金幣,之後變練習場(排行榜照算)</span></div>
      <div class="trtiers" id="trtiers"></div>
      </details>
     </div>
@@ -1881,7 +1890,7 @@ const DP={on:false,pot:null,log:[],busy:false,err:'',t:0};
 function dpH(){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;return h}
 const dpU=p=>ONLINE.supabaseUrl.replace(/\/+$/,'')+p;
 async function dpReq(path,body){const r=await fetch(dpU(path),body?{method:'POST',headers:dpH(),body:JSON.stringify(body)}:{headers:dpH()});
- if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}return r.json()}
+ if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const tx=await r.text();return tx?JSON.parse(tx):null}
 const dpNick=()=>(SAVE.pname||'匿名社畜').slice(0,12);
 /* 本機池底(claude.ai 版或連不上時) */
 function dpLocal(){if(SAVE.dpot==null)SAVE.dpot=1000;if(!SAVE.dlog)SAVE.dlog=[];return SAVE}
@@ -2097,12 +2106,15 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 /* ===== 1005-ZZM:賭徒下場 無限列車(純躲列車小遊戲) =====
    不能攻擊、沒有喪屍;一條命、撐 2 分鐘,五個等級(每班 +50/70/100/130/170);撐完 +400。裝備與座駕屬性不算,大家同樣的移動速度 */
 /* 1005-ZZZD:經濟調整 — 一條命(碰到列車就出局),每班金幣大幅降低 */
-const TR={win:500,dur:120,lim:250,hp:1};/* lim:月台上下邊界(只能在 ±250 之間移動) */
+const TR={win:500,dur:120,lim:250,hp:1,daily:5};
+const trTodayKey=()=>new Date(Date.now()+8*3600e3).toISOString().slice(0,10);
+function trDailyLeft(){const D=SAVE.trDaily;return(!D||D.d!==trTodayKey())?TR.daily:Math.max(0,TR.daily-(D.n||0))}
+function trDailyUse(){const k=trTodayKey();if(!SAVE.trDaily||SAVE.trDaily.d!==k)SAVE.trDaily={d:k,n:0};SAVE.trDaily.n++;save()}/* lim:月台上下邊界(只能在 ±250 之間移動) */
 const TRTAUNT=['欠芳芳的錢還沒還,先跑給列車追吧','賭輸了還想搭車?站長說:用跑的!','十賭九輸,剩下那一次是被列車撞','還債路上,請退到黃線後方'];
 function startTrain(){window.__TR=1;startRun(0)}
-function trInit(){try{trResetOld()}catch(e){}G.tr={hp:TR.hp,inv:0,nx:1.4,n:0,coins:0,last:0,duel:window.__DUEL||0};window.__DUEL=0;G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.ws={};G.ss={};G.evo={};
+function trInit(){try{trResetOld()}catch(e){}G.tr={hp:TR.hp,inv:0,nx:1.4,n:0,coins:0,last:0,duel:window.__DUEL||0};window.__DUEL=0;G.tr.prac=!G.tr.duel&&trDailyLeft()<=0;if(!G.tr.duel&&!G.tr.prac)trDailyUse();G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.ws={};G.ss={};G.evo={};
  G.S=Object.assign({},G.S,{spd:0,regen:0,hp:TR.hp,def:0,dr:0,sk:{}});G.hp=TR.hp;G.lanes=[];G.mod={n:'',d:''};try{$('modb').hidden=true}catch(e){}
- $('hch').textContent=G.tr.duel?'⚔️ 挑戰書對決':'🚇 賭徒下場 無限列車';toast(G.tr.duel?'⚔️ 挑戰賽開始!只比成績不給金幣,平手看誰閃得更驚險':'🚇 '+pickL(TRTAUNT));sfx('warn')}
+ $('hch').textContent=G.tr.duel?'⚔️ 挑戰書對決':G.tr.prac?'🏋️ 無限列車練習場':'🚇 賭徒下場 無限列車';toast(G.tr.duel?'⚔️ 挑戰賽開始!只比成績不給金幣,平手看誰閃得更驚險':G.tr.prac?'🏋️ 今天 '+TR.daily+' 場有獎場次已用完,這場是練習,不給金幣':'🚇 '+pickL(TRTAUNT));sfx('warn')}
 /* 1005-ZZP:總長 2 分鐘,五個等級 普通→困難→非常困難→地獄級別→終極煉獄;每班 50/70/100/130/170 */
 const TRT=[{to:15,nm:'普通',ic:'🟡',coin:6,gap:1.7,n:[1,2,2],warn:1.05,sp:1.12,vert:.15,slow:.2,fast:.25},
  {to:30,nm:'困難',ic:'🟠',coin:8,gap:1.5,n:[2,2,3],warn:.95,sp:1.2,vert:.35,slow:.25,fast:.3},
@@ -2136,7 +2148,7 @@ function trTick(dt){const T=G.tr;if(!T||G.over)return;T.inv-=dt;T.nx-=dt;G.y=Mat
   if(!L.hit&&Math.abs(cross-L.p)<(L.v?36:40)&&along>lo-12&&along<hi+12){L.hit=true;
    if(T.inv<=0){T.hp--;T.inv=1.2;G.hp=T.hp;G.hurt=.3;sfx('hurt');sfx('hurtThud');sfx('impact');shake(12);hitStop(.08);
     if(T.hp<=0){trEnd(false);return}toast(T.hp===1?'💔 只剩最後一條命!':'💥 被列車撞到了!')}}
-  if(!L.done&&!L.hit&&(L.dir>0?tail>along+20:tail<along-20)){L.done=true;T.n++;G.kills=T.n;if(L.md!=null&&L.md<130)(T.gaps=T.gaps||[]).push(L.md);if(!T.duel){const cc=trLevel(G.t).coin;T.coins+=cc;G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'+'+cc,t:0,d:.8})}else if(L.md!=null&&L.md<70)G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'驚險!',t:0,d:.7})}
+  if(!L.done&&!L.hit&&(L.dir>0?tail>along+20:tail<along-20)){L.done=true;T.n++;G.kills=T.n;if(L.md!=null&&L.md<130)(T.gaps=T.gaps||[]).push(L.md);if(!T.duel&&!T.prac){const cc=trLevel(G.t).coin;T.coins+=cc;G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'+'+cc,t:0,d:.8})}else if(L.md!=null&&L.md<70)G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'驚險!',t:0,d:.7})}
   if((L.dir>0?tail>(L.v?G.y+HH:G.x+HW):tail<(L.v?G.y-HH:G.x-HW)))G.trL.splice(i,1)}}
 function trDrawGround(){
  /* 1005-ZZV:場景改成「賭徒掉到軌道區」:中間是碎石軌道區(玩家活動範圍),上下是月台(爬不上去);列車只在軌道上跑 */
@@ -2190,15 +2202,15 @@ function trDrawTop(){trDrawTrains(false);
  const warnNow=(G.trL||[]).some(L=>!L.go),k=warnNow?'捷運站長喪屍-cast-'+(1+Math.floor(G.t*10)%5):'捷運站長喪屍-walk-1';
  if(IMG[k])drawImg(k,'👮',G.x+W/2-62,G.y-H/2+250,120,true,0,.95);
  if(warnNow){ctx.font='bold 18px system-ui';ctx.textAlign='center';ctx.fillStyle='#ffe08a';ctx.strokeStyle='rgba(0,0,0,.7)';ctx.lineWidth=4;ctx.strokeText('嗶——!',G.x+W/2-62,G.y-H/2+120);ctx.fillText('嗶——!',G.x+W/2-62,G.y-H/2+120)} }
-function trEnd(win){if(!G||G.over)return;const T=G.tr;G.over=true;running=false;joy=null;try{trSubmit(Math.min(TR.dur,G.t),T.n)}catch(e){}if(T.duel){const gg=T.gaps&&T.gaps.length?T.gaps.reduce((a,b)=>a+b,0)/T.gaps.length:999;socRpc('duel_submit',{p_id:T.duel,p_me:fmId(),p_t:+Math.min(TR.dur,G.t).toFixed(2),p_n:T.n,p_g:+gg.toFixed(1)}).then(()=>duLoad(true)).catch(()=>{})}
- const gross=T.duel?0:T.coins+(win?TR.win:0),tax=gross>0?taxIncome(gross):0;T.g=T.gaps&&T.gaps.length?T.gaps.reduce((a,b)=>a+b,0)/T.gaps.length:999;SAVE.coin=Math.max(0,(SAVE.coin||0)+gross-tax);
+function trEnd(win){if(!G||G.over)return;const T=G.tr;G.over=true;running=false;joy=null;setTimeout(()=>{try{trSubmit(Math.min(TR.dur,G.t),T.n)}catch(e){}},0);if(T.duel){const gg=T.gaps&&T.gaps.length?T.gaps.reduce((a,b)=>a+b,0)/T.gaps.length:999;socRpc('duel_submit',{p_id:T.duel,p_me:fmId(),p_t:+Math.min(TR.dur,G.t).toFixed(2),p_n:T.n,p_g:+gg.toFixed(1)}).then(()=>duLoad(true)).catch(()=>{})}
+ const gross=(T.duel||T.prac)?0:T.coins+(win?TR.win:0),tax=gross>0?taxIncome(gross):0;T.g=T.gaps&&T.gaps.length?T.gaps.reduce((a,b)=>a+b,0)/T.gaps.length:999;SAVE.coin=Math.max(0,(SAVE.coin||0)+gross-tax);
  const b=SAVE.trBest||{t:0,n:0};const nb=G.t>b.t+.01||(Math.abs(G.t-b.t)<.01&&T.n>b.n);if(nb)SAVE.trBest={t:Math.min(TR.dur,G.t),n:T.n};save();
  $('otitle').textContent=win?'🎉 撐過無限列車!賭債暫時跑掉了':pickL(['被列車撞飛…賭債還是沒還完','💥 下車!這班不收賭徒','站長:請退到黃線後方(已經來不及了)']);
  {const lv=trLevel(Math.min(G.t,TR.dur-.01)),tt=Math.min(TR.dur,G.t),bt=SAVE.trBest;
   $('ores').innerHTML='<div class="trres"><div class="trhero"><small>撐過時間</small><b>'+fmtT(tt)+'</b><span class="trlv">'+(win?'🏁 撐完全程':'到達 '+lv.ic+' '+lv.nm)+'</span>'+(nb?'<span class="trnew">🆕 個人新紀錄!</span>':'')+'</div>'+
-  '<div class="trrows"><div><span>🚆 閃過列車</span><b>'+T.n+' 班</b></div>'+(T.duel?'<div><span>📏 平均閃避距離 <small>平手時越近越強</small></span><b>'+(T.g>=999?'—':Math.round(T.g)+' 公分')+'</b></div><div><span>⚔️ 挑戰賽</span><b>不計金幣,輸贏看戰帖</b></div>':'<div><span>💰 列車金幣</span><b class="g">+'+fmtC(T.coins)+'</b></div>'+(win?'<div><span>🏁 通關獎金</span><b class="g">+'+fmtC(TR.win)+'</b></div>':''))+
-  (tax>0?'<div><span>🧾 芳芳收稅 <small>→ 射龍門池底</small></span><b class="r">−'+fmtC(tax)+'</b></div>':'')+(T.duel?'':'<div class="tot"><span>實得金幣</span><b>+'+fmtC(gross-tax)+'</b></div>')+'</div>'+
-  '<div class="trbestl">個人最佳 '+fmtT(bt.t)+' · 閃過 '+bt.n+' 班</div>'+(T.duel?'<div class="trduelsent">⚔️ 挑戰書成績已送出,到賭場「無限列車」看結果</div>':'')+
+  '<div class="trrows"><div><span>🚆 閃過列車</span><b>'+T.n+' 班</b></div>'+(T.prac?'<div><span>🏋️ 練習場</span><b>不計金幣(明天再領)</b></div>':T.duel?'<div><span>📏 平均閃避距離 <small>平手時越近越強</small></span><b>'+(T.g>=999?'—':Math.round(T.g)+' 公分')+'</b></div><div><span>⚔️ 挑戰賽</span><b>不計金幣,輸贏看戰帖</b></div>':'<div><span>💰 列車金幣</span><b class="g">+'+fmtC(T.coins)+'</b></div>'+(win?'<div><span>🏁 通關獎金</span><b class="g">+'+fmtC(TR.win)+'</b></div>':''))+
+  (tax>0?'<div><span>🧾 芳芳收稅 <small>→ 射龍門池底</small></span><b class="r">−'+fmtC(tax)+'</b></div>':'')+((T.duel||T.prac)?'':'<div class="tot"><span>實得金幣</span><b>+'+fmtC(gross-tax)+'</b></div><div><span>🎟️ 今日有獎場次</span><b>剩 '+trDailyLeft()+' / '+TR.daily+'</b></div>')+'</div>'+
+  '<div class="trbestl">個人最佳 '+fmtT(bt.t)+' · 閃過 '+bt.n+' 班</div><div class="trupl" id="trupl">⏳ 成績上傳排行榜中…</div>'+(T.duel?'<div class="trduelsent">⚔️ 挑戰書成績已送出,到賭場「無限列車」看結果</div>':'')+
   '<p class="trtaunt">'+(win?'芳芳:「跑完全程?下次記得留點錢搭計程車」':'芳芳:「跑不贏列車,就別跟池底賭了」')+'</p>'+
   '<button class="btn" onclick="trBoard()">🏆 看列車排行榜</button></div>';
   $('olh').hidden=true;$('oloot').hidden=true;$('oloot').innerHTML='';$('over').classList.add('trover');$('replay').textContent='🚇 再挑戰一次'}
@@ -2207,7 +2219,8 @@ function trEnd(win){if(!G||G.over)return;const T=G.tr;G.over=true;running=false;
 /* ===== 列車排行榜(今日、歷史);每人只留最佳一筆,先比撐過時間、再比閃過班數 ===== */
 const trDay=()=>new Date(Date.now()+8*3600e3).toISOString().slice(0,10);
 async function trSubmit(t,n){const r={t:+t.toFixed(2),n,d:trDay()};const L=SAVE.trRuns=SAVE.trRuns||[];L.push(Object.assign({nick:dpNick()},r));SAVE.trRuns=L.sort((a,b)=>b.t-a.t||b.n-a.n).slice(0,20);save();
- if(DP.on)try{await dpReq('/rest/v1/rpc/train_submit',{p_id:fmId(),p_nick:dpNick(),p_t:r.t,p_n:n})}catch(e){}TRLB.t={}}
+ let st='local';if(DP.on){try{await dpReq('/rest/v1/rpc/train_submit',{p_id:fmId(),p_nick:dpNick(),p_t:r.t,p_n:n,p_ver:2});st='ok'}catch(e){const m=String((e&&e.code)||'')+' '+String((e&&e.msg)||'');st=/404|PGRST202|Could not find/i.test(m)?'nofn':'err';console.warn('train_submit',e)}}
+ TRLB.t={};const el=$('trupl');if(el){el.className='trupl '+st;el.textContent=st==='ok'?'🏆 成績已上傳列車排行榜':st==='nofn'?'⚠️ 排行榜上傳失敗:伺服器還沒更新(請管理員執行最新的累積 SQL)':st==='err'?'⚠️ 排行榜上傳失敗:連線問題,稍後再試':'🧪 測試版/單機模式,成績只記在本機'}return st}
 const TRLB={tab:'day',d:{},t:{}};
 async function trLbRows(tab){if(TRLB.d[tab]&&Date.now()-(TRLB.t[tab]||0)<20000)return TRLB.d[tab];let rows;
  if(DP.on)rows=tab==='day'?await dpReq('/rest/v1/train_scores?select=nick,t:day_t,n:day_n&day=eq.'+trDay()+'&order=day_t.desc,day_n.desc&limit=20'):await dpReq('/rest/v1/train_scores?select=nick,t:best_t,n:best_n&order=best_t.desc,best_n.desc&limit=20');
@@ -2219,11 +2232,11 @@ async function trLbInto(el,tab){el.textContent='讀取中…';let rows;const me=
 function trArtReady(){if(ART['tr-banner']&&$('trbnimg')){$('trbnimg').src=ART['tr-banner'];$('trbanner').hidden=false;$('trsign').hidden=true}document.querySelectorAll('#castabs .cti[data-k="tr-icon"]').forEach(e=>{if(ART['tr-icon'])e.innerHTML='<img src="'+ART['tr-icon']+'" alt="">'});trDrawGround.tp=null;trDrawGround.gp=null}
 /* 1005-ZZZE:玩法改版(一條命、新金幣),舊的列車紀錄全部清空重新開始 */
 function trResetOld(){if(SAVE&&SAVE.trVer!==2){delete SAVE.trBest;delete SAVE.trRuns;SAVE.trVer=2;save();TRLB.d={};TRLB.t={}}}
-function trPanel(){try{trResetOld()}catch(e){}try{trArtReady()}catch(e){}if(SAVE.trBest&&SAVE.trBest.t>TR.dur+.01){delete SAVE.trBest;save()}
+function trPanel(){try{trResetOld()}catch(e){}{const L=trDailyLeft(),el=$('trdaily');if(el)el.innerHTML=L>0?'🎟️ 今日有獎場次 <b>'+L+' / '+TR.daily+'</b> · 用完後變練習場(不給金幣,排行榜照算)':'🏋️ 今天的有獎場次用完了,現在是<b>練習場</b>(不給金幣,排行榜照算),明天 00:00 恢復';const g=$('trgo');if(g)g.innerHTML=L>0?'🚇 開始挑戰':'🏋️ 進練習場'}try{trArtReady()}catch(e){}if(SAVE.trBest&&SAVE.trBest.t>TR.dur+.01){delete SAVE.trBest;save()}
  const b=SAVE.trBest;$('trbest').innerHTML=b?'<small>我的最佳</small><b>'+fmtT(b.t)+'</b><span>閃過 '+b.n+' 班 · '+(b.t>=TR.dur-.01?'✅ 撐完全程':'到達 '+trLevel(b.t).ic+trLevel(b.t).nm)+'</span>':'<small>我的最佳</small><b>—</b><span>還沒挑戰過</span>';
  let a=0;$('trtiers').innerHTML='<b>五個等級</b>'+TRT.map(v=>{const s=a,e=Math.min(v.to,TR.dur);a=e;return'<div class="trt"><span>'+v.ic+' '+v.nm+'</span><span class="muted">'+fmtT(s)+'～'+fmtT(e)+'</span><b>每班 +'+v.coin+'</b></div>'}).join('')+'<div class="trt fin"><span>🏁 撐完 2 分鐘</span><span></span><b>+'+TR.win+'</b></div>';
  document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===TRLB.tab));trLbInto($('trlb'),TRLB.tab);duRender();duLoad(false)}
-$('trgo').onclick=()=>{audioUnlock();startTrain()};$('trduelb').onclick=()=>{audioUnlock();duSend()};$('trduelrf').onclick=()=>{sfx('tab');duLoad(true)};
+$('trgo').onclick=()=>{audioUnlock();startTrain()};$('trduelb').onclick=()=>{audioUnlock();duSend()};
 $('trtabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;TRLB.tab=b.dataset.t;sfx('tab');document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x===b));trLbInto($('trlb'),TRLB.tab)};
 async function trBoard(){sfx('open');const ov=document.createElement('div');ov.className='ov trbov';
  ov.innerHTML='<div class="box trbbox"><h2>🏆 列車排行榜</h2><div class="trbtabs"><button data-t="day" class="on">今日</button><button data-t="all">歷史</button></div><div class="trbbody" id="trbb"></div><button class="btn" data-x="1">關閉</button></div>';
@@ -2241,26 +2254,39 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 /* --- 1005-ZZZA 農場日誌:自己的種植/收成/擴建/站崗記在本機,偷菜相關從伺服器抓,合併成一條時間線 --- */
 const FLOG={tab:'all',srv:[],t:0};
 function flogAdd(e){const L=SAVE.flog=SAVE.flog||[];L.unshift(Object.assign({t:Date.now()},e));if(L.length>120)L.length=120;save();if($('flogl'))flogRender()}
-const FLK={stolen:['😡','down'],scaredme:['🛡️','up'],steal:['🧺','up'],scared:['💦',''],harvest:['🌾','up'],plant:['🌱',''],guard:['🛡️',''],expand:['🧱','']};
+const FLK={revenge:['⚔️','up'],revenged:['😱','down'],stolen:['😡','down'],scaredme:['🛡️','up'],steal:['🧺','up'],scared:['💦',''],harvest:['🌾','up'],plant:['🌱',''],guard:['🛡️',''],expand:['🧱','']};
 function flogItems(){const loc=(SAVE.flog||[]).map(e=>Object.assign({},e));const keys=new Set(loc.map(e=>e.k+'|'+(e.who||'')+'|'+(e.crop||'')+'|'+Math.round(e.t/60000)));
- for(const r of FLOG.srv){const t=new Date(r.t).getTime(),k=r.mine?(r.kind==='scared'?'scared':'steal'):(r.kind==='scared'?'scaredme':'stolen'),who=r.mine?r.victim_nick:r.thief_nick;const key=k+'|'+(who||'')+'|'+(r.crop||'')+'|'+Math.round(t/60000);if(keys.has(key))continue;keys.add(key);loc.push({t,k,who,crop:r.crop,v:+r.value||0})}
+ for(const r of FLOG.srv){const t=new Date(r.t).getTime(),k=r.mine?(r.kind==='scared'?'scared':r.kind==='revenge'?'revenge':'steal'):(r.kind==='scared'?'scaredme':r.kind==='revenge'?'revenged':'stolen'),who=r.mine?r.victim_nick:r.thief_nick;const key=k+'|'+(who||'')+'|'+(r.crop||'')+'|'+Math.round(t/60000);if(keys.has(key))continue;keys.add(key);loc.push({t,k,who,crop:r.crop,v:+r.value||0})}
  return loc.sort((a,b)=>b.t-a.t)}
 function flogText(e){const c=CROP[e.crop]||null,cn=c?c.n:'作物',w='<b>'+escH(e.who||'神秘同事')+'</b>';
- switch(e.k){case'stolen':return w+' 採走了你的 '+cn;case'scaredme':return w+' 想偷你的菜,被守衛皮過敏擋下了';case'steal':return'你採走了 '+w+' 的 '+cn;case'scared':return'你去偷 '+w+' 的菜,被守衛皮過敏擋下';
+ switch(e.k){case'revenge':return'⚔️ 報仇成功!你採走了 '+w+' 的 '+cn;case'revenged':return'你偷過 '+w+',被他報仇了:採走你的 '+cn;case'stolen':return w+' 採走了你的 '+cn;case'scaredme':return w+' 想偷你的菜,被守衛皮過敏擋下了';case'steal':return'你採走了 '+w+' 的 '+cn;case'scared':return'你去偷 '+w+' 的菜,被守衛皮過敏擋下';
   case'harvest':return'收成 '+cn;case'plant':return'種下 '+cn;case'guard':return'付站崗費,守衛皮過敏站崗 '+(e.h||8)+' 小時';case'expand':return'擴建到 '+(e.n||'?')+' 塊地';default:return e.k}}
 function flogRender(){const el=$('flogl');if(!el)return;const tab=FLOG.tab,all=flogItems();
- const L=all.filter(e=>tab==='all'||(tab==='stolen'&&(e.k==='stolen'||e.k==='scaredme'))||(tab==='steal'&&(e.k==='steal'||e.k==='scared'))||(tab==='mine'&&(e.k==='harvest'||e.k==='plant'||e.k==='guard'||e.k==='expand'))).slice(0,60);
+ const L=all.filter(e=>tab==='all'||(tab==='stolen'&&(e.k==='stolen'||e.k==='scaredme'||e.k==='revenged'))||(tab==='steal'&&(e.k==='steal'||e.k==='scared'||e.k==='revenge'))||(tab==='mine'&&(e.k==='harvest'||e.k==='plant'||e.k==='guard'||e.k==='expand'))).slice(0,60);
  document.querySelectorAll('#flogtabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));
  const seen=SAVE.flogSeen||0,nNew=all.filter(e=>(e.k==='stolen'||e.k==='scaredme')&&e.t>seen).length;const bd=$('flognew');if(bd){bd.hidden=!nNew;bd.textContent=nNew+' 筆新紀錄'}
- el.innerHTML=L.length?L.map(e=>{const f=FLK[e.k]||['•',''],sign=e.k==='stolen'||e.k==='plant'||e.k==='guard'||e.k==='expand'?'−':'+',img=e.crop&&ART['fp-'+e.crop]?'<img src="'+ART['fp-'+e.crop]+'" alt="">':f[0];
+ el.innerHTML=L.length?L.map(e=>{const f=FLK[e.k]||['•',''],sign=e.k==='stolen'||e.k==='revenged'||e.k==='plant'||e.k==='guard'||e.k==='expand'?'−':'+',img=e.crop&&ART['fp-'+e.crop]?'<img src="'+ART['fp-'+e.crop]+'" alt="">':f[0];
   return'<div class="flr'+(e.t>seen&&(e.k==='stolen'||e.k==='scaredme')?' new':'')+'"><span class="fli">'+img+'</span><span class="flt">'+flogText(e)+'<small>'+dpAgo(new Date(e.t).toISOString())+'</small></span>'+(e.v?'<b class="'+(sign==='+'?'up':'down')+'">'+sign+fmtC(e.v)+'</b>':'<span></span>')+(e.k==='stolen'||e.k==='scaredme'?'<button class="btn fnrv" data-rv="'+escH(e.who||'')+'">⚔️ 報仇</button>':'')+'</div>'}).join(''):'<p class="muted">'+({all:'還沒有任何紀錄',stolen:'還沒有人偷過你的菜',steal:'你還沒偷過別人的菜',mine:'還沒有種植或收成紀錄'})[tab]+'</p>'}
-async function flogLoad(force){if(!SOC.on())return flogRender();if(!force&&Date.now()-FLOG.t<60000)return flogRender();FLOG.t=Date.now();try{FLOG.srv=await socRpc('farm_my_log',{p_id:fmId()})||[]}catch(e){}flogRender()}
+async function flogLoad(force){if(!SOC.on())return flogRender();if(!force&&Date.now()-FLOG.t<60000)return flogRender();FLOG.t=Date.now();try{FLOG.srv=await socRpc('farm_my_log',{p_id:fmId()})||[];for(const r of FLOG.srv)if(!r.mine&&r.kind!=='scared')foeAdd(r.thief_nick,new Date(r.t).getTime())}catch(e){}flogRender();foeRender()}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#flogtabs [data-t]');if(b){FLOG.tab=b.dataset.t;sfx('tab');flogRender();return}
  if(e.target.closest&&e.target.closest('#flogread')){SAVE.flogSeen=Date.now();save();flogRender()}});
 /* 被皮過敏擋下的那一塊:同一批作物(同一次種植)就不能再偷,只能採別塊成熟的,或等主人收成後重種 */
 const fmBlkKey=(id,i,pl)=>id+'|'+i+'|'+(pl&&pl.p||0);
 function fmMarkBlocked(id,plots){if(!plots)return;const B=SAVE.fblk||{},now=Date.now();for(const k in B)if(now-B[k]>3*864e5)delete B[k];
  document.querySelectorAll('#fvgrid [data-a="pick"]').forEach(b=>{const i=+b.dataset.i;if(B[fmBlkKey(id,i,plots[i])]){b.disabled=true;b.classList.add('fblk');b.innerHTML='🛡️ 被擋下了'}})}
+/* --- 1005-ZZZG 仇人名單:偷你的人列入 24 小時;他的作物成熟會通知你;報仇時無視守衛、不收贓款稅(一次) --- */
+const FOE={ttl:864e5,poll:0};
+function foeList(){const L=SAVE.foes||{},now=Date.now();for(const k in L)if(now-L[k].t>FOE.ttl)delete L[k];return L}
+function foeAdd(nick,t){if(!nick)return;const L=foeList(),k=String(nick);t=t||Date.now();if(Date.now()-t>FOE.ttl)return;if(!L[k]||L[k].t<t)L[k]=Object.assign(L[k]||{},{nick:k,t});SAVE.foes=L;save()}
+const foeActive=nick=>!!(nick&&foeList()[nick]);
+async function foePoll(){if(!FM.on||!SOC.on())return;const L=foeList(),ks=Object.keys(L).slice(0,6);if(!ks.length)return;
+ for(const k of ks){const f=L[k];try{if(!f.id){f.id=await socFindId(k);if(!f.id)continue}const r=await fmRpc('farm_view',{p_target:f.id});if(!r||!r.plots){f.ripe=0;continue}
+   const rp=r.plots.slice(0,r.size).map((p,i)=>({p,i})).filter(o=>fmState(o.p).k==='ripe');f.ripe=rp.length;
+   const key=rp.map(o=>o.i+':'+o.p.p).join(',');if(rp.length&&key!==f.nk){f.nk=key;const c=CROP[rp[0].p.c];toast('😈 仇人 '+k+' 的'+(c?c.n:'作物')+'成熟了!快去報仇');sfx('warn')}}catch(e){}}
+ SAVE.foes=L;save();foeRender()}
+function foeRender(){const el=$('ffoe');if(!el)return;const L=Object.values(foeList()).sort((a,b)=>(b.ripe||0)-(a.ripe||0)||b.t-a.t);if(!L.length){el.hidden=true;return}el.hidden=false;
+ el.innerHTML='<div class="trlbh"><b>😈 仇人名單</b><small class="muted">偷你的人保留 24 小時</small></div>'+L.map(f=>'<div class="foer'+(f.ripe?' hot':'')+'"><div><b>'+escH(f.nick)+'</b><small>'+(f.ripe?'🔥 有 '+f.ripe+' 塊作物成熟了!':'作物還沒成熟,成熟會通知你')+' · 剩 '+Math.max(1,Math.ceil((FOE.ttl-(Date.now()-f.t))/3600e3))+' 小時</small></div><button class="btn'+(f.ripe?' pri':'')+'" data-rv="'+escH(f.nick)+'">⚔️ 報仇</button></div>').join('')+'<small class="muted">報仇時無視他的皮過敏守衛、不收贓款稅(每個仇人一次)</small>'}
+setInterval(()=>{try{if(SAVE&&FM.on&&document.visibilityState==='visible'&&Date.now()-FOE.poll>120000){FOE.poll=Date.now();foePoll()}}catch(e){}},5000);
 /* --- 本週偷菜榜 --- */
 const FWB={tab:'thieves',d:null,t:0};
 async function fwbRender(force){const el=$('fwbl');if(!el)return;if(!SOC.on()){el.innerHTML='<p class="muted">網頁版才有偷菜榜</p>';return}
@@ -2285,7 +2311,7 @@ function duState(d){const me=duMine(d),opp=me?d.b_nick:d.a_nick,myT=me?d.a_t:d.b
  if((d.status==='declined'||d.status==='expired')&&me)pay=d.stake;
  return{me,opp,myT,myN,opT,opN,claimed,started,res,pay}}
 function duAction(d){const s=duState(d);if(d.status==='pending'&&!s.me)return'reply';if(d.status==='accepted'&&!s.started)return'play';if((d.status==='done'||d.status==='declined'||d.status==='expired')&&!s.claimed&&s.pay>0)return'claim';return''}
-async function duLoad(force){if(!SOC.on())return;if(DU.busy)return;if(!force&&Date.now()-DU.t<20000)return;DU.busy=true;try{DU.list=await socRpc('duel_list',{p_me:fmId()})||[];DU.t=Date.now();DU.err=''}catch(e){DU.err=e}DU.busy=false;duRender();duBadge()}
+async function duLoad(force){if(!SOC.on())return;if(DU.busy)return;if(!force&&Date.now()-DU.t<2500)return;DU.busy=true;try{DU.list=await socRpc('duel_list',{p_me:fmId()})||[];DU.t=Date.now();DU.err=''}catch(e){DU.err=e}DU.busy=false;duRender();duBadge()}
 function duBadge(){const n=(DU.list||[]).filter(d=>duAction(d)).length,b=document.querySelector('#castabs [data-c="train"]');if(!b)return;let s=b.querySelector('.cbadge');if(!n){if(s)s.remove();return}if(!s){s=document.createElement('i');s.className='cbadge';b.appendChild(s)}s.textContent=n}
 function duRender(){const el=$('trduel');if(!el)return;if(!SOC.on()){el.innerHTML='<p class="muted">網頁版才能發挑戰書</p>';return}
  if(DU.err){el.innerHTML='<p class="muted">'+(/404|PGRST|does not exist|function/i.test(String((DU.err&&DU.err.code)||'')+String((DU.err&&DU.err.msg)||''))?'挑戰書需要伺服器更新,請管理員執行 1005-ZZS 的 SQL':'讀取失敗,稍後再試')+'</p>';return}
@@ -2294,33 +2320,39 @@ function duRender(){const el=$('trduel');if(!el)return;if(!SOC.on()){el.innerHTM
   if(d.status==='pending')line=s.me?'等 <b>'+escH(s.opp)+'</b> 接受…':'<b>'+escH(s.opp)+'</b> 向你下戰帖!';
   else if(d.status==='accepted')line=!s.started?'對決 <b>'+escH(s.opp)+'</b>,輪到你出賽':(s.opT==null?'你跑了 '+fmtT(s.myT||0)+',等 <b>'+escH(s.opp)+'</b> 出賽':'等待結算…');
   else if(d.status==='done'){cls=s.res;{const myG=s.me?d.a_g:d.b_g,opG=s.me?d.b_g:d.a_g,same=(s.myT||0)===(s.opT||0),gs=g=>g==null||g>=999?'—':Math.round(g)+' 公分';line=(s.res==='win'?'🏆 贏了 ':s.res==='lose'?'💀 輸給 ':'🤝 平手 ')+'<b>'+escH(s.opp)+'</b><small>你 '+fmtT(s.myT||0)+(same?' · 閃避 '+gs(myG):'')+' ・ 對手 '+fmtT(s.opT||0)+(same?' · 閃避 '+gs(opG):'')+(same?'(時間一樣,比誰閃得更近)':'')+'</small>'}}
+  else if(d.status==='cancelled')line=s.me?'你取消了對 <b>'+escH(s.opp)+'</b> 的戰帖<small>押金已退回</small>':'<b>'+escH(s.opp)+'</b> 取消了戰帖';
   else line=s.me?'<b>'+escH(s.opp)+'</b> '+(d.status==='declined'?'拒絕了戰帖':'沒有回應,戰帖逾時'):'你'+(d.status==='declined'?'拒絕了':'錯過了')+' <b>'+escH(s.opp)+'</b> 的戰帖';
+  if(d.status==='pending'&&s.me)btns='<button class="btn" data-du="cancel" data-id="'+d.id+'">取消戰帖</button>';
   if(act==='reply')btns='<button class="btn pri" data-du="ok" data-id="'+d.id+'">接受<small>付 '+st+'</small></button><button class="btn" data-du="no" data-id="'+d.id+'">拒絕</button>';
   else if(act==='play')btns='<button class="btn pri" data-du="play" data-id="'+d.id+'">🚇 出賽</button>';
   else if(act==='claim')btns='<button class="btn pri" data-du="claim" data-id="'+d.id+'">領取<small>+'+fmtC(s.pay)+'</small></button>';
   return'<div class="durow '+cls+'"><div class="dul"><span class="dus">押 '+st+'</span><span>'+line+'</span></div>'+(btns?'<div class="dub">'+btns+'</div>':'')+'</div>'}).join('')}
 document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.closest('[data-du]');if(!b||b.disabled)return;audioUnlock();const id=+b.dataset.id,d=(DU.list||[]).find(x=>x.id==id);if(!d)return;const a=b.dataset.du;
  if(a==='ok'){if((SAVE.coin||0)<d.stake){sfx('error');toast('金幣不夠,接受需要 '+fmtC(d.stake));return}b.disabled=true;try{const r=await socRpc('duel_reply',{p_id:id,p_me:fmId(),p_ok:true});if(r==='accepted'){SAVE.coin-=d.stake;save();renderHome();sfx('chips');toast('⚔️ 接受挑戰!按「出賽」開跑')}else toast('這張戰帖已經失效')}catch(err){toast('連線失敗')}duLoad(true)}
+ else if(a==='cancel'){ask('確定要取消對 '+d.b_nick+' 的戰帖嗎?\n押金 '+fmtC(d.stake)+' 會退回給你。',async()=>{b.disabled=true;try{const amt=+(await socRpc('duel_cancel',{p_id:id,p_me:fmId()}))||0;if(amt>0){SAVE.coin=(SAVE.coin||0)+amt;save();renderHome();sfx('coins');toast('↩️ 戰帖已取消,押金 +'+fmtC(amt)+' 退回')}else toast('這張戰帖已經被接受或失效,無法取消')}catch(err){toast(/function|404|PGRST/.test(String((err&&err.msg)||'')+String((err&&err.code)||''))?'取消失敗:伺服器還沒更新':'連線失敗,稍後再試')}duLoad(true)})}
  else if(a==='no'){b.disabled=true;try{await socRpc('duel_reply',{p_id:id,p_me:fmId(),p_ok:false})}catch(err){}duLoad(true)}
  else if(a==='play'){ask('這場挑戰只能跑一次,開始後中途離開就以當下成績計算。\n準備好了嗎?',async()=>{try{const ok=await socRpc('duel_start',{p_id:id,p_me:fmId()});if(!ok){toast('這場已經跑過了');duLoad(true);return}window.__DUEL=id;startTrain()}catch(err){toast('連線失敗')}})}
  else if(a==='claim'){b.disabled=true;try{const amt=+(await socRpc('duel_claim',{p_id:id,p_me:fmId()}))||0;if(amt>0){SAVE.coin=(SAVE.coin||0)+amt;save();renderHome();sfx('casinoWin');toast('💰 領取 +'+fmtC(amt)+' 金幣')}}catch(err){toast('連線失敗')}duLoad(true)}});
 async function duSend(){if(!SOC.on()){toast('網頁版才能發挑戰書');return}sfx('open');const ov=document.createElement('div');ov.className='ov trbov';
  ov.innerHTML='<div class="box trbbox dusend"><h2>⚔️ 下戰帖</h2><p class="muted" style="margin:0;text-align:center;font-size:12px">雙方各押金幣、各跑一場無限列車(挑戰賽不計列車金幣),撐比較久的人贏走 1.8 倍(一成進射龍門池底);時間一樣就比誰閃得更驚險</p>'+
   '<b class="dusub">1. 挑一位同事</b><input class="dusearch" id="dusq" placeholder="🔍 搜尋暱稱"><div class="dupl" id="dupl">讀取中…</div>'+
-  '<b class="dusub">2. 押多少</b><div class="dustk" id="dustk">'+[1000,5000,10000,50000].map((v,i)=>'<button data-v="'+v+'"'+(i===0?' class="on"':'')+'>'+fmtC(v)+'</button>').join('')+'</div>'+
+  '<b class="dusub">2. 押多少 <small class="muted">(對方金幣不夠的會變灰)</small></b><div class="dustk" id="dustk">'+[1000,5000,10000,50000].map((v,i)=>'<button data-v="'+v+'"'+(i===0?' class="on"':'')+'>'+fmtC(v)+'</button>').join('')+'</div>'+
   '<div class="dubtns"><button class="btn" data-x="1">取消</button><button class="btn pri" id="dugo" disabled>送出戰帖</button></div></div>';
  document.body.appendChild(ov);let P=[],pick=null,stake=1000;
- const list=()=>{const q=($('dusq').value||'').trim();const L=P.filter(p=>!q||String(p.nick).includes(q)).slice(0,40);$('dupl').innerHTML=L.length?L.map(p=>'<button data-p="'+escH(p.id)+'"'+(pick&&pick.id===p.id?' class="on"':'')+'>'+escH(p.nick)+'</button>').join(''):'<p class="muted">找不到玩家</p>';
+ /* 1006-B:對方金幣不夠付押金的話,不能對他下這個金額的戰帖 */
+ const poor=p=>p.coin!=null&&+p.coin<stake;
+ const list=()=>{if(pick&&poor(pick))pick=null;const q=($('dusq').value||'').trim();const L=P.filter(p=>!q||String(p.nick).includes(q)).slice(0,40);$('dupl').innerHTML=L.length?L.map(p=>'<button data-p="'+escH(p.id)+'"'+(poor(p)?' class="poor" disabled':pick&&pick.id===p.id?' class="on"':'')+'>'+escH(p.nick)+(poor(p)?'<small>金幣不足</small>':'')+'</button>').join(''):'<p class="muted">找不到玩家</p>';
   $('dugo').disabled=!pick;$('dugo').textContent=pick?'送出戰帖給 '+pick.nick+'(押 '+fmtC(stake)+')':'送出戰帖'};
  try{P=await socPlayers()}catch(e){$('dupl').innerHTML='<p class="muted">讀取玩家失敗</p>'}list();
  $('dusq').oninput=list;
  ov.onclick=async e=>{if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close');return}
-  const p=e.target.closest('[data-p]');if(p){pick=P.find(x=>x.id===p.dataset.p);sfx('tab');list();return}
+  const p=e.target.closest('[data-p]');if(p){if(p.disabled)return;pick=P.find(x=>x.id===p.dataset.p);sfx('tab');list();return}
   const v=e.target.closest('#dustk [data-v]');if(v){stake=+v.dataset.v;ov.querySelectorAll('#dustk button').forEach(x=>x.classList.toggle('on',x===v));list();return}
   if(e.target.closest('#dugo')&&pick){if((SAVE.coin||0)<stake){sfx('error');toast('金幣不夠,押金要 '+fmtC(stake));return}$('dugo').disabled=true;
    try{await socRpc('duel_send',{p_a:fmId(),p_a_nick:dpNick(),p_b:pick.id,p_b_nick:pick.nick,p_stake:stake});SAVE.coin-=stake;save();renderHome();sfx('chips');toast('⚔️ 戰帖已送出,等 '+pick.nick+' 接受');ov.remove();duLoad(true)}
-   catch(err){const m=String((err&&err.msg)||'');sfx('error');toast(/too_many/.test(m)?'同時最多 5 張進行中的戰帖':'送出失敗,稍後再試');$('dugo').disabled=false}}}}
-setInterval(()=>{try{if(SOC.on()&&SAVE&&!$('home').hidden&&document.visibilityState==='visible')duLoad(false)}catch(e){}},90000);
+   catch(err){const m=String((err&&err.msg)||'');sfx('error');toast(/too_many/.test(m)?'同時最多 5 張進行中的戰帖':/target_poor/.test(m)?'對方的金幣不夠付這個押金,換小一點的金額或換人':'送出失敗,稍後再試');$('dugo').disabled=false}}}}
+/* 挑戰書:停在賭場「無限列車」頁時每 3 秒自動更新;其他頁面每 60 秒更新一次(紅點提醒用) */
+setInterval(()=>{try{if(!SOC.on()||!SAVE||$('home').hidden||document.visibilityState!=='visible')return;const onT=SAVE.tab==='dragon'&&SAVE.cas==='train';if(onT||Date.now()-DU.t>60000)duLoad(true)}catch(e){}},3000);
 setTimeout(()=>{try{if(SOC.on())duLoad(true)}catch(e){}},6000);
 /* ===== 塔羅 ===== */
 const TAROT=[['0','愚者','🃏','新的開始正在展開,帶著純真與好奇心踏出第一步,不必害怕未知','行事過於魯莽衝動,缺乏計畫,小心因一時興起而付出代價',4,2],
@@ -3575,6 +3607,7 @@ const CROPS=[{id:'pot',n:'辦公室小盆栽',e:'🪴',cost:100,g:300000,v:300,d
  {id:'coffee',n:'咖啡樹',e:'☕',cost:1500,g:7200000,v:4000,d:'續命必備'},{id:'tea',n:'高山茶',e:'🍵',cost:2500,g:14400000,v:7000,d:'上班種、下班收'},
  {id:'berry',n:'草莓',e:'🍓',cost:4000,g:28800000,v:12000,d:'睡前種、起床收'},{id:'money',n:'搖錢樹',e:'💰',cost:10000,g:86400000,v:30000,d:'每天一次的期待'}];
 const CROP=Object.fromEntries(CROPS.map(c=>[c.id,c]));
+/* 1005-ZZZH:農場經濟維持原本數字(照顧只玩農場的玩家) */
 const FEXP=[1000,2000,4000,6000,9000,12000,16000,20000];
 var FM={on:false,plots:null,size:4,off:0,busy:false,err:'',t:0,logs:[],view:null};
 (function(){try{FM.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){FM.on=false}})();
@@ -3582,7 +3615,7 @@ function fmId(){let u=localStorage.getItem('clockin-uid');if(!u){u='p_'+Math.ran
 function fmKey(){if(!SAVE.fkey||SAVE.fkey.length<16){const a=new Uint8Array(16);(crypto||window.msCrypto).getRandomValues(a);SAVE.fkey=[...a].map(x=>x.toString(16).padStart(2,'0')).join('');save()}return SAVE.fkey}
 async function fmRpc(fn,body){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
  const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(body)});
- if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}return r.json()}
+ if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}const tx=await r.text();return tx?JSON.parse(tx):null}
 const FERR={'bad key':'農場驗證失敗','occupied':'這塊地已經種了','not ripe':'還沒成熟喔','empty':'這塊地是空的(可能已經被採走了)','watered':'這次已經澆過水了','ripe':'已經成熟了,直接收成吧','self':'不能採自己的','no farm':'對方還沒開墾農場'};
 const fmMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in FERR)if(m.includes(k))return FERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器':'錯誤:'+m.slice(0,60)};
 const fmNow=()=>Date.now()+FM.off;
@@ -3600,7 +3633,7 @@ function fmPlotH(pl,i,visit){const st=fmState(pl);
  if(st.k==='ripe')return'<div class="fp ripe" data-i="'+i+'"><div class="fpw">'+(fmImg('fp-'+st.c.id)||'<span class="fe big">'+st.c.e+'</span>')+'</div><div class="finfo"><b>'+st.c.n+'</b><button class="btn pri" data-a="'+(visit?'pick':'harvest')+'" data-i="'+i+'">'+(visit?'🧺 採收':'收成')+' +'+fmtC(st.c.v)+'</button></div></div>';
  return'<div class="fp grow" data-i="'+i+'"><div class="fpw">'+(fmImg(st.pr<.5?'fp-s1':'fp-s2')||'<span class="fe">'+fmStage(st)+'</span>')+'</div><div class="finfo"><b>'+st.c.e+' '+st.c.n+'</b><div class="fbar"><i style="width:'+(st.pr*100).toFixed(1)+'%"></i></div><small>還要 '+fmT(st.left)+'</small>'+
   (!visit&&!pl.w?'<button class="btn fw" data-a="water" data-i="'+i+'">💧 澆水 −10%</button>':(!visit&&pl.w?'<small class="fwd">💧 已澆水</small>':''))+'</div></div>'}
-function renderFarm(){const g=$('fgrid');if(!g||!FM)return;if(Date.now()-(FM.socT||0)>60000){FM.socT=Date.now();try{guardRender();fwbRender(false);flogLoad(true)}catch(e){}}const si=$('fstimg');if(si&&!si.src&&ART['bean-coin'])si.src=ART['bean-coin'];const sg=$('fstgo');if(sg)sg.hidden=!FM.on;if(!FM.plots){g.innerHTML='<div class="muted">農場載入中…</div>';fmSync();return}
+function renderFarm(){const g=$('fgrid');if(!g||!FM)return;if(Date.now()-(FM.socT||0)>60000){FM.socT=Date.now();try{guardRender();fwbRender(false);flogLoad(true);foeRender()}catch(e){}}const si=$('fstimg');if(si&&!si.src&&ART['bean-coin'])si.src=ART['bean-coin'];const sg=$('fstgo');if(sg)sg.hidden=!FM.on;if(!FM.plots){g.innerHTML='<div class="muted">農場載入中…</div>';fmSync();return}
  let h=FM.plots.slice(0,FM.size).map((pl,i)=>fmPlotH(pl,i,false)).join('');
  const n=FM.size;if(n<12)h+='<div class="fp lock" data-a="expand"><div class="fpw">'+(fmImg('fp-lock')||'<span class="fe">🔒</span>')+'</div><div class="finfo"><b>擴建第 '+(n+1)+' 塊地</b><button class="btn" data-a="expand"'+((SAVE.coin||0)<FEXP[n-4]?' disabled':'')+'>💰 '+fmtC(FEXP[n-4])+'</button></div></div>';
  g.innerHTML=h;
@@ -3629,8 +3662,8 @@ function fmSeedPick(i){const ov=document.createElement('div');ov.className='ov f
   try{if(FM.on)fmApply(await fmRpc('farm_plant',{p_id:fmId(),p_key:fmKey(),p_idx:i,p_crop:c.id}));else{fmLocal().plots[i]={c:c.id,p:Date.now(),g:c.g,w:false};FM.plots=fmLocal().plots}
    SAVE.coin-=c.cost;save();sfx('equip');toast(c.e+' 種下 '+c.n+','+fmT(c.g)+'後成熟');try{flogAdd({k:'plant',crop:c.id,v:c.cost})}catch(e){}renderHome()}catch(e){sfx('error');toast(fmMsg(e));fmSync()}
   FM.busy=false;renderFarm()}}
-async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人的農場');FM.guardU=0;socGuardOf(id).then(u=>{FM.guardU=u;const h=$('fvhint');if(u>Date.now()&&h&&!document.querySelector('.fvguard'))h.insertAdjacentHTML('beforebegin','<div class="fvguard">'+guardIco(36)+' 這塊農場有<b>農場守衛「皮過敏」</b>站崗!每次採收有 '+Math.round(GUARD.rate*100)+'% 機率被擋下,被擋的那塊就採不到了</div>')}).catch(()=>{});ripeHide();ripeVisited(id);const ov=document.createElement('div');ov.className='ov fvov';
- ov.innerHTML='<div class="box fvbox">'+(ART['bean-hole']||ART['bean-coin']?'<img class="fmasc" src="'+(ART['bean-hole']||ART['bean-coin'])+'" alt="">':'')+'<h2>🌾 '+escH(nick||'同事')+' 的農場</h2><p class="muted" id="fvhint">讀取中…</p><div class="fgrid" id="fvgrid"></div><button class="btn" data-x="1">離開</button></div>';document.body.appendChild(ov);sfx('open');
+async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人的農場');const RV=foeActive(nick);FM.guardU=0;socGuardOf(id).then(u=>{FM.guardU=u;const h=$('fvhint');if(u>Date.now()&&h&&!document.querySelector('.fvguard'))h.insertAdjacentHTML('beforebegin','<div class="fvguard">'+guardIco(36)+' 這塊農場有<b>農場守衛「皮過敏」</b>站崗!每次採收有 '+Math.round(GUARD.rate*100)+'% 機率被擋下,被擋的那塊就採不到了</div>')}).catch(()=>{});ripeHide();ripeVisited(id);const ov=document.createElement('div');ov.className='ov fvov';
+ ov.innerHTML='<div class="box fvbox">'+(ART['bean-hole']||ART['bean-coin']?'<img class="fmasc" src="'+(ART['bean-hole']||ART['bean-coin'])+'" alt="">':'')+'<h2>'+(RV?'⚔️ 報仇!':'🌾')+' '+escH(nick||'同事')+' 的農場</h2>'+(RV?'<div class="fvrv">😈 他是你的仇人:這次無視守衛、不收贓款稅</div>':'')+'<p class="muted" id="fvhint">讀取中…</p><div class="fgrid" id="fvgrid"></div><button class="btn" data-x="1">離開</button></div>';document.body.appendChild(ov);sfx('open');
  let prevR=new Set(),mine=-1,timer=0;
  const load=async()=>{if(!document.body.contains(ov))return;try{const r=await fmRpc('farm_view',{p_target:id});if(!document.body.contains(ov))return;if(!r){$('fvhint').textContent='他還沒開墾農場';$('fvgrid').innerHTML='';return}
    FM.off=r.now-Date.now();FM.view={id,nick:r.nick||nick,plots:r.plots,size:r.size};
@@ -3643,10 +3676,10 @@ async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人
   const b=e.target.closest('[data-a="pick"]');if(!b||b.disabled)return;b.disabled=true;audioUnlock();
   const bi=+b.dataset.i,bpl=FM.view&&FM.view.plots&&FM.view.plots[bi],bk=fmBlkKey(id,bi,bpl);
   if((SAVE.fblk||{})[bk]){toast('🛡️ 這塊已經被皮過敏擋下了,去採別塊吧');return}
-  if(FM.guardU>Date.now()&&Math.random()<GUARD.rate){(SAVE.fblk=SAVE.fblk||{})[bk]=Date.now();save();fmMarkBlocked(id,FM.view&&FM.view.plots);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:0,p_crop:'',p_kind:'scared'}).catch(()=>{});flogAdd({k:'scared',who:vn})}sfx('wahwah');toast('🛡️ 被農場守衛皮過敏擋下了!這塊作物你採不到了,去採別塊吧');return}
+  if(!RV&&FM.guardU>Date.now()&&Math.random()<GUARD.rate){(SAVE.fblk=SAVE.fblk||{})[bk]=Date.now();save();fmMarkBlocked(id,FM.view&&FM.view.plots);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:0,p_crop:'',p_kind:'scared'}).catch(()=>{});flogAdd({k:'scared',who:vn})}sfx('wahwah');toast('🛡️ 被農場守衛皮過敏擋下了!這塊作物你採不到了,去採別塊吧');return}
   mine=+b.dataset.i;try{await fmSync();const r=await fmRpc('farm_pick',{p_target:id,p_id:fmId(),p_key:fmKey(),p_nick:SAVE.pname||'',p_idx:+b.dataset.i});
-   const st=taxIncome(r.value,TAXSTEAL);SAVE.coin=(SAVE.coin||0)+r.value-st;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value-st)+' 金幣'+(st>0?'(芳芳抽贓款稅 20%:'+fmtC(st)+',已丟進射龍門池底)':''));
-   ripeHide();fmFeedAdd(id,(FM.view&&FM.view.nick)||nick,r.crop,r.value);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value,p_crop:r.crop,p_kind:'steal'}).catch(()=>socRpc('farm_steal_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value}).catch(()=>{}));flogAdd({k:'steal',who:vn,crop:r.crop,v:r.value-st})}FWB.t=0}
+   const st=RV?0:taxIncome(r.value,TAXSTEAL);SAVE.coin=(SAVE.coin||0)+r.value-st;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value-st)+' 金幣'+(st>0?'(芳芳抽贓款稅 20%:'+fmtC(st)+',已丟進射龍門池底)':''));
+   ripeHide();fmFeedAdd(id,(FM.view&&FM.view.nick)||nick,r.crop,r.value);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value,p_crop:r.crop,p_kind:RV?'revenge':'steal'}).catch(()=>socRpc('farm_steal_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value}).catch(()=>{}));flogAdd({k:RV?'revenge':'steal',who:vn,crop:r.crop,v:r.value-st});if(RV){const L=foeList();delete L[nick];SAVE.foes=L;save();foeRender();toast('⚔️ 報仇成功!'+nick+' 從仇人名單移除')}}FWB.t=0}
   catch(e){sfx('error');toast(fmMsg(e))}load()};
  load()}
 const fnKey=l=>l.id!=null?'i'+l.id:[l.t,l.thief_nick,l.crop,l.value].join('|');
@@ -3656,7 +3689,7 @@ function fmNotify(){if(!FM.logs.length)return;const L=$('login');if(L&&!L.hidden
  const fresh=FM.logs.filter(l=>{const k=fnKey(l);if(have.has(k))return false;have.add(k);return true});FM.logs=[];
  fmRpc('farm_seen',{p_id:fmId(),p_key:fmKey()}).catch(()=>{});
  if(!fresh.length)return;
- try{for(const l of fresh)(SAVE.flog=SAVE.flog||[]).unshift({t:new Date(l.t).getTime()||Date.now(),k:'stolen',who:l.thief_nick,crop:l.crop,v:+l.value||0});if(SAVE.flog.length>120)SAVE.flog.length=120;save();flogRender()}catch(e){}
+ try{for(const l of fresh){(SAVE.flog=SAVE.flog||[]).unshift({t:new Date(l.t).getTime()||Date.now(),k:'stolen',who:l.thief_nick,crop:l.crop,v:+l.value||0});foeAdd(l.thief_nick,new Date(l.t).getTime()||Date.now())}foeRender();if(SAVE.flog.length>120)SAVE.flog.length=120;save();flogRender()}catch(e){}
  try{localStorage.setItem('shechu-fnseen',JSON.stringify([...fresh.map(fnKey),...seen].slice(0,120)))}catch(e){}
  const logs=[...fresh,...shown].sort((a,b)=>new Date(b.t)-new Date(a.t));const tot=logs.reduce((a,l)=>a+(+l.value||0),0);
  const h='<div class="box fnbox">'+(ART['bean-itch']||ART['bean-nap']?'<img class="fmasc" src="'+(ART['bean-itch']||ART['bean-nap'])+'" alt="">':'')+'<h2>😡 你的農場被採收了!</h2><p class="muted">你不在的時候,有同事來採走了成熟沒收的作物</p><div class="fnlist">'+logs.map(l=>{const c=CROP[l.crop]||{e:'🌱',n:l.crop};return'<div class="fnr"><span class="fe">'+(ART['fp-'+l.crop]?'<img src="'+ART['fp-'+l.crop]+'" alt="" style="width:34px;height:34px;object-fit:contain">':c.e)+'</span><span><b>'+escH(l.thief_nick||'神秘同事')+'</b> 採走了你的 '+c.n+'</span><b class="down">−'+fmtC(l.value)+'</b><small>'+dpAgo(l.t)+'</small>'+(l.thief_nick?'<button class="btn fnrv" data-rv="'+escH(l.thief_nick)+'">⚔️ 報仇</button>':'')+'</div>'}).join('')+'</div><p>總共損失 <b class="down">'+fmtC(tot)+'</b> 金幣。下次記得早點收成,或按「⚔️ 報仇」直接殺去他的農場!<br><small class="muted">之後也可以在農場的「📜 農場日誌」查看</small></p><button class="btn pri" data-x="1">知道了</button></div>';
@@ -3689,10 +3722,15 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1005-ZZZE';
+const GBUILD='1006-C';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
-const GVER='2026.10.06b';
-const GNOTES=[['💀','無限列車改成一條命','碰到列車就直接出局;每班金幣改成 6/8/12/16/20,撐完再 +500,真的是在賭命。玩法改版,列車排行榜和個人最佳全部清空重新開始'],
+const GVER='2026.10.06c';
+const GNOTES=[['↩️','戰帖可以取消','對方還沒接受前,可以按「取消戰帖」把押金拿回來;列車結算畫面也會顯示成績有沒有成功上傳排行榜'],
+ ['💸','戰帖押金檢查','對方金幣不夠付押金,就不能對他下這個金額的戰帖(名單上會變灰、寫「金幣不足」)'],
+ ['😈','仇人名單','偷你菜的人會列入仇人名單 24 小時;他的作物一成熟就通知你;報仇時無視他的皮過敏守衛、不收贓款稅,報仇成功他的日誌會顯示「被你報仇了」'],
+ ['🎟️','無限列車每日有獎場次','每天前 5 場給金幣,之後變練習場(不給金幣,排行榜照算),每天 00:00 恢復'],
+ ['⚔️','挑戰書自動更新','停在無限列車頁時,戰帖狀態每 3 秒自動更新,不用再按按鈕'],
+ ['💀','無限列車改成一條命','碰到列車就直接出局;每班金幣改成 6/8/12/16/20,撐完再 +500,真的是在賭命。玩法改版,列車排行榜和個人最佳全部清空重新開始'],
  ['📢','公告中心','左上角改成「📢 公告」按鈕,更新內容和系統訊息都可以隨時回來看'],
  ['🚇','無限列車全面加難','五個等級全部變難:出車更密、警示更短、列車更快;挑戰賽不計列車金幣,時間一樣就比誰閃得更驚險'],
  ['🌱','農場排版','作物格子縮小、一排三格,地多也不用一直往下滑'],
@@ -3985,7 +4023,7 @@ const clSyncGet=()=>+(localStorage.getItem('shechu-sync')||0),clSyncSet=v=>{try{
  try{const a=JSON.parse(localStorage.getItem('shechu-acct')||'null');if(a&&a.u&&a.t){CL.u=a.u;CL.t=a.t}}catch(e){}})();
 async function clRpc(fn,body,keep){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
  const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(body),keepalive:!!keep});
- if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}return r.json()}
+ if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}const tx=await r.text();return tx?JSON.parse(tx):null}
 const CLERR={'bad user':'帳號要 3~20 個英文字母、數字或底線','bad pass':'密碼要 4~40 個字','taken':'這個帳號已經有人用了,換一個吧','bad login':'帳號或密碼錯誤','bad token':'帳號已在其他裝置登入,請重新登入','too big':'存檔太大,請先賣掉一些裝備'};
 const clMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in CLERR)if(m.includes(k))return CLERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,80)};
 function clSet(u,t){CL.u=u;CL.t=t;try{if(u&&SAVE&&SAVE.acct!==u){SAVE.acct=u;localStorage.setItem(KEY,JSON.stringify(SAVE))}}catch(e){}try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
