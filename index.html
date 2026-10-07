@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-Z8">
+<meta name="gbuild" content="1008-A">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -46,7 +46,8 @@ document.addEventListener('DOMContentLoaded',build);
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="社畜特攻隊">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://qhlwqzybsdluzdannwpt.supabase.co" crossorigin><link rel="dns-prefetch" href="https://qhlwqzybsdluzdannwpt.supabase.co">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
 :root{--ink:#1d232b;--panel:#fbfaf6;--line:#dcd7cb;--dim:#6b717a;--accent:#f2b632;--c0:#b8bec8;--c1:#2fbf5f;--c2:#3b82f6;--c3:#f2b632;--c4:#e5303a}
 html,body{margin:0;height:100%;overflow:hidden;background:#2b3036;font:15px/1.5 system-ui,"PingFang TC","Microsoft JhengHei",sans-serif;color:var(--ink);touch-action:none;-webkit-user-select:none;user-select:none}
@@ -1000,6 +1001,7 @@ img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 #dsignA p{color:#fff!important;-webkit-text-fill-color:#fff!important;font-size:clamp(15px,4.2vw,19px)!important;text-shadow:0 0 1px #000,0 1px 2px rgba(0,0,0,.95),0 0 10px rgba(255,79,184,.85),0 0 20px rgba(255,47,160,.6)!important;animation:none!important;opacity:1!important;filter:none!important}
 #dsignA p.b{color:#fff3c4!important;-webkit-text-fill-color:#fff3c4!important;text-shadow:0 0 1px #000,0 1px 2px rgba(0,0,0,.95),0 0 10px rgba(255,176,32,.85),0 0 20px rgba(255,154,0,.6)!important}
 #dsignA{transition:opacity .35s;min-width:min(84%,300px);box-sizing:border-box}#dsignA.fade{opacity:0}
+.potann{touch-action:none}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1558,7 +1560,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-Z8</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-A</span></small>
   </div>
  </div>
 </div>
@@ -1831,7 +1833,10 @@ const EANIM={'雷隊友':{faceR:true,walk:[1,2,3,4,5,6].map(i=>'雷隊友-walk-'
 const $=id=>document.getElementById(id);
 EANIM['捷運站長喪屍']={faceR:true,walk:["捷運站長喪屍-walk-1", "捷運站長喪屍-walk-2", "捷運站長喪屍-walk-3", "捷運站長喪屍-walk-4", "捷運站長喪屍-walk-5", "捷運站長喪屍-walk-6"],atk:["捷運站長喪屍-atk-1", "捷運站長喪屍-atk-2", "捷運站長喪屍-atk-3", "捷運站長喪屍-atk-4", "捷運站長喪屍-atk-5", "捷運站長喪屍-atk-6"],cast:["捷運站長喪屍-cast-1", "捷運站長喪屍-cast-2", "捷運站長喪屍-cast-3", "捷運站長喪屍-cast-4", "捷運站長喪屍-cast-5"],die:["捷運站長喪屍-die-1", "捷運站長喪屍-die-2", "捷運站長喪屍-die-3", "捷運站長喪屍-die-4", "捷運站長喪屍-die-5", "捷運站長喪屍-die-6", "捷運站長喪屍-die-7", "捷運站長喪屍-die-8", "捷運站長喪屍-die-9"]};
 for(const [o,n] of [['萬寶龍鋼筆','萬能鋼筆'],['寶格麗公事包','名牌公事包'],['Ray-Ban墨鏡','老大墨鏡'],['Airpods耳機','藍牙耳機'],['我的ARMANI','我的訂製西裝'],['On球鞋','氣墊球鞋'],['舉手之勞力士','舉手之勞金錶'],['LV老花皮帶','老花紋皮帶'],['I Phone DUO','摺疊手機'],['JBL喇叭','藍牙喇叭'],['百威啤酒','冰涼啤酒'],['七星香菸','下班一根菸'],['麥當勞套餐','速食套餐'],['猛健樂','維他命針']])if(ART[o]&&!ART[n])ART[n]=ART[o];
-const IMG={};for(const k in ART){const i=new Image();i.src=ART[k];IMG[k]=i}
+/* 1008-A 圖片改成用到才解碼(原本開遊戲就把幾百張圖全部解碼,手機很吃 CPU 和記憶體) */
+const IMGT={};let IMGW=0;function imgLoaded(){if(IMGW)return;IMGW=1;requestAnimationFrame(()=>{IMGW=0;try{SC.clear()}catch(e){}})}
+const IMG=new Proxy(IMGT,{get(t,k){if(typeof k!=='string')return t[k];let v=t[k];if(v===undefined&&ART[k]){v=new Image();v.decoding='async';v.onload=imgLoaded;v.src=ART[k];t[k]=v}return v},set(t,k,v){t[k]=v;return true},has(t,k){return k in t||(typeof k==='string'&&k in ART)},deleteProperty(t,k){delete t[k];return true}});
+function imgWarm(keys){for(const k of keys)if(k)IMG[k]}
 (()=>{const R=document.documentElement.style;for(const k of ['hud-hp','hud-timer','hud-pause','btn-gold','btn-navy','btn-gray'])if(ART[k])R.setProperty('--'+k,'url('+ART[k]+')')})();
 if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h){this.rect(x,y,w,h)};
 const cv=$('c'),ctx=cv.getContext('2d');let W=0,H=0;
@@ -2008,7 +2013,7 @@ function fupdShow(){if(!FUPD.remote||FUPD.shown)return;if(typeof running!=='unde
  $('fupdgo').onclick=fupdGo}
 async function fupdGo(){try{save()}catch(e){}try{if(typeof clFlush==='function'&&CL&&CL.u)await clFlush()}catch(e){}const b=$('fupdgo');if(b){b.disabled=true;b.textContent='更新中…'}
  try{sessionStorage.setItem('shechu-upd-to',FUPD.remote||'');sessionStorage.setItem('shechu-upd-n',String((+sessionStorage.getItem('shechu-upd-n')||0)+1))}catch(e){}
- try{if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(e){}
+ /* 1008-A 只清掉主程式的快取,圖片音效(有版本號)保留,更新後不用重新下載十幾 MB */try{if(window.caches){for(const k of await caches.keys()){const ca=await caches.open(k);for(const req of await ca.keys()){const u=new URL(req.url);if(!u.searchParams.has('v'))await ca.delete(req)}}}}catch(e){}
  try{if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.update().catch(()=>{})))}}catch(e){}
  location.replace(location.pathname+'?u='+Date.now())}
 /* 更新後如果 CDN 還沒換成新版,自動稍等再試,避免一直重複跳更新 */
@@ -2864,7 +2869,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&sel&&$('detail')&&$('detail'
 function renameAsk(){{const L=nkLeft();if(L>0){sfx('error');toast('改名後 7 天內不能再改,還要 '+nkDays(L));return}}if((SAVE.coin||0)<1000){sfx('error');toast('改名需要 1,000 金幣,金幣不夠喔');return}NRENAME=true;askName(false);$('namehint').innerHTML='改名需要花費 <b style="color:#ffcf2e">1,000 金幣</b><br>目前有 '+fmtC(SAVE.coin||0)+' 金幣';$('namehint').innerHTML+='<br><small style="color:#9ba4ae">暱稱不能跟別人重複,改名後 7 天內不能再改</small>';$('nameok').textContent='花 1,000 金幣改名'}
 $('lbme').onclick=e=>{if(e.target.id==='lbname')renameAsk()};
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='lbbtn')lbOpen()});
-setInterval(()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.pname&&LB.db&&!LB.busy){LB.last='';lbSync(true)}},30000);
+setInterval(()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.pname&&LB.db&&!LB.busy){if(Date.now()-(LB.forceT||0)>180000){LB.forceT=Date.now();LB.last=''}lbSync(true)}},60000);/* 1008-A 排行榜:沒變化就不上傳,最多 3 分鐘強制同步一次 */
 function lbGoOff(){try{clearTimeout(LB.t);if(LB.sb&&SAVE&&SAVE.pname&&LB.uid){LB.last='';LB.sb.off(lbPayload())}}catch(e){}}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')lbGoOff();else if(SAVE&&SAVE.pname&&LB.db){LB.last='';lbSync(true)}});
 window.addEventListener('pagehide',lbGoOff);
@@ -3720,7 +3725,7 @@ function hdN(){for(const n in HDN)for(const a in HDN[n]){const k=n+'-'+a+'-1';if
 function heroHD(){if(!ART['主角HD-idle-1'])return;const L=p=>{const a=[];for(let i=1;ART['主角HD-'+p+'-'+i];i++)a.push('主角HD-'+p+'-'+i);return a};
  const idle=L('idle'),run=L('run'),atk=L('atk');if(!idle.length||!run.length||!atk.length)return;
  ANIM.idle=idle;ANIM.run=run;ANIM.atk=atk;HERO_HD=true;SC.clear();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(e){}}
-window.__artPack=function(X){if(!X)return;/* 1006-R 新版美術(n2- 開頭)優先,之後載入的舊圖不能蓋掉 */const NL=window.__NL||(window.__NL=new Set());for(const k in X)if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k];X['__n2_'+r]=1}for(const r of NL)if(!X['__n2_'+r])delete X[r];for(const k in X)if(k.startsWith('__n2_'))delete X[k];try{for(const [o,n] of BRANDREN)if(X[o]&&!X[n]&&!ART[n])X[n]=X[o]}catch(e){}Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X){const i=new Image();i.onload=()=>{SC.clear()};i.src=X[k];IMG[k]=i}SC.clear();if(X['主角HD-idle-1'])heroHD();try{if(X['st-atk'])for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">'}catch(e){}try{hdN()}catch(e){}
+window.__artPack=function(X){if(!X)return;/* 1006-R 新版美術(n2- 開頭)優先,之後載入的舊圖不能蓋掉 */const NL=window.__NL||(window.__NL=new Set());for(const k in X)if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k];X['__n2_'+r]=1}for(const r of NL)if(!X['__n2_'+r])delete X[r];for(const k in X)if(k.startsWith('__n2_'))delete X[k];try{for(const [o,n] of BRANDREN)if(X[o]&&!X[n]&&!ART[n])X[n]=X[o]}catch(e){}Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X)delete IMGT[k];SC.clear();if(X['主角HD-idle-1'])heroHD();try{if(X['st-atk'])for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">'}catch(e){}try{hdN()}catch(e){}
  try{if(X['bg-home'])document.documentElement.style.setProperty('--homebg','url('+X['bg-home']+')')}catch(e){}try{document.querySelectorAll('img.pico').forEach(i=>{if(ART['金幣'])i.src=ART['金幣']});if(!$('home').hidden)renderHome()}catch(e){}try{if(!$('lbov').hidden&&LB.rows&&LB.rows.length)lbRender()}catch(e){}};
 function update(dt){
  const S=G.S;G.t+=dt;G.dtl=dt;G.atk-=dt;if(G.dh&&G.dh.length)for(let i=G.dh.length-1;i>=0;i--){if((G.dh[i].t-=dt)<=0){const f=G.dh[i].f;G.dh.splice(i,1);try{f()}catch(e){}}}G.hurt-=dt;G.inv-=dt;
@@ -4146,15 +4151,16 @@ function potShow(pot){let el=$('potann');if(!el){el=document.createElement('div'
  el.innerHTML='<img src="'+HI('host-4','fd')+'" alt="芳芳"><div class="pa"><small>📢 伺服器公告 · 企劃女神芳芳</small>'+pickL(lines)+'</div><button class="btn pri" data-go="1">去射龍門</button><span class="x" data-x="1">✕</span>';
  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');setTimeout(()=>sfx('coins'),250);
  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),14000);
- el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');if(typeof casSwitch==='function')casSwitch('dragon');renderHome()}}
+ el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');if(typeof casSwitch==='function')casSwitch('dragon');renderHome()};try{swipeUp(el,()=>{el.classList.remove('on');clearTimeout(el._t)})}catch(e){}}
 setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch()},45000);setTimeout(potWatch,8000);
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-Z8';
+const GBUILD='1008-A';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
+const GNOTES=[['⚡','載入與連線加速','圖片改成用到才解碼,開遊戲更快、更省記憶體;資源檔依照需要的順序載入;更新版本後不用重新下載全部圖片;減少背景的連線次數,更省流量和電'],
+ ['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
  ['📱','多裝置登入全自動','同一個帳號一次只能在一台裝置上線:在新裝置登入時,舊裝置會自動下線,新裝置自動接續最新進度,不用再自己選擇。被下線的裝置按「在這台繼續玩」重新登入即可'],
  ['🔑','雲端帳號登入更直覺','這台裝置已經綁定帳號時,按「建立帳號」會直接帶你去登入那個帳號;帳號已存在時也會提示改用登入,不會再出現「這個帳號已經有人用了」的誤會'],
  ['🧹','登出時可以清除這台裝置的進度','登出雲端帳號時多了「登出並清除這台裝置的進度」:會變回新玩家,可以重新取名、建立或登入別的帳號,原本帳號的雲端進度不受影響'],
@@ -4281,11 +4287,12 @@ function annRender(){const bar=$('annbar');if(!bar)return;let closed='';try{clos
 function swipeUp(el,onGone){if(!el||el.__sw)return;el.__sw=1;let y0=null,x0=0,dy=0;
  const st=e=>{const p=e.touches?e.touches[0]:e;y0=p.clientY;x0=p.clientX;dy=0;el.style.transition='none'};
  const mv=e=>{if(y0==null)return;const p=e.touches?e.touches[0]:e;dy=Math.min(0,p.clientY-y0);if(Math.abs(p.clientX-x0)>40&&dy>-10)return;el.style.translate='0 '+dy+'px';el.style.opacity=String(Math.max(.15,1+dy/120));if(dy<-6&&e.cancelable)e.preventDefault()};
- const en=()=>{if(y0==null)return;y0=null;el.style.transition='translate .2s ease,opacity .2s ease';if(dy<-35){el.style.translate='0 -140px';el.style.opacity='0';setTimeout(()=>{onGone();el.style.transition='none';el.style.translate='';el.style.opacity=''},200);sfx('close')}else{el.style.translate='';el.style.opacity=''}};
+ const en=()=>{if(y0==null)return;y0=null;if(dy<-6)el.__nc=Date.now();el.style.transition='translate .2s ease,opacity .2s ease';if(dy<-35){el.style.translate='0 -140px';el.style.opacity='0';setTimeout(()=>{onGone();el.style.transition='none';el.style.translate='';el.style.opacity=''},200);sfx('close')}else{el.style.translate='';el.style.opacity=''}};
+ el.addEventListener('click',e=>{if(Date.now()-(el.__nc||0)<450){e.stopImmediatePropagation();e.preventDefault()}},true);
  el.addEventListener('touchstart',st,{passive:true});el.addEventListener('touchmove',mv,{passive:false});el.addEventListener('touchend',en);el.addEventListener('mousedown',st);addEventListener('mousemove',mv);addEventListener('mouseup',en)}
 setTimeout(()=>{try{swipeUp($('annbar'),()=>{try{localStorage.setItem('shechu-annx',annSig())}catch(x){}$('annbar').hidden=true});swipeUp($('toast'),()=>{$('toast').className='';toastT=0})}catch(e){}},0);
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#annx')){try{localStorage.setItem('shechu-annx',annSig())}catch(x){}$('annbar').hidden=true;sfx('close')}});
-setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))annFetch()},30000);setTimeout(annFetch,2500);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')annFetch()});
+setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))annFetch()},60000);setTimeout(annFetch,2500);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')annFetch()});
 
 /* ===== 十八仔 ===== */
 const SBMAX=50000;
@@ -4483,7 +4490,7 @@ async function fmRipeWatch(){try{if(!FM.on||!SAVE||!SAVE.pname||document.visibil
   el.innerHTML='<img src="'+(ART['bean-coin']||ART['host-4']||'')+'" alt=""><div class="pa"><small>📢 搶收公告 · 企劃女神芳芳</small>「<b>'+escH(it.nick||'某位同事')+'</b>」的 '+c.e+' '+c.n+' 成熟超過 1 小時還沒收'+(n>1?'(共 '+n+' 塊)':'')+',快去搶收!</div><button class="btn pri" data-go="1">🧺 去搶收</button><span class="x" data-x="1">✕</span>';
   requestAnimationFrame(()=>el.classList.add('on'));sfx('open');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),15000);
   el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;audioUnlock();fmVisit(it.id,it.nick)}}catch(e){}}
-setInterval(fmRipeWatch,60000);setTimeout(fmRipeWatch,15000);
+setInterval(()=>{if(document.visibilityState==='visible')fmRipeWatch()},60000);setTimeout(fmRipeWatch,15000);
 function ripeHide(){const el=$('ripeann');if(el){el.classList.remove('on');clearTimeout(el._t)}}
 function ripeVisGet(){try{return JSON.parse(localStorage.getItem('shechu-ripevis')||'{}')}catch(e){return{}}}
 function ripeVisited(id){if(!id)return;const v=ripeVisGet(),n=Date.now();for(const k in v)if(n-v[k]>600000)delete v[k];v[id]=n;try{localStorage.setItem('shechu-ripevis',JSON.stringify(v))}catch(e){}}
@@ -4503,8 +4510,8 @@ function fmFeedNext(){if(FF.busy||!FF.q.length)return;const L=$('login');if((L&&
  el.innerHTML='<img src="'+(ART['bean-hole']||ART['bean-cheer']||ART['bean-coin']||ART['host-4']||'')+'" alt=""><div class="pa"><small>📢 搶收快報 · 企劃女神芳芳</small>「<b>'+escH(x.thief||'神秘同事')+'</b>」偷採了「<b>'+escH(x.victim||'某位同事')+'</b>」的 '+c.e+' '+c.n+',賺走 <b class="v">'+fmtC(x.value)+'</b> 金幣!</div><span class="x" data-x="1">✕</span>';
  requestAnimationFrame(()=>el.classList.add('on'));sfx('open');clearTimeout(el._t);
  const done=()=>{el.classList.remove('on');clearTimeout(el._t);setTimeout(()=>{FF.busy=false;fmFeedNext()},700)};
- el._t=setTimeout(done,7000);el.onclick=done}
-setInterval(()=>{if(!(G&&running))fmFeedWatch()},40000);setTimeout(fmFeedWatch,9000);
+ el._t=setTimeout(done,7000);el.onclick=done;try{swipeUp(el,()=>{try{el.onclick&&el.onclick()}catch(e){}})}catch(e){}}
+setInterval(()=>{if(!(G&&running)&&document.visibilityState==='visible')fmFeedWatch()},45000);setTimeout(fmFeedWatch,9000);
 
 /* ===== 雲端存檔帳號 ===== */
 var CL={on:false,u:null,t:null,timer:null,busy:false,lastOk:0,err:'',ready:false,dirty:false};
@@ -4629,7 +4636,7 @@ async function clBoot(){clUI();try{if(CL.u&&SAVE.acct!==CL.u){SAVE.acct=CL.u;sav
   CL.lastOk=Date.now();CL.err='';clUI()}
  catch(e){CL.err=clMsg(e);CL.ready=true;if(/token/i.test(String(e.msg||'')))clKick();clUI()}}
 
-window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;{const NL=window.__NL||(window.__NL=new Set());for(const k of Object.keys(X))if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k]}}Object.assign(ART,X);try{SC.clear()}catch(e){}setTimeout(()=>{try{emjConvert(document.body)}catch(e){}},50);for(const k in X){const i=new Image();i.src=X[k];IMG[k]=i}
+window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;{const NL=window.__NL||(window.__NL=new Set());for(const k of Object.keys(X))if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k]}}Object.assign(ART,X);try{SC.clear()}catch(e){}setTimeout(()=>{try{emjConvert(document.body)}catch(e){}},50);for(const k in X)delete IMGT[k];
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
  try{if(!document.querySelector('#gov:not([hidden])')){renderHome();if(!$('home').hidden&&SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
 if(window.ART_EXTRA)window.__artExtra();
@@ -4650,7 +4657,23 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 </script>
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
-function go(){add('assets-extra.js?v=1007H',function(){if(window.__artExtra)window.__artExtra()});setTimeout(function(){add('assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)});add('assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)});add('assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)});add('assets-stage2.js?v=1007B',function(){if(window.__artPack&&window.ART_STAGE2){window.__artPack(window.ART_STAGE2);try{if(!$('home').hidden)renderHome()}catch(e){}}});add('assets-cars.js?v=1006K',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}});add('assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}})},600)}
+/* 1008-A 資源檔依需要的順序一個一個載入(原本 7 個同時下載互搶頻寬);用到的功能會插隊先載 */
+var PK={extra:['assets-extra.js?v=1007H',function(){if(window.__artExtra)window.__artExtra()}],
+ hero2:['assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)}],
+ hd:['assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)}],
+ boss:['assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)}],
+ cars:['assets-cars.js?v=1006K',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
+ stage2:['assets-stage2.js?v=1007B',function(){if(window.__artPack&&window.ART_STAGE2){window.__artPack(window.ART_STAGE2);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
+ train:['assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}}]};
+var PKO=['extra','hero2','hd','boss','cars','stage2','train'],PKS={};
+function pkLoad(n,next){if(PKS[n])return;PKS[n]=1;var p=PK[n];add(p[0],function(){try{p[1]()}catch(e){}PKS[n]=2;if(next)setTimeout(next,60)});}
+function pkNext(){for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
+window.ensurePack=function(){for(var i=0;i<arguments.length;i++)if(PK[arguments[i]])pkLoad(arguments[i])};
+function hook(name,fn){var o=window[name];if(typeof o!=='function')return;window[name]=function(){try{fn.apply(this,arguments)}catch(e){}return o.apply(this,arguments)}}
+hook('startRun',function(c){ensurePack('hero2','hd','boss');if(c===1)ensurePack('stage2');try{const A=(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
+hook('setTab',function(t){if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2')});
+hook('casSwitch',function(t){if(t==='train')ensurePack('train')});
+function go(){pkNext()}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
