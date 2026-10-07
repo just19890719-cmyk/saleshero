@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-S">
+<meta name="gbuild" content="1007-Y">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -996,6 +996,10 @@ img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 .scar.q5 .rqs{background:linear-gradient(115deg,transparent 35%,rgba(230,200,255,.55) 50%,transparent 65%);background-size:250% 100%;animation-duration:3s}
 .tile.rqt.better::before{content:"▲"!important;position:absolute;left:8px!important;top:5px!important;right:auto!important;bottom:auto!important;font-size:11px;color:#55d68a;font-weight:900;text-shadow:0 1px 2px #000}
 .tile.rqt.eq::after{content:"E"!important;position:absolute;right:8px!important;top:5px!important;left:auto!important;bottom:auto!important;font-size:10px;font-weight:800;color:var(--accent)}
+/* 1007-T 射龍門招牌字更清楚 */
+#dsignA p{color:#fff!important;-webkit-text-fill-color:#fff!important;font-size:clamp(15px,4.2vw,19px)!important;text-shadow:0 0 1px #000,0 1px 2px rgba(0,0,0,.95),0 0 10px rgba(255,79,184,.85),0 0 20px rgba(255,47,160,.6)!important;animation:none!important;opacity:1!important;filter:none!important}
+#dsignA p.b{color:#fff3c4!important;-webkit-text-fill-color:#fff3c4!important;text-shadow:0 0 1px #000,0 1px 2px rgba(0,0,0,.95),0 0 10px rgba(255,176,32,.85),0 0 20px rgba(255,154,0,.6)!important}
+#dsignA{transition:opacity .35s;min-width:min(84%,300px);box-sizing:border-box}#dsignA.fade{opacity:0}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1499,6 +1503,23 @@ body.gready #lgload{display:none}
 html.ios-app #tabs{top:100vh!important;bottom:auto!important;transform:translateY(-100%)}
 html.ios-app .page{bottom:auto!important;height:100vh!important;box-sizing:border-box}
 html.ios-app body{min-height:100vh}
+
+/* 1007-U 射龍門排版 ①:荷官居中,牌放大 */
+#casD .dbox{display:flex!important;flex-direction:column;align-items:center!important}
+#casD .dbox>.dsign{order:1}#casD .dbox>#dmbub{order:2;margin-bottom:2px}#casD .dbox>.dghost{order:3}#casD .dbox>.dpot{order:4}#casD .dbox>.dtable{order:5;width:100%}
+#casD .dghost{position:relative!important;right:auto!important;top:auto!important;width:auto!important;padding:0!important;margin:0 0 -18px!important;z-index:1;pointer-events:none}
+#casD .dghost img{height:150px!important;width:128px!important;max-width:none!important;margin:0!important;object-fit:cover;object-position:50% 0;-webkit-mask-image:linear-gradient(#000 74%,transparent);mask-image:linear-gradient(#000 74%,transparent);display:block}
+#casD .dghost img.wide{width:150px!important}
+#casD .dpot{margin-right:0!important;position:relative;z-index:2}
+#casD .dcards{padding-right:0!important;gap:10px!important;min-height:0!important;margin:8px 0 4px}
+#casD .dcards{width:100%;container-type:inline-size}#casD .dslot{width:min(30%,100px)!important;--cw:min(30cqw,100px)}#casD .dslot.mid{width:min(32%,108px)!important;--cw:min(32cqw,108px)}
+#casD #dmbub:empty{display:none!important}
+/* 1007-V 芳芳頭上的對話框拿掉(台詞改顯示在上方那一行),不會擋到臉 */
+#casD .dghost .bub,#casD .dghost .hname{display:none!important}
+#casD #dmbub{position:relative;z-index:3}
+#casD #dmbub:not(:empty){display:block!important;background:#fff;color:#222;font-weight:800;font-size:13px;padding:5px 12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.4);max-width:92%;text-align:center}
+#casD .dslot .pc .f .r,#casD .dslot .pc .f .r2{font-size:calc(var(--cw)*.2)!important}
+#casD .dslot .pc .f .r img,#casD .dslot .pc .f .r2 img{width:calc(var(--cw)*.14)!important;height:calc(var(--cw)*.14)!important}
 </style>
 </head>
 <body>
@@ -1537,7 +1558,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-S</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-Y</span></small>
   </div>
  </div>
 </div>
@@ -1645,7 +1666,7 @@ html.ios-app body{min-height:100vh}
     <div id="casD">
     <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用池底 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
-     <div class="dsign"><p>有人看海 有人被愛</p><p class="b">有人射龍門輸到不知悔改</p><small>— 本店名言 —</small></div>
+     <div class="dsign" id="dsignA"><p>有人看海 有人被愛</p><p class="b">有人射龍門輸到不知悔改</p><small>— 本店名言 —</small></div>
      <div class="mbub" id="dmbub"></div><div class="dpot"><div class="dpw"><small>💰 全伺服器池底</small><b id="dpotv">—</b><span id="dpotst">連線中…</span><span id="dptax" class="dtax"></span></div></div>
      <div class="dtable">
       <div class="dcards"><div class="dslot" id="dA"></div><div class="dslot mid" id="dC"></div><div class="dslot" id="dB"></div></div>
@@ -1664,7 +1685,7 @@ html.ios-app body{min-height:100vh}
      <summary>📖 遊戲說明</summary>
      <ol>
       <li><b>全伺服器共用一個池底</b>:所有玩家都在搶同一個池子,上方會顯示目前池底金額和最近大家的戰況。</li>
-      <li><b>丟底發牌</b>:每局先丟 <b>100 金幣</b>底注進池底,芳芳翻開兩張牌當「門柱」。A 最小算 1,K 最大算 13,不分花色。</li>
+      <li><b>丟底發牌</b>:每局先丟 <b>100 金幣</b>底注進池底,芳芳翻開兩張牌當「門柱」。A 最小算 1,K 最大算 13,不分花色。<b>使用 4 副牌(208 張)</b>,剩不到 52 張就重新洗牌。</li>
       <li><b>看門柱決定</b>:門夠寬就選好下注金額「射門」;門太窄就「放棄」,但<b>丟進去的底注會留在池底</b>,讓池子越滾越大。</li>
       <li><b>射門結果</b>:芳芳翻第三張牌——
        <ul><li>落在兩根門柱<b>中間</b>:<span class="up">依本門賠率從池底贏錢</span>:門越窄賠越多(最高 1 賠 15)、門越寬賠越少,發牌後會顯示賠率。每一把最多只能贏走池底的一部分:勝率 80% 以上 5%、65% 以上 8%、50% 以上 15%、更低 30%(全包除外)</li><li>落在門柱<b>外面</b>:<span class="down">下注金額丟進池底</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">丟 2 倍進池底</span></li></ul></li>
@@ -1997,6 +2018,8 @@ async function fupdGo(){try{save()}catch(e){}try{if(typeof clFlush==='function'&
  FUPD.remote=to;setTimeout(()=>{fupdShow();const st=$('updst');if(st)st.textContent='新版本還在發布中,15 秒後自動再試一次…';setTimeout(fupdGo,15000)},800)},0);
 setTimeout(fupdCheck,4000);setInterval(()=>{if(document.visibilityState==='visible')fupdCheck()},90000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')fupdCheck()});
+/* 1007-T 射龍門招牌輪流顯示兩句話 */
+(function(){const S=[['有人看海 有人被愛','有人射龍門輸到不知悔改'],['射龍門的盡頭','是邪門']];let k=0;setInterval(()=>{const el=document.getElementById('dsignA');if(!el||!el.offsetParent)return;el.classList.add('fade');setTimeout(()=>{k=(k+1)%S.length;const ps=el.querySelectorAll('p');if(ps[0])ps[0].textContent=S[k][0];if(ps[1])ps[1].textContent=S[k][1];el.classList.remove('fade')},380)},6000)})();
 /* ===== 1006-L 車行跑馬燈:買到典藏車、改裝到 Lv.5 → 全伺服器公告 ===== */
 async function carNews(kind,id){try{if(!DP.on)return;await fmRpc('car_news_add',{p_id:fmId(),p_nick:dpNick(),p_kind:kind,p_car:id});setTimeout(()=>{try{annFetch()}catch(e){}},800)}catch(e){}}
 function carNewsMsg(n){const r=RIDES.find(x=>x.id===n.car),cn=r?r.n:n.car;return n.kind==='buy'?'🚗 '+n.nick+' 從夢想車庫開走了一台「'+cn+'」!':'🔧 '+n.nick+' 的「'+cn+'」改裝到 Lv.5,性能滿分!'}
@@ -2142,8 +2165,10 @@ const DL={idle:['來來來,射龍門!莊家今天手氣很好喔','下注不嫌�
  fold:['怕了喔?','保守也是一種智慧啦','不射?那我收牌囉','膽小鬼~下一把再來'],
  broke:['金幣不夠喔,先去打怪賺錢再來','錢包見底了,要不要先回去上班?']};
 let DK=[],DS={ph:'idle',bet:100,a:null,b:null,c:null};
-function newDeck(){if(typeof DK!=='undefined'&&DK.length)sfx('shuffle');DK=[];for(const s of SUITS)for(let r=1;r<=13;r++)DK.push({r,s});for(let i=DK.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[DK[i],DK[j]]=[DK[j],DK[i]]}}
-function drawC(){if(DK.length<8)newDeck();return DK.pop()}
+/* 1007-U 射龍門改用 4 副牌(208 張),剩不到 52 張就重洗,撞柱機率更穩定 */
+const DECKS=4,RESHUF=52;
+function newDeck(){if(typeof DK!=='undefined'&&DK.length)sfx('shuffle');DK=[];for(let d=0;d<DECKS;d++)for(const s of SUITS)for(let r=1;r<=13;r++)DK.push({r,s});for(let i=DK.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[DK[i],DK[j]]=[DK[j],DK[i]]}}
+function drawC(){if(DK.length<RESHUF)newDeck();return DK.pop()}
 const SI=s=>ART['pk-s'+SUITS.indexOf(s)];
 const cardH=(c,d)=>{const red=c.s==='♥'||c.s==='♦',si=SI(c.s);let f;
  if(c.r>=11&&ART['pk-'+RANKN[c.r]+SUITS.indexOf(c.s)])f='<div class="f img" style="background-image:url('+ART['pk-'+RANKN[c.r]+SUITS.indexOf(c.s)]+')"></div>';
@@ -4119,10 +4144,13 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-S';
+const GBUILD='1007-Y';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['👑','裝備升階:至尊、典藏','紅框裝備可以繼續祈禱升階:神話→至尊(15,000 金幣、成功 12%、25% 降回傳說)、至尊→典藏(30,000 金幣、成功 6%、30% 降回神話)。至尊屬性 2.4 倍、典藏 3 倍並多一條屬性;只能靠祈禱,打怪不會掉'],
+const GNOTES=[['☁️','雲端帳號登入更安全','登入雲端帳號時,如果雲端上的進度是空的,會自動保留這台裝置的進度並上傳;兩邊都有進度時,可以自己選擇要用哪一份,不會再不小心被空白進度蓋掉'],
+ ['🃏','射龍門改用 4 副牌','射龍門從 1 副牌(52 張)改成同時使用 4 副牌(208 張),剩不到 52 張才重新洗牌。撞柱機率會穩定在約 12%,不會因為一副牌快發完而忽高忽低。說明:撞柱機率從來沒有被調高,過去偶爾看到 20% 以上,是因為牌快發完時剩下的牌剛好很多張跟門柱同點數。另外牌桌換成荷官居中的新排版,撲克牌放大'],
+ ['🎰','射龍門招牌','招牌字變得更清楚,並新增一句「射龍門的盡頭是邪門」跟原本的句子輪流顯示'],
+ ['👑','裝備升階:至尊、典藏','紅框裝備可以繼續祈禱升階:神話→至尊(15,000 金幣、成功 12%、25% 降回傳說)、至尊→典藏(30,000 金幣、成功 6%、30% 降回神話)。至尊屬性 2.4 倍、典藏 3 倍並多一條屬性;只能靠祈禱,打怪不會掉'],
  ['🧺','農場一鍵採收、一鍵種植','農場新增「一鍵採收」(所有成熟的作物一次收完)和「一鍵種植」(所有空地一次種同一種作物,金幣不夠時種到能種的為止);戰鬥中連擊時的白色閃光拿掉了'],
  ['💀','怪物全面強化','捷運站、辦公大樓的怪物血量和攻擊力都再提高為 2 倍(精英怪、首領一起強化)'],
  ['🛠️','更新流程修正','修正按下「立即更新」後,重新載入時遊戲可能卡在載入畫面的問題'],
@@ -4509,7 +4537,7 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
  const err=t=>{$('clerr').textContent=t;sfx('error')},close=()=>{ov.remove()};
  ov.addEventListener('keydown',e=>{if(e.key==='Enter')$('clok').click()});
  $('clx').onclick=close;
- $('clok').onclick=async()=>{const u=$('clu').value.trim().toLowerCase(),p=$('clp').value;
+ $('clok').onclick=async()=>{const uRaw=$('clu').value.trim(),u=uRaw.toLowerCase(),p=$('clp').value;
   if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<(reg?6:4))return err(reg?'密碼至少要 6 個字':CLERR['bad pass']);
   if(reg&&SAVE.acct&&SAVE.acct!==u)return err('這台裝置的進度已經綁定帳號「'+SAVE.acct+'」,請直接登入那個帳號,不能再綁到新帳號');
   if(reg&&p!==$('clp2').value)return err('兩次輸入的密碼不一樣');CL.kicked=false;
@@ -4525,7 +4553,15 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
      if(r.save){try{localStorage.setItem(KEY,JSON.stringify(r.save))}catch(e){}clSyncSet(r.save._t||0)}else{CL.ready=true;clFlush()}
      try{sessionStorage.setItem('shechu-justlogin','1')}catch(e){}close();location.reload()};
     const hasLocal=(SAVE.items||[]).length>1||(SAVE.coin||0)>1000||(SAVE.clear||[]).length>0;
-    if(r.save&&hasLocal){close();ask('登入後會改用雲端帳號「'+r.user+'」的進度,\n這台裝置目前的進度會被取代,確定嗎?',apply)}else apply()}}
+    /* 1007-Y 雲端存檔是空的時候,保留這台裝置的進度並上傳;兩邊都有進度時讓玩家自己選 */
+    const keepLocal=async()=>{CL.noflush=false;clSet(r.user,r.token);clSyncSet(+r.save_t||(r.save&&+r.save._t)||0);CL.ready=true;CL.kicked=false;CL.gt=Date.now();SAVE._t=Date.now();save();close();
+     try{await clFlush()}catch(e){}if(CL.err){toast('⚠️ 上傳失敗:'+CL.err)}else{sfx('levelUp');toast('☁️ 已把這台裝置的進度上傳到雲端帳號「'+r.user+'」')}clUI();try{renderHome()}catch(e){}};
+    const cs=r.save||{},cloudEmpty=!r.save||!cs.pname||(((cs.items||[]).length<=1)&&((cs.coin||0)<=1000)&&!((cs.clear||[]).length));
+    if(hasLocal&&cloudEmpty){await keepLocal()}
+    else if(r.save&&hasLocal){close();const ov=document.createElement('div');ov.className='ov';const sm=s=>'<b>'+escH(s.pname||'(沒有名字)')+'</b><br>金幣 '+fmtC(s.coin||0)+'・裝備 '+((s.items||[]).length)+' 件・通關 '+((s.clear||[]).length)+' 區';
+     ov.innerHTML='<div class="box" style="max-width:360px;text-align:center"><h2>☁️ 要用哪一份進度?</h2><p class="muted">雲端帳號「'+escH(r.user)+'」和這台裝置都有進度,請選擇要保留哪一份。<br>沒選到的那份會被取代。</p><div style="display:grid;gap:8px;margin-top:10px"><button class="btn" data-k="cloud" style="text-align:left;line-height:1.5">☁️ 用雲端的進度<br><small>'+sm(cs)+'</small></button><button class="btn pri" data-k="local" style="text-align:left;line-height:1.5">📱 用這台裝置的進度(上傳到雲端)<br><small>'+sm(SAVE)+'</small></button><button class="btn" data-k="x">取消</button></div></div>';
+     document.body.appendChild(ov);ov.onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k;ov.remove();if(k==='cloud')apply();else if(k==='local')keepLocal()}}
+    else apply()}}
   catch(e){b.disabled=false;b.textContent=reg?'建立並綁定':'登入';err(clMsg(e))}}}
 document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
  if(t.closest('#clreg'))clModal('reg');else if(t.closest('#clin'))clModal('in');
