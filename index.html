@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-Y">
+<meta name="gbuild" content="1007-Z4">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1558,7 +1558,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-Y</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-Z4</span></small>
   </div>
  </div>
 </div>
@@ -1892,7 +1892,7 @@ function restoreSave(){const R=SAVE._restore;delete SAVE._restore;SAVE.items=SAV
  if(!SAVE.eq.wpn){const u=makeItem(1,0,'wpn',BASES.wpn[0]);SAVE.items.push(u);SAVE.eq.wpn=u.id}
  SAVE._restored=Date.now();setTimeout(()=>{try{save();toast('♻️ 已從排行榜紀錄還原你的進度!')}catch(e){}},1500)}
 function freshSave(){const s={items:[],eq:{},parts:0,unlock:1,clear:[],auto:true,ch:0};const u=makeItem(1,0,'wpn',BASES.wpn[0]);s.items.push(u);s.eq.wpn=u.id;return s}
-function load(){try{const j=localStorage.getItem(KEY);return j?JSON.parse(j):null}catch(e){return null}}
+function load(){try{const j=localStorage.getItem(KEY);if(!j)return null;const o=JSON.parse(j);/* 1007-Z 不完整的存檔(例如幾乎空白的雲端存檔)自動補齊欄位 */try{const f=freshSave();for(const k in f)if(o[k]===undefined||o[k]===null&&f[k]!==null)o[k]=f[k];if(!Array.isArray(o.items))o.items=f.items;if(!o.eq||typeof o.eq!=='object')o.eq=f.eq}catch(e){}return o}catch(e){return null}}
 function save(){try{SAVE._t=Date.now();localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}if(typeof cloudQueue==='function')cloudQueue();if(typeof lbSync==='function'&&typeof LB!=='undefined')lbSync()}
 const byId=id=>SAVE.items.find(i=>i.id===id);
 const isEq=it=>Object.values(SAVE.eq).includes(it.id);
@@ -2742,13 +2742,15 @@ function sbBackend(){const U=ONLINE.supabaseUrl.replace(/\/+$/,''),H={apikey:ONL
  let uid=localStorage.getItem('clockin-uid');if(!uid){uid='p_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('clockin-uid',uid)}
  return{uid,
   set:async p=>{const r=await fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p))});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}},
-  sub:(cb,err)=>{let stop=false,last=0,busy=false;const pull=async()=>{if(stop||busy)return;busy=true;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();last=Date.now();cb(rows)}catch(e){err&&err(e)}busy=false};
+  sub:(cb,err)=>{let stop=false,last=0,busy=false;const pull=async()=>{if(stop||busy)return;busy=true;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();last=Date.now();cb(lbDedupe(rows))}catch(e){err&&err(e)}busy=false};
   const loop=()=>{if(stop)return;const lb=document.getElementById('lbov');if(lb&&!lb.hidden&&document.visibilityState==='visible'&&Date.now()-last>30000)pull();setTimeout(loop,2000)};LB.pullNow=()=>{if(Date.now()-last>3000)pull()};pull();setTimeout(loop,2000);return()=>{stop=true}},
   off:p=>{try{fetch(U+'/rest/v1/leaderboard?on_conflict=id',{method:'POST',keepalive:true,headers:Object.assign({Prefer:'resolution=merge-duplicates,return=minimal'},H),body:JSON.stringify(Object.assign({id:uid},p,{t:1}))})}catch(e){}}}}
 async function lbInit(){
  if(ONLINE.supabaseUrl&&ONLINE.supabaseKey&&!(window.claude&&window.claude.use)){const be=sbBackend();LB.sb=be;LB.uid=be.uid;LB.db=true;LB.ready=true;lbSync(true);if(!$('lbov').hidden)lbOpen();return}
  try{const c=window.claude;if(!c||!c.use){LB.ready=true;return}
  const [u,d]=await Promise.all([c.use('user'),c.use('db')]);LB.user=u;LB.db=d;if(u)LB.uid=await u.id()}catch(e){}LB.ready=true;lbSync(true);if(!$('lbov').hidden)lbOpen()}
+/* 1007-Z2 排行榜同名只顯示一筆:優先自己,其次最近更新的那筆 */
+function lbDedupe(rows){try{const m=new Map();for(const r of rows||[]){const k=String(r.nick||'').trim();if(!k){continue}const o=m.get(k);if(!o||r.id===LB.uid||(o.id!==LB.uid&&(+r.t||0)>(+o.t||0)))m.set(k,r)}return [...m.values()].sort((a,b)=>(b.coin||0)-(a.coin||0))}catch(e){return rows}}
 function lbPayload(){const eq=SLOTS.map(sl=>{const it=byId(SAVE.eq[sl.k]);return it?{b:it.b,q:it.q,n:it.name}:null});
  const rl=SAVE.ride&&rideLv(SAVE.ride)?{id:SAVE.ride,lv:rideLv(SAVE.ride)}:null;
  return Object.assign(LB.noMotto?{}:{motto:SAVE.motto||''},{nick:(SAVE.pname||'').slice(0,12),coin:Math.floor(SAVE.coin||0),power:power(),eq,ride:rl,clear:(SAVE.clear||[]).length})}
@@ -2800,7 +2802,12 @@ function showLogin(){const li=$('login');if(!li)return;mqBulbs();
  const ai=k=>ART[k]||'';$('lgh').src=ai(heroIdleKey());$('lgz1').src=ai('奧客喪屍-atk-1');$('lgz2').src=ai('菜市場大媽喪屍-atk-1');
  if(!$('lgz1').src)$('lgz1').hidden=true;if(!$('lgz2').src)$('lgz2').hidden=true;
  const back=!!SAVE.pname;$('lgname').value=SAVE.pname||'';$('lgname').readOnly=back;$('lglab').textContent=back?'歡迎回來!':'設定你的遊戲暱稱';$('lggo').textContent=back?'繼續上班':'開始上班';
- li.hidden=false;if($('lgsave'))$('lgsave').open=false;if(!back)setTimeout(()=>$('lgname').focus(),300)}
+ li.hidden=false;if($('lgsave'))$('lgsave').open=false;if(!back)setTimeout(()=>$('lgname').focus(),300);if(!back)nickRecover()}
+/* 1007-Z 有雲端帳號但存檔沒有暱稱時,從排行榜找回原本的暱稱(同一個排行榜編號) */
+async function nickRecover(){try{if(SAVE.pname||!ONLINE||!ONLINE.supabaseUrl)return;const uid=localStorage.getItem('clockin-uid');if(!uid||!(SAVE.acct||(CL&&CL.u)))return;
+ const h={apikey:ONLINE.supabaseKey};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;
+ const r=await fetch(ONLINE.supabaseUrl.replace(/\/+$/,'')+'/rest/v1/leaderboard?select=nick,coin&id=eq.'+encodeURIComponent(uid)+'&limit=1',{headers:h});if(!r.ok)return;const a=await r.json();const nk=a&&a[0]&&String(a[0].nick||'').trim();if(!nk||SAVE.pname)return;
+ SAVE.pname=nk;save();const el=$('lgname');if(el){el.value=nk;el.readOnly=true}if($('lglab'))$('lglab').textContent='歡迎回來!';if($('lggo'))$('lggo').textContent='繼續上班';toast('✅ 已找回你的遊戲暱稱「'+nk+'」');try{clFlush()}catch(e){}}catch(e){}}
 /* ===== 暱稱登記:不可與他人重複、改名後 7 天內不能再改 ===== */
 var NK={on:false},NFREE=false;
 (function(){try{NK.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){}})();
@@ -4144,10 +4151,12 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-Y';
+const GBUILD='1007-Z4';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['☁️','雲端帳號登入更安全','登入雲端帳號時,如果雲端上的進度是空的,會自動保留這台裝置的進度並上傳;兩邊都有進度時,可以自己選擇要用哪一份,不會再不小心被空白進度蓋掉'],
+const GNOTES=[['🧹','登出時可以清除這台裝置的進度','登出雲端帳號時多了「登出並清除這台裝置的進度」:會變回新玩家,可以重新取名、建立或登入別的帳號,原本帳號的雲端進度不受影響'],
+ ['🪪','找回遊戲暱稱','登入雲端帳號後,如果存檔裡沒有遊戲暱稱,會自動從排行榜找回原本的暱稱,不用重新輸入'],
+ ['☁️','雲端帳號登入更安全','登入雲端帳號時,如果雲端上的進度是空的,會自動保留這台裝置的進度並上傳;兩邊都有進度時,可以自己選擇要用哪一份,不會再不小心被空白進度蓋掉'],
  ['🃏','射龍門改用 4 副牌','射龍門從 1 副牌(52 張)改成同時使用 4 副牌(208 張),剩不到 52 張才重新洗牌。撞柱機率會穩定在約 12%,不會因為一副牌快發完而忽高忽低。說明:撞柱機率從來沒有被調高,過去偶爾看到 20% 以上,是因為牌快發完時剩下的牌剛好很多張跟門柱同點數。另外牌桌換成荷官居中的新排版,撲克牌放大'],
  ['🎰','射龍門招牌','招牌字變得更清楚,並新增一句「射龍門的盡頭是邪門」跟原本的句子輪流顯示'],
  ['👑','裝備升階:至尊、典藏','紅框裝備可以繼續祈禱升階:神話→至尊(15,000 金幣、成功 12%、25% 降回傳說)、至尊→典藏(30,000 金幣、成功 6%、30% 降回神話)。至尊屬性 2.4 倍、典藏 3 倍並多一條屬性;只能靠祈禱,打怪不會掉'],
@@ -4539,7 +4548,7 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
  $('clx').onclick=close;
  $('clok').onclick=async()=>{const uRaw=$('clu').value.trim(),u=uRaw.toLowerCase(),p=$('clp').value;
   if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<(reg?6:4))return err(reg?'密碼至少要 6 個字':CLERR['bad pass']);
-  if(reg&&SAVE.acct&&SAVE.acct!==u)return err('這台裝置的進度已經綁定帳號「'+SAVE.acct+'」,請直接登入那個帳號,不能再綁到新帳號');
+  if(reg&&SAVE.acct&&SAVE.acct!==u){err('');$('clerr').innerHTML='這台裝置的進度已經綁定帳號「'+escH(SAVE.acct)+'」,不能再綁到新帳號。<br>想用新帳號重新開始,可以<button class="btn" id="clreset" style="margin-top:6px;padding:5px 10px;font-size:13px">🧹 清除這台的進度,重新開始</button>';return}
   if(reg&&p!==$('clp2').value)return err('兩次輸入的密碼不一樣');CL.kicked=false;
   const b=$('clok');b.disabled=true;b.textContent='處理中…';audioUnlock();
   try{if(reg){const nm=SAVE.pname||nkClean($('lgname').value);if(!nm){b.disabled=false;b.textContent='建立並綁定';return err('請先在登入畫面輸入遊戲名稱')}
@@ -4554,7 +4563,7 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
      try{sessionStorage.setItem('shechu-justlogin','1')}catch(e){}close();location.reload()};
     const hasLocal=(SAVE.items||[]).length>1||(SAVE.coin||0)>1000||(SAVE.clear||[]).length>0;
     /* 1007-Y 雲端存檔是空的時候,保留這台裝置的進度並上傳;兩邊都有進度時讓玩家自己選 */
-    const keepLocal=async()=>{CL.noflush=false;clSet(r.user,r.token);clSyncSet(+r.save_t||(r.save&&+r.save._t)||0);CL.ready=true;CL.kicked=false;CL.gt=Date.now();SAVE._t=Date.now();save();close();
+    const keepLocal=async()=>{CL.noflush=false;/* 1007-Z4 排行榜編號和驗證碼要一起換:雲端存檔有驗證碼才改用帳號的編號,否則保留這台的編號,避免農場/暱稱驗證失敗 */const cfk=r.save&&r.save.fkey;if(r.lb_id&&cfk){try{localStorage.setItem('clockin-uid',r.lb_id);LB.uid=r.lb_id}catch(e){}SAVE.fkey=cfk}clSet(r.user,r.token);clSyncSet(+r.save_t||(r.save&&+r.save._t)||0);CL.ready=true;CL.kicked=false;CL.gt=Date.now();SAVE._t=Date.now();save();close();
      try{await clFlush()}catch(e){}if(CL.err){toast('⚠️ 上傳失敗:'+CL.err)}else{sfx('levelUp');toast('☁️ 已把這台裝置的進度上傳到雲端帳號「'+r.user+'」')}clUI();try{renderHome()}catch(e){}};
     const cs=r.save||{},cloudEmpty=!r.save||!cs.pname||(((cs.items||[]).length<=1)&&((cs.coin||0)<=1000)&&!((cs.clear||[]).length));
     if(hasLocal&&cloudEmpty){await keepLocal()}
@@ -4565,7 +4574,19 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
   catch(e){b.disabled=false;b.textContent=reg?'建立並綁定':'登入';err(clMsg(e))}}}
 document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
  if(t.closest('#clreg'))clModal('reg');else if(t.closest('#clin'))clModal('in');
- else if(t.closest('#clout'))ask('確定要登出雲端帳號嗎?\n這台裝置的進度會保留,之後可以再登入。',async()=>{await clFlush();clSet(null,null);toast('已登出雲端帳號')})});
+ else if(t.closest('#clout'))clLogoutAsk();else if(t.closest('#clreset'))devReset()});
+/* 1007-Z3 登出時可以選擇「清除這台裝置的進度」,變回新玩家:可以重新取名、綁定別的帳號(雲端帳號的進度不受影響) */
+function clLogoutAsk(){const ov=document.createElement('div');ov.className='ov';const u=CL.u||SAVE.acct||'';
+ ov.innerHTML='<div class="box" style="max-width:360px;text-align:center"><h2>☁️ 登出雲端帳號</h2><p class="muted">帳號「'+escH(u)+'」的進度已經存在雲端,登出後隨時可以再登入。</p><div style="display:grid;gap:8px;margin-top:10px">'+
+  '<button class="btn" data-k="keep" style="line-height:1.5">登出,保留這台裝置的進度<br><small>之後只能再登入「'+escH(u)+'」</small></button>'+
+  '<button class="btn pri" data-k="wipe" style="line-height:1.5">登出並清除這台裝置的進度<br><small>變成新玩家,可以重新取名、建立或登入別的帳號</small></button>'+
+  '<button class="btn" data-k="x">取消</button></div></div>';
+ document.body.appendChild(ov);ov.onclick=async e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k;ov.remove();if(k==='x')return;
+  try{await clFlush()}catch(x){}
+  if(k==='keep'){clSet(null,null);toast('已登出雲端帳號');return}
+  devWipe()}}
+function devWipe(){try{clSet(null,null)}catch(e){}try{['clockin-hero-v1','clockin-uid','shechu-acct','shechu-annx'].forEach(k=>localStorage.removeItem(k));sessionStorage.clear()}catch(e){}toast('🧹 已清除這台裝置的進度');setTimeout(()=>location.reload(),600)}
+function devReset(){document.querySelectorAll('.clov').forEach(o=>o.remove());const u=SAVE.acct||'';ask('確定要清除這台裝置的進度嗎?\n'+(u?'帳號「'+u+'」在雲端的進度不會受影響,之後可以再登入。\n':'')+'清除後會變成新玩家,可以重新取名、建立新帳號。',async()=>{if(CL.u){try{await clFlush()}catch(e){}}devWipe()})}
 
 function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);clSet(null,null);
  const ov=document.createElement('div');ov.className='ov clov';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>⚠️ 帳號已在其他裝置登入</h2><p>你的雲端帳號剛剛在<b>另一個瀏覽器或裝置</b>登入了。<br>為了避免兩邊的進度互相覆蓋,這裡的進度<b>已停止上傳</b>。</p><p class="muted" style="font-size:12px">如果要改回在這台裝置玩,請重新登入,另一台就會被登出。</p><div class="clbtns"><button class="btn pri" data-a="re">重新登入</button><button class="btn" data-a="x">知道了</button></div></div>';
