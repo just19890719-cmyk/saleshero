@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1008-B">
+<meta name="gbuild" content="1008-G">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1456,7 +1456,21 @@ body.gready #lgload{display:none}
 .potann .x{top:-9px!important;right:-5px!important;width:24px;height:24px;padding:0!important;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#2a1018;border:2px solid #ffd24a;opacity:1!important;font-size:12px!important;font-weight:900;color:#ffe08a;box-shadow:0 2px 6px rgba(0,0,0,.5);cursor:pointer;z-index:2}
 /* 男女主角切換鈕 */
 .hsel{display:flex;gap:6px;align-items:center;justify-content:center;margin:6px 0 8px}.hsel .muted{font-size:12px}
-.hsel button{flex:1;max-width:150px;padding:6px 0;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#cfd6de;font-size:12.5px;font-weight:800}
+/* 1008-G 裝備頁三隻角色各自的背景(地上的光圈對準角色腳底) */
+.dhero.hbon{background-color:#141a22}
+.dhero.hbon.hb-m{background:linear-gradient(rgba(10,14,22,.18),rgba(10,14,22,.42)),var(--hbg-m) 50% 44%/auto 135% no-repeat}
+.dhero.hbon.hb-f{background:linear-gradient(rgba(10,14,22,.18),rgba(10,14,22,.42)),var(--hbg-f) 50% 27%/auto 135% no-repeat}
+.dhero.hbon.hb-a{background:linear-gradient(rgba(10,14,22,.12),rgba(10,14,22,.38)),var(--hbg-a) 50% 6%/auto 135% no-repeat}
+/* 1008-D 恨鐵不成鋼:免費標籤、角色按鈕掃光、裝備頁立繪掃光 */
+.hsel .freeb{position:absolute;top:-8px;right:-4px;font-style:normal;font-size:9.5px;font-weight:900;padding:1px 5px;border-radius:999px;background:linear-gradient(#ff6a5a,#e0302a);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.5)}
+.hsel button[data-hero=a]{overflow:visible;border-color:rgba(120,235,255,.7);background:linear-gradient(115deg,rgba(0,0,0,.35) 35%,rgba(150,245,255,.35) 47%,rgba(0,0,0,.35) 60%) 0 0/300% 100%;animation:mshbtn 2.4s ease-in-out infinite}
+.hsel button[data-hero=a].on{background:linear-gradient(115deg,#7fe9ff 35%,#ffffff 47%,#7fe9ff 60%) 0 0/300% 100%;color:#06303a;border-color:#bff6ff}
+@keyframes mshbtn{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+.dhero .msh{position:relative;display:inline-block;height:auto;line-height:0;margin-bottom:4px}
+.dhero .msh img{display:block;margin:0!important;filter:drop-shadow(0 0 7px rgba(95,240,255,.75)) drop-shadow(0 6px 6px rgba(0,0,0,.25))}
+.dhero .mshc{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.dhero .mfree{position:absolute;left:8px;top:44px;z-index:2;font-size:11px;font-weight:900;padding:2px 8px;border-radius:999px;background:rgba(10,40,52,.85);color:#9ff3ff;border:1px solid rgba(120,235,255,.7)}
+.hsel button{flex:1;max-width:150px;padding:6px 2px;white-space:nowrap;min-width:0;position:relative;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#cfd6de;font-size:12.5px;font-weight:800}
 .hsel button.on{background:linear-gradient(#ffe08a,#e8a923);color:#3a2600;border-color:#ffd24a}
 /* 裝備頁人物顯示全身(1005-ZZD) */
 .dhero>*:not(.pw){max-height:100%}
@@ -1560,7 +1574,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-B</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-G</span></small>
   </div>
  </div>
 </div>
@@ -1919,7 +1933,7 @@ function makeItem(il,q,type,force){
 let ASKF=null;
 function ask(msg,yes){$('askm').textContent=msg;ASKF=yes;$('ask').hidden=false}
 const SELLP={'-1':15,0:30,1:50,2:70,3:180,4:450,5:900,6:1800};/* 1005-ZS:黑框 8→15、銀框 15→30、綠框 30→50 */
-const sellPrice=it=>Math.round(SELLP[it.q]*(1+(it.il||1)*.08)*(1+(it.up||0)*.15));/* 裝備等級加成每級 +8%(原本 +4%) */
+const sellPrice=it=>Math.round(SELLP[it.q]*(1+(it.il||1)*.08)*(1+(it.up||0)*.15))*5;/* 1008-F 賣價 5 倍 *//* 裝備等級加成每級 +8%(原本 +4%) */
 const TIERQ=q=>['黑框','銀框','綠框','藍框','黃金框','紅框'][q+1];
 const ist=(it,k)=>(it.st[k]||0)*(1+.1*it.up);
 const fv=(k,v)=>STAT[k].n+' +'+(k==='regen'?v.toFixed(1):Math.round(v))+(STAT[k].p?'%':'');
@@ -1930,7 +1944,7 @@ const disVal=it=>Math.round([2,5,12,30,80][it.q]*(1+it.up*.5));
 const upCost=it=>Math.round(10*Math.pow(it.up+1,1.5)*(1+it.q*.5));
 
 function pstats(lv){
- const s={atk:12,hp:130,def:0,aspd:0,crit:5,spd:0,pick:0,regen:0,sk:{},wpn:heroF()?'kick':'fist'};
+ const s={atk:12,hp:130,def:0,aspd:0,crit:5,spd:0,pick:0,regen:0,sk:{},wpn:heroA()?'mech':heroF()?'kick':'fist'};
  for(const k in SAVE.eq){const it=byId(SAVE.eq[k]);if(!it)continue;for(const st in it.st)s[st]+=ist(it,st);if(it.sk)s.sk[it.sk]=(s.sk[it.sk]||0)+it.skl;if(k==='wpn')s.wpn=it.w}
  const rd=RIDES.find(r=>r.id===SAVE.ride),rl=rd&&rideLv(rd.id);if(rd&&rl){const b=rideBonus(rd,rl);for(const k in b)s[k]+=b[k];}
  {const n=shopOwned();if(n){const m=1+.01*n;s.atk*=m;s.hp*=m;s.def*=m;s.regen*=m}}
@@ -2112,7 +2126,7 @@ const PRAYL={idle:['把裝備交給我,保證…有一定機率變好!','今天�
  top:['已經是紅框了,再求下去神明要收你房租了']};
 let PSEL=null,PBUSY=false;
 /* 1007-Q 裝備也能祈禱升到至尊、典藏(只能靠祈禱,打怪不會掉) */
-const PRAYT={'-1':[100,.6,0],0:[300,.5,0],1:[800,.4,0],2:[2000,.3,.1],3:[8000,.2,.2],4:[15000,.12,.284],5:[30000,.06,.319]};
+const PRAYT={'-1':[50,.6,0],0:[150,.5,0],1:[400,.4,0],2:[1000,.3,0],3:[4000,.2,0],4:[7500,.12,0],5:[15000,.06,0]};/* 1008-F 祈禱半價、失敗不降階 */
 function prayItem(it){if(!it||PBUSY||it.q>=6)return;const T=PRAYT[it.q];if((SAVE.coin||0)<T[0]){sfx('error');return toast('金幣不夠,這次祈禱要 '+fmtC(T[0])+' 金幣')}
  audioUnlock();SAVE.coin-=T[0];PBUSY=true;dqAdd('pray');renderHome();const d=$('detail');d.classList.add('praying');sfx('bell');toast('🙏 芳芳:南無…升階大菩薩…');
  setTimeout(()=>{const r=Math.random();let res=r<T[1]?'up':r<T[1]+(1-T[1])*T[2]?'down':'same',line;const from=it.q;
@@ -2429,19 +2443,19 @@ $('dlb').querySelector('.dlbt').onclick=e=>{const b=e.target.closest('[data-l]')
 $('drule').addEventListener('toggle',()=>{if(!$('drule').open){SAVE.drule=1;save()}});
 
 /* 男/女主角切換(裝備頁) */
-document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hero]');if(!b)return;const v=b.dataset.hero==='f'?'f':'m';if((SAVE.hero||'m')===v)return;
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hero]');if(!b)return;const v=b.dataset.hero==='f'?'f':b.dataset.hero==='a'?'a':'m';if((SAVE.hero||'m')===v)return;if(v==='a'){armorEnsure();if(!ART['裝甲-idle-1']){toast('「恨鐵不成鋼」圖片載入中,請稍等幾秒再試');return}}
  if(v==='f'&&!ART['女主角-idle-1']){toast('女主角圖片載入中,請稍等幾秒再試');return}
- SAVE.hero=v;save();audioUnlock();sfx('equip');renderHome();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(x){}toast(v==='f'?'👠 換成女主角,開局技能:高跟鞋踢擊':'👊 換成男主角,開局技能:空手揮拳')});
+ SAVE.hero=v;save();audioUnlock();sfx('equip');renderHome();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(x){}toast(v==='a'?'🤖 換成「恨鐵不成鋼」(免費體驗中),開局技能:三段遠距離火力':v==='f'?'👠 換成女主角,開局技能:高跟鞋踢擊':'👊 換成男主角,開局技能:空手揮拳')});
 /* ===== 1005-ZZM:賭徒下場 無限列車(純躲列車小遊戲) =====
    不能攻擊、沒有喪屍;一條命、撐 2 分鐘,五個等級(每班 +50/70/100/130/170);撐完 +400。裝備與座駕屬性不算,大家同樣的移動速度 */
 /* 1005-ZZZD:經濟調整 — 一條命(碰到列車就出局),每班金幣大幅降低 */
-const TR={win:500,dur:120,lim:250,hp:1,daily:5};
+const TR={win:1000,dur:120,lim:250,hp:1,daily:5};/* 1008-F 撐完獎金 2 倍 */
 const trTodayKey=()=>new Date(Date.now()+8*3600e3).toISOString().slice(0,10);
 function trDailyLeft(){const D=SAVE.trDaily;return(!D||D.d!==trTodayKey())?TR.daily:Math.max(0,TR.daily-(D.n||0))}
 function trDailyUse(){const k=trTodayKey();if(!SAVE.trDaily||SAVE.trDaily.d!==k)SAVE.trDaily={d:k,n:0};SAVE.trDaily.n++;save()}/* lim:月台上下邊界(只能在 ±250 之間移動) */
 const TRTAUNT=['欠芳芳的錢還沒還,先跑給列車追吧','賭輸了還想搭車?站長說:用跑的!','十賭九輸,剩下那一次是被列車撞','還債路上,請退到黃線後方'];
 function startTrain(){window.__TR=1;startRun(0)}
-function trInit(){try{trResetOld()}catch(e){}G.tr={hp:TR.hp,inv:0,nx:1.4,n:0,coins:0,last:0,duel:window.__DUEL||0};window.__DUEL=0;G.tr.prac=!G.tr.duel&&trDailyLeft()<=0;if(!G.tr.duel&&!G.tr.prac)trDailyUse();G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.ws={};G.ss={};G.evo={};
+function trInit(){try{trResetOld()}catch(e){}G.tr={hp:TR.hp,inv:0,nx:1.4,n:0,coins:0,last:0,duel:window.__DUEL||0};window.__DUEL=0;G.tr.prac=!G.tr.duel&&trDailyLeft()<=0;if(!G.tr.duel&&!G.tr.prac)trDailyUse();G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.ws={};G.ss={};G.mb=[];G.ms=[];G.mfx=[];G.mcs=[];G.mpf=[];G.evo={};
  G.S=Object.assign({},G.S,{spd:0,regen:0,hp:TR.hp,def:0,dr:0,sk:{}});G.hp=TR.hp;G.lanes=[];G.mod={n:'',d:''};try{$('modb').hidden=true}catch(e){}
  $('hch').textContent=G.tr.duel?'⚔️ 挑戰書對決':G.tr.prac?'🏋️ 無限列車練習場':'🚇 賭徒下場 無限列車';toast(G.tr.duel?'⚔️ 挑戰賽開始!只比成績不給金幣,平手看誰閃得更驚險':G.tr.prac?'🏋️ 今天 '+TR.daily+' 場有獎場次已用完,這場是練習,不給金幣':'🚇 '+pickL(TRTAUNT));sfx('warn')}
 /* 1005-ZZP:總長 2 分鐘,五個等級 普通→困難→非常困難→地獄級別→終極煉獄;每班 50/70/100/130/170 */
@@ -2449,7 +2463,7 @@ const TRT=[{to:15,nm:'普通',ic:'🟡',coin:6,gap:1.7,n:[1,2,2],warn:1.05,sp:1.
  {to:30,nm:'困難',ic:'🟠',coin:8,gap:1.5,n:[2,2,3],warn:.95,sp:1.2,vert:.35,slow:.25,fast:.3},
  {to:60,nm:'非常困難',ic:'🔴',coin:12,gap:1.35,n:[2,3,3],warn:.86,sp:1.3,vert:.5,slow:.25,fast:.4},
  {to:90,nm:'地獄級別',ic:'🔥',coin:16,gap:1.15,n:[2,3,3,3],warn:.78,sp:1.4,vert:.6,slow:.2,fast:.5},
- {to:999,nm:'終極煉獄',ic:'💀',coin:20,gap:1.0,n:[3,3,3,4],warn:.7,sp:1.52,vert:.65,slow:.2,fast:.55}];
+ {to:999,nm:'終極煉獄',ic:'💀',coin:20,gap:1.0,n:[3,3,3,4],warn:.7,sp:1.52,vert:.65,slow:.2,fast:.55}];TRT.forEach(v=>{v.coin*=2});/* 1008-F 每班金幣 2 倍 */
 /* 1005-ZZZC:五個等級全面加難(出車更密、警示更短、速度更快、直向列車更多) */
 function trLevel(t){return TRT.find(v=>t<v.to)}
 /* 確保每一波都留有跑得到的安全空間:平行軌道至少間隔 130,並檢查玩家在警示時間內跑得到的範圍裡有空隙 */
@@ -2585,7 +2599,7 @@ const FLOG={tab:'all',srv:[],t:0};
 function flogAdd(e){const L=SAVE.flog=SAVE.flog||[];L.unshift(Object.assign({t:Date.now()},e));if(L.length>120)L.length=120;save();if($('flogl'))flogRender()}
 const FLK={revenge:['⚔️','up'],revenged:['😱','down'],stolen:['😡','down'],scaredme:['🛡️','up'],steal:['🧺','up'],scared:['💦',''],harvest:['🌾','up'],plant:['🌱',''],guard:['🛡️',''],expand:['🧱','']};
 function flogItems(){const loc=(SAVE.flog||[]).map(e=>Object.assign({},e));const keys=new Set(loc.map(e=>e.k+'|'+(e.who||'')+'|'+(e.crop||'')+'|'+Math.round(e.t/60000)));
- for(const r of FLOG.srv){const t=new Date(r.t).getTime(),k=r.mine?(r.kind==='scared'?'scared':r.kind==='revenge'?'revenge':'steal'):(r.kind==='scared'?'scaredme':r.kind==='revenge'?'revenged':'stolen'),who=r.mine?r.victim_nick:r.thief_nick;const key=k+'|'+(who||'')+'|'+(r.crop||'')+'|'+Math.round(t/60000);if(keys.has(key))continue;keys.add(key);loc.push({t,k,who,crop:r.crop,v:+r.value||0})}
+ for(const r of FLOG.srv){const t=new Date(r.t).getTime(),k=r.mine?(r.kind==='scared'?'scared':r.kind==='revenge'?'revenge':'steal'):(r.kind==='scared'?'scaredme':r.kind==='revenge'?'revenged':'stolen'),who=r.mine?r.victim_nick:r.thief_nick;const key=k+'|'+(who||'')+'|'+(r.crop||'')+'|'+Math.round(t/60000);if(keys.has(key))continue;keys.add(key);loc.push({t,k,who,crop:r.crop,v:(+r.value||0)*FMX})}
  return loc.sort((a,b)=>b.t-a.t)}
 function flogText(e){const c=CROP[e.crop]||null,cn=c?c.n:'作物',w='<b>'+escH(e.who||'神秘同事')+'</b>';
  switch(e.k){case'revenge':return'⚔️ 報仇成功!你採走了 '+w+' 的 '+cn;case'revenged':return'你偷過 '+w+',被他報仇了:採走你的 '+cn;case'stolen':return w+' 採走了你的 '+cn;case'scaredme':return w+' 想偷你的菜,被守衛皮過敏擋下了';case'steal':return'你採走了 '+w+' 的 '+cn;case'scared':return'你去偷 '+w+' 的菜,被守衛皮過敏擋下';
@@ -2911,10 +2925,10 @@ function renderHome(){migItems();
  if($('parts'))$('parts').textContent=fmt(SAVE.parts||0);renderGacha();if(SAVE.tab==='eq')renderPray();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin||0);
   const s=pstats(1),wi=byId(SAVE.eq.wpn);
   $('slots').innerHTML='<div class="doll"><div class="dcol">'+['head','coat','shoe'].map(slotHtml).join('')+'</div>'+
-   '<div class="dhero"><div class="pw"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div>'+icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>')+'</div>'+
+   '<div class="dhero hb-'+(heroA()?'a':heroF()?'f':'m')+(ART['bg-hero-m']?' hbon':'')+'"><div class="pw"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div>'+(heroA()?(armorEnsure(),ART['裝甲-doll']?(mshStart(),'<span class="msh"><img src="'+ART['裝甲-doll']+'" alt=""><canvas class="mshc"></canvas></span><span class="mfree">✦ 免費體驗中</span>'):'<span style="font-size:90px">🤖</span>'):icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>'))+'</div>'+
    '<div class="dcol">'+['off','acc1','acc2'].map(slotHtml).join('')+'</div></div>'+
-   '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()?'':' class="on"')+'>👔 男主角・揮拳</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角・踢擊</button></div>'+
-   '<div class="wrrow"><div class="wslot'+(wi&&wi.q>=5?' eqrq rq'+wi.q:'')+'">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name.replace(/^典藏 /,'')+(wi.up?' +'+wi.up:'')+(wi.q>=5?' <span class="rqb rqb'+wi.q+'">'+RAR[wi.q].n+'</span>':''):(heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
+   '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()||heroA()?'':' class="on"')+'>👔 男主角</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角</button><button data-hero="a"'+(heroA()?' class="on"':'')+'>🤖 恨鐵不成鋼<i class="freeb">免費</i></button></div>'+
+   '<div class="wrrow"><div class="wslot'+(wi&&wi.q>=5?' eqrq rq'+wi.q:'')+'">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name.replace(/^典藏 /,'')+(wi.up?' +'+wi.up:'')+(wi.q>=5?' <span class="rqb rqb'+wi.q+'">'+RAR[wi.q].n+'</span>':''):(heroA()?'空手(裝甲火力)':heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroA()?'三段遠距離火力':heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'&&s.wpn!=='mech'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
    (()=>{const R0=SAVE.ride&&RIDES.find(r=>r.id===SAVE.ride),lv=R0?rideLv(R0.id):0;return'<div class="wslot rslot'+(R0?' rq'+R0.q:'')+'" data-goride="1" style="--rc:'+(R0?RAR[R0.q].c:'rgba(255,255,255,.2)')+'"><div class="rimg">'+(R0&&R0.q>=5?'<span class="rqclip"></span><span class="rqs"></span>':'')+(R0&&R0.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+(R0&&ART['ride-'+R0.id]?'<img src="'+ART['ride-'+R0.id]+'" alt="">':'<span>🚲</span>')+'</div><div><div class="muted">座駕</div><div class="wn'+(R0?' t'+R0.q:'')+'">'+(R0?R0.n+' Lv.'+lv+(R0.q>=5?' <span class="rqb rqb'+R0.q+'">'+RAR[R0.q].n+'</span>':''):'尚未裝備座駕')+'</div><div class="muted">'+(R0?rideText(R0,lv):'點這裡去車庫抽代步車')+'</div></div></div>'})()+'</div>';
   const sv2=(k,v)=>'<div class="stat"><span>'+STI[k]+' '+STAT[k].n+'</span><b>'+v+'</b></div>';
   $('pst').innerHTML=sv2('atk',Math.round(s.atk))+sv2('hp',Math.round(s.hp))+sv2('def',Math.round(s.def))+sv2('aspd','+'+Math.round(s.aspd)+'%')+sv2('crit',Math.round(s.crit)+'%')+sv2('spd','+'+Math.round(s.spd)+'%')+sv2('pick','+'+Math.round(s.pick)+'%')+sv2('regen',s.regen.toFixed(1));
@@ -3158,7 +3172,15 @@ const SFX={
  start:()=>{N('bandpass',400,4000,.35,.25,1.5,0,0,.08);arp([NT(72),NT(79),NT(84)],.07,'triangle',.4,.12,.2)},
  /* 舊名稱相容 */
  swing:()=>SFX.saber(),thud:()=>SFX.slashHit(),throw:()=>SFX.pen(),tick:()=>SFX.roulette(),lob:()=>SFX.lighter(),laser:()=>SFX.flash(),loot:()=>SFX.item(),lvl:()=>SFX.levelUp()};
-const SGAP={car:.9,coffee:.5,lighter:.15,saberSpin:.3,shieldUp:.5,zbHit:.07,crit:.1,zbDie:.09,xp:.04,penHit:.05,pew:.06,clip:.08,splat:.25,hurt:.3,zbAtk1:.35,zbAtk2:.35,zbAtk3:.35,roulette:.03,drum:.05,boom:.08,punch:.05,saber:.05,pen:.04,flash:.05,item:.06,click:.04,cardFlip:.05,chips:.05};
+Object.assign(SFX,{/* 1008-C 動力裝甲 */
+ mgShot:()=>{N('bandpass',3200,900,.05,.3,1.2);T('square',180,70,.05,.16)},
+ msLaunch:()=>{if(!S('tk2_fire1',.32,0,1.25)){N('bandpass',600,3200,.45,.3,.9);T('sawtooth',220,700,.4,.06,0,{lp:[1500,4000]})}},
+ msBoom:()=>{S('tk2_game_explosion5',.5,0,R_(.92,1.08))||SFX.boom();S('lowboom',.35,0,R_(.95,1.05))},
+ mgShell:()=>{S('metalClick',.1,0,R_(1.2,1.5))},
+ cnZap:()=>{S('tk2_lightning',.28,0,1.35)},
+ cnCharge:()=>{T('sine',220,1600,.36,.15,0,{a:.05});T('sawtooth',110,800,.36,.05,0,{a:.05,lp:[800,5000]})},
+ cnFire:()=>{const ok=S('laserL',.85,0,.72);S('lowboom',.55,0,1);if(!ok){N('lowpass',4000,180,.6,.8);T('sawtooth',1400,90,.45,.2,0,{lp:[7000,900]})}T('sine',110,35,.6,.5)}});
+const SGAP={mgShot:.03,msLaunch:.12,cnCharge:.3,cnFire:.2,msBoom:.07,mgShell:.12,cnZap:.3,car:.9,coffee:.5,lighter:.15,saberSpin:.3,shieldUp:.5,zbHit:.07,crit:.1,zbDie:.09,xp:.04,penHit:.05,pew:.06,clip:.08,splat:.25,hurt:.3,zbAtk1:.35,zbAtk2:.35,zbAtk3:.35,roulette:.03,drum:.05,boom:.08,punch:.05,saber:.05,pen:.04,flash:.05,item:.06,click:.04,cardFlip:.05,chips:.05};
 /* SND 由 sounds.js 載入 */
 /* ===== Kenney 真實音效(CC0)+ 合成音效混用 ===== */
 const SB={};
@@ -3301,10 +3323,10 @@ function runStats(){
  s.aspd=Math.min(s.aspd,250);s.crit=Math.min(s.crit,80);s.spd=Math.min(s.spd,120);return s}
 function refreshStats(){const r=G.hp/G.S.hp,old=G.S.hp;G.S=runStats();G.hp=Math.min(G.S.hp,Math.max(G.S.hp*r,G.hp+(G.S.hp-old)))}
 function initSkills(){
- G.ws={};G.ss={};G.evo={};G.wt={};G.lvq=0;G.pd=[];G.dh=[];G.cbD=0;G.wpnB=((SAVE.eq&&byId(SAVE.eq.wpn))||{}).b;G.ep=[];G.ejet=[];G.etel=[];G.e2fx=[];G.shield=0;G.mod=pick(MODS);G.ref=3+(G.mod.ref||0);
+ G.ws={};G.ss={};G.mb=[];G.ms=[];G.mfx=[];G.mcs=[];G.mpf=[];G.evo={};G.wt={};G.lvq=0;G.pd=[];G.dh=[];G.cbD=0;G.wpnB=((SAVE.eq&&byId(SAVE.eq.wpn))||{}).b;G.ep=[];G.ejet=[];G.etel=[];G.e2fx=[];G.shield=0;G.mod=pick(MODS);G.ref=3+(G.mod.ref||0);
  /* 1006-F:空手連擊(男:三段拳/女:三段踢)永遠保留;有裝武器的話,武器技能另外再加一格 */
  if(SAVE.ride==='classic'&&rideLv('classic'))G.shield=(G.shield||0)+1;
- G.ws[heroF()?'kick':'fist']=1;if(G.base.wpn&&G.base.wpn!=='fist'&&G.base.wpn!=='kick')G.ws[G.base.wpn]=1;
+ G.ws[heroA()?'mech':heroF()?'kick':'fist']=1;if(G.base.wpn&&G.base.wpn!=='fist'&&G.base.wpn!=='kick'&&G.base.wpn!=='mech')G.ws[G.base.wpn]=1;
  for(const k in G.base.sk)if(WKEYS.includes(k)&&Object.keys(G.ws).length<6)G.ws[k]=Math.min(5,G.base.sk[k]);
  G.S=runStats();G.hp=G.S.hp;
  const mb=$('modb');mb.innerHTML='<b>'+G.mod.n+'</b><small>'+G.mod.d+'</small>';mb.hidden=false;mb.style.opacity=1;
@@ -3326,14 +3348,14 @@ function rollOpts(n,forChest){
  return out}
 function optInfo(o){
  if(o.t==='heal')return{n:'速食套餐',ic:ART['速食套餐'],d:'吃飽有力氣,生命完全回復',lv:0,cls:'sup'};
- if(o.t==='coin')return{n:'開工紅包$200',ic:ART['開工紅包'],d:'金幣 +200',lv:0,cls:'sup'};
+ if(o.t==='coin')return{n:'開工紅包$1688',ic:ART['開工紅包'],d:'金幣 +1688',lv:0,cls:'sup'};
  if(o.t==='evo'){const e=WS[o.k].evo;return{n:e.n,ic:ART[e.ic||WS[o.k].ic],d:'突破!'+e.d,lv:-1,cls:'evo'}}
  if(o.t==='w'){const c=G.ws[o.k]||0,d=WS[o.k];const ev=d.evo?'突破組合:'+d.n+' 5★ + '+d.evo.w:'';return{n:wName(o.k),ic:wIcon(o.k),d:d.d[c],lv:c+1,nw:!c,cls:'',cb:ev}}
  const c=G.ss[o.k]||0,ev=WKEYS.find(k=>WS[k].evo&&WS[k].evo.w===o.k);
  return{n:o.k,ic:ART[o.k],d:SUP[o.k].d+(c?'(累計 '+(c+1)+' 層)':''),lv:c+1,nw:!c,cls:'sup',cb:ev?'突破組合:'+WS[ev].n+' 5★':''}}
 function applyOpt(o){
  if(o.t==='heal'){G.hp=G.S.hp;return}
- if(o.t==='coin'){SAVE.coin=(SAVE.coin||0)+200;G.coinB=(G.coinB||0)+200;save();return}
+ if(o.t==='coin'){SAVE.coin=(SAVE.coin||0)+1688;G.coinB=(G.coinB||0)+1688;save();return}
  if(o.t==='evo'){G.evo[o.k]=1;toast('突破!'+WS[o.k].evo.n);sfx('evo')}
  else if(o.t==='w')G.ws[o.k]=(G.ws[o.k]||0)+1;else G.ss[o.k]=(G.ss[o.k]||0)+1;
  refreshStats()}
@@ -3357,7 +3379,7 @@ function openChest(){
  if(!G||G.over)return;CHESTING=true;running=false;joy=null;
  const r=Math.random(),n=r<.55?1:r<.85?2:3,res=[];
  for(let i=0;i<n;i++){const o=rollOpts(1,true)[0];res.push({o,f:optInfo(o)});applyOpt(o)}
- const icons=[...Object.keys(G.ws).map(k=>({i:wIcon(k),n:wName(k)})),...Object.keys(G.ss).map(k=>({i:ART[k],n:k})),{i:ART['速食套餐'],n:'速食套餐'},{i:ART['開工紅包'],n:'開工紅包$200'}].filter(o=>o.i);
+ const icons=[...Object.keys(G.ws).map(k=>({i:wIcon(k),n:wName(k)})),...Object.keys(G.ss).map(k=>({i:ART[k],n:k})),{i:ART['速食套餐'],n:'速食套餐'},{i:ART['開工紅包'],n:'開工紅包$1688'}].filter(o=>o.i);
  const ring=[0,1,2,3,7,11,15,14,13,12,8,4];let h='';for(let i=0;i<16;i++){if(i===5){h+='<div class="mid"><img src="'+(ART['業績獎金']||'')+'" alt=""></div>';continue}if([6,9,10].includes(i))continue;const ic=icons.length?pick(icons):{i:'',n:''};h+='<div class="c" data-p="'+i+'"><img src="'+ic.i+'" alt=""><span>'+ic.n+'</span></div>'}
  $('chgrid').innerHTML=h;$('chres').innerHTML='';$('chok').hidden=true;$('chest').hidden=false;
  const cells=ring.map(p=>$('chgrid').querySelector('[data-p="'+p+'"]'));let step=0;const used=new Set();
@@ -3409,6 +3431,7 @@ function combat(dt){
  const S=G.S,A=S.atk,ar=S.area||1,cdm=1/(1+S.aspd/100);
  const rdy=k=>{G.wt[k]=(G.wt[k]||0)-dt;return G.wt[k]<=0};const cd=(k,v)=>{G.wt[k]=v};
  for(const k in G.ws){const lv=G.ws[k],ev=!!G.evo[k];
+  if(k==='mech'){mechCombat(lv,A,ar,cdm,rdy,cd);continue}
   if(k==='kick'){if(!rdy(k))continue;/* 三段連踢 前踢→側踢→迴旋踢(轉身、打周圍一圈);傷害在腳踢出去那一格才生效 */
    const R=75*ar*(lv>=3?1.2:1),t=nearest(1,R+40)[0];if(!t){G.wt[k]=0;continue}
    if(G.t-(G.cbt||-9)>1.5)G.cb=0;const st=G.cb||0;G.cbs=st;G.cbAt=G.t;G.cbt=G.t;G.cb=(st+1)%3;G.cbD=seqDur(HSEQ.f[st]);
@@ -3716,9 +3739,143 @@ const HSEQ={m:[[['男主角-njab-1',0.03],['男主角-njab-2',0.03],['男主角-
  f:[[['女主角-nfront-1',0.03],['女主角-nfront-2',0.05],['女主角-nfront-3',0.04],['女主角-nfront-4',0.13],['女主角-nfront-5',0.06],['女主角-nfront-6',0.05]],[['女主角-nside-1',0.03],['女主角-nside-2',0.05],['女主角-nside-3',0.04],['女主角-nside-4',0.14],['女主角-nside-5',0.06],['女主角-nside-6',0.05]],[['女主角-nspin8-1',.03],['女主角-nspin8-2',.05],['女主角-nspin8-3',.05],['女主角-nspin8-4',.05],['女主角-nspin8-5',.05],['女主角-nspin8-6',.15],['女主角-nspin8-7',.06],['女主角-nspin8-8',.05]]]};
 const HHIT={m:[.10,.09,.16],f:[.12,.12,.23]};
 const HSTRIKE={m:[3,2,3],f:[3,3,5]};
+/* ===== 1008-C 新角色:動力裝甲「恨鐵不成鋼」(SAVE.hero='a');1008-D 換成正式美術 + 掃光特效,目前免費體驗 ===== */
+const heroA=()=>!!(typeof SAVE!=='undefined'&&SAVE&&SAVE.hero==='a');
+const MECH_NAME='恨鐵不成鋼';
+const ANIMA={idle:[1,2,3,4,5,6,7,8].map(i=>'裝甲-idle-'+i),run:[1,2,3,4,5,6,7,8].map(i=>'裝甲-run-'+i),atk:['裝甲-gun-1','裝甲-gun-2','裝甲-gun-8'],atk2:['裝甲-msl-2','裝甲-msl-3','裝甲-msl-6'],atk3:['裝甲-cnn-3','裝甲-cnn-4','裝甲-cnn-7']};
+/* 美術在 assets-mech.js,用到這隻角色時才優先下載 */
+function armorEnsure(){try{if(!ART['裝甲-idle-1']&&typeof ensurePack==='function')ensurePack('mech')}catch(e){}}
+/* 動作時間軸(同樣的圖,用停留時間做出節奏):蓄力/準備停久一點,出手那一格很短 */
+HSEQ.a=[
+ [['裝甲-gun-1',.06],['裝甲-gun-2',.045],['裝甲-gun-3',.045],['裝甲-gun-4',.045],['裝甲-gun-2',.045],['裝甲-gun-3',.045],['裝甲-gun-4',.045],['裝甲-gun-6',.05],['裝甲-gun-7',.05],['裝甲-gun-8',.05]],
+ [['裝甲-msl-1',.07],['裝甲-msl-2',.15],['裝甲-msl-3',.05],['裝甲-msl-4',.13],['裝甲-msl-5',.07],['裝甲-msl-6',.06],['裝甲-msl-7',.06]],
+ [['裝甲-cnn-1',.08],['裝甲-cnn-2',.12],['裝甲-cnn-3',.16],['裝甲-cnn-4',.06],['裝甲-cnn-5',.2],['裝甲-cnn-6',.07],['裝甲-cnn-7',.07]]];
+HHIT.a=[.06,.22,.36];HSTRIKE.a=[-1,-1,3];
+/* 1008-G 瞄準方向:正上、右上、水平、右下、正下 5 種姿勢,依敵人方向自動選,槍口/拳頭位置跟著姿勢走 */
+const AZ={"g": [[-0.6, 124.9], [29.8, 114.7], [34.2, 89.9], [19.9, 57.0], [10.9, 43.5]], "c": [[-0.6, 128.6], [21.4, 113.3], [24.4, 91.7], [18.4, 56.9], [12.0, 49.1]]},AIMH=460;
+ANIMA.aim=[1,2,3,4,5].map(i=>'裝甲-ag-'+i).concat([1,2,3,4,5].map(i=>'裝甲-ac-'+i));
+const mechAimOK=()=>!!ART['裝甲-ag-1']&&!!ART['裝甲-ac-1'];
+function mechDir(a){const s=Math.max(-1,Math.min(1,Math.sin(a)));return Math.max(0,Math.min(4,Math.round(Math.asin(s)/(Math.PI/4))+2))}
+function mechAimKey(st,j,k){if(!mechAimOK()||G.mdir==null)return k;if(st===0&&j>=1&&j<=6)return '裝甲-ag-'+(G.mdir+1);if(st===2&&(j===3||j===4))return '裝甲-ac-'+(G.mdir+1);return k}
+
+/* 平衡參數(測試後可調):射程、每種火力的傷害倍率、冷卻 */
+const MECH={R:600,mg:{n:6,dmg:.2,spd:1300,gap:.045},ms:{n:3,dmg:.6,R:62,spd:640},cn:{dmg:1.8,wd:22},cdT:[.75,1,1.7]};
+/* 槍口、拳頭砲口、胸前蓄力光球、背上飛彈艙相對腳底的位置(朝右,依正式美術量測) */
+const MZ={x:31,y:81},CZ={x:48,y:93},OZ={x:5,y:74},PZ={x:9,y:70};
+WS.mech={n:'恨鐵三段火力',ic:'sk-mech',d:['三段遠距離火力:機關槍連射 → 追蹤飛彈 → 能量砲貫穿一整排,射程超遠','傷害 +30%','射程 +20%、飛彈 +1 枚','傷害 +30%','攻速 +40%、機關槍 +2 發']};
+
+/* ===== 1008-E 攻擊特效改用 AI 美術(沒載到時自動退回程式畫的簡易版) ===== */
+const MXA={"mx-flash-1": [0.017, 0.505], "mx-flash-2": [0.019, 0.493], "mx-flash-3": [0.019, 0.506], "mx-flash-4": [0.02, 0.512], "mx-tracer-1": [0.97, 0.5], "mx-tracer-2": [0.97, 0.5], "mx-tracer-3": [0.97, 0.5], "mx-beam": [0, 0.5], "mx-burst-1": [0.703, 0.399], "mx-burst-2": [0.5, 0.501], "mx-burst-3": [0.449, 0.474], "mx-splash-1": [0.5, 0.8], "mx-splash-2": [0.5, 0.8], "mx-splash-3": [0.5, 0.8], "mx-boom-1": [0.5, 0.62], "mx-boom-2": [0.5, 0.62], "mx-boom-3": [0.5, 0.62], "mx-boom-4": [0.5, 0.62], "mx-boom-5": [0.5, 0.62], "mx-boom-6": [0.5, 0.62], "mx-boom-7": [0.5, 0.62], "mx-boom-8": [0.5, 0.62], "mx-msl-1": [0.62, 0.5], "mx-msl-2": [0.62, 0.5], "mx-msl-3": [0.62, 0.5], "mx-msl-4": [0.62, 0.5], "mx-launch-1": [0.72, 0.55], "mx-launch-2": [0.72, 0.55], "mx-launch-3": [0.72, 0.55], "mx-launch-4": [0.72, 0.55]};
+function mxImg(k){const im=IMG[k];return im&&im.complete&&im.naturalWidth?im:null}
+const mxHave=()=>!!mxImg('mx-boom-1')&&!!mxImg('mx-beam');
+function mxDraw(k,x,y,w,rot,flip,al,add){const im=mxImg(k);if(!im)return false;const A=MXA[k]||[.5,.5],h=w*im.naturalHeight/im.naturalWidth;
+ ctx.save();ctx.translate(x,y);if(rot)ctx.rotate(rot);if(flip)ctx.scale(-1,1);if(al!==undefined)ctx.globalAlpha=Math.max(0,Math.min(1,al));if(add)ctx.globalCompositeOperation='lighter';ctx.drawImage(im,-A[0]*w,-A[1]*h,w,h);ctx.restore();return true}
+function mxSeq(f){const p=Math.min(.999,f.t/f.d),i=Math.floor(p*f.n);return mxDraw(f.img+'-'+(i+1),f.x,f.y,f.w*(f.grow?1+p*f.grow:1),f.rot||0,f.flip,f.fade?1-Math.max(0,(p-f.fade)/(1-f.fade)):1,f.add)}
+function mechCombat(lv,A,ar,cdm,rdy,cd){
+ if(!rdy('mech'))return;const M=MECH,R=M.R*(lv>=3?1.2:1),t=nearest(1,R)[0];if(!t){G.wt.mech=0;return}
+ if(G.t-(G.cbt||-9)>1.5)G.cb=0;const st=G.mlock!=null?G.mlock:(G.cb||0);G.cbs=st;G.cbAt=G.t;G.cbt=G.t;G.cb=(st+1)%3;G.cbD=seqDur(HSEQ.a[st]);G.atk=G.cbD;
+ G.face=t.x>=G.x?1:-1;const dm=A*(1+.3*((lv>=2)+(lv>=4)));G.dh=G.dh||[];
+ const tgt=()=>t.hp>0&&G.en.includes(t)?t:nearest(1,R)[0];
+ if(st===0){/* 機關槍:每一發都是一個事件,槍口火光、彈殼、音效都跟著那一發 */
+  const n=M.mg.n+(lv>=5?2:0);
+  for(let i=0;i<n;i++)G.dh.push({t:HHIT.a[0]+i*M.mg.gap,f:()=>{const tt=tgt();if(!tt)return;G.face=tt.x>=G.x?1:-1;const ok=mechAimOK(),d=ok?mechDir(Math.atan2(tt.y-tt.r-(G.y-80),Math.abs(tt.x-G.x))):2;G.mdir=d;const Z=ok?AZ.g[d]:[MZ.x,MZ.y],mx=G.x+G.face*Z[0],my=G.y-Z[1],a=Math.atan2(tt.y-tt.r-my,tt.x-mx)+rnd(-.035,.035);
+   G.mb.push({x:mx,y:my,vx:Math.cos(a)*M.mg.spd,vy:Math.sin(a)*M.mg.spd,a,life:R*1.1/M.mg.spd,dmg:dm*M.mg.dmg,v:1+(i%3)});G.mfx.push({k:'mz',x:mx,y:my,a,t:0,d:.06,i});
+   if(mxHave()){if(G.mcs.length<24)G.mcs.push({x:G.x-G.face*2,y:my+6,vx:-G.face*rnd(70,130),vy:-rnd(140,220),gy:G.y+rnd(-3,8),t:0,r:Math.random()*4,b:0})}else part(G.x-G.face*4,my+6,1,{c:'#e8c15a',k:'drop',a:-Math.PI/2-G.face*.6,sp:.4,v0:80,v1:150,g:650,l0:.3,l1:.5,s:2});sfx('mgShot')}})}
+ else if(st===1){/* 飛彈:肩上艙蓋打開停頓一下,再一枚一枚射出,先往上飛再轉向追蹤 */
+  const n=M.ms.n+(lv>=3?1:0);G.dh.push({t:Math.max(0,HHIT.a[1]-.04),f:()=>sfx('msLaunch')});
+  for(let i=0;i<n;i++)G.dh.push({t:HHIT.a[1]+i*.06,f:()=>{const ts=nearest(n,R*1.1),tt=ts.length?ts[i%ts.length]:null,px=G.x+G.face*PZ.x+rnd(-5,5),py=G.y-PZ.y;
+   G.ms.push({x:px,y:py,a:-Math.PI/2-G.face*(.3+i*.16),v:230,t:0,tg:tt,dmg:dm*M.ms.dmg,R:M.ms.R*ar,pt:0});if(mxHave()){if(i===0)G.mfx.push({k:'sq',img:'mx-launch',n:4,x:px-G.face*14,y:py+8,w:78,t:0,d:.55,flip:G.face<0,fade:.6})}else part(px,py,3,{c:'rgba(230,230,230,.7)',k:'smoke',v0:10,v1:40,l0:.3,l1:.6,s:7})}})}
+ else{/* 能量砲:伸手蓄力(光越聚越大)→ 一道粗光束貫穿整排 */
+  G.mfx.push({k:'chg',t:0,d:HHIT.a[2]});sfx('cnCharge');
+  G.dh.push({t:HHIT.a[2],f:()=>{const tt=tgt();if(tt)G.face=tt.x>=G.x?1:-1;const ok=mechAimOK(),d=ok&&tt?mechDir(Math.atan2(tt.y-tt.r-(G.y-80),Math.abs(tt.x-G.x))):2;G.mdir=d;const Z=ok?AZ.c[d]:[CZ.x,CZ.y],ox=G.x+G.face*Z[0],oy=G.y-Z[1],a=tt?Math.atan2(tt.y-tt.r-oy,tt.x-ox):(G.face>0?0:Math.PI),L=R*1.15,wd=M.cn.wd*ar*(lv>=3?1.2:1),cx=Math.cos(a),cy=Math.sin(a);
+   let nz=0;for(const e of G.en){const px=e.x-ox,py=e.y-e.r-oy,pr=px*cx+py*cy;if(pr<0||pr>L)continue;if(Math.abs(px*cy-py*cx)<wd+e.r){hit(e,dm*M.cn.dmg,140,a);if(mxHave()&&nz++<10)G.mfx.push({k:'sq',img:'mx-zap',n:4,x:e.x,y:e.y-e.r*1.4,w:66+e.r,t:0,d:.32,add:1,rot:Math.random()*6.28})}}
+   G.mfx.push({k:'cnn',x:ox,y:oy,a,L,wd,t:0,d:.38});sfx('cnFire');if(nz)sfx('cnZap');shake(5);try{hitStop(.05)}catch(e){}
+   for(let i=0;i<NP(14);i++){const r=rnd(30,L);part(ox+cx*r,oy+cy*r,1,{c:'#c8fbff',v0:30,v1:140,l0:.2,l1:.45,s:2.5})}}})}
+ cd('mech',M.cdT[st]*cdm*(lv>=5?.6:1))}
+function mechTick(dt){if(!G||!G.mb)return;
+ for(let i=G.mb.length-1;i>=0;i--){const b=G.mb[i];let dead=false;
+  for(let s=0;s<2&&!dead;s++){b.x+=b.vx*dt/2;b.y+=b.vy*dt/2;for(const e of G.en){const dx=e.x-b.x,dy=e.y-e.r-b.y;if(dx*dx+dy*dy<(e.r+6)**2){hit(e,b.dmg,35,b.a);if(mxHave()){if(G.mfx.length<90)G.mfx.push({k:'sq',img:'mx-spark',n:5,x:b.x,y:b.y,w:46,t:0,d:.24,add:1,rot:Math.random()*6.28})}else part(b.x,b.y,3,{c:'#ffe58a',v0:80,v1:220,l0:.08,l1:.18,s:2});dead=true;break}}}
+  b.life-=dt;if(dead||b.life<=0)G.mb.splice(i,1)}
+ for(let i=G.ms.length-1;i>=0;i--){const m=G.ms[i];m.t+=dt;
+  if(!m.tg||m.tg.hp<=0||!G.en.includes(m.tg)){m.tg=null;let bd=9e9;for(const e of G.en){const d=(e.x-m.x)**2+(e.y-m.y)**2;if(d<bd){bd=d;m.tg=e}}}
+  if(m.t>.16&&m.tg){const want=Math.atan2(m.tg.y-m.tg.r*.6-m.y,m.tg.x-m.x),d=angD(want,m.a),tr=(m.t<.45?5:10)*dt;m.a+=Math.max(-tr,Math.min(tr,d))}
+  m.v=Math.min(MECH.ms.spd,m.v+950*dt);m.x+=Math.cos(m.a)*m.v*dt;m.y+=Math.sin(m.a)*m.v*dt;
+  if(mxHave()){m.pt-=dt;if(m.pt<=0&&G.mpf.length<90){m.pt=.035;G.mpf.push({x:m.x-Math.cos(m.a)*14+rnd(-2,2),y:m.y-Math.sin(m.a)*14+rnd(-2,2),t:0,d:rnd(.45,.7),s:rnd(9,14),r:Math.random()*6.28})}}
+  else if(G.pt.length<230&&Math.random()<.8)part(m.x-Math.cos(m.a)*10,m.y-Math.sin(m.a)*10,1,{c:'rgba(225,228,232,.6)',k:'smoke',v0:4,v1:18,l0:.3,l1:.55,s:6});
+  let boom=m.t>2.4;if(!boom&&m.t>.12)for(const e of G.en){const dx=e.x-m.x,dy=e.y-e.r-m.y;if(dx*dx+dy*dy<(e.r+10)**2){boom=true;break}}
+  if(boom){mechBoom(m);G.ms.splice(i,1)}}
+ for(let i=G.mfx.length-1;i>=0;i--){const f=G.mfx[i];f.t+=dt;if(f.t>=f.d)G.mfx.splice(i,1)}
+ if(G.mpf)for(let i=G.mpf.length-1;i>=0;i--){const q=G.mpf[i];q.t+=dt;q.y-=8*dt;if(q.t>=q.d)G.mpf.splice(i,1)}
+ if(G.mcs)for(let i=G.mcs.length-1;i>=0;i--){const c=G.mcs[i];c.t+=dt;c.vy+=900*dt;c.x+=c.vx*dt;c.y+=c.vy*dt;c.r+=dt*18*(c.b?.3:1);
+  if(c.y>=c.gy&&c.vy>0){c.y=c.gy;if(c.b<1){c.vy*=-.35;c.vx*=.5;c.b++;sfx('mgShell')}else{c.vy=0;c.vx*=.8}}if(c.t>.9)G.mcs.splice(i,1)}}
+function mechBoom(m){const R=m.R,gy=m.y+16;aoe(m.x,gy,R,m.dmg,150);
+ if(mxHave())G.mfx.push({k:'sq',img:'mx-boom',n:8,x:m.x,y:gy,w:R*2.9,t:0,d:.7,fade:.7,bm:1});else{G.fx.push({k:'boom',x:m.x,y:gy,R,t:0,d:.55});part(m.x,m.y-4,5,{c:'rgba(90,90,90,.5)',k:'smoke',v0:15,v1:50,up:30,l0:.5,l1:.9,s:14})}
+ part(m.x,m.y,10,{c:'#ffb347',v0:120,v1:300,l0:.2,l1:.4,s:3});decal(m.x,gy,'scorch',R*.8);shake(3);sfx('msBoom')}
+function mechDraw(){if(!G||!G.mb)return;
+ if(!mxHave())return mechDrawOld();
+ /* 爆炸先畫(在地上),再畫飛彈尾煙 */
+ for(const f of G.mfx)if(f.bm)mxSeq(f);
+ for(const q of G.mpf){const p=q.t/q.d,i=Math.min(4,Math.floor(p*5));mxDraw('mx-puff-'+(i+1),q.x,q.y,q.s*(1+p*1.4),q.r,false,.85*(1-p*.75))}
+ for(const f of G.mfx)if(f.k==='sq'&&f.img==='mx-launch')mxSeq(f);
+ /* 蓄力光球 */
+ for(const f of G.mfx)if(f.k==='chg'){const p=Math.min(1,f.t/f.d),i=Math.min(5,Math.floor(p*6)),ox=G.x+G.face*OZ.x,oy=G.y-OZ.y;mxDraw('mx-chg-'+(i+1),ox,oy,46+p*58,G.t*2,false,1,true)}
+ /* 彈殼 */
+ for(const c of G.mcs)mxDraw('mx-shell-'+(1+(Math.floor(c.r)%4)),c.x,c.y,9,0,false,c.t>.7?1-(c.t-.7)/.2:1);
+ /* 曳光彈 */
+ for(const b of G.mb)mxDraw('mx-tracer-'+(b.v||1),b.x,b.y,56,b.a,false,1,true);
+ /* 飛彈:本體輪播尾焰 */
+ for(const m of G.ms)mxDraw('mx-msl-'+(1+(Math.floor(G.t*24+m.R)%4)),m.x,m.y,38,m.a,false,1);
+ /* 能量砲光束:用拼接的方式畫,打多遠接多長 */
+ for(const f of G.mfx){const p=f.t/f.d;
+  if(f.k==='mz'){mxDraw('mx-flash-'+(1+(f.i||0)%4),f.x,f.y,40*(1-p*.3),f.a,false,1-p*.5,true)}
+  else if(f.k==='cnn'){const im=mxImg('mx-beam');const al=p<.1?p/.1:1-(p-.1)/.9,fl=.88+.12*Math.sin(f.t*90),bh=f.wd*5.4*(1-p*.35)*fl,tw=im.naturalWidth*bh/im.naturalHeight,off=(f.t*900)%tw;
+   ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.a);ctx.globalCompositeOperation='lighter';ctx.globalAlpha=al;ctx.beginPath();ctx.rect(0,-bh,f.L,bh*2);ctx.clip();
+   for(let x=-off;x<f.L;x+=tw-1)ctx.drawImage(im,x,-bh/2,tw,bh);ctx.restore();
+   const bi=Math.min(3,Math.floor(p*4));mxDraw('mx-burst-'+(bi+1),f.x,f.y,120,f.a,false,1,true);
+   const si=Math.min(2,Math.floor(p*3));mxDraw('mx-splash-'+(si+1),f.x+Math.cos(f.a)*f.L,f.y+Math.sin(f.a)*f.L+20,110,0,false,1-p*.4,true)}
+  else if(f.k==='sq'&&!f.bm&&f.img!=='mx-launch')mxSeq(f)}}
+function mechDrawOld(){
+ for(const f of G.mfx)if(f.k==='chg'){const p=Math.min(1,f.t/f.d),ox=G.x+G.face*OZ.x,oy=G.y-OZ.y,r=8+p*26;ctx.save();ctx.globalCompositeOperation='lighter';
+  const g=ctx.createRadialGradient(ox,oy,0,ox,oy,r*1.6);g.addColorStop(0,'rgba(235,255,255,'+(.6+.4*p)+')');g.addColorStop(.4,'rgba(95,240,255,'+(.5*p+.2)+')');g.addColorStop(1,'rgba(95,240,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(ox,oy,r*1.6,0,6.283);ctx.fill();
+  ctx.strokeStyle='rgba(160,250,255,'+(.3+.5*p)+')';ctx.lineWidth=2;ctx.lineCap='round';for(let i=0;i<7;i++){const a=i*.898+f.t*4,ph=(f.t*3.2+i*.19)%1,d0=64*(1-ph),d1=Math.max(0,d0-16);ctx.beginPath();ctx.moveTo(ox+Math.cos(a)*d0,oy+Math.sin(a)*d0);ctx.lineTo(ox+Math.cos(a)*d1,oy+Math.sin(a)*d1);ctx.stroke()}ctx.restore()}
+ ctx.save();ctx.lineCap='round';for(const b of G.mb){const L=34,cx=Math.cos(b.a),cy=Math.sin(b.a);ctx.strokeStyle='rgba(255,210,90,.55)';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(b.x-cx*L,b.y-cy*L);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.strokeStyle='#fffbe0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(b.x-cx*L*.6,b.y-cy*L*.6);ctx.lineTo(b.x,b.y);ctx.stroke()}ctx.restore();
+ for(const m of G.ms){ctx.save();ctx.translate(m.x,m.y);ctx.rotate(m.a);ctx.globalCompositeOperation='lighter';const fl=8+Math.random()*9,g=ctx.createLinearGradient(-8-fl,0,-6,0);g.addColorStop(0,'rgba(255,120,30,0)');g.addColorStop(1,'rgba(255,235,160,.95)');ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(-6,-3.5);ctx.lineTo(-8-fl,0);ctx.lineTo(-6,3.5);ctx.closePath();ctx.fill();
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle='#e9eef3';ctx.fillRect(-7,-3.5,14,7);ctx.fillStyle='#ff9a3c';ctx.beginPath();ctx.moveTo(7,-3.5);ctx.lineTo(12,0);ctx.lineTo(7,3.5);ctx.closePath();ctx.fill();ctx.fillStyle='#4d6582';ctx.fillRect(-8,-5.5,4,11);ctx.restore()}
+ for(const f of G.mfx){const p=f.t/f.d;
+  if(f.k==='mz'){ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.a);ctx.globalCompositeOperation='lighter';ctx.globalAlpha=Math.max(0,1-p);const s=1+Math.random()*.4;ctx.fillStyle='rgba(255,220,120,.9)';ctx.beginPath();ctx.moveTo(0,-6*s);ctx.lineTo(26*s,0);ctx.lineTo(0,6*s);ctx.closePath();ctx.fill();ctx.fillStyle='#fffbe8';ctx.beginPath();ctx.arc(2,0,5*s,0,6.283);ctx.fill();ctx.restore()}
+  else if(f.k==='cnn'){const al=p<.1?p/.1:1-(p-.1)/.9,fl=.85+.15*Math.sin(f.t*80),w=f.wd*(1-p*.4)*fl;ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.a);ctx.globalCompositeOperation='lighter';
+   let g=ctx.createLinearGradient(0,-w*2.2,0,w*2.2);g.addColorStop(0,'rgba(95,240,255,0)');g.addColorStop(.5,'rgba(95,240,255,'+(.55*al)+')');g.addColorStop(1,'rgba(95,240,255,0)');ctx.fillStyle=g;ctx.fillRect(0,-w*2.2,f.L,w*4.4);
+   ctx.fillStyle='rgba(150,250,255,'+(.8*al)+')';ctx.fillRect(0,-w*.75,f.L,w*1.5);ctx.fillStyle='rgba(255,255,255,'+al+')';ctx.fillRect(0,-w*.32,f.L,w*.64);
+   g=ctx.createRadialGradient(0,0,0,0,0,w*3);g.addColorStop(0,'rgba(255,255,255,'+al+')');g.addColorStop(1,'rgba(95,240,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,w*3,0,6.283);ctx.fill();
+   ctx.strokeStyle='rgba(200,255,255,'+(.7*al)+')';ctx.lineWidth=2;for(let i=0;i<3;i++){const x=((p*2+i/3)%1)*f.L;ctx.beginPath();ctx.ellipse(x,0,w*.35,w*1.4,0,0,6.283);ctx.stroke()}ctx.restore()}}}
+/* 1008-D 掃光特效:一道斜向白光定時掃過角色(只照在角色身上),加上腳下青色光環 */
+const SHC2=document.createElement('canvas'),SHX=SHC2.getContext('2d');
+function mechSheen(k,x,y,h,flip){try{const c=sprite(k,'',Math.round(h),flip);if(!c||!c.width)return;
+ const per=2.4,ph=(G.t%per)/per,dur=.42;if(ph>dur)return;const p=ph/dur;
+ if(SHC2.width!==c.width||SHC2.height!==c.height){SHC2.width=c.width;SHC2.height=c.height}
+ SHX.globalCompositeOperation='source-over';SHX.clearRect(0,0,c.width,c.height);SHX.drawImage(c,0,0);SHX.globalCompositeOperation='source-in';
+ const W2=c.width,H2=c.height,bx=-W2*.6+p*W2*2.2,g=SHX.createLinearGradient(bx,0,bx+W2*.55,H2*.35);
+ g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.42,'rgba(190,250,255,.55)');g.addColorStop(.5,'rgba(255,255,255,.95)');g.addColorStop(.58,'rgba(190,250,255,.55)');g.addColorStop(1,'rgba(255,255,255,0)');
+ SHX.fillStyle=g;SHX.fillRect(0,0,W2,H2);
+ ctx.save();ctx.globalCompositeOperation='lighter';ctx.drawImage(SHC2,x-c.w/2,y-Math.round(h),c.w,Math.round(h));ctx.restore()}catch(e){}}
+function mechAura(x,y){const pu=.5+.5*Math.sin(G.t*4);ctx.save();ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(x,y,0,x,y,34);g.addColorStop(0,'rgba(95,240,255,'+(.22+.12*pu)+')');g.addColorStop(1,'rgba(95,240,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x,y,34,13,0,0,6.283);ctx.fill();
+ ctx.strokeStyle='rgba(140,245,255,'+(.25+.2*pu)+')';ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(x,y,26+3*pu,9+1*pu,0,0,6.283);ctx.stroke();ctx.restore()}
+/* 裝備頁立繪的掃光:只在掃過的 0.7 秒畫,其餘時間不重畫(省電) */
+function mshStart(){if(mshStart.on)return;mshStart.on=1;setTimeout(()=>requestAnimationFrame(mshTick),0)}
+function mshTick(){const cv=document.querySelector('.dhero .mshc');if(!cv){mshStart.on=0;return}requestAnimationFrame(mshTick);
+ const im=cv.previousElementSibling;if(!im||!im.complete||!im.naturalWidth||!im.clientWidth)return;
+ const d=Math.min(2,window.devicePixelRatio||1),W=Math.round(im.clientWidth*d),H=Math.round(im.clientHeight*d),x=cv.getContext('2d');
+ if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H;cv._c=1}
+ const t=(performance.now()/1000)%2.6,dur=.7;
+ if(t>dur){if(cv._c){x.clearRect(0,0,W,H);cv._c=0}return}
+ const p=t/dur,bx=-W*.7+p*W*2.2,g=x.createLinearGradient(bx,0,bx+W*.6,H*.3);
+ g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.42,'rgba(190,250,255,.45)');g.addColorStop(.5,'rgba(255,255,255,.9)');g.addColorStop(.58,'rgba(190,250,255,.45)');g.addColorStop(1,'rgba(255,255,255,0)');
+ x.globalCompositeOperation='source-over';x.clearRect(0,0,W,H);x.drawImage(im,0,0,W,H);x.globalCompositeOperation='source-in';x.fillStyle=g;x.fillRect(0,0,W,H);cv._c=1}
+setTimeout(()=>{try{if(heroA())armorEnsure()}catch(e){}},300);
+
 const seqDur=s=>s.reduce((a,f)=>a+f[1],0);
-const heroAnim=()=>heroF()?(ANIMF.idle.every(k=>IMG[k])&&ANIMF.atk3.every(k=>IMG[k])?ANIMF:ANIM):(ANIMM.idle.every(k=>IMG[k])&&ANIMM.atk3.every(k=>IMG[k])?ANIMM:ANIM);
-const heroIdleKey=()=>heroF()&&ART['女主角-idle-1']?'女主角-idle-1':(!heroF()&&ART['男主角-idle-1']?'男主角-idle-1':(HERO_HD?'主角HD-idle-1':'主角動畫-idle-1'));
+const heroAnim=()=>heroA()?(armorEnsure(),ANIMA):heroF()?(ANIMF.idle.every(k=>IMG[k])&&ANIMF.atk3.every(k=>IMG[k])?ANIMF:ANIM):(ANIMM.idle.every(k=>IMG[k])&&ANIMM.atk3.every(k=>IMG[k])?ANIMM:ANIM);
+const heroIdleKey=()=>heroA()?(armorEnsure(),'裝甲-idle-1'):heroF()&&ART['女主角-idle-1']?'女主角-idle-1':(!heroF()&&ART['男主角-idle-1']?'男主角-idle-1':(HERO_HD?'主角HD-idle-1':'主角動畫-idle-1'));
 /* 高清怪物圖的格數(與原本不同時) */
 const HDN={'菜市場大媽喪屍':{walk:6}};
 function hdN(){for(const n in HDN)for(const a in HDN[n]){const k=n+'-'+a+'-1';if(EANIM[n]&&ART[k]&&ART[k].length>9000&&IMG[k]&&IMG[k].src===ART[k]&&ART['__hd_'+n])EANIM[n][a]=Array.from({length:HDN[n][a]},(_,i)=>n+'-'+a+'-'+(i+1))}}
@@ -3739,7 +3896,7 @@ function update(dt){
   G.spawn+=dt*(BAL.spawn+G.t/BAL.spawnG);while(G.spawn>=1){G.spawn--;if(G.en.length<Q.cap)spawn(ENE[pick(ch.pool)],'n')}
   if(G.t>=G.elite){G.elite+=BAL.elite;spawn(ch.elite?ENE[pick(ch.elite)]:pick(ELITE),'elite');toast('精英怪出現!');sfx('eliteRoar')}
  }else if(!G.boss){G.boss=true;const b=BOSS[CH[G.c].boss];if(!b){toast('撐過 3 分鐘,通關!');endRun(true);return}spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*(CH[G.c].bA||BAL.bossAtk))*mult();bossInit(be);be.b.k=CH[G.c].boss}
-  combat(dt);projectiles(dt);
+  combat(dt);projectiles(dt);mechTick(dt);
  const far=Math.hypot(W,H)*.9;
  for(const e of G.en){
   const dx=G.x-e.x,dy=G.y-e.y,d=Math.hypot(dx,dy)||1;
@@ -3848,19 +4005,19 @@ function drawHero(){
  const AN=heroAnim();
  if(AN.idle.every(k=>IMG[k])){
   let arr,i;
-  if(G.atk>0&&(AN===ANIMM||AN===ANIMF)&&G.cbD&&G.t-(G.cbAt||-9)<G.cbD+.02){const sq=HSEQ[AN===ANIMF?'f':'m'][G.cbs||0];let el=G.t-G.cbAt,j=0;while(j<sq.length-1&&el>sq[j][1]){el-=sq[j][1];j++}
-   const fr=sq[j],who=AN===ANIMF?'f':'m',st=G.cbs||0,hT=HHIT[who][st],eT=G.t-G.cbAt,hh=AN===ANIMM?110.4:108;
+  if(G.atk>0&&(AN===ANIMM||AN===ANIMF||AN===ANIMA)&&G.cbD&&G.t-(G.cbAt||-9)<G.cbD+.02){const sq=HSEQ[AN===ANIMF?'f':AN===ANIMA?'a':'m'][G.cbs||0];let el=G.t-G.cbAt,j=0;while(j<sq.length-1&&el>sq[j][1]){el-=sq[j][1];j++}
+   const fr=sq[j],who=AN===ANIMF?'f':AN===ANIMA?'a':'m',st=G.cbs||0,hT=HHIT[who][st],eT=G.t-G.cbAt,hh=AN===ANIMM?110.4:AN===ANIMA?120:108;
    /* 出手瞬間身體往前衝再收回 + 打到最遠那格留殘影 */
-   const lg=G.face*(st===2?14:10)*Math.max(0,1-Math.abs(eT-hT)/.15),px=G.x+lg;
-   shadow(px,G.y,22);
-   if(j===HSTRIKE[who][st]){drawImg(fr[0],'',px-G.face*14,G.y+2,hh,G.face<0,0,.22);drawImg(fr[0],'',px-G.face*7,G.y+2,hh,G.face<0,0,.35)}
-   drawImg(fr[0],'',px,G.y+2,hh,G.face<0,0,G.hurt>0?.45:1);return}
+   const lg=(who==='a'?-G.face*[2,5,10][st]:G.face*(st===2?14:10))*Math.max(0,1-Math.abs(eT-hT)/.15),px=G.x+lg;const FK=who==='a'?mechAimKey(st,j,fr[0]):fr[0],FH=FK.indexOf('裝甲-a')===0?hh*AIMH/368:hh;/* 1008-C 裝甲是後座力往後退 */
+   if(who==='a')mechAura(px,G.y);shadow(px,G.y,22);
+   if(j===HSTRIKE[who][st]){drawImg(FK,'',px-G.face*14,G.y+2,FH,G.face<0,0,.22);drawImg(FK,'',px-G.face*7,G.y+2,FH,G.face<0,0,.35)}
+   drawImg(FK,'',px,G.y+2,FH,G.face<0,0,G.hurt>0?.45:1);if(who==='a')mechSheen(FK,px,G.y+2,FH,G.face<0);return}
   if(G.atk>0){arr=AN.atk;i=Math.min(arr.length-1,Math.floor((1-G.atk/ATKD)*arr.length))}
-  else if(G.moving){arr=AN.run;i=Math.floor(G.t*(AN===ANIMF?12:AN===ANIMM?12:(HERO_HD?14:13)))%arr.length}
-  else{arr=AN.idle;i=Math.floor(G.t*(AN===ANIMF||AN===ANIMM?6:5))%arr.length}
-  shadow(G.x,G.y,22);
+  else if(G.moving){arr=AN.run;i=Math.floor(G.t*(AN===ANIMF?12:AN===ANIMM?12:AN===ANIMA?13:(HERO_HD?14:13)))%arr.length}
+  else{arr=AN.idle;i=Math.floor(G.t*(AN===ANIMF||AN===ANIMM||AN===ANIMA?6:5))%arr.length}
+  if(AN===ANIMA)mechAura(G.x,G.y);shadow(G.x,G.y,22);
   if(G.shield){ctx.strokeStyle='rgba(120,200,255,.8)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(G.x,G.y-50,48,0,Math.PI*2);ctx.stroke()}
-  drawImg(arr[i],'🧑‍💼',G.x,G.y+2,AN===ANIMM?110.4:108,G.face<0,0,G.hurt>0?.45:1);return;
+  drawImg(arr[i],'🧑‍💼',G.x,G.y+2,AN===ANIMM?110.4:AN===ANIMA?120:108,G.face<0,0,G.hurt>0?.45:1);if(AN===ANIMA)mechSheen(arr[i],G.x,G.y+2,120,G.face<0);return;
  }
  const atk=G.atk>0,bob=G.moving&&!atk?Math.abs(Math.sin(G.t*12))*4:0,breathe=!G.moving&&!atk?1+Math.sin(G.t*3)*.02:1;
  let k='主角-待機',rot=0;
@@ -3993,7 +4150,7 @@ function draw(){
   for(const l of G.lob){const p=l.t/l.d,x=l.x0+(l.x1-l.x0)*p,y=l.y0+(l.y1-l.y0)*p-Math.sin(p*Math.PI)*90;
    ctx.strokeStyle='rgba(230,60,40,'+(.25+.5*p)+')';ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();ctx.ellipse(l.x1,l.y1,75*(1.15-.15*p),75*.5*(1.15-.15*p),0,0,6.283);ctx.stroke();ctx.setLineDash([]);
    shadow(x,l.y0+(l.y1-l.y0)*p,10);drawThermos(x,y,p*12)}
-  bossDrawTop();e2DrawTop();if(G.tr)trDrawTop();drawFx();
+  mechDraw();bossDrawTop();e2DrawTop();if(G.tr)trDrawTop();drawFx();
  if(G.drops.length)for(const d of G.drops)if(d.it&&(d.it.q>=3||d.boss===2)&&!(d.pt<1)){ctx.fillStyle=d.boss===2?'#ffe27a':RAR[d.it.q].c;ctx.font='bold '+(d.boss===2?14:12)+'px system-ui';ctx.textAlign='center';if(d.boss===2){ctx.strokeStyle='rgba(0,0,0,.8)';ctx.lineWidth=3;ctx.strokeText('★ '+d.it.name,d.x,d.y-120)}ctx.fillText((d.boss===2?'★ ':'')+d.it.name,d.x,d.y-(d.boss===2?120:76))}
  ctx.textAlign='center';ctx.textBaseline='middle';
  for(const f of G.fx)if(f.k==='num'){const p=f.t/f.d,sc=p<.16?(f.cr?2.1:1.6)-(f.cr?1.1:.6)*(p/.16):1,yy=f.y-(1-Math.pow(1-p,2.2))*(f.cr?34:26),fs=Math.round((f.cr?20:13)*sc);
@@ -4028,7 +4185,7 @@ SAVE=load()||freshSave();if(SAVE._restore){try{restoreSave()}catch(e){console.er
 const CROPS=[{id:'pot',n:'辦公室小盆栽',e:'🪴',cost:100,g:300000,v:300,d:'上班空檔點一下'},{id:'chili',n:'朝天椒',e:'🌶️',cost:500,g:1800000,v:1500,d:'被主管罵的心情'},
  {id:'coffee',n:'咖啡樹',e:'☕',cost:1500,g:7200000,v:4000,d:'續命必備'},{id:'tea',n:'高山茶',e:'🍵',cost:2500,g:14400000,v:7000,d:'上班種、下班收'},
  {id:'berry',n:'草莓',e:'🍓',cost:4000,g:28800000,v:12000,d:'睡前種、起床收'},{id:'money',n:'搖錢樹',e:'💰',cost:10000,g:86400000,v:30000,d:'每天一次的期待'}];
-const CROP=Object.fromEntries(CROPS.map(c=>[c.id,c]));
+const FMX=2;CROPS.forEach(c=>{c.v*=FMX});/* 1008-F 農場收成 2 倍 */const CROP=Object.fromEntries(CROPS.map(c=>[c.id,c]));
 /* 1005-ZZZH:農場經濟維持原本數字(照顧只玩農場的玩家) */
 const FEXP=[1000,2000,4000,6000,9000,12000,16000,20000];
 var FM={on:false,plots:null,size:4,off:0,busy:false,err:'',t:0,logs:[],view:null};
@@ -4071,15 +4228,20 @@ async function fmAct(a,i){if(FM.busy)return;audioUnlock();const pl=FM.plots&&FM.
     SAVE.fsize=n+1;SAVE.coin-=cost;save();sfx('equip');try{flogAdd({k:'expand',n:n+1})}catch(e){}toast('🧱 擴建完成!現在有 '+(n+1)+' 塊地')}catch(e){sfx('error');toast(fmMsg(e))}FM.busy=false;renderFarm();renderHome()});return}
  FM.busy=true;
  try{if(a==='water'){if(FM.on)fmApply(await fmRpc('farm_water',{p_id:fmId(),p_key:fmKey(),p_idx:i}));else{pl.p-=Math.floor(pl.g/10);pl.w=true;save()}sfx('splat');toast('💧 澆水完成,成長時間縮短 10%')}
-  else if(a==='harvest'){let v,c;if(FM.on){const r=await fmRpc('farm_harvest',{p_id:fmId(),p_key:fmKey(),p_idx:i});fmApply(r);v=r.value;c=CROP[r.crop]}else{const st=fmState(pl);if(st.k!=='ripe')throw{msg:'not ripe'};v=st.c.v;c=st.c;fmLocal().plots[i]=null;FM.plots=fmLocal().plots}
+  else if(a==='harvest'){let v,c;if(FM.on){const r=await fmRpc('farm_harvest',{p_id:fmId(),p_key:fmKey(),p_idx:i});fmApply(r);v=(+r.value||0)*FMX;c=CROP[r.crop]}else{const st=fmState(pl);if(st.k!=='ripe')throw{msg:'not ripe'};v=st.c.v;c=st.c;fmLocal().plots[i]=null;FM.plots=fmLocal().plots}
    const vt=taxIncome(v);SAVE.coin=(SAVE.coin||0)+v-vt;SAVE.fharv=(SAVE.fharv||0)+1;dqAdd('harv');save();try{flogAdd({k:'harvest',crop:(c&&c.id)||'',v:v-vt})}catch(e){}sfx('coins');toast((c?c.e+' ':'')+'收成 +'+fmtC(v-vt)+' 金幣'+taxTxt(vt));renderHome()}}
  catch(e){sfx('error');toast(fmMsg(e));if(FM.on)fmSync()}
  FM.busy=false;renderFarm()}
 /* 1007-P 農場一鍵採收、一鍵種植 */
-async function fmHarvestAll(){if(FM.busy)return;audioUnlock();const idx=FM.plots.slice(0,FM.size).map((p,i)=>fmState(p).k==='ripe'?i:-1).filter(i=>i>=0);if(!idx.length)return;FM.busy=true;let tot=0,tax=0,n=0,fail=0;
- for(const i of idx){try{let v,c;if(FM.on){const r=await fmRpc('farm_harvest',{p_id:fmId(),p_key:fmKey(),p_idx:i});fmApply(r);v=r.value;c=CROP[r.crop]}else{const st=fmState(FM.plots[i]);if(st.k!=='ripe')continue;v=st.c.v;c=st.c;fmLocal().plots[i]=null;FM.plots=fmLocal().plots}
-   const vt=taxIncome(v);SAVE.coin=(SAVE.coin||0)+v-vt;tot+=v-vt;tax+=vt;n++;SAVE.fharv=(SAVE.fharv||0)+1;dqAdd('harv');try{flogAdd({k:'harvest',crop:(c&&c.id)||'',v:v-vt})}catch(e){}}catch(e){fail++}}
- save();FM.busy=false;if(n){sfx('coins');toast('🧺 一鍵採收 '+n+' 塊,+'+fmtC(tot)+' 金幣'+taxTxt(tax)+(fail?'('+fail+' 塊失敗)':''))}else{sfx('error');toast('採收失敗,請稍後再試');if(FM.on)fmSync()}renderHome();renderFarm()}
+async function fmHarvestAll(){if(FM.busy)return;audioUnlock();const idx=FM.plots.slice(0,FM.size).map((p,i)=>fmState(p).k==='ripe'?i:-1).filter(i=>i>=0);if(!idx.length)return;
+ /* 1008-G 一鍵採收立刻有反應:先收進畫面、加錢,再在背景跟伺服器確認;沒收成功的再扣回 */
+ const exp={};let tot=0,tax=0;for(const i of idx){const st=fmState(FM.plots[i]),v=st.c.v,vt=taxIncome(v);exp[i]={v,vt,c:st.c};tot+=v-vt;tax+=vt;FM.plots[i]=null}
+ if(!FM.on){const f=fmLocal();for(const i of idx)f.plots[i]=null;FM.plots=f.plots}
+ SAVE.coin=(SAVE.coin||0)+tot;SAVE.fharv=(SAVE.fharv||0)+idx.length;for(const i of idx){dqAdd('harv');try{flogAdd({k:'harvest',crop:exp[i].c.id,v:exp[i].v-exp[i].vt})}catch(e){}}
+ save();sfx('coins');toast('🧺 一鍵採收 '+idx.length+' 塊,+'+fmtC(tot)+' 金幣'+taxTxt(tax));renderHome();renderFarm();
+ if(!FM.on)return;FM.busy=true;let last=null,fail=0,adj=0;
+ for(const i of idx){try{const r=await fmRpc('farm_harvest',{p_id:fmId(),p_key:fmKey(),p_idx:i});last=r;const v=(+r.value||0)*FMX;if(v!==exp[i].v){const vt=taxIncome(v);adj+=(v-vt)-(exp[i].v-exp[i].vt)}}catch(e){fail++;adj-=exp[i].v-exp[i].vt}}
+ FM.busy=false;if(last)fmApply(last);if(adj){SAVE.coin=Math.max(0,(SAVE.coin||0)+adj);save()}if(fail){sfx('error');toast('⚠️ 有 '+fail+' 塊沒收到(可能被別人先採走了),已扣回 '+fmtC(-adj)+' 金幣');fmSync()}renderHome();renderFarm()}
 function fmSeedPick(i){const ov=document.createElement('div');ov.className='ov fsov';const coin=SAVE.coin||0;
  const ALL=i<0,empN=FM.plots.slice(0,FM.size).filter(p=>!p).length;
  ov.innerHTML='<div class="box fsbox"><h2>🌱 '+(ALL?'一鍵種植:'+empN+' 塊空地都種同一種':'選擇要種的作物')+'</h2><div class="fshead"><span>💰 你的金幣 <b>'+fmtC(coin)+'</b></span><span>種完可以關掉遊戲,<b>離線也會長大</b></span></div><div class="fslist">'+CROPS.map(c=>{const poor=coin<c.cost;
@@ -4089,9 +4251,15 @@ function fmSeedPick(i){const ov=document.createElement('div');ov.className='ov f
  document.body.appendChild(ov);sfx('open');
  ov.onclick=async e=>{const b=e.target.closest('[data-c]');if(!b){if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}return}
   const c=CROP[b.dataset.c];if((SAVE.coin||0)<c.cost)return;ov.remove();
-  if(ALL){FM.busy=true;const idx=FM.plots.slice(0,FM.size).map((p,k)=>p?-1:k).filter(k=>k>=0);let n=0,fail=0,spent=0;
-   for(const k of idx){if((SAVE.coin||0)<c.cost)break;try{if(FM.on)fmApply(await fmRpc('farm_plant',{p_id:fmId(),p_key:fmKey(),p_idx:k,p_crop:c.id}));else{fmLocal().plots[k]={c:c.id,p:Date.now(),g:c.g,w:false};FM.plots=fmLocal().plots}SAVE.coin-=c.cost;spent+=c.cost;n++;try{flogAdd({k:'plant',crop:c.id,v:c.cost})}catch(e){}}catch(e){fail++}}
-   save();FM.busy=false;if(n){sfx('equip');toast(c.e+' 一鍵種下 '+n+' 塊'+c.n+',花費 '+fmtC(spent)+' 金幣,'+fmT(c.g)+'後成熟'+(n<idx.length&&!fail?'(金幣不夠,剩下的沒種)':'')+(fail?'('+fail+' 塊失敗)':''))}else{sfx('error');toast('種植失敗,請稍後再試');if(FM.on)fmSync()}renderHome();renderFarm();return}
+  if(ALL){if(FM.busy)return;const idx=FM.plots.slice(0,FM.size).map((p,k)=>p?-1:k).filter(k=>k>=0);const use=idx.slice(0,Math.floor((SAVE.coin||0)/c.cost));if(!use.length)return;
+   /* 1008-G 一鍵種植立刻有反應:先在畫面上種好、扣錢,再在背景送到伺服器 */
+   const now=FM.on?fmNow():Date.now();for(const k of use)FM.plots[k]={c:c.id,p:now,g:c.g,w:false};if(!FM.on){const f=fmLocal();for(const k of use)f.plots[k]={c:c.id,p:now,g:c.g,w:false};FM.plots=f.plots}
+   const spent=c.cost*use.length;SAVE.coin-=spent;save();sfx('equip');renderHome();renderFarm();
+   toast(c.e+' 一鍵種下 '+use.length+' 塊'+c.n+',花費 '+fmtC(spent)+' 金幣,'+fmT(c.g)+'後成熟'+(use.length<idx.length?'(金幣不夠,剩下的沒種)':''));
+   for(const k of use){try{flogAdd({k:'plant',crop:c.id,v:c.cost})}catch(e){}}
+   if(!FM.on)return;FM.busy=true;let fail=0,last=null;
+   for(const k of use){try{last=await fmRpc('farm_plant',{p_id:fmId(),p_key:fmKey(),p_idx:k,p_crop:c.id})}catch(e){fail++}}
+   FM.busy=false;if(last)fmApply(last);if(fail){SAVE.coin=(SAVE.coin||0)+c.cost*fail;save();sfx('error');toast('⚠️ 有 '+fail+' 塊沒種成功,已退回 '+fmtC(c.cost*fail)+' 金幣');fmSync()}renderHome();renderFarm();return}
   FM.busy=true;
   try{if(FM.on)fmApply(await fmRpc('farm_plant',{p_id:fmId(),p_key:fmKey(),p_idx:i,p_crop:c.id}));else{fmLocal().plots[i]={c:c.id,p:Date.now(),g:c.g,w:false};FM.plots=fmLocal().plots}
    SAVE.coin-=c.cost;save();sfx('equip');toast(c.e+' 種下 '+c.n+','+fmT(c.g)+'後成熟');try{flogAdd({k:'plant',crop:c.id,v:c.cost})}catch(e){}renderHome()}catch(e){sfx('error');toast(fmMsg(e));fmSync()}
@@ -4112,7 +4280,7 @@ async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人
   if((SAVE.fblk||{})[bk]){toast('🛡️ 這塊已經被皮過敏擋下了,去採別塊吧');return}
   if(!RV&&FM.guardU>Date.now()&&Math.random()<GUARD.rate){(SAVE.fblk=SAVE.fblk||{})[bk]=Date.now();save();fmMarkBlocked(id,FM.view&&FM.view.plots);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:0,p_crop:'',p_kind:'scared'}).catch(()=>{});flogAdd({k:'scared',who:vn})}sfx('wahwah');toast('🛡️ 被農場守衛皮過敏擋下了!這塊作物你採不到了,去採別塊吧');return}
   mine=+b.dataset.i;try{await fmSync();const r=await fmRpc('farm_pick',{p_target:id,p_id:fmId(),p_key:fmKey(),p_nick:SAVE.pname||'',p_idx:+b.dataset.i});
-   const st=RV?0:taxIncome(r.value,TAXSTEAL);SAVE.coin=(SAVE.coin||0)+r.value-st;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value-st)+' 金幣'+(st>0?'(芳芳抽贓款稅 20%:'+fmtC(st)+',已丟進射龍門池底)':''));
+   r.value=(+r.value||0)*FMX;const st=RV?0:taxIncome(r.value,TAXSTEAL);SAVE.coin=(SAVE.coin||0)+r.value-st;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value-st)+' 金幣'+(st>0?'(芳芳抽贓款稅 20%:'+fmtC(st)+',已丟進射龍門池底)':''));
    ripeHide();fmFeedAdd(id,(FM.view&&FM.view.nick)||nick,r.crop,r.value);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value,p_crop:r.crop,p_kind:RV?'revenge':'steal'}).catch(()=>socRpc('farm_steal_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value}).catch(()=>{}));flogAdd({k:RV?'revenge':'steal',who:vn,crop:r.crop,v:r.value-st});if(RV){const L=foeList();delete L[nick];SAVE.foes=L;save();foeRender();toast('⚔️ 報仇成功!'+nick+' 從仇人名單移除')}}FWB.t=0}
   catch(e){sfx('error');toast(fmMsg(e))}load()};
  load()}
@@ -4156,10 +4324,14 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1008-B';
+const GBUILD='1008-G';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['🔧','能力修正','單眼相機升級加寬、藍牙喇叭時,畫面上的光束也會變粗;萬能鋼筆多支時扇形縮小,遠距離也能多支命中;攻速現在也會加快熱咖啡、迴紋針轉速和首領裝備技能;無限悠遊卡每撿一顆寶石回復 1%~3% 生命'],
+const GNOTES=[['🎯','恨鐵不成鋼會瞄準了','打上方、下方的敵人時,手臂和槍口會跟著轉向(正上、斜上、水平、斜下、正下),子彈和能量砲從槍口、拳頭正確射出;裝備頁三隻角色各有自己的背景;一鍵種植、一鍵採收按下去立刻有反應'],
+['💰','經濟大調整','祈禱升階全部半價,而且失敗不會再降階;道具賣價變成 5 倍;無限列車金幣 2 倍(每班和撐完獎金);農場收成 2 倍;年終獎金抽到「開工紅包」變成 $1688'],
+['💥','恨鐵不成鋼 攻擊特效升級','機關槍有槍口火光、曳光彈、命中火花和彈殼彈跳;飛彈有發射白煙、一路尾煙和全新爆炸;能量砲有蓄力光球、會流動的光束、砲口爆發、打到底的水花和命中電擊'],
+['🤖','新角色「恨鐵不成鋼」免費體驗','裝備頁的角色可以選「恨鐵不成鋼」:機關槍連射 → 追蹤飛彈 → 能量砲貫穿一整排,射程超遠,全身還有掃光特效。目前免費體驗中!'],
+['🔧','能力修正','單眼相機升級加寬、藍牙喇叭時,畫面上的光束也會變粗;萬能鋼筆多支時扇形縮小,遠距離也能多支命中;攻速現在也會加快熱咖啡、迴紋針轉速和首領裝備技能;無限悠遊卡每撿一顆寶石回復 1%~3% 生命'],
  ['⚡','載入與連線加速','圖片改成用到才解碼,開遊戲更快、更省記憶體;資源檔依照需要的順序載入;更新版本後不用重新下載全部圖片;減少背景的連線次數,更省流量和電'],
  ['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
  ['📱','多裝置登入全自動','同一個帳號一次只能在一台裝置上線:在新裝置登入時,舊裝置會自動下線,新裝置自動接續最新進度,不用再自己選擇。被下線的裝置按「在這台繼續玩」重新登入即可'],
@@ -4665,16 +4837,18 @@ var PK={extra:['assets-extra.js?v=1007H',function(){if(window.__artExtra)window.
  boss:['assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)}],
  cars:['assets-cars.js?v=1006K',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
  stage2:['assets-stage2.js?v=1007B',function(){if(window.__artPack&&window.ART_STAGE2){window.__artPack(window.ART_STAGE2);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
- train:['assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}}]};
-var PKO=['extra','hero2','hd','boss','cars','stage2','train'],PKS={};
+ train:['assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}}],
+ herobg:['assets-herobg.js?v=1008G',function(){if(window.__artPack&&window.ART_HEROBG){window.__artPack(window.ART_HEROBG);try{const r=document.documentElement.style;for(const k of ['m','f','a'])if(ART['bg-hero-'+k])r.setProperty('--hbg-'+k,'url('+ART['bg-hero-'+k]+')');if(!$('home').hidden)renderHome()}catch(e){}}}],
+ mech:['assets-mech.js?v=1008G',function(){if(window.__artPack&&window.ART_MECH){window.__artPack(window.ART_MECH);try{if(!$('home').hidden)renderHome()}catch(e){}}}]};
+var PKO=['extra','herobg','hero2','hd','boss','cars','stage2','train','mech'],PKS={};/* 1008-D 恨鐵不成鋼的圖放最後背景下載;選了這隻角色才優先 */
 function pkLoad(n,next){if(PKS[n])return;PKS[n]=1;var p=PK[n];add(p[0],function(){try{p[1]()}catch(e){}PKS[n]=2;if(next)setTimeout(next,60)});}
 function pkNext(){for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
 window.ensurePack=function(){for(var i=0;i<arguments.length;i++)if(PK[arguments[i]])pkLoad(arguments[i])};
 function hook(name,fn){var o=window[name];if(typeof o!=='function')return;window[name]=function(){try{fn.apply(this,arguments)}catch(e){}return o.apply(this,arguments)}}
-hook('startRun',function(c){ensurePack('hero2','hd','boss');if(c===1)ensurePack('stage2');try{const A=(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
-hook('setTab',function(t){if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2')});
+hook('startRun',function(c){ensurePack('hero2','hd','boss');try{if(SAVE.hero==='a')ensurePack('mech')}catch(e){}if(c===1)ensurePack('stage2');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
+hook('setTab',function(t){if(t==='eq')ensurePack('herobg');if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2')});
 hook('casSwitch',function(t){if(t==='train')ensurePack('train')});
-function go(){pkNext()}
+function go(){try{if(SAVE&&SAVE.hero==='a')pkLoad('mech',pkNext)}catch(e){}pkNext()}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
