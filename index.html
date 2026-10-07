@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-Z4">
+<meta name="gbuild" content="1007-Z8">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1558,7 +1558,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-Z4</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-Z8</span></small>
   </div>
  </div>
 </div>
@@ -4151,10 +4151,13 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-Z4';
+const GBUILD='1007-Z8';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['🧹','登出時可以清除這台裝置的進度','登出雲端帳號時多了「登出並清除這台裝置的進度」:會變回新玩家,可以重新取名、建立或登入別的帳號,原本帳號的雲端進度不受影響'],
+const GNOTES=[['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
+ ['📱','多裝置登入全自動','同一個帳號一次只能在一台裝置上線:在新裝置登入時,舊裝置會自動下線,新裝置自動接續最新進度,不用再自己選擇。被下線的裝置按「在這台繼續玩」重新登入即可'],
+ ['🔑','雲端帳號登入更直覺','這台裝置已經綁定帳號時,按「建立帳號」會直接帶你去登入那個帳號;帳號已存在時也會提示改用登入,不會再出現「這個帳號已經有人用了」的誤會'],
+ ['🧹','登出時可以清除這台裝置的進度','登出雲端帳號時多了「登出並清除這台裝置的進度」:會變回新玩家,可以重新取名、建立或登入別的帳號,原本帳號的雲端進度不受影響'],
  ['🪪','找回遊戲暱稱','登入雲端帳號後,如果存檔裡沒有遊戲暱稱,會自動從排行榜找回原本的暱稱,不用重新輸入'],
  ['☁️','雲端帳號登入更安全','登入雲端帳號時,如果雲端上的進度是空的,會自動保留這台裝置的進度並上傳;兩邊都有進度時,可以自己選擇要用哪一份,不會再不小心被空白進度蓋掉'],
  ['🃏','射龍門改用 4 副牌','射龍門從 1 副牌(52 張)改成同時使用 4 副牌(208 張),剩不到 52 張才重新洗牌。撞柱機率會穩定在約 12%,不會因為一副牌快發完而忽高忽低。說明:撞柱機率從來沒有被調高,過去偶爾看到 20% 以上,是因為牌快發完時剩下的牌剛好很多張跟門柱同點數。另外牌桌換成荷官居中的新排版,撲克牌放大'],
@@ -4515,7 +4518,7 @@ const CLERR={'bad user':'帳號要 3~20 個英文字母、數字或底線','bad 
 const clMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in CLERR)if(m.includes(k))return CLERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,80)};
 function clSet(u,t){CL.u=u;CL.t=t;try{if(u&&SAVE&&SAVE.acct!==u){SAVE.acct=u;localStorage.setItem(KEY,JSON.stringify(SAVE))}}catch(e){}try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
 function clSnap(){return JSON.parse(JSON.stringify(SAVE))}
-function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,3000)}
+function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,1000)}/* 1007-Z8 進度變動 1 秒後就上傳 */
 /* 防止多裝置互相覆蓋:雲端存檔若被別台裝置寫過,這台就停止上傳並登出 */
 /* 省流量:只向伺服器問「存檔時間」,不下載整份存檔(需要 acct_stamp;伺服器沒有時自動改回舊方式) */
 async function clStamp(){if(CL.stampOK!==false){try{const r=await clRpc('acct_stamp',{p_user:CL.u,p_token:CL.t});CL.stampOK=true;return{t:+((r&&r.save_t)||0)}}
@@ -4529,20 +4532,21 @@ async function clGuard(){if(!CL.on||!CL.u||!CL.ready||CL.kicked)return false;
 async function clFlush(keep){if(!CL||!CL.on||!CL.u||CL.noflush||CL.kicked)return;clearTimeout(CL.timer);if(CL.busy){if(!keep)CL.timer=setTimeout(clFlush,2000);return}
  if(Date.now()-(CL.gt||0)>30000){if(keep)return;CL.busy=true;const ok=await clGuard();CL.busy=false;if(!ok)return}
  CL.busy=true;
- try{const snap=clSnap(),body={p_user:CL.u,p_token:CL.t,p_save:snap};if(keep&&JSON.stringify(body).length>60000)keep=false;await clRpc('acct_save',body,keep);clSyncSet(snap._t);CL.lastOk=Date.now();CL.err=''}
+ try{const snap=clSnap(),body={p_user:CL.u,p_token:CL.t,p_save:snap};if(keep&&JSON.stringify(body).length>60000)keep=false;await clRpc('acct_save',body,keep);clSyncSet(snap._t);try{CL.syncCoin=+snap.coin||0;CL.syncIds=new Set((snap.items||[]).map(i=>i.id))}catch(e){}CL.lastOk=Date.now();CL.err=''}
  catch(e){CL.err=clMsg(e);if(/token/i.test(String(e.msg||'')))clKick()}
  CL.busy=false;clUI()}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&CL.u)clFlush(true)});
 function clUI(){const el=$('lgcloud');if(!el)return;try{$('lggo').classList.toggle('lock',!!(CL.on&&!CL.u))}catch(e){}if(!CL.on){el.hidden=true;return}el.hidden=false;
  el.innerHTML=CL.u?'<div class="clst"><div>☁️ 雲端帳號:<b>'+escH(CL.u)+'</b></div><span>'+(CL.err?'<i class="down">'+escH(CL.err)+'</i>':'進度自動同步中')+'</span></div><button class="btn" id="clout">登出</button>'
   :'<div class="clst"><div>🔒 <b>需要帳號才能開始</b></div><span>綁定帳號密碼,換手機、換瀏覽器都能接續進度</span></div><div class="clbtns"><button class="btn pri" id="clreg">建立帳號/綁定進度</button><button class="btn" id="clin">登入帳號</button></div>'}
-function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');ov.className='ov clov';
+function clModal(mode,pre){/* 1007-Z5 這台已經綁定帳號、只是被登出時,按「建立帳號」直接改成登入那個帳號 */if(mode==='reg'&&SAVE.acct&&!CL.u){mode='in';pre=pre||SAVE.acct}
+ const reg=mode==='reg',ov=document.createElement('div');ov.className='ov clov';
  ov.innerHTML='<div class="box clbox"><h2>'+(reg?'☁️ 建立雲端帳號':'☁️ 登入雲端帳號')+'</h2><p class="muted">'+(reg?'會把<b>這台裝置目前的進度</b>綁定到新帳號,之後在任何裝置登入都能接續。':'登入後會改用<b>雲端帳號的進度</b>。同一個帳號同時只能在一個地方登入,其他裝置會被登出。')+'</p>'+
   '<label>帳號<input id="clu" maxlength="20" autocomplete="username" autocapitalize="off" placeholder="英文字母、數字或底線,3~20 字"></label>'+
   '<label>密碼<input id="clp" type="password" maxlength="40" autocomplete="'+(reg?'new-password':'current-password')+'" placeholder="'+(reg?'至少 6 個字':'')+'"></label>'+
   (reg?'<label>再輸入一次密碼<input id="clp2" type="password" maxlength="40" autocomplete="new-password"></label><p class="clwarn">⚠️ 沒有綁 Email,<b>忘記密碼無法自己重設</b>,請記好或截圖保存。</p>':'')+
   '<p class="clerr" id="clerr"></p><div class="clbtns"><button class="btn pri" id="clok">'+(reg?'建立並綁定':'登入')+'</button><button class="btn" id="clx">取消</button></div></div>';
- document.body.appendChild(ov);setTimeout(()=>$('clu').focus(),50);
+ document.body.appendChild(ov);if(pre){$('clu').value=pre;if(!reg&&SAVE.acct===pre)$('clerr').innerHTML='<span style="color:#9fd8ff">這台裝置綁定的帳號是「'+escH(pre)+'」,輸入密碼就能登入</span>'}setTimeout(()=>(pre?$('clp'):$('clu')).focus(),50);
  const err=t=>{$('clerr').textContent=t;sfx('error')},close=()=>{ov.remove()};
  ov.addEventListener('keydown',e=>{if(e.key==='Enter')$('clok').click()});
  $('clx').onclick=close;
@@ -4558,7 +4562,9 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
     clSet(r.user,r.token);clSyncSet(SAVE._t);CL.ready=true;CL.lastOk=Date.now();close();sfx('levelUp');toast('☁️ 帳號 '+r.user+' 建立成功,進度已存到雲端!');
     if(!SAVE.gNew&&!SAVE.gNewP){SAVE.gNewP=1;save();setTimeout(()=>giftCheck(true),900)}}
    else{const r=await clRpc('acct_login',{p_user:u,p_pass:p});
-    const apply=()=>{CL.noflush=true;clearTimeout(CL.timer);clSet(r.user,r.token);if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
+    const apply=()=>{CL.noflush=true;clearTimeout(CL.timer);/* 1007-Z7 被取代前先備份這台的進度(萬一要救回);雲端存檔沒有驗證碼時沿用這台的,避免農場/暱稱驗證失敗 */try{if(hasLocal)localStorage.setItem('clockin-hero-backup',JSON.stringify(Object.assign({},SAVE,{_bk:Date.now()})))}catch(e){}
+     const sameUid=localStorage.getItem('clockin-uid')===r.lb_id;if(r.save&&!r.save.fkey&&SAVE.fkey&&(sameUid||!r.lb_id))r.save.fkey=SAVE.fkey;
+     clSet(r.user,r.token);if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
      if(r.save){try{localStorage.setItem(KEY,JSON.stringify(r.save))}catch(e){}clSyncSet(r.save._t||0)}else{CL.ready=true;clFlush()}
      try{sessionStorage.setItem('shechu-justlogin','1')}catch(e){}close();location.reload()};
     const hasLocal=(SAVE.items||[]).length>1||(SAVE.coin||0)>1000||(SAVE.clear||[]).length>0;
@@ -4566,15 +4572,20 @@ function clModal(mode){const reg=mode==='reg',ov=document.createElement('div');o
     const keepLocal=async()=>{CL.noflush=false;/* 1007-Z4 排行榜編號和驗證碼要一起換:雲端存檔有驗證碼才改用帳號的編號,否則保留這台的編號,避免農場/暱稱驗證失敗 */const cfk=r.save&&r.save.fkey;if(r.lb_id&&cfk){try{localStorage.setItem('clockin-uid',r.lb_id);LB.uid=r.lb_id}catch(e){}SAVE.fkey=cfk}clSet(r.user,r.token);clSyncSet(+r.save_t||(r.save&&+r.save._t)||0);CL.ready=true;CL.kicked=false;CL.gt=Date.now();SAVE._t=Date.now();save();close();
      try{await clFlush()}catch(e){}if(CL.err){toast('⚠️ 上傳失敗:'+CL.err)}else{sfx('levelUp');toast('☁️ 已把這台裝置的進度上傳到雲端帳號「'+r.user+'」')}clUI();try{renderHome()}catch(e){}};
     const cs=r.save||{},cloudEmpty=!r.save||!cs.pname||(((cs.items||[]).length<=1)&&((cs.coin||0)<=1000)&&!((cs.clear||[]).length));
-    if(hasLocal&&cloudEmpty){await keepLocal()}
-    else if(r.save&&hasLocal){close();const ov=document.createElement('div');ov.className='ov';const sm=s=>'<b>'+escH(s.pname||'(沒有名字)')+'</b><br>金幣 '+fmtC(s.coin||0)+'・裝備 '+((s.items||[]).length)+' 件・通關 '+((s.clear||[]).length)+' 區';
-     ov.innerHTML='<div class="box" style="max-width:360px;text-align:center"><h2>☁️ 要用哪一份進度?</h2><p class="muted">雲端帳號「'+escH(r.user)+'」和這台裝置都有進度,請選擇要保留哪一份。<br>沒選到的那份會被取代。</p><div style="display:grid;gap:8px;margin-top:10px"><button class="btn" data-k="cloud" style="text-align:left;line-height:1.5">☁️ 用雲端的進度<br><small>'+sm(cs)+'</small></button><button class="btn pri" data-k="local" style="text-align:left;line-height:1.5">📱 用這台裝置的進度(上傳到雲端)<br><small>'+sm(SAVE)+'</small></button><button class="btn" data-k="x">取消</button></div></div>';
-     document.body.appendChild(ov);ov.onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k;ov.remove();if(k==='cloud')apply();else if(k==='local')keepLocal()}}
+    /* 1007-Z7 防止複製進度:這台已綁定別的帳號時,不能把進度搬到這個帳號 */
+    if(hasLocal&&cloudEmpty&&(!SAVE.acct||SAVE.acct===r.user)){await keepLocal()}
+    /* 1007-Z6 全自動:新登入的裝置一律接續雲端上最新的進度(雲端是空的才保留這台並上傳),不用玩家自己選 */
     else apply()}}
-  catch(e){b.disabled=false;b.textContent=reg?'建立並綁定':'登入';err(clMsg(e))}}}
+  catch(e){b.disabled=false;b.textContent=reg?'建立並綁定':'登入';err(clMsg(e));if(reg&&/taken/.test(String((e&&e.msg)||(e&&e.message)||''))){$('clerr').innerHTML='這個帳號已經存在。<b>如果是你的帳號,請改用登入</b>:<br><button class="btn pri" id="clsw" style="margin-top:6px;padding:5px 12px;font-size:13px">改用登入「'+escH(u)+'」</button>';$('clsw').onclick=()=>{close();clModal('in',u)}}}}}
 document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
  if(t.closest('#clreg'))clModal('reg');else if(t.closest('#clin'))clModal('in');
  else if(t.closest('#clout'))clLogoutAsk();else if(t.closest('#clreset'))devReset()});
+/* 1007-Z8 補發被中斷那場的獎勵(在同一台重新登入同一個帳號時) */
+setTimeout(function pendMerge(){try{const P=JSON.parse(localStorage.getItem('clockin-pending')||'[]');if(!P.length)return;if(!CL||!CL.u||!CL.ready){setTimeout(pendMerge,3000);return}
+ const mine=P.filter(p=>p.acct===CL.u),rest=P.filter(p=>p.acct!==CL.u);if(!mine.length)return;let c=0,n=0;const have=new Set((SAVE.items||[]).map(i=>i.id));
+ for(const p of mine){c+=p.coin||0;for(const it of p.items||[])if(!have.has(it.id)){SAVE.items.push(it);have.add(it.id);n++}}
+ SAVE.coin=(SAVE.coin||0)+c;save();localStorage.setItem('clockin-pending',JSON.stringify(rest));try{clFlush()}catch(e){}try{renderHome()}catch(e){}
+ setTimeout(()=>{try{sfx('coins');toast('🎁 已補發上一場被中斷的獎勵:+'+fmtC(c)+' 金幣'+(n?'、裝備 '+n+' 件':''))}catch(e){}},800)}catch(e){}},4000);
 /* 1007-Z3 登出時可以選擇「清除這台裝置的進度」,變回新玩家:可以重新取名、綁定別的帳號(雲端帳號的進度不受影響) */
 function clLogoutAsk(){const ov=document.createElement('div');ov.className='ov';const u=CL.u||SAVE.acct||'';
  ov.innerHTML='<div class="box" style="max-width:360px;text-align:center"><h2>☁️ 登出雲端帳號</h2><p class="muted">帳號「'+escH(u)+'」的進度已經存在雲端,登出後隨時可以再登入。</p><div style="display:grid;gap:8px;margin-top:10px">'+
@@ -4588,9 +4599,15 @@ function clLogoutAsk(){const ov=document.createElement('div');ov.className='ov';
 function devWipe(){try{clSet(null,null)}catch(e){}try{['clockin-hero-v1','clockin-uid','shechu-acct','shechu-annx'].forEach(k=>localStorage.removeItem(k));sessionStorage.clear()}catch(e){}toast('🧹 已清除這台裝置的進度');setTimeout(()=>location.reload(),600)}
 function devReset(){document.querySelectorAll('.clov').forEach(o=>o.remove());const u=SAVE.acct||'';ask('確定要清除這台裝置的進度嗎?\n'+(u?'帳號「'+u+'」在雲端的進度不會受影響,之後可以再登入。\n':'')+'清除後會變成新玩家,可以重新取名、建立新帳號。',async()=>{if(CL.u){try{await clFlush()}catch(e){}}devWipe()})}
 
-function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);clSet(null,null);
- const ov=document.createElement('div');ov.className='ov clov';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>⚠️ 帳號已在其他裝置登入</h2><p>你的雲端帳號剛剛在<b>另一個瀏覽器或裝置</b>登入了。<br>為了避免兩邊的進度互相覆蓋,這裡的進度<b>已停止上傳</b>。</p><p class="muted" style="font-size:12px">如果要改回在這台裝置玩,請重新登入,另一台就會被登出。</p><div class="clbtns"><button class="btn pri" data-a="re">重新登入</button><button class="btn" data-a="x">知道了</button></div></div>';
- document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;if(b.dataset.a==='re')clModal('in')}}
+function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);const ku=CL.u||SAVE.acct||'';clSet(null,null);
+ /* 1007-Z6 被踢下線:畫面鎖住,只能在這台重新登入(會接續另一台的最新進度),避免兩邊進度分岔 */
+ /* 1007-Z8 戰鬥中被踢:先把這場結算,獎勵暫存在這台;之後在這台重新登入時自動補發到帳號 */
+ try{if(G&&!G.over&&!G.tr){const c0=CL.syncCoin!=null?CL.syncCoin:(SAVE.coin||0),ids=CL.syncIds||new Set((SAVE.items||[]).map(i=>i.id));running=true;endRun();const add=(SAVE.items||[]).filter(i=>!ids.has(i.id)),dc=Math.max(0,(SAVE.coin||0)-c0);
+   if(ku&&(dc>0||add.length)){let P=[];try{P=JSON.parse(localStorage.getItem('clockin-pending')||'[]')}catch(e){}P.push({acct:ku,coin:dc,items:add,t:Date.now()});localStorage.setItem('clockin-pending',JSON.stringify(P.slice(-5)))}}
+   else if(typeof running!=='undefined'&&running&&G&&!G.over){running=false}}catch(e){}
+ document.querySelectorAll('.clov.kick').forEach(o=>o.remove());
+ const ov=document.createElement('div');ov.className='ov clov kick';ov.style.zIndex='99998';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>📱 帳號已在另一台裝置上線</h2><p>你的雲端帳號「'+escH(ku)+'」剛剛在<b>另一台裝置</b>登入,這台已經自動下線。</p><p class="muted" style="font-size:13px">要在這台繼續玩,請重新登入。<br>重新登入後,另一台會下線,這台會<b>自動接續最新的進度</b>。</p><div class="clbtns"><button class="btn pri" data-a="re">在這台繼續玩</button></div></div>';
+ document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;clModal('in',ku)}}
 async function clCheck(){if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;if(Date.now()-(CL.ct||0)<8000)return;CL.ct=Date.now();
  if(CL.stampOK===false){try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false){clKick();return}}catch(e){if(/token/i.test(String((e&&e.msg)||''))){clKick();return}}}
  if(!CL.busy){CL.busy=true;await clGuard();CL.busy=false}}
