@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1007-O">
+<meta name="gbuild" content="1007-S">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -980,6 +980,22 @@ img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 #updov{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:rgba(5,6,10,.88);backdrop-filter:blur(4px)}
 #updov .updbox{width:min(360px,88vw);padding:22px 18px;border-radius:18px;background:linear-gradient(180deg,#232c3d,#151a24);border:1.5px solid rgba(255,210,74,.6);box-shadow:0 10px 40px rgba(0,0,0,.6);text-align:center;color:#ebe7dd}
 #updov .updic{font-size:44px}#updov h2{margin:6px 0 8px;color:#ffd24a}#updov p{margin:6px 0;font-size:14px;line-height:1.55}#updov .btn{margin-top:12px;width:100%;font-size:17px;padding:11px}#updov .updst{margin-top:8px;font-size:12px;color:#9aa4b2;min-height:1em}
+.fbulk{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 10px}.fbulk .btn{padding:9px 8px;font-size:14px}.fbulk .btn small{font-size:11px;opacity:.85}
+/* 1007-R 至尊/典藏裝備的發光特效跟同階座駕完全一樣 */
+.tile.rqt{border:0!important;padding:3px!important;background:none!important;overflow:visible!important;border-radius:10px!important;position:relative;isolation:isolate}
+.tile.rqt::before{inset:auto!important;animation:none!important;background:none!important;z-index:5!important}
+.tile.rqt::after{inset:auto!important;background:none!important;border-radius:0!important;z-index:5!important}
+.tile.rqt>img,.tile.rqt>span:not(.rqclip):not(.rqs){position:relative;z-index:1}
+.tile.rq5{box-shadow:0 0 14px rgba(180,108,255,.7)!important}
+.tile.rq6{box-shadow:0 0 18px rgba(255,207,74,.8),0 0 4px #fff!important}
+.tile.rq6>img{animation:rqshine 2.6s ease-in-out infinite}
+.wslot.eqrq.rq5{border-color:#b46cff!important;box-shadow:0 0 14px rgba(180,108,255,.45),inset 0 0 0 1px rgba(180,108,255,.4)}
+.wslot.eqrq.rq6{border-color:#ffcf4a!important;background:linear-gradient(180deg,#221b0c,#0b0906)!important;animation:sgold 3s ease-in-out infinite}
+.wslot .wn{white-space:normal!important}
+.scar.q5 .sim,.scar.q6 .sim{position:relative;isolation:isolate}.scar .sim img{position:relative;z-index:1}
+.scar.q5 .rqs{background:linear-gradient(115deg,transparent 35%,rgba(230,200,255,.55) 50%,transparent 65%);background-size:250% 100%;animation-duration:3s}
+.tile.rqt.better::before{content:"▲"!important;position:absolute;left:8px!important;top:5px!important;right:auto!important;bottom:auto!important;font-size:11px;color:#55d68a;font-weight:900;text-shadow:0 1px 2px #000}
+.tile.rqt.eq::after{content:"E"!important;position:absolute;right:8px!important;top:5px!important;left:auto!important;bottom:auto!important;font-size:10px;font-weight:800;color:var(--accent)}
 #over.trover .box{max-width:400px}
 #over.trover #ores{display:block!important}
 .trres{display:grid;gap:10px;margin-bottom:12px}
@@ -1521,7 +1537,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-O</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1007-S</span></small>
   </div>
  </div>
 </div>
@@ -1595,6 +1611,7 @@ html.ios-app body{min-height:100vh}
     <h2>開心農場 <span class="muted" style="font-size:13px;font-weight:400">公司頂樓的秘密菜園</span></h2>
     <div class="fbox">
      <div class="fstat" id="fstat"></div>
+     <div class="fbulk" id="fbulk"><button class="btn pri" id="fharvall">🧺 一鍵採收</button><button class="btn" id="fplantall">🌱 一鍵種植</button></div>
      <div class="fgrid" id="fgrid"></div>
     </div>
     <div class="fguard" id="fguard"></div>
@@ -1850,7 +1867,7 @@ const DUR=180;
 const KEY='clockin-hero-v1';let SAVE;
 function restoreSave(){const R=SAVE._restore;delete SAVE._restore;SAVE.items=SAVE.items||[];SAVE.eq=SAVE.eq||{};const eq=Array.isArray(R.eq)?R.eq:[];
  SLOTS.forEach((sl,j)=>{const e=eq[j];if(!e||typeof e.b!=='string')return;const bs=(BASES[sl.t]||[]).concat(EGGS.filter(x=>x.t===sl.t),BOSSI.filter(x=>x.t===sl.t));const base=bs.find(x=>x.b===e.b)||bs[0];if(!base)return;
-  const q=Math.max(-1,Math.min(4,+e.q|0));const it=makeItem(R.il||3,q,sl.t,base);if(e.n)it.name=e.n;SAVE.items.push(it);SAVE.eq[sl.k]=it.id});
+  const q=Math.max(-1,Math.min(6,+e.q|0));const it=makeItem(R.il||3,q,sl.t,base);if(e.n)it.name=e.n;SAVE.items.push(it);SAVE.eq[sl.k]=it.id});
  if(!SAVE.eq.wpn){const u=makeItem(1,0,'wpn',BASES.wpn[0]);SAVE.items.push(u);SAVE.eq.wpn=u.id}
  SAVE._restored=Date.now();setTimeout(()=>{try{save();toast('♻️ 已從排行榜紀錄還原你的進度!')}catch(e){}},1500)}
 function freshSave(){const s={items:[],eq:{},parts:0,unlock:1,clear:[],auto:true,ch:0};const u=makeItem(1,0,'wpn',BASES.wpn[0]);s.items.push(u);s.eq.wpn=u.id;return s}
@@ -1875,7 +1892,7 @@ function makeItem(il,q,type,force){
 }
 let ASKF=null;
 function ask(msg,yes){$('askm').textContent=msg;ASKF=yes;$('ask').hidden=false}
-const SELLP={'-1':15,0:30,1:50,2:70,3:180,4:450};/* 1005-ZS:黑框 8→15、銀框 15→30、綠框 30→50 */
+const SELLP={'-1':15,0:30,1:50,2:70,3:180,4:450,5:900,6:1800};/* 1005-ZS:黑框 8→15、銀框 15→30、綠框 30→50 */
 const sellPrice=it=>Math.round(SELLP[it.q]*(1+(it.il||1)*.08)*(1+(it.up||0)*.15));/* 裝備等級加成每級 +8%(原本 +4%) */
 const TIERQ=q=>['黑框','銀框','綠框','藍框','黃金框','紅框'][q+1];
 const ist=(it,k)=>(it.st[k]||0)*(1+.1*it.up);
@@ -1994,7 +2011,7 @@ function renderShop(){if(!$('scars'))return;if(ART['showroom-bg'])$('sbg').src=A
  const n=shopOwned();$('scol').innerHTML='🏆 車庫收藏 <b>'+n+' / '+SRIDES.length+'</b> · 加成:攻擊、生命、防禦、回復 <b>+'+n+'%</b>';
  $('scars').innerHTML=SRIDES.map(r=>{const lv=rideLv(r.id),on=SAVE.ride===r.id,c=RAR[r.q].c,price=r.shop,canBuy=(SAVE.coin||0)>=price,tc=tuneCost(r),tr=tuneRate(r.id);
   return'<div class="scar q'+r.q+(lv?' own':'')+(on?' on':'')+'" style="--rc:'+c+'"><span class="sq">'+RAR[r.q].n+'</span>'+(on?'<span class="rused">使用中</span>':'')+(lv?'<span class="slv">Lv.'+lv+'</span>':'')+
-   '<div class="sim">'+(r.q>=6?'<span class="rqs"></span><i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+'<img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"></div><b class="sn">'+r.n+'</b><small class="sd">'+r.d+'</small><div class="sst">'+rideText(r,Math.max(1,lv))+(r.sp?'<br><span class="ssp">✨ '+r.sp+'</span>':'')+'</div>'+
+   '<div class="sim">'+(r.q>=5?'<span class="rqs"></span>':'')+(r.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+'<img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"></div><b class="sn">'+r.n+'</b><small class="sd">'+r.d+'</small><div class="sst">'+rideText(r,Math.max(1,lv))+(r.sp?'<br><span class="ssp">✨ '+r.sp+'</span>':'')+'</div>'+
    (lv?'<div class="sbt">'+(on?'<button class="btn" data-ride="">卸下</button>':'<button class="btn pri" data-ride="'+r.id+'">裝備</button>')+(lv<RMAX?'<button class="btn stune" data-tune="'+r.id+'"'+((SAVE.coin||0)<tc?' disabled':'')+'>🔧 改裝 Lv.'+(lv+1)+'<small>💰'+fmtC(tc)+' · 成功率 '+Math.round(tr*100)+'%</small></button>':'<button class="btn" disabled>🏁 已改滿</button>')+'</div>'
    :'<div class="sbt"><button class="btn pri sbuy" data-buy="'+r.id+'"'+(canBuy?'':' disabled')+'>購買<small>💰 '+fmtC(price)+'</small></button></div>')+'</div>'}).join('')}
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#gtabs [data-g]');if(t){audioUnlock();sfx('tab');gTab(t.dataset.g);return}
@@ -2058,7 +2075,7 @@ $('tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(b){audioUnlock();s
 (()=>{const im=(id,k)=>{if(ART[k])$(id).innerHTML='<img src="'+ART[k]+'" alt="">'};im('tie','我的訂製西裝');im('tig','gacha-machine');
  for(const [t,k] of [['map','nav-map'],['eq','nav-eq'],['gacha','nav-gacha'],['farm','nav-farm'],['dragon','nav-dragon'],['tarot','nav-tarot']]){const b=$('tabs').querySelector('[data-t="'+t+'"] .ti');if(b&&ART[k])b.innerHTML='<img src="'+ART[k]+'" alt="">'}})();
 /* ===== 祈禱 ===== */
-const TIERN=['黑框','銀框','綠框','藍框','黃金框','紅框'];
+const TIERN=['黑框','銀框','綠框','藍框','黃金框','紅框','至尊','典藏'];
 const PRAYL={idle:['把裝備交給我,保證…有一定機率變好!','今天我有拜過,手感很熱喔','100 塊換一個奇蹟,很划算吧?','不要問我原理,問就是玄學'],
  up:['升階啦!記得請我喝珍奶,半糖少冰','祖先有在看!這件現在可以拿去炫耀了','我果然是公司的開運擔當,獎金分我一點','這波升級比你的業績還穩','神明說你最近很努力(其實是我很努力)'],
  same:['沒變…神明可能在開會,等等再試','穩定也是一種美,就跟你的薪水一樣','差一點點!我剛剛感覺神明猶豫了一下','沒升也沒降,今天就當作練習祈禱','別灰心,我再多念一遍經文'],
@@ -2066,8 +2083,9 @@ const PRAYL={idle:['把裝備交給我,保證…有一定機率變好!','今天�
  floor:['已經黑到底了,神明也降不下去,算你走運','黑框是最後防線,神明也懶得再踩一腳'],
  top:['已經是紅框了,再求下去神明要收你房租了']};
 let PSEL=null,PBUSY=false;
-const PRAYT={'-1':[100,.6,0],0:[300,.5,0],1:[800,.4,0],2:[2000,.3,.1],3:[8000,.2,.2]};
-function prayItem(it){if(!it||PBUSY||it.q>=4)return;const T=PRAYT[it.q];if((SAVE.coin||0)<T[0]){sfx('error');return toast('金幣不夠,這次祈禱要 '+fmtC(T[0])+' 金幣')}
+/* 1007-Q 裝備也能祈禱升到至尊、典藏(只能靠祈禱,打怪不會掉) */
+const PRAYT={'-1':[100,.6,0],0:[300,.5,0],1:[800,.4,0],2:[2000,.3,.1],3:[8000,.2,.2],4:[15000,.12,.284],5:[30000,.06,.319]};
+function prayItem(it){if(!it||PBUSY||it.q>=6)return;const T=PRAYT[it.q];if((SAVE.coin||0)<T[0]){sfx('error');return toast('金幣不夠,這次祈禱要 '+fmtC(T[0])+' 金幣')}
  audioUnlock();SAVE.coin-=T[0];PBUSY=true;dqAdd('pray');renderHome();const d=$('detail');d.classList.add('praying');sfx('bell');toast('🙏 芳芳:南無…升階大菩薩…');
  setTimeout(()=>{const r=Math.random();let res=r<T[1]?'up':r<T[1]+(1-T[1])*T[2]?'down':'same',line;const from=it.q;
   if(res==='up'){setQ(it,it.q+1);line=pickL(PRAYL.up)}else if(res==='down'){setQ(it,it.q-1);line=pickL(PRAYL.down)}else line=pickL(it.q<=-1?PRAYL.floor:PRAYL.same);
@@ -2082,6 +2100,7 @@ function setQ(it,nq){
  if(nq>=3&&!it.sk)it.sk=pick(Object.keys(SK).filter(k=>!SK[k].egg));
  if(nq<=1&&it.sk&&!it.egg&&!it.boss)it.sk=null;
  if(it.sk)it.skl=nq>=4?3:nq>=3?2:1;else it.skl=0;
+ if(nq>=6&&!/^典藏 /.test(it.name))it.name='典藏 '+it.name;else if(nq<6&&/^典藏 /.test(it.name))it.name=it.name.replace(/^典藏 /,'');
  it.q=nq}
 function renderPray(){if(!$('phost'))return;
  $('phost').src=ART['host-1']||'';$('pcoinimg').src=ART['金幣']||'';$('coins2').textContent=fmtC(SAVE.coin||0);
@@ -2783,7 +2802,7 @@ let NAMECB=null;
 document.addEventListener('click',e=>{const d=$('lgsave');if(d&&d.open&&!e.target.closest('#lgsave ul')&&!e.target.closest('#lgsave summary')){d.open=false}});
 function lbDet(r){const eq=Array.isArray(r.eq)?r.eq:[];
  const items=SLOTS.map((sl,j)=>{const e=eq[j];if(!e||typeof e.b!=='string')return'<div class="lbdi no"><span class="tile empty"></span><div><small>'+sl.n+'</small><b>(空)</b></div></div>';
-  const q=Math.max(-1,Math.min(4,+e.q|0)),rr=RAR[q]||RAR[0];
+  const q=Math.max(-1,Math.min(6,+e.q|0)),rr=RAR[q]||RAR[0];
   return'<div class="lbdi"><span class="tile q'+q+(BOSSI.some(x=>x.b===e.b)?' bossi':'')+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span><div><small>'+sl.n+'</small><b style="color:'+rr.c+'">'+escH(e.n||e.b)+'</b><i style="color:'+rr.c+'">'+rr.n+'</i></div></div>'}).join('');
  const rd=r.ride&&typeof r.ride.id==='string'?(()=>{const R0=RIDES.find(x=>x.id===r.ride.id);return'<div class="lbdi"><span class="tile q'+(R0?R0.q:0)+'">'+(ART['ride-'+r.ride.id]?'<img src="'+ART['ride-'+r.ride.id]+'" alt="">':'')+'</span><div><small>座駕</small><b>'+escH(R0?R0.n:r.ride.id)+'</b><i>Lv.'+(+r.ride.lv|0)+'</i></div></div>'})():'';
  return'<div class="lbd">'+items+rd+((typeof FM!=='undefined'&&FM.on&&r.id!==LB.uid)?'<button class="btn lbfarm" data-farm="'+escH(r.id)+'" data-nick="'+escH(r.nick||'')+'">🌾 逛他的農場</button>':'')+'</div>'}
@@ -2828,7 +2847,7 @@ function artVars(first){const R=document.documentElement.style,u=k=>ART[k]?'url(
  if(first&&ART['金幣'])document.getElementById('phd').innerHTML='<img class="pico" src="'+(ART['金幣']||'')+'" alt="金幣"> <b id="hcoins">0</b><button class="volbtn" id="volbtn" aria-label="音效設定">🔊</button><button class="lbbtn" id="lbbtn">🏆 排行榜</button><div class="volpop" id="volpop" hidden><h4>🔊 音效設定</h4><div class="vr"><input type="range" id="vol3" min="0" max="100" step="5" value="50"><b id="vol3v">50%</b></div><label><input type="checkbox" id="mute3"> 關閉音效</label></div><b id="parts" hidden>0</b>'}
 artVars(true);
 const better=it=>!isEq(it)&&score(it)>score(byId(SAVE.eq[slotFor(it)]))+.01;
-function tile(it,on,mark){return'<button class="tile q'+it.q+(on?' sel':'')+(isEq(it)?' eq':'')+(it.boss?' bossi':'')+(mark&&better(it)?' better':'')+'" data-id="'+it.id+'" aria-label="'+it.name+'">'+icon(it.b,it.e)+(it.up?'<b>+'+it.up+'</b>':'')+''+'</button>'}
+function tile(it,on,mark){const RQ=it.q>=5;return'<button class="tile q'+it.q+(RQ?' rqt rq'+it.q:'')+(on?' sel':'')+(isEq(it)?' eq':'')+(it.boss?' bossi':'')+(mark&&better(it)?' better':'')+'" data-id="'+it.id+'" aria-label="'+it.name+'">'+(RQ?'<span class="rqclip"></span><span class="rqs"></span>':'')+(it.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+icon(it.b,it.e)+(it.up?'<b>+'+it.up+'</b>':'')+''+'</button>'}
 function slotHtml(k){const sl=SLOTS.find(x=>x.k===k),it=byId(SAVE.eq[k]);
  return'<div class="slot">'+(it?tile(it,sel===it.id):'<button class="tile empty" data-f="'+sl.t+'" aria-label="'+sl.n+'(空)">'+sl.e+'</button>')+sl.n+'</div>'}
 
@@ -2858,7 +2877,7 @@ function renderHome(){migItems();
    '<div class="dhero"><div class="pw"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div>'+icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>')+'</div>'+
    '<div class="dcol">'+['off','acc1','acc2'].map(slotHtml).join('')+'</div></div>'+
    '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()?'':' class="on"')+'>👔 男主角・揮拳</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角・踢擊</button></div>'+
-   '<div class="wrrow"><div class="wslot">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name+(wi.up?' +'+wi.up:''):(heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
+   '<div class="wrrow"><div class="wslot'+(wi&&wi.q>=5?' eqrq rq'+wi.q:'')+'">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name.replace(/^典藏 /,'')+(wi.up?' +'+wi.up:'')+(wi.q>=5?' <span class="rqb rqb'+wi.q+'">'+RAR[wi.q].n+'</span>':''):(heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
    (()=>{const R0=SAVE.ride&&RIDES.find(r=>r.id===SAVE.ride),lv=R0?rideLv(R0.id):0;return'<div class="wslot rslot'+(R0?' rq'+R0.q:'')+'" data-goride="1" style="--rc:'+(R0?RAR[R0.q].c:'rgba(255,255,255,.2)')+'"><div class="rimg">'+(R0&&R0.q>=5?'<span class="rqclip"></span><span class="rqs"></span>':'')+(R0&&R0.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+(R0&&ART['ride-'+R0.id]?'<img src="'+ART['ride-'+R0.id]+'" alt="">':'<span>🚲</span>')+'</div><div><div class="muted">座駕</div><div class="wn'+(R0?' t'+R0.q:'')+'">'+(R0?R0.n+' Lv.'+lv+(R0.q>=5?' <span class="rqb rqb'+R0.q+'">'+RAR[R0.q].n+'</span>':''):'尚未裝備座駕')+'</div><div class="muted">'+(R0?rideText(R0,lv):'點這裡去車庫抽代步車')+'</div></div></div>'})()+'</div>';
   const sv2=(k,v)=>'<div class="stat"><span>'+STI[k]+' '+STAT[k].n+'</span><b>'+v+'</b></div>';
   $('pst').innerHTML=sv2('atk',Math.round(s.atk))+sv2('hp',Math.round(s.hp))+sv2('def',Math.round(s.def))+sv2('aspd','+'+Math.round(s.aspd)+'%')+sv2('crit',Math.round(s.crit)+'%')+sv2('spd','+'+Math.round(s.spd)+'%')+sv2('pick','+'+Math.round(s.pick)+'%')+sv2('regen',s.regen.toFixed(1));
@@ -2886,7 +2905,7 @@ function detail(){
   (it.sk?'<div class="skill">'+skI(it.sk)+'<span>技能「'+SK[it.sk].n+'」Lv.'+it.skl+':'+SK[it.sk].d+'</span></div>':'')+
   (cmp?'<div class="muted">與目前穿戴相比,戰力 <b class="'+(ds>=0?'up':'down')+'">'+(ds>=0?'+':'')+fmt(ds)+'</b></div>':'')+
   '<div class="tools" style="margin-top:8px">'+(eq?'<button class="btn" data-a="un">卸下</button>':'<button class="btn pri" data-a="eq">裝備</button>')+
-  (eq?'':'<button class="btn sell" data-a="sell">💰 賣出(+'+sellPrice(it)+' 金幣)</button>')+'</div>'+(eq?(it.q>=4?'<div class="prayrow"><button class="btn" disabled>👑 已是最高階(紅框)</button></div>':(()=>{const T=PRAYT[it.q];return'<div class="prayrow"><button class="btn pri" data-a="pray"'+(PBUSY||(SAVE.coin||0)<T[0]?' disabled':'')+'>🙏 祈禱升階 '+TIERN[it.q+1]+' → '+TIERN[it.q+2]+'('+fmtC(T[0])+' 金幣)</button><small>成功率 '+Math.round(T[1]*100)+'%'+(T[2]?'｜失敗時 '+Math.round(T[2]*100)+'% 會降一階':'｜失敗不會降階')+' · 越高階越難升</small>'})()+
+  (eq?'':'<button class="btn sell" data-a="sell">💰 賣出(+'+sellPrice(it)+' 金幣)</button>')+'</div>'+(eq?(it.q>=6?'<div class="prayrow"><button class="btn" disabled>👑 已是最高階(典藏)</button></div>':(()=>{const T=PRAYT[it.q];return'<div class="prayrow"><button class="btn pri" data-a="pray"'+(PBUSY||(SAVE.coin||0)<T[0]?' disabled':'')+'>🙏 祈禱升階 '+TIERN[it.q+1]+' → '+TIERN[it.q+2]+'('+fmtC(T[0])+' 金幣)</button><small>成功率 '+Math.round(T[1]*100)+'%'+(T[2]?'｜失敗時 '+Math.round(T[2]*100)+'% 會降一階':'｜失敗不會降階')+' · 越高階越難升</small>'})()+
        (PRES&&PRES.id===it.id?'<div class="prayres"><b style="color:'+(PRES.res==='up'?'#ffd24a':PRES.res==='down'?'#ff7468':'#cfd6de')+'">'+(PRES.res==='up'?'✨ 升階成功!'+TIERN[PRES.from+1]+' → '+TIERN[it.q+1]:PRES.res==='down'?'💧 降階了…'+TIERN[PRES.from+1]+' → '+TIERN[it.q+1]:'沒有變化')+'</b><i>芳芳:'+escH(PRES.line)+'</i></div>':'')+'</div>')
        +'<div class="muted" style="margin-top:6px;font-size:12px">穿戴中的裝備要先卸下才能賣出</div>':'')+'</div>';
 }
@@ -3704,7 +3723,7 @@ function update(dt){
  let nk=0;for(let i=G.en.length-1;i>=0;i--){const e=G.en[i];if(e.hp>0)continue;G.en.splice(i,1);G.kills++;nk++;
   if(e.kind==='elite'){hitStop(.1);shake(8);sfx('impact')}
   if((e.kind!=='n'||Math.random()<.12)&&G.fx.length<60)G.fx.push({k:'himg',img:'hx-goo',x:e.x,y:e.y-e.r*1.2,S:e.r*(e.kind==='n'?3:4.5),t:0,d:.4,s0:.6,s1:1.2,rot:Math.random()*6});
-  if(G.t-(G.comboT||-9)<1.2)G.combo=(G.combo||0)+1;else G.combo=1;G.comboT=G.t;if(G.combo>=5&&G.combo%5===0){G.comboT2=G.combo/5;sfx('combo');if(G.combo%10===0)G.fx.push({k:'himg',img:'hx-flash',x:G.x,y:G.y-50,S:150,t:0,d:.3,add:1,s0:.6,s1:1.4})}else if(e.kind==='n'&&G.fx.length<60)G.fx.push({k:'kpop',x:e.x,y:e.y,R:e.r*2.2,t:0,d:.22});sfx(e.kind==='n'?'zbDie':'roar');if(EANIM[e.n]&&(G.dead.length<24||e.kind==='boss'))G.dead.push({x:e.x,y:e.y,n:e.n,r:e.r,fx:G.x,t:0,b:e.kind==='boss'});
+  if(G.t-(G.comboT||-9)<1.2)G.combo=(G.combo||0)+1;else G.combo=1;G.comboT=G.t;if(G.combo>=5&&G.combo%5===0){G.comboT2=G.combo/5;sfx('combo')}else if(e.kind==='n'&&G.fx.length<60)G.fx.push({k:'kpop',x:e.x,y:e.y,R:e.r*2.2,t:0,d:.22});sfx(e.kind==='n'?'zbDie':'roar');if(EANIM[e.n]&&(G.dead.length<24||e.kind==='boss'))G.dead.push({x:e.x,y:e.y,n:e.n,r:e.r,fx:G.x,t:0,b:e.kind==='boss'});
   if(e.noLoot)continue;
   {const gv=e.kind==='boss'?50:e.kind==='elite'?10:1;if(G.gems.length>220)G.gems[(Math.random()*G.gems.length)|0].v+=gv;else G.gems.push({x:e.x,y:e.y-6,v:gv})}if(e.kind==='elite'||e.kind==='boss')sfx('ko');dropLoot(e);
   if(S.sk.deal&&++G.dealK>=Math.max(10,25-2*S.sk.deal)){G.dealK=0;sfx('deal');for(let k=0;k<12;k++)shoot(G.x,G.y-34,k*Math.PI/6,S.atk*1.2,'deal',2)}
@@ -4004,7 +4023,9 @@ function renderFarm(){const g=$('fgrid');if(!g||!FM)return;if(Date.now()-(FM.soc
  const n=FM.size;if(n<12)h+='<div class="fp lock" data-a="expand"><div class="fpw">'+(fmImg('fp-lock')||'<span class="fe">🔒</span>')+'</div><div class="finfo"><b>擴建第 '+(n+1)+' 塊地</b><button class="btn" data-a="expand"'+((SAVE.coin||0)<FEXP[n-4]?' disabled':'')+'>💰 '+fmtC(FEXP[n-4])+'</button></div></div>';
  g.innerHTML=h;
  const ripe=FM.plots.slice(0,FM.size).filter(p=>fmState(p).k==='ripe').length;
+ {const emp=FM.plots.slice(0,FM.size).filter(p=>!p).length,hb=$('fharvall'),pb=$('fplantall');if(hb){hb.disabled=!ripe;hb.innerHTML='🧺 一鍵採收'+(ripe?' <small>('+ripe+' 塊)</small>':'')}if(pb){pb.disabled=!emp;pb.innerHTML='🌱 一鍵種植'+(emp?' <small>('+emp+' 塊空地)</small>':'')}}
  $('fstat').innerHTML=(ART[ripe?'bean-cheer':'bean-nap']?'<img class="fbean" src="'+ART[ripe?'bean-cheer':'bean-nap']+'" alt="皮過敏" title="皮過敏">':'')+(FM.err?'<span class="down">連線失敗:'+escH(FM.err)+'</span>':FM.on?'🟢 全伺服器連線中':'🟡 單機農場(網頁版才能互相採收)')+(ripe?' · <b class="up">'+ripe+' 塊地成熟了,快收成!別被同事採走</b>':'')}
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#fharvall,#fplantall');if(!t||t.disabled)return;if(t.id==='fharvall')fmHarvestAll();else{if(FM.busy)return;audioUnlock();fmSeedPick(-1)}});
 async function fmAct(a,i){if(FM.busy)return;audioUnlock();const pl=FM.plots&&FM.plots[i];
  if(a==='plant')return fmSeedPick(i);
  if(a==='expand'){const n=FM.size,cost=FEXP[n-4];if(n>=12||(SAVE.coin||0)<cost){sfx('error');return toast('金幣不夠擴建')}
@@ -4017,14 +4038,24 @@ async function fmAct(a,i){if(FM.busy)return;audioUnlock();const pl=FM.plots&&FM.
    const vt=taxIncome(v);SAVE.coin=(SAVE.coin||0)+v-vt;SAVE.fharv=(SAVE.fharv||0)+1;dqAdd('harv');save();try{flogAdd({k:'harvest',crop:(c&&c.id)||'',v:v-vt})}catch(e){}sfx('coins');toast((c?c.e+' ':'')+'收成 +'+fmtC(v-vt)+' 金幣'+taxTxt(vt));renderHome()}}
  catch(e){sfx('error');toast(fmMsg(e));if(FM.on)fmSync()}
  FM.busy=false;renderFarm()}
+/* 1007-P 農場一鍵採收、一鍵種植 */
+async function fmHarvestAll(){if(FM.busy)return;audioUnlock();const idx=FM.plots.slice(0,FM.size).map((p,i)=>fmState(p).k==='ripe'?i:-1).filter(i=>i>=0);if(!idx.length)return;FM.busy=true;let tot=0,tax=0,n=0,fail=0;
+ for(const i of idx){try{let v,c;if(FM.on){const r=await fmRpc('farm_harvest',{p_id:fmId(),p_key:fmKey(),p_idx:i});fmApply(r);v=r.value;c=CROP[r.crop]}else{const st=fmState(FM.plots[i]);if(st.k!=='ripe')continue;v=st.c.v;c=st.c;fmLocal().plots[i]=null;FM.plots=fmLocal().plots}
+   const vt=taxIncome(v);SAVE.coin=(SAVE.coin||0)+v-vt;tot+=v-vt;tax+=vt;n++;SAVE.fharv=(SAVE.fharv||0)+1;dqAdd('harv');try{flogAdd({k:'harvest',crop:(c&&c.id)||'',v:v-vt})}catch(e){}}catch(e){fail++}}
+ save();FM.busy=false;if(n){sfx('coins');toast('🧺 一鍵採收 '+n+' 塊,+'+fmtC(tot)+' 金幣'+taxTxt(tax)+(fail?'('+fail+' 塊失敗)':''))}else{sfx('error');toast('採收失敗,請稍後再試');if(FM.on)fmSync()}renderHome();renderFarm()}
 function fmSeedPick(i){const ov=document.createElement('div');ov.className='ov fsov';const coin=SAVE.coin||0;
- ov.innerHTML='<div class="box fsbox"><h2>🌱 選擇要種的作物</h2><div class="fshead"><span>💰 你的金幣 <b>'+fmtC(coin)+'</b></span><span>種完可以關掉遊戲,<b>離線也會長大</b></span></div><div class="fslist">'+CROPS.map(c=>{const poor=coin<c.cost;
+ const ALL=i<0,empN=FM.plots.slice(0,FM.size).filter(p=>!p).length;
+ ov.innerHTML='<div class="box fsbox"><h2>🌱 '+(ALL?'一鍵種植:'+empN+' 塊空地都種同一種':'選擇要種的作物')+'</h2><div class="fshead"><span>💰 你的金幣 <b>'+fmtC(coin)+'</b></span><span>種完可以關掉遊戲,<b>離線也會長大</b></span></div><div class="fslist">'+CROPS.map(c=>{const poor=coin<c.cost;
   return'<button class="fs2" data-c="'+c.id+'"'+(poor?' disabled':'')+'><div class="fsimg">'+(fmImg('fp-'+c.id)||'<span>'+c.e+'</span>')+'</div><div class="fsbody"><div class="fstt"><b>'+c.n+'</b><small>'+c.d+'</small></div>'+
    '<div class="fschips"><span class="fsc t"><i>⏱ 成熟時間</i><b>'+fmT(c.g)+'</b></span><span class="fsc c"><i>🌱 種子費用</i><b>'+fmtC(c.cost)+' 金幣</b></span><span class="fsc v"><i>🌾 收成可得</i><b>'+fmtC(c.v)+' 金幣</b></span></div>'+
    '<div class="fsnet">'+(poor?'<span class="poor">🔒 金幣不足,還差 '+fmtC(c.cost-coin)+'</span>':'淨賺 <b>+'+fmtC(c.v-c.cost)+'</b> 金幣')+'</div></div></button>'}).join('')+'</div><p class="fswarn">⚠️ 成熟後要記得來收成,放著不收會被其他玩家採走!</p><button class="btn" data-x="1">取消</button></div>';
  document.body.appendChild(ov);sfx('open');
  ov.onclick=async e=>{const b=e.target.closest('[data-c]');if(!b){if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}return}
-  const c=CROP[b.dataset.c];if((SAVE.coin||0)<c.cost)return;ov.remove();FM.busy=true;
+  const c=CROP[b.dataset.c];if((SAVE.coin||0)<c.cost)return;ov.remove();
+  if(ALL){FM.busy=true;const idx=FM.plots.slice(0,FM.size).map((p,k)=>p?-1:k).filter(k=>k>=0);let n=0,fail=0,spent=0;
+   for(const k of idx){if((SAVE.coin||0)<c.cost)break;try{if(FM.on)fmApply(await fmRpc('farm_plant',{p_id:fmId(),p_key:fmKey(),p_idx:k,p_crop:c.id}));else{fmLocal().plots[k]={c:c.id,p:Date.now(),g:c.g,w:false};FM.plots=fmLocal().plots}SAVE.coin-=c.cost;spent+=c.cost;n++;try{flogAdd({k:'plant',crop:c.id,v:c.cost})}catch(e){}}catch(e){fail++}}
+   save();FM.busy=false;if(n){sfx('equip');toast(c.e+' 一鍵種下 '+n+' 塊'+c.n+',花費 '+fmtC(spent)+' 金幣,'+fmT(c.g)+'後成熟'+(n<idx.length&&!fail?'(金幣不夠,剩下的沒種)':'')+(fail?'('+fail+' 塊失敗)':''))}else{sfx('error');toast('種植失敗,請稍後再試');if(FM.on)fmSync()}renderHome();renderFarm();return}
+  FM.busy=true;
   try{if(FM.on)fmApply(await fmRpc('farm_plant',{p_id:fmId(),p_key:fmKey(),p_idx:i,p_crop:c.id}));else{fmLocal().plots[i]={c:c.id,p:Date.now(),g:c.g,w:false};FM.plots=fmLocal().plots}
    SAVE.coin-=c.cost;save();sfx('equip');toast(c.e+' 種下 '+c.n+','+fmT(c.g)+'後成熟');try{flogAdd({k:'plant',crop:c.id,v:c.cost})}catch(e){}renderHome()}catch(e){sfx('error');toast(fmMsg(e));fmSync()}
   FM.busy=false;renderFarm()}}
@@ -4088,10 +4119,12 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1007-O';
+const GBUILD='1007-S';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['💀','怪物全面強化','捷運站、辦公大樓的怪物血量和攻擊力都再提高為 2 倍(精英怪、首領一起強化)'],
+const GNOTES=[['👑','裝備升階:至尊、典藏','紅框裝備可以繼續祈禱升階:神話→至尊(15,000 金幣、成功 12%、25% 降回傳說)、至尊→典藏(30,000 金幣、成功 6%、30% 降回神話)。至尊屬性 2.4 倍、典藏 3 倍並多一條屬性;只能靠祈禱,打怪不會掉'],
+ ['🧺','農場一鍵採收、一鍵種植','農場新增「一鍵採收」(所有成熟的作物一次收完)和「一鍵種植」(所有空地一次種同一種作物,金幣不夠時種到能種的為止);戰鬥中連擊時的白色閃光拿掉了'],
+ ['💀','怪物全面強化','捷運站、辦公大樓的怪物血量和攻擊力都再提高為 2 倍(精英怪、首領一起強化)'],
  ['🛠️','更新流程修正','修正按下「立即更新」後,重新載入時遊戲可能卡在載入畫面的問題'],
  ['💪','第二關怪物強化','辦公大樓的怪物、精英怪和首領,血量和攻擊力都提高為 2 倍;主角揮空(包含遠距離自動出手)時不再出現任何光效'],
  ['🚀','自動檢查更新','遊戲有新版本時會跳出提示,按「立即更新」就會自動載入最新版本(戰鬥中會等這場打完才跳出)'],
