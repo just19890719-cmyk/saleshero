@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1008-A">
+<meta name="gbuild" content="1008-B">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1560,7 +1560,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-A</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-B</span></small>
   </div>
  </div>
 </div>
@@ -1879,7 +1879,7 @@ RAR[-1]={n:'破損',m:.85,c:'#6b7079'};RAR[5]={n:'至尊',m:2.4,c:'#b46cff'};RAR
 const SK={
  coffee:{n:'熱咖啡潑灑',d:'定時灼燒周圍的敵人'},clip:{n:'咒術迴針',d:'灌注咒力的迴針繞著你旋轉'},
  drone:{n:'外送無人機',d:'無人機自動射擊敵人'}, 
- whistle:{n:'哨音震波',d:'定時以自己為中心放出震波,擊退並傷害周圍的敵人',egg:1,ic:'站長指揮棒'},train:{n:'列車進站',d:'定時召喚捷運列車,橫掃一整排敵人',egg:1,ic:'站長大盤帽'},card:{n:'嗶卡加速',d:'撿到寶石時短暫加速,並回復少量生命',egg:1,ic:'無限悠遊卡'},deal:{n:'成交爆發',d:'每擊倒一定數量敵人,向四周射出大量鋼筆',egg:1},
+ whistle:{n:'哨音震波',d:'定時以自己為中心放出震波,擊退並傷害周圍的敵人',egg:1,ic:'站長指揮棒'},train:{n:'列車進站',d:'定時召喚捷運列車,橫掃一整排敵人',egg:1,ic:'站長大盤帽'},card:{n:'嗶卡加速',d:'撿到寶石時短暫加速,並回復 1%~3% 生命',egg:1,ic:'無限悠遊卡'},deal:{n:'成交爆發',d:'每擊倒一定數量敵人,向四周射出大量鋼筆',egg:1},
  cry:{n:'巨嬰大哭',d:'受到傷害時有機率大哭,哭出震波震開並傷害周圍的敵人',egg:1,ic:'黃金奶嘴'},guilt:{n:'情緒勒索',d:'身邊的敵人被勒索到腳軟,移動變慢',egg:1,ic:'慣老闆口水巾'},bottle:{n:'奶瓶亂丟',d:'定時往四周丟出奶瓶砸敵人',egg:1,ic:'搖搖奶瓶'}};
 const ENE=[{n:'奧客喪屍',e:'🧟',hp:20,sp:46,r:20,dmg:9},{n:'菜市場大媽喪屍',e:'🧟‍♀️',hp:30,sp:40,r:21,dmg:11},{n:'吸毒喪屍',e:'🧟',hp:12,sp:78,r:19,dmg:7},
  /* 1006-Y 第二關 辦公大樓 */
@@ -3437,7 +3437,7 @@ function combat(dt){
    sfx(ev?'saberSpin':'saber');if(nh){setTimeout(()=>sfx('slashHit'),60);shake(3)}cd(k,.8*cdm*(lv>=4?.85:1))}
   else if(k==='pen'){if(!rdy(k))continue;const t=nearest(1,480)[0];if(!t){G.wt[k]=0;continue}
    const a=Math.atan2(t.y-t.r-(G.y-34),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=ATKD;
-   const n=1+(lv>=2)+(lv>=4)+(ev?2:0),sp=ev?.22:.14,dm=A*(1+.3*(lv>=3))*(ev?1.4:1),pr=ev?4:lv>=5?3:1;
+   const n=1+(lv>=2)+(lv>=4)+(ev?2:0),sp=ev?.09:.06,/* 1008-B 扇形縮小,遠距離單一目標也能多支命中 */dm=A*(1+.3*(lv>=3))*(ev?1.4:1),pr=ev?4:lv>=5?3:1;
    for(let i=0;i<n;i++)shoot(G.x,G.y-34,a+(i-(n-1)/2)*sp,dm,ev?'deal':'pen',pr);sfx(ev?'penGold':'pen');cd(k,.55*cdm)}
   else if(k==='thermos'){if(!rdy(k))continue;const ts=nearest(8,460);if(!ts.length){G.wt[k]=0;continue}
    const n=1+(lv>=3)+(lv>=5),R=(75+(lv>=2?15:0))*ar,dm=A*2.2*(lv>=4?1.3:1);G.atk=ATKD;
@@ -3448,20 +3448,20 @@ function combat(dt){
    const dm=A*1.8*(1+.3*(lv>=2))*(ev?1.3:1),wd=(18+(lv>=3?10:0))*ar,dirs=ev?[0,1,2,3].map(i=>a+i*Math.PI/2):lv>=5?[a,a+Math.PI]:[a];
    for(const d of dirs)beam(G.x,G.y-50,d,430,wd,dm);sfx(ev?'flashBurst':'flash');shake(2.5);cd(k,1.3*cdm*(lv>=4?.8:1)*(ev?.85:1))}
   else if(k==='coffee'){if(ev&&G.moving&&rdy('ctrail')){cd('ctrail',.28);G.pd.push({x:G.x,y:G.y,R:38*ar,t:0,d:2,dmg:A*.45,tk:0,cf:1});sfx('splat')}
-   if(!rdy(k))continue;const R=(90+(lv>=2?15:0)+(lv>=5?15:0))*ar,dm=A*.9*(1+.3*((lv>=3)+(lv>=5)));aoe(G.x,G.y,R,dm,120);G.fx.push({k:'csplash',x:G.x,y:G.y-20,R,t:0,d:.6});sfx('coffee');cd(k,lv>=4?3:4)}
+   if(!rdy(k))continue;const R=(90+(lv>=2?15:0)+(lv>=5?15:0))*ar,dm=A*.9*(1+.3*((lv>=3)+(lv>=5)));aoe(G.x,G.y,R,dm,120);G.fx.push({k:'csplash',x:G.x,y:G.y-20,R,t:0,d:.6});sfx('coffee');cd(k,(lv>=4?3:4)*cdm)}
   else if(k==='drone'){if(!rdy(k))continue;const ts=nearest(6,520);if(!ts.length){G.wt[k]=0;continue}
    const nd=ev?3:1,sh=lv>=5?3:lv>=3?2:1,dm=A*.9*(lv>=3?1.3:1);for(let d=0;d<nd;d++){const p=dronePos(d,nd);for(let j=0;j<sh;j++){const t=ts[(d*sh+j)%ts.length];shoot(p.x,p.y,Math.atan2(t.y-t.r-p.y,t.x-p.x),dm,'drone',2)}}sfx('pew');
    cd(k,1.0*(lv>=2?.8:1)*(lv>=4?.8:1)*cdm)}
  }
  // 迴紋針
  G.orbs=[];const cl=G.ws.clip;
- if(cl){const ev=G.evo.clip,n=(2+(cl>=2)+(cl>=4))*(ev?2:1),R=72*(cl>=5?1.2:1)*(ev?1.4:1)*ar,dm=A*.4*(cl>=3?1.3:1);G.oa=(G.oa||0)+dt*3.2*(cl>=5?1.3:1);
+ if(cl){const ev=G.evo.clip,n=(2+(cl>=2)+(cl>=4))*(ev?2:1),R=72*(cl>=5?1.2:1)*(ev?1.4:1)*ar,dm=A*.4*(cl>=3?1.3:1);G.oa=(G.oa||0)+dt*3.2*(cl>=5?1.3:1)/cdm;
   for(let i=0;i<n;i++){const a=G.oa+i*Math.PI*2/n,ox=G.x+Math.cos(a)*R,oy=G.y-26+Math.sin(a)*R;G.orbs.push({x:ox,y:oy,a});
    for(const e of G.en){if(e.oh>G.t)continue;const dx=e.x-ox,dy=e.y-e.r-oy;if(dx*dx+dy*dy<(e.r+16)**2){hit(e,dm,100,Math.atan2(e.y-G.y,e.x-G.x));e.oh=G.t+.5;sfx('clip')}}}}
  // 首領專屬裝備技能
- const wh=S.sk.whistle;if(wh&&rdy('bwh')){const R=(85+15*wh)*ar;aoe(G.x,G.y,R,A*(.9+.3*wh),200);G.fx.push({k:'bwave',x:G.x,y:G.y,R,t:0,d:.7});sfx('shieldBreak');cd('bwh',Math.max(3.5,7-.8*wh))}
- const bt=S.sk.bottle;if(bt&&rdy('bbt')){const n=5+bt;for(let i=0;i<n;i++){const a=i/n*6.283+G.t;G.bul.push({k:'bottle',x:G.x,y:G.y-34,vx:Math.cos(a)*380,vy:Math.sin(a)*380,r:12,dmg:A*(1+.3*bt),pr:2,life:1.1,hit:new Set(),a})}sfx('throw');cd('bbt',Math.max(1.6,3-.4*bt))}
- const tr=S.sk.train;if(tr&&rdy('btr')){const ts=nearest(8,560);const ty=ts.length?pick(ts).y:G.y+rnd(-120,120);G.bul.push({k:'train',x:G.x+W/2+200,y:ty,vx:-1500,vy:0,r:46,dmg:A*(2.4+.8*tr),pr:999,life:2.6,hit:new Set(),dir:-1});sfx('car');cd('btr',Math.max(3,7.5-1.2*tr))}
+ const wh=S.sk.whistle;if(wh&&rdy('bwh')){const R=(85+15*wh)*ar;aoe(G.x,G.y,R,A*(.9+.3*wh),200);G.fx.push({k:'bwave',x:G.x,y:G.y,R,t:0,d:.7});sfx('shieldBreak');cd('bwh',Math.max(3.5,7-.8*wh)*cdm)}
+ const bt=S.sk.bottle;if(bt&&rdy('bbt')){const n=5+bt;for(let i=0;i<n;i++){const a=i/n*6.283+G.t;G.bul.push({k:'bottle',x:G.x,y:G.y-34,vx:Math.cos(a)*380,vy:Math.sin(a)*380,r:12,dmg:A*(1+.3*bt),pr:2,life:1.1,hit:new Set(),a})}sfx('throw');cd('bbt',Math.max(1.6,3-.4*bt)*cdm)}
+ const tr=S.sk.train;if(tr&&rdy('btr')){const ts=nearest(8,560);const ty=ts.length?pick(ts).y:G.y+rnd(-120,120);G.bul.push({k:'train',x:G.x+W/2+200,y:ty,vx:-1500,vy:0,r:46,dmg:A*(2.4+.8*tr),pr:999,life:2.6,hit:new Set(),dir:-1});sfx('car');cd('btr',Math.max(3,7.5-1.2*tr)*cdm)}
  // 灼燒地面
  for(let i=G.pd.length-1;i>=0;i--){const q=G.pd[i];q.t+=dt;q.tk-=dt;if(q.tk<=0){q.tk=.4;aoe(q.x,q.y,q.R,q.dmg,0)}if(q.t>=q.d)G.pd.splice(i,1)}
  if(G.pd.length>60)G.pd.splice(0,G.pd.length-60);
@@ -3769,7 +3769,7 @@ function update(dt){
  const pk=40*(1+S.pick/100),gk=100*(1+S.pick/100);
  for(let i=G.gems.length-1;i>=0;i--){const g=G.gems[i],dx=G.x-g.x,dy=G.y-20-g.y,d=Math.hypot(dx,dy)||1;
   if(!G.bossDown&&(d<gk||g.m)){g.m=1;const v=Math.max(320,720-d);g.x+=dx/d*v*dt;g.y+=dy/d*v*dt}
-  if(d<20&&!G.bossDown){G.gems.splice(i,1);if(!G.bossDown)G.xp+=g.v*(S.xpm||1);sfx('xp');if(S.sk.card){G.cardT=1.2;G.hp=Math.min(S.hp,G.hp+S.hp*.002*S.sk.card)}}}
+  if(d<20&&!G.bossDown){G.gems.splice(i,1);if(!G.bossDown)G.xp+=g.v*(S.xpm||1);sfx('xp');if(S.sk.card){G.cardT=1.2;G.hp=Math.min(S.hp,G.hp+S.hp*.01*Math.min(3,S.sk.card))}/* 1008-B 每顆寶石回 1%~3% 生命 */}}
  for(let i=G.drops.length-1;i>=0;i--){const d=G.drops[i];if(d.pt!==undefined&&d.pt<1)continue;if(Math.hypot(G.x-d.x,G.y-d.y)<pk){G.drops.splice(i,1);if(d.heal){G.hp=S.hp;sfx('heal');toast('撿到速食套餐!生命回滿')}else if(d.chest){sfx('chestOpen');openChest();return}else takeItem(d.it)}}
  for(let i=G.dead.length-1;i>=0;i--){G.dead[i].t+=dt;if(G.dead[i].t>(G.dead[i].b?4.2:1))G.dead.splice(i,1)}
  {let up=0;while(!G.bossDown&&G.xp>=needXp(G.lv)*(G.mod.xp||1)){G.xp-=needXp(G.lv)*(G.mod.xp||1);G.lv++;up++}if(up){G.hp=Math.min(G.S.hp,G.hp+G.S.hp*.1);G.lvq+=up-1;queueLevel();return}}
@@ -3918,7 +3918,7 @@ function drawFx(){
    ctx.fillStyle='#ff9f1a';ctx.beginPath();for(let i=0;i<16;i++){const r=i%2?s*.45:s,aa=i*Math.PI/8;ctx.lineTo(Math.cos(aa)*r,Math.sin(aa)*r)}ctx.closePath();ctx.fill();
    ctx.fillStyle='#fff6c2';ctx.beginPath();for(let i=0;i<16;i++){const r=(i%2?s*.45:s)*.6,aa=i*Math.PI/8+.2;ctx.lineTo(Math.cos(aa)*r,Math.sin(aa)*r)}ctx.closePath();ctx.fill();
    ctx.strokeStyle='rgba(255,255,255,.9)';ctx.lineWidth=3;for(let i=-1;i<=1;i++){ctx.beginPath();ctx.moveTo(-s*2.4,i*9);ctx.lineTo(-s*1.3,i*9);ctx.stroke()}ctx.restore();ctx.globalAlpha=1}
-  else if(f.k==='beam'){const al=p<.15?p/.15:1-(p-.15)/.85,fl=.85+.15*Math.sin(f.t*90),ex=f.x+Math.cos(f.a)*f.L,ey=f.y+Math.sin(f.a)*f.L,w=(1-p*.6)*fl;
+  else if(f.k==='beam'){const al=p<.15?p/.15:1-(p-.15)/.85,fl=.85+.15*Math.sin(f.t*90),ex=f.x+Math.cos(f.a)*f.L,ey=f.y+Math.sin(f.a)*f.L,w=(1-p*.6)*fl*((f.wd||18)/18);/* 1008-B 畫面粗細跟判定寬度一致 */
    ctx.lineCap='round';ctx.globalAlpha=al;
    ctx.strokeStyle='rgba(0,120,200,.25)';ctx.lineWidth=40*w;ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(ex,ey);ctx.stroke();
    ctx.strokeStyle='rgba(40,210,255,.75)';ctx.lineWidth=20*w;ctx.stroke();
@@ -4156,10 +4156,11 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!(G&&running))potWatch
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1008-A';
+const GBUILD='1008-B';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
-const GNOTES=[['⚡','載入與連線加速','圖片改成用到才解碼,開遊戲更快、更省記憶體;資源檔依照需要的順序載入;更新版本後不用重新下載全部圖片;減少背景的連線次數,更省流量和電'],
+const GNOTES=[['🔧','能力修正','單眼相機升級加寬、藍牙喇叭時,畫面上的光束也會變粗;萬能鋼筆多支時扇形縮小,遠距離也能多支命中;攻速現在也會加快熱咖啡、迴紋針轉速和首領裝備技能;無限悠遊卡每撿一顆寶石回復 1%~3% 生命'],
+ ['⚡','載入與連線加速','圖片改成用到才解碼,開遊戲更快、更省記憶體;資源檔依照需要的順序載入;更新版本後不用重新下載全部圖片;減少背景的連線次數,更省流量和電'],
  ['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
  ['📱','多裝置登入全自動','同一個帳號一次只能在一台裝置上線:在新裝置登入時,舊裝置會自動下線,新裝置自動接續最新進度,不用再自己選擇。被下線的裝置按「在這台繼續玩」重新登入即可'],
  ['🔑','雲端帳號登入更直覺','這台裝置已經綁定帳號時,按「建立帳號」會直接帶你去登入那個帳號;帳號已存在時也會提示改用登入,不會再出現「這個帳號已經有人用了」的誤會'],
