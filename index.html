@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1009-B">
+<meta name="gbuild" content="1009-D">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1704,7 +1704,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-B</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-D</span></small>
   </div>
  </div>
 </div>
@@ -2792,7 +2792,7 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 const fmBlkKey=(id,i,pl)=>id+'|'+i+'|'+(pl&&pl.p||0);
 function fmMarkBlocked(id,plots){if(!plots)return;const B=SAVE.fblk||{},now=Date.now();for(const k in B)if(now-B[k]>3*864e5)delete B[k];
  document.querySelectorAll('#fvgrid [data-a="pick"]').forEach(b=>{const i=+b.dataset.i;if(B[fmBlkKey(id,i,plots[i])]){b.disabled=true;b.classList.add('fblk');b.innerHTML='🛡️ 被擋下了'}})}
-/* --- 1005-ZZZG 仇人名單:偷你的人列入 24 小時;他的作物成熟會通知你;報仇時無視守衛、不收贓款稅(一次) --- */
+/* --- 1005-ZZZG 仇人名單:偷你的人列入 24 小時;他的作物成熟會通知你;報仇一樣會被守衛擋、收贓款稅(1009-D) --- */
 const FOE={ttl:864e5,poll:0};
 function foeList(){const L=SAVE.foes||{},now=Date.now();for(const k in L)if(now-L[k].t>FOE.ttl)delete L[k];return L}
 function foeAdd(nick,t){if(!nick)return;const L=foeList(),k=String(nick);t=t||Date.now();if(Date.now()-t>FOE.ttl)return;if(!L[k]||L[k].t<t)L[k]=Object.assign(L[k]||{},{nick:k,t});SAVE.foes=L;save()}
@@ -2803,7 +2803,7 @@ async function foePoll(){if(!FM.on||!SOC.on())return;const L=foeList(),ks=Object
    const key=rp.map(o=>o.i+':'+o.p.p).join(',');if(rp.length&&key!==f.nk&&!inBattle()){f.nk=key;const c=CROP[rp[0].p.c];toast('😈 仇人 '+k+' 的'+(c?c.n:'作物')+'成熟了!快去報仇');sfx('warn')}}catch(e){}}
  SAVE.foes=L;save();foeRender()}
 function foeRender(){const el=$('ffoe');if(!el)return;const L=Object.values(foeList()).sort((a,b)=>(b.ripe||0)-(a.ripe||0)||b.t-a.t);if(!L.length){el.hidden=true;return}el.hidden=false;
- el.innerHTML='<div class="trlbh"><b>😈 仇人名單</b><small class="muted">偷你的人保留 24 小時</small></div>'+L.map(f=>'<div class="foer'+(f.ripe?' hot':'')+'"><div><b>'+escH(f.nick)+'</b><small>'+(f.ripe?'🔥 有 '+f.ripe+' 塊作物成熟了!':'作物還沒成熟,成熟會通知你')+' · 剩 '+Math.max(1,Math.ceil((FOE.ttl-(Date.now()-f.t))/3600e3))+' 小時</small></div><button class="btn'+(f.ripe?' pri':'')+'" data-rv="'+escH(f.nick)+'">⚔️ 報仇</button></div>').join('')+'<small class="muted">報仇時無視他的皮過敏守衛、不收贓款稅(每個仇人一次)</small>'}
+ el.innerHTML='<div class="trlbh"><b>😈 仇人名單</b><small class="muted">偷你的人保留 24 小時</small></div>'+L.map(f=>'<div class="foer'+(f.ripe?' hot':'')+'"><div><b>'+escH(f.nick)+'</b><small>'+(f.ripe?'🔥 有 '+f.ripe+' 塊作物成熟了!':'作物還沒成熟,成熟會通知你')+' · 剩 '+Math.max(1,Math.ceil((FOE.ttl-(Date.now()-f.t))/3600e3))+' 小時</small></div><button class="btn'+(f.ripe?' pri':'')+'" data-rv="'+escH(f.nick)+'">⚔️ 報仇</button></div>').join('')+'<small class="muted">報仇一樣會被他的皮過敏擋下、也要繳 20% 贓款稅</small>'}
 setInterval(()=>{try{if(SAVE&&FM.on&&document.visibilityState==='visible'&&Date.now()-FOE.poll>120000){FOE.poll=Date.now();foePoll()}}catch(e){}},5000);
 /* --- 本週偷菜榜 --- */
 const FWB={tab:'thieves',d:null,t:0};
@@ -4553,8 +4553,8 @@ function fmSeedPick(i){if(!FM.plots){sfx('error');toast('農場還在連線中,�
   try{if(FM.on)fmApply(await fmRpc('farm_plant',{p_id:fmId(),p_key:fmKey(),p_idx:i,p_crop:c.id}));else{fmLocal().plots[i]={c:c.id,p:Date.now(),g:c.g,w:false};FM.plots=fmLocal().plots}
    SAVE.coin-=c.cost;save();sfx('equip');toast(c.e+' 種下 '+c.n+','+fmT(c.g)+'後成熟');try{flogAdd({k:'plant',crop:c.id,v:c.cost})}catch(e){}renderHome()}catch(e){sfx('error');toast(fmMsg(e));fmSync()}
   FM.busy=false;renderFarm()}}
-async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人的農場');const RV=foeActive(nick);FM.guardU=0;socGuardOf(id).then(u=>{FM.guardU=u;const h=$('fvhint');if(u>Date.now()&&h&&!document.querySelector('.fvguard'))h.insertAdjacentHTML('beforebegin','<div class="fvguard">'+guardIco(36)+' 這塊農場有<b>農場守衛「皮過敏」</b>站崗!每次採收有 '+Math.round(GUARD.rate*100)+'% 機率被擋下,被擋的那塊就採不到了</div>')}).catch(()=>{});ripeHide();ripeVisited(id);const ov=document.createElement('div');ov.className='ov fvov';
- ov.innerHTML='<div class="box fvbox">'+(ART['bean-hole']||ART['bean-coin']?'<img class="fmasc" src="'+(ART['bean-hole']||ART['bean-coin'])+'" alt="">':'')+'<h2>'+(RV?'⚔️ 報仇!':'🌾')+' '+escH(nick||'同事')+' 的農場</h2>'+(RV?'<div class="fvrv">😈 他是你的仇人:這次無視守衛、不收贓款稅</div>':'')+'<p class="muted" id="fvhint">讀取中…</p><div class="fgrid" id="fvgrid"></div><button class="btn" data-x="1">離開</button></div>';document.body.appendChild(ov);sfx('open');
+async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人的農場');const RV=foeActive(nick);FM.guardU=0;socGuardOf(id).then(u=>{FM.guardU=u;const h=$('fvhint');if(u>Date.now()&&h&&!document.querySelector('.fvguard'))h.insertAdjacentHTML('beforebegin','<div class="fvguard">'+guardIco(36)+' 這塊農場有<b>農場守衛「皮過敏」</b>站崗!每次採收有 '+Math.round(GUARD.rate*100)+'% 機率被擋下,被擋的那塊就採不到了'+(RV?'<br><b>皮過敏:「來報仇的也會被我擋下!」</b>':'')+'</div>')}).catch(()=>{});ripeHide();ripeVisited(id);const ov=document.createElement('div');ov.className='ov fvov';
+ ov.innerHTML='<div class="box fvbox">'+(ART['bean-hole']||ART['bean-coin']?'<img class="fmasc" src="'+(ART['bean-hole']||ART['bean-coin'])+'" alt="">':'')+'<h2>'+(RV?'⚔️ 報仇!':'🌾')+' '+escH(nick||'同事')+' 的農場</h2>'+(RV?'<div class="fvrv">😈 他是你的仇人,報仇的時候到了!(皮過敏照樣會擋、也照收贓款稅)</div>':'')+'<p class="muted" id="fvhint">讀取中…</p><div class="fgrid" id="fvgrid"></div><button class="btn" data-x="1">離開</button></div>';document.body.appendChild(ov);sfx('open');
  let prevR=new Set(),mine=-1,timer=0;
  const load=async()=>{if(!document.body.contains(ov))return;try{const r=await fmRpc('farm_view',{p_target:id});if(!document.body.contains(ov))return;if(!r){$('fvhint').textContent='他還沒開墾農場';$('fvgrid').innerHTML='';return}
    FM.off=r.now-Date.now();FM.view={id,nick:r.nick||nick,plots:r.plots,size:r.size};
@@ -4567,9 +4567,9 @@ async function fmVisit(id,nick){if(!FM.on)return toast('網頁版才能逛別人
   const b=e.target.closest('[data-a="pick"]');if(!b||b.disabled)return;b.disabled=true;audioUnlock();
   const bi=+b.dataset.i,bpl=FM.view&&FM.view.plots&&FM.view.plots[bi],bk=fmBlkKey(id,bi,bpl);
   if((SAVE.fblk||{})[bk]){toast('🛡️ 這塊已經被皮過敏擋下了,去採別塊吧');return}
-  if(!RV&&FM.guardU>Date.now()&&Math.random()<GUARD.rate){(SAVE.fblk=SAVE.fblk||{})[bk]=Date.now();save();fmMarkBlocked(id,FM.view&&FM.view.plots);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:0,p_crop:'',p_kind:'scared'}).catch(()=>{});flogAdd({k:'scared',who:vn})}sfx('wahwah');toast('🛡️ 被農場守衛皮過敏擋下了!這塊作物你採不到了,去採別塊吧');return}
+  /* 1009-D 報仇也會被皮過敏擋、也收贓款稅 */if(FM.guardU>Date.now()&&Math.random()<GUARD.rate){(SAVE.fblk=SAVE.fblk||{})[bk]=Date.now();save();fmMarkBlocked(id,FM.view&&FM.view.plots);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:0,p_crop:'',p_kind:'scared'}).catch(()=>{});flogAdd({k:'scared',who:vn})}sfx('wahwah');toast(RV?'🛡️ 皮過敏:「來報仇的也會被我擋下!」這塊採不到了,去採別塊吧':'🛡️ 被農場守衛皮過敏擋下了!這塊作物你採不到了,去採別塊吧');return}
   mine=+b.dataset.i;try{await fmSync();const r=await fmRpc('farm_pick',{p_target:id,p_id:fmId(),p_key:fmKey(),p_nick:SAVE.pname||'',p_idx:+b.dataset.i});
-   r.value=(+r.value||0)*FMX;const st=RV?0:taxIncome(r.value,TAXSTEAL);SAVE.coin=(SAVE.coin||0)+r.value-st;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value-st)+' 金幣'+(st>0?'(芳芳抽贓款稅 20%:'+fmtC(st)+',已丟進射龍門池底)':''));
+   r.value=(+r.value||0)*FMX;const st=taxIncome(r.value,TAXSTEAL);SAVE.coin=(SAVE.coin||0)+r.value-st;SAVE.fpick=(SAVE.fpick||0)+1;dqAdd('steal');save();renderHome();sfx('coins');toast('🧺 採走 '+((CROP[r.crop]||{}).e||'')+' '+((CROP[r.crop]||{}).n||'')+',+'+fmtC(r.value-st)+' 金幣'+(st>0?'(芳芳抽贓款稅 20%:'+fmtC(st)+',已丟進射龍門池底)':''));
    ripeHide();fmFeedAdd(id,(FM.view&&FM.view.nick)||nick,r.crop,r.value);{const vn=(FM.view&&FM.view.nick)||nick||'';socRpc('farm_log_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value,p_crop:r.crop,p_kind:RV?'revenge':'steal'}).catch(()=>socRpc('farm_steal_add',{p_thief:fmId(),p_thief_nick:dpNick(),p_victim:id,p_victim_nick:vn,p_value:r.value}).catch(()=>{}));flogAdd({k:RV?'revenge':'steal',who:vn,crop:r.crop,v:r.value-st});if(RV){const L=foeList();delete L[nick];SAVE.foes=L;save();foeRender();toast('⚔️ 報仇成功!'+nick+' 從仇人名單移除')}}FWB.t=0}
   catch(e){sfx('error');toast(fmMsg(e))}load()};
  load()}
@@ -4632,10 +4632,11 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1009-B';
+const GBUILD='1009-D';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🛡️','報仇沒有特權了','去仇人的農場報仇,一樣會被他的皮過敏守衛擋下,採到的也一樣要繳 20% 贓款稅。皮過敏:「來報仇的也會被我擋下!」'],
 ['🛡️','皮過敏警戒提示修正','皮過敏警戒時頭上的 ❗、👀 和睡覺的 Zzz 不會再被切掉'],
 ['🎯','一線天排行榜','排行榜的射龍門分類新增「一線天榜」:射中一線天單把贏最多的前 10 名,金色標示'],
 ['🏆','排行榜大整合','戰力、金幣、無限列車、本週偷菜(神偷/苦主)、射龍門都整合到右上角「排行榜」,分類切換;塔羅牌桌放大,抽牌改成全畫面選牌;挑戰書 12 小時沒處理自動取消;皮過敏站崗卡片縮小'],
@@ -4655,7 +4656,6 @@ const GNOTES=[
 ['🎁','年終獎金開獎變快','輪盤轉得更快(大約 1 秒);轉的時候可以按「⏩ 跳過動畫」直接看結果;開完 3 秒自動繼續戰鬥'],
 ['🎯','戰鬥中不再被通知擋住','戰鬥中撿到裝備、自動賣出改成右上角戰利品欄的小字;射龍門池底公告、農場被偷、搶收公告、仇人作物成熟、新版本提醒等,都會等你打完回到首頁才跳出;戰鬥中的提示改成畫面上方的小條,也不會擋住手指拖曳'],
 ['🤖','撿到裝備自動賣出','裝備頁的倉庫上方可以設定「撿到自動賣」:關閉、黑框、銀框以下、綠框以下、藍框以下。戰鬥中撿到這些框的裝備會直接換成金幣(一樣扣芳芳稅 10%),倉庫不會再一下就塞滿;首領專屬裝備永遠不會被自動賣掉。預設是黑框'],
-['🃏','射龍門紀錄修正','射龍門的最近紀錄不再出現「ANTE」(每局丟底的紀錄),只顯示射中、射偏、撞柱、全包這些結果'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
