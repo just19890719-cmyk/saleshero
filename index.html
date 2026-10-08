@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1009-A">
+<meta name="gbuild" content="1009-B">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -820,7 +820,15 @@ button.tile img{width:68%!important;height:68%!important;margin:0!important;obje
 #fguard .fgname{gap:5px}
 #fguard .fgst{margin:0}
 #fguard small{margin-top:3px}
-@media(max-width:520px){#fguard{grid-template-columns:104px minmax(0,1fr) auto!important;gap:8px!important}#fguard .fgrole{display:none}#fguard .fpatrol{height:66px}#fguard .gpw,#fguard .gpw img{width:60px;height:60px}#fguard .gsl{margin-left:-30px}#fguard small{font-size:10.5px!important}#fguard .btn{padding:6px 9px!important;font-size:12px!important}}
+/* 1009-B 警戒 ❗👀 與 Zzz 不被切掉:小路不裁切、皮過敏縮小一點留出頭頂空間 */
+#fguard .fpatrol{overflow:visible}
+#fguard .gpw,#fguard .gpw img{width:64px;height:64px}
+#fguard .gsl{margin-left:-32px}
+#fguard .fpbub{top:-6px;left:70%;font-size:17px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.8))}
+#fguard .gzz{top:2px;left:66%}
+#fguard .gzz i{animation-name:gzz2}
+@keyframes gzz2{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(26px,-16px)}}
+@media(max-width:520px){#fguard{grid-template-columns:104px minmax(0,1fr) auto!important;gap:8px!important}#fguard .fgrole{display:none}#fguard .fpatrol{height:66px}#fguard .gpw,#fguard .gpw img{width:56px;height:56px}#fguard .gsl{margin-left:-28px}#fguard small{font-size:10.5px!important}#fguard .btn{padding:6px 9px!important;font-size:12px!important}}
 .gsl img{animation:gbreath 2.6s ease-in-out infinite;filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) saturate(.8)}
 @keyframes gbreath{50%{transform:scale(1.04,.97)}}
 .gzz{position:absolute;left:62%;top:-4px;width:40px;height:40px;pointer-events:none}
@@ -1696,7 +1704,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-A</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-B</span></small>
   </div>
  </div>
 </div>
@@ -4624,10 +4632,11 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1009-A';
+const GBUILD='1009-B';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🛡️','皮過敏警戒提示修正','皮過敏警戒時頭上的 ❗、👀 和睡覺的 Zzz 不會再被切掉'],
 ['🎯','一線天排行榜','排行榜的射龍門分類新增「一線天榜」:射中一線天單把贏最多的前 10 名,金色標示'],
 ['🏆','排行榜大整合','戰力、金幣、無限列車、本週偷菜(神偷/苦主)、射龍門都整合到右上角「排行榜」,分類切換;塔羅牌桌放大,抽牌改成全畫面選牌;挑戰書 12 小時沒處理自動取消;皮過敏站崗卡片縮小'],
 ['🌱','農場土地位置修正','修正上一版農場土地圖跑位的問題;皮過敏沒站崗時會在小路上呼呼大睡,站崗時才起來巡邏警戒'],
@@ -4647,7 +4656,6 @@ const GNOTES=[
 ['🎯','戰鬥中不再被通知擋住','戰鬥中撿到裝備、自動賣出改成右上角戰利品欄的小字;射龍門池底公告、農場被偷、搶收公告、仇人作物成熟、新版本提醒等,都會等你打完回到首頁才跳出;戰鬥中的提示改成畫面上方的小條,也不會擋住手指拖曳'],
 ['🤖','撿到裝備自動賣出','裝備頁的倉庫上方可以設定「撿到自動賣」:關閉、黑框、銀框以下、綠框以下、藍框以下。戰鬥中撿到這些框的裝備會直接換成金幣(一樣扣芳芳稅 10%),倉庫不會再一下就塞滿;首領專屬裝備永遠不會被自動賣掉。預設是黑框'],
 ['🃏','射龍門紀錄修正','射龍門的最近紀錄不再出現「ANTE」(每局丟底的紀錄),只顯示射中、射偏、撞柱、全包這些結果'],
-['🛡️','防作弊與系統整理','射龍門改成由伺服器發牌、算輸贏,池底不會再被作弊掏空;排行榜只能更新自己的資料,並檢查金幣與戰力是否合理;每日任務、塔羅、無限列車的「今天」統一用台灣時間並以伺服器時間為準;倉庫上限 300 件,滿了以後低階裝備自動賣出;排行榜上還沒用新算法上傳的玩家會顯示「待更新」'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
