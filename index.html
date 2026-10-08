@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1008-S">
+<meta name="gbuild" content="1008-U">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1039,6 +1039,28 @@ img.emj{height:1.15em;width:auto;vertical-align:-.2em;margin:0 .08em}
 .dallbtns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
 .dallov{z-index:9}
 .dlr.big{background:linear-gradient(90deg,rgba(255,180,40,.35),rgba(0,0,0,.28));border:1px solid rgba(255,200,60,.6)}
+/* 1008-T 一線天 */
+.dlr.g1{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(255,200,40,.5),rgba(255,90,110,.28) 60%,rgba(0,0,0,.28));border:1px solid #ffd24a;box-shadow:0 0 10px rgba(255,210,74,.55)}
+.dlr.g1::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-100%);animation:g1sw 2.4s ease-in-out infinite;pointer-events:none}
+.dlr .k.g1{background:linear-gradient(#fff3b0,#ffb800);color:#3a1d00;font-weight:900;box-shadow:0 0 6px #ffd24a}
+@keyframes g1sw{0%,40%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.g1tag{display:inline-block;margin-top:4px;padding:2px 10px;border-radius:999px;background:linear-gradient(#fff3b0,#ffb800);color:#3a1d00;font-weight:900;font-size:13px;box-shadow:0 0 10px rgba(255,210,74,.7);animation:g1pulse 1.2s ease-in-out infinite}
+.g1tag.g2{background:linear-gradient(#e6f6ff,#7fc8ff);color:#06243a;box-shadow:0 0 8px rgba(127,200,255,.6);animation:none}
+.g1tag.big{font-size:16px;padding:3px 14px}
+@keyframes g1pulse{50%{transform:scale(1.06);box-shadow:0 0 18px rgba(255,210,74,.95)}}
+.g1ov{position:fixed;inset:0;z-index:9500;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(60,30,0,.55),rgba(0,0,0,.75));animation:g1in .3s both;cursor:pointer}
+.g1ov.out{opacity:0;transition:opacity .3s}
+@keyframes g1in{from{opacity:0}}
+.g1fx{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.g1fx i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:g1fall linear infinite}
+@keyframes g1fall{to{transform:translateY(110vh) rotate(720deg)}}
+.g1card{position:relative;text-align:center;padding:22px 30px;border-radius:20px;background:linear-gradient(160deg,#3a2200,#1a0b10);border:3px solid #ffd24a;box-shadow:0 0 40px rgba(255,210,74,.75),inset 0 0 20px rgba(255,210,74,.25);animation:g1pop .55s cubic-bezier(.2,1.6,.4,1) both;max-width:calc(100vw - 32px);box-sizing:border-box}
+@keyframes g1pop{from{transform:scale(.3);opacity:0}}
+.g1t{font-size:42px;font-weight:900;color:#ffd24a;text-shadow:0 0 18px rgba(255,200,40,.9),0 3px 0 #7a4a00;letter-spacing:.05em}
+.g1s{color:#ffe9a8;font-weight:800;margin:4px 0}
+.g1v{font-size:34px;font-weight:900;color:#7ee2a8;text-shadow:0 0 12px rgba(126,226,168,.7)}
+.g1card small{display:block;margin-top:8px;color:#c9b98a;font-size:11px}
+.potann.g1{border-color:#ffd24a!important;box-shadow:0 0 22px rgba(255,210,74,.8)!important}
 .dlr .k.big{background:linear-gradient(#ffd24a,#e08a00);color:#2a1700;font-weight:900}
 
 .lgcloud{display:grid;gap:8px;padding:10px;border-radius:10px;background:rgba(80,160,255,.1);border:1px dashed rgba(120,190,255,.45);text-align:left}
@@ -1119,7 +1141,7 @@ body.gready #lgload{display:none}
 .liveann:not(.on){transform:translate(-50%,calc(-100% - 140px - env(safe-area-inset-top,0px)))!important}
 .potann:not(.on){visibility:hidden;pointer-events:none;transition:transform .45s cubic-bezier(.2,1.4,.4,1),visibility 0s linear .45s}
 .ripeann:not(.on),.stealann:not(.on){transform:translate(-50%,calc(-100% - 140px - env(safe-area-inset-top,0px)))!important}
-.potann img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid #ffd24a;background:#1a0b10;flex:none}
+.potann>img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid #ffd24a;background:#1a0b10;flex:none}
 .potann .pa{flex:1;min-width:0;font-size:13px;line-height:1.45}
 .potann .pa small{display:block;font-size:11px;color:#ffe08a;font-weight:900;letter-spacing:.1em}
 .potann .pa b{color:#ffd24a;font-size:15px}
@@ -1617,7 +1639,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-S</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-U</span></small>
   </div>
  </div>
 </div>
@@ -1745,7 +1767,7 @@ html.ios-app body{min-height:100vh}
       <li><b>丟底發牌</b>:每局先丟 <b>100 金幣</b>底注進池底,芳芳翻開兩張牌當「門柱」。A 最小算 1,K 最大算 13,不分花色。<b>使用 4 副牌(208 張)</b>,剩不到 52 張就重新洗牌。</li>
       <li><b>看門柱決定</b>:門夠寬就選好下注金額「射門」;門太窄就「放棄」,但<b>丟進去的底注會留在池底</b>,讓池子越滾越大。</li>
       <li><b>射門結果</b>:芳芳翻第三張牌——
-       <ul><li>落在兩根門柱<b>中間</b>:<span class="up">依本門賠率從池底贏錢</span>:門越窄賠越多(最高 1 賠 15)、門越寬賠越少,發牌後會顯示賠率。每一把最多只能贏走池底的一部分:勝率 80% 以上 5%、65% 以上 8%、50% 以上 15%、更低 30%(全包除外)</li><li>落在門柱<b>外面</b>:<span class="down">下注金額丟進池底</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">丟 2 倍進池底</span></li></ul></li>
+       <ul><li>落在兩根門柱<b>中間</b>:<span class="up">依本門賠率從池底贏錢</span>:門越窄賠越多、門越寬賠越少,發牌後會顯示賠率。<b style="color:#ffd24a">🎯 一線天</b>(兩根門柱中間只有 1 種點數)加碼 1 賠 18,中間 2 種點數 1 賠 6.5,射中一線天會全服恭喜。每一把最多只能贏走池底的一部分:勝率 80% 以上 5%、65% 以上 8%、50% 以上 15%、更低 30%(全包除外)</li><li>落在門柱<b>外面</b>:<span class="down">下注金額丟進池底</span></li><li>和任一根門柱<b>一樣大</b>(撞柱):<span class="down">丟 2 倍進池底</span></li></ul></li>
       <li><b>兩根門柱一樣大</b>時,改成猜第三張「比門柱大」還是「比門柱小」:猜對從池底贏走下注金額的 90%,猜錯丟 1 倍,又一樣大就是<span class="down">撞柱丟 3 倍</span>。</li>
       <li><b>💥 全包</b>:看完門柱也可以選「全包」,押上<b>整個池底</b>。射中就抱走整個池底;射偏賠一個池底;撞柱賠 2 倍(雙柱 3 倍),最多扣到身上金幣歸零。<b>限制:池底要滿 3,000、而且這一門的勝率不能超過 50%</b>(太寬的門不能全包),身上也要有一個池底的金幣。</li>
       <li><b>下注上限</b>:不能超過目前池底;<b>門越寬押得越少</b>:勝率 50% 以上最多押池底 50%、65% 以上最多 35%、80% 以上最多 20%;身上金幣也要夠付撞柱的倍數;金幣不夠時至少可以押 1,000,撞柱最多扣到身上金幣歸零。<b>開局至少要有 1,100 金幣</b>(底注 100+最低下注 1,000)。</li>
@@ -2288,9 +2310,11 @@ async function dpReq(path,body){const r=await fetch(dpU(path),body?{method:'POST
 const dpNick=()=>(SAVE.pname||'匿名社畜').slice(0,12);
 /* 本機池底(claude.ai 版或連不上時) */
 function dpLocal(){if(SAVE.dpot==null)SAVE.dpot=1000;if(!SAVE.dlog)SAVE.dlog=[];return SAVE}
-function dpLocalLog(kind,amount,pot){const s=dpLocal();s.dlog.unshift({nick:dpNick(),kind,amount,pot,t:new Date().toISOString()});s.dlog.length=Math.min(s.dlog.length,20)}
+function dpLocalLog(kind,amount,pot){const s=dpLocal();s.dlog.unshift({nick:dpNick(),kind,amount,pot,t:new Date().toISOString(),gap:/win|lose|post/.test(kind)&&DS.ph==='posts'?dGap():null});s.dlog.length=Math.min(s.dlog.length,20)}
+/* 1008-T 紀錄多抓門寬(gap);伺服器還沒加欄位時退回舊查詢 */
+const dLogQ=()=>{const old=()=>dpReq('/rest/v1/dragon_log?select=nick,kind,amount,pot,t&kind=neq.ante&order=id.desc&limit=6');if(DP.gapOk===false)return old();return dpReq('/rest/v1/dragon_log?select=nick,kind,amount,pot,t,gap&kind=neq.ante&order=id.desc&limit=6').then(r=>{DP.gapOk=true;return r},e=>{DP.gapOk=false;return old()})};
 async function dpFetch(){if(DP.on){const potQ=()=>DP.taxCol===false?dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot'):dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot,tax_day,tax_amt').then(r=>{DP.taxCol=true;return r},e=>{DP.taxCol=false;return dpReq('/rest/v1/dragon_pot?id=eq.1&select=pot')});
-  const [p,l]=await Promise.all([potQ(),dpReq('/rest/v1/dragon_log?select=nick,kind,amount,pot,t&kind=neq.ante&order=id.desc&limit=6')]);
+  const [p,l]=await Promise.all([potQ(),dLogQ()]);
   DP.pot=p&&p[0]?+p[0].pot:null;DP.log=l||[];if(p&&p[0]&&'tax_amt' in p[0]){const td=new Date(Date.now()+8*3600e3).toISOString().slice(0,10);DP.tax=p[0].tax_day===td?+(p[0].tax_amt||0):0}}
  else{const s=dpLocal();DP.pot=s.dpot;DP.log=s.dlog.slice(0,6);DP.tax=s.dtaxD===new Date().toDateString()?(s.dtax||0):0}DP.t=Date.now()}
 async function dpAnte(amt){if(DP.on){const v=await dpReq('/rest/v1/rpc/dragon_ante',{p_nick:dpNick(),p_amt:amt});DP.pot=+v;return DP.pot}
@@ -2303,8 +2327,9 @@ function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==nul
  $('dpotst').innerHTML=(DP.err?'<span style="color:#ff9a8a">連線失敗:'+escH(DP.err)+'</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機池底(網頁版才是全伺服器共用)');if($('dptax'))$('dptax').innerHTML=DP.tax!=null?'🧾 今日芳芳稅收 <i>+'+fmtC(DP.tax)+'</i>':'';
  const K={allwin:['💥全包成功','up big','+'],alllose:['💥全包失敗','down','+'],allpost:['💥全包撞柱','down','+'],win:['射中','up','+'],lose:['射偏','down','+'],post:['撞柱','down','+'],fold:['放棄','',''],seed:['芳芳補底','up','+'],ante:['丟底','','']};
  /* 1008-J 丟底(ante)紀錄不顯示 */DP.log=(DP.log||[]).filter(r=>r&&r.kind!=='ante');
-  $('dlog').innerHTML=DP.log.length?DP.log.map(r=>{const k=K[r.kind]||[r.kind,'',''];const amt=+r.amount||0;
+  $('dlog').innerHTML=DP.log.length?DP.log.map(r=>{const g1=+r.gap===1&&(r.kind==='win'||r.kind==='allwin');const k=g1?['🎯一線天','big g1']:K[r.kind]||[r.kind,'',''];const amt=+r.amount||0;
   const txt=r.kind==='allwin'?'抱走整個池底 <b class="up">'+fmtC(amt)+'</b>':r.kind==='win'?'贏走 <b class="up">'+fmtC(amt)+'</b>':r.kind==='fold'?'底 '+fmtC(amt)+' 留在池裡':r.kind==='seed'?'補進 <b class="up">'+fmtC(amt)+'</b>':'丟進池裡 <b class="down">'+fmtC(amt)+'</b>';
+  if(g1)return'<div class="dlr big g1"><span class="nm">'+escH(r.nick||'?')+'</span><span class="k big g1">'+k[0]+'</span><span class="tx">🎉 贏走 <b class="up">'+fmtC(amt)+'</b></span><span class="ag">'+dpAgo(r.t)+'</span></div>';
   return'<div class="dlr'+(r.kind==='allwin'?' big':'')+'"><span class="nm">'+escH(r.kind==='seed'?'芳芳':(r.nick||'?'))+'</span><span class="k '+k[1]+'">'+k[0]+'</span><span class="tx">'+txt+'</span><span class="ag">'+dpAgo(r.t)+'</span></div>'}).join(''):'<div class="muted" style="font-size:12px">還沒有人射過,第一槍就是你!</div>'}
 /* ===== 芳芳收稅:戰鬥收成、賣裝備、採收自己的農作物都抽 10%,補進射龍門池底 =====
    稅金先記在存檔 SAVE.taxQ,累積後一次送到伺服器(省流量),送成功才扣掉;斷線也不會弄丟。 */
@@ -2330,7 +2355,9 @@ function dAllWhy(){const pot=DP.pot||0;if(DS.ph==='posts'&&dWinMax()<=0)return'�
 const dMinBet=()=>Math.min(DMINB,DP.pot||0);
 /* 1005-ZZS:賠率依門寬浮動。門越窄賠越多、越寬賠越少,每種門的期望值都是小輸約 6%,等寬門才打不再穩賺 */
 const DEDGE=.06;
-function dPayMult(bid){const rest=DK.length||1;if(!DS.a||!DS.b)return 1;let p,pp,K;
+/* 1008-T 鼓勵射窄門:一線天(中間 1 種點數)1 賠 18、中間 2 種 1 賠 6.5(跟伺服器 dragon_shoot 一致;伺服器還沒更新時用舊算法) */
+const DGAPM={1:18,2:6.5};const dGap=()=>DS.a&&DS.b&&DS.a.r!==DS.b.r?DS.b.r-DS.a.r-1:-1;
+function dPayMult(bid){const rest=DK.length||1;if(!DS.a||!DS.b)return 1;let p,pp,K;if(DS.a.r!==DS.b.r&&DGAPM[dGap()]&&DP.gapOk!==false)return DGAPM[dGap()];
  if(DS.ph==='pair'){const up=bid==='dhi';p=DK.filter(c=>up?c.r>DS.a.r:c.r<DS.a.r).length/rest;pp=DK.filter(c=>c.r===DS.a.r).length/rest;K=3}
  else{p=DK.filter(c=>c.r>DS.a.r&&c.r<DS.b.r).length/rest;pp=DK.filter(c=>c.r===DS.a.r||c.r===DS.b.r).length/rest;K=2}
  if(p<=0)return 0;const m=(1-p-pp+K*pp-DEDGE)/p;return Math.max(.1,Math.min(15,Math.round(m*100)/100))}
@@ -2382,7 +2409,7 @@ $('dact').onclick=async e=>{const b=e.target.closest('button');if(!b||b.disabled
   if(DS.a.r===DS.b.r){DS.ph='pair';const hi=DK.filter(c=>c.r>DS.a.r).length,lo=DK.filter(c=>c.r<DS.a.r).length,eq=DK.filter(c=>c.r===DS.a.r).length;
    $('dinfo').innerHTML='兩根門柱都是 '+RANKN[DS.a.r]+'!選好下注再猜大小<br><span class="muted">猜大勝率 '+Math.round(hi/rest*100)+'%('+dPayTxt(dPayMult('dhi'))+') · 猜小勝率 '+Math.round(lo/rest*100)+'%('+dPayTxt(dPayMult('dlo'))+') · 撞柱 '+Math.round(eq/rest*100)+'%</span>';dSay('pair','host-2')}
   else{DS.ph='posts';const inn=DK.filter(c=>c.r>DS.a.r&&c.r<DS.b.r).length,eq=DK.filter(c=>c.r===DS.a.r||c.r===DS.b.r).length,gap=DS.b.r-DS.a.r-1;
-   $('dinfo').innerHTML='門柱 '+RANKN[DS.a.r]+' ~ '+RANKN[DS.b.r]+'(中間有 '+gap+' 種點數)<br><span class="muted">勝率 '+Math.round(inn/rest*100)+'% · 撞柱 '+Math.round(eq/rest*100)+'% · <b class="dodds">賠率 '+dPayTxt(dPayMult('dshoot'))+'</b></span>';dSay(gap>=7?'wide':gap>=4?'mid':'narrow','host-1')}
+   $('dinfo').innerHTML='門柱 '+RANKN[DS.a.r]+' ~ '+RANKN[DS.b.r]+'(中間有 '+gap+' 種點數)<br><span class="muted">勝率 '+Math.round(inn/rest*100)+'% · 撞柱 '+Math.round(eq/rest*100)+'% · <b class="dodds">賠率 '+dPayTxt(dPayMult('dshoot'))+'</b></span>'+(gap===1&&DP.gapOk!==false?'<br><span class="g1tag">🎯 一線天!射中 1 賠 18 加碼</span>':gap===2&&DP.gapOk!==false?'<br><span class="g1tag g2">✨ 窄門加碼 1 賠 6.5</span>':'');if(gap===1&&DP.gapOk!==false){$('dbub').textContent='一線天!敢射中我就全服幫你放鞭炮 🎉';if($('dmbub'))$('dmbub').textContent='芳芳:'+$('dbub').textContent;$('dhost').src=HI('host-4','fd');sfx('open')}else dSay(gap>=7?'wide':gap>=4?'mid':'narrow','host-1')}
   DP.busy=false;renderDragon();dpRefresh()}
  else if(b.id==='dfold'){DS.ph='idle';$('dinfo').textContent='放棄這局,底注 '+fmtC(DANTE)+' 留在池底';dSay('fold','host-4');sfx('chipsClear');renderDragon();
   try{await dpSettle('fold',DANTE)}catch(err){}dpRefresh()}
@@ -2441,7 +2468,7 @@ async function dShoot(bid,allin){if(DP.busy||!(DS.ph==='posts'||DS.ph==='pair'))
   const SRV=!!(DS.round&&DP.srv);let SR=null;const SQ=dSqPlan(bid);
   if(SRV){try{SR=await dpReq('/rest/v1/rpc/dragon_shoot',{p_id:lbId(),p_key:fmKey(),p_nick:dpNick(),p_round:DS.round,p_bid:bid,p_bet:bet,p_allin:!!allin,p_coin:coin0});DP.err=''}
    catch(err){DP.busy=false;DP.err=String(err.code||err.message||err);DS.ph='done';DS.round=null;$('dinfo').innerHTML='<span class="down">連線失敗,這把沒有開牌,下注也沒有扣</span>';sfx('error');renderDragon();return}
-   DS.round=null;bet=+SR.bet||bet;DS.c={r:+SR.c.r,s:SUITS[+SR.c.s]||SUITS[0]}}
+   DS.round=null;bet=+SR.bet||bet;DS.c={r:+SR.c.r,s:SUITS[+SR.c.s]||SUITS[0]};if(!pair)DP.gapOk=('gap' in SR)}
   else{if(DK.length<8)newDeck();DS.c=drawC()}
   if(SQ.can&&DSHAPE[DS.c.r]&&(dLooksWin(DS.c,bid)||Math.random()<SQ.q)&&!(allin?SAVE.sqSkip:SAVE.sqSkipN)){$('dC').innerHTML='';await dSqueeze(DS.c,{allin,bid,bet})}$('dC').innerHTML=cardH(DS.c);sfx('cardDeal');const c=DS.c.r,a=DS.a.r,bb=DS.b.r;
   let kind,amt,msg;const mult=SR?+SR.mult:dPayMult(bid);
@@ -2457,7 +2484,8 @@ async function dShoot(bid,allin){if(DP.busy||!(DS.ph==='posts'||DS.ph==='pair'))
   if(!res){if(!isWin){dCoins(-amt);dStat(-amt,kind)}$('dinfo').innerHTML='<span class="down">連線失敗,'+(isWin?'這把獎金沒有入帳':'已扣 '+fmtC(amt)+' 金幣')+'</span>';sfx('error');renderDragon();return}
   if(isWin){dCoins(res.paid);dStat(res.paid,'win');msg='<span class="up">'+(allin?'💥 全包成功!抱走整個池底 ':(pair?'猜對了':'射中了')+'!從池底贏走 ')+fmtC(res.paid)+' 金幣</span>'+(!allin?'<br><span class="muted">本門賠率 '+dPayTxt(mult)+'</span>':'')+(res.paid<amt?'<br><span class="muted">池底被別人先挖走了,只剩這些</span>':'');sfx(allin?'fan4':'casinoWin');dSay(allin?'allwin':res.seeded?'seed':'win','host-4')}
   else{dCoins(-amt);dStat(-amt,kind.replace('all',''));const kk=kind.replace('all','');msg='<span class="down">'+(allin?'💥 全包失敗!':'')+(kk==='post'?(pair?'又一樣大!撞柱':'撞柱!')+'丟 '+fmtC(amt)+' 進池底':(pair?'猜錯了':'射偏了')+',丟 '+fmtC(amt)+' 進池底')+'</span>';if(kk==='post'){sfx('gong');dSay(allin?'alllose':'post','host-3')}else{sfx('casinoLose');dSay(allin?'alllose':'lose','host-2')}}
-  try{msg+=dTrack(isWin,isWin?res.paid:amt,pair,allin)}catch(e){console.error(e)}
+  const g1=!pair&&dGap()===1&&isWin;if(g1){msg='<span class="g1tag big">🎯 一線天!射中了!</span><br>'+msg;try{g1Party(res.paid,allin)}catch(e){console.error(e)}}
+  try{msg+=dTrack(isWin,isWin?res.paid:amt,pair,allin,g1)}catch(e){console.error(e)}
   $('dinfo').innerHTML=msg;renderDragon();dpRefresh()}
 setInterval(()=>{if(document.visibilityState==='visible'&&!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas!=='sib'&&!DP.busy&&Date.now()-DP.t>5000)dpRefresh()},2000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&SAVE&&SAVE.tab==='dragon'&&!$('home').hidden&&!DP.busy)dpRefresh()});
@@ -2473,7 +2501,7 @@ async function dAllinAsk(){if(DP.busy)return;DP.busy=true;renderDragon();try{awa
 DL.hot=['連贏 {n} 把了!芳芳要報警了','{n} 連勝?你是不是偷偷出老千','手氣這麼燙,不全包一把嗎?','再贏下去芳芳要被老闆罵了','{n} 連勝!池底在發抖'];
 DL.cold=['連輸 {n} 把…芳芳都不好意思收了','{n} 連敗,下一把一定轉運(芳芳說的)','輸成這樣,要不要先去打幾隻喪屍?','沒關係,池底會記得你的貢獻','{n} 連敗也是一種紀錄啦'];
 function dMyS(){const s=SAVE.dmy=SAVE.dmy||{};s.g=s.g||{narrow:[0,0],mid:[0,0],wide:[0,0],pair:[0,0]};s.al=s.al||[0,0];return s}
-function dTrack(win,amt,pair,allin){const s=dMyS(),gap=DS.b.r-DS.a.r-1,cat=pair?'pair':gap>=7?'wide':gap>=4?'mid':'narrow';
+function dTrack(win,amt,pair,allin,g1){const s=dMyS(),gap=DS.b.r-DS.a.r-1,cat=pair?'pair':gap>=7?'wide':gap>=4?'mid':'narrow';if(!pair&&gap===1){s.g1=s.g1||[0,0];s.g1[0]++;if(win)s.g1[1]++}
  s.g[cat][0]++;if(win)s.g[cat][1]++;if(allin){s.al[0]++;if(win)s.al[1]++}
  if(win)s.big=Math.max(s.big||0,amt);else s.bigL=Math.max(s.bigL||0,amt);
  const k=SAVE.dstk||0;SAVE.dstk=win?(k>0?k+1:1):(k<0?k-1:-1);s.maxW=Math.max(s.maxW||0,SAVE.dstk);s.maxL=Math.max(s.maxL||0,-SAVE.dstk);save();
@@ -2488,7 +2516,7 @@ function dMyRender(){const s=dMyS(),st=SAVE.dstat||{w:0,l:0,n:0,net:0},N={narrow
   '<div><small>累計輸贏</small><b class="'+(st.net>=0?'up':'down')+'">'+(st.net>=0?'+':'')+fmtC(st.net)+'</b></div><div><small>目前</small><b>'+(cur>0?'🔥 連勝 '+cur:cur<0?'🥶 連敗 '+(-cur):'—')+'</b></div>'+
   '<div><small>單把最大贏</small><b class="up">+'+fmtC(s.big||0)+'</b></div><div><small>單把最大輸</small><b class="down">−'+fmtC(s.bigL||0)+'</b></div>'+
   '<div><small>最長連勝 / 連敗</small><b>'+(s.maxW||0)+' / '+(s.maxL||0)+'</b></div><div><small>💥 全包</small><b>'+s.al[0]+' 次,成功 '+s.al[1]+'</b></div>'+
-  '<div><small>最常射的門</small><b>'+fav+'</b></div><div><small>最旺的門(5 把以上)</small><b>'+lucky+'</b></div></div>'+
+  '<div><small>🎯 一線天</small><b>'+((s.g1||[0,0])[0])+' 次,射中 '+((s.g1||[0,0])[1])+'</b></div><div><small>最常射的門</small><b>'+fav+'</b></div><div><small>最旺的門(5 把以上)</small><b>'+lucky+'</b></div></div>'+
   '<table class="dgw"><tr><th>門的寬度</th><th>次數</th><th>射中</th><th>勝率</th></tr>'+Object.keys(N).map(k=>'<tr><td>'+N[k]+'</td><td>'+s.g[k][0]+'</td><td>'+s.g[k][1]+'</td><td>'+pct(s.g[k][1],s.g[k][0])+'</td></tr>').join('')+'</table>'+
   '<p class="muted" style="font-size:11px;margin:6px 0 0">戰績從這次更新後開始記錄(勝率和累計輸贏包含之前的紀錄)</p>'}
 $('dmy').addEventListener('toggle',()=>{if($('dmy').open)dMyRender()});
@@ -3147,9 +3175,24 @@ function startRun(c){
 const mult=()=>CH[G.c]&&CH[G.c].m?CH[G.c].m:Math.pow(1.7,G.c);/* 1006-Y 每關可個別設定難度倍率 */
 /* 1006-E 難度調校參數:第一關不要太簡單,但保留刷怪爽度(血量成長溫和、傷害與密度提高) */
 var BAL={hp:.7,hpG:.5,dmg:1.15,dmgG:150,spawn:2.0,spawnG:10,elite:35,eliteHp:8,bossAtk:380};
+/* 1008-U 戰鬥場地有邊界:以出生點為中心,至少比畫面大一圈;無限列車有自己的軌道限制,不套用 */
+const ARN=()=>({x:Math.max(760,W/2+180),y:Math.max(760,H/2+180)});
+function ringPos(dd){const A=G&&!G.tr?ARN():null;let x=G.x,y=G.y;for(let i=0;i<14;i++){const a=Math.random()*Math.PI*2;x=G.x+Math.cos(a)*dd;y=G.y+Math.sin(a)*dd;if(!A||(Math.abs(x)<A.x-40&&Math.abs(y)<A.y-40))return[x,y]}
+ /* 角落時隨機角度大多在場外:改往場地中心方向,左右小幅偏移 */const c=Math.atan2(-G.y,-G.x);for(let i=0;i<10;i++){const a=c+(Math.random()-.5)*(1.2-i*.1);x=G.x+Math.cos(a)*dd;y=G.y+Math.sin(a)*dd;if(Math.abs(x)<A.x-40&&Math.abs(y)<A.y-40)return[x,y]}
+ return[Math.max(-A.x+40,Math.min(A.x-40,x)),Math.max(-A.y+40,Math.min(A.y-40,y))]}
+/* 鏡頭跟著角色,但最多只看到場外一小條(封鎖線外 90px) */
+const CAMX=()=>{if(!G)return 0;if(G.tr)return G.x;const A=ARN(),M=90;return Math.max(-A.x-M+W/2,Math.min(A.x+M-W/2,G.x))};
+const CAMY=()=>{if(!G)return 0;if(G.tr)return G.y;const A=ARN(),M=90;return Math.max(-A.y-M+H/2,Math.min(A.y+M-H/2,G.y))};
+function arenaClamp(){if(!G||G.tr)return;const A=ARN();G.x=Math.max(-A.x+24,Math.min(A.x-24,G.x));G.y=Math.max(-A.y+40,Math.min(A.y-16,G.y));
+ for(const e of G.en){const m=Math.min(60,e.r||20);if(e.x<-A.x+m)e.x=-A.x+m;else if(e.x>A.x-m)e.x=A.x-m;if(e.y<-A.y+m)e.y=-A.y+m;else if(e.y>A.y-m)e.y=A.y-m}}
+function drawArena(){if(!G||G.tr)return;const A=ARN(),O=4000;ctx.save();ctx.fillStyle='rgba(6,8,12,.72)';
+ ctx.fillRect(-A.x-O,-A.y-O,2*A.x+2*O,O);ctx.fillRect(-A.x-O,A.y,2*A.x+2*O,O);ctx.fillRect(-A.x-O,-A.y,O,2*A.y);ctx.fillRect(A.x,-A.y,O,2*A.y);
+ const T=14;ctx.lineWidth=T;ctx.strokeStyle='#f2c230';ctx.strokeRect(-A.x-T/2,-A.y-T/2,2*A.x+T,2*A.y+T);
+ ctx.setLineDash([22,22]);ctx.strokeStyle='#1b1b1b';ctx.strokeRect(-A.x-T/2,-A.y-T/2,2*A.x+T,2*A.y+T);ctx.setLineDash([]);
+ ctx.lineWidth=2;ctx.strokeStyle='rgba(255,210,60,.45)';ctx.strokeRect(-A.x+2,-A.y+2,2*A.x-4,2*A.y-4);ctx.restore()}
 function spawn(def,kind){
  const a=Math.random()*Math.PI*2,d=Math.hypot(W,H)/2+60,s=kind==='boss'?mult():mult()*BAL.hp*(1+G.t/60*BAL.hpG)*(kind==='elite'?BAL.eliteHp:1);
- G.en.push({ai:def.ai,x:G.x+Math.cos(a)*d,y:G.y+Math.sin(a)*d,hp:def.hp*s,max:def.hp*s,sp:def.sp,r:def.r*(kind==='elite'?1.5:1),dmg:def.dmg*BAL.dmg*mult()*(1+G.t/BAL.dmgG),n:def.n,e:def.e,kind,fl:0,kx:0,ky:0,oh:0,ph:Math.random()*8,at:0});
+ const sp0=ringPos(d);G.en.push({ai:def.ai,x:sp0[0],y:sp0[1],hp:def.hp*s,max:def.hp*s,sp:def.sp,r:def.r*(kind==='elite'?1.5:1),dmg:def.dmg*BAL.dmg*mult()*(1+G.t/BAL.dmgG),n:def.n,e:def.e,kind,fl:0,kx:0,ky:0,oh:0,ph:Math.random()*8,at:0});
 }
 function hit(e,dmg,kb,ang){
  if(e.hp<=0)return;const cr=Math.random()*100<G.S.crit;if(cr)dmg*=1.8;sfx(cr?'crit':'zbHit');
@@ -3619,7 +3662,7 @@ function combat(dt){
  // 首領專屬裝備技能
  const wh=S.sk.whistle;if(wh&&rdy('bwh')){const R=(85+15*wh)*ar;aoe(G.x,G.y,R,A*(.9+.3*wh),200);G.fx.push({k:'bwave',x:G.x,y:G.y,R,t:0,d:.7});sfx('shieldBreak');cd('bwh',Math.max(3.5,7-.8*wh)*cdm)}
  const bt=S.sk.bottle;if(bt&&rdy('bbt')){const n=5+bt;for(let i=0;i<n;i++){const a=i/n*6.283+G.t;G.bul.push({k:'bottle',x:G.x,y:G.y-34,vx:Math.cos(a)*380,vy:Math.sin(a)*380,r:12,dmg:A*(1+.3*bt),pr:2,life:1.1,hit:new Set(),a})}sfx('throw');cd('bbt',Math.max(1.6,3-.4*bt)*cdm)}
- const tr=S.sk.train;if(tr&&rdy('btr')){const ts=nearest(8,560);const ty=ts.length?pick(ts).y:G.y+rnd(-120,120);G.bul.push({k:'train',x:G.x+W/2+200,y:ty,vx:-1500,vy:0,r:46,dmg:A*(2.4+.8*tr),pr:999,life:2.6,hit:new Set(),dir:-1});sfx('car');cd('btr',Math.max(3,7.5-1.2*tr)*cdm)}
+ const tr=S.sk.train;if(tr&&rdy('btr')){const ts=nearest(8,560);const ty=ts.length?pick(ts).y:G.y+rnd(-120,120);G.bul.push({k:'train',x:CAMX()+W/2+200,y:ty,vx:-1500,vy:0,r:46,dmg:A*(2.4+.8*tr),pr:999,life:2.6,hit:new Set(),dir:-1});sfx('car');cd('btr',Math.max(3,7.5-1.2*tr)*cdm)}
  // 灼燒地面
  for(let i=G.pd.length-1;i>=0;i--){const q=G.pd[i];q.t+=dt;q.tk-=dt;if(q.tk<=0){q.tk=.4;aoe(q.x,q.y,q.R,q.dmg,0)}if(q.t>=q.d)G.pd.splice(i,1)}
  if(G.pd.length>60)G.pd.splice(0,G.pd.length-60);
@@ -3699,7 +3742,7 @@ function e2AI(e,dt,dx,dy,d){const el=e.kind==='elite',C=E2C[e.ai];e.fl-=dt;e.at-
  if(e.cast>0){e.cast-=dt;e.x+=e.kx*dt;e.y+=e.ky*dt;if(e.ai==='water'||e.ai==='fire')e.ca=Math.atan2(dy,dx);if(e.cast<=0)e2Fire(e,dx,dy,d,el)}
  else{const rangedAI=e.ai==='fire'||e.ai==='water',want=rangedAI?(d>250?1:d<160?-.55:0):1;
   const gs=guiltSlow(d);e.x+=(dx/d*e.sp*want*gs+e.kx)*dt;e.y+=(dy/d*e.sp*want*gs+e.ky)*dt;
-  const onScr=Math.abs(e.x-G.x)<W/2-10&&Math.abs(e.y-G.y)<H/2-10,busy=rangedAI&&(G.ep.length+G.ejet.length*2>=7);
+  const onScr=Math.abs(e.x-CAMX())<W/2-10&&Math.abs(e.y-CAMY())<H/2-10,busy=rangedAI&&(G.ep.length+G.ejet.length*2>=7);
   if(e.cd<=0&&d<C.rng*(el?1.15:1)&&onScr&&!busy){e.cast=C.cast;e.at=e.ad=C.cast+.3;e.aa='atk';e.cd=C.cd*(el?.75:1);e.ca=Math.atan2(dy,dx);
    if(e.ai==='bagua'){G.etel.push({k:'bagua',x:e.x,y:e.y,R:110*(el?1.35:1),t:0,d:C.cast});sfx('e2bagua')}
    else if(e.ai==='zap'){G.etel.push({k:'zap',x:e.x,y:e.y,R:95*(el?1.3:1),t:0,d:C.cast,src:e})}
@@ -3783,11 +3826,11 @@ function bossUpdate(dt){if(!G)return;
   if(!w.hit&&Math.abs(Math.hypot(G.x-w.x,(G.y-w.y)/.6)-Rc)<30){w.hit=true;if(pHurt(w.dmg,'zbAtk2'))return}
   if(w.t>=w.d)G.bw.splice(i,1)}
  if(G.lanes)for(let i=G.lanes.length-1;i>=0;i--){const L=G.lanes[i];L.t+=dt;
-  if(!L.go){if(L.t>=L.warn){L.go=true;L.x=G.x+W/2+40;sfx('car');setTimeout(()=>sfx('boom'),120);shake(5)}continue}
+  if(!L.go){if(L.t>=L.warn){L.go=true;L.x=CAMX()+W/2+40;sfx('car');setTimeout(()=>sfx('boom'),120);shake(5)}continue}
   L.x-=2300*dt;const TW=trainLen(105);
   if(!L.hit&&Math.abs(G.y-L.y)<40&&G.x>L.x-10&&G.x<L.x+TW){L.hit=true;if(pHurt(L.dmg,'zbAtk1'))return;shake(12)}
   for(const o of G.en)if(o.kind==='n'&&!L.kill.has(o)&&Math.abs(o.y-L.y)<44&&o.x>L.x&&o.x<L.x+TW){L.kill.add(o);hit(o,o.hp+1,0,0)}
-  if(L.x+TW<G.x-W/2-60)G.lanes.splice(i,1)}
+  if(L.x+TW<CAMX()-W/2-60)G.lanes.splice(i,1)}
  for(const d of G.drops)if(d.pt!==undefined&&d.pt<1){d.pt=Math.min(1,d.pt+dt/.7);if(d.pt>=1){sfx(d.boss===2?'fan3':'item');if(d.boss===2)shake(4)}}
  if(G.bossDown){const B=G.bossDown;B.t+=dt;G.inv=9;
   if(B.t>1.4){/* 1006-V 首領倒下後只吸道具,經驗寶石不再吸(戰鬥已結束) */for(const d of G.drops){if(d.pt<1)continue;const dx=G.x-d.x,dy=G.y-d.y,dd=Math.hypot(dx,dy)||1,v=Math.min(dd/dt,620);d.x+=dx/dd*v*dt;d.y+=dy/dd*v*dt}}
@@ -3805,13 +3848,13 @@ function bfx(k,x,y,w,rot,al,flip,sy){const im=IMG[k];if(!im||!im.naturalWidth)re
  if(!rot&&!flip){const hh=h*(sy||1),pa=ctx.globalAlpha;ctx.globalAlpha=pa*(al==null?1:al);ctx.drawImage(im,x-w/2,y-hh/2,w,hh);ctx.globalAlpha=pa;return true}
  ctx.save();ctx.globalAlpha=al==null?1:al;ctx.translate(x,y);if(sy)ctx.scale(1,sy);if(rot)ctx.rotate(rot);if(flip)ctx.scale(-1,1);ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();return true}
 function bossDrawGround(){
- if(G.lanes)for(const L of G.lanes){const x0=G.x-W/2-30,w=W+60,hh=74;
+ if(G.lanes)for(const L of G.lanes){const x0=CAMX()-W/2-30,w=W+60,hh=74;
   if(!L.go){const p=Math.min(1,L.t/L.warn),fl=(Math.sin(L.t*(9+p*16))+1)/2;
    ctx.globalAlpha=.16+.22*fl;ctx.fillStyle='#ffd400';ctx.fillRect(x0,L.y-hh/2,w,hh);
-   ctx.globalAlpha=.35;ctx.fillStyle='#ff3b2f';ctx.fillRect(G.x+W/2+30-w*p,L.y-hh/2,w*p,hh);
+   ctx.globalAlpha=.35;ctx.fillStyle='#ff3b2f';ctx.fillRect(CAMX()+W/2+30-w*p,L.y-hh/2,w*p,hh);
    ctx.globalAlpha=.75+.25*fl;ctx.strokeStyle='#ffd400';ctx.lineWidth=4;ctx.setLineDash([22,12]);ctx.lineDashOffset=-G.t*80;
    ctx.beginPath();ctx.moveTo(x0,L.y-hh/2);ctx.lineTo(x0+w,L.y-hh/2);ctx.moveTo(x0,L.y+hh/2);ctx.lineTo(x0+w,L.y+hh/2);ctx.stroke();ctx.setLineDash([]);
-   ctx.globalAlpha=.6+.4*fl;ctx.fillStyle='#fff';ctx.font='bold 15px system-ui';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText('列車進站',G.x+W/2-12,L.y);if(IMG['tr-sign-n']){const tw=ctx.measureText('列車進站').width;ctx.drawImage(IMG['tr-sign-n'],G.x+W/2-12-tw-30,L.y-13,26,26)}ctx.globalAlpha=1}
+   ctx.globalAlpha=.6+.4*fl;ctx.fillStyle='#fff';ctx.font='bold 15px system-ui';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText('列車進站',CAMX()+W/2-12,L.y);if(IMG['tr-sign-n']){const tw=ctx.measureText('列車進站').width;ctx.drawImage(IMG['tr-sign-n'],CAMX()+W/2-12-tw-30,L.y-13,26,26)}ctx.globalAlpha=1}
   else{ctx.globalAlpha=.12;ctx.fillStyle='#ffd400';ctx.fillRect(x0,L.y-hh/2,w,hh);ctx.globalAlpha=1}}
  const e=G.bossE;if(e&&e.b&&e.b.st==='tele'){const B=e.b,p=Math.min(1,B.t/B.dur),fl=(Math.sin(B.t*30)+1)/2;
   ctx.save();ctx.translate(e.x,e.y);ctx.rotate(B.a);ctx.globalAlpha=.18+.14*fl;ctx.fillStyle='#ff2a1f';ctx.fillRect(0,-e.r,B.len+e.r,e.r*2);
@@ -4008,7 +4051,7 @@ function update(dt){
  let mx=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0),my=(keys.ArrowDown||keys.s?1:0)-(keys.ArrowUp||keys.w?1:0);
  if(joy){mx=joy.dx;my=joy.dy}
  const ml=Math.hypot(mx,my);G.moving=ml>.05;
- if(G.moving){const k=Math.min(1,ml)/ml,sp=150*(1+S.spd/100)*(G.cardT>0?1.25+.08*(S.sk.card||0):1);G.x+=mx*k*sp*dt;G.y+=my*k*sp*dt;if(G.atk<=0&&Math.abs(mx)>.1)G.face=mx>0?1:-1}
+ if(G.moving){const k=Math.min(1,ml)/ml,sp=150*(1+S.spd/100)*(G.cardT>0?1.25+.08*(S.sk.card||0):1);G.x+=mx*k*sp*dt;G.y+=my*k*sp*dt;if(G.atk<=0&&Math.abs(mx)>.1)G.face=mx>0?1:-1}arenaClamp();
  G.hp=Math.min(S.hp,G.hp+S.regen*dt);
  const ch=CH[G.c];
  if(G.tr){trTick(dt)}else if(G.t<DUR){
@@ -4027,7 +4070,7 @@ function update(dt){
    if(G.shield>0){G.shield--;G.inv=.5;sfx('shieldHit');G.fx.push({k:'ring',x:G.x,y:G.y-30,R:50,t:0,d:.3,c:'120,200,255'});const ab=G.ws.airbag||0;if(ab>=3||G.evo.airbag){const R=G.evo.airbag?170:110;aoe(G.x,G.y,R,S.atk*(G.evo.airbag?3:1),320);G.fx.push({k:'ring',x:G.x,y:G.y-20,R,t:0,d:.4,c:'120,200,255'});sfx('shieldBreak')}}
    else{G.hp-=e.dmg*100/(100+S.def)*(1-(S.dr||0));G.inv=.6;sfx(e.n==='菜市場大媽喪屍'?'zbAtk2':e.n==='吸毒喪屍'?'zbAtk3':'zbAtk1');sfx('hurt');sfx('hurtThud');G.hurt=.2;hitStop(.05);shake(4);if(G.hp<=0){endRun(false);return}babyCry()}
   }
-  if(d>far&&e.kind!=='boss'){const a=Math.random()*Math.PI*2,dd=Math.hypot(W,H)/2+40;e.x=G.x+Math.cos(a)*dd;e.y=G.y+Math.sin(a)*dd}
+  if(d>far&&e.kind!=='boss'){const q=ringPos(Math.hypot(W,H)/2+40);e.x=q[0];e.y=q[1]}
  }
  if(e2Update(dt))return;bossUpdate(dt);if(!G||G.over)return;
  const grid=new Map();
@@ -4213,14 +4256,14 @@ function drawFx(){
  ctx.globalAlpha=1}
 function draw(){
  if(!G){ctx.fillStyle='#2b3036';ctx.fillRect(0,0,W,H);return}
-  const shk=(running&&!G.over)?G.shk:0,cx=G.x-W/2+(shk?rnd(-shk,shk):0),cy=G.y-H/2+(shk?rnd(-shk,shk):0);drawGround(cx,cy);
+  if(running&&!G.over)arenaClamp();const shk=(running&&!G.over)?G.shk:0,cx=CAMX()-W/2+(shk?rnd(-shk,shk):0),cy=CAMY()-H/2+(shk?rnd(-shk,shk):0);drawGround(cx,cy);
   ctx.save();ctx.translate(-cx,-cy);
   for(const d of G.dc){const al=d.t>3?4-d.t:1;ctx.globalAlpha=al*(d.k==='scorch'?.55:.7);
    const dcv=decalCanvas(d.k,Math.round(d.R));if(dcv)ctx.drawImage(dcv,d.x-dcv.width/2,d.y-dcv.height/2);
    else if(d.k==='scorch'){const g=ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.R);g.addColorStop(0,'rgba(40,25,15,.9)');g.addColorStop(.6,'rgba(60,35,20,.5)');g.addColorStop(1,'rgba(60,35,20,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(d.x,d.y,d.R,d.R*.55,0,0,6.283);ctx.fill()}
    else{ctx.fillStyle=d.k==='gold'?'#d9a42a':'#1f3d8f';for(let i=0;i<4;i++){const a=d.r+i*1.7,rr=d.R*(i?.35:.7);ctx.beginPath();ctx.ellipse(d.x+Math.cos(a)*d.R*.6*(i?1:0),d.y+Math.sin(a)*d.R*.3*(i?1:0),rr,rr*.6,0,0,6.283);ctx.fill()}}}
   ctx.globalAlpha=1;
-  bossDrawGround();e2DrawGround();if(G.tr)trDrawGround();
+  bossDrawGround();e2DrawGround();if(G.tr)trDrawGround();else drawArena();
   for(const f of G.fx)if(f.k==='bwave')wvDraw(f.x,f.y-6,f.R,f.t/f.d);
   if(IMG['xp寶石']&&IMG['xp寶石'].naturalWidth)for(const g of G.gems)drawImg('xp寶石','',g.x,g.y+7,g.v>=10?22:g.v>1?17:13);else
   for(const g of G.gems){ctx.fillStyle=g.v>=10?'#ffb43b':g.v>1?'#7cf0c8':'#4fc3ff';ctx.beginPath();ctx.moveTo(g.x,g.y-7);ctx.lineTo(g.x+5,g.y);ctx.lineTo(g.x,g.y+7);ctx.lineTo(g.x-5,g.y);ctx.closePath();ctx.fill()}
@@ -4243,7 +4286,7 @@ function draw(){
  }
  for(const d of G.dead){const A=EANIM[d.n],nf=A.die.length,DD=d.b?1.3:.6;const f=A.die[Math.min(nf-1,Math.floor(d.t/DD*nf))];drawImg(f,d.b?'👮':'',d.x,d.y+3,d.r*4.6,A.faceR?d.fx<d.x:d.fx>d.x,0,d.b?(d.t>3.4?Math.max(0,1-(d.t-3.4)/.8):1):(d.t>.7?Math.max(0,1-(d.t-.7)/.3):1))}
  {const ev=G.evo&&G.evo.clip;for(const o of G.orbs)if(o.y<G.y-26)drawOrb(o,ev)}
-  const vx=W/2+120,vy=H/2+160,list=G.en.filter(e=>Math.abs(e.x-G.x)<vx&&Math.abs(e.y-G.y)<vy);list.push(null);list.sort((a,b)=>(a?a.y:G.y)-(b?b.y:G.y));
+  const vx=W/2+120,vy=H/2+160,list=G.en.filter(e=>Math.abs(e.x-CAMX())<vx&&Math.abs(e.y-CAMY())<vy);list.push(null);list.sort((a,b)=>(a?a.y:G.y)-(b?b.y:G.y));
  for(const e of list){
   if(!e){drawHero();continue}
   const A=EANIM[e.n];if(A){const h=e.r*4.6;shadow(e.x,e.y,e.r*.9);
@@ -4433,20 +4476,41 @@ async function potWatch(){try{if(typeof DP==='undefined')return;let pot=null;
   if(pot<POTANN)return;
   const now=Date.now();if(st.t&&now-st.t<POTGAP)return;
   st={p:pot,t:now};try{localStorage.setItem('shechu-potann',JSON.stringify(st))}catch(e){}potShow(pot)}catch(e){}}
-function potShow(pot){let el=$('potann');if(!el){el=document.createElement('div');el.id='potann';el.className='potann';document.body.appendChild(el)}
+function potShow(pot,o){o=o||{};let el=$('potann');if(!el){el=document.createElement('div');el.id='potann';el.className='potann';document.body.appendChild(el)}el.classList.toggle('g1',!!o.g1);
  const lines=['池底已經滾到 <b>'+fmtC(pot)+'</b> 金幣了!誰要來挑戰?','<b>'+fmtC(pot)+'</b> 金幣躺在池底等人帶走,全包的勇者在哪裡?','池底 <b>'+fmtC(pot)+'</b>!射中一把直接下班!'];
- el.innerHTML='<img src="'+HI('host-4','fd')+'" alt="芳芳"><div class="pa"><small>📢 伺服器公告 · 企劃女神芳芳</small>'+pickL(lines)+'</div><button class="btn pri" data-go="1">去射龍門</button><span class="x" data-x="1">✕</span>';
- requestAnimationFrame(()=>el.classList.add('on'));sfx('open');setTimeout(()=>sfx('coins'),250);
+ el.innerHTML='<img src="'+HI('host-4','fd')+'" alt="芳芳"><div class="pa"><small>'+(o.small||'📢 伺服器公告 · 企劃女神芳芳')+'</small>'+(o.html||pickL(lines))+'</div><button class="btn pri" data-go="1">去射龍門</button><span class="x" data-x="1">✕</span>';
+ requestAnimationFrame(()=>el.classList.add('on'));sfx('open');setTimeout(()=>sfx(o.g1?'fan4':'coins'),250);
  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),14000);
  el.onclick=e=>{el.classList.remove('on');if(e.target.closest('[data-x]'))return;if(G&&running)return;setTab('dragon');if(typeof casSwitch==='function')casSwitch('dragon');renderHome()};try{swipeUp(el,()=>{el.classList.remove('on');clearTimeout(el._t)})}catch(e){}}
 setInterval(()=>{if(document.visibilityState==='visible'&&!inBattle())potWatch()},45000);setTimeout(potWatch,8000);
+/* 1008-T 全服恭喜:有人射中一線天(15 分鐘內),不在戰鬥、不在射龍門頁時跳恭喜;每一筆只跳一次 */
+const G1K='shechu-g1seen';
+async function g1Watch(){try{if(typeof DP==='undefined'||DP.gapOk===false)return;let rows;
+  if(DP.on){try{rows=await dpReq('/rest/v1/dragon_log?select=id,nick,amount,kind,t&gap=eq.1&kind=in.(win,allwin)&order=id.desc&limit=1')}catch(e){DP.gapOk=false;return}}
+  else rows=((SAVE.dlog)||[]).filter(r=>+r.gap===1&&/win$/.test(r.kind)).slice(0,1).map(r=>Object.assign({id:new Date(r.t).getTime()},r));
+  const r=rows&&rows[0];if(!r)return;let seen=0;try{seen=+localStorage.getItem(G1K)||0}catch(e){}
+  if(+r.id<=seen)return;if(Date.now()-new Date(r.t).getTime()>15*60000){try{localStorage.setItem(G1K,String(r.id))}catch(e){}return}
+  const L=$('login');if(L&&!L.hidden)return;if(inBattle())return;
+  try{localStorage.setItem(G1K,String(r.id))}catch(e){}
+  if(SAVE.tab==='dragon'&&!$('home').hidden)return;/* 在射龍門頁:紀錄裡已經有金色標示 */
+  if((r.nick||'')===dpNick())return;/* 自己射中的已經看過慶祝動畫 */
+  potShow(DP.pot||0,{g1:1,small:'全服恭喜 · 射龍門',html:'<b>'+escH(r.nick||'神秘同事')+'</b> 射中一線天<br>贏走 <b>'+fmtC(+r.amount||0)+'</b> 金幣'})}catch(e){}}
+setInterval(()=>{if(document.visibilityState==='visible'&&!inBattle())g1Watch()},30000);setTimeout(g1Watch,12000);
+/* 自己射中一線天:全螢幕慶祝 */
+function g1Party(paid,allin){const ov=document.createElement('div');ov.className='g1ov';
+ let sp='';for(let i=0;i<26;i++)sp+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;animation-delay:'+(Math.random()*.9).toFixed(2)+'s;animation-duration:'+(1.6+Math.random()*1.4).toFixed(2)+'s;background:'+['#ffd24a','#ff5a6e','#5ad1ff','#7ee2a8','#ffffff'][i%5]+'"></i>';
+ ov.innerHTML='<div class="g1fx">'+sp+'</div><div class="g1card"><div class="g1t">🎯 一線天!</div><div class="g1s">'+(allin?'全包成功,抱走整個池底':'1 賠 18 加碼')+'</div><div class="g1v">+'+fmtC(paid)+'</div><small>全服都會看到你的恭喜通知 · 點一下關閉</small></div>';
+ document.body.appendChild(ov);sfx('fan4');setTimeout(()=>sfx('coinsMany'),400);
+ const close=()=>{if(ov.parentNode){ov.classList.add('out');setTimeout(()=>ov.remove(),300)}};ov.onclick=close;setTimeout(close,4200)}
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1008-S';
+const GBUILD='1008-U';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🚧','戰鬥場地加上邊界','關卡地圖不再無限延伸,四周有黃黑封鎖線,角色和喪屍都不會跑出場外;一線天全服恭喜的通知也改得更簡潔'],
+['🎯','射龍門「一線天」大加碼','門柱中間只差 1 種點數的「一線天」賠率提高到 1 賠 18,射中有專屬慶祝動畫、紀錄金色標示,還會全服恭喜;中間 2 種點數的門也提高到 1 賠 6.5'],
 ['🔧','賣出等級選單完整顯示','倉庫的賣出等級選單不會再被切掉,破損到神話六個等級一次全部看得到;下方空間不夠時會自動往上展開'],
 ['🧹','倉庫介面整理','一鍵賣出改用等級名稱(破損、普通、優良、稀有、傳說、神話)並標上顏色;「撿到自動賣」整合進一鍵賣出,勾選「撿到也自動賣」就會用同一個等級;音效設定移到上方的 🔊 按鈕;排行榜上每個等級的裝備格大小統一'],
 ['✨','至尊掃光更明顯、排行榜也發光','至尊(紫)裝備的掃光加亮,跟典藏一樣明顯;排行榜上的至尊、典藏裝備和座駕也有掃光、光暈和閃光,展開裝備明細一樣有'],
@@ -4465,8 +4529,6 @@ const GNOTES=[
 ['💥','恨鐵不成鋼 攻擊特效升級','機關槍有槍口火光、曳光彈、命中火花和彈殼彈跳;飛彈有發射白煙、一路尾煙和全新爆炸;能量砲有蓄力光球、會流動的光束、砲口爆發、打到底的水花和命中電擊'],
 ['🤖','新角色「恨鐵不成鋼」免費體驗','裝備頁的角色可以選「恨鐵不成鋼」:機關槍連射 → 追蹤飛彈 → 能量砲貫穿一整排,射程超遠,全身還有掃光特效。目前免費體驗中!'],
 ['🔧','能力修正','單眼相機升級加寬、藍牙喇叭時,畫面上的光束也會變粗;萬能鋼筆多支時扇形縮小,遠距離也能多支命中;攻速現在也會加快熱咖啡、迴紋針轉速和首領裝備技能;無限悠遊卡每撿一顆寶石回復 1%~3% 生命'],
-['⚡','載入與連線加速','圖片改成用到才解碼,開遊戲更快、更省記憶體;資源檔依照需要的順序載入;更新版本後不用重新下載全部圖片;減少背景的連線次數,更省流量和電'],
-['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
