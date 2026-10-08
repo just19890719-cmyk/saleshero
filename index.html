@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1008-N">
+<meta name="gbuild" content="1008-Q">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1456,6 +1456,21 @@ body.gready #lgload{display:none}
 .potann .x{top:-9px!important;right:-5px!important;width:24px;height:24px;padding:0!important;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#2a1018;border:2px solid #ffd24a;opacity:1!important;font-size:12px!important;font-weight:900;color:#ffe08a;box-shadow:0 2px 6px rgba(0,0,0,.5);cursor:pointer;z-index:2}
 /* 男女主角切換鈕 */
 .hsel{display:flex;gap:6px;align-items:center;justify-content:center;margin:6px 0 8px}.hsel .muted{font-size:12px}
+/* 1008-Q 至尊掃光加亮(跟典藏一樣明顯,顏色偏紫白) */
+.rq5 .rqs,.scar.q5 .rqs{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.8) 46%,rgba(225,190,255,.55) 52%,transparent 66%)!important;background-size:250% 100%!important;animation-duration:2.4s!important}
+.tile.rq5>img,.rslot.rq5 .rimg img,.scar.q5 .sim img{animation:rqshine5 2.6s ease-in-out infinite}
+@keyframes rqshine5{0%,100%{filter:drop-shadow(0 0 3px rgba(200,150,255,.7)) brightness(1)}50%{filter:drop-shadow(0 0 9px rgba(214,168,255,1)) brightness(1.15)}}
+/* 1008-Q 排行榜:至尊、典藏格子(小尺寸)與座駕 */
+.lbr .eqs .tile.rqt,.lbdi .tile.rqt{padding:2px!important;box-sizing:border-box!important}
+.lbr .eqs .tile.rqt .rqspark{font-size:8px}
+.lbr .eqs .rdw{position:relative;display:inline-flex;flex:none;align-items:center;justify-content:center;width:42px;height:28px;border-radius:7px;overflow:hidden}
+.lbr .eqs .rdw .rd{position:relative;z-index:1;width:100%!important;height:100%!important}
+.lbr .eqs .rdw.rq5{background:radial-gradient(ellipse at 50% 60%,rgba(180,108,255,.55),rgba(36,18,63,.2) 75%);box-shadow:0 0 8px rgba(180,108,255,.75),inset 0 0 0 1px rgba(214,168,255,.6)}
+.lbr .eqs .rdw.rq6{background:radial-gradient(ellipse at 50% 60%,rgba(255,207,74,.55),rgba(58,38,0,.2) 75%);box-shadow:0 0 10px rgba(255,207,74,.85),inset 0 0 0 1px rgba(255,240,180,.7);animation:sgold 3s ease-in-out infinite}
+.lbr .eqs .rdw.rq5 .rd{animation:rqshine5 2.6s ease-in-out infinite}
+.lbr .eqs .rdw.rq6 .rd{animation:rqshine 2.6s ease-in-out infinite}
+.lbr .eqs .rdw .rqs{z-index:2;border-radius:7px}
+.lbr .eqs .rdw .rqspark{font-size:8px;z-index:3}
 .chbox .chskip{display:block;margin:8px auto 0;font-size:13px;padding:6px 16px;opacity:.9}
 .chbox .chskip[hidden]{display:none}
 /* 1008-L 戰鬥中的提示:上方小條、半透明、不攔手指 */
@@ -1586,7 +1601,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-N</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-Q</span></small>
   </div>
  </div>
 </div>
@@ -1616,8 +1631,8 @@ html.ios-app body{min-height:100vh}
    <section>
     <h2 id="sth">倉庫</h2>
     <div class="tools">
-     <span class="sellbar"><select id="sellq" aria-label="賣出範圍"><option value="-1">黑框</option><option value="0">銀框以下</option><option value="1" selected>綠框以下</option><option value="2">藍框以下</option><option value="3">黃金框以下</option></select><button class="btn" id="sellall">💰 一鍵賣出</button></span>
-     <label class="asell" title="戰鬥中撿到這些框的裝備會直接換成金幣">🤖 撿到自動賣 <select id="asellq" aria-label="撿到自動賣出"><option value="-2">關閉</option><option value="-1">黑框</option><option value="0">銀框以下</option><option value="1">綠框以下</option><option value="2">藍框以下</option></select></label>
+     <span class="sellbar"><select id="sellq" aria-label="賣出範圍"><option value="-1">黑框</option><option value="0">銀框以下</option><option value="1" selected>綠框以下</option><option value="2">藍框以下</option><option value="3">黃金框以下</option><option value="4">紅框以下</option></select><button class="btn" id="sellall">💰 一鍵賣出</button></span>
+     <label class="asell" title="戰鬥中撿到這些框的裝備會直接換成金幣">🤖 撿到自動賣 <select id="asellq" aria-label="撿到自動賣出"><option value="-2">關閉</option><option value="-1">黑框</option><option value="0">銀框以下</option><option value="1">綠框以下</option><option value="2">藍框以下</option><option value="3">黃金框以下</option><option value="4">紅框以下</option></select></label>
      <button class="btn pri" id="besteq">⚡ 一鍵換上較好裝備</button>
      <label><input type="checkbox" id="mute"> 關閉音效</label>
      <label class="volw">🔊 音量 <input type="range" id="vol" min="0" max="100" step="5" value="50"><b id="volv">50%</b></label>
@@ -1945,7 +1960,8 @@ function makeItem(il,q,type,force){
  return{id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),type,b:base.b,e:base.e,w:base.w||null,q,il,st,sk,skl,up:0,name,egg};
 }
 let ASKF=null;
-function ask(msg,yes){$('askm').textContent=msg;ASKF=yes;$('ask').hidden=false}
+let ASKN=null;
+function ask(msg,yes,o){o=o||{};$('askm').textContent=msg;ASKF=yes;ASKN=o.no||null;$('asky').textContent=o.yes||'確定';$('askn').textContent=o.noTxt||'取消';$('ask').hidden=false}
 const SELLP={'-1':15,0:30,1:50,2:70,3:180,4:450,5:900,6:1800};/* 1005-ZS:黑框 8→15、銀框 15→30、綠框 30→50 */
 const sellPrice=it=>Math.round(SELLP[it.q]*(1+(it.il||1)*.08)*(1+(it.up||0)*.15))*5;/* 1008-F 賣價 5 倍 *//* 裝備等級加成每級 +8%(原本 +4%) */
 const TIERQ=q=>['黑框','銀框','綠框','藍框','黃金框','紅框'][q+1];
@@ -2490,13 +2506,14 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 /* ===== 1005-ZZM:賭徒下場 無限列車(純躲列車小遊戲) =====
    不能攻擊、沒有喪屍;一條命、撐 2 分鐘,五個等級(每班 +50/70/100/130/170);撐完 +400。裝備與座駕屬性不算,大家同樣的移動速度 */
 /* 1005-ZZZD:經濟調整 — 一條命(碰到列車就出局),每班金幣大幅降低 */
-const TR={win:1000,dur:120,lim:250,hp:1,daily:5};/* 1008-F 撐完獎金 2 倍 */
+const TR={win:1500,dur:120,lim:250,hp:1,daily:5};/* 1008-O 撐完獎金再 ×1.5 *//* 1008-F 撐完獎金 2 倍 */
 /* 1008-I 時間以伺服器為準(防止改手機時間刷每日),日期一律用台灣時間 */
 let SRVOFF=0;const srvNow=()=>Date.now()+SRVOFF;function srvSync(ms){ms=+ms;if(ms&&isFinite(ms))SRVOFF=ms-Date.now()}
 const twDay=()=>{const d=new Date(srvNow()+8*3600e3);return d.getUTCFullYear()+'-'+(d.getUTCMonth()+1)+'-'+d.getUTCDate()};
 const trTodayKey=()=>new Date(srvNow()+8*3600e3).toISOString().slice(0,10);
-function trDailyLeft(){const D=SAVE.trDaily;return(!D||D.d!==trTodayKey())?TR.daily:Math.max(0,TR.daily-(D.n||0))}
-function trDailyUse(){const k=trTodayKey();if(!SAVE.trDaily||SAVE.trDaily.d!==k)SAVE.trDaily={d:k,n:0};SAVE.trDaily.n++;save()}/* lim:月台上下邊界(只能在 ±250 之間移動) */
+/* 1008-O 取消每日有獎次數:每場都給金幣 */
+function trDailyLeft(){return 1}
+function trDailyUse(){}/* lim:月台上下邊界(只能在 ±250 之間移動) */
 const TRTAUNT=['欠芳芳的錢還沒還,先跑給列車追吧','賭輸了還想搭車?站長說:用跑的!','十賭九輸,剩下那一次是被列車撞','還債路上,請退到黃線後方'];
 function startTrain(){window.__TR=1;startRun(0)}
 function trInit(){try{trResetOld()}catch(e){}G.tr={hp:TR.hp,inv:0,nx:1.4,n:0,coins:0,last:0,duel:window.__DUEL||0};window.__DUEL=0;G.tr.prac=!G.tr.duel&&trDailyLeft()<=0;if(!G.tr.duel&&!G.tr.prac)trDailyUse();G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.ws={};G.ss={};G.mb=[];G.ms=[];G.mfx=[];G.mcs=[];G.mpf=[];G.evo={};
@@ -2507,7 +2524,7 @@ const TRT=[{to:15,nm:'普通',ic:'🟡',coin:6,gap:1.7,n:[1,2,2],warn:1.05,sp:1.
  {to:30,nm:'困難',ic:'🟠',coin:8,gap:1.5,n:[2,2,3],warn:.95,sp:1.2,vert:.35,slow:.25,fast:.3},
  {to:60,nm:'非常困難',ic:'🔴',coin:12,gap:1.35,n:[2,3,3],warn:.86,sp:1.3,vert:.5,slow:.25,fast:.4},
  {to:90,nm:'地獄級別',ic:'🔥',coin:16,gap:1.15,n:[2,3,3,3],warn:.78,sp:1.4,vert:.6,slow:.2,fast:.5},
- {to:999,nm:'終極煉獄',ic:'💀',coin:20,gap:1.0,n:[3,3,3,4],warn:.7,sp:1.52,vert:.65,slow:.2,fast:.55}];TRT.forEach(v=>{v.coin*=2});/* 1008-F 每班金幣 2 倍 */
+ {to:999,nm:'終極煉獄',ic:'💀',coin:20,gap:1.0,n:[3,3,3,4],warn:.7,sp:1.52,vert:.65,slow:.2,fast:.55}];TRT.forEach(v=>{v.coin=Math.round(v.coin*2*1.5)});/* 1008-F ×2、1008-O 再 ×1.5 *//* 1008-F 每班金幣 2 倍 */
 /* 1005-ZZZC:五個等級全面加難(出車更密、警示更短、速度更快、直向列車更多) */
 function trLevel(t){return TRT.find(v=>t<v.to)}
 /* 確保每一波都留有跑得到的安全空間:平行軌道至少間隔 130,並檢查玩家在警示時間內跑得到的範圍裡有空隙 */
@@ -2596,7 +2613,7 @@ function trEnd(win){if(!G||G.over)return;const T=G.tr;G.over=true;running=false;
  {const lv=trLevel(Math.min(G.t,TR.dur-.01)),tt=Math.min(TR.dur,G.t),bt=SAVE.trBest;
   $('ores').innerHTML='<div class="trres"><div class="trhero"><small>撐過時間</small><b>'+fmtT(tt)+'</b><span class="trlv">'+(win?'🏁 撐完全程':'到達 '+lv.ic+' '+lv.nm)+'</span>'+(nb?'<span class="trnew">🆕 個人新紀錄!</span>':'')+'</div>'+
   '<div class="trrows"><div><span>🚆 閃過列車</span><b>'+T.n+' 班</b></div>'+(T.prac?'<div><span>🏋️ 練習場</span><b>不計金幣(明天再領)</b></div>':T.duel?'<div><span>📏 平均閃避距離 <small>平手時越近越強</small></span><b>'+(T.g>=999?'—':Math.round(T.g)+' 公分')+'</b></div><div><span>⚔️ 挑戰賽</span><b>不計金幣,輸贏看戰帖</b></div>':'<div><span>💰 列車金幣</span><b class="g">+'+fmtC(T.coins)+'</b></div>'+(win?'<div><span>🏁 通關獎金</span><b class="g">+'+fmtC(TR.win)+'</b></div>':''))+
-  (tax>0?'<div><span>🧾 芳芳收稅 <small>→ 射龍門池底</small></span><b class="r">−'+fmtC(tax)+'</b></div>':'')+((T.duel||T.prac)?'':'<div class="tot"><span>實得金幣</span><b>+'+fmtC(gross-tax)+'</b></div><div><span>🎟️ 今日有獎場次</span><b>剩 '+trDailyLeft()+' / '+TR.daily+'</b></div>')+'</div>'+
+  (tax>0?'<div><span>🧾 芳芳收稅 <small>→ 射龍門池底</small></span><b class="r">−'+fmtC(tax)+'</b></div>':'')+((T.duel||T.prac)?'':'<div class="tot"><span>實得金幣</span><b>+'+fmtC(gross-tax)+'</b></div>')+'</div>'+
   '<div class="trbestl">個人最佳 '+fmtT(bt.t)+' · 閃過 '+bt.n+' 班</div><div class="trupl" id="trupl">⏳ 成績上傳排行榜中…</div>'+(T.duel?'<div class="trduelsent">⚔️ 挑戰書成績已送出,到遊戲場「無限列車」看結果</div>':'')+
   '<p class="trtaunt">'+(win?'芳芳:「跑完全程?下次記得留點錢搭計程車」':'芳芳:「跑不贏列車,就別跟池底賭了」')+'</p>'+
   '<button class="btn" onclick="trBoard()">🏆 看列車排行榜</button></div>';
@@ -2619,7 +2636,7 @@ async function trLbInto(el,tab){el.textContent='讀取中…';let rows;const me=
 function trArtReady(){if(ART['tr-banner']&&$('trbnimg')){$('trbnimg').src=ART['tr-banner'];$('trbanner').hidden=false;$('trsign').hidden=true}document.querySelectorAll('#castabs .cti[data-k="tr-icon"]').forEach(e=>{if(ART['tr-icon'])e.innerHTML='<img src="'+ART['tr-icon']+'" alt="">'});trDrawGround.tp=null;trDrawGround.gp=null}
 /* 1005-ZZZE:玩法改版(一條命、新金幣),舊的列車紀錄全部清空重新開始 */
 function trResetOld(){if(SAVE&&SAVE.trVer!==2){delete SAVE.trBest;delete SAVE.trRuns;SAVE.trVer=2;save();TRLB.d={};TRLB.t={}}}
-function trPanel(){try{trResetOld()}catch(e){}{const L=trDailyLeft(),el=$('trdaily');if(el)el.innerHTML=L>0?'🎟️ 今日有獎場次 <b>'+L+' / '+TR.daily+'</b> · 用完後變練習場(不給金幣,排行榜照算)':'🏋️ 今天的有獎場次用完了,現在是<b>練習場</b>(不給金幣,排行榜照算),明天 00:00 恢復';const g=$('trgo');if(g)g.innerHTML=L>0?'🚇 開始挑戰':'🏋️ 進練習場'}try{trArtReady()}catch(e){}if(SAVE.trBest&&SAVE.trBest.t>TR.dur+.01){delete SAVE.trBest;save()}
+function trPanel(){try{trResetOld()}catch(e){}{const L=trDailyLeft(),el=$('trdaily');if(el)el.innerHTML='🎟️ 不限次數,每一場都給金幣 · 撐完 2 分鐘 +'+fmtC(TR.win);const g=$('trgo');if(g)g.innerHTML=L>0?'🚇 開始挑戰':'🏋️ 進練習場'}try{trArtReady()}catch(e){}if(SAVE.trBest&&SAVE.trBest.t>TR.dur+.01){delete SAVE.trBest;save()}
  const b=SAVE.trBest;$('trbest').innerHTML=b?'<small>我的最佳</small><b>'+fmtT(b.t)+'</b><span>閃過 '+b.n+' 班 · '+(b.t>=TR.dur-.01?'✅ 撐完全程':'到達 '+trLevel(b.t).ic+trLevel(b.t).nm)+'</span>':'<small>我的最佳</small><b>—</b><span>還沒挑戰過</span>';
  let a=0;$('trtiers').innerHTML='<b>五個等級</b>'+TRT.map(v=>{const s=a,e=Math.min(v.to,TR.dur);a=e;return'<div class="trt"><span>'+v.ic+' '+v.nm+'</span><span class="muted">'+fmtT(s)+'～'+fmtT(e)+'</span><b>每班 +'+v.coin+'</b></div>'}).join('')+'<div class="trt fin"><span>🏁 撐完 2 分鐘</span><span></span><b>+'+TR.win+'</b></div>';
  document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===TRLB.tab));trLbInto($('trlb'),TRLB.tab);duRender();duLoad(false)}
@@ -2861,8 +2878,8 @@ async function lbRender(){
  const med=['🥇','🥈','🥉'],onN=rows.filter(lbOn).length;
  const myI=rows.findIndex(r=>r.id===LB.uid);
  $('lblist').innerHTML='<div class="lbonline">🟢 目前在線 '+onN+' 人 · 共 '+rows.length+' 位玩家</div>'+(myI>=0?'<div class="lbmine">🏅 你目前'+(LB.sort==='power'?'戰力':'金幣')+'排第 '+(myI+1)+' 名</div>':'')+rows.map((r,i)=>{const nm=r.nick||(ps[r.id]&&ps[r.id].name)||'神秘玩家';
-  const eqs=(Array.isArray(r.eq)?r.eq:[]).map(e=>e&&typeof e.b==='string'?'<span class="tile q'+(+e.q|0)+(BOSSI.some(x=>x.b===e.b)?' bossi':'')+'" title="'+escH(e.n||e.b)+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span>':'').join('');
-  const rd=r.ride&&ART['ride-'+r.ride.id]?'<img class="rd" src="'+ART['ride-'+r.ride.id]+'" alt="" title="座駕 Lv.'+(+r.ride.lv|0)+'">':'';
+  const eqs=(Array.isArray(r.eq)?r.eq:[]).map(e=>e&&typeof e.b==='string'?lbTile(e.q,ART[e.b],BOSSI.some(x=>x.b===e.b)?'bossi':'',e.n||e.b):'').join('');
+  const rd=lbRide(r.ride);
   return'<div class="lbr'+(r.id===LB.uid?' me':'')+(LB.open===r.id?' open':'')+'" data-uid="'+escH(r.id)+'"><div class="rk">'+(med[i]||(i+1))+'</div><div style="min-width:0"><div class="nm">'+escH(nm)+(r.id===LB.uid?' (你)':'')+(lbOn(r)?'<span class="olst on">在線</span>':'<span class="olst">離線</span>')+'<span class="tap">▾ 裝備</span></div>'+((r.id===LB.uid?SAVE.motto:r.motto)?'<div class="mt"><span>'+escH(mottoClean(r.id===LB.uid?SAVE.motto:r.motto))+'</span></div>':'')+'<div class="eqs">'+(eqs||'<span class="muted" style="font-size:12px">沒有裝備</span>')+rd+'</div></div>'+
    '<div class="val">'+(LB.sort==='power'?'⚔️ '+lbPw(r)+'<small>💰 '+fmtC(+r.coin||0)+'</small>':'💰 '+fmtC(+r.coin||0)+'<small>⚔️ '+lbPw(r)+'</small>')+'</div>'+lbDet(r)+'</div>'}).join('')}
 
@@ -2904,11 +2921,15 @@ $('lggo').onclick=()=>{if(typeof CL!=='undefined'&&CL.on&&!CL.u){audioUnlock();s
 $('lgname').addEventListener('keydown',e=>{if(e.key==='Enter')$('lggo').click()});
 let NAMECB=null;
 document.addEventListener('click',e=>{const d=$('lgsave');if(d&&d.open&&!e.target.closest('#lgsave ul')&&!e.target.closest('#lgsave summary')){d.open=false}});
+/* 1008-Q 排行榜的裝備/座駕格:至尊、典藏跟倉庫一樣有掃光 */
+function lbTile(q,img,cls,title){q=Math.max(-1,Math.min(6,+q|0));const RQ=q>=5;return'<span class="tile q'+q+(RQ?' rqt rq'+q:'')+(cls?' '+cls:'')+'"'+(title?' title="'+escH(title)+'"':'')+'>'+(RQ?'<span class="rqclip"></span><span class="rqs"></span>':'')+(q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+(img?'<img src="'+img+'" alt="">':'')+'</span>'}
+function lbRide(rd){if(!rd||typeof rd.id!=='string'||!ART['ride-'+rd.id])return'';const R0=RIDES.find(x=>x.id===rd.id),q=R0?R0.q:0,RQ=q>=5;
+ return'<span class="rdw'+(RQ?' rq'+q:'')+'" title="'+escH((R0?R0.n:'座駕')+' Lv.'+(+rd.lv|0))+'">'+(RQ?'<span class="rqs"></span>':'')+(q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i>':'')+'<img class="rd" src="'+ART['ride-'+rd.id]+'" alt=""></span>'}
 function lbDet(r){const eq=Array.isArray(r.eq)?r.eq:[];
  const items=SLOTS.map((sl,j)=>{const e=eq[j];if(!e||typeof e.b!=='string')return'<div class="lbdi no"><span class="tile empty"></span><div><small>'+sl.n+'</small><b>(空)</b></div></div>';
   const q=Math.max(-1,Math.min(6,+e.q|0)),rr=RAR[q]||RAR[0];
-  return'<div class="lbdi"><span class="tile q'+q+(BOSSI.some(x=>x.b===e.b)?' bossi':'')+'">'+(ART[e.b]?'<img src="'+ART[e.b]+'" alt="">':'')+'</span><div><small>'+sl.n+'</small><b style="color:'+rr.c+'">'+escH(e.n||e.b)+'</b><i style="color:'+rr.c+'">'+rr.n+'</i></div></div>'}).join('');
- const rd=r.ride&&typeof r.ride.id==='string'?(()=>{const R0=RIDES.find(x=>x.id===r.ride.id);return'<div class="lbdi"><span class="tile q'+(R0?R0.q:0)+'">'+(ART['ride-'+r.ride.id]?'<img src="'+ART['ride-'+r.ride.id]+'" alt="">':'')+'</span><div><small>座駕</small><b>'+escH(R0?R0.n:r.ride.id)+'</b><i>Lv.'+(+r.ride.lv|0)+'</i></div></div>'})():'';
+  return'<div class="lbdi">'+lbTile(q,ART[e.b],BOSSI.some(x=>x.b===e.b)?'bossi':'')+'<div><small>'+sl.n+'</small><b style="color:'+rr.c+'">'+escH(e.n||e.b)+'</b><i style="color:'+rr.c+'">'+rr.n+'</i></div></div>'}).join('');
+ const rd=r.ride&&typeof r.ride.id==='string'?(()=>{const R0=RIDES.find(x=>x.id===r.ride.id);const rq=R0?R0.q:0,rc=(RAR[rq]||RAR[0]).c;return'<div class="lbdi">'+lbTile(rq,ART['ride-'+r.ride.id],'')+'<div><small>座駕</small><b style="color:'+rc+'">'+escH(R0?R0.n:r.ride.id)+'</b><i style="color:'+rc+'">'+(rq>=5?RAR[rq].n+' · ':'')+'Lv.'+(+r.ride.lv|0)+'</i></div></div>'})():'';
  return'<div class="lbd">'+items+rd+((typeof FM!=='undefined'&&FM.on&&r.id!==LB.uid)?'<button class="btn lbfarm" data-farm="'+escH(r.id)+'" data-nick="'+escH(r.nick||'')+'">🌾 逛他的農場</button>':'')+'</div>'}
 $('lblist').onclick=e=>{const fb=e.target.closest('[data-farm]');if(fb){fmVisit(fb.dataset.farm,fb.dataset.nick);return}const row=e.target.closest('.lbr');if(!row)return;const id=row.dataset.uid;LB.open=LB.open===id?null:id;
  $('lblist').querySelectorAll('.lbr').forEach(x=>x.classList.toggle('open',x.dataset.uid===LB.open))};
@@ -3023,18 +3044,28 @@ $('detail').onclick=e=>{
   if(a==='close')sel=null;
   else if(a==='eq'){equip(it);sel=null;audioUnlock();sfx('equip')}
   else if(a==='un'){for(const k in SAVE.eq)if(SAVE.eq[k]===it.id)delete SAVE.eq[k];sel=null;audioUnlock();sfx('unequip')}
-  else if(a==='sell'){if(isEq(it))return;const doSell=()=>{const pr=sellPrice(it),t=taxIncome(pr);SAVE.coin=(SAVE.coin||0)+pr-t;SAVE.items=SAVE.items.filter(i=>i!==it);if(PSEL===it.id)PSEL=null;sel=null;save();renderHome();toast('賣出「'+it.name+'」,獲得 '+fmtC(pr-t)+' 金幣'+taxTxt(t));audioUnlock();sfx('coins')};if(it.q>=3){ask('確定要賣出'+TIERQ(it.q)+'「'+it.name+'」嗎?\n可獲得 '+fmtC(sellPrice(it)-Math.floor(sellPrice(it)*TAXR))+' 金幣(已扣芳芳稅 10%)',doSell);return}doSell();return}
+  else if(a==='sell'){if(isEq(it))return;const doSell=()=>{const pr=sellPrice(it),t=taxIncome(pr);SAVE.coin=(SAVE.coin||0)+pr-t;SAVE.items=SAVE.items.filter(i=>i!==it);if(PSEL===it.id)PSEL=null;sel=null;save();renderHome();toast('賣出「'+it.name+'」,獲得 '+fmtC(pr-t)+' 金幣'+taxTxt(t));audioUnlock();sfx('coins')};/* 1008-P 首領專屬裝備:再跳一次確認 */
+  const bossAsk=()=>{if(!it.boss){doSell();return}ask('👑 這是首領專屬裝備「'+it.name+'」\n只有打倒首領才拿得到,賣掉就沒了。\n真的要賣掉嗎?',doSell,{yes:'確定賣掉',noTxt:'保留'})};
+  if(it.q>=3){ask('確定要賣出'+TIERQ(it.q)+'「'+it.name+'」嗎?\n可獲得 '+fmtC(sellPrice(it)-Math.floor(sellPrice(it)*TAXR))+' 金幣(已扣芳芳稅 10%)',()=>setTimeout(bossAsk,60));return}bossAsk();return}
  save();renderHome();
 };
 /* 1008-K 撿到自動賣出的設定 */
 const autoSellQ=()=>SAVE.autoSell==null?-1:+SAVE.autoSell;
-const ASN={'-2':'關閉','-1':'黑框','0':'銀框以下','1':'綠框以下','2':'藍框以下'};
-$('asellq').onchange=()=>{SAVE.autoSell=+$('asellq').value;save();audioUnlock();sfx('tab');toast(SAVE.autoSell<=-2?'🤖 撿到自動賣已關閉,所有裝備都會收進倉庫':'🤖 之後戰鬥中撿到'+ASN[SAVE.autoSell]+'的裝備會直接賣掉換金幣(首領裝備除外)')};
+const ASN={'-2':'關閉','-1':'黑框','0':'銀框以下','1':'綠框以下','2':'藍框以下','3':'黃金框以下','4':'紅框以下'};
+$('asellq').onchange=()=>{const v=+$('asellq').value,prev=autoSellQ();audioUnlock();
+ const apply=()=>{SAVE.autoSell=v;save();sfx('tab');$('asellq').value=String(v);toast(SAVE.autoSell<=-2?'🤖 撿到自動賣已關閉,所有裝備都會收進倉庫':'🤖 之後戰鬥中撿到'+ASN[SAVE.autoSell]+'的裝備會直接賣掉換金幣(首領裝備除外)')};
+ /* 1008-O 選黃金框以上要再確認一次 */
+ if(v>=3&&v>prev){$('asellq').value=String(prev);ask('確定要把撿到的'+ASN[v]+'裝備都自動賣掉嗎?\n傳說、神話這些好裝備也會直接換成金幣(首領專屬裝備除外)',apply);return}
+ apply();return;toast(SAVE.autoSell<=-2?'🤖 撿到自動賣已關閉,所有裝備都會收進倉庫':'🤖 之後戰鬥中撿到'+ASN[SAVE.autoSell]+'的裝備會直接賣掉換金幣(首領裝備除外)')};
 $('sellall').onclick=()=>{const mq=+$('sellq').value,list=SAVE.items.filter(i=>!isEq(i)&&i.q<=mq);
  if(!list.length){toast('沒有可以賣出的'+TIERQ(mq)+(mq>-1?'以下':'')+'裝備');return}
- const tot=list.reduce((a,i)=>a+sellPrice(i),0);ask('要賣出 '+list.length+' 件'+TIERQ(mq)+(mq>-1?'以下':'')+'的裝備,\n共獲得 '+fmtC(tot-Math.floor(tot*TAXR))+' 金幣嗎?(已扣芳芳稅 10%)\n(穿戴中的裝備不會被賣出)',()=>{
- SAVE.items=SAVE.items.filter(i=>!list.includes(i));const tt=taxIncome(tot);SAVE.coin=(SAVE.coin||0)+tot-tt;if(PSEL&&!byId(PSEL))PSEL=null;if(sel&&!byId(sel))sel=null;save();renderHome();audioUnlock();sfx('coinsMany');toast('賣出 '+list.length+' 件,獲得 '+fmtC(tot-tt)+' 金幣'+taxTxt(tt))})};
-$('asky').onclick=()=>{$('ask').hidden=true;const f=ASKF;ASKF=null;if(f)f()};$('askn').onclick=()=>{$('ask').hidden=true;ASKF=null};
+ const tot=list.reduce((a,i)=>a+sellPrice(i),0);
+ const sellL=L=>{if(!L.length){toast('沒有賣出任何裝備');return}const tt0=L.reduce((a,i)=>a+sellPrice(i),0);SAVE.items=SAVE.items.filter(i=>!L.includes(i));const tt=taxIncome(tt0);SAVE.coin=(SAVE.coin||0)+tt0-tt;if(PSEL&&!byId(PSEL))PSEL=null;if(sel&&!byId(sel))sel=null;save();renderHome();audioUnlock();sfx('coinsMany');toast('賣出 '+L.length+' 件,獲得 '+fmtC(tt0-tt)+' 金幣'+taxTxt(tt))};
+ ask('要賣出 '+list.length+' 件'+TIERQ(mq)+(mq>-1?'以下':'')+'的裝備,\n共獲得 '+fmtC(tot-Math.floor(tot*TAXR))+' 金幣嗎?(已扣芳芳稅 10%)\n(穿戴中的裝備不會被賣出)',()=>{
+  /* 1008-P 清單裡有首領專屬裝備:再跳一次確認 */
+  const bs=list.filter(i=>i.boss);if(!bs.length){sellL(list);return}
+  setTimeout(()=>ask('👑 裡面有 '+bs.length+' 件首領專屬裝備:\n'+bs.slice(0,5).map(i=>'「'+i.name+'」').join('\n')+(bs.length>5?'\n…等 '+bs.length+' 件':'')+'\n只有打倒首領才拿得到,也要一起賣掉嗎?',()=>sellL(list),{yes:'一起賣掉',noTxt:'保留首領裝備',no:()=>sellL(list.filter(i=>!i.boss))}),60)})};
+$('asky').onclick=()=>{$('ask').hidden=true;const f=ASKF;ASKF=null;ASKN=null;if(f)f()};$('askn').onclick=()=>{$('ask').hidden=true;const f=ASKN;ASKF=null;ASKN=null;if(f)f()};
 $('besteq').onclick=()=>{audioUnlock();let n=0;
  for(const t of ['wpn','off','head','coat','shoe']){const p0=powerOf(pstats(1)),best=SAVE.items.filter(i=>i.type===t).map(i=>[i,powerWith(t,i)]).sort((a,b)=>b[1]-a[1])[0];const cur=byId(SAVE.eq[t]);if(best&&best[0]!==cur&&best[1]>p0){equip(best[0],t);n++}}
  const acc=SAVE.items.filter(i=>i.type==='acc').sort((a,b)=>ival(b)-ival(a)).slice(0,2);const curA=[byId(SAVE.eq.acc1),byId(SAVE.eq.acc2)];
@@ -4378,10 +4409,14 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!inBattle())potWatch()
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1008-N';
+const GBUILD='1008-Q';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['✨','至尊掃光更明顯、排行榜也發光','至尊(紫)裝備的掃光加亮,跟典藏一樣明顯;排行榜上的至尊、典藏裝備和座駕也有掃光、光暈和閃光,展開裝備明細一樣有'],
+['👑','首領裝備賣出前再確認','賣出首領專屬裝備時會多跳一次確認;一鍵賣出如果清單裡有首領裝備,可以選「一起賣掉」或「保留首領裝備」'],
+['🚇','無限列車不限次數、金幣 1.5 倍','無限列車取消每天 5 場有獎次數,每一場都給金幣;每班金幣與撐完獎金再提高 1.5 倍(每班 18/24/36/48/60,撐完 +1,500)'],
+['💰','賣出可以選到紅框','「一鍵賣出」和「撿到自動賣」都新增黃金框、紅框選項;選黃金框以上會再跟你確認一次,首領專屬裝備不會被自動賣掉'],
 ['📢','池底公告不再洗版','射龍門池底要滿 50 萬金幣才會發公告,而且每 30 分鐘最多一次'],
 ['🎁','年終獎金開獎變快','輪盤轉得更快(大約 1 秒);轉的時候可以按「⏩ 跳過動畫」直接看結果;開完 3 秒自動繼續戰鬥'],
 ['🎯','戰鬥中不再被通知擋住','戰鬥中撿到裝備、自動賣出改成右上角戰利品欄的小字;射龍門池底公告、農場被偷、搶收公告、仇人作物成熟、新版本提醒等,都會等你打完回到首頁才跳出;戰鬥中的提示改成畫面上方的小條,也不會擋住手指拖曳'],
@@ -4397,11 +4432,7 @@ const GNOTES=[
 ['⚡','載入與連線加速','圖片改成用到才解碼,開遊戲更快、更省記憶體;資源檔依照需要的順序載入;更新版本後不用重新下載全部圖片;減少背景的連線次數,更省流量和電'],
 ['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
 ['📱','多裝置登入全自動','同一個帳號一次只能在一台裝置上線:在新裝置登入時,舊裝置會自動下線,新裝置自動接續最新進度,不用再自己選擇。被下線的裝置按「在這台繼續玩」重新登入即可'],
-['🔑','雲端帳號登入更直覺','這台裝置已經綁定帳號時,按「建立帳號」會直接帶你去登入那個帳號;帳號已存在時也會提示改用登入,不會再出現「這個帳號已經有人用了」的誤會'],
-['🧹','登出時可以清除這台裝置的進度','登出雲端帳號時多了「登出並清除這台裝置的進度」:會變回新玩家,可以重新取名、建立或登入別的帳號,原本帳號的雲端進度不受影響'],
-['🪪','找回遊戲暱稱','登入雲端帳號後,如果存檔裡沒有遊戲暱稱,會自動從排行榜找回原本的暱稱,不用重新輸入'],
-['☁️','雲端帳號登入更安全','登入雲端帳號時,如果雲端上的進度是空的,會自動保留這台裝置的進度並上傳;兩邊都有進度時,可以自己選擇要用哪一份,不會再不小心被空白進度蓋掉'],
-['🃏','射龍門改用 4 副牌','射龍門從 1 副牌(52 張)改成同時使用 4 副牌(208 張),剩不到 52 張才重新洗牌。撞柱機率會穩定在約 12%,不會因為一副牌快發完而忽高忽低。說明:撞柱機率從來沒有被調高,過去偶爾看到 20% 以上,是因為牌快發完時剩下的牌剛好很多張跟門柱同點數。另外牌桌換成荷官居中的新排版,撲克牌放大']
+['🔑','雲端帳號登入更直覺','這台裝置已經綁定帳號時,按「建立帳號」會直接帶你去登入那個帳號;帳號已存在時也會提示改用登入,不會再出現「這個帳號已經有人用了」的誤會']
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
