@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1008-Q">
+<meta name="gbuild" content="1008-S">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1456,6 +1456,22 @@ body.gready #lgload{display:none}
 .potann .x{top:-9px!important;right:-5px!important;width:24px;height:24px;padding:0!important;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#2a1018;border:2px solid #ffd24a;opacity:1!important;font-size:12px!important;font-weight:900;color:#ffe08a;box-shadow:0 2px 6px rgba(0,0,0,.5);cursor:pointer;z-index:2}
 /* 男女主角切換鈕 */
 .hsel{display:flex;gap:6px;align-items:center;justify-content:center;margin:6px 0 8px}.hsel .muted{font-size:12px}
+/* 1008-R 倉庫:賣出等級選單 */
+.sellbox{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.selw{position:relative}
+.selq{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);color:#f3efe6;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 10px;font-size:14px;cursor:pointer;white-space:nowrap}
+.selq i,.selpop i{display:inline-block;width:10px;height:10px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
+.selpop{position:fixed;left:0;top:0;z-index:9000;min-width:140px;display:grid;gap:2px;padding:5px;border-radius:10px;background:#141a22;border:1px solid rgba(255,255,255,.18);box-shadow:0 8px 22px rgba(0,0,0,.55)}
+.selpop[hidden]{display:none}
+.selpop button{display:flex;align-items:center;gap:7px;padding:7px 10px;border:0;border-radius:7px;background:none;color:#cfd6de;font-size:14px;text-align:left;cursor:pointer;white-space:nowrap}
+.selpop button.on,.selpop button:hover{background:rgba(255,255,255,.1)}
+.asell2{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;white-space:nowrap;color:#cfd6de}
+/* 1008-R 排行榜:每個等級的格子一樣大(車子可以寬一點) */
+.lbr .eqs .tile{box-sizing:border-box!important;width:min(34px,calc((100% - 74px)/7))!important}
+.lbr .eqs .tile.rqt,.lbdi .tile.rqt{padding:3px!important}
+.lbdi .tile{box-sizing:border-box!important;width:42px!important;height:42px!important}
+.lbr .eqs .rdw{flex:1 1 52px!important;min-width:44px;max-width:62px;width:auto!important;height:32px!important}
+.lbr .eqs>.rd{flex:1 1 52px!important;min-width:44px;max-width:62px;width:auto!important;height:32px!important}
 /* 1008-Q 至尊掃光加亮(跟典藏一樣明顯,顏色偏紫白) */
 .rq5 .rqs,.scar.q5 .rqs{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.8) 46%,rgba(225,190,255,.55) 52%,transparent 66%)!important;background-size:250% 100%!important;animation-duration:2.4s!important}
 .tile.rq5>img,.rslot.rq5 .rimg img,.scar.q5 .sim img{animation:rqshine5 2.6s ease-in-out infinite}
@@ -1601,7 +1617,7 @@ html.ios-app body{min-height:100vh}
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-Q</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1008-S</span></small>
   </div>
  </div>
 </div>
@@ -1631,12 +1647,9 @@ html.ios-app body{min-height:100vh}
    <section>
     <h2 id="sth">倉庫</h2>
     <div class="tools">
-     <span class="sellbar"><select id="sellq" aria-label="賣出範圍"><option value="-1">黑框</option><option value="0">銀框以下</option><option value="1" selected>綠框以下</option><option value="2">藍框以下</option><option value="3">黃金框以下</option><option value="4">紅框以下</option></select><button class="btn" id="sellall">💰 一鍵賣出</button></span>
-     <label class="asell" title="戰鬥中撿到這些框的裝備會直接換成金幣">🤖 撿到自動賣 <select id="asellq" aria-label="撿到自動賣出"><option value="-2">關閉</option><option value="-1">黑框</option><option value="0">銀框以下</option><option value="1">綠框以下</option><option value="2">藍框以下</option><option value="3">黃金框以下</option><option value="4">紅框以下</option></select></label>
+     <div class="sellbox"><span class="selw"><button class="selq" id="sellqb" aria-haspopup="listbox"></button><div class="selpop" id="selpop" hidden></div></span><button class="btn" id="sellall">💰 一鍵賣出</button><label class="asell2" title="戰鬥中撿到這個等級以下的裝備會直接換成金幣(首領裝備除外)"><input type="checkbox" id="asellon"> 🤖 撿到也自動賣</label></div>
      <button class="btn pri" id="besteq">⚡ 一鍵換上較好裝備</button>
-     <label><input type="checkbox" id="mute"> 關閉音效</label>
-     <label class="volw">🔊 音量 <input type="range" id="vol" min="0" max="100" step="5" value="50"><b id="volv">50%</b></label>
-     <button class="btn" id="stest">🔊 測試音效</button>
+     <span hidden><input type="checkbox" id="mute"><input type="range" id="vol" min="0" max="100" step="5" value="50"><b id="volv">50%</b><button id="stest"></button></span>
     </div>
     <div class="chips" id="flt"></div>
     <div class="tiles" id="stash"></div>
@@ -1964,7 +1977,7 @@ let ASKN=null;
 function ask(msg,yes,o){o=o||{};$('askm').textContent=msg;ASKF=yes;ASKN=o.no||null;$('asky').textContent=o.yes||'確定';$('askn').textContent=o.noTxt||'取消';$('ask').hidden=false}
 const SELLP={'-1':15,0:30,1:50,2:70,3:180,4:450,5:900,6:1800};/* 1005-ZS:黑框 8→15、銀框 15→30、綠框 30→50 */
 const sellPrice=it=>Math.round(SELLP[it.q]*(1+(it.il||1)*.08)*(1+(it.up||0)*.15))*5;/* 1008-F 賣價 5 倍 *//* 裝備等級加成每級 +8%(原本 +4%) */
-const TIERQ=q=>['黑框','銀框','綠框','藍框','黃金框','紅框'][q+1];
+const TIERQ=q=>(RAR[q]||RAR[0]).n;/* 1008-R 改用等級名稱 */
 const ist=(it,k)=>(it.st[k]||0)*(1+.1*it.up);
 const fv=(k,v)=>STAT[k].n+' +'+(k==='regen'?v.toFixed(1):Math.round(v))+(STAT[k].p?'%':'');
 
@@ -3010,7 +3023,7 @@ function renderHome(){migItems();
   const all=SAVE.items.filter(i=>!isEq(i));
   $('flt').innerHTML=[['all','全部']].concat(Object.entries(TYPEN)).map(([k,n])=>{const c=k==='all'?all.length:all.filter(i=>i.type===k).length;return'<button data-f="'+k+'" class="'+(flt===k?'on':'')+'">'+n+' '+c+'</button>'}).join('');
   const list=all.filter(i=>flt==='all'||i.type===flt).sort((a,b)=>b.q-a.q||ival(b)-ival(a));
-  {const a=$('asellq');if(a&&document.activeElement!==a)a.value=String(autoSellQ())}
+  try{sellUI()}catch(e){}
   $('sth').innerHTML='倉庫 <span class="'+(SAVE.items.length>=STASHMAX*.9?'stfull':'')+'">('+SAVE.items.length+' / '+STASHMAX+')</span>';
   $('stash').innerHTML=list.length?list.map(it=>tile(it,sel===it.id,1)).join(''):'<span class="muted">'+(all.length?'這個分類沒有裝備。':'倉庫是空的,出擊打怪就會掉裝備。')+'</span>';
  $('mute').checked=$('mute2').checked=!!SAVE.mute;volUI();
@@ -3050,18 +3063,39 @@ $('detail').onclick=e=>{
  save();renderHome();
 };
 /* 1008-K 撿到自動賣出的設定 */
-const autoSellQ=()=>SAVE.autoSell==null?-1:+SAVE.autoSell;
-const ASN={'-2':'關閉','-1':'黑框','0':'銀框以下','1':'綠框以下','2':'藍框以下','3':'黃金框以下','4':'紅框以下'};
-$('asellq').onchange=()=>{const v=+$('asellq').value,prev=autoSellQ();audioUnlock();
- const apply=()=>{SAVE.autoSell=v;save();sfx('tab');$('asellq').value=String(v);toast(SAVE.autoSell<=-2?'🤖 撿到自動賣已關閉,所有裝備都會收進倉庫':'🤖 之後戰鬥中撿到'+ASN[SAVE.autoSell]+'的裝備會直接賣掉換金幣(首領裝備除外)')};
- /* 1008-O 選黃金框以上要再確認一次 */
- if(v>=3&&v>prev){$('asellq').value=String(prev);ask('確定要把撿到的'+ASN[v]+'裝備都自動賣掉嗎?\n傳說、神話這些好裝備也會直接換成金幣(首領專屬裝備除外)',apply);return}
- apply();return;toast(SAVE.autoSell<=-2?'🤖 撿到自動賣已關閉,所有裝備都會收進倉庫':'🤖 之後戰鬥中撿到'+ASN[SAVE.autoSell]+'的裝備會直接賣掉換金幣(首領裝備除外)')};
-$('sellall').onclick=()=>{const mq=+$('sellq').value,list=SAVE.items.filter(i=>!isEq(i)&&i.q<=mq);
- if(!list.length){toast('沒有可以賣出的'+TIERQ(mq)+(mq>-1?'以下':'')+'裝備');return}
+/* 1008-R 一鍵賣出與撿到自動賣整合:同一個等級設定,勾選「撿到也自動賣」就套用到戰鬥 */
+const SELC=q=>q<0?'#9aa3ad':(RAR[q]||RAR[0]).c;
+const SELN=q=>(RAR[q]||RAR[0]).n+(q>-1?'以下':'');
+const sellQ=()=>SAVE.sellQ!=null?+SAVE.sellQ:(SAVE.autoSell!=null&&+SAVE.autoSell>=-1?+SAVE.autoSell:-1);
+const autoOn=()=>SAVE.autoSell==null?true:+SAVE.autoSell!==-2;
+const autoSellQ=()=>autoOn()?sellQ():-2;
+const ASN={'-2':'關閉','-1':'破損','0':'普通以下','1':'優良以下','2':'稀有以下','3':'傳說以下','4':'神話以下'};
+function sellSet(q,on){SAVE.sellQ=q;SAVE.autoSell=on?q:-2;save();sellUI()}
+function sellUI(){const b=$('sellqb');if(!b)return;const q=sellQ();b.innerHTML='<i style="background:'+SELC(q)+'"></i><b style="color:'+SELC(q)+'">'+(RAR[q]||RAR[0]).n+'</b>'+(q>-1?'以下':'')+' ▾';
+ const c=$('asellon');if(c&&document.activeElement!==c)c.checked=autoOn();
+ $('selpop').innerHTML=[-1,0,1,2,3,4].map(v=>'<button data-sq="'+v+'"'+(v===q?' class="on"':'')+'><i style="background:'+SELC(v)+'"></i><b style="color:'+SELC(v)+'">'+(RAR[v]||RAR[0]).n+'</b>'+(v>-1?'以下':'')+'</button>').join('')}
+const sellWarn=(q,yes)=>ask('確定要把撿到的'+SELN(q)+'裝備都自動賣掉嗎?\n傳說、神話這些好裝備也會直接換成金幣(首領專屬裝備除外)',yes);
+/* 1008-S 選單改成固定定位,不會被倉庫面板切掉;下方空間不夠就往上開 */
+function selPlace(){const P=$('selpop'),B=$('sellqb');if(!P||P.hidden||!B)return;if(B.offsetParent===null){P.hidden=true;return}if(P.parentNode!==document.body)document.body.appendChild(P);/* 移到最外層,不受倉庫面板裁切與圖層影響 */
+ const r=B.getBoundingClientRect(),T=$('tabs'),tb=T&&T.offsetParent!==null?T.getBoundingClientRect().top:window.innerHeight,vh=Math.min(window.innerHeight,tb),vw=window.innerWidth;
+ P.style.position='fixed';P.style.maxHeight='';P.style.overflowY='';const h=P.offsetHeight,w=P.offsetWidth,below=vh-r.bottom-8,above=r.top-8;
+ let top=r.bottom+4;if(h>below&&above>below){top=Math.max(8,r.top-4-h)}else if(h>below){P.style.maxHeight=Math.max(120,below)+'px';P.style.overflowY='auto'}
+ P.style.top=top+'px';P.style.left=Math.max(8,Math.min(r.left,vw-w-8))+'px'}
+$('sellqb').onclick=e=>{e.stopPropagation();audioUnlock();sfx('tab');const P=$('selpop');P.hidden=!P.hidden;if(!P.hidden)selPlace()};
+addEventListener('resize',selPlace);
+addEventListener('scroll',e=>{const P=$('selpop');if(P&&!P.hidden&&!(e.target&&e.target.nodeType===1&&P.contains(e.target)))selPlace()},true);
+$('selpop').onclick=e=>{const b=e.target.closest('[data-sq]');if(!b)return;e.stopPropagation();const v=+b.dataset.sq,prev=sellQ();$('selpop').hidden=true;sfx('tab');
+ if(autoOn()&&v>=3&&v>prev){sellWarn(v,()=>{sellSet(v,true);toast('🤖 一鍵賣出與撿到自動賣:'+SELN(v))});return}
+ sellSet(v,autoOn());toast('💰 賣出等級:'+SELN(v)+(autoOn()?'(撿到也會自動賣)':''))};
+document.addEventListener('click',e=>{const p=$('selpop');if(p&&!p.hidden&&!e.target.closest('.selw')&&!e.target.closest('#selpop'))p.hidden=true});
+$('asellon').onchange=()=>{const on=$('asellon').checked,q=sellQ();audioUnlock();
+ if(on&&q>=3){$('asellon').checked=false;sellWarn(q,()=>{sellSet(q,true);toast('🤖 之後戰鬥中撿到'+SELN(q)+'的裝備會直接賣掉換金幣(首領裝備除外)')});return}
+ sellSet(q,on);sfx('tab');toast(on?'🤖 之後戰鬥中撿到'+SELN(q)+'的裝備會直接賣掉換金幣(首領裝備除外)':'🤖 撿到自動賣已關閉,所有裝備都會收進倉庫')};
+$('sellall').onclick=()=>{const mq=sellQ(),list=SAVE.items.filter(i=>!isEq(i)&&i.q<=mq);
+ if(!list.length){toast('沒有可以賣出的'+SELN(mq)+'裝備');return}
  const tot=list.reduce((a,i)=>a+sellPrice(i),0);
  const sellL=L=>{if(!L.length){toast('沒有賣出任何裝備');return}const tt0=L.reduce((a,i)=>a+sellPrice(i),0);SAVE.items=SAVE.items.filter(i=>!L.includes(i));const tt=taxIncome(tt0);SAVE.coin=(SAVE.coin||0)+tt0-tt;if(PSEL&&!byId(PSEL))PSEL=null;if(sel&&!byId(sel))sel=null;save();renderHome();audioUnlock();sfx('coinsMany');toast('賣出 '+L.length+' 件,獲得 '+fmtC(tt0-tt)+' 金幣'+taxTxt(tt))};
- ask('要賣出 '+list.length+' 件'+TIERQ(mq)+(mq>-1?'以下':'')+'的裝備,\n共獲得 '+fmtC(tot-Math.floor(tot*TAXR))+' 金幣嗎?(已扣芳芳稅 10%)\n(穿戴中的裝備不會被賣出)',()=>{
+ ask('要賣出 '+list.length+' 件'+SELN(mq)+'的裝備,\n共獲得 '+fmtC(tot-Math.floor(tot*TAXR))+' 金幣嗎?(已扣芳芳稅 10%)\n(穿戴中的裝備不會被賣出)',()=>{
   /* 1008-P 清單裡有首領專屬裝備:再跳一次確認 */
   const bs=list.filter(i=>i.boss);if(!bs.length){sellL(list);return}
   setTimeout(()=>ask('👑 裡面有 '+bs.length+' 件首領專屬裝備:\n'+bs.slice(0,5).map(i=>'「'+i.name+'」').join('\n')+(bs.length>5?'\n…等 '+bs.length+' 件':'')+'\n只有打倒首領才拿得到,也要一起賣掉嗎?',()=>sellL(list),{yes:'一起賣掉',noTxt:'保留首領裝備',no:()=>sellL(list.filter(i=>!i.boss))}),60)})};
@@ -4409,10 +4443,12 @@ setInterval(()=>{if(document.visibilityState==='visible'&&!inBattle())potWatch()
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1008-Q';
+const GBUILD='1008-S';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🔧','賣出等級選單完整顯示','倉庫的賣出等級選單不會再被切掉,破損到神話六個等級一次全部看得到;下方空間不夠時會自動往上展開'],
+['🧹','倉庫介面整理','一鍵賣出改用等級名稱(破損、普通、優良、稀有、傳說、神話)並標上顏色;「撿到自動賣」整合進一鍵賣出,勾選「撿到也自動賣」就會用同一個等級;音效設定移到上方的 🔊 按鈕;排行榜上每個等級的裝備格大小統一'],
 ['✨','至尊掃光更明顯、排行榜也發光','至尊(紫)裝備的掃光加亮,跟典藏一樣明顯;排行榜上的至尊、典藏裝備和座駕也有掃光、光暈和閃光,展開裝備明細一樣有'],
 ['👑','首領裝備賣出前再確認','賣出首領專屬裝備時會多跳一次確認;一鍵賣出如果清單裡有首領裝備,可以選「一起賣掉」或「保留首領裝備」'],
 ['🚇','無限列車不限次數、金幣 1.5 倍','無限列車取消每天 5 場有獎次數,每一場都給金幣;每班金幣與撐完獎金再提高 1.5 倍(每班 18/24/36/48/60,撐完 +1,500)'],
@@ -4431,8 +4467,6 @@ const GNOTES=[
 ['🔧','能力修正','單眼相機升級加寬、藍牙喇叭時,畫面上的光束也會變粗;萬能鋼筆多支時扇形縮小,遠距離也能多支命中;攻速現在也會加快熱咖啡、迴紋針轉速和首領裝備技能;無限悠遊卡每撿一顆寶石回復 1%~3% 生命'],
 ['⚡','載入與連線加速','圖片改成用到才解碼,開遊戲更快、更省記憶體;資源檔依照需要的順序載入;更新版本後不用重新下載全部圖片;減少背景的連線次數,更省流量和電'],
 ['🎁','被下線也不白打','戰鬥中如果帳號在另一台登入,這場會先結算,獎勵暫存在這台;在這台重新登入時自動補發。進度變動後 1 秒就上傳雲端,換裝置時更不容易漏掉'],
-['📱','多裝置登入全自動','同一個帳號一次只能在一台裝置上線:在新裝置登入時,舊裝置會自動下線,新裝置自動接續最新進度,不用再自己選擇。被下線的裝置按「在這台繼續玩」重新登入即可'],
-['🔑','雲端帳號登入更直覺','這台裝置已經綁定帳號時,按「建立帳號」會直接帶你去登入那個帳號;帳號已存在時也會提示改用登入,不會再出現「這個帳號已經有人用了」的誤會']
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
