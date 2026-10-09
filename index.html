@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1009-H">
+<meta name="gbuild" content="1009-J">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1756,6 +1756,49 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
  .bjdealer img{height:170px!important;width:146px!important}
 }
 </style>
+<style id="stk1009i">
+/* 1009-I 社畜股市 */
+.skup{color:#ff5b5b!important}.skdn{color:#27d07a!important}.skeq{color:#dfe7dc}
+.skhead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:14px;background:radial-gradient(ellipse at 20% 0,rgba(255,210,74,.18),transparent 60%),linear-gradient(#1d2433,#121722);border:1px solid rgba(255,210,74,.35);box-shadow:inset 0 0 24px rgba(0,0,0,.5)}
+.skhead.art{background:linear-gradient(90deg,rgba(10,14,22,.86),rgba(10,14,22,.45)),var(--stkbg) center/cover no-repeat}
+.skidx{display:flex;flex-direction:column}.skidx small{font-size:12px;font-weight:800;color:#ffe08a;letter-spacing:.08em}.skidx b{font-size:clamp(24px,7vw,34px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums;text-shadow:0 2px 6px rgba(0,0,0,.6)}.skidx span{font-size:13px;font-weight:800}
+.skinfo{display:flex;flex-direction:column;align-items:flex-end;gap:3px;font-size:11.5px;color:#c9d1dc;text-align:right}.skhead.art .skinfo{background:rgba(6,9,15,.72);padding:6px 9px;border-radius:10px;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}.skhead.art .skidx{text-shadow:0 2px 8px #000}#skclock{font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+.sknews{display:grid;gap:4px;margin:8px 0}.sknw{display:block;width:100%;text-align:left;font-size:12.5px;color:#e8ecf2;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:6px 9px;cursor:pointer;line-height:1.4}.sknw span{font-weight:900}.sknw small{color:#8f9aab;margin-left:4px}
+.skme{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}.skme>div{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:6px 8px;text-align:center}.skme small{display:block;font-size:10.5px;color:#9aa6b6}.skme b{font-size:14px;font-variant-numeric:tabular-nums}.skme em{font-style:normal;font-size:11px}
+.skme .skdiv{grid-column:1/-1;padding:9px;font-size:15px}
+.sklist{display:grid;gap:6px}
+.skrow{display:grid;grid-template-columns:44px minmax(0,1fr) 80px 104px;align-items:center;gap:8px;width:100%;text-align:left;padding:8px 10px;border-radius:12px;background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);color:#ebe7dd;cursor:pointer}
+.skrow:hover{border-color:rgba(255,210,74,.5)}
+.sklogo{width:44px;height:44px;border-radius:24%;box-shadow:0 2px 6px rgba(0,0,0,.45);display:grid;place-items:center;font-size:26px;background:rgba(255,255,255,.08);object-fit:cover}.sklogo.big{width:58px;height:58px;font-size:34px;border-radius:14px}
+.skn{display:flex;flex-direction:column;min-width:0}.skn b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.skn small{font-size:11px;color:#9aa6b6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.skn em{font-style:normal;color:#ffd24a;font-weight:800}
+.skspark{width:80px;height:30px}
+.skp{display:flex;flex-direction:column;align-items:flex-end}.skp b{font-size:17px;font-weight:900;font-variant-numeric:tabular-nums}.skp small{font-size:11px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sklim{font-style:normal;font-size:10.5px;font-weight:900;color:#fff;padding:1px 6px;border-radius:6px;margin-left:5px;vertical-align:2px}.sklim.up{background:#e0322f}.sklim.dn{background:#13a35a}
+.skbox{box-sizing:border-box;overflow-x:hidden;max-width:680px!important;padding:14px!important;background:linear-gradient(#1b2130,#121722)!important;border:1px solid rgba(255,210,74,.35)}
+.skdh{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}.skdh b{font-size:19px}.skdh b small{font-size:12px;color:#9aa6b6}.sktag{display:block;font-size:12px;color:#ffd9a0}.skx{padding:6px 12px}
+.skpx{display:flex;align-items:baseline;gap:10px;margin:8px 0 4px;flex-wrap:wrap}.skpx b{font-size:34px;font-weight:900;font-variant-numeric:tabular-nums}.skpx span{font-size:15px;font-weight:800}
+.skstat{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;font-size:13px;font-variant-numeric:tabular-nums;text-align:center}.skstat div{background:rgba(0,0,0,.28);border-radius:8px;padding:4px 2px}.skstat small{display:block;font-size:10.5px;color:#9aa6b6}
+.skct{display:flex;gap:6px;margin:10px 0 4px}.skct button{flex:1;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.3);color:#c9d1dc;font-weight:800;cursor:pointer}.skct button.on{background:#ffd24a;color:#2a1700;border-color:#ffd24a}
+.skchart{background:rgba(0,0,0,.35);border-radius:10px;min-height:150px}.sksvg{width:100%;height:auto;display:block}.skax{font-size:11px;fill:#9aa6b6;font-variant-numeric:tabular-nums}
+.skpos{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0;text-align:center}.skpos div{background:rgba(255,210,74,.07);border:1px solid rgba(255,210,74,.2);border-radius:9px;padding:5px 2px}.skpos small{display:block;font-size:10.5px;color:#9aa6b6}.skpos b{font-size:14px;font-variant-numeric:tabular-nums}
+.skside{display:grid;grid-template-columns:1fr 1fr;gap:6px}.skside button{padding:9px;border-radius:10px;font-weight:900;font-size:15px;border:2px solid rgba(255,255,255,.15);background:rgba(0,0,0,.3);color:#c9d1dc;cursor:pointer}
+.skside button.on.b{background:linear-gradient(#ff7a6e,#d8392b);color:#fff;border-color:#ffd0c8}.skside button.on.s{background:linear-gradient(#5fe08f,#1f9d55);color:#fff;border-color:#b8ffd0}
+.skqty{display:grid;grid-template-columns:48px 1fr 48px;gap:6px;margin-top:8px}.skqty button{font-size:22px;font-weight:900;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
+.skqty input{width:100%;box-sizing:border-box;font-size:20px;font-weight:900;text-align:center;padding:8px;border-radius:10px;border:1px solid rgba(255,210,74,.45);background:rgba(0,0,0,.4);color:#fff;font-variant-numeric:tabular-nums}
+.skqc{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:6px}.skqc button{padding:7px 0;border-radius:8px;border:1px solid rgba(255,210,74,.35);background:rgba(255,210,74,.1);color:#ffe08a;font-weight:800;font-size:13px;cursor:pointer}.skqc .clr{color:#c9d1dc;border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.05)}
+.sksum{margin:8px 0;font-size:13px;line-height:1.55;text-align:center;min-height:20px}
+.skgo{width:100%;padding:12px!important;font-size:17px!important;font-weight:900;color:#fff!important;border:2px solid transparent!important;text-shadow:0 1px 2px rgba(0,0,0,.4)}.skgo.b{background:linear-gradient(#ff7a6e,#d8392b 60%,#a8231a)!important;border-color:#ffd0c8!important}.skgo.s{background:linear-gradient(#6fe39a,#1f9d55 60%,#157a40)!important;border-color:#b8ffd0!important}.skgo:disabled{filter:grayscale(.7) brightness(.7)}
+.skdesc{font-size:13px;color:#dfe7dc;line-height:1.6;margin:10px 0 4px}.skfee{font-size:11px;margin:0}
+.sktxl{display:grid;gap:4px;margin-top:8px}.sktx{display:grid;grid-template-columns:64px 1fr auto;gap:2px 8px;font-size:12.5px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.04)}.sktx small{grid-column:2/-1;color:#8f9aab;font-size:10.5px}
+@media(min-width:900px){.skrow{grid-template-columns:48px minmax(0,1fr) 260px 130px}.skspark{width:260px;height:34px}.skme{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){
+ .castabs{gap:4px}.castabs button{font-size:12.5px!important;padding:6px 2px!important;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.15}.castabs button img{height:22px!important;margin:0!important}.castabs .cti{font-size:18px}
+ .skrow{grid-template-columns:40px minmax(0,1fr) 56px 92px;gap:6px;padding:7px 8px}.sklogo{width:40px;height:40px;font-size:23px}.skspark{width:56px}.skp b{font-size:15.5px}.skp small{font-size:10.5px}
+ .skme{grid-template-columns:repeat(2,1fr)}
+ .skstat{grid-template-columns:repeat(3,1fr)}.skpx b{font-size:30px}
+ .skov{padding:0!important;align-items:end!important}.skov .skbox{max-height:94vh!important;border-radius:16px 16px 0 0!important;padding:12px 12px calc(14px + env(safe-area-inset-bottom))!important}
+}
+</style>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -1793,7 +1836,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-H</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-J</span></small>
   </div>
  </div>
 </div>
@@ -1895,7 +1938,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
   </div>
   <div class="tab" data-tab="dragon" hidden>
    <section style="margin-top:12px">
-    <div class="castabs" id="castabs"><button data-c="dragon" class="on"><span class="cti" data-k="cards-fan">🃏</span> 射龍門</button><button data-c="train"><span class="cti" data-k="tr-icon">🚇</span> 無限列車</button><button data-c="bj"><span class="cti">♠️</span> 21 點</button></div>
+    <div class="castabs" id="castabs"><button data-c="dragon" class="on"><span class="cti" data-k="cards-fan">🃏</span> 射龍門</button><button data-c="train"><span class="cti" data-k="tr-icon">🚇</span> 無限列車</button><button data-c="bj"><span class="cti">♠️</span> 21 點</button><button data-c="stk"><span class="cti" data-k="stk-icon">📈</span> 股市</button></div>
     <div id="casD">
     <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用池底 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
@@ -1984,6 +2027,27 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
      <li>發牌、牌堆(6 副牌)和莊家的蓋牌都在伺服器上,畫面上看不到下一張牌。牌局 15 分鐘沒動作會自動停牌結算。</li>
     </ol></details>
     </div>
+    <div id="casK" hidden>
+    <h2>社畜股市 <span class="muted" style="font-size:13px;font-weight:400">24 小時開盤 · 每分鐘一筆股價</span></h2>
+    <div class="skhead" id="skhead"><div class="skidx" id="skidx"><small>📈 社畜指數</small><b>—</b></div><div class="skinfo"><span id="skclock"></span><span id="skst"></span></div></div>
+    <div class="sknews" id="sknews"></div>
+    <div class="skme" id="skme"></div>
+    <div class="sklist" id="sklist"></div>
+    <details class="drule dmore" id="skmy"><summary>📊 我的股市戰績與交易紀錄</summary><div id="skmyb"></div></details>
+    <button class="btn lbgo" data-lbc="stk">🏆 股神榜(今日獲利 / 累計獲利)</button>
+    <details class="drule"><summary>📖 遊戲說明</summary><ol>
+     <li><b>24 小時開盤</b>:6 家公司每 1 分鐘一筆新股價,全伺服器看到的股價都一樣。股價在伺服器上產生,沒有人能提前知道下一筆。</li>
+     <li><b>漲跌停</b>:跟台股一樣,每天台灣時間 0 點重新計算,一天最多漲跌<b>昨天收盤價的 10%</b>。紅色是漲、綠色是跌。</li>
+     <li><b>買賣</b>:點公司進去選股數,用當下的股價成交。買進、賣出都收 <b>0.3% 手續費</b>(丟進射龍門池底)。</li>
+     <li><b>芳芳稅</b>:賣出有賺錢時,獲利的 <b>10%</b> 抽芳芳稅丟回池底;虧錢不用繳稅。股利也算收入,一樣抽 10%。</li>
+     <li><b>持股上限</b>:每家公司最多投入 <b>200 萬</b>金幣(成本),不能一個人把全服的錢壓進同一家。</li>
+     <li><b>股利</b>:韭菜銀行每天台灣時間 0 點依收盤價配發 <b>0.2%</b> 股利,按「領股利」入帳。</li>
+     <li><b>連動</b>:芳芳娛樂城跟射龍門池底連動,池底越大股價越高;開心農場跟最近 24 小時全服偷菜次數連動;加班物流長期每天大約漲 0.1%。</li>
+     <li><b>新聞</b>:不定時會有公司新聞,利多會大漲、利空會大跌;新聞的影響大約一週才會慢慢消退。</li>
+     <li>股市不保證賺錢,長期平均報酬接近 0,扣掉手續費和稅,亂買亂賣通常會虧。</li>
+    </ol></details>
+    </div>
+    </div>
    </section>
   </div>
   <div class="tab" data-tab="tarot" hidden>
@@ -2023,15 +2087,17 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
   <p class="muted">撤退也會保留已撿到的裝備。</p>
  </div>
 </div>
+<div class="ov skov" id="skov" hidden><div class="box skbox" id="skdet"></div></div>
 <div class="ov" id="lbov" hidden>
  <div class="box lbbox">
   <div class="lbh"><h2>🏆 排行榜</h2><button class="btn" id="lbx">關閉</button></div>
-  <div class="lbcat" id="lbcat"><button data-c="main" class="on">👔 玩家</button><button data-c="train">🚇 無限列車</button><button data-c="farm">🥬 偷菜</button><button data-c="dragon">🐉 射龍門</button><button data-c="bj">♠️ 21點</button></div>
+  <div class="lbcat" id="lbcat"><button data-c="main" class="on">👔 玩家</button><button data-c="train">🚇 無限列車</button><button data-c="farm">🥬 偷菜</button><button data-c="dragon">🐉 射龍門</button><button data-c="bj">♠️ 21點</button><button data-c="stk">📈 股神</button></div>
   <div class="lbp" id="lbp-main"><div class="chips lbtab" id="lbtab"><button data-s="coin" class="on">💰 金幣排行</button><button data-s="power">⚔️ 戰力排行</button></div><div class="muted" style="margin:-2px 0 6px;font-size:12px">點玩家可以查看他的完整裝備</div>
   <div class="lbme" id="lbme"></div>
   <div class="lblist" id="lblist"></div></div>
   <div class="lbp" id="lbp-train" hidden><div class="trbtabs lbsub" id="trtabs"><button data-t="day" class="on">今日</button><button data-t="all">歷史</button></div><div class="trbbody" id="trlb">讀取中…</div></div>
   <div class="lbp" id="lbp-farm" hidden><div class="trbtabs lbsub" id="fwbtabs"><button data-t="thieves" class="on">神偷榜</button><button data-t="victims">苦主榜</button></div><div class="trbbody" id="fwbl"></div><small class="muted">每週一 00:00 重新計算</small></div>
+  <div class="lbp" id="lbp-stk" hidden><div class="trbtabs lbsub" id="sklbt"><button data-t="today" class="on">今日獲利</button><button data-t="all">累計獲利</button></div><div class="trbbody" id="sklbb">讀取中…</div></div>
   <div class="lbp" id="lbp-bj" hidden><div class="trbtabs lbsub" id="bjlbt"><button data-t="today" class="on">今日最大一把</button><button data-t="bjc">♠️ 黑傑克次數</button></div><div class="trbbody" id="bjlbb">讀取中…</div></div>
   <div class="lbp" id="lbp-dragon" hidden><div id="dlb"><div class="dlbt lbsub"><button data-l="today" class="on">今日最大一把</button><button data-l="g1">🎯 一線天榜</button><button data-l="hall">💥 全包名人堂</button></div><div id="dlbb" class="trbbody"><div class="muted">讀取中…</div></div></div></div>
  </div>
@@ -3148,6 +3214,204 @@ async function bjLbRender(){const el=$('bjlbb');if(!el)return;document.querySele
  el.innerHTML=rows.length?rows.map((r,i)=>'<div class="trbr'+(r.nick===me?' me':'')+'"><span class="rk">'+(med[i]||(i+1))+'</span><span class="nm">'+escH(r.nick||'?')+'</span><span class="am">'+(BJ.lb==='today'?'+'+fmtC(+r.amount||0):(+r.n||0)+' 次')+'</span><small>'+(BJ.lb==='today'?(r.kind==='bjbj'?'♠️ 黑傑克 · ':'')+dpAgo(r.t):'最近一次 '+dpAgo(r.t))+'</small></div>').join('')+'<p class="muted" style="font-size:11px;margin:6px 0 0">'+(BJ.lb==='today'?'今天(台灣時間)21 點單局贏最多的前 10 名':'近 7 天拿到黑傑克最多次的前 10 名')+'</p>'
   :'<p class="muted">'+(BJ.lb==='today'?'今天還沒有人在 21 點贏錢,第一個就是你!':'這週還沒有人拿到黑傑克')+'</p>'}
 $('bjlbt').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;BJ.lb=b.dataset.t;sfx('tab');bjLbRender()};
+/* ===== 1009-I 社畜股市:24 小時開盤,每分鐘一筆股價(伺服器產生;單機版用同一套規則) ===== */
+const STKC=[
+ {sym:'HXT',name:'黑心科技',emoji:'💻',base:88,dvol:.06,np:.0016,div:0,tag:'高風險 · 常漲停也常跌停',desc:'全員責任制的科技公司,接到大單就大漲、爆出過勞新聞就重挫。波動最大,適合喜歡刺激的人。'},
+ {sym:'JBL',name:'加班物流',emoji:'🚚',base:52,dvol:.015,np:.0008,div:0,tag:'穩健 · 長期慢慢漲',desc:'全年無休的物流公司,股價波動小,長期每天大約漲 0.1%。適合放著不管的人。'},
+ {sym:'JCB',name:'韭菜銀行',emoji:'🏦',base:30,dvol:.008,np:.0006,div:.002,tag:'低波動 · 每天配息 0.2%',desc:'割了又長的老字號銀行。股價最穩,每天台灣時間 0 點依收盤價配發 0.2% 股利,記得回來領。'},
+ {sym:'FFC',name:'芳芳娛樂城',emoji:'🎰',base:66,dvol:.035,np:.0011,div:0,tag:'跟射龍門池底連動',desc:'芳芳開的娛樂城。射龍門池底越大,娛樂城股價越高;池底被挖空,股價也會跟著跌。'},
+ {sym:'KXN',name:'開心農場',emoji:'🌻',base:25,dvol:.03,np:.0011,div:0,tag:'跟全服偷菜次數連動',desc:'全服的菜都是它種的。最近 24 小時大家偷菜越多,菜價越高,股價也越高。'},
+ {sym:'ZMB',name:'殭屍製藥',emoji:'🧟',base:150,dvol:.05,np:.0014,div:0,tag:'高風險 · 看新聞吃飯',desc:'專做殭屍疫苗的藥廠,疫苗成功就飆漲、實驗品逃出來就暴跌。新聞很多,波動很大。'}];
+const STKH={HXT:[['黑心科技宣布全員責任制,獲利暴增','黑心科技 AI 取代實習生,法人搶進','黑心科技接到大單,工程師連加三個月班'],['黑心科技爆出過勞事件,股價重挫','黑心科技被勞檢,外資大賣','黑心科技工程師集體離職']],
+ JBL:[['加班物流拿下雙 11 大單','加班物流宣布周休一日,效率創新高','加班物流擴建倉庫'],['加班物流貨車司機罷工','加班物流倉庫淹水','加班物流被爆送錯貨']],
+ JCB:[['韭菜銀行升息,存款大增','韭菜銀行推出「割了又長」理財方案','韭菜銀行獲評最穩健銀行'],['韭菜銀行呆帳增加','韭菜銀行 ATM 吃卡,客訴暴增','韭菜銀行被罰款']],
+ FFC:[['芳芳娛樂城人潮爆滿,池底創新高','芳芳娛樂城開幕週年慶','芳芳宣布今天手氣很好'],['芳芳娛樂城被臨檢','芳芳娛樂城莊家連輸,股東哭哭','芳芳請假一天,娛樂城冷清']],
+ KXN:[['開心農場高麗菜大豐收','開心農場推出防偷菜保全','開心農場有機認證通過'],['開心農場颱風來襲,菜價崩盤','開心農場遭小偷連夜偷菜','開心農場爆發蟲害']],
+ ZMB:[['殭屍製藥疫苗臨床試驗成功','殭屍病毒再起,殭屍製藥接單接到手軟','殭屍製藥獲政府大單'],['殭屍製藥試驗品逃出實驗室','殭屍製藥疫苗副作用:想上班','殭屍製藥研究員被咬']]};
+const STK={q:null,sel:null,mode:'m',side:'buy',qty:0,busy:false,srv:null,lb:'today',ch:null,chk:'',lt:0,err:'',cap:2000000,fee:.003};
+const stkCo=s=>STKC.find(c=>c.sym===s)||STKC[0];
+const stkNowT=()=>Math.floor(Date.now()/60000)+(window.__STKOFF||0);
+const stkDay=t=>new Date((t*60+8*3600)*1000).toISOString().slice(0,10);
+const stkR2=v=>Math.round(v*100)/100;
+const stkF=v=>(+v||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const stkUp=pc=>Math.floor(pc*1.1*100+1e-6)/100,stkDn=pc=>Math.ceil(pc*.9*100-1e-6)/100;
+const stkGauss=()=>Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(2*Math.PI*Math.random());
+/* 單機引擎(測試版 / 沒連線):規則跟伺服器 stk__tick / stk_trade 一樣 */
+const STKL={
+ K:'clockin-stkL',
+ load(){if(this.S)return this.S;let S=null;try{S=JSON.parse(localStorage.getItem(this.K)||'null')}catch(e){}
+  if(!S||!S.px)S={lt:null,t0:null,px:{},day:{},fo:{},news:[],hold:{},div:0,realized:0,tx:[]};this.S=S;return S},
+ save(){try{localStorage.setItem(this.K,JSON.stringify(this.S))}catch(e){}},
+ reset(){this.S=null;try{localStorage.removeItem(this.K)}catch(e){}},
+ last(sym){const S=this.S,a=S.px[sym];return a&&a.length?a[a.length-1]:stkCo(sym).base},
+ at(sym,t){const S=this.S,a=S.px[sym],i=t-S.t0;return a&&i>=0&&i<a.length?a[i]:null},
+ prevClose(sym,d){const D=(this.S.day[sym]||[]).filter(x=>x[0]<d);return D.length?D[D.length-1][4]:null},
+ dayRow(sym,d){return(this.S.day[sym]||[]).find(x=>x[0]===d)||null},
+ putDay(sym,row){const D=this.S.day[sym]=this.S.day[sym]||[],i=D.findIndex(x=>x[0]===row[0]);if(i>=0)D[i]=row;else{D.push(row);D.sort((a,b)=>a[0]<b[0]?-1:1)}if(D.length>40)D.splice(0,D.length-40)},
+ tick(force){const S=this.load(),nt=stkNowT();let lt=S.lt;if(lt!=null&&lt>=nt)return;
+  const days=Math.max(0,Math.floor((Date.now()-Date.UTC(2026,9,8,16))/864e5)),pot=dpLocal().dpot||0,steal=0;
+  const fair={},kap={};STKC.forEach(c=>{fair[c.sym]=c.base;kap[c.sym]=1/4320});
+  fair.JBL=stkCo('JBL').base*(1+.001*days);fair.FFC=Math.min(600,Math.max(10,stkCo('FFC').base*Math.pow(Math.max(pot,10000)/1e6,.35)));kap.FFC=1/1440;fair.KXN=Math.min(300,Math.max(8,stkCo('KXN').base*Math.sqrt(1+steal/200)));kap.KXN=1/1440;
+  if(lt==null||nt-lt>4320){const t=lt==null?nt-240:nt-4320;STKC.forEach(c=>{const p=lt==null?c.base:this.last(c.sym);S.px[c.sym]=[p]});S.t0=t;lt=t}
+  let cd=stkDay(lt);const P={},L={},O={},H={},Lo={};
+  STKC.forEach(c=>{const s=c.sym;P[s]=this.at(s,lt)||this.last(s);const pc=this.prevClose(s,cd);L[s]=pc!=null?pc:P[s];const r=this.dayRow(s,cd);if(r){O[s]=r[1];H[s]=r[2];Lo[s]=r[3]}else{O[s]=H[s]=Lo[s]=P[s]}if(S.fo[s]==null)S.fo[s]=0});
+  for(let t=lt+1;t<=nt;t++){const d=stkDay(t);
+   if(d!==cd){STKC.forEach(c=>{const s=c.sym;this.putDay(s,[cd,O[s],H[s],Lo[s],P[s]]);if(c.div>0){const h=S.hold[s];if(h&&h.qty>0)S.div+=Math.floor(h.qty*P[s]*c.div)}L[s]=P[s];O[s]=H[s]=Lo[s]=P[s]});cd=d}
+   STKC.forEach(c=>{const s=c.sym,sg=c.dvol/Math.sqrt(1440);S.fo[s]=Math.round(S.fo[s]*(1-1/10080)*1e6)/1e6;
+    let r=-sg*sg/2+sg*stkGauss()+kap[s]*Math.log(fair[s]*Math.exp(S.fo[s])/Math.max(P[s],.01));
+    const up=stkUp(L[s]),dn=stkDn(L[s]);let nw=window.__STKNEWS&&window.__STKNEWS[s]&&t===nt?window.__STKNEWS[s]:null;
+    if(nw||Math.random()<c.np){const good=nw?nw>0:Math.random()<.5+Math.min(.3,Math.max(-.3,Math.log(fair[s]*Math.exp(S.fo[s])/Math.max(P[s],.01))));
+     const mag=nw?Math.abs(Math.log((nw>0?up:dn)/Math.max(P[s],.01)))+.01:(s==='HXT'||s==='ZMB'?.04+Math.random()*.06:.03+Math.random()*.05);r+=good?mag:-mag;S.fo[s]=Math.round((S.fo[s]+.7*(good?mag:-mag))*1e6)/1e6;
+     S.news.unshift({sym:s,pct:Math.round((good?mag:-mag)*1000)/10,title:pickL(STKH[s][good?0:1]),t:new Date(t*60000-(window.__STKOFF||0)*60000).toISOString()});}
+    P[s]=stkR2(Math.min(up,Math.max(dn,Math.max(.5,P[s]*Math.exp(r)))));if(P[s]>H[s])H[s]=P[s];if(P[s]<Lo[s])Lo[s]=P[s];S.px[s].push(P[s])})}
+  if(window.__STKNEWS)window.__STKNEWS=null;
+  STKC.forEach(c=>{const s=c.sym;this.putDay(s,[cd,O[s],H[s],Lo[s],P[s]]);S.fo[s]=Math.min(1.5,Math.max(-1.5,S.fo[s]))});
+  const cut=S.px[STKC[0].sym].length-4321;if(cut>0){STKC.forEach(c=>S.px[c.sym].splice(0,cut));S.t0+=cut}
+  S.lt=nt;S.news.length=Math.min(S.news.length,30);this.save()},
+ co(c){const S=this.S,s=c.sym,nt=S.lt,p=this.last(s),cd=stkDay(nt),r=this.dayRow(s,cd)||[cd,p,p,p,p],pcv=this.prevClose(s,cd),pc=pcv!=null?pcv:r[1],sp=[];
+  for(let t=nt-359;t<=nt;t++){if(t%5===0||t===nt){const v=this.at(s,t);if(v!=null)sp.push(v)}}
+  return{sym:s,name:c.name,emoji:c.emoji,p,pc,o:r[1],h:r[2],l:r[3],up:stkUp(pc),dn:stkDn(pc),div:c.div,sp}},
+ me(){const S=this.S;return{hold:Object.keys(S.hold).filter(k=>S.hold[k].qty>0).map(k=>({sym:k,qty:S.hold[k].qty,cost:S.hold[k].cost})),div:S.div,realized:S.realized}},
+ quote(){this.tick();const S=this.S;return{t:S.lt,cos:STKC.map(c=>this.co(c)),news:S.news.slice(0,12),pot:dpLocal().dpot,me:this.me()}},
+ chart(sym,mode){this.tick();const S=this.S,nt=S.lt,out=[];
+  if(mode==='m'){for(let t=nt-239;t<=nt;t++){const v=this.at(sym,t);if(v!=null)out.push([t,v])}return out}
+  if(mode==='k5'){const B={};for(let t=nt-359;t<=nt;t++){const v=this.at(sym,t);if(v==null)continue;const b=Math.floor(t/5);if(!B[b])B[b]=[b*5,v,v,v,v];else{const k=B[b];k[2]=Math.max(k[2],v);k[3]=Math.min(k[3],v);k[4]=v}}return Object.values(B).sort((a,b)=>a[0]-b[0])}
+  return(S.day[sym]||[]).slice(-30)},
+ txj(x){const S=this.S,h=S.hold[x.sym];return Object.assign({},x,{hold:h?{qty:h.qty,cost:h.cost}:null,div:S.div,pot:dpLocal().dpot})},
+ trade(nonce,sym,side,qty,coin){const S=this.load(),ex=S.tx.find(x=>x.nonce===nonce);if(ex)return this.txj(ex);
+  if(side!=='buy'&&side!=='sell')throw{msg:'bad side'};if(!(qty>=1&&qty<=1e7&&Math.floor(qty)===qty))throw{msg:'bad qty'};if(!STKC.find(c=>c.sym===sym))throw{msg:'bad sym'};
+  this.tick();const px=this.last(sym),h=S.hold[sym]=S.hold[sym]||{qty:0,cost:0};let gross,fee,amt,pnl=0;
+  if(side==='buy'){gross=Math.ceil(qty*px-1e-9);fee=Math.max(1,Math.ceil(gross*STK.fee-1e-9));amt=-(gross+fee);if((coin||0)<gross+fee)throw{msg:'poor'};if(h.cost+gross+fee>STK.cap)throw{msg:'cap'};h.qty+=qty;h.cost+=gross+fee}
+  else{if(h.qty<qty)throw{msg:'no_qty'};gross=Math.floor(qty*px+1e-9);fee=Math.max(1,Math.ceil(gross*STK.fee-1e-9));amt=Math.max(0,gross-fee);const cp=qty===h.qty?h.cost:Math.round(h.cost*qty/h.qty);pnl=amt-cp;h.qty-=qty;h.cost-=cp;S.realized+=pnl}
+  const P=dpLocal();P.dpot=(P.dpot||0)+fee;const x={nonce,kind:side,sym,qty,price:px,amount:amt,fee,pnl,t:new Date().toISOString()};S.tx.unshift(x);S.tx.length=Math.min(S.tx.length,40);
+  this.save();save();return this.txj(x)},
+ claim(nonce){const S=this.load(),ex=S.tx.find(x=>x.nonce===nonce);if(ex)return this.txj(ex);this.tick();if(!(S.div>0))throw{msg:'no_div'};
+  const x={nonce,kind:'div',sym:'JCB',qty:0,price:0,amount:S.div,fee:0,pnl:0,t:new Date().toISOString()};S.div=0;S.tx.unshift(x);S.tx.length=Math.min(S.tx.length,40);this.save();return this.txj(x)},
+ txGet(nonce){const x=this.load().tx.find(x=>x.nonce===nonce);return x?this.txj(x):null},
+ myTx(){return this.load().tx.slice(0,30)},
+ board(){const S=this.load(),d0=dLbDay(),me=dpNick(),td=S.tx.filter(x=>x.kind==='sell'&&x.t>=d0).reduce((a,x)=>a+x.pnl,0);
+  return{today:td>0?[{nick:me,amount:td,t:new Date().toISOString()}]:[],all:S.realized>0?[{nick:me,amount:S.realized,t:new Date().toISOString()}]:[]}}};
+const stkOn=()=>DP.on&&STK.srv!==false;
+async function stkRpc(fn,b){return dpReq('/rest/v1/rpc/'+fn,b)}
+const stkErr=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||''),c=String((e&&e.code)||'');if(/poor/.test(m))return'金幣不夠';if(/cap/.test(m))return'每家公司最多只能投入 '+fmtC(STK.cap)+' 金幣';if(/no_qty/.test(m))return'持股不夠';if(/no_div/.test(m))return'目前沒有可以領的股利';if(/bad qty/.test(m))return'股數不對';if(/404|PGRST2|does not exist|function/i.test(c+m))return'股市需要伺服器更新,請管理員執行 1009-I 的 SQL';return'連線失敗,稍後再試'};
+const stkNonce=()=>'n'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const stkHold=s=>{const me=STK.q&&STK.q.me;const h=me&&(me.hold||[]).find(x=>x.sym===s);return h||{qty:0,cost:0}};
+const stkCls=v=>v>0?'skup':v<0?'skdn':'skeq';
+const stkPct=(p,pc)=>pc?(p-pc)/pc*100:0;
+const stkLogo=(s,big)=>ART['stk-'+s]?'<img class="sklogo'+(big?' big':'')+'" src="'+ART['stk-'+s]+'" alt="">':'<span class="sklogo'+(big?' big':'')+'">'+stkCo(s).emoji+'</span>';
+function stkSpark(sp,pc){if(!sp||sp.length<2)return'<svg class="skspark"></svg>';const mn=Math.min(pc,...sp),mx=Math.max(pc,...sp),rg=(mx-mn)||1,W=80,H=30,y=v=>(H-2-(v-mn)/rg*(H-4)).toFixed(1);
+ const pts=sp.map((v,i)=>(i/(sp.length-1)*W).toFixed(1)+','+y(v)).join(' '),col=sp[sp.length-1]>=pc?'#ff5b5b':'#27d07a';
+ return'<svg class="skspark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none"><line x1="0" x2="'+W+'" y1="'+y(pc)+'" y2="'+y(pc)+'" stroke="rgba(255,255,255,.25)" stroke-dasharray="2 2" stroke-width="1"/><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="1.6" stroke-linejoin="round"/></svg>'}
+function stkIdx(q){if(!q||!q.cos)return null;let a=0,b=0;q.cos.forEach(c=>{const B=stkCo(c.sym).base;a+=c.p/B;b+=c.pc/B});return{v:a/q.cos.length*1000,pc:b/q.cos.length*1000}}
+function stkClock(){const el=$('skclock');if(!el)return;const n=new Date(Date.now()+8*3600e3),s=60-n.getUTCSeconds();el.textContent='台灣時間 '+String(n.getUTCHours()).padStart(2,'0')+':'+String(n.getUTCMinutes()).padStart(2,'0')+' · 下一筆 0:'+String(s%60).padStart(2,'0')}
+function stkRender(){const q=STK.q,list=$('sklist');if(!list)return;stkClock();
+ $('skst').innerHTML=STK.err?'<span style="color:#ff9a8a">'+escH(STK.err)+'</span>':stkOn()?'🟢 全伺服器即時共用 · 24 小時開盤':'🟡 單機股市(網頁版才是全伺服器共用)';
+ if(!q){list.innerHTML='<div class="muted" style="padding:14px;text-align:center">讀取中…</div>';return}
+ const ix=stkIdx(q),d=ix.v-ix.pc;$('skidx').innerHTML='<small>📈 社畜指數</small><b class="'+stkCls(d)+'">'+stkF(ix.v)+'</b><span class="'+stkCls(d)+'">'+(d>0?'▲':d<0?'▼':'')+stkF(Math.abs(d))+'('+(d>=0?'+':'−')+Math.abs(stkPct(ix.v,ix.pc)).toFixed(2)+'%)</span>';
+ list.innerHTML=q.cos.map(c=>{const ch=c.p-c.pc,h=stkHold(c.sym),lim=c.p>=c.up?'<i class="sklim up">漲停</i>':c.p<=c.dn?'<i class="sklim dn">跌停</i>':'';
+  return'<button class="skrow" data-s="'+c.sym+'">'+stkLogo(c.sym)+'<span class="skn"><b>'+escH(c.name)+lim+'</b><small>'+c.sym+(h.qty>0?' · <em>持有 '+fmtC(h.qty)+' 股</em>':' · '+escH(stkCo(c.sym).tag.split(' · ')[0]))+'</small></span>'+stkSpark(c.sp,c.pc)+
+  '<span class="skp"><b class="'+stkCls(ch)+'">'+stkF(c.p)+'</b><small class="'+stkCls(ch)+'">'+(ch>0?'▲':ch<0?'▼':'')+stkF(Math.abs(ch))+' ('+(ch>=0?'+':'−')+Math.abs(stkPct(c.p,c.pc)).toFixed(2)+'%)</small></span></button>'}).join('');
+ const nw=(q.news||[]).slice(0,4);$('sknews').innerHTML=nw.length?nw.map(n=>'<button class="sknw" data-s="'+n.sym+'"><span class="'+stkCls(n.pct)+'">'+(n.pct>0?'📈 +':'📉 ')+n.pct+'%</span> '+escH(n.title)+' <small>'+dpAgo(n.t)+'</small></button>').join(''):'<div class="muted">目前沒有新聞,股市風平浪靜</div>';
+ const me=q.me||{hold:[],div:0,realized:0};let mv=0,cost=0;(me.hold||[]).forEach(h=>{const c=q.cos.find(x=>x.sym===h.sym);if(c){mv+=Math.floor(h.qty*c.p);cost+=h.cost}});const un=mv-cost;
+ $('skme').innerHTML='<div><small>持股市值</small><b>'+fmtC(mv)+'</b></div><div><small>未實現損益</small><b class="'+stkCls(un)+'">'+(un>0?'+':un<0?'−':'')+fmtC(Math.abs(un))+(cost?' <em>('+(un>=0?'+':'−')+Math.abs(un/cost*100).toFixed(1)+'%)</em>':'')+'</b></div><div><small>已實現損益</small><b class="'+stkCls(me.realized)+'">'+(me.realized>0?'+':me.realized<0?'−':'')+fmtC(Math.abs(me.realized||0))+'</b></div>'+
+  '<div><small>身上金幣</small><b>'+fmtC(SAVE.coin||0)+'</b></div>'+(me.div>0?'<button class="btn pri skdiv" id="skdiv"'+(STK.busy?' disabled':'')+'>🏦 領股利 '+fmtC(me.div)+'</button>':'');
+ if(!$('skov').hidden)stkDetRender();try{if($('skmy').open)stkMyRender()}catch(e){}}
+async function stkLoad(force){if(STK.loading)return;STK.loading=true;try{const q=stkOn()?await stkRpc('stk_quote',{p_id:lbId(),p_key:fmKey()}):STKL.quote();if(q&&q.cos){STK.q=q;STK.err='';STK.skew=(+q.t||0)-stkNowT();if(q.pot!=null)DP.pot=+q.pot}STK.lt=Date.now()}
+ catch(e){const m=stkErr(e);if(/伺服器更新/.test(m)){STK.srv=false;STK.err=m;try{STK.q=STKL.quote()}catch(x){}}else STK.err=m;STK.lt=Date.now()}
+ STK.loading=false;stkRender();if(!$('skov').hidden&&(force||!STK.ch||STK.chk!==STK.sel+STK.mode+(STK.q&&STK.q.t)))stkChartLoad()}
+/* 重新整理後補帳:送出交易後還沒收到結果就關掉,回來查伺服器有沒有成交 */
+async function stkRecover(){const P=SAVE.stkPend;if(!P)return;let x=null;try{x=stkOn()?await stkRpc('stk_tx_get',{p_id:lbId(),p_key:fmKey(),p_nonce:P.n}):STKL.txGet(P.n)}catch(e){return}
+ if(x&&x.nonce){stkApply(x,true);toast('📈 補上一筆沒有入帳的'+(x.kind==='buy'?'買進':x.kind==='sell'?'賣出':'股利'))}else if(Date.now()-(P.t||0)>15000){delete SAVE.stkPend;save()}}
+function stkApply(x,quiet){const D=SAVE.stkDone=SAVE.stkDone||[];if(D.includes(x.nonce)){if(SAVE.stkPend&&SAVE.stkPend.n===x.nonce){delete SAVE.stkPend;save()}return 0}
+ let tax=0;if(x.kind==='sell'&&x.pnl>0)tax=taxIncome(x.pnl);else if(x.kind==='div')tax=taxIncome(x.amount);
+ SAVE.coin=Math.max(0,(SAVE.coin||0)+(+x.amount||0)-tax);D.unshift(x.nonce);D.length=Math.min(D.length,40);if(SAVE.stkPend&&SAVE.stkPend.n===x.nonce)delete SAVE.stkPend;
+ const s=SAVE.stks=SAVE.stks||{n:0,buy:0,sell:0,pnl:0,fee:0,tax:0,div:0,best:0,worst:0};s.n++;s.fee+=+x.fee||0;s.tax+=tax;
+ if(x.kind==='buy')s.buy+=-x.amount;else if(x.kind==='sell'){s.sell+=x.amount;const np=x.pnl-tax;s.pnl+=np;s.best=Math.max(s.best,np);s.worst=Math.min(s.worst,np)}else if(x.kind==='div')s.div+=x.amount-tax;
+ if(STK.q){const me=STK.q.me=STK.q.me||{hold:[],div:0,realized:0};if(x.sym&&x.hold){me.hold=(me.hold||[]).filter(h=>h.sym!==x.sym);if(x.hold.qty>0)me.hold.push({sym:x.sym,qty:x.hold.qty,cost:x.hold.cost})}if(x.div!=null)me.div=+x.div;if(x.kind==='sell')me.realized=(+me.realized||0)+x.pnl;if(x.pot!=null)DP.pot=+x.pot}
+ save();renderHome();try{dqAdd('cas')}catch(e){}return tax}
+async function stkTrade(){const s=STK.sel,c=STK.q&&STK.q.cos.find(x=>x.sym===s);if(!c||STK.busy)return;const qty=Math.floor(STK.qty||0),side=STK.side,coin=SAVE.coin||0,h=stkHold(s);
+ if(qty<1){toast('📈 先選要'+(side==='buy'?'買':'賣')+'幾股');sfx('error');return}
+ if(side==='buy'){const need=Math.ceil(qty*c.p)+Math.max(1,Math.ceil(Math.ceil(qty*c.p)*STK.fee));if(coin<need){toast('📈 金幣不夠,買 '+fmtC(qty)+' 股要 '+fmtC(need));sfx('error');return}if(h.cost+need>STK.cap){toast('📈 '+stkErr({msg:'cap'}));sfx('error');return}}
+ else if(qty>h.qty){toast('📈 持股不夠,只有 '+fmtC(h.qty)+' 股');sfx('error');return}
+ audioUnlock();const n=stkNonce();SAVE.stkPend={n,t:Date.now()};save();STK.busy=true;stkDetRender();let x=null;
+ try{x=stkOn()?await stkRpc('stk_trade',{p_id:lbId(),p_key:fmKey(),p_nick:dpNick(),p_nonce:n,p_sym:s,p_side:side,p_qty:qty,p_coin:coin}):STKL.trade(n,s,side,qty,coin)}
+ catch(e){STK.busy=false;delete SAVE.stkPend;save();const m=stkErr(e);sfx('error');toast('📈 '+m);if(/伺服器更新/.test(m))STK.srv=false;stkDetRender();return}
+ STK.busy=false;const tax=stkApply(x);STK.qty=0;
+ if(x.kind==='buy'){sfx('chips');toast('📈 買進 '+stkCo(s).name+' '+fmtC(x.qty)+' 股 @ '+stkF(x.price)+',付出 '+fmtC(-x.amount)+'(含手續費 '+fmtC(x.fee)+')')}
+ else{const np=x.pnl-tax;sfx(np>0?'casinoWin':np<0?'casinoLose':'coins');toast('📈 賣出 '+fmtC(x.qty)+' 股 @ '+stkF(x.price)+',拿回 '+fmtC(x.amount-tax)+(x.pnl>0?'(獲利 '+fmtC(x.pnl)+',芳芳稅 '+fmtC(tax)+')':x.pnl<0?'(虧損 '+fmtC(-x.pnl)+')':''))}
+ STK.flash={k:x.kind,v:x.kind==='buy'?x.amount:x.pnl-tax,t:Date.now()};stkLoad(true)}
+async function stkClaim(){if(STK.busy)return;audioUnlock();const n=stkNonce();SAVE.stkPend={n,t:Date.now()};save();STK.busy=true;stkRender();let x=null;
+ try{x=stkOn()?await stkRpc('stk_claim',{p_id:lbId(),p_key:fmKey(),p_nonce:n}):STKL.claim(n)}catch(e){STK.busy=false;delete SAVE.stkPend;save();sfx('error');toast('🏦 '+stkErr(e));stkRender();return}
+ STK.busy=false;const tax=stkApply(x);sfx('coinsMany');toast('🏦 領到韭菜銀行股利 '+fmtC(x.amount)+(tax?',芳芳稅 '+fmtC(tax)+',實拿 '+fmtC(x.amount-tax):''));stkRender()}
+/* 個股視窗 */
+function stkOpen(s){STK.sel=s;STK.qty=0;STK.ch=null;$('skov').hidden=false;sfx('open');stkDetRender();stkChartLoad()}
+async function stkChartLoad(){const s=STK.sel,m=STK.mode,key=s+m+(STK.q&&STK.q.t);try{const d=stkOn()?await stkRpc('stk_chart',{p_sym:s,p_mode:m}):STKL.chart(s,m);if(STK.sel===s&&STK.mode===m){STK.ch=d;STK.chk=key;stkChartDraw()}}catch(e){const el=$('skchart');if(el)el.innerHTML='<div class="muted" style="padding:30px;text-align:center">'+escH(stkErr(e))+'</div>'}}
+function stkChartDraw(){const el=$('skchart');if(!el)return;const d=STK.ch||[],c=STK.q&&STK.q.cos.find(x=>x.sym===STK.sel);if(!d.length||!c){el.innerHTML='<div class="muted" style="padding:30px;text-align:center">讀取中…</div>';return}
+ const W=640,H=220,PL=6,PR=52,PT=10,PB=22,iw=W-PL-PR,ih=H-PT-PB,line=STK.mode==='m';
+ let mn=Infinity,mx=-Infinity;d.forEach(r=>{if(line){mn=Math.min(mn,r[1]);mx=Math.max(mx,r[1])}else{mn=Math.min(mn,r[3]);mx=Math.max(mx,r[2])}});if(line){mn=Math.min(mn,c.pc);mx=Math.max(mx,c.pc)}
+ const pad=(mx-mn)*.08||mx*.01||1;mn-=pad;mx+=pad;const y=v=>(PT+ih-(v-mn)/(mx-mn)*ih).toFixed(1),n=d.length;
+ let g='';for(let i=0;i<=4;i++){const v=mn+(mx-mn)*i/4;g+='<line x1="'+PL+'" x2="'+(PL+iw)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="rgba(255,255,255,.08)"/><text x="'+(W-PR+6)+'" y="'+(+y(v)+4)+'" class="skax">'+stkF(v)+'</text>'}
+ const tl=(t)=>{if(STK.mode==='d')return String(t).slice(5).replace('-','/');const z=new Date((t*60+8*3600)*1000);return String(z.getUTCHours()).padStart(2,'0')+':'+String(z.getUTCMinutes()).padStart(2,'0')};
+ [0,Math.floor(n/2),n-1].forEach((i,k)=>{if(d[i])g+='<text x="'+(PL+(n<2?0:i/(n-1))*iw)+'" y="'+(H-6)+'" class="skax" text-anchor="'+(k===0?'start':k===2?'end':'middle')+'">'+tl(d[i][0])+'</text>'});
+ let body='';if(line){const col=d[n-1][1]>=c.pc?'#ff5b5b':'#27d07a',pts=d.map((r,i)=>(PL+(n<2?0:i/(n-1))*iw).toFixed(1)+','+y(r[1])).join(' ');
+  body='<defs><linearGradient id="skgr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".35"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
+  '<line x1="'+PL+'" x2="'+(PL+iw)+'" y1="'+y(c.pc)+'" y2="'+y(c.pc)+'" stroke="#ffd24a" stroke-opacity=".6" stroke-dasharray="4 4"/><text x="'+(PL+4)+'" y="'+(+y(c.pc)-4)+'" class="skax" fill="#ffd24a">昨收 '+stkF(c.pc)+'</text>'+
+  '<polygon points="'+PL+','+(PT+ih)+' '+pts+' '+(PL+iw)+','+(PT+ih)+'" fill="url(#skgr)"/><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round"/><circle cx="'+(PL+iw)+'" cy="'+y(d[n-1][1])+'" r="3.5" fill="'+col+'"/>'}
+ else{const bw=iw/Math.max(n,12),cw=Math.max(2,bw*.62);d.forEach((r,i)=>{const x=PL+bw*i+bw/2,up=r[4]>=r[1],col=up?'#ff5b5b':'#27d07a',t1=Math.min(+y(r[1]),+y(r[4])),hh=Math.max(1,Math.abs(+y(r[1])-+y(r[4])));
+  body+='<line x1="'+x.toFixed(1)+'" x2="'+x.toFixed(1)+'" y1="'+y(r[2])+'" y2="'+y(r[3])+'" stroke="'+col+'" stroke-width="1.2"/><rect x="'+(x-cw/2).toFixed(1)+'" y="'+t1.toFixed(1)+'" width="'+cw.toFixed(1)+'" height="'+hh.toFixed(1)+'" fill="'+col+'"/>'})}
+ el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" class="sksvg">'+g+body+'</svg>'}
+function stkMaxQty(c){const h=stkHold(c.sym);if(STK.side==='sell')return h.qty;const per=c.p*(1+STK.fee),byCoin=Math.floor(Math.max(0,(SAVE.coin||0)-1)/per),byCap=Math.floor(Math.max(0,STK.cap-h.cost-1)/per);return Math.max(0,Math.min(byCoin,byCap,1e7))}
+function stkDetRender(){const box=$('skdet');if(!box||!STK.q)return;const c=STK.q.cos.find(x=>x.sym===STK.sel);if(!c)return;const co=stkCo(c.sym),ch=c.p-c.pc,h=stkHold(c.sym),mv=Math.floor(h.qty*c.p),un=mv-h.cost;
+ const mq=stkMaxQty(c);if(STK.qty>mq&&STK.side==='sell')STK.qty=mq;const q=Math.floor(STK.qty||0),gross=STK.side==='buy'?Math.ceil(q*c.p):Math.floor(q*c.p),fee=q?Math.max(1,Math.ceil(gross*STK.fee)):0;
+ let sum='';if(q){if(STK.side==='buy')sum='買進 <b>'+fmtC(q)+'</b> 股 × '+stkF(c.p)+' = '+fmtC(gross)+' + 手續費 '+fmtC(fee)+' → <b class="skup">付出 '+fmtC(gross+fee)+'</b>';
+  else{const cp=q===h.qty?h.cost:Math.round(h.cost*q/h.qty),pnl=gross-fee-cp,tx=pnl>0?Math.floor(pnl*TAXR):0;sum='賣出 <b>'+fmtC(q)+'</b> 股 × '+stkF(c.p)+' = '+fmtC(gross)+' − 手續費 '+fmtC(fee)+(tx?' − 芳芳稅 '+fmtC(tx):'')+' → <b class="skdn">拿回 '+fmtC(gross-fee-tx)+'</b><br><small>這次'+(pnl>=0?'獲利 <b class="skup">+'+fmtC(pnl):'虧損 <b class="skdn">−'+fmtC(-pnl))+'</b></small>'}}
+ else sum='<span class="muted">'+(STK.side==='buy'?'最多可以買 '+fmtC(mq)+' 股(每家公司最多投入 '+fmtC(STK.cap/10000)+' 萬)':h.qty?'持有 '+fmtC(h.qty)+' 股,選要賣幾股':'你還沒有這家公司的股票')+'</span>';
+ const lim=c.p>=c.up?'<i class="sklim up">漲停</i>':c.p<=c.dn?'<i class="sklim dn">跌停</i>':'';
+ box.innerHTML='<div class="skdh">'+stkLogo(c.sym,true)+'<div><b>'+escH(c.name)+' <small>'+c.sym+'</small></b><span class="sktag">'+escH(co.tag)+'</span></div><button class="btn skx" data-x="1">✕</button></div>'+
+ '<div class="skpx"><b class="'+stkCls(ch)+'">'+stkF(c.p)+'</b><span class="'+stkCls(ch)+'">'+(ch>0?'▲':ch<0?'▼':'')+stkF(Math.abs(ch))+'('+(ch>=0?'+':'−')+Math.abs(stkPct(c.p,c.pc)).toFixed(2)+'%)</span>'+lim+'</div>'+
+ '<div class="skstat"><div><small>開盤</small>'+stkF(c.o)+'</div><div><small>最高</small><span class="skup">'+stkF(c.h)+'</span></div><div><small>最低</small><span class="skdn">'+stkF(c.l)+'</span></div><div><small>昨收</small>'+stkF(c.pc)+'</div><div><small>漲停</small><span class="skup">'+stkF(c.up)+'</span></div><div><small>跌停</small><span class="skdn">'+stkF(c.dn)+'</span></div></div>'+
+ '<div class="skct" id="skct"><button data-m="m"'+(STK.mode==='m'?' class="on"':'')+'>分時</button><button data-m="k5"'+(STK.mode==='k5'?' class="on"':'')+'>5 分 K</button><button data-m="d"'+(STK.mode==='d'?' class="on"':'')+'>日 K</button></div><div class="skchart" id="skchart"></div>'+
+ '<div class="skpos"><div><small>持有</small><b>'+fmtC(h.qty)+' 股</b></div><div><small>平均成本</small><b>'+(h.qty?stkF(h.cost/h.qty):'—')+'</b></div><div><small>市值</small><b>'+fmtC(mv)+'</b></div><div><small>損益</small><b class="'+stkCls(un)+'">'+(h.qty?(un>=0?'+':'−')+fmtC(Math.abs(un)):'—')+'</b></div></div>'+
+ '<div class="skside" id="skside"><button data-d="buy" class="'+(STK.side==='buy'?'on ':'')+'b">🔴 買進</button><button data-d="sell" class="'+(STK.side==='sell'?'on ':'')+'s">🟢 賣出</button></div>'+
+ '<div class="skqty"><button data-q="-1">−</button><input id="skqin" type="number" inputmode="numeric" min="0" step="1" value="'+(q||'')+'" placeholder="股數"><button data-q="1">+</button></div>'+
+ '<div class="skqc" id="skqc"><button data-a="10">+10</button><button data-a="100">+100</button><button data-a="1000">+1千</button><button data-a="10000">+1萬</button><button data-a="max">最大</button><button data-a="0" class="clr">清除</button></div>'+
+ '<div class="sksum" id="sksum">'+sum+'</div>'+
+ '<button class="btn skgo '+(STK.side==='buy'?'b':'s')+'" id="skgo"'+(STK.busy||!q?' disabled':'')+'>'+(STK.busy?'交易中…':STK.side==='buy'?'🔴 買進 '+(q?fmtC(q)+' 股':''):'🟢 賣出 '+(q?fmtC(q)+' 股':''))+'</button>'+
+ '<p class="skdesc">'+escH(co.desc)+'</p><p class="muted skfee">手續費 0.3%(丟進射龍門池底)· 賣出獲利抽 10% 芳芳稅 · 每分鐘一筆股價,24 小時開盤</p>';
+ if(STK.ch)stkChartDraw();else $('skchart').innerHTML='<div class="muted" style="padding:30px;text-align:center">讀取中…</div>'}
+function stkSetQty(v){const c=STK.q&&STK.q.cos.find(x=>x.sym===STK.sel);if(!c)return;STK.qty=Math.max(0,Math.min(Math.floor(+v||0),stkMaxQty(c)));stkDetRender()}
+function stkMyRender(){const s=SAVE.stks||{n:0,buy:0,sell:0,pnl:0,fee:0,tax:0,div:0,best:0,worst:0};
+ $('skmyb').innerHTML='<div class="dmy"><div><small>交易次數</small><b>'+fmtC(s.n)+'</b></div><div><small>賣出已實現(稅後)</small><b class="'+stkCls(s.pnl)+'">'+(s.pnl>=0?'+':'−')+fmtC(Math.abs(s.pnl))+'</b></div><div><small>領到的股利(稅後)</small><b>'+fmtC(s.div)+'</b></div><div><small>付過的手續費</small><b>'+fmtC(s.fee)+'</b></div>'+
+ '<div><small>單筆最大獲利</small><b class="skup">+'+fmtC(s.best)+'</b></div><div><small>單筆最大虧損</small><b class="skdn">−'+fmtC(-s.worst)+'</b></div><div><small>累計買進</small><b>'+fmtC(s.buy)+'</b></div><div><small>付過的芳芳稅</small><b>'+fmtC(s.tax)+'</b></div></div><div id="sktxl" class="sktxl"><div class="muted">讀取交易紀錄…</div></div>';
+ (async()=>{let L=[];try{L=stkOn()?await stkRpc('stk_my_tx',{p_id:lbId(),p_key:fmKey()}):STKL.myTx()}catch(e){}const el=$('sktxl');if(!el)return;
+  el.innerHTML=(L||[]).length?L.slice(0,15).map(x=>'<div class="sktx"><span>'+(x.kind==='buy'?'🔴 買進':x.kind==='sell'?'🟢 賣出':'🏦 股利')+'</span><span>'+(x.kind==='div'?'韭菜銀行':escH(stkCo(x.sym).name)+' '+fmtC(x.qty)+' 股 @ '+stkF(x.price))+'</span><b class="'+(x.kind==='sell'?stkCls(x.pnl):x.kind==='div'?'skup':'')+'">'+(x.kind==='sell'?(x.pnl>=0?'+':'−')+fmtC(Math.abs(x.pnl)):x.kind==='div'?'+'+fmtC(x.amount):'−'+fmtC(-x.amount))+'</b><small>'+dpAgo(x.t)+'</small></div>').join(''):'<div class="muted">還沒有交易紀錄</div>'})()}
+function stkPanel(){if(!ART['stk-HXT']&&typeof ensurePack==='function')try{ensurePack('extra')}catch(e){}stkArt();stkRender();stkLoad(true);stkRecover()}
+function stkArtAll(){stkArt();document.querySelectorAll('#castabs .cti[data-k="stk-icon"]').forEach(e=>{if(ART['stk-icon'])e.innerHTML='<img src="'+ART['stk-icon']+'" alt="">'});if(STK.q){stkRender();if(!$('skov').hidden)stkDetRender()}}
+function stkArt(){try{if(ART['stk-bg'])document.documentElement.style.setProperty('--stkbg','url('+ART['stk-bg']+')');$('skhead').classList.toggle('art',!!ART['stk-bg'])}catch(e){}}
+/* 股神榜 */
+const STKLB={d:null,t:0};
+async function stkLbRender(){const el=$('sklbb');if(!el)return;document.querySelectorAll('#sklbt button').forEach(b=>b.classList.toggle('on',b.dataset.t===STK.lb));
+ try{if(!STKLB.d||Date.now()-STKLB.t>30000){STKLB.d=stkOn()?await stkRpc('stk_board',{}):STKL.board();STKLB.t=Date.now()}}catch(e){el.innerHTML='<p class="muted">'+escH(stkErr(e))+'</p>';return}
+ const rows=(STKLB.d&&STKLB.d[STK.lb])||[],med=['🥇','🥈','🥉'],me=dpNick();
+ el.innerHTML=rows.length?rows.map((r,i)=>'<div class="trbr'+(r.nick===me?' me':'')+'"><span class="rk">'+(med[i]||(i+1))+'</span><span class="nm">'+escH(r.nick||'?')+'</span><span class="am">+'+fmtC(+r.amount||0)+'</span><small>'+dpAgo(r.t)+'</small></div>').join('')+'<p class="muted" style="font-size:11px;margin:6px 0 0">'+(STK.lb==='today'?'今天(台灣時間)賣出股票的已實現獲利前 10 名':'開盤以來累計已實現獲利前 10 名')+'(稅前)</p>'
+  :'<p class="muted">'+(STK.lb==='today'?'今天還沒有人在股市賺到錢,第一個股神就是你!':'還沒有人在股市賺到錢')+'</p>'}
+$('sklbt').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;STK.lb=b.dataset.t;sfx('tab');stkLbRender()};
+$('sklist').onclick=e=>{const b=e.target.closest('[data-s]');if(!b)return;audioUnlock();stkOpen(b.dataset.s)};
+$('sknews').onclick=e=>{const b=e.target.closest('[data-s]');if(!b)return;audioUnlock();stkOpen(b.dataset.s)};
+$('skme').onclick=e=>{if(e.target.closest('#skdiv'))stkClaim()};
+$('skov').onclick=e=>{if(e.target===$('skov')||e.target.closest('[data-x]')){$('skov').hidden=true;sfx('close');return}
+ const m=e.target.closest('#skct [data-m]');if(m){STK.mode=m.dataset.m;STK.ch=null;sfx('tab');stkDetRender();stkChartLoad();return}
+ const sd=e.target.closest('#skside [data-d]');if(sd){STK.side=sd.dataset.d;STK.qty=0;sfx('tab');stkDetRender();return}
+ const qb=e.target.closest('[data-q]');if(qb){stkSetQty((STK.qty||0)+(+qb.dataset.q));sfx('tab');return}
+ const a=e.target.closest('#skqc [data-a]');if(a){const c=STK.q.cos.find(x=>x.sym===STK.sel),v=a.dataset.a;audioUnlock();if(v==='max')stkSetQty(stkMaxQty(c));else if(v==='0')stkSetQty(0);else stkSetQty((STK.qty||0)+(+v));sfx(v==='0'?'chipsClear':'chips');return}
+ if(e.target.closest('#skgo'))stkTrade()};
+$('skov').addEventListener('change',e=>{if(e.target.id==='skqin')stkSetQty(e.target.value)});
+$('skmy').addEventListener('toggle',()=>{if($('skmy').open)stkMyRender()});
+/* 開遊戲時有沒入帳的股市交易就補上(不用等打開股市) */
+setTimeout(()=>{try{if(SAVE&&SAVE.stkPend)stkRecover()}catch(e){}},8000);
+/* 停在股市頁:每到新的一分鐘就更新報價 */
+setInterval(()=>{try{if(!SAVE||$('home').hidden||SAVE.tab!=='dragon'||SAVE.cas!=='stk'||document.visibilityState!=='visible')return;stkClock();
+ const nt=stkNowT()+(STK.skew||0);if(!STK.loading&&((STK.q&&nt>STK.q.t&&Date.now()-STK.lt>4000)||Date.now()-STK.lt>30000))stkLoad()}catch(e){}},1000);
 /* ===== 塔羅 ===== */
 const TAROT=[['0','愚者','🃏','新的開始正在展開,帶著純真與好奇心踏出第一步,不必害怕未知','行事過於魯莽衝動,缺乏計畫,小心因一時興起而付出代價',4,2],
  ['I','魔術師','🪄','你已擁有所需的資源與能力,只要專注行動,就能把想法化為現實','才能尚未發揮,或身邊有人言行不一,需留意表面話語背後的意圖',5,2],
@@ -3245,8 +3509,8 @@ function lbSync(now){clearTimeout(LB.t);LB.t=setTimeout(async()=>{
  LB.busy=false;if(!LB.ro&&JSON.stringify(lbPayload())!==LB.last)lbSync()},now?300:2500)}
 /* 1008-Z 排行榜分類:玩家(金幣/戰力)、無限列車、偷菜、射龍門 */
 let LBC='main';
-function lbCat(c){LBC=c;document.querySelectorAll('#lbcat button').forEach(b=>b.classList.toggle('on',b.dataset.c===c));['main','train','farm','dragon','bj'].forEach(k=>{const p=$('lbp-'+k);if(p)p.hidden=k!==c});
- try{if(c==='train'){document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===TRLB.tab));trLbInto($('trlb'),TRLB.tab)}else if(c==='farm')fwbRender(true);else if(c==='dragon')dLbRender();else if(c==='bj')bjLbRender()}catch(e){}}
+function lbCat(c){LBC=c;document.querySelectorAll('#lbcat button').forEach(b=>b.classList.toggle('on',b.dataset.c===c));['main','train','farm','dragon','bj','stk'].forEach(k=>{const p=$('lbp-'+k);if(p)p.hidden=k!==c});
+ try{if(c==='train'){document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===TRLB.tab));trLbInto($('trlb'),TRLB.tab)}else if(c==='farm')fwbRender(true);else if(c==='dragon')dLbRender();else if(c==='bj')bjLbRender();else if(c==='stk')stkLbRender()}catch(e){}}
 $('lbcat').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');lbCat(b.dataset.c)};
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-lbc]');if(!b)return;audioUnlock();const c=b.dataset.lbc;lbOpen();lbCat(c)});
 function lbOpen(){$('lbov').hidden=false;sfx('open');if(LBC!=='main')lbCat(LBC);
@@ -4883,10 +5147,12 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1009-H';
+const GBUILD='1009-J';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🎨','股市換上新美術','6 家公司都有自己的 logo,股市上方換成交易大廳背景,遊戲場的「股市」分頁也換上新圖示'],
+['📈','新遊戲:社畜股市','遊戲場新增 24 小時開盤的股市!6 家社畜公司每分鐘一筆股價,跟台股一樣漲跌停 10%、紅漲綠跌;芳芳娛樂城跟射龍門池底連動、開心農場跟全服偷菜連動、韭菜銀行每天配息;排行榜新增股神榜'],
 ['🃏','21 點排版更清爽','芳芳回到牌桌正上方(跟射龍門一樣),池底改成金罐橫條;牌桌下方不再留一大片空白;要牌換成綠色、停牌換成紅色、加倍紫色,一眼就分得出來'],
 ['🎨','21 點牌桌換上新美術','21 點換上絨布牌桌和賭場包廂背景,牌、下注圈、桌布字都對齊桌面金線;整體排版縮短,手機一個畫面就看得到牌桌和按鈕'],
 ['🎰','21 點牌桌改版','21 點換成真正的賭桌:芳芳站在桌後發牌、弧形的「BLACKJACK 1 賠 1.5」桌布字、下注圈疊籌碼;全伺服器池底和今日芳芳稅收也顯示在桌邊;要牌、加倍也有瞇牌動畫;21 點贏錢跟射龍門一樣抽 10% 芳芳稅,丟進池底'],
@@ -4905,8 +5171,6 @@ const GNOTES=[
 ['🧹','倉庫介面整理','一鍵賣出改用等級名稱(破損、普通、優良、稀有、傳說、神話)並標上顏色;「撿到自動賣」整合進一鍵賣出,勾選「撿到也自動賣」就會用同一個等級;音效設定移到上方的 🔊 按鈕;排行榜上每個等級的裝備格大小統一'],
 ['✨','至尊掃光更明顯、排行榜也發光','至尊(紫)裝備的掃光加亮,跟典藏一樣明顯;排行榜上的至尊、典藏裝備和座駕也有掃光、光暈和閃光,展開裝備明細一樣有'],
 ['👑','首領裝備賣出前再確認','賣出首領專屬裝備時會多跳一次確認;一鍵賣出如果清單裡有首領裝備,可以選「一起賣掉」或「保留首領裝備」'],
-['🚇','無限列車不限次數、金幣 1.5 倍','無限列車取消每天 5 場有獎次數,每一場都給金幣;每班金幣與撐完獎金再提高 1.5 倍(每班 18/24/36/48/60,撐完 +1,500)'],
-['💰','賣出可以選到紅框','「一鍵賣出」和「撿到自動賣」都新增黃金框、紅框選項;選黃金框以上會再跟你確認一次,首領專屬裝備不會被自動賣掉'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -5032,7 +5296,7 @@ if($('sbchips'))$('sbchips').onclick=e=>{const b=e.target.closest('[data-v]');if
  if(v===-1)SBS.bet=Math.max(1000,mx);else if(v===0)SBS.bet=1000;else SBS.bet=Math.min(Math.max(1000,mx),SBS.bet+v);audioUnlock();sfx(v?'chips':'chipsClear');renderSib()};
 if($('sbgo'))$('sbgo').onclick=()=>sbPlay();
 const SIB_CLOSED=true;
-function casSwitch(k){if(k==='sib'||(k!=='dragon'&&k!=='train'&&k!=='bj'))k='dragon';SAVE.cas=k;$('casD').hidden=k!=='dragon';if($('casT'))$('casT').hidden=k!=='train';if($('casJ'))$('casJ').hidden=k!=='bj';if(k==='bj'){try{bjPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='train'){try{trPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
+function casSwitch(k){if(k==='sib'||(k!=='dragon'&&k!=='train'&&k!=='bj'&&k!=='stk'))k='dragon';SAVE.cas=k;$('casD').hidden=k!=='dragon';if($('casT'))$('casT').hidden=k!=='train';if($('casJ'))$('casJ').hidden=k!=='bj';if($('casK'))$('casK').hidden=k!=='stk';if(k==='stk'){try{stkPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='bj'){try{bjPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='train'){try{trPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
 document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});
 $('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');casSwitch(b.dataset.c)};
 setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
@@ -5313,6 +5577,7 @@ window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDo
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
  try{if(!document.querySelector('#gov:not([hidden])')){renderHome();if(!$('home').hidden&&SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
 if(window.ART_EXTRA)window.__artExtra();
+/* 1009-J 股市美術載入後更新 logo、分頁圖示、大廳背景 */{const o=window.__artExtra;window.__artExtra=function(){const r=o.apply(this,arguments);try{stkArtAll()}catch(e){}return r}}try{if(window.__artExtraDone)stkArtAll()}catch(e){}
 try{if(SAVE.tab==='dragon')casSwitch(SAVE.cas||'dragon')}catch(e){}
 try{if('serviceWorker' in navigator&&location.protocol==='https:'&&typeof ONLINE!=='undefined'&&ONLINE.supabaseKey&&!(window.claude&&window.claude.use))navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
 /* ===== 電腦版:切換成手機面板的按鈕 ===== */
@@ -5331,7 +5596,7 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
 /* 1008-A 資源檔依需要的順序一個一個載入(原本 7 個同時下載互搶頻寬);用到的功能會插隊先載 */
-var PK={extra:['assets-extra.js?v=1009G',function(){if(window.__artExtra)window.__artExtra()}],
+var PK={extra:['assets-extra.js?v=1009J',function(){if(window.__artExtra)window.__artExtra()}],
  hero2:['assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)}],
  hd:['assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)}],
  boss:['assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)}],
