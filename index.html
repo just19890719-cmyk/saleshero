@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-F">
+<meta name="gbuild" content="1010-H">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1833,6 +1833,17 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
 .evbox .btn{display:block;margin:0 auto;min-width:160px;font-size:16px}
 .evbox{max-width:340px!important;width:88vw!important}
 </style>
+<style id="pw1010g">
+/* 1010-G 角色介面的戰力:改成金框徽章,數字放大發光 */
+.pwbar{display:flex;justify-content:center;margin:0 0 8px}
+.pwbar .pw{position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none;display:flex!important;align-items:center!important;gap:8px!important;padding:4px 16px 4px 10px;border-radius:999px;background:linear-gradient(180deg,rgba(40,26,6,.88),rgba(14,10,4,.92));border:2px solid #f2b21c;box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 16px rgba(242,178,28,.55),inset 0 1px 0 rgba(255,230,150,.35);white-space:nowrap}
+.pwbar .pw .muted{font-size:13px!important;font-weight:900;letter-spacing:.12em;color:#ffd75e!important;text-shadow:0 1px 2px #000;opacity:1!important}
+.pwbar .pw .muted::before{content:"⚔️ ";letter-spacing:0}
+.pwbar .pw b{font-size:30px!important;line-height:1!important;color:#fff4c2!important;text-shadow:0 0 6px rgba(255,200,60,.9),0 0 16px rgba(255,160,20,.6),0 2px 0 #7a4d00,0 3px 6px rgba(0,0,0,.8)!important;letter-spacing:.02em}
+.pwbar .pw.up{animation:pwup .7s ease-out}
+@keyframes pwup{0%{transform:scale(1)}30%{transform:scale(1.12);box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 30px rgba(255,210,60,.95)}100%{transform:scale(1)}}
+@media(max-width:480px){.pwbar .pw b{font-size:26px!important}.pwbar .pw{padding:3px 13px 3px 9px}}
+</style>
 <style id="stk1009i">
 /* 1009-I 社畜股市 */
 .skup{color:#ff5b5b!important}.skdn{color:#27d07a!important}.skeq{color:#dfe7dc}
@@ -1946,7 +1957,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-F</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-H</span></small>
   </div>
  </div>
 </div>
@@ -2299,7 +2310,8 @@ if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.protot
 const cv=$('c'),ctx=cv.getContext('2d');let W=0,H=0;
 /* 效能設定:會依實際流暢度自動降低 */
 const Q={cap:220,nums:true,level:0,dprMax:1.5};let DPR=1;const SC=new Map();
-function resize(){DPR=Math.min(Q.dprMax,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);SC.clear()}
+/* 1010-H 手機直式畫面拉遠:左右至少看得到約 560 的範圍,怪從旁邊進來比較早看到 */let VZ=1;
+function resize(){DPR=Math.min(Q.dprMax,devicePixelRatio||1);const iw=innerWidth,ih=innerHeight;VZ=(iw<600&&ih>iw)?Math.max(.68,Math.min(1,iw/560)):1;W=iw/VZ;H=ih/VZ;cv.width=iw*DPR;cv.height=ih*DPR;ctx.setTransform(DPR*VZ,0,0,DPR*VZ,0,0);SC.clear()}
 addEventListener('resize',resize);resize();
 const rnd=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];
 const icon=(k,e)=>ART[k]?'<img src="'+ART[k]+'" alt="">':e;
@@ -3793,20 +3805,20 @@ function migItems(){try{for(const it of (SAVE&&SAVE.items)||[]){/* 1007-K 舊存
 /* 1010-E 2026 雙十節:當天(台灣時間,以伺服器時間為準)只要登入,每人送 10 萬金幣一次 */
 const EV1010={day:'2026-10-10',coin:100000};
 function ev1010(){try{if(twDay()!==EV1010.day||!SAVE||!SAVE.pname||SAVE.ev1010)return;if(CL&&CL.on&&(!CL.u||!CL.ready))return;if(document.querySelector('.ev1010'))return;
- /* 1010-F 進到戰鬥畫面才發(開打 2 秒後跳出,先暫停戰鬥),不在登入時發 */if(!G||G.over||G.tr||!running||CHOOSING||CHESTING||G.t<2)return;running=false;joy=null;
+ /* 1010-G 封面關掉、回到住處畫面 1.5 秒後才發;戰鬥中不跳通知 */const L=$('login');if((L&&!L.hidden)||(G&&!G.over)||$('home').hidden||document.querySelector('.ov:not([hidden]):not(.ev1010)')){ev1010.t0=0;return}if(!ev1010.t0){ev1010.t0=Date.now();return}if(Date.now()-ev1010.t0<1500)return;
  SAVE.ev1010=EV1010.day;SAVE.coin=(SAVE.coin||0)+EV1010.coin;save();try{clFlush()}catch(e){}
- const ov=document.createElement('div');ov.className='ov ev1010';ov.innerHTML='<div class="box evbox"><div class="evfl">🇹🇼</div><h2>雙十節快樂!</h2><p>國慶紅包到!今天上班打怪的社畜,每人加發</p><b class="evamt">💰 '+fmtC(EV1010.coin)+' 金幣</b><p class="evnote">公司不給的,遊戲給!</p><button class="btn pri" id="evok">收下紅包</button></div>';
- document.body.appendChild(ov);try{sfx('coinsMany')}catch(e){}$('evok').onclick=()=>{ov.remove();try{sfx('coins')}catch(e){}if(G&&!G.over&&!CHOOSING&&!CHESTING){running=true;last=performance.now()}};
+ const ov=document.createElement('div');ov.className='ov ev1010';ov.innerHTML='<div class="box evbox"><div class="evfl">🇹🇼</div><h2>雙十節快樂!</h2><p>國慶紅包到!今天上班的社畜,每人加發</p><b class="evamt">💰 '+fmtC(EV1010.coin)+' 金幣</b><p class="evnote">公司不給的,遊戲給!</p><button class="btn pri" id="evok">收下紅包</button></div>';
+ document.body.appendChild(ov);try{sfx('coinsMany')}catch(e){}$('evok').onclick=()=>{ov.remove();try{sfx('coins')}catch(e){}renderHome()};
  if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin)}catch(e){}}
-setInterval(ev1010,1000);
+setInterval(ev1010,500);
 function renderHome(){migItems();
  renderGacha();if(SAVE.tab==='eq')renderPray();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin||0);
   const s=pstats(1),wi=byId(SAVE.eq.wpn);
-  $('slots').innerHTML='<div class="doll"><div class="dcol">'+['head','coat','shoe'].map(slotHtml).join('')+'</div>'+
-   '<div class="dhero'+(heroJ()&&ART['bg-hero-j']?' hbj':'')+' hb-'+(heroJ()?'j':heroA()?'a':heroF()?'f':'m')+(ART['bg-hero-m']?' hbon':'')+'"><div class="pw"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div>'+(heroJ()?(jEnsure(),(ART['腎虛-doll2']||ART['腎虛-idle-1'])?'<img class="jdimg'+(ART['腎虛-doll2']?' d2':'')+'" src="'+(ART['腎虛-doll2']||ART['腎虛-idle-1'])+'" alt="">':'<span class="jph"><b>🗡️</b><small>九劍腎虛<br>圖片載入中…</small></span>'):heroA()?(armorEnsure(),ART['裝甲-doll']?(mshStart(),'<span class="msh"><img src="'+ART['裝甲-doll']+'" alt=""><canvas class="mshc"></canvas></span>'):'<span style="font-size:90px">🤖</span>'):ART[heroF()?'女主角-doll2':'男主角-doll2']?'<img class="hdimg '+(heroF()?'hf':'hm')+'" src="'+ART[heroF()?'女主角-doll2':'男主角-doll2']+'" alt="">':icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>'))+'</div>'+
+  $('slots').innerHTML='<div class="pwbar"><div class="pw'+((()=>{const p=power(),u=window.__pw0!=null&&p>window.__pw0;window.__pw0=p;return u?' up':''})())+'"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div></div><div class="doll"><div class="dcol">'+['head','coat','shoe'].map(slotHtml).join('')+'</div>'+
+   '<div class="dhero'+(heroJ()&&ART['bg-hero-j']?' hbj':'')+' hb-'+(heroJ()?'j':heroA()?'a':heroF()?'f':'m')+(ART['bg-hero-m']?' hbon':'')+'">'+(heroJ()?(jEnsure(),(ART['腎虛-doll2']||ART['腎虛-idle-1'])?'<img class="jdimg'+(ART['腎虛-doll2']?' d2':'')+'" src="'+(ART['腎虛-doll2']||ART['腎虛-idle-1'])+'" alt="">':'<span class="jph"><b>🗡️</b><small>九劍腎虛<br>圖片載入中…</small></span>'):heroA()?(armorEnsure(),ART['裝甲-doll']?(mshStart(),'<span class="msh"><img src="'+ART['裝甲-doll']+'" alt=""><canvas class="mshc"></canvas></span>'):'<span style="font-size:90px">🤖</span>'):ART[heroF()?'女主角-doll2':'男主角-doll2']?'<img class="hdimg '+(heroF()?'hf':'hm')+'" src="'+ART[heroF()?'女主角-doll2':'男主角-doll2']+'" alt="">':icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>'))+'</div>'+
    '<div class="dcol">'+['off','acc1','acc2'].map(slotHtml).join('')+'</div></div>'+
    '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()||heroA()||heroJ()?'':' class="on"')+'>👔 男主角</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角</button><button data-hero="a"'+(heroA()?' class="on"':'')+'>🤖 恨鐵不成鋼</button><button data-hero="j"'+(heroJ()?' class="on"':'')+'>🗡️ 九劍腎虛</button></div>'+
-   '<div class="wrrow"><div class="wslot'+(wi&&wi.q>=5?' eqrq rq'+wi.q:'')+'">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name.replace(/^典藏 /,'')+(wi.up?' +'+wi.up:'')+(wi.q>=5?' <span class="rqb rqb'+wi.q+'">'+RAR[wi.q].n+'</span>':''):(heroJ()?'空手(御劍)':heroA()?'空手(裝甲火力)':heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroJ()?'九劍穿梭':heroA()?'三段遠距離火力':heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'&&s.wpn!=='mech'&&s.wpn!=='sword9'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
+   '<div class="wrrow"><div class="wslot'+(wi&&wi.q>=5?' eqrq rq'+wi.q:'')+'">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name.replace(/^典藏 /,'')+(wi.up?' +'+wi.up:'')+(wi.q>=5?' <span class="rqb rqb'+wi.q+'">'+RAR[wi.q].n+'</span>':''):(heroJ()?'空手(御劍)':heroA()?'空手(裝甲火力)':heroF()?'空手(烈焰飛踢)':'空手(雷電拳)'))+'</div><div class="muted">攻擊方式:'+(heroJ()?'九劍穿梭':heroA()?'三段遠距離火力':heroF()?'烈焰飛踢(遠距離)':'雷電拳(遠距離)')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'&&s.wpn!=='mech'&&s.wpn!=='sword9'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
    (()=>{const R0=SAVE.ride&&RIDES.find(r=>r.id===SAVE.ride),lv=R0?rideLv(R0.id):0;return'<div class="wslot rslot'+(R0?' rq'+R0.q:'')+'" data-goride="1" style="--rc:'+(R0?RAR[R0.q].c:'rgba(255,255,255,.2)')+'"><div class="rimg">'+(R0&&R0.q>=5?'<span class="rqclip"></span><span class="rqs"></span>':'')+(R0&&R0.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+(R0&&ART['ride-'+R0.id]?'<img src="'+ART['ride-'+R0.id]+'" alt="">':'<span>🚲</span>')+'</div><div><div class="muted">座駕</div><div class="wn'+(R0?' t'+R0.q:'')+'">'+(R0?R0.n+' Lv.'+lv+(R0.q>=5?' <span class="rqb rqb'+R0.q+'">'+RAR[R0.q].n+'</span>':''):'尚未裝備座駕')+'</div><div class="muted">'+(R0?rideText(R0,lv):'點這裡去車庫抽代步車')+'</div></div></div>'})()+'</div>';
   const sv2=(k,v)=>'<div class="stat"><span>'+STI[k]+' '+STAT[k].n+'</span><b>'+v+'</b></div>';
   $('pst').innerHTML=sv2('atk',Math.round(s.atk))+sv2('hp',Math.round(s.hp))+sv2('def',Math.round(s.def))+sv2('aspd','+'+Math.round(s.aspd)+'%')+sv2('crit',Math.round(s.crit)+'%')+sv2('spd','+'+Math.round(s.spd)+'%')+sv2('pick','+'+Math.round(s.pick)+'%')+sv2('regen',s.regen.toFixed(1));
@@ -4388,21 +4400,21 @@ function combat(dt){
   if(k==='mech'){mechCombat(lv,A,ar,cdm,rdy,cd);continue}
   if(k==='sword9'){swordCombat(lv,A,ar,cdm,rdy,cd);continue}
   if(k==='kick'){if(!rdy(k))continue;/* 1010-B 火焰踢:前踢、側踢踢出貫穿的火焰踢氣(遠距離);第三下迴旋踢放出一圈往外擴散的火環 */
-   const R=FIRE.kr*ar*(lv>=3?1.2:1),t=nearest(1,R)[0];if(!t){G.wt[k]=0;continue}
+   const R=FIRE.kr*ar*(lv>=3?1.2:1),t=nearV(1,R)[0];if(!t){G.wt[k]=0;continue}
    if(G.t-(G.cbt||-9)>1.5)G.cb=0;const st=G.cb||0;G.cbs=st;G.cbAt=G.t;G.cbt=G.t;G.cb=(st+1)%3;G.cbD=seqDur(HSEQ.f[st]);
    const a=Math.atan2(t.y-t.r-(G.y-30),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=G.cbD;const dmg=A*FIRE.kd*(st===2?FIRE.kring:1)*(1+.3*((lv>=2)+(lv>=4)));
    if(st===2){sfx('swish')}
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.f[st]-.06),f:()=>sfx(st===2?'spinKick':'kickHit')});
    G.dh.push({t:HHIT.f[st],f:()=>{if(st===2){hfShot({k:'ring',x:G.x,y:G.y-24,t:0,d:FIRE.rd,R0:24,R1:FIRE.rr*ar*(lv>=3?1.2:1),dmg,kb:220});sfx('fiRing');shake(2);return}
-    const tt=t.hp>0&&G.en.includes(t)?t:nearest(1,R)[0],sx=G.x+G.face*24,sy=G.y-(st===0?44:56),aa=tt?Math.atan2(tt.y-tt.r-sy,tt.x-sx):(G.face>0?0:Math.PI);
+    const tt=t.hp>0&&G.en.includes(t)?t:nearV(1,R)[0],sx=G.x+G.face*24,sy=G.y-(st===0?44:56),aa=tt?Math.atan2(tt.y-tt.r-sy,tt.x-sx):(G.face>0?0:Math.PI);
     hfShot({k:'kick',x:sx,y:sy,a:aa,v:FIRE.kv,life:R*1.1/FIRE.kv,dmg,kb:[110,130][st],w:FIRE.kw,S:FIRE.ksz*(st===1?1.15:1),pierce:true,flip:st===1});sfx('fiKick')}});
    cd(k,[.5,.6,.95][st]*cdm*(lv>=5?.6:1))}
-  else if(k==='fist'){if(!rdy(k))continue;const R=LIT.fr*ar*(lv>=3?1.2:1),t=nearest(1,R)[0];if(!t){G.wt[k]=0;continue}
+  else if(k==='fist'){if(!rdy(k))continue;const R=LIT.fr*ar*(lv>=3?1.2:1),t=nearV(1,R)[0];if(!t){G.wt[k]=0;continue}
    /* 1010-B 雷電拳:前兩拳打出雷電拳勁(遠距離),打中後往旁邊的怪連鎖電擊;第三拳上鉤拳在目標位置招來落雷,範圍傷害 */
    if(G.t-(G.cbt||-9)>1.5)G.cb=0;const st=G.cb||0;G.cbs=st;G.cbAt=G.t;G.cbt=G.t;G.cb=(st+1)%3;G.cbD=seqDur(HSEQ.m[st]);
    const a=Math.atan2(t.y-t.r-(G.y-30),t.x-G.x);G.face=Math.cos(a)>=0?1:-1;G.atk=G.cbD;const up=(1+.3*((lv>=2)+(lv>=4))),dmg=A*LIT.fd*up;
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.m[st]-.06),f:()=>sfx(['jab','cross','upper'][st])});
-   G.dh.push({t:HHIT.m[st],f:()=>{const tt=t.hp>0&&G.en.includes(t)?t:nearest(1,R)[0];
+   G.dh.push({t:HHIT.m[st],f:()=>{const tt=t.hp>0&&G.en.includes(t)?t:nearV(1,R)[0];
     if(st===2){if(!tt)return;hfShot({k:'strike',x:tt.x,y:tt.y,t:0,d:.32,hitAt:.08,R:LIT.sr*ar*(lv>=3?1.2:1),dmg:A*LIT.sd*up,kb:160,done:false});sfx('ltStrike');return}
     const sx=G.x+G.face*30,sy=G.y-50,aa=tt?Math.atan2(tt.y-tt.r-sy,tt.x-sx):(G.face>0?0:Math.PI);
     hfShot({k:'bolt',x:sx,y:sy,a:aa,v:LIT.fv,life:R*1.15/LIT.fv,dmg,kb:[60,70][st],w:20,S:LIT.fsz,chain:LIT.cn+(lv>=5?1:0)});sfx('ltPunch')}});
@@ -4725,10 +4737,10 @@ function mxDraw(k,x,y,w,rot,flip,al,add){const im=mxImg(k);if(!im)return false;c
  ctx.save();ctx.translate(x,y);if(rot)ctx.rotate(rot);if(flip)ctx.scale(-1,1);if(al!==undefined)ctx.globalAlpha=Math.max(0,Math.min(1,al));if(add)ctx.globalCompositeOperation='lighter';ctx.drawImage(im,-A[0]*w,-A[1]*h,w,h);ctx.restore();return true}
 function mxSeq(f){const p=Math.min(.999,f.t/f.d),i=Math.floor(p*f.n);return mxDraw(f.img+'-'+(i+1),f.x,f.y,f.w*(f.grow?1+p*f.grow:1),f.rot||0,f.flip,f.fade?1-Math.max(0,(p-f.fade)/(1-f.fade)):1,f.add)}
 function mechCombat(lv,A,ar,cdm,rdy,cd){
- if(!rdy('mech'))return;const M=MECH,R=M.R*(lv>=3?1.2:1),t=nearest(1,R)[0];if(!t){G.wt.mech=0;return}
+ if(!rdy('mech'))return;const M=MECH,R=M.R*(lv>=3?1.2:1),t=nearV(1,R)[0];if(!t){G.wt.mech=0;return}
  if(G.t-(G.cbt||-9)>1.5)G.cb=0;const st=G.mlock!=null?G.mlock:(G.cb||0);G.cbs=st;G.cbAt=G.t;G.cbt=G.t;G.cb=(st+1)%3;G.cbD=seqDur(HSEQ.a[st]);G.atk=G.cbD;
  G.face=t.x>=G.x?1:-1;const dm=A*(1+.3*((lv>=2)+(lv>=4)));G.dh=G.dh||[];
- const tgt=()=>t.hp>0&&G.en.includes(t)?t:nearest(1,R)[0];
+ const tgt=()=>t.hp>0&&G.en.includes(t)?t:nearV(1,R)[0];
  if(st===0){/* 機關槍:每一發都是一個事件,槍口火光、彈殼、音效都跟著那一發 */
   const n=M.mg.n+(lv>=5?2:0);
   for(let i=0;i<n;i++)G.dh.push({t:HHIT.a[0]+i*M.mg.gap,f:()=>{const tt=tgt();if(!tt)return;G.face=tt.x>=G.x?1:-1;const ok=mechAimOK(),d=ok?mechDir(Math.atan2(tt.y-tt.r-(G.y-80),Math.abs(tt.x-G.x))):2;G.mdir=d;const Z=ok?AZ.g[d]:[MZ.x,MZ.y],mx=G.x+G.face*Z[0],my=G.y-Z[1],a=Math.atan2(tt.y-tt.r-my,tt.x-mx)+rnd(-.035,.035);
@@ -4736,7 +4748,7 @@ function mechCombat(lv,A,ar,cdm,rdy,cd){
    if(mxHave()){if(G.mcs.length<24)G.mcs.push({x:G.x-G.face*2,y:my+6,vx:-G.face*rnd(70,130),vy:-rnd(140,220),gy:G.y+rnd(-3,8),t:0,r:Math.random()*4,b:0})}else part(G.x-G.face*4,my+6,1,{c:'#e8c15a',k:'drop',a:-Math.PI/2-G.face*.6,sp:.4,v0:80,v1:150,g:650,l0:.3,l1:.5,s:2});sfx('mgShot')}})}
  else if(st===1){/* 飛彈:肩上艙蓋打開停頓一下,再一枚一枚射出,先往上飛再轉向追蹤 */
   const n=M.ms.n+(lv>=3?1:0);G.dh.push({t:Math.max(0,HHIT.a[1]-.04),f:()=>sfx('msLaunch')});
-  for(let i=0;i<n;i++)G.dh.push({t:HHIT.a[1]+i*.06,f:()=>{const ts=nearest(n,R*1.1),tt=ts.length?ts[i%ts.length]:null,px=G.x+G.face*PZ.x+rnd(-5,5),py=G.y-PZ.y;
+  for(let i=0;i<n;i++)G.dh.push({t:HHIT.a[1]+i*.06,f:()=>{const ts=nearV(n,R*1.1),tt=ts.length?ts[i%ts.length]:null,px=G.x+G.face*PZ.x+rnd(-5,5),py=G.y-PZ.y;
    G.ms.push({x:px,y:py,a:-Math.PI/2-G.face*(.3+i*.16),v:230,t:0,tg:tt,dmg:dm*M.ms.dmg,R:M.ms.R*ar,pt:0});if(mxHave()){if(i===0)G.mfx.push({k:'sq',img:'mx-launch',n:4,x:px-G.face*14,y:py+8,w:78,t:0,d:.55,flip:G.face<0,fade:.6})}else part(px,py,3,{c:'rgba(230,230,230,.7)',k:'smoke',v0:10,v1:40,l0:.3,l1:.6,s:7})}})}
  else{/* 能量砲:伸手蓄力(光越聚越大)→ 一道粗光束貫穿整排 */
   G.mfx.push({k:'chg',t:0,d:HHIT.a[2]});sfx('cnCharge');
@@ -4798,6 +4810,8 @@ function hfDraw(){if(!G||!G.hf||!G.hf.length)return;ctx.save();ctx.globalComposi
   else{ctx.lineCap='round';ctx.strokeStyle='rgba(255,110,20,.8)';ctx.lineWidth=S*.22;ctx.beginPath();ctx.arc(-S*.35,0,S*.5,-1.15,1.15);ctx.stroke();ctx.strokeStyle='rgba(255,235,150,.95)';ctx.lineWidth=S*.08;ctx.beginPath();ctx.arc(-S*.33,0,S*.5,-1.05,1.05);ctx.stroke()}
   ctx.restore()}
  ctx.restore()}
+/* 1010-H 開局武器只打畫面上看得到的怪(避免還沒看到怪就出招) */
+function nearV(n,R){const x0=CAMX()-W/2+8,x1=CAMX()+W/2-8,y0=CAMY()-H/2+8,y1=CAMY()+H/2-8;return nearest(n+6,R).filter(e=>e.x>x0&&e.x<x1&&e.y-e.r>y0&&e.y-e.r<y1).slice(0,n)}
 /* 1009-Z 畫面上看得到的怪(用畫面長方形判斷,往內留一點邊) */
 function swVisT(n){const x0=CAMX()-W/2+16,x1=CAMX()+W/2-16,y0=CAMY()-H/2+16,y1=CAMY()+H/2-16,o=[];for(const e of G.en){if(e.hp<=0)continue;const ey=e.y-e.r;if(e.x>x0&&e.x<x1&&ey>y0&&ey<y1)o.push([e,(e.x-G.x)**2+(e.y-G.y)**2])}return o.sort((a,b)=>a[1]-b[1]).slice(0,n).map(a=>a[0])}
 function swInit(){G.sw=[];G.jfx=[];if(!G.ws||!G.ws.sword9)return;for(let i=0;i<SWJ.n;i++){const p=swSlot(i);G.sw.push({i,x:p.x,y:p.y,a:p.a,st:0,t:0,tg:null,n:0,pass:0,hit:new Map(),tr:[]})}}
@@ -5215,7 +5229,7 @@ function draw(){
  ctx.globalAlpha=1;ctx.restore();
  if(G.hurt>0){const a=Math.min(1,G.hurt/.2);const key=W+'x'+H;if(!window.__vgC||window.__vgC.k!==key){const c=document.createElement('canvas');c.width=Math.max(64,Math.round(W/3));c.height=Math.max(64,Math.round(H/3));const x=c.getContext('2d'),g=x.createRadialGradient(c.width/2,c.height/2,Math.min(c.width,c.height)*.32,c.width/2,c.height/2,Math.max(c.width,c.height)*.75);g.addColorStop(0,'rgba(200,0,0,0)');g.addColorStop(1,'rgba(200,0,0,.5)');x.fillStyle=g;x.fillRect(0,0,c.width,c.height);c.k=key;window.__vgC=c}const pa=ctx.globalAlpha;ctx.globalAlpha=a;ctx.drawImage(window.__vgC,0,0,W,H);ctx.globalAlpha=pa}
  bossHud();bossArrow();
- if(joy){ctx.fillStyle='rgba(255,255,255,.15)';ctx.beginPath();ctx.arc(joy.ox,joy.oy,55,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(255,255,255,.45)';ctx.beginPath();ctx.arc(joy.x,joy.y,24,0,Math.PI*2);ctx.fill()}
+ if(joy){ctx.save();ctx.scale(1/VZ,1/VZ);ctx.fillStyle='rgba(255,255,255,.15)';ctx.beginPath();ctx.arc(joy.ox,joy.oy,55,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(255,255,255,.45)';ctx.beginPath();ctx.arc(joy.x,joy.y,24,0,Math.PI*2);ctx.fill();ctx.restore()}
 }
 const spd2On=()=>!!(SAVE&&SAVE.spd2&&G&&!G.tr);
 function spdUI(){const b=$('spdbtn');if(!b)return;const show=!$('pbtn').hidden&&!!G&&!G.tr;if(b.hidden===show)b.hidden=!show;const on=!!(SAVE&&SAVE.spd2);if(b.classList.contains('on')!==on){b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.title=on?'2 倍速中(點一下回到正常速度)':'切換 2 倍速'}}
@@ -5403,11 +5417,12 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-F';
+const GBUILD='1010-H';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
-['🎉','恨鐵不成鋼、九劍腎虛常態開放','恨鐵不成鋼、九劍腎虛改為常態開放角色;雙十節紅包改成進到戰鬥畫面才發,給你一個驚喜'],
+['📱','手機畫面拉遠、只打看得到的怪','手機直式畫面拉遠一點,左右看得更遠,怪從旁邊進來比較早看到;男女主角、恨鐵不成鋼也改成只攻擊畫面上看得到的怪,不會再還沒看到怪就出招;戰力徽章移到角色上方,不擋住角色'],
+['🎉','恨鐵不成鋼、九劍腎虛常態開放、戰力更醒目','恨鐵不成鋼、九劍腎虛改為常態開放角色;雙十節紅包改成回到住處畫面才發,戰鬥中不會跳出;裝備頁的戰力改成金框徽章,數字放大發光,戰力提升時會閃一下'],
 ['🇹🇼','雙十節紅包、新封面','2026 年 10 月 10 日當天只要登入,每人送 10 萬金幣(公司不給的,遊戲給!);封面換成四位主角的宣傳海報,九劍腎虛從打卡鐘炸開的時空裂縫穿越而來'],
 ['🛠️','修正戰鬥卡住、男女主角新立繪、封面新標題','修正拿到迴紋針、奶瓶、列車或首領裝備技能時戰鬥會停住的問題;裝備頁換上男主角(雷電拳)、女主角(烈焰飛踢)的新立繪;封面的霓虹燈招牌改成電影片名風格的金屬標題'],
 ['🎨','雷電拳、烈焰飛踢換上正式美術和音效','雷電拳勁、落雷、電擊爆閃、火焰踢氣、火環、火焰爆炸都換成正式美術圖,技能圖示也換新;出拳、連鎖電擊、落雷、飛踢、火環都有專屬音效'],
@@ -5426,7 +5441,6 @@ const GNOTES=[
 ['🗡️','新角色:九劍腎虛','新角色「九劍腎虛」免費體驗!一臉腎虛的古風公子,召喚九把飛劍在怪物之間來回穿梭斬擊,強度跟恨鐵不成鋼一樣'],
 ['🎲','裝備技能更隨機、更多種','首領裝備以外,裝備的技能種類和等級都是隨機的,技能從 3 種增加到 7 種(新增光劍、鋼筆、打火機、相機):稀有 Lv.1~2、傳說 Lv.1~3、神話 Lv.2~3,同品質也有高低,值得一直刷來組技能;祈禱升階有機會順便提升技能等級,不會變低。已經拿到的裝備等級不變'],
 ['📈','股市波動更劇烈','黑心科技、殭屍製藥、芳芳娛樂城、開心農場漲跌變大,新聞更多更猛;新增「📢 大盤新聞」全市場一起暴漲暴跌,以及「🔥 熱度」時段,熱絡時漲跌最多變 3 倍。加班物流、韭菜銀行還是比較穩'],
-['🔒','裝備可以鎖住、戰鬥 2 倍速','倉庫的裝備可以按「🔒 鎖住」,鎖住的裝備不會被一鍵賣出或單獨賣出;戰鬥中右上角新增「2x」按鈕,開了之後怪物、子彈、時間都變 2 倍快(無限列車不適用)'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
