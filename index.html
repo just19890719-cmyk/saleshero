@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-H">
+<meta name="gbuild" content="1010-I">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1957,7 +1957,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-H</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-I</span></small>
   </div>
  </div>
 </div>
@@ -4406,7 +4406,7 @@ function combat(dt){
    if(st===2){sfx('swish')}
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.f[st]-.06),f:()=>sfx(st===2?'spinKick':'kickHit')});
    G.dh.push({t:HHIT.f[st],f:()=>{if(st===2){hfShot({k:'ring',x:G.x,y:G.y-24,t:0,d:FIRE.rd,R0:24,R1:FIRE.rr*ar*(lv>=3?1.2:1),dmg,kb:220});sfx('fiRing');shake(2);return}
-    const tt=t.hp>0&&G.en.includes(t)?t:nearV(1,R)[0],sx=G.x+G.face*24,sy=G.y-(st===0?44:56),aa=tt?Math.atan2(tt.y-tt.r-sy,tt.x-sx):(G.face>0?0:Math.PI);
+    const tt=t.hp>0&&G.en.includes(t)?t:nearV(1,R)[0],sx=G.x+G.face*52,sy=G.y-(st===0?44:56),aa=tt?Math.atan2(tt.y-tt.r-sy,tt.x-sx):(G.face>0?0:Math.PI);
     hfShot({k:'kick',x:sx,y:sy,a:aa,v:FIRE.kv,life:R*1.1/FIRE.kv,dmg,kb:[110,130][st],w:FIRE.kw,S:FIRE.ksz*(st===1?1.15:1),pierce:true,flip:st===1});sfx('fiKick')}});
    cd(k,[.5,.6,.95][st]*cdm*(lv>=5?.6:1))}
   else if(k==='fist'){if(!rdy(k))continue;const R=LIT.fr*ar*(lv>=3?1.2:1),t=nearV(1,R)[0];if(!t){G.wt[k]=0;continue}
@@ -4416,7 +4416,7 @@ function combat(dt){
    (G.dh=G.dh||[]).push({t:Math.max(0,HHIT.m[st]-.06),f:()=>sfx(['jab','cross','upper'][st])});
    G.dh.push({t:HHIT.m[st],f:()=>{const tt=t.hp>0&&G.en.includes(t)?t:nearV(1,R)[0];
     if(st===2){if(!tt)return;hfShot({k:'strike',x:tt.x,y:tt.y,t:0,d:.32,hitAt:.08,R:LIT.sr*ar*(lv>=3?1.2:1),dmg:A*LIT.sd*up,kb:160,done:false});sfx('ltStrike');return}
-    const sx=G.x+G.face*30,sy=G.y-50,aa=tt?Math.atan2(tt.y-tt.r-sy,tt.x-sx):(G.face>0?0:Math.PI);
+    const sx=G.x+G.face*58,sy=G.y-50,aa=tt?Math.atan2(tt.y-tt.r-sy,tt.x-sx):(G.face>0?0:Math.PI);
     hfShot({k:'bolt',x:sx,y:sy,a:aa,v:LIT.fv,life:R*1.15/LIT.fv,dmg,kb:[60,70][st],w:20,S:LIT.fsz,chain:LIT.cn+(lv>=5?1:0)});sfx('ltPunch')}});
    cd(k,[.45,.55,.9][st]*cdm*(lv>=5?.6:1))}
   else if(k==='umb'){if(!rdy(k))continue;const R=(100+(lv>=3?20:0))*ar*(ev?1.25:1),t=nearest(1,R+40)[0];if(!t){G.wt[k]=0;continue}
@@ -4802,7 +4802,7 @@ function hfDraw(){if(!G||!G.hf||!G.hf.length)return;ctx.save();ctx.globalComposi
   if(p.k==='strike'){const q=p.t/p.d,al=q<.25?1:1-(q-.25)/.75,im=IMG['hl-bolt'];ctx.globalAlpha=Math.max(0,al);
    if(im&&im.naturalWidth){const h=p.R*4.6,w=h*im.naturalWidth/im.naturalHeight;ctx.drawImage(im,p.x-w/2,p.y-h*.93,w,h)}else{hlLine(p.x+rnd(-8,8),p.y-p.R*4,p.x,p.y-10,al,p.t*60|0,7);hlLine(p.x+rnd(-20,20),p.y-p.R*3.5,p.x,p.y-10,al*.6,p.t*90|0,3)}
    const g=ctx.createRadialGradient(p.x,p.y,4,p.x,p.y,p.R*1.1);g.addColorStop(0,'rgba(220,245,255,'+(.8*al)+')');g.addColorStop(1,'rgba(120,200,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(p.x,p.y,p.R*1.1,p.R*.68,0,0,6.283);ctx.fill();ctx.globalAlpha=1;continue}
-  const im=IMG[p.k==='bolt'?'hl-fist':p.k==='fist'?'hf-fist':'hf-kick'],fl=1+.08*Math.sin(p.t*40),S=p.S*fl,al=Math.min(1,(p.life-p.t)/.12);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);if(p.flip)ctx.scale(1,-1);ctx.globalAlpha=Math.max(0,al);
+  const im=IMG[p.k==='bolt'?'hl-fist':p.k==='fist'?'hf-fist':'hf-kick'],fl=1+.08*Math.sin(p.t*40),S=p.S*fl,al=Math.min(1,(p.life-p.t)/.12,p.t/.09);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);if(p.flip)ctx.scale(1,-1);ctx.globalAlpha=Math.max(0,al);
   if(im&&im.naturalWidth){const W=S*(p.k==='bolt'?2.7:2.1),h=W*im.naturalHeight/im.naturalWidth;ctx.drawImage(im,-W*(p.k==='bolt'?.86:.82),-h/2,W,h)}
   else if(p.k==='bolt'){let g=ctx.createRadialGradient(0,0,2,0,0,S*.5);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.35,'rgba(150,225,255,.9)');g.addColorStop(1,'rgba(80,160,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,S*.5,0,6.283);ctx.fill();ctx.restore();ctx.save();ctx.globalCompositeOperation='lighter';hlLine(p.x-Math.cos(p.a)*S*1.4,p.y-Math.sin(p.a)*S*1.4,p.x,p.y,al,p.t*50|0,3)}
   else if(p.k==='fist'){let g=ctx.createRadialGradient(0,0,2,0,0,S*.55);g.addColorStop(0,'rgba(255,250,210,1)');g.addColorStop(.35,'rgba(255,170,50,.9)');g.addColorStop(1,'rgba(255,60,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,S*.55,0,6.283);ctx.fill();
@@ -5072,6 +5072,24 @@ function drawGround(cx,cy){
  for(let x=ox;x<W+T;x+=T){ctx.moveTo(x,0);ctx.lineTo(x,H)}for(let y=oy;y<H+T;y+=T){ctx.moveTo(0,y);ctx.lineTo(W,y)}ctx.stroke();
 }
 function drawOrb(o,ev){const sz=ev?40:34;/* 1006-V 迴紋針縮小到符合角色比例 */if(!fxImg('cfx-'+(1+((Math.floor(G.t*8+(o.a||0)*3)%8)+8)%8),o.x,o.y,sz,Math.sin(G.t*3+(o.a||0))*.18)){const im=IMG['迴紋針'];ctx.save();const gr=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,sz*.5);gr.addColorStop(0,'rgba(190,110,255,.75)');gr.addColorStop(.55,'rgba(120,50,230,.35)');gr.addColorStop(1,'rgba(90,30,200,0)');ctx.fillStyle=gr;ctx.beginPath();ctx.arc(o.x,o.y,sz*.5,0,6.283);ctx.fill();ctx.restore();if(im&&im.naturalWidth){const h=sz*.62,w=h*im.naturalWidth/im.naturalHeight;ctx.save();ctx.translate(o.x,o.y);ctx.rotate(Math.sin(G.t*3+(o.a||0))*.18);ctx.shadowColor='rgba(170,80,255,1)';ctx.shadowBlur=12;ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore()}}}
+/* 1010-I 男女主角戰鬥新美術(跟選角立繪同一個人):動作格對應 + 拳頭電弧 / 高跟鞋火焰錨點(以畫布高為單位,x 從中心、y 從腳底) */
+const H3A={"m": [[[-0.069, 0.731]], [[-0.066, 0.748], [-0.124, 0.654]], [[0.264, 0.715]], [[0.241, 0.668]], [[-0.018, 0.682], [0.418, 0.732]], [[-0.109, 0.89]], [[0.423, 0.727], [0.185, 0.728]], [[0.505, 0.742]], [[0.0, 0.651], [0.238, 0.614]], [[0.22, 0.933], [0.188, 0.871]], [[0.238, 0.759], [0.252, 0.602]], [[-0.067, 0.746]]], "f": [[[0.204, 0.072], [-0.179, 0.036]], [[0.197, 0.076], [-0.169, 0.038]], [[0.272, 0.078], [-0.339, 0.238]], [[-0.065, 0.233], [-0.322, 0.136]], [[-0.338, 0.21], [0.231, 0.061]], [[-0.324, 0.11], [-0.054, 0.224]], [[0.076, 0.254], [-0.051, 0.051]], [[0.495, 0.574]], [[0.107, 0.418], [-0.027, 0.035]], [[-0.02, 0.071], [0.028, 0.337]], [[0.46, 0.604]], [[0.384, 0.836]]]};
+const H3K={};
+function hero3On(){if(!ART['m2-1']||!ART['f2-12'])return;const M=i=>'m2-'+i,F=i=>'f2-'+i;
+ ANIMM.idle=[1,1,1,12,12,12].map(M);ANIMM.run=[2,3,4].map(M);ANIMM.atk=[1,8,1].map(M);ANIMM.atk2=[6,7,1].map(M);ANIMM.atk3=[9,11,1].map(M);
+ ANIMF.idle=[1,1,1,2,2,2].map(F);ANIMF.run=[3,4,5,6].map(F);ANIMF.atk=[7,8,1].map(F);ANIMF.atk2=[9,12,1].map(F);ANIMF.atk3=[10,11,1].map(F);
+ const D=(ks,ds)=>ks.map((k,i)=>[k,ds[i]]);
+ HSEQ.m=[D([1,1,1,8,8,1].map(M),[.03,.03,.04,.13,.06,.05]),D([6,6,7,7,6,1].map(M),[.04,.05,.13,.06,.06,.04]),D([9,9,10,11,11,1].map(M),[.03,.08,.05,.16,.07,.05])];
+ HSEQ.f=[D([1,7,7,8,8,1].map(F),[.03,.05,.04,.13,.06,.05]),D([1,9,9,12,12,1].map(F),[.03,.05,.04,.14,.06,.05]),D([1,9,10,10,10,11,11,1].map(F),[.03,.05,.05,.05,.05,.15,.06,.05])];
+ for(let i=1;i<=12;i++){H3K['m2-'+i]=H3A.m[i-1];H3K['f2-'+i]=H3A.f[i-1]}try{SC.clear()}catch(e){}}
+/* 戰鬥中:拳頭的電弧 + 光暈、高跟鞋的火焰 + 火星(打到最遠那一格特別大) */
+function hero3Fx(k,x,y,h,flip,big){const A=H3K[k];if(!A)return;const m=k[0]==='m',s=flip?-1:1;ctx.save();ctx.globalCompositeOperation='lighter';
+ for(const p of A){const px=x+s*p[0]*h,py=y-p[1]*h,R=(big?19:12)*(m?1:1.1),fl=.6+.2*Math.sin(G.t*37+p[0]*9);
+  const g=ctx.createRadialGradient(px,py,0,px,py,R*1.6);g.addColorStop(0,m?'rgba(220,245,255,'+(.75*fl)+')':'rgba(255,220,120,'+(.8*fl)+')');g.addColorStop(.4,m?'rgba(110,200,255,'+(.4*fl)+')':'rgba(255,110,20,'+(.45*fl)+')');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,R*1.6,0,6.283);ctx.fill();
+  if(m){const n=big?3:2,seed=Math.floor(G.t*18);for(let j=0;j<n;j++){const a=((seed*7+j*97)%628)/100,L=R*(1+((seed+j*13)%10)/10);hlLine(px,py,px+Math.cos(a)*L,py+Math.sin(a)*L,.9,seed*31+j,big?2.2:1.4)}}
+  else{const n=big?5:3;for(let j=0;j<n;j++){const ph=(G.t*3+j/n)%1,fx=px+Math.sin(G.t*9+j*2.1)*R*.35*(1-ph),fy=py-ph*R*(big?2.2:1.6),fr=R*(.55-.4*ph);const f2=ctx.createRadialGradient(fx,fy,0,fx,fy,fr);f2.addColorStop(0,'rgba(255,240,170,'+(.9*(1-ph))+')');f2.addColorStop(.5,'rgba(255,120,20,'+(.6*(1-ph))+')');f2.addColorStop(1,'rgba(200,30,0,0)');ctx.fillStyle=f2;ctx.beginPath();ctx.arc(fx,fy,fr,0,6.283);ctx.fill()}
+   if(Math.random()<(big?.6:.18))part(px+rnd(-6,6),py-4,1,{c:Math.random()<.5?'#ffb347':'#ffe08a',a:-Math.PI/2,sp:.6,v0:30,v1:90,l0:.25,l1:.5,s:2})}}
+ ctx.restore()}
 function drawHero(){
  const AN=heroAnim();
  if(AN.idle.every(k=>IMG[k])){
@@ -5082,13 +5100,13 @@ function drawHero(){
    const lg=(who==='a'?-G.face*[2,5,10][st]:G.face*(st===2?14:10))*Math.max(0,1-Math.abs(eT-hT)/.15),px=G.x+lg;const FK=who==='a'?mechAimKey(st,j,fr[0]):fr[0],FH=FK.indexOf('裝甲-a')===0?hh*AIMH/368:hh;/* 1008-C 裝甲是後座力往後退 */
    if(who==='a')mechAura(px,G.y);shadow(px,G.y,22);
    if(j===HSTRIKE[who][st]){drawImg(FK,'',px-G.face*14,G.y+2,FH,G.face<0,0,.22);drawImg(FK,'',px-G.face*7,G.y+2,FH,G.face<0,0,.35)}
-   drawImg(FK,'',px,G.y+2,FH,G.face<0,0,G.hurt>0?.45:1);if(who==='a')mechSheen(FK,px,G.y+2,FH,G.face<0);return}
+   drawImg(FK,'',px,G.y+2,FH,G.face<0,0,G.hurt>0?.45:1);if(who==='a')mechSheen(FK,px,G.y+2,FH,G.face<0);else hero3Fx(FK,px,G.y+2,FH,G.face<0,j===HSTRIKE[who][st]);return}
   if(G.atk>0){arr=AN.atk;i=Math.min(arr.length-1,Math.floor((1-G.atk/ATKD)*arr.length))}
   else if(G.moving){arr=AN.run;i=Math.floor(G.t*(AN===ANIMJ?12:AN===ANIMF?12:AN===ANIMM?12:AN===ANIMA?13:(HERO_HD?14:13)))%arr.length}
   else{arr=AN.idle;i=Math.floor(G.t*(AN===ANIMF||AN===ANIMM||AN===ANIMA||AN===ANIMJ?6:5))%arr.length}
   if(AN===ANIMA)mechAura(G.x,G.y);if(heroJ())jAura(G.x,G.y);shadow(G.x,G.y,22);
   if(G.shield){ctx.strokeStyle='rgba(120,200,255,.8)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(G.x,G.y-50,48,0,Math.PI*2);ctx.stroke()}
-  drawImg(arr[i],'🧑‍💼',G.x,G.y+2,AN===ANIMJ?126:AN===ANIMM?110.4:AN===ANIMA?120:108,G.face<0,0,G.hurt>0?.45:1);if(AN===ANIMA)mechSheen(arr[i],G.x,G.y+2,120,G.face<0);return;
+  drawImg(arr[i],'🧑‍💼',G.x,G.y+2,AN===ANIMJ?126:AN===ANIMM?110.4:AN===ANIMA?120:108,G.face<0,0,G.hurt>0?.45:1);if(AN===ANIMM||AN===ANIMF)hero3Fx(arr[i],G.x,G.y+2,AN===ANIMM?110.4:108,G.face<0,false);if(AN===ANIMA)mechSheen(arr[i],G.x,G.y+2,120,G.face<0);return;
  }
  const atk=G.atk>0,bob=G.moving&&!atk?Math.abs(Math.sin(G.t*12))*4:0,breathe=!G.moving&&!atk?1+Math.sin(G.t*3)*.02:1;
  let k='主角-待機',rot=0;
@@ -5417,10 +5435,11 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-H';
+const GBUILD='1010-I';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🥊','男女主角戰鬥新美術','戰鬥中的男女主角換成跟選角立繪同一個人的新動作圖;男主角的拳頭帶著跳動的藍白電弧,女主角的紅色高跟鞋一直燃著火焰,出招打到最遠時特別猛'],
 ['📱','手機畫面拉遠、只打看得到的怪','手機直式畫面拉遠一點,左右看得更遠,怪從旁邊進來比較早看到;男女主角、恨鐵不成鋼也改成只攻擊畫面上看得到的怪,不會再還沒看到怪就出招;戰力徽章移到角色上方,不擋住角色'],
 ['🎉','恨鐵不成鋼、九劍腎虛常態開放、戰力更醒目','恨鐵不成鋼、九劍腎虛改為常態開放角色;雙十節紅包改成回到住處畫面才發,戰鬥中不會跳出;裝備頁的戰力改成金框徽章,數字放大發光,戰力提升時會閃一下'],
 ['🇹🇼','雙十節紅包、新封面','2026 年 10 月 10 日當天只要登入,每人送 10 萬金幣(公司不給的,遊戲給!);封面換成四位主角的宣傳海報,九劍腎虛從打卡鐘炸開的時空裂縫穿越而來'],
@@ -5440,7 +5459,6 @@ const GNOTES=[
 ['🗡️','九劍腎虛調整','飛劍放大、加上淡藍光暈,拖尾和打中的閃光變小,戰鬥中看得清楚是九把劍在穿梭;強度下修到跟恨鐵不成鋼差不多;裝備頁立繪改成跟戰鬥同畫風'],
 ['🗡️','新角色:九劍腎虛','新角色「九劍腎虛」免費體驗!一臉腎虛的古風公子,召喚九把飛劍在怪物之間來回穿梭斬擊,強度跟恨鐵不成鋼一樣'],
 ['🎲','裝備技能更隨機、更多種','首領裝備以外,裝備的技能種類和等級都是隨機的,技能從 3 種增加到 7 種(新增光劍、鋼筆、打火機、相機):稀有 Lv.1~2、傳說 Lv.1~3、神話 Lv.2~3,同品質也有高低,值得一直刷來組技能;祈禱升階有機會順便提升技能等級,不會變低。已經拿到的裝備等級不變'],
-['📈','股市波動更劇烈','黑心科技、殭屍製藥、芳芳娛樂城、開心農場漲跌變大,新聞更多更猛;新增「📢 大盤新聞」全市場一起暴漲暴跌,以及「🔥 熱度」時段,熱絡時漲跌最多變 3 倍。加班物流、韭菜銀行還是比較穩'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -5887,6 +5905,7 @@ var PK={extra:['assets-extra.js?v=1009J',function(){if(window.__artExtra)window.
  train:['assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}}],
  herobg:['assets-herobg.js?v=1008G',function(){if(window.__artPack&&window.ART_HEROBG){window.__artPack(window.ART_HEROBG);try{const r=document.documentElement.style;for(const k of ['m','f','a'])if(ART['bg-hero-'+k])r.setProperty('--hbg-'+k,'url('+ART['bg-hero-'+k]+')');if(!$('home').hidden)renderHome()}catch(e){}}}],
  mech:['assets-mech.js?v=1008G',function(){if(window.__artPack&&window.ART_MECH){window.__artPack(window.ART_MECH);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
+ hero3:['assets-hero3.js?v=1010I',function(){if(window.__artPack&&window.ART_HERO3){window.__artPack(window.ART_HERO3);try{hero3On()}catch(e){}}}],
  fx:['assets-fx.js?v=1010D',function(){if(window.__artPack&&window.ART_FX){window.__artPack(window.ART_FX);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
  jx:['assets-jx.js?v=1009R',function(){if(window.__artPack&&window.ART_JX){window.__artPack(window.ART_JX);try{if(ART['bg-hero-j'])document.documentElement.style.setProperty('--hbg-j','url('+ART['bg-hero-j']+')');if(!$('home').hidden)renderHome()}catch(e){}}}]};
 var PKO=['extra','herobg','hero2','hd','boss','cars','stage2','train','mech','jx'],PKS={};/* 1008-D 恨鐵不成鋼的圖放最後背景下載;選了這隻角色才優先 */
@@ -5894,10 +5913,10 @@ function pkLoad(n,next){if(PKS[n])return;PKS[n]=1;var p=PK[n];add(p[0],function(
 function pkNext(){for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
 window.ensurePack=function(){for(var i=0;i<arguments.length;i++)if(PK[arguments[i]])pkLoad(arguments[i])};
 function hook(name,fn){var o=window[name];if(typeof o!=='function')return;window[name]=function(){try{fn.apply(this,arguments)}catch(e){}return o.apply(this,arguments)}}
-hook('startRun',function(c){ensurePack('fx','hero2','hd','boss');try{if(SAVE.hero==='a')ensurePack('mech');if(SAVE.hero==='j')ensurePack('jx')}catch(e){}if(c===1)ensurePack('stage2');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
+hook('startRun',function(c){ensurePack('fx','hero3','hero2','hd','boss');try{if(SAVE.hero==='a')ensurePack('mech');if(SAVE.hero==='j')ensurePack('jx')}catch(e){}if(c===1)ensurePack('stage2');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
 hook('setTab',function(t){if(t==='eq')ensurePack('herobg');if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2')});
 hook('casSwitch',function(t){if(t==='train')ensurePack('train')});
-function go(){try{pkLoad('fx',pkNext);if(SAVE&&SAVE.hero==='a')pkLoad('mech',pkNext);if(SAVE&&SAVE.hero==='j')pkLoad('jx',pkNext)}catch(e){}pkNext()}
+function go(){try{pkLoad('fx',pkNext);if(SAVE&&SAVE.hero!=='a'&&SAVE.hero!=='j')pkLoad('hero3',pkNext);if(SAVE&&SAVE.hero==='a')pkLoad('mech',pkNext);if(SAVE&&SAVE.hero==='j')pkLoad('jx',pkNext)}catch(e){}pkNext()}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
