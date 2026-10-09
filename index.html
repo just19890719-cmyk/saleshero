@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1009-K">
+<meta name="gbuild" content="1009-L">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1811,6 +1811,14 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
 #spdbtn:active{transform:scale(.92)}
 @keyframes spdp{50%{box-shadow:0 0 20px rgba(255,200,40,1)}}
 </style>
+<style id="l1009">
+/* 1009-L 股市熱度、大盤新聞 */
+.skhot{font-style:normal;font-size:10.5px;font-weight:900;color:#fff;padding:1px 6px;border-radius:6px;margin-left:5px;vertical-align:2px;background:linear-gradient(#ff9a3c,#e2470f);box-shadow:0 0 8px rgba(255,120,40,.6);animation:skhot 1s ease-in-out infinite;white-space:nowrap}
+.skpx .skhot{font-size:12px;vertical-align:4px}
+.skcool{font-style:normal;font-size:12px;margin-left:4px;opacity:.75}
+@keyframes skhot{50%{box-shadow:0 0 14px rgba(255,140,40,1)}}
+.sknw.all{border-color:rgba(255,210,74,.55);background:linear-gradient(90deg,rgba(255,210,74,.16),rgba(255,255,255,.03));font-weight:800;cursor:default}
+</style>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -1848,7 +1856,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-K</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-L</span></small>
   </div>
  </div>
 </div>
@@ -2056,6 +2064,8 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
      <li><b>股利</b>:韭菜銀行每天台灣時間 0 點依收盤價配發 <b>0.2%</b> 股利,按「領股利」入帳。</li>
      <li><b>連動</b>:芳芳娛樂城跟射龍門池底連動,池底越大股價越高;開心農場跟最近 24 小時全服偷菜次數連動;加班物流長期每天大約漲 0.1%。</li>
      <li><b>新聞</b>:不定時會有公司新聞,利多會大漲、利空會大跌;新聞的影響大約一週才會慢慢消退。</li>
+     <li><b>📢 大盤新聞</b>:平均一天兩次,所有股票一起大漲或一起大跌(黑心科技、殭屍製藥影響最大,韭菜銀行最小)。</li>
+     <li><b>🔥 熱度</b>:每家公司會輪流進入「交易熱絡」的時段,這段時間漲跌最多會變成平常的 3 倍;😴 代表比較冷清。</li>
      <li>股市不保證賺錢,長期平均報酬接近 0,扣掉手續費和稅,亂買亂賣通常會虧。</li>
     </ol></details>
     </div>
@@ -3228,17 +3238,18 @@ async function bjLbRender(){const el=$('bjlbb');if(!el)return;document.querySele
 $('bjlbt').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;BJ.lb=b.dataset.t;sfx('tab');bjLbRender()};
 /* ===== 1009-I 社畜股市:24 小時開盤,每分鐘一筆股價(伺服器產生;單機版用同一套規則) ===== */
 const STKC=[
- {sym:'HXT',name:'黑心科技',emoji:'💻',base:88,dvol:.06,np:.0016,div:0,tag:'高風險 · 常漲停也常跌停',desc:'全員責任制的科技公司,接到大單就大漲、爆出過勞新聞就重挫。波動最大,適合喜歡刺激的人。'},
- {sym:'JBL',name:'加班物流',emoji:'🚚',base:52,dvol:.015,np:.0008,div:0,tag:'穩健 · 長期慢慢漲',desc:'全年無休的物流公司,股價波動小,長期每天大約漲 0.1%。適合放著不管的人。'},
- {sym:'JCB',name:'韭菜銀行',emoji:'🏦',base:30,dvol:.008,np:.0006,div:.002,tag:'低波動 · 每天配息 0.2%',desc:'割了又長的老字號銀行。股價最穩,每天台灣時間 0 點依收盤價配發 0.2% 股利,記得回來領。'},
- {sym:'FFC',name:'芳芳娛樂城',emoji:'🎰',base:66,dvol:.035,np:.0011,div:0,tag:'跟射龍門池底連動',desc:'芳芳開的娛樂城。射龍門池底越大,娛樂城股價越高;池底被挖空,股價也會跟著跌。'},
- {sym:'KXN',name:'開心農場',emoji:'🌻',base:25,dvol:.03,np:.0011,div:0,tag:'跟全服偷菜次數連動',desc:'全服的菜都是它種的。最近 24 小時大家偷菜越多,菜價越高,股價也越高。'},
- {sym:'ZMB',name:'殭屍製藥',emoji:'🧟',base:150,dvol:.05,np:.0014,div:0,tag:'高風險 · 看新聞吃飯',desc:'專做殭屍疫苗的藥廠,疫苗成功就飆漲、實驗品逃出來就暴跌。新聞很多,波動很大。'}];
+ {sym:'HXT',name:'黑心科技',emoji:'💻',base:88,dvol:.085,np:.0028,beta:1.4,div:0,tag:'高風險 · 常漲停也常跌停',desc:'全員責任制的科技公司,接到大單就大漲、爆出過勞新聞就重挫。波動最大,適合喜歡刺激的人。'},
+ {sym:'JBL',name:'加班物流',emoji:'🚚',base:52,dvol:.02,np:.0012,beta:.6,div:0,tag:'穩健 · 長期慢慢漲',desc:'全年無休的物流公司,股價波動比較小,長期每天大約漲 0.1%。適合放著不管的人。'},
+ {sym:'JCB',name:'韭菜銀行',emoji:'🏦',base:30,dvol:.01,np:.0008,beta:.3,div:.002,tag:'低波動 · 每天配息 0.2%',desc:'割了又長的老字號銀行。股價最穩,每天台灣時間 0 點依收盤價配發 0.2% 股利,記得回來領。'},
+ {sym:'FFC',name:'芳芳娛樂城',emoji:'🎰',base:66,dvol:.06,np:.002,beta:1,div:0,tag:'跟射龍門池底連動',desc:'芳芳開的娛樂城。射龍門池底越大,娛樂城股價越高;池底被挖空,股價也會跟著跌。'},
+ {sym:'KXN',name:'開心農場',emoji:'🌻',base:25,dvol:.055,np:.002,beta:.9,div:0,tag:'跟全服偷菜次數連動',desc:'全服的菜都是它種的。最近 24 小時大家偷菜越多,菜價越高,股價也越高。'},
+ {sym:'ZMB',name:'殭屍製藥',emoji:'🧟',base:150,dvol:.08,np:.0025,beta:1.3,div:0,tag:'高風險 · 看新聞吃飯',desc:'專做殭屍疫苗的藥廠,疫苗成功就飆漲、實驗品逃出來就暴跌。新聞很多,波動很大。'}];
 const STKH={HXT:[['黑心科技宣布全員責任制,獲利暴增','黑心科技 AI 取代實習生,法人搶進','黑心科技接到大單,工程師連加三個月班'],['黑心科技爆出過勞事件,股價重挫','黑心科技被勞檢,外資大賣','黑心科技工程師集體離職']],
  JBL:[['加班物流拿下雙 11 大單','加班物流宣布周休一日,效率創新高','加班物流擴建倉庫'],['加班物流貨車司機罷工','加班物流倉庫淹水','加班物流被爆送錯貨']],
  JCB:[['韭菜銀行升息,存款大增','韭菜銀行推出「割了又長」理財方案','韭菜銀行獲評最穩健銀行'],['韭菜銀行呆帳增加','韭菜銀行 ATM 吃卡,客訴暴增','韭菜銀行被罰款']],
  FFC:[['芳芳娛樂城人潮爆滿,池底創新高','芳芳娛樂城開幕週年慶','芳芳宣布今天手氣很好'],['芳芳娛樂城被臨檢','芳芳娛樂城莊家連輸,股東哭哭','芳芳請假一天,娛樂城冷清']],
  KXN:[['開心農場高麗菜大豐收','開心農場推出防偷菜保全','開心農場有機認證通過'],['開心農場颱風來襲,菜價崩盤','開心農場遭小偷連夜偷菜','開心農場爆發蟲害']],
+ ALL:[['📢 央行宣布降息,大盤全面噴發','📢 政府發放社畜補助金,股市大漲','📢 外資大舉買超,全面上漲','📢 老闆宣布全公司加薪,股民瘋狂'],['📢 股災來了!全市場恐慌性賣壓','📢 央行宣布升息,大盤重挫','📢 外資大逃殺,全面下跌','📢 勞基法大修,社畜股全面崩跌']],
  ZMB:[['殭屍製藥疫苗臨床試驗成功','殭屍病毒再起,殭屍製藥接單接到手軟','殭屍製藥獲政府大單'],['殭屍製藥試驗品逃出實驗室','殭屍製藥疫苗副作用:想上班','殭屍製藥研究員被咬']]};
 const STK={q:null,sel:null,mode:'m',side:'buy',qty:0,busy:false,srv:null,lb:'today',ch:null,chk:'',lt:0,err:'',cap:2000000,fee:.003};
 const stkCo=s=>STKC.find(c=>c.sym===s)||STKC[0];
@@ -3252,7 +3263,7 @@ const stkGauss=()=>Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(2*Math.PI*Ma
 const STKL={
  K:'clockin-stkL',
  load(){if(this.S)return this.S;let S=null;try{S=JSON.parse(localStorage.getItem(this.K)||'null')}catch(e){}
-  if(!S||!S.px)S={lt:null,t0:null,px:{},day:{},fo:{},news:[],hold:{},div:0,realized:0,tx:[]};this.S=S;return S},
+  if(!S||!S.px)S={lt:null,t0:null,px:{},day:{},fo:{},ht:{},news:[],hold:{},div:0,realized:0,tx:[]};this.S=S;return S},
  save(){try{localStorage.setItem(this.K,JSON.stringify(this.S))}catch(e){}},
  reset(){this.S=null;try{localStorage.removeItem(this.K)}catch(e){}},
  last(sym){const S=this.S,a=S.px[sym];return a&&a.length?a[a.length-1]:stkCo(sym).base},
@@ -3266,23 +3277,24 @@ const STKL={
   fair.JBL=stkCo('JBL').base*(1+.001*days);fair.FFC=Math.min(600,Math.max(10,stkCo('FFC').base*Math.pow(Math.max(pot,10000)/1e6,.35)));kap.FFC=1/1440;fair.KXN=Math.min(300,Math.max(8,stkCo('KXN').base*Math.sqrt(1+steal/200)));kap.KXN=1/1440;
   if(lt==null||nt-lt>4320){const t=lt==null?nt-240:nt-4320;STKC.forEach(c=>{const p=lt==null?c.base:this.last(c.sym);S.px[c.sym]=[p]});S.t0=t;lt=t}
   let cd=stkDay(lt);const P={},L={},O={},H={},Lo={};
-  STKC.forEach(c=>{const s=c.sym;P[s]=this.at(s,lt)||this.last(s);const pc=this.prevClose(s,cd);L[s]=pc!=null?pc:P[s];const r=this.dayRow(s,cd);if(r){O[s]=r[1];H[s]=r[2];Lo[s]=r[3]}else{O[s]=H[s]=Lo[s]=P[s]}if(S.fo[s]==null)S.fo[s]=0});
+  STKC.forEach(c=>{const s=c.sym;P[s]=this.at(s,lt)||this.last(s);const pc=this.prevClose(s,cd);L[s]=pc!=null?pc:P[s];const r=this.dayRow(s,cd);if(r){O[s]=r[1];H[s]=r[2];Lo[s]=r[3]}else{O[s]=H[s]=Lo[s]=P[s]}if(S.fo[s]==null)S.fo[s]=0});if(!S.ht)S.ht={};
   for(let t=lt+1;t<=nt;t++){const d=stkDay(t);
    if(d!==cd){STKC.forEach(c=>{const s=c.sym;this.putDay(s,[cd,O[s],H[s],Lo[s],P[s]]);if(c.div>0){const h=S.hold[s];if(h&&h.qty>0)S.div+=Math.floor(h.qty*P[s]*c.div)}L[s]=P[s];O[s]=H[s]=Lo[s]=P[s]});cd=d}
-   STKC.forEach(c=>{const s=c.sym,sg=c.dvol/Math.sqrt(1440);S.fo[s]=Math.round(S.fo[s]*(1-1/10080)*1e6)/1e6;
-    let r=-sg*sg/2+sg*stkGauss()+kap[s]*Math.log(fair[s]*Math.exp(S.fo[s])/Math.max(P[s],.01));
+   let mk=0;if(Math.random()<1/720||(window.__STKMKT&&t===nt)){const mg=window.__STKMKT?Math.abs(window.__STKMKT):.03+Math.random()*.04;mk=(window.__STKMKT?window.__STKMKT>0:Math.random()<.5)?mg:-mg;S.news.unshift({sym:'ALL',pct:Math.round(mk*1000)/10,title:pickL(STKH.ALL[mk>0?0:1]),t:new Date(t*60000-(window.__STKOFF||0)*60000).toISOString()})}
+   STKC.forEach(c=>{const s=c.sym;if(Math.random()<1/240)S.ht[s]=pickL([.6,1,1,1.5,2.2,3]);const sg=c.dvol*(S.ht[s]||1)/Math.sqrt(1440);S.fo[s]=Math.round(S.fo[s]*(1-1/10080)*1e6)/1e6;
+    let r=-sg*sg/2+sg*stkGauss()+kap[s]*Math.log(fair[s]*Math.exp(S.fo[s])/Math.max(P[s],.01))+mk*(c.beta||1);
     const up=stkUp(L[s]),dn=stkDn(L[s]);let nw=window.__STKNEWS&&window.__STKNEWS[s]&&t===nt?window.__STKNEWS[s]:null;
     if(nw||Math.random()<c.np){const good=nw?nw>0:Math.random()<.5+Math.min(.3,Math.max(-.3,Math.log(fair[s]*Math.exp(S.fo[s])/Math.max(P[s],.01))));
-     const mag=nw?Math.abs(Math.log((nw>0?up:dn)/Math.max(P[s],.01)))+.01:(s==='HXT'||s==='ZMB'?.04+Math.random()*.06:.03+Math.random()*.05);r+=good?mag:-mag;S.fo[s]=Math.round((S.fo[s]+.7*(good?mag:-mag))*1e6)/1e6;
+     const mag=nw?Math.abs(Math.log((nw>0?up:dn)/Math.max(P[s],.01)))+.01:(s==='HXT'||s==='ZMB'?.05+Math.random()*.07:s==='JBL'||s==='JCB'?.02+Math.random()*.03:.03+Math.random()*.06);r+=good?mag:-mag;S.fo[s]=Math.round((S.fo[s]+.7*(good?mag:-mag))*1e6)/1e6;
      S.news.unshift({sym:s,pct:Math.round((good?mag:-mag)*1000)/10,title:pickL(STKH[s][good?0:1]),t:new Date(t*60000-(window.__STKOFF||0)*60000).toISOString()});}
     P[s]=stkR2(Math.min(up,Math.max(dn,Math.max(.5,P[s]*Math.exp(r)))));if(P[s]>H[s])H[s]=P[s];if(P[s]<Lo[s])Lo[s]=P[s];S.px[s].push(P[s])})}
-  if(window.__STKNEWS)window.__STKNEWS=null;
+  if(window.__STKNEWS)window.__STKNEWS=null;if(window.__STKMKT)window.__STKMKT=null;
   STKC.forEach(c=>{const s=c.sym;this.putDay(s,[cd,O[s],H[s],Lo[s],P[s]]);S.fo[s]=Math.min(1.5,Math.max(-1.5,S.fo[s]))});
   const cut=S.px[STKC[0].sym].length-4321;if(cut>0){STKC.forEach(c=>S.px[c.sym].splice(0,cut));S.t0+=cut}
   S.lt=nt;S.news.length=Math.min(S.news.length,30);this.save()},
  co(c){const S=this.S,s=c.sym,nt=S.lt,p=this.last(s),cd=stkDay(nt),r=this.dayRow(s,cd)||[cd,p,p,p,p],pcv=this.prevClose(s,cd),pc=pcv!=null?pcv:r[1],sp=[];
   for(let t=nt-359;t<=nt;t++){if(t%5===0||t===nt){const v=this.at(s,t);if(v!=null)sp.push(v)}}
-  return{sym:s,name:c.name,emoji:c.emoji,p,pc,o:r[1],h:r[2],l:r[3],up:stkUp(pc),dn:stkDn(pc),div:c.div,sp}},
+  return{sym:s,name:c.name,emoji:c.emoji,p,pc,o:r[1],h:r[2],l:r[3],up:stkUp(pc),dn:stkDn(pc),div:c.div,heat:S.ht[s]||1,sp}},
  me(){const S=this.S;return{hold:Object.keys(S.hold).filter(k=>S.hold[k].qty>0).map(k=>({sym:k,qty:S.hold[k].qty,cost:S.hold[k].cost})),div:S.div,realized:S.realized}},
  quote(){this.tick();const S=this.S;return{t:S.lt,cos:STKC.map(c=>this.co(c)),news:S.news.slice(0,12),pot:dpLocal().dpot,me:this.me()}},
  chart(sym,mode){this.tick();const S=this.S,nt=S.lt,out=[];
@@ -3305,7 +3317,7 @@ const STKL={
   return{today:td>0?[{nick:me,amount:td,t:new Date().toISOString()}]:[],all:S.realized>0?[{nick:me,amount:S.realized,t:new Date().toISOString()}]:[]}}};
 const stkOn=()=>DP.on&&STK.srv!==false;
 async function stkRpc(fn,b){return dpReq('/rest/v1/rpc/'+fn,b)}
-const stkErr=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||''),c=String((e&&e.code)||'');if(/poor/.test(m))return'金幣不夠';if(/cap/.test(m))return'每家公司最多只能投入 '+fmtC(STK.cap)+' 金幣';if(/no_qty/.test(m))return'持股不夠';if(/no_div/.test(m))return'目前沒有可以領的股利';if(/bad qty/.test(m))return'股數不對';if(/404|PGRST2|does not exist|function/i.test(c+m))return'股市需要伺服器更新,請管理員執行 1009-I 的 SQL';return'連線失敗,稍後再試'};
+const stkErr=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||''),c=String((e&&e.code)||'');if(/poor/.test(m))return'金幣不夠';if(/cap/.test(m))return'每家公司最多只能投入 '+fmtC(STK.cap)+' 金幣';if(/no_qty/.test(m))return'持股不夠';if(/no_div/.test(m))return'目前沒有可以領的股利';if(/bad qty/.test(m))return'股數不對';if(/404|PGRST2|does not exist|function/i.test(c+m))return'股市需要伺服器更新,請管理員執行 1009-L 的 SQL';return'連線失敗,稍後再試'};
 const stkNonce=()=>'n'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 const stkHold=s=>{const me=STK.q&&STK.q.me;const h=me&&(me.hold||[]).find(x=>x.sym===s);return h||{qty:0,cost:0}};
 const stkCls=v=>v>0?'skup':v<0?'skdn':'skeq';
@@ -3320,10 +3332,10 @@ function stkRender(){const q=STK.q,list=$('sklist');if(!list)return;stkClock();
  $('skst').innerHTML=STK.err?'<span style="color:#ff9a8a">'+escH(STK.err)+'</span>':stkOn()?'🟢 全伺服器即時共用 · 24 小時開盤':'🟡 單機股市(網頁版才是全伺服器共用)';
  if(!q){list.innerHTML='<div class="muted" style="padding:14px;text-align:center">讀取中…</div>';return}
  const ix=stkIdx(q),d=ix.v-ix.pc;$('skidx').innerHTML='<small>📈 社畜指數</small><b class="'+stkCls(d)+'">'+stkF(ix.v)+'</b><span class="'+stkCls(d)+'">'+(d>0?'▲':d<0?'▼':'')+stkF(Math.abs(d))+'('+(d>=0?'+':'−')+Math.abs(stkPct(ix.v,ix.pc)).toFixed(2)+'%)</span>';
- list.innerHTML=q.cos.map(c=>{const ch=c.p-c.pc,h=stkHold(c.sym),lim=c.p>=c.up?'<i class="sklim up">漲停</i>':c.p<=c.dn?'<i class="sklim dn">跌停</i>':'';
+ list.innerHTML=q.cos.map(c=>{const ch=c.p-c.pc,h=stkHold(c.sym),lim=(c.p>=c.up?'<i class="sklim up">漲停</i>':c.p<=c.dn?'<i class="sklim dn">跌停</i>':'')+(+c.heat>=2.2?'<i class="skhot" title="這段時間交易特別熱絡,漲跌會更劇烈">🔥 熱</i>':+c.heat<1?'<i class="skcool" title="這段時間比較冷清">😴</i>':'');
   return'<button class="skrow" data-s="'+c.sym+'">'+stkLogo(c.sym)+'<span class="skn"><b>'+escH(c.name)+lim+'</b><small>'+c.sym+(h.qty>0?' · <em>持有 '+fmtC(h.qty)+' 股</em>':' · '+escH(stkCo(c.sym).tag.split(' · ')[0]))+'</small></span>'+stkSpark(c.sp,c.pc)+
   '<span class="skp"><b class="'+stkCls(ch)+'">'+stkF(c.p)+'</b><small class="'+stkCls(ch)+'">'+(ch>0?'▲':ch<0?'▼':'')+stkF(Math.abs(ch))+' ('+(ch>=0?'+':'−')+Math.abs(stkPct(c.p,c.pc)).toFixed(2)+'%)</small></span></button>'}).join('');
- const nw=(q.news||[]).slice(0,4);$('sknews').innerHTML=nw.length?nw.map(n=>'<button class="sknw" data-s="'+n.sym+'"><span class="'+stkCls(n.pct)+'">'+(n.pct>0?'📈 +':'📉 ')+n.pct+'%</span> '+escH(n.title)+' <small>'+dpAgo(n.t)+'</small></button>').join(''):'<div class="muted">目前沒有新聞,股市風平浪靜</div>';
+ const nw=(q.news||[]).slice(0,4);$('sknews').innerHTML=nw.length?nw.map(n=>'<button class="sknw'+(n.sym==='ALL'?' all':'')+'"'+(n.sym==='ALL'?'':' data-s="'+n.sym+'"')+'><span class="'+stkCls(n.pct)+'">'+(n.pct>0?'📈 +':'📉 ')+n.pct+'%</span> '+escH(n.title)+' <small>'+dpAgo(n.t)+'</small></button>').join(''):'<div class="muted">目前沒有新聞,股市風平浪靜</div>';
  const me=q.me||{hold:[],div:0,realized:0};let mv=0,cost=0;(me.hold||[]).forEach(h=>{const c=q.cos.find(x=>x.sym===h.sym);if(c){mv+=Math.floor(h.qty*c.p);cost+=h.cost}});const un=mv-cost;
  $('skme').innerHTML='<div><small>持股市值</small><b>'+fmtC(mv)+'</b></div><div><small>未實現損益</small><b class="'+stkCls(un)+'">'+(un>0?'+':un<0?'−':'')+fmtC(Math.abs(un))+(cost?' <em>('+(un>=0?'+':'−')+Math.abs(un/cost*100).toFixed(1)+'%)</em>':'')+'</b></div><div><small>已實現損益</small><b class="'+stkCls(me.realized)+'">'+(me.realized>0?'+':me.realized<0?'−':'')+fmtC(Math.abs(me.realized||0))+'</b></div>'+
   '<div><small>身上金幣</small><b>'+fmtC(SAVE.coin||0)+'</b></div>'+(me.div>0?'<button class="btn pri skdiv" id="skdiv"'+(STK.busy?' disabled':'')+'>🏦 領股利 '+fmtC(me.div)+'</button>':'');
@@ -3380,7 +3392,7 @@ function stkDetRender(){const box=$('skdet');if(!box||!STK.q)return;const c=STK.
  else sum='<span class="muted">'+(STK.side==='buy'?'最多可以買 '+fmtC(mq)+' 股(每家公司最多投入 '+fmtC(STK.cap/10000)+' 萬)':h.qty?'持有 '+fmtC(h.qty)+' 股,選要賣幾股':'你還沒有這家公司的股票')+'</span>';
  const lim=c.p>=c.up?'<i class="sklim up">漲停</i>':c.p<=c.dn?'<i class="sklim dn">跌停</i>':'';
  box.innerHTML='<div class="skdh">'+stkLogo(c.sym,true)+'<div><b>'+escH(c.name)+' <small>'+c.sym+'</small></b><span class="sktag">'+escH(co.tag)+'</span></div><button class="btn skx" data-x="1">✕</button></div>'+
- '<div class="skpx"><b class="'+stkCls(ch)+'">'+stkF(c.p)+'</b><span class="'+stkCls(ch)+'">'+(ch>0?'▲':ch<0?'▼':'')+stkF(Math.abs(ch))+'('+(ch>=0?'+':'−')+Math.abs(stkPct(c.p,c.pc)).toFixed(2)+'%)</span>'+lim+'</div>'+
+ '<div class="skpx"><b class="'+stkCls(ch)+'">'+stkF(c.p)+'</b><span class="'+stkCls(ch)+'">'+(ch>0?'▲':ch<0?'▼':'')+stkF(Math.abs(ch))+'('+(ch>=0?'+':'−')+Math.abs(stkPct(c.p,c.pc)).toFixed(2)+'%)</span>'+lim+(+c.heat>=2.2?'<i class="skhot">🔥 交易熱絡,漲跌特別劇烈</i>':'')+'</div>'+
  '<div class="skstat"><div><small>開盤</small>'+stkF(c.o)+'</div><div><small>最高</small><span class="skup">'+stkF(c.h)+'</span></div><div><small>最低</small><span class="skdn">'+stkF(c.l)+'</span></div><div><small>昨收</small>'+stkF(c.pc)+'</div><div><small>漲停</small><span class="skup">'+stkF(c.up)+'</span></div><div><small>跌停</small><span class="skdn">'+stkF(c.dn)+'</span></div></div>'+
  '<div class="skct" id="skct"><button data-m="m"'+(STK.mode==='m'?' class="on"':'')+'>分時</button><button data-m="k5"'+(STK.mode==='k5'?' class="on"':'')+'>5 分 K</button><button data-m="d"'+(STK.mode==='d'?' class="on"':'')+'>日 K</button></div><div class="skchart" id="skchart"></div>'+
  '<div class="skpos"><div><small>持有</small><b>'+fmtC(h.qty)+' 股</b></div><div><small>平均成本</small><b>'+(h.qty?stkF(h.cost/h.qty):'—')+'</b></div><div><small>市值</small><b>'+fmtC(mv)+'</b></div><div><small>損益</small><b class="'+stkCls(un)+'">'+(h.qty?(un>=0?'+':'−')+fmtC(Math.abs(un)):'—')+'</b></div></div>'+
@@ -5163,10 +5175,11 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1009-K';
+const GBUILD='1009-L';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['📈','股市波動更劇烈','黑心科技、殭屍製藥、芳芳娛樂城、開心農場漲跌變大,新聞更多更猛;新增「📢 大盤新聞」全市場一起暴漲暴跌,以及「🔥 熱度」時段,熱絡時漲跌最多變 3 倍。加班物流、韭菜銀行還是比較穩'],
 ['🔒','裝備可以鎖住、戰鬥 2 倍速','倉庫的裝備可以按「🔒 鎖住」,鎖住的裝備不會被一鍵賣出或單獨賣出;戰鬥中右上角新增「2x」按鈕,開了之後怪物、子彈、時間都變 2 倍快(無限列車不適用)'],
 ['🎨','股市換上新美術','6 家公司都有自己的 logo,股市上方換成交易大廳背景,遊戲場的「股市」分頁也換上新圖示'],
 ['📈','新遊戲:社畜股市','遊戲場新增 24 小時開盤的股市!6 家社畜公司每分鐘一筆股價,跟台股一樣漲跌停 10%、紅漲綠跌;芳芳娛樂城跟射龍門池底連動、開心農場跟全服偷菜連動、韭菜銀行每天配息;排行榜新增股神榜'],
@@ -5186,7 +5199,6 @@ const GNOTES=[
 ['🎯','射龍門「一線天」大加碼','門柱中間只差 1 種點數的「一線天」賠率提高到 1 賠 18,射中有專屬慶祝動畫、紀錄金色標示,還會全服恭喜;中間 2 種點數的門也提高到 1 賠 6.5'],
 ['🔧','賣出等級選單完整顯示','倉庫的賣出等級選單不會再被切掉,破損到神話六個等級一次全部看得到;下方空間不夠時會自動往上展開'],
 ['🧹','倉庫介面整理','一鍵賣出改用等級名稱(破損、普通、優良、稀有、傳說、神話)並標上顏色;「撿到自動賣」整合進一鍵賣出,勾選「撿到也自動賣」就會用同一個等級;音效設定移到上方的 🔊 按鈕;排行榜上每個等級的裝備格大小統一'],
-['✨','至尊掃光更明顯、排行榜也發光','至尊(紫)裝備的掃光加亮,跟典藏一樣明顯;排行榜上的至尊、典藏裝備和座駕也有掃光、光暈和閃光,展開裝備明細一樣有'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
