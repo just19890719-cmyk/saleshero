@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1009-L">
+<meta name="gbuild" content="1009-S">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1819,6 +1819,19 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
 @keyframes skhot{50%{box-shadow:0 0 14px rgba(255,140,40,1)}}
 .sknw.all{border-color:rgba(255,210,74,.55);background:linear-gradient(90deg,rgba(255,210,74,.16),rgba(255,255,255,.03));font-weight:800;cursor:default}
 </style>
+<style id="m1009">
+/* 1009-M 技能等級隨機 */
+.skill .sklr{display:block;font-size:11px;color:#9fb3c8;margin-top:2px}
+</style>
+<style id="n1009">
+/* 1009-N 腎虛公子 */
+.hsel{flex-wrap:wrap}
+.hsel button[data-hero=j]{overflow:visible;border-color:rgba(170,215,255,.7);background:linear-gradient(115deg,rgba(0,0,0,.35) 35%,rgba(200,230,255,.3) 47%,rgba(0,0,0,.35) 60%) 0 0/300% 100%;animation:mshbtn 2.8s ease-in-out infinite}
+.hsel button[data-hero=j].on{background:linear-gradient(115deg,#cfe8ff 35%,#ffffff 47%,#cfe8ff 60%) 0 0/300% 100%;color:#0b2540;border-color:#e6f3ff}
+.hsel{display:grid!important;grid-template-columns:auto 1fr 1fr;gap:8px 6px}.hsel .muted{grid-row:span 2}.hsel button{max-width:none!important}
+.dhero.hb-j{background:radial-gradient(ellipse at 50% 88%,rgba(255,214,150,.30),transparent 45%),radial-gradient(ellipse at 50% 20%,rgba(150,205,255,.18),transparent 60%),linear-gradient(#2a1f18,#120d0a)!important}.dhero.hb-j.hbj{background:linear-gradient(rgba(10,14,22,.15),rgba(10,14,22,.4)),var(--hbg-j) 50% 100%/cover no-repeat!important;background-color:#1a120d!important;border-radius:12px!important;overflow:hidden}.dhero .jdimg{height:84%!important;filter:drop-shadow(0 0 8px rgba(150,220,255,.55)) drop-shadow(0 6px 6px rgba(0,0,0,.35))}.dhero .jdimg.d2{height:86%!important}.jdoll{display:block;height:100%}.jdoll img{height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}
+.jph{display:grid;place-items:center;gap:6px;text-align:center}.jph b{font-size:84px;line-height:1;filter:drop-shadow(0 0 14px rgba(140,210,255,.9))}.jph small{font-size:12px;color:#bcd6ee;line-height:1.4}
+</style>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -1856,7 +1869,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-L</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-S</span></small>
   </div>
  </div>
 </div>
@@ -2044,6 +2057,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
      <li><b>加倍</b>:前兩張的時候可以加倍下注,只再拿一張牌。</li>
      <li><b>分牌</b>:前兩張點數一樣(10、J、Q、K 都算 10)可以分成兩手,各押一樣的錢。只能分一次,分牌後不能加倍;分 A 各補一張就結束。</li>
      <li><b>莊家規則</b>:莊家 17 點以上一定停牌,16 點以下一定要牌。莊家前兩張是黑傑克時直接開牌。</li>
+     <li><b>🖐️ 過五關</b>:手上拿到 5 張牌還沒爆牌,直接算你贏(1 賠 1),不用跟莊家比點數。</li>
      <li>發牌、牌堆(6 副牌)和莊家的蓋牌都在伺服器上,畫面上看不到下一張牌。牌局 15 分鐘沒動作會自動停牌結算。</li>
     </ol></details>
     </div>
@@ -2243,6 +2257,7 @@ RAR[-1]={n:'破損',m:.85,c:'#6b7079'};RAR[5]={n:'至尊',m:2.4,c:'#b46cff'};RAR
 const SK={
  coffee:{n:'熱咖啡潑灑',d:'定時灼燒周圍的敵人'},clip:{n:'咒術迴針',d:'灌注咒力的迴針繞著你旋轉'},
  drone:{n:'外送無人機',d:'無人機自動射擊敵人'}, 
+ /* 1009-M 裝備隨機技能池加大:原本關卡升級才拿得到的 4 種武器也能從裝備上隨機帶出來 */umb:{n:'晴雨窗光劍',d:'揮出光劍斬擊前方扇形範圍',ic:'晴雨窗光劍'},pen:{n:'萬能鋼筆',d:'朝最近的敵人射出鋼筆',ic:'萬能鋼筆'},thermos:{n:'梵谷打火機',d:'投擲打火機,落地爆炸',ic:'梵谷打火機'},laptop:{n:'單眼相機',d:'閃光燈射出貫穿光束',ic:'單眼相機'},
  whistle:{n:'哨音震波',d:'定時以自己為中心放出震波,擊退並傷害周圍的敵人',egg:1,ic:'站長指揮棒'},train:{n:'列車進站',d:'定時召喚捷運列車,橫掃一整排敵人',egg:1,ic:'站長大盤帽'},card:{n:'嗶卡加速',d:'撿到寶石時短暫加速,並回復 1%~3% 生命',egg:1,ic:'無限悠遊卡'},deal:{n:'成交爆發',d:'每擊倒一定數量敵人,向四周射出大量鋼筆',egg:1},
  cry:{n:'巨嬰大哭',d:'受到傷害時有機率大哭,哭出震波震開並傷害周圍的敵人',egg:1,ic:'黃金奶嘴'},guilt:{n:'情緒勒索',d:'身邊的敵人被勒索到腳軟,移動變慢',egg:1,ic:'慣老闆口水巾'},bottle:{n:'奶瓶亂丟',d:'定時往四周丟出奶瓶砸敵人',egg:1,ic:'搖搖奶瓶'}};
 const ENE=[{n:'奧客喪屍',e:'🧟',hp:20,sp:46,r:20,dmg:9},{n:'菜市場大媽喪屍',e:'🧟‍♀️',hp:30,sp:40,r:21,dmg:11},{n:'吸毒喪屍',e:'🧟',hp:12,sp:78,r:19,dmg:7},
@@ -2269,6 +2284,10 @@ const isEq=it=>Object.values(SAVE.eq).includes(it.id);
 /* ===== 裝備產生 ===== */
 function rollQ(w){let x=Math.random()*w.reduce((a,b)=>a+b);for(let i=0;i<w.length;i++){x-=w[i];if(x<0)return i}return 0}
 function sv(k,il,m){const g=Math.pow(1.15,il);const r={atk:3*g,hp:15*g,def:1.2*g,regen:.3*Math.pow(1.12,il),aspd:rnd(3,8),crit:rnd(2,6),spd:rnd(3,7),pick:rnd(8,20)}[k]*m*rnd(.85,1.15);return k==='regen'?Math.max(.1,Math.round(r*10)/10):Math.max(1,Math.round(r))}
+/* 1009-M 技能等級隨機(首領裝備除外):同品質也有高低,讓玩家一直刷裝備組技能 */
+const SKLV={2:[[1,.75],[2,.25]],3:[[1,.25],[2,.5],[3,.25]],4:[[2,.4],[3,.6]]};
+function rollSkl(q){if(q>=5)return 3;const T=SKLV[q]||[[1,1]];let r=Math.random();for(const [l,p] of T){if((r-=p)<0)return l}return T[T.length-1][0]}
+const sklRange=q=>q>=5?'Lv.3':q>=4?'Lv.2~3':q>=3?'Lv.1~3':'Lv.1~2';
 function makeItem(il,q,type,force){
  type=type||pick(['wpn','off','head','coat','shoe','acc','acc']);
  let base=force||pick(BASES[type]),egg=false;
@@ -2276,7 +2295,7 @@ function makeItem(il,q,type,force){
  const m=RAR[q].m,st={},p=type==='acc'?pick(ACCST):PRIM[type];st[p]=sv(p,il,m);
  Object.keys(STAT).filter(k=>k!==p).sort(()=>Math.random()-.5).slice(0,Math.max(0,q)).forEach(k=>st[k]=sv(k,il,m*.6));
  let sk=base.sk||null;if(!sk&&(q>=3||(q===2&&Math.random()<.5)))sk=pick(Object.keys(SK).filter(k=>!SK[k].egg));
- const skl=sk?(q>=4?3:q>=3?2:1):0;
+ const skl=sk?rollSkl(q):0;
  const name=(egg?'':q>=3?pick(['傳奇','黃金','究極']):q>=1?pick(['耐用的','專業的','限量版','改造']):'')+base.b;
  return{id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),type,b:base.b,e:base.e,w:base.w||null,q,il,st,sk,skl,up:0,name,egg};
 }
@@ -2295,7 +2314,7 @@ function equip(it,slot){slot=slot||slotFor(it);for(const k in SAVE.eq)if(SAVE.eq
 
 
 function pstats(lv){
- const s={atk:12,hp:130,def:0,aspd:0,crit:5,spd:0,pick:0,regen:0,sk:{},wpn:heroA()?'mech':heroF()?'kick':'fist'};
+ const s={atk:12,hp:130,def:0,aspd:0,crit:5,spd:0,pick:0,regen:0,sk:{},wpn:heroA()?'mech':heroJ()?'sword9':heroF()?'kick':'fist'};
  for(const k in SAVE.eq){const it=byId(SAVE.eq[k]);if(!it)continue;for(const st in it.st)s[st]+=ist(it,st);if(it.sk)s.sk[it.sk]=(s.sk[it.sk]||0)+it.skl;if(k==='wpn')s.wpn=it.w}
  const rd=RIDES.find(r=>r.id===SAVE.ride),rl=rd&&rideLv(rd.id);if(rd&&rl){const b=rideBonus(rd,rl);for(const k in b)s[k]+=b[k];}
  {const n=shopOwned();if(n){const m=1+.01*n;s.atk*=m;s.hp*=m;s.def*=m;s.regen*=m}}
@@ -2507,7 +2526,7 @@ function setQ(it,nq){
  if(nq<it.q){const mx=Math.max(1,nq+1);Object.keys(it.st).slice(mx).forEach(k=>delete it.st[k])}
  if(nq>=3&&!it.sk)it.sk=pick(Object.keys(SK).filter(k=>!SK[k].egg));
  if(nq<=1&&it.sk&&!it.egg&&!it.boss)it.sk=null;
- if(it.sk)it.skl=nq>=4?3:nq>=3?2:1;else it.skl=0;
+ if(!it.sk)it.skl=0;else if(it.boss)it.skl=nq>=4?3:nq>=3?2:1;/* 首領裝備:等級照品質 */else if(nq>it.q)it.skl=Math.max(it.skl||1,rollSkl(nq));/* 升階:有機會升技能等級,不會變低 */else if(nq<it.q)it.skl=Math.min(it.skl||1,nq>=3?3:2);
  if(nq>=6&&!/^典藏 /.test(it.name))it.name='典藏 '+it.name;else if(nq<6&&/^典藏 /.test(it.name))it.name=it.name.replace(/^典藏 /,'');
  it.q=nq}
 function renderPray(){if(!$('phost'))return;
@@ -2832,9 +2851,9 @@ $('dlb').querySelector('.dlbt').onclick=e=>{const b=e.target.closest('[data-l]')
 $('drule').addEventListener('toggle',()=>{if(!$('drule').open){SAVE.drule=1;save()}});
 
 /* 男/女主角切換(裝備頁) */
-document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hero]');if(!b)return;const v=b.dataset.hero==='f'?'f':b.dataset.hero==='a'?'a':'m';if((SAVE.hero||'m')===v)return;if(v==='a'){armorEnsure();if(!ART['裝甲-idle-1']){toast('「恨鐵不成鋼」圖片載入中,請稍等幾秒再試');return}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hero]');if(!b)return;const v=b.dataset.hero==='f'?'f':b.dataset.hero==='a'?'a':b.dataset.hero==='j'?'j':'m';if((SAVE.hero||'m')===v)return;if(v==='a'){armorEnsure();if(!ART['裝甲-idle-1']){toast('「恨鐵不成鋼」圖片載入中,請稍等幾秒再試');return}}if(v==='j'){jEnsure();if(!ART['腎虛-idle-1']){toast('「腎虛公子」圖片載入中,請稍等幾秒再試');return}}
  if(v==='f'&&!ART['女主角-idle-1']){toast('女主角圖片載入中,請稍等幾秒再試');return}
- SAVE.hero=v;save();audioUnlock();sfx('equip');renderHome();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(x){}toast(v==='a'?'🤖 換成「恨鐵不成鋼」(免費體驗中),開局技能:三段遠距離火力':v==='f'?'👠 換成女主角,開局技能:高跟鞋踢擊':'👊 換成男主角,開局技能:空手揮拳')});
+ SAVE.hero=v;save();audioUnlock();sfx('equip');renderHome();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(x){}toast(v==='j'?'🗡️ 換成「腎虛公子」(免費體驗中),開局技能:九劍穿梭':v==='a'?'🤖 換成「恨鐵不成鋼」(免費體驗中),開局技能:三段遠距離火力':v==='f'?'👠 換成女主角,開局技能:高跟鞋踢擊':'👊 換成男主角,開局技能:空手揮拳')});
 /* ===== 1005-ZZM:賭徒下場 無限列車(純躲列車小遊戲) =====
    不能攻擊、沒有喪屍;一條命、撐 2 分鐘,五個等級(每班 +50/70/100/130/170);撐完 +400。裝備與座駕屬性不算,大家同樣的移動速度 */
 /* 1005-ZZZD:經濟調整 — 一條命(碰到列車就出局),每班金幣大幅降低 */
@@ -2848,7 +2867,7 @@ function trDailyLeft(){return 1}
 function trDailyUse(){}/* lim:月台上下邊界(只能在 ±250 之間移動) */
 const TRTAUNT=['欠芳芳的錢還沒還,先跑給列車追吧','賭輸了還想搭車?站長說:用跑的!','十賭九輸,剩下那一次是被列車撞','還債路上,請退到黃線後方'];
 function startTrain(){window.__TR=1;startRun(0)}
-function trInit(){try{trResetOld()}catch(e){}G.tr={hp:TR.hp,inv:0,nx:1.4,n:0,coins:0,last:0,duel:window.__DUEL||0};window.__DUEL=0;G.tr.prac=!G.tr.duel&&trDailyLeft()<=0;if(!G.tr.duel&&!G.tr.prac)trDailyUse();G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.ws={};G.ss={};G.mb=[];G.ms=[];G.mfx=[];G.mcs=[];G.mpf=[];G.evo={};
+function trInit(){try{trResetOld()}catch(e){}G.tr={hp:TR.hp,inv:0,nx:1.4,n:0,coins:0,last:0,duel:window.__DUEL||0};window.__DUEL=0;G.tr.prac=!G.tr.duel&&trDailyLeft()<=0;if(!G.tr.duel&&!G.tr.prac)trDailyUse();G.tutI=999;try{document.querySelectorAll('.tut,#tut').forEach(e=>e.remove())}catch(e){}G.sw=[];G.ws={};G.ss={};G.mb=[];G.ms=[];G.mfx=[];G.mcs=[];G.mpf=[];G.evo={};
  G.S=Object.assign({},G.S,{spd:0,regen:0,hp:TR.hp,def:0,dr:0,sk:{}});G.hp=TR.hp;G.lanes=[];G.mod={n:'',d:''};try{$('modb').hidden=true}catch(e){}
  $('hch').textContent=G.tr.duel?'⚔️ 挑戰書對決':G.tr.prac?'🏋️ 無限列車練習場':'🚇 賭徒下場 無限列車';toast(G.tr.duel?'⚔️ 挑戰賽開始!只比成績不給金幣,平手看誰閃得更驚險':G.tr.prac?'🏋️ 今天 '+TR.daily+' 場有獎場次已用完,這場是練習,不給金幣':'🚇 '+pickL(TRTAUNT));sfx('warn')}
 /* 1005-ZZP:總長 2 分鐘,五個等級 普通→困難→非常困難→地獄級別→終極煉獄;每班 50/70/100/130/170 */
@@ -3130,7 +3149,7 @@ const BJL={/* 單機引擎(測試版 / 沒連線):規則跟伺服器 bj_deal / b
  settle(R){if(R.done)return;const pnat=!R.h2&&R.h1.length===2&&bjTot(R.h1)===21,dnat=R.dl.length===2&&bjTot(R.dl)===21;let net=0,kind;
   if(pnat||dnat){net=pnat&&dnat?0:pnat?Math.floor(R.bet*1.5):-R.bet;kind=pnat&&!dnat?'bjbj':net<0?'bjlose':'bjpush'}
   else{const alive=bjTot(R.h1)<=21||(R.h2&&bjTot(R.h2)<=21);if(alive)while(bjTot(R.dl)<17){R.dl.push(R.deck[R.pos]);R.pos++}
-   const td=bjTot(R.dl);[R.h1,R.h2].forEach((h,i)=>{if(!h)return;const t=bjTot(h),b=i===0&&R.dbl1?R.bet*2:R.bet;if(t>21)net-=b;else if(td>21||t>td)net+=b;else if(t<td)net-=b});
+   const td=bjTot(R.dl);[R.h1,R.h2].forEach((h,i)=>{if(!h)return;const t=bjTot(h),b=i===0&&R.dbl1?R.bet*2:R.bet;if(t>21)net-=b;else if(h.length>=5)net+=b;/* 1009-S 過五關 */else if(td>21||t>td)net+=b;else if(t<td)net-=b});
    kind=net>0?'bjwin':net<0?'bjlose':'bjpush'}
   const S=dpLocal();S.dpot=S.dpot+R.reserve-net;R.done=true;R.net=net;R.res={bjbj:'bj',bjwin:'win',bjlose:'lose',bjpush:'push'}[kind];
   if(kind!=='bjpush')dpLocalLog(kind,Math.abs(net),S.dpot);save()},
@@ -3141,7 +3160,7 @@ const BJL={/* 單機引擎(測試版 / 沒連線):規則跟伺服器 bj_deal / b
   S.dpot-=2*bet;const R=SAVE.bjr={id:Date.now(),bet,reserve:2*bet,deck:d,pos:4,h1:[d[0],d[2]],h2:null,dl:[d[1],d[3]],cur:1,dbl1:false,done:false};
   if(bjTot(R.h1)===21||bjTot(R.dl)===21)this.settle(R);save();return this.view(R)},
  act(a,coin){const R=SAVE.bjr;if(!R)throw{msg:'bad round'};if(R.done)return this.view(R);let h=R.cur===2?R.h2:R.h1,fin=false,st=false;
-  if(a==='hit'){h.push(R.deck[R.pos++]);if(bjTot(h)>=21)fin=true}
+  if(a==='hit'){h.push(R.deck[R.pos++]);if(bjTot(h)>=21||h.length>=5)fin=true}
   else if(a==='stand')fin=true;
   else if(a==='double'){if(!(!R.h2&&R.cur===1&&h.length===2))throw{msg:'cant_double'};if((coin||0)<2*R.bet)throw{msg:'poor'};R.dbl1=true;h.push(R.deck[R.pos++]);fin=true}
   else if(a==='split'){if(!(!R.h2&&R.cur===1&&h.length===2&&bjVal(h[0])===bjVal(h[1])))throw{msg:'cant_split'};if((coin||0)<2*R.bet)throw{msg:'poor'};
@@ -3150,14 +3169,14 @@ const BJL={/* 單機引擎(測試版 / 沒連線):規則跟伺服器 bj_deal / b
   if(fin&&!st){if(R.cur===1&&R.h2){R.cur=2;if(bjTot(R.h2)>=21)st=true}else st=true}
   if(st)this.settle(R);save();return this.view(R)},
  state(){return SAVE.bjr?this.view(SAVE.bjr):null}};
-const bjOn=()=>DP.on&&BJ.srv!==false;
+const bjOn=()=>DP.on&&BJ.srv!==false&&!BJ.loc;/* BJ.loc:測試版指定牌時這一局改用單機引擎 */
 async function bjRpc(fn,b){return dpReq('/rest/v1/rpc/'+fn,b)}
 const bjErr=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||''),c=String((e&&e.code)||'');if(/pot_small/.test(m))return'池底不到 '+fmtC(BJ.open)+',芳芳先休息。先去射龍門把池底養大吧!';if(/bad_bet/.test(m))return'下注要在 '+fmtC(BJ.min)+' ~ '+fmtC(bjMax())+' 之間(池底的 5%)';if(/poor/.test(m))return'金幣不夠';if(/cant_split/.test(m))return'這手不能分牌';if(/cant_double/.test(m))return'這手不能加倍';if(/404|PGRST2|does not exist|function/i.test(c+m))return'21 點需要伺服器更新,請管理員執行 1009-E 的 SQL';return'連線失敗,稍後再試'};
-const BJS={deal:['發牌囉!','來,看看你的手氣','池底就是我的本錢,放馬過來'],bj:['黑傑克!今天你是贏家','A 配 10 點,漂亮!','哇,天生 21 點!'],bust:['爆了…貪心不足蛇吞象','超過 21 點囉','下次見好就收'],dbust:['我爆了!算你好運','哎呀,莊家爆牌','這把讓你贏'],win:['贏了,池底被你挖走一塊','好牌!','漂亮的停牌'],lose:['莊家贏,錢我收下了','差一點點','池底謝謝你的貢獻'],push:['平手,錢退給你','一樣大,再來一局'],dbj:['莊家黑傑克,不好意思囉'],split:['分牌!兩手一起拚'],double:['加倍!有膽識'],idle:['21 點,比誰最接近 21!','要牌還是停牌,全看你的膽量','莊家 17 點一定停牌喔']};
+const BJS={deal:['發牌囉!','來,看看你的手氣','池底就是我的本錢,放馬過來'],bj:['黑傑克!今天你是贏家','A 配 10 點,漂亮!','哇,天生 21 點!'],bust:['爆了…貪心不足蛇吞象','超過 21 點囉','下次見好就收'],dbust:['我爆了!算你好運','哎呀,莊家爆牌','這把讓你贏'],win:['贏了,池底被你挖走一塊','好牌!','漂亮的停牌'],lose:['莊家贏,錢我收下了','差一點點','池底謝謝你的貢獻'],push:['平手,錢退給你','一樣大,再來一局'],dbj:['莊家黑傑克,不好意思囉'],split:['分牌!兩手一起拚'],double:['加倍!有膽識'],five:['過五關!5 張都沒爆,算你贏','哇,拿到 5 張還沒爆!','過五關,這把我認了'],idle:['21 點,比誰最接近 21!','要牌還是停牌,全看你的膽量','莊家 17 點一定停牌喔','拿到 5 張沒爆就是過五關,直接贏!']};
 function bjSay(k,pose){const t=pickL(BJS[k]||BJS.idle);if($('bjbub'))$('bjbub').textContent='芳芳:'+t;if($('bjhost'))$('bjhost').src=HI(pose||'host-1','fd')}
 const bjBack=()=>'<div class="pc" style="animation:none"><div class="k" style="transform:none;background-image:url('+ART['pk-back']+')"></div></div>';
 function bjCard(c,isNew,d){const h=cardH({r:c.r,s:SUITS[c.s]||SUITS[0]},d||0);return isNew?h:h.replace('<div class="pc" style="animation-delay:','<div class="pc" style="animation:none;transform:rotateY(180deg);animation-delay:')}
-function bjHandH(cards,old,tot,on,tag,dbl){return'<div class="bjh'+(on?' on':'')+(tot>21?' bust':'')+'"><div class="bjcs">'+cards.map((c,i)=>'<div class="bjc">'+bjCard(c,i>=old,(i-old)*.18)+'</div>').join('')+'</div><div class="bjt">'+(tag?tag+' · ':'')+(tot>21?'爆牌 '+tot:tot)+(dbl?' · 加倍':'')+'</div></div>'}
+function bjHandH(cards,old,tot,on,tag,dbl){return'<div class="bjh'+(on?' on':'')+(tot>21?' bust':'')+'"><div class="bjcs">'+cards.map((c,i)=>'<div class="bjc">'+bjCard(c,i>=old,(i-old)*.18)+'</div>').join('')+'</div><div class="bjt">'+(tag?tag+' · ':'')+(tot>21?'爆牌 '+tot:tot)+(cards.length>=5&&tot<=21?' · 🖐️ 過五關':'')+(dbl?' · 加倍':'')+'</div></div>'}
 const BJWH=1440;function bjLayout(){const f=$('bjfelt');if(!f||!f.offsetWidth)return;const W=f.clientWidth,H=f.clientHeight,k=Math.max(W/2528,H/BJWH);f.style.setProperty('--s',k.toFixed(5));f.style.setProperty('--ox',((W-2528*k)/2).toFixed(1));f.style.setProperty('--oy',Math.min(0,(H-BJWH*k)/2).toFixed(1))}
 addEventListener('resize',()=>{try{bjLayout()}catch(e){}});
 function bjStack(v){const C=[[100000,'chip4'],[10000,'chip3'],[5000,'chip1'],[1000,'chip2']];let h='',n=0;for(const [d,k] of C){let c=Math.floor(v/d);v-=c*d;while(c-->0&&n<8){h+='<i style="background-image:var(--'+k+');bottom:'+(n*5)+'px;left:'+((n%2)*3-1)+'px"></i>';n++}}return h}
@@ -3183,8 +3202,9 @@ function bjFinish(r,quiet){const P=SAVE.bjPend;if(!P||P.id!==r.id)return;const g
  const s=SAVE.bjs=SAVE.bjs||{n:0,w:0,l:0,p:0,bj:0,net:0,big:0,bigL:0,stk:0,maxW:0,maxL:0,dbl:0,spl:0};s.n++;const net=(+r.net||0)-(r.tax||0);s.net+=net;
  if(r.res==='bj')s.bj++;if(net>0){s.w++;s.big=Math.max(s.big,net);s.stk=s.stk>0?s.stk+1:1}else if(net<0){s.l++;s.bigL=Math.max(s.bigL,-net);s.stk=s.stk<0?s.stk-1:-1}else{s.p++}s.maxW=Math.max(s.maxW,s.stk);s.maxL=Math.max(s.maxL,-s.stk);
  save();renderHome();try{dqAdd('cas')}catch(e){}
- const bust=r.t1>21&&(!r.h2||r.t2>21);
+ const bust=r.t1>21&&(!r.h2||r.t2>21),five=(r.h1.length>=5&&r.t1<=21)||(r.h2&&r.h2.length>=5&&r.t2<=21);
  if(r.res==='bj'){bjMsg('<span class="bjbig">♠️ 黑傑克!</span><br><span class="up">從池底贏走 '+fmtC(gross)+' 金幣(1 賠 1.5)</span>'+bjTaxT(r));if(!quiet){sfx('fan4');bjSay('bj','host-4');bjFlash()}}
+ else if(net>0&&five){bjMsg('<span class="bjbig">🖐️ 過五關!</span><br><span class="up">5 張沒爆直接贏,從池底贏走 '+fmtC(gross)+' 金幣</span>'+bjTaxT(r));if(!quiet){sfx('casinoWin');bjSay('five','host-4')}}
  else if(net>0){bjMsg('<span class="up">'+(r.td>21?'莊家爆牌!':'你贏了!')+'從池底贏走 '+fmtC(gross)+' 金幣</span>'+bjTaxT(r));if(!quiet){sfx('casinoWin');bjSay(r.td>21?'dbust':'win','host-4')}}
  else if(net<0){bjMsg('<span class="down">'+(bust?'爆牌!':r.dl&&r.dl.length===2&&r.td===21?'莊家黑傑克!':'莊家贏了,')+'輸掉 '+fmtC(-net)+' 金幣(進射龍門池底)</span>');if(!quiet){sfx(bust?'gong':'casinoLose');bjSay(bust?'bust':r.dl&&r.dl.length===2&&r.td===21?'dbj':'lose','host-2')}}
  else{bjMsg('<span>平手,下注退回</span>');if(!quiet){sfx('chipsClear');bjSay('push','host-1')}}
@@ -3691,14 +3711,14 @@ function renderHome(){migItems();
  renderGacha();if(SAVE.tab==='eq')renderPray();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin||0);
   const s=pstats(1),wi=byId(SAVE.eq.wpn);
   $('slots').innerHTML='<div class="doll"><div class="dcol">'+['head','coat','shoe'].map(slotHtml).join('')+'</div>'+
-   '<div class="dhero hb-'+(heroA()?'a':heroF()?'f':'m')+(ART['bg-hero-m']?' hbon':'')+'"><div class="pw"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div>'+(heroA()?(armorEnsure(),ART['裝甲-doll']?(mshStart(),'<span class="msh"><img src="'+ART['裝甲-doll']+'" alt=""><canvas class="mshc"></canvas></span><span class="mfree">✦ 免費體驗中</span>'):'<span style="font-size:90px">🤖</span>'):icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>'))+'</div>'+
+   '<div class="dhero'+(heroJ()&&ART['bg-hero-j']?' hbj':'')+' hb-'+(heroJ()?'j':heroA()?'a':heroF()?'f':'m')+(ART['bg-hero-m']?' hbon':'')+'"><div class="pw"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div>'+(heroJ()?(jEnsure(),(ART['腎虛-doll2']||ART['腎虛-idle-1'])?'<img class="jdimg'+(ART['腎虛-doll2']?' d2':'')+'" src="'+(ART['腎虛-doll2']||ART['腎虛-idle-1'])+'" alt=""><span class="mfree">✦ 免費體驗中</span>':'<span class="jph"><b>🗡️</b><small>腎虛公子<br>圖片載入中…</small></span><span class="mfree">✦ 免費體驗中</span>'):heroA()?(armorEnsure(),ART['裝甲-doll']?(mshStart(),'<span class="msh"><img src="'+ART['裝甲-doll']+'" alt=""><canvas class="mshc"></canvas></span><span class="mfree">✦ 免費體驗中</span>'):'<span style="font-size:90px">🤖</span>'):icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>'))+'</div>'+
    '<div class="dcol">'+['off','acc1','acc2'].map(slotHtml).join('')+'</div></div>'+
-   '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()||heroA()?'':' class="on"')+'>👔 男主角</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角</button><button data-hero="a"'+(heroA()?' class="on"':'')+'>🤖 恨鐵不成鋼<i class="freeb">免費</i></button></div>'+
-   '<div class="wrrow"><div class="wslot'+(wi&&wi.q>=5?' eqrq rq'+wi.q:'')+'">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name.replace(/^典藏 /,'')+(wi.up?' +'+wi.up:'')+(wi.q>=5?' <span class="rqb rqb'+wi.q+'">'+RAR[wi.q].n+'</span>':''):(heroA()?'空手(裝甲火力)':heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroA()?'三段遠距離火力':heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'&&s.wpn!=='mech'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
+   '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()||heroA()||heroJ()?'':' class="on"')+'>👔 男主角</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角</button><button data-hero="a"'+(heroA()?' class="on"':'')+'>🤖 恨鐵不成鋼<i class="freeb">免費</i></button><button data-hero="j"'+(heroJ()?' class="on"':'')+'>🗡️ 腎虛公子<i class="freeb">新</i></button></div>'+
+   '<div class="wrrow"><div class="wslot'+(wi&&wi.q>=5?' eqrq rq'+wi.q:'')+'">'+(wi?tile(wi,sel===wi.id):'<button class="tile empty" data-f="wpn">⚔️</button>')+'<div><div class="muted">武器</div><div class="wn'+(wi?' t'+wi.q:'')+'">'+(wi?wi.name.replace(/^典藏 /,'')+(wi.up?' +'+wi.up:'')+(wi.q>=5?' <span class="rqb rqb'+wi.q+'">'+RAR[wi.q].n+'</span>':''):(heroJ()?'空手(御劍)':heroA()?'空手(裝甲火力)':heroF()?'空手(用腳踢)':'空手'))+'</div><div class="muted">攻擊方式:'+(heroJ()?'九劍穿梭':heroA()?'三段遠距離火力':heroF()?'三段踢':'三段拳')+(wi&&s.wpn!=='fist'&&s.wpn!=='kick'&&s.wpn!=='mech'&&s.wpn!=='sword9'?' + '+WPN[s.wpn]:'')+'</div></div></div>'+
    (()=>{const R0=SAVE.ride&&RIDES.find(r=>r.id===SAVE.ride),lv=R0?rideLv(R0.id):0;return'<div class="wslot rslot'+(R0?' rq'+R0.q:'')+'" data-goride="1" style="--rc:'+(R0?RAR[R0.q].c:'rgba(255,255,255,.2)')+'"><div class="rimg">'+(R0&&R0.q>=5?'<span class="rqclip"></span><span class="rqs"></span>':'')+(R0&&R0.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+(R0&&ART['ride-'+R0.id]?'<img src="'+ART['ride-'+R0.id]+'" alt="">':'<span>🚲</span>')+'</div><div><div class="muted">座駕</div><div class="wn'+(R0?' t'+R0.q:'')+'">'+(R0?R0.n+' Lv.'+lv+(R0.q>=5?' <span class="rqb rqb'+R0.q+'">'+RAR[R0.q].n+'</span>':''):'尚未裝備座駕')+'</div><div class="muted">'+(R0?rideText(R0,lv):'點這裡去車庫抽代步車')+'</div></div></div>'})()+'</div>';
   const sv2=(k,v)=>'<div class="stat"><span>'+STI[k]+' '+STAT[k].n+'</span><b>'+v+'</b></div>';
   $('pst').innerHTML=sv2('atk',Math.round(s.atk))+sv2('hp',Math.round(s.hp))+sv2('def',Math.round(s.def))+sv2('aspd','+'+Math.round(s.aspd)+'%')+sv2('crit',Math.round(s.crit)+'%')+sv2('spd','+'+Math.round(s.spd)+'%')+sv2('pick','+'+Math.round(s.pick)+'%')+sv2('regen',s.regen.toFixed(1));
-  const sk=Object.entries(s.sk);$('psk').innerHTML=(sk.length?sk.map(([k,l])=>'<span>'+skI(k)+SK[k].n+' Lv.'+Math.min(SKMAX,l)+(l>SKMAX?'<small class="skcap">已達上限,多疊的 '+(l-SKMAX)+' 級沒有效果</small>':'')+'</span>').join(''):'<span class="muted" style="background:none;font-weight:400;padding:0">尚未擁有技能,稀有以上的裝備有機會附帶技能。</span>')+'<p class="pwnote">⚔️ 戰力依照進戰鬥時的實際數值計算:攻擊、攻速、暴擊、技能,搭配生命、防禦、回復,再加上移速、吸取範圍;座駕屬性也算在內,超過上限的部分不算。</p>';
+  const sk=Object.entries(s.sk);$('psk').innerHTML=(sk.length?sk.map(([k,l])=>'<span>'+skI(k)+SK[k].n+' Lv.'+Math.min(SKMAX,l)+(l>SKMAX?'<small class="skcap">已達上限,多疊的 '+(l-SKMAX)+' 級沒有效果</small>':'')+'</span>').join(''):'<span class="muted" style="background:none;font-weight:400;padding:0">尚未擁有技能,稀有以上的裝備有機會附帶技能,技能種類和等級都是隨機的。</span>')+'<p class="pwnote">⚔️ 戰力依照進戰鬥時的實際數值計算:攻擊、攻速、暴擊、技能,搭配生命、防禦、回復,再加上移速、吸取範圍;座駕屬性也算在內,超過上限的部分不算。</p>';
   const all=SAVE.items.filter(i=>!isEq(i));
   $('flt').innerHTML=[['all','全部']].concat(Object.entries(TYPEN)).map(([k,n])=>{const c=k==='all'?all.length:all.filter(i=>i.type===k).length;return'<button data-f="'+k+'" class="'+(flt===k?'on':'')+'">'+n+' '+c+'</button>'}).join('');
   const list=all.filter(i=>flt==='all'||i.type===flt).sort((a,b)=>b.q-a.q||ival(b)-ival(a));
@@ -3720,7 +3740,7 @@ function detail(){
   const slk=eq?Object.keys(SAVE.eq).find(k=>SAVE.eq[k]===it.id):null,sln=slk?(SLOTS.find(x=>x.k===slk)||{}).n:'';
  d.innerHTML='<div class="card"><button id="dclose" data-a="close" aria-label="關閉">×</button><div class="dtag '+(eq?'on':'st')+'">'+(eq?'🧍 身上穿戴中'+(sln?' · '+sln:''):'📦 倉庫裡的裝備')+'</div><div class="ch2" style="background:linear-gradient(120deg,'+RAR[it.q].c+',#1a1f28)"><div class="ic icm mq'+it.q+(it.boss?' bossi':'')+'">'+icon(it.b,it.e)+'</div><div><b>'+it.name+(it.up?' +'+it.up:'')+'</b><small>'+RAR[it.q].n+' '+TYPEN[it.type]+' · 物品等級 '+it.il+(eq?' · 穿戴中':'')+'</small>'+(it.w?'<br><small>攻擊方式:'+WPN[it.w]+'</small>':'')+'</div></div>'+
   (it.egg?'<div class="muted">✨ 生活彩蛋裝備</div>':'')+(it.boss?'<div class="bossnote">👑 首領專屬裝備 · '+((()=>{const bb=BOSSI.find(z=>z.b===it.b);return bb&&BOSS[bb.bi]?BOSS[bb.bi].n:'首領'})())+'掉落</div>':'')+'<ul>'+li+'</ul>'+
-  (it.sk?'<div class="skill">'+skI(it.sk)+'<span>技能「'+SK[it.sk].n+'」Lv.'+it.skl+':'+SK[it.sk].d+'</span></div>':'')+
+  (it.sk?'<div class="skill">'+skI(it.sk)+'<span>技能「'+SK[it.sk].n+'」Lv.'+it.skl+':'+SK[it.sk].d+(it.boss?'':'<small class="sklr">🎲 技能隨機 · '+(RAR[it.q]?RAR[it.q].n:'')+'技能等級 '+sklRange(it.q)+'</small>')+'</span></div>':'')+
   (cmp?'<div class="muted">與目前穿戴相比,戰力 <b class="'+(ds>=0?'up':'down')+'">'+(ds>=0?'+':'')+fmt(ds)+'</b></div>':'')+
   '<div class="tools" style="margin-top:8px">'+(eq?'<button class="btn" data-a="un">卸下</button>':'<button class="btn pri" data-a="eq">裝備</button>')+
   (eq?'':it.lk?'<button class="btn sell" disabled>🔒 已鎖住,解鎖才能賣</button>':'<button class="btn sell" data-a="sell">💰 賣出(+'+sellPrice(it)+' 金幣)</button>')+'<button class="btn lkb'+(it.lk?' on':'')+'" data-a="lock">'+(it.lk?'🔓 解鎖':'🔒 鎖住')+'</button></div>'+(eq?(it.q>=6?'<div class="prayrow"><button class="btn" disabled>👑 已是最高階(典藏)</button></div>':(()=>{const T=PRAYT[it.q];return'<div class="prayrow"><button class="btn pri" data-a="pray"'+(PBUSY||(SAVE.coin||0)<T[0]?' disabled':'')+'>🙏 祈禱升階 '+TIERN[it.q+1]+' → '+TIERN[it.q+2]+'('+fmtC(T[0])+' 金幣)</button><small>成功率 '+Math.round(T[1]*100)+'%'+(T[2]?'｜失敗時 '+Math.round(T[2]*100)+'% 會降一階':'｜失敗不會降階')+' · 越高階越難升</small>'})()+
@@ -3899,6 +3919,10 @@ function growl(f,dur,vol,t0,rate){T('sawtooth',f*1.2,f*.7,dur,vol,t0,{a:.03,vib:
 /* 人聲悶哼 */
 function grunt(f,dur,vol,t0){T('sawtooth',f,f*.62,dur,vol,t0,{a:.01,lp:[1100,450],q:6});T('square',f*2,f*1.2,dur*.7,vol*.25,t0,{a:.01,lp:[1500,600],q:5})}
 const SFX={
+ /* 1009-N 腎虛公子:飛劍音效(程式合成,有音效包時混入揮劍取樣) */
+ jLaunch:()=>{S('tk_swish',.3,0,R_(1.2,1.35));T('sine',2350,2280,.42,.045,0,{rv:.5});T('sine',3560,3480,.36,.03,.01,{rv:.5});T('sine',5150,5050,.28,.02,.02,{rv:.4});N('highpass',2600,6500,.16,.1,1)},
+ jHit:()=>{S('slice',.2,0,R_(1.35,1.6))||N('bandpass',2600,5200,.07,.2,4);T('triangle',R_(1800,2100),1500,.1,.045);T('sine',150,70,.07,.14)},
+ jCast:()=>{[NT(79),NT(86),NT(91)].forEach((f,i)=>T('sine',f,f*1.01,.42,.035,i*.05,{a:.03,rv:.8}));N('bandpass',1500,4200,.28,.08,2,0,.4)},
  /* ---- 武器 ---- */
  punch:()=>{N('bandpass',600,2200,.08,.18,2);T('sine',150,45,.16,.75,.04);N('lowpass',1600,250,.08,.5,1,.04)},
  saber:()=>{T('sawtooth',180,120,.32,.16,0,{a:.02,vib:[34,14],lp:[1800,700],q:3});N('bandpass',700,3200,.22,.32,3);T('sine',95,80,.3,.25,0,{a:.02})},
@@ -4000,7 +4024,7 @@ Object.assign(SFX,{/* 1008-C 動力裝甲 */
  cnZap:()=>{S('tk2_lightning',.28,0,1.35)},
  cnCharge:()=>{T('sine',220,1600,.36,.15,0,{a:.05});T('sawtooth',110,800,.36,.05,0,{a:.05,lp:[800,5000]})},
  cnFire:()=>{const ok=S('laserL',.85,0,.72);S('lowboom',.55,0,1);if(!ok){N('lowpass',4000,180,.6,.8);T('sawtooth',1400,90,.45,.2,0,{lp:[7000,900]})}T('sine',110,35,.6,.5)}});
-const SGAP={mgShot:.03,msLaunch:.12,cnCharge:.3,cnFire:.2,msBoom:.07,mgShell:.12,cnZap:.3,car:.9,coffee:.5,lighter:.15,saberSpin:.3,shieldUp:.5,zbHit:.07,crit:.1,zbDie:.09,xp:.04,penHit:.05,pew:.06,clip:.08,splat:.25,hurt:.3,zbAtk1:.35,zbAtk2:.35,zbAtk3:.35,roulette:.03,drum:.05,boom:.08,punch:.05,saber:.05,pen:.04,flash:.05,item:.06,click:.04,cardFlip:.05,chips:.05};
+const SGAP={jHit:.06,jLaunch:.1,jCast:.5,mgShot:.03,msLaunch:.12,cnCharge:.3,cnFire:.2,msBoom:.07,mgShell:.12,cnZap:.3,car:.9,coffee:.5,lighter:.15,saberSpin:.3,shieldUp:.5,zbHit:.07,crit:.1,zbDie:.09,xp:.04,penHit:.05,pew:.06,clip:.08,splat:.25,hurt:.3,zbAtk1:.35,zbAtk2:.35,zbAtk3:.35,roulette:.03,drum:.05,boom:.08,punch:.05,saber:.05,pen:.04,flash:.05,item:.06,click:.04,cardFlip:.05,chips:.05};
 /* SND 由 sounds.js 載入 */
 /* ===== Kenney 真實音效(CC0)+ 合成音效混用 ===== */
 const SB={};
@@ -4146,9 +4170,9 @@ function initSkills(){
  G.ws={};G.ss={};G.mb=[];G.ms=[];G.mfx=[];G.mcs=[];G.mpf=[];G.evo={};G.wt={};G.lvq=0;G.pd=[];G.dh=[];G.cbD=0;G.wpnB=((SAVE.eq&&byId(SAVE.eq.wpn))||{}).b;G.ep=[];G.ejet=[];G.etel=[];G.e2fx=[];G.shield=0;G.mod=pick(MODS);G.ref=3+(G.mod.ref||0);
  /* 1006-F:空手連擊(男:三段拳/女:三段踢)永遠保留;有裝武器的話,武器技能另外再加一格 */
  if(SAVE.ride==='classic'&&rideLv('classic'))G.shield=(G.shield||0)+1;
- G.ws[heroA()?'mech':heroF()?'kick':'fist']=1;if(G.base.wpn&&G.base.wpn!=='fist'&&G.base.wpn!=='kick'&&G.base.wpn!=='mech')G.ws[G.base.wpn]=1;
+ G.ws[heroA()?'mech':heroJ()?'sword9':heroF()?'kick':'fist']=1;if(G.base.wpn&&G.base.wpn!=='fist'&&G.base.wpn!=='kick'&&G.base.wpn!=='mech'&&G.base.wpn!=='sword9')G.ws[G.base.wpn]=1;
  for(const k in G.base.sk)if(WKEYS.includes(k)&&Object.keys(G.ws).length<6)G.ws[k]=Math.min(5,G.base.sk[k]);
- G.S=runStats();G.hp=G.S.hp;
+ G.S=runStats();G.hp=G.S.hp;G.sw=[];try{if(G.ws.sword9)swInit()}catch(e){}
  const mb=$('modb');mb.innerHTML='<b>'+G.mod.n+'</b><small>'+G.mod.d+'</small>';mb.hidden=false;mb.style.opacity=1;
  setTimeout(()=>{mb.style.opacity=0},3500);setTimeout(()=>{mb.hidden=true},4200);
 }
@@ -4262,6 +4286,7 @@ function combat(dt){
  const rdy=k=>{G.wt[k]=(G.wt[k]||0)-dt;return G.wt[k]<=0};const cd=(k,v)=>{G.wt[k]=v};
  for(const k in G.ws){const lv=G.ws[k],ev=!!G.evo[k];
   if(k==='mech'){mechCombat(lv,A,ar,cdm,rdy,cd);continue}
+  if(k==='sword9'){swordCombat(lv,A,ar,cdm,rdy,cd);continue}
   if(k==='kick'){if(!rdy(k))continue;/* 三段連踢 前踢→側踢→迴旋踢(轉身、打周圍一圈);傷害在腳踢出去那一格才生效 */
    const R=75*ar*(lv>=3?1.2:1),t=nearest(1,R+40)[0];if(!t){G.wt[k]=0;continue}
    if(G.t-(G.cbt||-9)>1.5)G.cb=0;const st=G.cb||0;G.cbs=st;G.cbAt=G.t;G.cbt=G.t;G.cb=(st+1)%3;G.cbD=seqDur(HSEQ.f[st]);
@@ -4621,6 +4646,58 @@ function mechCombat(lv,A,ar,cdm,rdy,cd){
    G.mfx.push({k:'cnn',x:ox,y:oy,a,L,wd,t:0,d:.38});sfx('cnFire');if(nz)sfx('cnZap');shake(5);try{hitStop(.05)}catch(e){}
    for(let i=0;i<NP(14);i++){const r=rnd(30,L);part(ox+cx*r,oy+cy*r,1,{c:'#c8fbff',v0:30,v1:140,l0:.2,l1:.45,s:2.5})}}})}
  cd('mech',M.cdT[st]*cdm*(lv>=5?.6:1))}
+/* ===== 1009-N 新角色「腎虛公子」(SAVE.hero='j'):召喚九把飛劍,在怪物之間來回穿梭斬擊。強度對齊恨鐵不成鋼 ===== */
+const heroJ=()=>!!(typeof SAVE!=='undefined'&&SAVE&&SAVE.hero==='j');
+/* 平衡參數:射程、每次出擊幾把、每把傷害、同一把劍打同一隻的間隔、每次出擊最多穿梭幾隻 */
+const SWJ={n:9,R:400,spd:980,turn:11,dmg:.13,hcd:.32,sortie:3,cdT:.3,orbR:56,launch:3};
+WS.sword9={n:'九劍穿梭',ic:'sk-sword9',d:['召喚九把飛劍,自動在怪物之間來回穿梭斬擊','傷害 +30%','飛行速度 +20%、穿梭範圍 +20%','傷害 +30%','出劍更快、每次多穿梭 2 隻']};
+const ANIMJ={idle:[1,2,3,4,5,6,7,8].map(i=>'腎虛-idle-'+i),run:[1,2,3,4,5,6,7,8].map(i=>'腎虛-run-'+i),atk:[2,3,4,5,6].map(i=>'腎虛-atk-'+i),atk2:[2,3,4,5,6].map(i=>'腎虛-atk-'+i),atk3:[2,3,4,5,6].map(i=>'腎虛-atk-'+i)};
+function jEnsure(){try{if(!ART['腎虛-idle-1']&&typeof ensurePack==='function')ensurePack('jx')}catch(e){}}
+const jArtOK=()=>!!ART['腎虛-idle-1'];
+/* 還沒有正式美術時:技能圖示先用程式畫的暫代圖 */
+(()=>{try{if(ART['sk-sword9'])return;const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');const g=x.createLinearGradient(0,0,128,128);g.addColorStop(0,'#1e3a8a');g.addColorStop(1,'#6d28d9');x.fillStyle=g;x.beginPath();x.roundRect?x.roundRect(4,4,120,120,26):x.rect(4,4,120,120);x.fill();
+ x.translate(64,64);for(let i=0;i<9;i++){x.save();x.rotate(i/9*6.283);x.translate(0,-30);x.rotate(.9);x.fillStyle='#e8f6ff';x.shadowColor='#7fd8ff';x.shadowBlur=8;x.beginPath();x.moveTo(0,-18);x.lineTo(3,10);x.lineTo(-3,10);x.closePath();x.fill();x.fillStyle='#ffd76a';x.fillRect(-5,10,10,3);x.restore()}ART['sk-sword9']=c.toDataURL('image/png')}catch(e){}})();
+function swInit(){G.sw=[];G.jfx=[];if(!G.ws||!G.ws.sword9)return;for(let i=0;i<SWJ.n;i++){const p=swSlot(i);G.sw.push({i,x:p.x,y:p.y,a:p.a,st:0,t:0,tg:null,n:0,pass:0,hit:new Map(),tr:[]})}}
+function swSlot(i){const ph=-Math.PI/2+(i-(SWJ.n-1)/2)*.27,bob=Math.sin(G.t*2.2+i)*3,cx=G.x-G.face*12,cy=G.y-64;return{x:cx+Math.cos(ph)*(SWJ.orbR+bob),y:cy+Math.sin(ph)*(SWJ.orbR+bob)*.85,a:ph}}
+function swNext(s,R){let b=null,bd=R*R;for(const e of G.en){if(e.hp<=0)continue;const h=s.hit.get(e);if(h!=null&&G.t-h<SWJ.hcd*1.2)continue;const d=(e.x-s.x)**2+(e.y-e.r-s.y)**2;if(d<bd){bd=d;b=e}}return b}
+function swordCombat(lv,A,ar,cdm,rdy,cd){
+ if(!G.sw||G.sw.length!==SWJ.n)swInit();
+ if(!rdy('sword9'))return;const R=SWJ.R*ar*(lv>=3?1.2:1),ts=nearest(3,R);if(!ts.length){G.wt.sword9=0;return}
+ const idle=G.sw.filter(s=>s.st===0);if(!idle.length){G.wt.sword9=.05;return}
+ const nL=Math.min(idle.length,SWJ.launch+(lv>=5?2:0));G.face=ts[0].x>=G.x?1:-1;if(G.t-(G.jcast||-9)>.9){G.jcast=G.t;G.atk=ATKD;sfx('jCast')}
+ for(let k=0;k<nL;k++){const s=idle[k],t=ts[k%ts.length];s.st=1;s.t=0;s.tg=t;s.n=SWJ.sortie+(lv>=5?3:0);s.pass=0;s.v=SWJ.spd*(lv>=3?1.2:1);s.dmg=A*SWJ.dmg*(1+.5*((lv>=2)+(lv>=4)))*(lv>=5?1.45:1);s.R=R;s.hc=SWJ.hcd*(lv>=5?.6:1);s.a=Math.atan2(t.y-t.r-s.y,t.x-s.x)+rnd(-.5,.5)}
+ sfx('jLaunch');cd('sword9',SWJ.cdT*cdm*(lv>=5?.6:1))}
+function swTick(dt){if(!G||!G.sw||!G.sw.length)return;if(G.jfx)for(let i=G.jfx.length-1;i>=0;i--){G.jfx[i].t+=dt;if(G.jfx[i].t>=G.jfx[i].d)G.jfx.splice(i,1)}
+ for(const s of G.sw){s.t+=dt;
+  if(s.st===0){const p=swSlot(s.i),k=Math.min(1,dt*12);s.x+=(p.x-s.x)*k;s.y+=(p.y-s.y)*k;s.a+=angD(p.a,s.a)*k;s.tr.length=0;continue}
+  if(s.st===1){
+   if(s.tg&&(s.tg.hp<=0||!G.en.includes(s.tg)))s.tg=null;
+   if(s.pass>0)s.pass-=dt;else if(!s.tg){if(s.n<=0||s.t>4)s.st=2;else{s.tg=swNext(s,s.R*.85);if(!s.tg)s.st=2}}
+   if(s.tg&&s.pass<=0){const w=Math.atan2(s.tg.y-s.tg.r-s.y,s.tg.x-s.x),tr=SWJ.turn*dt;s.a+=Math.max(-tr,Math.min(tr,angD(w,s.a)))}}
+  if(s.st===2){const p=swSlot(s.i),dd=(p.x-s.x)**2+(p.y-s.y)**2,w=Math.atan2(p.y-s.y,p.x-s.x),tr=SWJ.turn*(dd<160*160?3:1.4)*dt;s.a+=Math.max(-tr,Math.min(tr,angD(w,s.a)));if(dd<110*110){const k=Math.min(1,dt*9);s.x+=(p.x-s.x)*k;s.y+=(p.y-s.y)*k}if(dd<40*40||s.t>5){s.st=0;s.tg=null}}
+  const v=(s.st===2?1.25:1)*(s.v||SWJ.spd);
+  for(let q=0;q<3;q++){s.x+=Math.cos(s.a)*v*dt/3;s.y+=Math.sin(s.a)*v*dt/3;
+   if(s.st!==1)continue;
+   for(const e of G.en){if(e.hp<=0)continue;const dx=e.x-s.x,dy=e.y-e.r-s.y;if(dx*dx+dy*dy<(e.r+16)**2){const h=s.hit.get(e);if(h!=null&&G.t-h<(s.hc||SWJ.hcd))continue;s.hit.set(e,G.t);hit(e,s.dmg,40,s.a);
+     sfx('jHit');if(G.jfx&&G.jfx.length<10&&Math.random()<.4)G.jfx.push({x:e.x+rnd(-6,6),y:e.y-e.r*1.3+rnd(-6,6),t:0,d:.18,r:Math.random()*6.28,s:rnd(36,46)});
+     s.n--;if(e===s.tg){s.tg=null;s.pass=.12}if(s.n<=0){s.st=2;break}}}}
+  if(s.hit.size>40){for(const [e,h] of s.hit)if(G.t-h>1)s.hit.delete(e)}
+  s.tr.unshift(s.x,s.y,s.a);if(s.tr.length>21)s.tr.length=21}}
+/* 1009-O 飛劍看得清楚:劍放大、外圈淡藍光暈;拖尾短而淡;打中的閃光縮小 */
+let SWGLOW=null;function swGlow(){if(SWGLOW)return SWGLOW;const c=document.createElement('canvas');c.width=128;c.height=32;const x=c.getContext('2d'),g=x.createRadialGradient(64,16,2,64,16,60);g.addColorStop(0,'rgba(150,225,255,.85)');g.addColorStop(.45,'rgba(110,200,255,.35)');g.addColorStop(1,'rgba(90,180,255,0)');x.fillStyle=g;x.save();x.scale(1,.26);x.beginPath();x.arc(64,61,60,0,6.283);x.fill();x.restore();return SWGLOW=c}
+function swBlade(x,y,a,L,al,glow){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.globalAlpha=al;const im=IMG['腎虛-sword'];
+ if(glow){ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=al*.9;ctx.drawImage(swGlow(),-L*.62,-L*.17,L*1.25,L*.34);ctx.restore()}
+ if(im&&im.complete&&im.naturalWidth){const h=L*im.naturalHeight/im.naturalWidth;ctx.drawImage(im,-L*.55,-h/2,L,h)}
+ else{const g=ctx.createLinearGradient(-L*.5,0,L*.5,0);g.addColorStop(0,'#c9d6e3');g.addColorStop(.6,'#ffffff');g.addColorStop(1,'#d8f3ff');ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(L*.5,0);ctx.lineTo(-L*.18,-3);ctx.lineTo(-L*.18,3);ctx.closePath();ctx.fill();ctx.fillStyle='#ffd76a';ctx.fillRect(-L*.22,-6,4,12);ctx.fillStyle='#7fb7e6';ctx.fillRect(-L*.48,-2,L*.26,4)}
+ ctx.restore()}
+function swDraw(){if(!G||!G.sw||!G.sw.length)return;const L=86,art=jArtOK()&&IMG['腎虛-idle-1']&&IMG['腎虛-idle-1'].naturalWidth,tl=IMG['腎虛-trail'],tok=tl&&tl.complete&&tl.naturalWidth;
+ ctx.save();ctx.globalCompositeOperation='lighter';
+ for(const s of G.sw){if(s.st===0||s.tr.length<6)continue;
+  if(tok){const k=Math.min(s.tr.length-3,9),dx=s.x-s.tr[k],dy=s.y-s.tr[k+1],len=Math.max(24,Math.min(80,Math.hypot(dx,dy))),h=len*tl.naturalHeight/tl.naturalWidth*.8;ctx.save();ctx.translate(s.x-Math.cos(s.a)*L*.5,s.y-Math.sin(s.a)*L*.5);ctx.rotate(s.a);ctx.globalAlpha=.4;ctx.drawImage(tl,-len,-h/2,len,h);ctx.restore()}}
+ const hm=IMG['腎虛-hit'];if(G.jfx&&hm&&hm.complete&&hm.naturalWidth)for(const f of G.jfx){const p=f.t/f.d,S=f.s*(.55+.4*p);ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.r);ctx.globalAlpha=.8*(1-p*p);ctx.drawImage(hm,-S/2,-S/2,S,S);ctx.restore()}
+ ctx.restore();
+ for(const s of G.sw){if(s.st===0&&art)continue;swBlade(s.x,s.y,s.a,s.st===0?L*.7:L,1,s.st!==0)}}
+function jAura(x,y){const pu=.5+.5*Math.sin(G.t*3);ctx.save();ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(x,y-6,0,x,y-6,40);g.addColorStop(0,'rgba(150,215,255,'+(.18+.1*pu)+')');g.addColorStop(1,'rgba(150,215,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x,y-6,40,16,0,0,6.283);ctx.fill();ctx.restore()}
 function mechTick(dt){if(!G||!G.mb)return;
  for(let i=G.mb.length-1;i>=0;i--){const b=G.mb[i];let dead=false;
   for(let s=0;s<2&&!dead;s++){b.x+=b.vx*dt/2;b.y+=b.vy*dt/2;for(const e of G.en){const dx=e.x-b.x,dy=e.y-e.r-b.y;if(dx*dx+dy*dy<(e.r+6)**2){hit(e,b.dmg,35,b.a);if(mxHave()){if(G.mfx.length<90)G.mfx.push({k:'sq',img:'mx-spark',n:5,x:b.x,y:b.y,w:46,t:0,d:.24,add:1,rot:Math.random()*6.28})}else part(b.x,b.y,3,{c:'#ffe58a',v0:80,v1:220,l0:.08,l1:.18,s:2});dead=true;break}}}
@@ -4700,11 +4777,11 @@ function mshTick(){const cv=document.querySelector('.dhero .mshc');if(!cv){mshSt
  const p=t/dur,bx=-W*.7+p*W*2.2,g=x.createLinearGradient(bx,0,bx+W*.6,H*.3);
  g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.42,'rgba(190,250,255,.45)');g.addColorStop(.5,'rgba(255,255,255,.9)');g.addColorStop(.58,'rgba(190,250,255,.45)');g.addColorStop(1,'rgba(255,255,255,0)');
  x.globalCompositeOperation='source-over';x.clearRect(0,0,W,H);x.drawImage(im,0,0,W,H);x.globalCompositeOperation='source-in';x.fillStyle=g;x.fillRect(0,0,W,H);cv._c=1}
-setTimeout(()=>{try{if(heroA())armorEnsure()}catch(e){}},300);
+setTimeout(()=>{try{if(heroA())armorEnsure();if(heroJ())jEnsure()}catch(e){}},300);
 
 const seqDur=s=>s.reduce((a,f)=>a+f[1],0);
-const heroAnim=()=>heroA()?(armorEnsure(),ANIMA):heroF()?(ANIMF.idle.every(k=>IMG[k])&&ANIMF.atk3.every(k=>IMG[k])?ANIMF:ANIM):(ANIMM.idle.every(k=>IMG[k])&&ANIMM.atk3.every(k=>IMG[k])?ANIMM:ANIM);
-const heroIdleKey=()=>heroA()?(armorEnsure(),'裝甲-idle-1'):heroF()&&ART['女主角-idle-1']?'女主角-idle-1':(!heroF()&&ART['男主角-idle-1']?'男主角-idle-1':(HERO_HD?'主角HD-idle-1':'主角動畫-idle-1'));
+const heroAnim=()=>heroJ()?(jArtOK()&&ANIMJ.idle.every(k=>IMG[k])?ANIMJ:(ANIMM.idle.every(k=>IMG[k])&&ANIMM.atk3.every(k=>IMG[k])?ANIMM:ANIM)):heroA()?(armorEnsure(),ANIMA):heroF()?(ANIMF.idle.every(k=>IMG[k])&&ANIMF.atk3.every(k=>IMG[k])?ANIMF:ANIM):(ANIMM.idle.every(k=>IMG[k])&&ANIMM.atk3.every(k=>IMG[k])?ANIMM:ANIM);
+const heroIdleKey=()=>heroJ()&&jArtOK()?'腎虛-idle-1':heroA()?(armorEnsure(),'裝甲-idle-1'):heroF()&&ART['女主角-idle-1']?'女主角-idle-1':(!heroF()&&ART['男主角-idle-1']?'男主角-idle-1':(HERO_HD?'主角HD-idle-1':'主角動畫-idle-1'));
 /* 高清怪物圖的格數(與原本不同時) */
 const HDN={'菜市場大媽喪屍':{walk:6}};
 function hdN(){for(const n in HDN)for(const a in HDN[n]){const k=n+'-'+a+'-1';if(EANIM[n]&&ART[k]&&ART[k].length>9000&&IMG[k]&&IMG[k].src===ART[k]&&ART['__hd_'+n])EANIM[n][a]=Array.from({length:HDN[n][a]},(_,i)=>n+'-'+a+'-'+(i+1))}}
@@ -4725,7 +4802,7 @@ function update(dt){
   G.spawn+=dt*(BAL.spawn+G.t/BAL.spawnG);while(G.spawn>=1){G.spawn--;if(G.en.length<Q.cap)spawn(ENE[pick(ch.pool)],'n')}
   if(G.t>=G.elite){G.elite+=BAL.elite;spawn(ch.elite?ENE[pick(ch.elite)]:pick(ELITE),'elite');toast('精英怪出現!');sfx('eliteRoar')}
  }else if(!G.boss){G.boss=true;const b=BOSS[CH[G.c].boss];if(!b){toast('撐過 3 分鐘,通關!');endRun(true);return}{let n=0;for(const z of G.en)if(z.kind!=='boss'&&z.hp>0){z.hp=0;z.noLoot=true;z.quiet=true;n++}if(n){shake(10);sfx('impact');setTimeout(()=>sfx('ko'),120);G.fx.push({k:'bossclear',t:0,d:1.1});G.combo=0}}/* 1008-W 首領出場,小怪全部倒下 */spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*(CH[G.c].bA||BAL.bossAtk))*mult();bossInit(be);be.b.k=CH[G.c].boss}
-  combat(dt);projectiles(dt);mechTick(dt);
+  combat(dt);projectiles(dt);mechTick(dt);swTick(dt);
  const far=Math.hypot(W,H)*.9;
  for(const e of G.en){
   const dx=G.x-e.x,dy=G.y-e.y,d=Math.hypot(dx,dy)||1;
@@ -4842,11 +4919,11 @@ function drawHero(){
    if(j===HSTRIKE[who][st]){drawImg(FK,'',px-G.face*14,G.y+2,FH,G.face<0,0,.22);drawImg(FK,'',px-G.face*7,G.y+2,FH,G.face<0,0,.35)}
    drawImg(FK,'',px,G.y+2,FH,G.face<0,0,G.hurt>0?.45:1);if(who==='a')mechSheen(FK,px,G.y+2,FH,G.face<0);return}
   if(G.atk>0){arr=AN.atk;i=Math.min(arr.length-1,Math.floor((1-G.atk/ATKD)*arr.length))}
-  else if(G.moving){arr=AN.run;i=Math.floor(G.t*(AN===ANIMF?12:AN===ANIMM?12:AN===ANIMA?13:(HERO_HD?14:13)))%arr.length}
-  else{arr=AN.idle;i=Math.floor(G.t*(AN===ANIMF||AN===ANIMM||AN===ANIMA?6:5))%arr.length}
-  if(AN===ANIMA)mechAura(G.x,G.y);shadow(G.x,G.y,22);
+  else if(G.moving){arr=AN.run;i=Math.floor(G.t*(AN===ANIMJ?12:AN===ANIMF?12:AN===ANIMM?12:AN===ANIMA?13:(HERO_HD?14:13)))%arr.length}
+  else{arr=AN.idle;i=Math.floor(G.t*(AN===ANIMF||AN===ANIMM||AN===ANIMA||AN===ANIMJ?6:5))%arr.length}
+  if(AN===ANIMA)mechAura(G.x,G.y);if(heroJ())jAura(G.x,G.y);shadow(G.x,G.y,22);
   if(G.shield){ctx.strokeStyle='rgba(120,200,255,.8)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(G.x,G.y-50,48,0,Math.PI*2);ctx.stroke()}
-  drawImg(arr[i],'🧑‍💼',G.x,G.y+2,AN===ANIMM?110.4:AN===ANIMA?120:108,G.face<0,0,G.hurt>0?.45:1);if(AN===ANIMA)mechSheen(arr[i],G.x,G.y+2,120,G.face<0);return;
+  drawImg(arr[i],'🧑‍💼',G.x,G.y+2,AN===ANIMJ?126:AN===ANIMM?110.4:AN===ANIMA?120:108,G.face<0,0,G.hurt>0?.45:1);if(AN===ANIMA)mechSheen(arr[i],G.x,G.y+2,120,G.face<0);return;
  }
  const atk=G.atk>0,bob=G.moving&&!atk?Math.abs(Math.sin(G.t*12))*4:0,breathe=!G.moving&&!atk?1+Math.sin(G.t*3)*.02:1;
  let k='主角-待機',rot=0;
@@ -4979,7 +5056,7 @@ function draw(){
   for(const l of G.lob){const p=l.t/l.d,x=l.x0+(l.x1-l.x0)*p,y=l.y0+(l.y1-l.y0)*p-Math.sin(p*Math.PI)*90;
    ctx.strokeStyle='rgba(230,60,40,'+(.25+.5*p)+')';ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();ctx.ellipse(l.x1,l.y1,75*(1.15-.15*p),75*.5*(1.15-.15*p),0,0,6.283);ctx.stroke();ctx.setLineDash([]);
    shadow(x,l.y0+(l.y1-l.y0)*p,10);drawThermos(x,y,p*12)}
-  mechDraw();bossDrawTop();e2DrawTop();if(G.tr)trDrawTop();drawFx();
+  mechDraw();swDraw();bossDrawTop();e2DrawTop();if(G.tr)trDrawTop();drawFx();
  if(G.drops.length)for(const d of G.drops)if(d.it&&(d.it.q>=3||d.boss===2)&&!(d.pt<1)){ctx.fillStyle=d.boss===2?'#ffe27a':RAR[d.it.q].c;ctx.font='bold '+(d.boss===2?14:12)+'px system-ui';ctx.textAlign='center';if(d.boss===2){ctx.strokeStyle='rgba(0,0,0,.8)';ctx.lineWidth=3;ctx.strokeText('★ '+d.it.name,d.x,d.y-120)}ctx.fillText((d.boss===2?'★ ':'')+d.it.name,d.x,d.y-(d.boss===2?120:76))}
  ctx.textAlign='center';ctx.textBaseline='middle';
  for(const f of G.fx)if(f.k==='num'){const p=f.t/f.d,sc=p<.16?(f.cr?2.1:1.6)-(f.cr?1.1:.6)*(p/.16):1,yy=f.y-(1-Math.pow(1-p,2.2))*(f.cr?34:26),fs=Math.round((f.cr?20:13)*sc);
@@ -5175,10 +5252,15 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1009-L';
+const GBUILD='1009-S';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🖐️','21 點新增過五關、帳號保留大小寫','21 點拿到 5 張牌還沒爆牌就直接贏(1 賠 1);換裝置登入時,帳號會照你當初輸入的大小寫顯示,只要輸入密碼就好'],
+['🏮','腎虛公子新立繪、新背景','腎虛公子的裝備頁換上同畫風的新立繪,背景是夜晚的中藥行,角色站在地上的光圈中間'],
+['🗡️','腎虛公子調整','飛劍放大、加上淡藍光暈,拖尾和打中的閃光變小,戰鬥中看得清楚是九把劍在穿梭;強度下修到跟恨鐵不成鋼差不多;裝備頁立繪改成跟戰鬥同畫風'],
+['🗡️','新角色:腎虛公子','新角色「腎虛公子」免費體驗!一臉腎虛的古風公子,召喚九把飛劍在怪物之間來回穿梭斬擊,強度跟恨鐵不成鋼一樣'],
+['🎲','裝備技能更隨機、更多種','首領裝備以外,裝備的技能種類和等級都是隨機的,技能從 3 種增加到 7 種(新增光劍、鋼筆、打火機、相機):稀有 Lv.1~2、傳說 Lv.1~3、神話 Lv.2~3,同品質也有高低,值得一直刷來組技能;祈禱升階有機會順便提升技能等級,不會變低。已經拿到的裝備等級不變'],
 ['📈','股市波動更劇烈','黑心科技、殭屍製藥、芳芳娛樂城、開心農場漲跌變大,新聞更多更猛;新增「📢 大盤新聞」全市場一起暴漲暴跌,以及「🔥 熱度」時段,熱絡時漲跌最多變 3 倍。加班物流、韭菜銀行還是比較穩'],
 ['🔒','裝備可以鎖住、戰鬥 2 倍速','倉庫的裝備可以按「🔒 鎖住」,鎖住的裝備不會被一鍵賣出或單獨賣出;戰鬥中右上角新增「2x」按鈕,開了之後怪物、子彈、時間都變 2 倍快(無限列車不適用)'],
 ['🎨','股市換上新美術','6 家公司都有自己的 logo,股市上方換成交易大廳背景,遊戲場的「股市」分頁也換上新圖示'],
@@ -5194,11 +5276,6 @@ const GNOTES=[
 ['🌱','農場土地位置修正','修正上一版農場土地圖跑位的問題;皮過敏沒站崗時會在小路上呼呼大睡,站崗時才起來巡邏警戒'],
 ['🛡️','皮過敏巡邏新動畫','農場守衛皮過敏站崗時換上新的逐格動畫:扛著長戟搖搖擺擺來回巡邏,走到盡頭會舉手遮眼、左右張望警戒'],
 ['👑','首領戰更順暢','戰鬥場地放大一倍;首領出場時場上小怪全部倒下,打王不再卡頓;首領跑出畫面時,邊緣會有箭頭和距離指引;農場守衛皮過敏站崗時會來回巡邏、停下來警戒'],
-['📱','iPhone 長按不再跳出拷貝','長按道具圖、角色圖或文字時,不會再跳出「拷貝/儲存圖片」選單,也不會反白選取文字;輸入暱稱等欄位照常可以打字'],
-['🚧','戰鬥場地加上邊界','關卡地圖不再無限延伸,四周有黃黑封鎖線,角色和喪屍都不會跑出場外;一線天全服恭喜的通知也改得更簡潔'],
-['🎯','射龍門「一線天」大加碼','門柱中間只差 1 種點數的「一線天」賠率提高到 1 賠 18,射中有專屬慶祝動畫、紀錄金色標示,還會全服恭喜;中間 2 種點數的門也提高到 1 賠 6.5'],
-['🔧','賣出等級選單完整顯示','倉庫的賣出等級選單不會再被切掉,破損到神話六個等級一次全部看得到;下方空間不夠時會自動往上展開'],
-['🧹','倉庫介面整理','一鍵賣出改用等級名稱(破損、普通、優良、稀有、傳說、神話)並標上顏色;「撿到自動賣」整合進一鍵賣出,勾選「撿到也自動賣」就會用同一個等級;音效設定移到上方的 🔊 按鈕;排行榜上每個等級的裝備格大小統一'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -5488,7 +5565,7 @@ async function clRpc(fn,body,keep){const h={apikey:ONLINE.supabaseKey,'Content-T
  if(!r.ok){let t='';try{t=await r.text()}catch(x){}let m='';try{m=JSON.parse(t).message||''}catch(x){m=t}throw{code:'http_'+r.status,msg:m}}const tx=await r.text();return tx?JSON.parse(tx):null}
 const CLERR={'bad user':'帳號要 3~20 個英文字母、數字或底線','bad pass':'密碼要 4~40 個字','taken':'這個帳號已經有人用了,換一個吧','bad login':'帳號或密碼錯誤','bad token':'帳號已在其他裝置登入,請重新登入','too big':'存檔太大,請先賣掉一些裝備'};
 const clMsg=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||'');for(const k in CLERR)if(m.includes(k))return CLERR[k];return/fetch|Load failed|NetworkError/i.test(m)?'連不上伺服器,請檢查網路':'發生錯誤:'+m.slice(0,80)};
-function clSet(u,t){CL.u=u;CL.t=t;try{if(u&&SAVE&&SAVE.acct!==u){SAVE.acct=u;localStorage.setItem(KEY,JSON.stringify(SAVE))}}catch(e){}try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
+function clSet(u,t){CL.u=u;CL.t=t;try{const d=localStorage.getItem('shechu-acctd');if(u&&d&&d.toLowerCase()===u&&SAVE&&SAVE.acctD!==d)SAVE.acctD=d}catch(e){}try{if(u&&SAVE&&SAVE.acct!==u){SAVE.acct=u;localStorage.setItem(KEY,JSON.stringify(SAVE))}}catch(e){}try{if(u)localStorage.setItem('shechu-acct',JSON.stringify({u,t}));else localStorage.removeItem('shechu-acct')}catch(e){}clUI()}
 function clSnap(){return JSON.parse(JSON.stringify(SAVE))}
 function cloudQueue(){if(!CL||!CL.on||!CL.u)return;if(!CL.ready){CL.dirty=true;return}clearTimeout(CL.timer);CL.timer=setTimeout(clFlush,1000)}/* 1007-Z8 進度變動 1 秒後就上傳 */
 /* 防止多裝置互相覆蓋:雲端存檔若被別台裝置寫過,這台就停止上傳並登出 */
@@ -5509,8 +5586,10 @@ async function clFlush(keep){if(!CL||!CL.on||!CL.u||CL.noflush||CL.kicked)return
  CL.busy=false;clUI()}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&CL.u)clFlush(true)});
 function clUI(){const el=$('lgcloud');if(!el)return;try{$('lggo').classList.toggle('lock',!!(CL.on&&!CL.u))}catch(e){}if(!CL.on){el.hidden=true;return}el.hidden=false;
- el.innerHTML=CL.u?'<div class="clst"><div>☁️ 雲端帳號:<b>'+escH(CL.u)+'</b></div><span>'+(CL.err?'<i class="down">'+escH(CL.err)+'</i>':'進度自動同步中')+'</span></div><button class="btn" id="clout">登出</button>'
+ el.innerHTML=CL.u?'<div class="clst"><div>☁️ 雲端帳號:<b>'+escH(acctDisp(CL.u))+'</b></div><span>'+(CL.err?'<i class="down">'+escH(CL.err)+'</i>':'進度自動同步中')+'</span></div><button class="btn" id="clout">登出</button>'
   :'<div class="clst"><div>🔒 <b>需要帳號才能開始</b></div><span>綁定帳號密碼,換手機、換瀏覽器都能接續進度</span></div><div class="clbtns"><button class="btn pri" id="clreg">建立帳號/綁定進度</button><button class="btn" id="clin">登入帳號</button></div>'}
+/* 1009-S 帳號照玩家當初輸入的大小寫顯示 */
+function acctDisp(u){try{const d=localStorage.getItem('shechu-acctd')||(SAVE&&SAVE.acctD)||'';if(d&&u&&d.toLowerCase()===String(u).toLowerCase())return d}catch(e){}return u}
 function clModal(mode,pre){/* 1007-Z5 這台已經綁定帳號、只是被登出時,按「建立帳號」直接改成登入那個帳號 */if(mode==='reg'&&SAVE.acct&&!CL.u){mode='in';pre=pre||SAVE.acct}
  const reg=mode==='reg',ov=document.createElement('div');ov.className='ov clov';
  ov.innerHTML='<div class="box clbox"><h2>'+(reg?'☁️ 建立雲端帳號':'☁️ 登入雲端帳號')+'</h2><p class="muted">'+(reg?'會把<b>這台裝置目前的進度</b>綁定到新帳號,之後在任何裝置登入都能接續。':'登入後會改用<b>雲端帳號的進度</b>。同一個帳號同時只能在一個地方登入,其他裝置會被登出。')+'</p>'+
@@ -5518,11 +5597,11 @@ function clModal(mode,pre){/* 1007-Z5 這台已經綁定帳號、只是被登出
   '<label>密碼<input id="clp" type="password" maxlength="40" autocomplete="'+(reg?'new-password':'current-password')+'" placeholder="'+(reg?'至少 6 個字':'')+'"></label>'+
   (reg?'<label>再輸入一次密碼<input id="clp2" type="password" maxlength="40" autocomplete="new-password"></label><p class="clwarn">⚠️ 沒有綁 Email,<b>忘記密碼無法自己重設</b>,請記好或截圖保存。</p>':'')+
   '<p class="clerr" id="clerr"></p><div class="clbtns"><button class="btn pri" id="clok">'+(reg?'建立並綁定':'登入')+'</button><button class="btn" id="clx">取消</button></div></div>';
- document.body.appendChild(ov);if(pre){$('clu').value=pre;if(!reg&&SAVE.acct===pre)$('clerr').innerHTML='<span style="color:#9fd8ff">這台裝置綁定的帳號是「'+escH(pre)+'」,輸入密碼就能登入</span>'}setTimeout(()=>(pre?$('clp'):$('clu')).focus(),50);
+ document.body.appendChild(ov);if(pre){const pd=acctDisp(pre);$('clu').value=pd;if(!reg&&SAVE.acct===pre)$('clerr').innerHTML='<span style="color:#9fd8ff">這台裝置綁定的帳號是「'+escH(pd)+'」,輸入密碼就能登入</span>'}setTimeout(()=>(pre?$('clp'):$('clu')).focus(),50);
  const err=t=>{$('clerr').textContent=t;sfx('error')},close=()=>{ov.remove()};
  ov.addEventListener('keydown',e=>{if(e.key==='Enter')$('clok').click()});
  $('clx').onclick=close;
- $('clok').onclick=async()=>{const uRaw=$('clu').value.trim(),u=uRaw.toLowerCase(),p=$('clp').value;
+ $('clok').onclick=async()=>{const uRaw=$('clu').value.trim(),u=uRaw.toLowerCase(),p=$('clp').value;try{if(/^[A-Za-z0-9_]{3,20}$/.test(uRaw))localStorage.setItem('shechu-acctd',uRaw)}catch(e){}
   if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<(reg?6:4))return err(reg?'密碼至少要 6 個字':CLERR['bad pass']);
   if(reg&&SAVE.acct&&SAVE.acct!==u){err('');$('clerr').innerHTML='這台裝置的進度已經綁定帳號「'+escH(SAVE.acct)+'」,不能再綁到新帳號。<br>想用新帳號重新開始,可以<button class="btn" id="clreset" style="margin-top:6px;padding:5px 10px;font-size:13px">🧹 清除這台的進度,重新開始</button>';return}
   if(reg&&p!==$('clp2').value)return err('兩次輸入的密碼不一樣');CL.kicked=false;
@@ -5589,7 +5668,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 addEventListener('focus',()=>setTimeout(clCheck,300));
 async function clBoot(){clUI();try{if(CL.u&&SAVE.acct!==CL.u){SAVE.acct=CL.u;save()}}catch(e){}if(!CL.on||!CL.u){CL.ready=true;return}
  let just=false;try{just=sessionStorage.getItem('shechu-justlogin')==='1';sessionStorage.removeItem('shechu-justlogin')}catch(e){}
- if(just){CL.ready=true;CL.gt=Date.now();toast('☁️ 已登入 '+CL.u+',雲端進度載入完成');return}
+ if(just){CL.ready=true;CL.gt=Date.now();toast('☁️ 已登入 '+acctDisp(CL.u)+',雲端進度載入完成');return}
  try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});
   if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
   const ct=r.save?+(r.save._t||r.save_t||0):0,sy=clSyncGet();
@@ -5632,16 +5711,17 @@ var PK={extra:['assets-extra.js?v=1009J',function(){if(window.__artExtra)window.
  stage2:['assets-stage2.js?v=1007B',function(){if(window.__artPack&&window.ART_STAGE2){window.__artPack(window.ART_STAGE2);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
  train:['assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}}],
  herobg:['assets-herobg.js?v=1008G',function(){if(window.__artPack&&window.ART_HEROBG){window.__artPack(window.ART_HEROBG);try{const r=document.documentElement.style;for(const k of ['m','f','a'])if(ART['bg-hero-'+k])r.setProperty('--hbg-'+k,'url('+ART['bg-hero-'+k]+')');if(!$('home').hidden)renderHome()}catch(e){}}}],
- mech:['assets-mech.js?v=1008G',function(){if(window.__artPack&&window.ART_MECH){window.__artPack(window.ART_MECH);try{if(!$('home').hidden)renderHome()}catch(e){}}}]};
-var PKO=['extra','herobg','hero2','hd','boss','cars','stage2','train','mech'],PKS={};/* 1008-D 恨鐵不成鋼的圖放最後背景下載;選了這隻角色才優先 */
+ mech:['assets-mech.js?v=1008G',function(){if(window.__artPack&&window.ART_MECH){window.__artPack(window.ART_MECH);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
+ jx:['assets-jx.js?v=1009R',function(){if(window.__artPack&&window.ART_JX){window.__artPack(window.ART_JX);try{if(ART['bg-hero-j'])document.documentElement.style.setProperty('--hbg-j','url('+ART['bg-hero-j']+')');if(!$('home').hidden)renderHome()}catch(e){}}}]};
+var PKO=['extra','herobg','hero2','hd','boss','cars','stage2','train','mech','jx'],PKS={};/* 1008-D 恨鐵不成鋼的圖放最後背景下載;選了這隻角色才優先 */
 function pkLoad(n,next){if(PKS[n])return;PKS[n]=1;var p=PK[n];add(p[0],function(){try{p[1]()}catch(e){}PKS[n]=2;if(next)setTimeout(next,60)});}
 function pkNext(){for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
 window.ensurePack=function(){for(var i=0;i<arguments.length;i++)if(PK[arguments[i]])pkLoad(arguments[i])};
 function hook(name,fn){var o=window[name];if(typeof o!=='function')return;window[name]=function(){try{fn.apply(this,arguments)}catch(e){}return o.apply(this,arguments)}}
-hook('startRun',function(c){ensurePack('hero2','hd','boss');try{if(SAVE.hero==='a')ensurePack('mech')}catch(e){}if(c===1)ensurePack('stage2');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
+hook('startRun',function(c){ensurePack('hero2','hd','boss');try{if(SAVE.hero==='a')ensurePack('mech');if(SAVE.hero==='j')ensurePack('jx')}catch(e){}if(c===1)ensurePack('stage2');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
 hook('setTab',function(t){if(t==='eq')ensurePack('herobg');if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2')});
 hook('casSwitch',function(t){if(t==='train')ensurePack('train')});
-function go(){try{if(SAVE&&SAVE.hero==='a')pkLoad('mech',pkNext)}catch(e){}pkNext()}
+function go(){try{if(SAVE&&SAVE.hero==='a')pkLoad('mech',pkNext);if(SAVE&&SAVE.hero==='j')pkLoad('jx',pkNext)}catch(e){}pkNext()}
 if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
 </script>
 </body>
