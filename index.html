@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1009-S">
+<meta name="gbuild" content="1009-X">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1756,6 +1756,50 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
  .bjdealer img{height:170px!important;width:146px!important}
 }
 </style>
+<style id="bj1009t">
+/* 1009-T 21 點結果訊息:改成貼牌桌底部往上長,多行(抽稅、連勝)也不會被切掉 */
+.bjmsg{top:auto!important;bottom:6px;width:max-content!important;max-width:94%;box-sizing:border-box;padding:4px 12px;border-radius:12px;background:rgba(0,0,0,.58);box-shadow:0 2px 8px rgba(0,0,0,.45);z-index:4!important;line-height:1.38}
+.bjmsg .bjbig{font-size:18px;line-height:1.25}
+.bjmsg .bjtx{display:inline-block;font-size:12px;line-height:1.35}
+@media(max-width:600px){.bjmsg{font-size:12.5px!important;padding:3px 9px}.bjmsg .bjbig{font-size:16px}.bjmsg .bjtx{font-size:11.5px}}
+</style>
+<style id="lv1009u">
+/* 1009-U 技能選擇上方的武器/補給欄:圖不再跑出格子、等級改成 Lv./MAX/突破(跟暫停畫面一致) */
+.lvslots{gap:8px!important;margin-bottom:12px}
+.lvslots .grp{flex-direction:column;gap:5px!important;padding:6px 8px 8px!important;border-radius:10px!important;background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.09)}
+.lvslots .gl{writing-mode:horizontal-tb!important;margin:0!important;align-self:stretch!important;display:flex;gap:4px;align-items:center;font-size:12.5px!important;font-weight:900;color:#ffd77a;line-height:1.2;white-space:nowrap}
+.lvslots .gl b{font-size:12px}
+.lvslots .gl small{margin-left:auto;font-size:11px;font-weight:700;color:#9aa6b4}
+.lvslots .sls{display:grid;grid-template-columns:repeat(6,36px);gap:4px}
+.lvslots .sl{width:36px!important;height:36px!important;display:block!important;box-sizing:border-box;border:1px solid rgba(255,255,255,.12);border-radius:7px!important;background:rgba(0,0,0,.4)!important;overflow:hidden}
+.lvslots .sl.em{border-style:dashed;border-color:rgba(255,255,255,.1);background:rgba(0,0,0,.2)!important}
+.lvslots .sl img{position:absolute;left:3px;top:2px;width:calc(100% - 6px)!important;height:calc(100% - 15px)!important;object-fit:contain}
+.lvslots .sl i{position:absolute;left:0!important;right:0!important;bottom:0!important;height:13px;line-height:13px;text-align:center;font-style:normal;font-size:10px!important;font-weight:900;letter-spacing:0;color:#fff!important;background:rgba(0,0,0,.75);text-shadow:none!important}
+.lvslots .sl.mx{border-color:#f2b21c;box-shadow:0 0 6px rgba(242,178,28,.45)}
+.lvslots .sl.mx i{color:#3a2600!important;background:linear-gradient(#ffe36a,#f2b21c)}
+.lvslots .sl.ev{border-color:#ff5d8f;box-shadow:0 0 6px rgba(255,93,143,.5)}
+.lvslots .sl.ev i{background:linear-gradient(#ff7aa6,#c2185b)}
+@media(max-width:480px){
+ .lvslots{flex-direction:column;align-items:center;gap:6px!important}
+ .lvslots .grp{flex-direction:row;align-items:center;gap:6px!important;padding:5px 7px!important}
+ .lvslots .gl{flex-direction:column;justify-content:center;align-self:center!important;width:40px;font-size:12px!important;text-align:center;gap:1px}
+ .lvslots .gl small{margin-left:0}
+ .lvslots .sls{grid-template-columns:repeat(6,36px)}
+ .lvslots .sl{width:36px!important;height:36px!important}
+}
+</style>
+<style id="ch1009w">
+/* 1009-W 年終獎金:視窗比較矮時格子自動縮小,電腦版不再出現拉動的邊條 */
+.chgrid{max-width:min(440px,100%,max(220px,calc(100vh - 390px)))!important}
+.chbox,.chres{scrollbar-width:none}.chbox::-webkit-scrollbar,.chres::-webkit-scrollbar{display:none}
+</style>
+<style id="lb1009x">
+/* 1009-X 排行榜「在線玩家」 */
+.lbonb{display:block;width:100%;text-align:left;background:rgba(80,220,140,.08);border:1px solid rgba(80,220,140,.3);border-radius:8px;padding:5px 9px;cursor:pointer;font:inherit;font-size:12px;color:#7ee2a8}
+.lbonb u{float:right;text-decoration:none;font-weight:800;color:#b6ffd3}
+.lbonb:hover{background:rgba(80,220,140,.16)}
+#lbtab button[data-s=online].on{background:linear-gradient(#5fe39a,#1f9d55)!important;color:#fff!important;border-color:#b8ffd0!important}
+</style>
 <style id="stk1009i">
 /* 1009-I 社畜股市 */
 .skup{color:#ff5b5b!important}.skdn{color:#27d07a!important}.skeq{color:#dfe7dc}
@@ -1869,7 +1913,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-S</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-X</span></small>
   </div>
  </div>
 </div>
@@ -2128,7 +2172,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
  <div class="box lbbox">
   <div class="lbh"><h2>🏆 排行榜</h2><button class="btn" id="lbx">關閉</button></div>
   <div class="lbcat" id="lbcat"><button data-c="main" class="on">👔 玩家</button><button data-c="train">🚇 無限列車</button><button data-c="farm">🥬 偷菜</button><button data-c="dragon">🐉 射龍門</button><button data-c="bj">♠️ 21點</button><button data-c="stk">📈 股神</button></div>
-  <div class="lbp" id="lbp-main"><div class="chips lbtab" id="lbtab"><button data-s="coin" class="on">💰 金幣排行</button><button data-s="power">⚔️ 戰力排行</button></div><div class="muted" style="margin:-2px 0 6px;font-size:12px">點玩家可以查看他的完整裝備</div>
+  <div class="lbp" id="lbp-main"><div class="chips lbtab" id="lbtab"><button data-s="coin" class="on">💰 金幣排行</button><button data-s="power">⚔️ 戰力排行</button><button data-s="online">🟢 在線玩家</button></div><div class="muted" style="margin:-2px 0 6px;font-size:12px">點玩家可以查看他的完整裝備</div>
   <div class="lbme" id="lbme"></div>
   <div class="lblist" id="lblist"></div></div>
   <div class="lbp" id="lbp-train" hidden><div class="trbtabs lbsub" id="trtabs"><button data-t="day" class="on">今日</button><button data-t="all">歷史</button></div><div class="trbbody" id="trlb">讀取中…</div></div>
@@ -3532,7 +3576,7 @@ function sbBackend(){const U=ONLINE.supabaseUrl.replace(/\/+$/,''),H={apikey:ONL
  const be={uid,
   set:async p=>{if(LB.rpc===false)return old(p);try{await rpc(p);LB.rpc=true}catch(e){if(e.code==='http_404'&&LB.rpc!==true){LB.rpc=false;return old(p)}
    if(/bad key/.test(String(e.msg||''))&&!be._rot){be._rot=1;uid=lbNewId();be.uid=uid;LB.uid=uid;await rpc(p);return}throw e}},
-  sub:(cb,err)=>{let stop=false,last=0,busy=false;const pull=async()=>{if(stop||busy)return;busy=true;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();last=Date.now();cb(lbDedupe(rows))}catch(e){err&&err(e)}busy=false};
+  sub:(cb,err)=>{let stop=false,last=0,busy=false;const pull=async()=>{if(stop||busy)return;busy=true;try{const r=await fetch(U+'/rest/v1/leaderboard?select=*&order=coin.desc&limit=200',{headers:H});if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const rows=await r.json();last=Date.now();cb(lbDedupe(rows));/* 1009-X 另外抓最近有回報的 100 位,在線玩家不在前 200 名也看得到 */try{const r2=await fetch(U+'/rest/v1/leaderboard?select=*&order=t.desc&limit=100',{headers:H});if(r2.ok){LB.onRows=lbDedupe(await r2.json());if(LB.sort==='online')lbRender()}}catch(x){}}catch(e){err&&err(e)}busy=false};
   const loop=()=>{if(stop)return;const lb=document.getElementById('lbov');if(lb&&!lb.hidden&&document.visibilityState==='visible'&&Date.now()-last>30000)pull();setTimeout(loop,2000)};LB.pullNow=()=>{if(Date.now()-last>3000)pull()};pull();setTimeout(loop,2000);return()=>{stop=true}},
   off:p=>{try{const q=Object.assign({},p,{t:1});(LB.rpc===false?old(q,1):rpc(q,1)).catch(()=>{})}catch(e){}}};return be}
 function lbId(){let id=localStorage.getItem('clockin-lbid');if(!id){id=localStorage.getItem('clockin-uid');if(!id){id='p_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('clockin-uid',id)}localStorage.setItem('clockin-lbid',id)}return id}
@@ -3583,13 +3627,16 @@ const lbOn=r=>r.id===LB.uid||(srvNow()-(+r.t||0))<75000;
 /* 1008-I 戰力排行:還沒用新算法上傳的玩家顯示「待更新」並排在後面 */
 const lbNewPw=()=>LB.rows.some(r=>(+r.pv||0)>=2);const lbPwOk=r=>!lbNewPw()||(+r.pv||0)>=2||r.id===LB.uid;
 const lbPw=r=>lbPwOk(r)?fmt(+r.power||0):'<span class="lbpend">待更新</span>';
+/* 1009-X 在線玩家:前 200 名 + 最近有回報的玩家,合併後只留在線的 */
+function lbOnline(){const m=new Map();for(const r of (LB.rows||[]).concat(LB.onRows||[])){if(!r||!r.id)continue;const o=m.get(r.id);if(!o||(+r.t||0)>(+o.t||0))m.set(r.id,r)}return[...m.values()].filter(lbOn).sort((a,b)=>(b.id===LB.uid)-(a.id===LB.uid)||(+b.coin||0)-(+a.coin||0))}
 async function lbRender(){
- const rows=LB.rows.slice().sort((a,b)=>LB.sort==='power'?((lbPwOk(b)-lbPwOk(a))||(+b.power||0)-(+a.power||0)):(+b[LB.sort]||0)-(+a[LB.sort]||0));
- if(!rows.length){$('lblist').innerHTML='<div class="lbmsg">還沒有人上榜,快來搶第一名!</div>';return}
+ const OL=LB.sort==='online';
+ const rows=OL?lbOnline():LB.rows.slice().sort((a,b)=>LB.sort==='power'?((lbPwOk(b)-lbPwOk(a))||(+b.power||0)-(+a.power||0)):(+b[LB.sort]||0)-(+a[LB.sort]||0));
+ if(!rows.length){$('lblist').innerHTML='<div class="lbmsg">'+(OL?'目前沒有其他玩家在線':'還沒有人上榜,快來搶第一名!')+'</div>';return}
  let ps={};try{if(LB.user&&!LB.sb)ps=await LB.user.profiles(rows.filter(r=>!r.nick).map(r=>r.id))||{}}catch(e){}
- const med=['🥇','🥈','🥉'],onN=rows.filter(lbOn).length;
+ const med=OL?[]:['🥇','🥈','🥉'],onN=OL?rows.length:lbOnline().length;
  const myI=rows.findIndex(r=>r.id===LB.uid);
- $('lblist').innerHTML='<div class="lbonline">🟢 目前在線 '+onN+' 人 · 共 '+rows.length+' 位玩家</div>'+(myI>=0?'<div class="lbmine">🏅 你目前'+(LB.sort==='power'?'戰力':'金幣')+'排第 '+(myI+1)+' 名</div>':'')+rows.map((r,i)=>{const nm=r.nick||(ps[r.id]&&ps[r.id].name)||'神秘玩家';
+ $('lblist').innerHTML=(OL?'<div class="lbonline">🟢 目前在線 <b>'+onN+'</b> 人(依金幣排序,約每 30 秒更新)</div>':'<button class="lbonline lbonb" data-lbon>🟢 目前在線 '+onN+' 人 · 共 '+rows.length+' 位玩家 <u>查看在線玩家 ›</u></button>')+(myI>=0&&!OL?'<div class="lbmine">🏅 你目前'+(LB.sort==='power'?'戰力':'金幣')+'排第 '+(myI+1)+' 名</div>':'')+rows.map((r,i)=>{const nm=r.nick||(ps[r.id]&&ps[r.id].name)||'神秘玩家';
   const eqs=(Array.isArray(r.eq)?r.eq:[]).map(e=>e&&typeof e.b==='string'?lbTile(e.q,ART[e.b],BOSSI.some(x=>x.b===e.b)?'bossi':'',e.n||e.b):'').join('');
   const rd=lbRide(r.ride);
   return'<div class="lbr'+(r.id===LB.uid?' me':'')+(LB.open===r.id?' open':'')+'" data-uid="'+escH(r.id)+'"><div class="rk">'+(med[i]||(i+1))+'</div><div style="min-width:0"><div class="nm">'+escH(nm)+(r.id===LB.uid?' (你)':'')+(lbOn(r)?'<span class="olst on">在線</span>':'<span class="olst">離線</span>')+'<span class="tap">▾ 裝備</span></div>'+((r.id===LB.uid?SAVE.motto:r.motto)?'<div class="mt"><span>'+escH(mottoClean(r.id===LB.uid?SAVE.motto:r.motto))+'</span></div>':'')+'<div class="eqs">'+(eqs||'<span class="muted" style="font-size:12px">沒有裝備</span>')+rd+'</div></div>'+
@@ -3645,7 +3692,8 @@ function lbDet(r){const eq=Array.isArray(r.eq)?r.eq:[];
  return'<div class="lbd">'+items+rd+((typeof FM!=='undefined'&&FM.on&&r.id!==LB.uid)?'<button class="btn lbfarm" data-farm="'+escH(r.id)+'" data-nick="'+escH(r.nick||'')+'">🌾 逛他的農場</button>':'')+'</div>'}
 $('lblist').onclick=e=>{const fb=e.target.closest('[data-farm]');if(fb){fmVisit(fb.dataset.farm,fb.dataset.nick);return}const row=e.target.closest('.lbr');if(!row)return;const id=row.dataset.uid;LB.open=LB.open===id?null:id;
  $('lblist').querySelectorAll('.lbr').forEach(x=>x.classList.toggle('open',x.dataset.uid===LB.open))};
-$('lbtab').onclick=e=>{const b=e.target.closest('[data-s]');if(!b)return;LB.sort=b.dataset.s;$('lbtab').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));lbRender()};
+$('lbtab').onclick=e=>{const b=e.target.closest('[data-s]');if(!b)return;LB.sort=b.dataset.s;$('lbtab').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));lbRender();if(LB.sort==='online'&&LB.pullNow)LB.pullNow()};
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-lbon]');if(!b)return;const x=$('lbtab').querySelector('[data-s=online]');if(x)x.click()});
 function askName(req,cb){NAMECB=cb||null;$('namein').value=SAVE.pname||'';$('namecancel').hidden=!!req;
  $('namehint').innerHTML=req?'進入遊戲前請先取一個名稱,會顯示在排行榜上。<br>之後想改名,到右上角「🏆 排行榜」<br>點<b style="color:#ffcf2e">「修改名稱」</b>即可。':'會顯示在排行榜上,之後隨時可以再修改。';
  $('nameov').hidden=false;setTimeout(()=>$('namein').focus(),50)}
@@ -4205,9 +4253,9 @@ function applyOpt(o){
  refreshStats()}
 const starH=lv=>lv<0?'<b>★★★★★</b>':'<b>'+'★'.repeat(lv)+'</b>'+'★'.repeat(Math.max(0,5-lv));
 function slotsHtml(){
- const w=Object.keys(G.ws),sp=Object.keys(G.ss),cell=(ic,lv,ev)=>'<div class="sl">'+(ic?'<img src="'+ic+'" alt="">':'')+(lv?'<i>'+(ev?'突':lv>=5?'M':lv)+'</i>':'')+'</div>';
+ const w=Object.keys(G.ws),sp=Object.keys(G.ss),cell=(ic,lv,ev,nm)=>'<div class="sl'+(!ic?' em':ev?' ev':lv>=5?' mx':'')+'"'+(nm?' title="'+escH(nm)+'"':'')+'>'+(ic?'<img src="'+ic+'" alt="">':'')+(lv?'<i>'+(ev?'突破':lv>=5?'MAX':'Lv.'+lv)+'</i>':'')+'</div>';
  const g1=[...Array(6)].map((_,i)=>w[i]?cell(wIcon(w[i]),G.ws[w[i]],G.evo[w[i]],wName(w[i])):cell()).join(''),g2=[...Array(6)].map((_,i)=>sp[i]?cell(ART[sp[i]],G.ss[sp[i]],0,sp[i]):cell()).join('');
- return'<div class="grp"><span class="gl">武器</span>'+g1+'</div><div class="grp"><span class="gl">補給</span>'+g2+'</div>'}
+ return'<div class="grp"><span class="gl"><b>⚔️</b>武器<small>'+Math.min(6,w.length)+'/6</small></span><div class="sls">'+g1+'</div></div><div class="grp"><span class="gl"><b>🎒</b>補給<small>'+Math.min(6,sp.length)+'/6</small></span><div class="sls">'+g2+'</div></div>'}
 let CHOOSING=false,CHESTING=false,LVOPTS=[];
 function queueLevel(){G.lvq++;if(!CHOOSING&&!CHESTING)openChoice()}
 function openChoice(){if(!G||G.over||G.lvq<=0)return;CHOOSING=true;running=false;joy=null;LVOPTS=rollOpts(3);renderChoice();$('lvup').hidden=false;sfx('levelUp')}
@@ -4662,7 +4710,7 @@ function swSlot(i){const ph=-Math.PI/2+(i-(SWJ.n-1)/2)*.27,bob=Math.sin(G.t*2.2+
 function swNext(s,R){let b=null,bd=R*R;for(const e of G.en){if(e.hp<=0)continue;const h=s.hit.get(e);if(h!=null&&G.t-h<SWJ.hcd*1.2)continue;const d=(e.x-s.x)**2+(e.y-e.r-s.y)**2;if(d<bd){bd=d;b=e}}return b}
 function swordCombat(lv,A,ar,cdm,rdy,cd){
  if(!G.sw||G.sw.length!==SWJ.n)swInit();
- if(!rdy('sword9'))return;const R=SWJ.R*ar*(lv>=3?1.2:1),ts=nearest(3,R);if(!ts.length){G.wt.sword9=0;return}
+ if(!rdy('sword9'))return;const R=SWJ.R*ar*(lv>=3?1.2:1);let ts=nearest(3,R);if(!ts.length)ts=nearest(3,Math.max(R,Math.hypot(W,H)/2+90));/* 1009-V 近處沒怪時,剛生出來的怪也會鎖定(開場不再發呆) */if(!ts.length){G.wt.sword9=0;return}
  const idle=G.sw.filter(s=>s.st===0);if(!idle.length){G.wt.sword9=.05;return}
  const nL=Math.min(idle.length,SWJ.launch+(lv>=5?2:0));G.face=ts[0].x>=G.x?1:-1;if(G.t-(G.jcast||-9)>.9){G.jcast=G.t;G.atk=ATKD;sfx('jCast')}
  for(let k=0;k<nL;k++){const s=idle[k],t=ts[k%ts.length];s.st=1;s.t=0;s.tg=t;s.n=SWJ.sortie+(lv>=5?3:0);s.pass=0;s.v=SWJ.spd*(lv>=3?1.2:1);s.dmg=A*SWJ.dmg*(1+.5*((lv>=2)+(lv>=4)))*(lv>=5?1.45:1);s.R=R;s.hc=SWJ.hcd*(lv>=5?.6:1);s.a=Math.atan2(t.y-t.r-s.y,t.x-s.x)+rnd(-.5,.5)}
@@ -4684,9 +4732,14 @@ function swTick(dt){if(!G||!G.sw||!G.sw.length)return;if(G.jfx)for(let i=G.jfx.l
   if(s.hit.size>40){for(const [e,h] of s.hit)if(G.t-h>1)s.hit.delete(e)}
   s.tr.unshift(s.x,s.y,s.a);if(s.tr.length>21)s.tr.length=21}}
 /* 1009-O 飛劍看得清楚:劍放大、外圈淡藍光暈;拖尾短而淡;打中的閃光縮小 */
-let SWGLOW=null;function swGlow(){if(SWGLOW)return SWGLOW;const c=document.createElement('canvas');c.width=128;c.height=32;const x=c.getContext('2d'),g=x.createRadialGradient(64,16,2,64,16,60);g.addColorStop(0,'rgba(150,225,255,.85)');g.addColorStop(.45,'rgba(110,200,255,.35)');g.addColorStop(1,'rgba(90,180,255,0)');x.fillStyle=g;x.save();x.scale(1,.26);x.beginPath();x.arc(64,61,60,0,6.283);x.fill();x.restore();return SWGLOW=c}
+let SWGLOW=null;function swGlow(){if(SWGLOW)return SWGLOW;const c=document.createElement('canvas');c.width=192;c.height=64;const x=c.getContext('2d');
+ /* 1009-W 光暈加強:外圈大片淡藍 + 內圈亮白藍芯,2 倍速也看得到 */
+ const e=(rx,ry,st)=>{x.save();x.translate(96,32);x.scale(1,ry/rx);const g=x.createRadialGradient(0,0,0,0,0,rx);st.forEach(s=>g.addColorStop(s[0],s[1]));x.fillStyle=g;x.beginPath();x.arc(0,0,rx,0,6.283);x.fill();x.restore()};
+ e(94,30,[[0,'rgba(140,220,255,.95)'],[.35,'rgba(100,200,255,.6)'],[.7,'rgba(70,170,255,.22)'],[1,'rgba(60,150,255,0)']]);
+ e(70,9,[[0,'rgba(240,252,255,1)'],[.5,'rgba(190,240,255,.75)'],[1,'rgba(150,225,255,0)']]);
+ return SWGLOW=c}
 function swBlade(x,y,a,L,al,glow){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.globalAlpha=al;const im=IMG['腎虛-sword'];
- if(glow){ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=al*.9;ctx.drawImage(swGlow(),-L*.62,-L*.17,L*1.25,L*.34);ctx.restore()}
+ if(glow){const gw=swGlow();ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=al*.75;ctx.drawImage(gw,-L*1.75,-L*.16,L*1.6,L*.32);ctx.globalAlpha=al;ctx.drawImage(gw,-L*.85,-L*.3,L*1.6,L*.6);ctx.restore()}
  if(im&&im.complete&&im.naturalWidth){const h=L*im.naturalHeight/im.naturalWidth;ctx.drawImage(im,-L*.55,-h/2,L,h)}
  else{const g=ctx.createLinearGradient(-L*.5,0,L*.5,0);g.addColorStop(0,'#c9d6e3');g.addColorStop(.6,'#ffffff');g.addColorStop(1,'#d8f3ff');ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(L*.5,0);ctx.lineTo(-L*.18,-3);ctx.lineTo(-L*.18,3);ctx.closePath();ctx.fill();ctx.fillStyle='#ffd76a';ctx.fillRect(-L*.22,-6,4,12);ctx.fillStyle='#7fb7e6';ctx.fillRect(-L*.48,-2,L*.26,4)}
  ctx.restore()}
@@ -5252,10 +5305,15 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1009-S';
+const GBUILD='1009-X';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🟢','排行榜可以看在線玩家','排行榜的玩家分類新增「🟢 在線玩家」:列出目前在線的所有玩家(不在前 200 名也看得到),點玩家一樣可以看裝備;點「目前在線 N 人」也能直接切過去'],
+['✨','飛劍光暈加強、年終獎金不再出現邊條','腎虛公子的飛劍外圈淡藍光加大加亮,劍身後面多一道藍色尾光,開 2 倍速也看得清楚;電腦版視窗比較矮時,年終獎金的格子會自動縮小,不會再跑出拉動的邊條'],
+['🗡️','腎虛公子開場就出劍','腎虛公子的九把飛劍,開場怪一出現就會飛出去攻擊,不用等怪走近才啟動;怪靠近之後一樣優先打附近的,強度不變'],
+['🧩','技能選擇欄位更清楚','升級選技能時,上方的武器/補給欄重新排版:圖示不會再跑出格子,等級改成 Lv.1~Lv.4、滿級顯示金色 MAX、突破顯示粉紅色「突破」,旁邊標示已經拿了幾格(例如 3/6)'],
+['🃏','21 點結果文字完整顯示','21 點贏錢、過五關時,結果訊息(含芳芳抽稅、實拿金額、連勝連敗)改成貼著牌桌底部往上長,加上半透明底,手機和電腦都不會再被切掉一半'],
 ['🖐️','21 點新增過五關、帳號保留大小寫','21 點拿到 5 張牌還沒爆牌就直接贏(1 賠 1);換裝置登入時,帳號會照你當初輸入的大小寫顯示,只要輸入密碼就好'],
 ['🏮','腎虛公子新立繪、新背景','腎虛公子的裝備頁換上同畫風的新立繪,背景是夜晚的中藥行,角色站在地上的光圈中間'],
 ['🗡️','腎虛公子調整','飛劍放大、加上淡藍光暈,拖尾和打中的閃光變小,戰鬥中看得清楚是九把劍在穿梭;強度下修到跟恨鐵不成鋼差不多;裝備頁立繪改成跟戰鬥同畫風'],
@@ -5271,11 +5329,6 @@ const GNOTES=[
 ['♠️','新遊戲:21 點','遊戲場新增 21 點!射龍門池底當莊家:贏的錢從池底拿、輸的錢進池底。黑傑克 1 賠 1.5、可以加倍和分牌,莊家 17 點停牌;排行榜也新增 21 點分類'],
 ['🛡️','報仇沒有特權了','去仇人的農場報仇,一樣會被他的皮過敏守衛擋下,採到的也一樣要繳 20% 贓款稅。皮過敏:「來報仇的也會被我擋下!」'],
 ['🛡️','皮過敏警戒提示修正','皮過敏警戒時頭上的 ❗、👀 和睡覺的 Zzz 不會再被切掉'],
-['🎯','一線天排行榜','排行榜的射龍門分類新增「一線天榜」:射中一線天單把贏最多的前 10 名,金色標示'],
-['🏆','排行榜大整合','戰力、金幣、無限列車、本週偷菜(神偷/苦主)、射龍門都整合到右上角「排行榜」,分類切換;塔羅牌桌放大,抽牌改成全畫面選牌;挑戰書 12 小時沒處理自動取消;皮過敏站崗卡片縮小'],
-['🌱','農場土地位置修正','修正上一版農場土地圖跑位的問題;皮過敏沒站崗時會在小路上呼呼大睡,站崗時才起來巡邏警戒'],
-['🛡️','皮過敏巡邏新動畫','農場守衛皮過敏站崗時換上新的逐格動畫:扛著長戟搖搖擺擺來回巡邏,走到盡頭會舉手遮眼、左右張望警戒'],
-['👑','首領戰更順暢','戰鬥場地放大一倍;首領出場時場上小怪全部倒下,打王不再卡頓;首領跑出畫面時,邊緣會有箭頭和距離指引;農場守衛皮過敏站崗時會來回巡邏、停下來警戒'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
