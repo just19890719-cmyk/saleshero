@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1009-D">
+<meta name="gbuild" content="1009-H">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -393,11 +393,69 @@ section{background:var(--panel);border:1px solid var(--line);border-radius:8px;p
 .lbbox{max-width:620px;width:96vw;box-sizing:border-box;background:linear-gradient(#1c2230,#121620)!important;color:#ebe7dd;max-height:88vh;display:flex;flex-direction:column}
 .lbh{display:flex;justify-content:space-between;align-items:center}.lbh h2{margin:0}
 .lbtab{margin:10px 0 6px}
-.lbcat{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 4px}
+.lbcat{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0 4px}
 .lbcat button{padding:8px 4px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#d8dee6;font-weight:800;font-size:13px;cursor:pointer;white-space:nowrap}
 .lbcat button.on{background:linear-gradient(#ffd75e,#e8a923);color:#2a1a00;border-color:#ffd75e;box-shadow:0 0 10px rgba(255,210,74,.4)}
 .lbp{display:flex;flex-direction:column;min-height:0;flex:1}.lbp[hidden]{display:none}
 .lbp .lbsub{display:flex;gap:6px;margin:8px 0}
+/* 1009-G 21 點賭桌(新美術、壓縮高度) */
+.bjstage{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"pot dealer" "felt felt" "ctl ctl";gap:0 8px;border-radius:18px;overflow:hidden;padding:8px 8px 10px;background:radial-gradient(ellipse at 50% 0,#3a2416,#1a0f09 60%,#100906);border:2px solid #6b4a1e;box-shadow:inset 0 0 40px rgba(0,0,0,.7)}
+.bjstage.art{background:linear-gradient(rgba(16,9,6,.2),rgba(16,9,6,.55) 45%,rgba(16,9,6,.85)),var(--bjroom) center 30%/cover no-repeat}
+.bjpotbox{grid-area:pot;position:relative;z-index:4;align-self:center;justify-self:stretch;display:flex;flex-direction:column;align-items:center;padding:4px 8px;border-radius:12px;background:radial-gradient(ellipse at 50% 0,rgba(255,200,60,.25),rgba(0,0,0,.6) 70%);border:2px solid rgba(255,200,60,.55);box-shadow:0 0 14px rgba(255,180,40,.3)}
+.bjpotbox .dpw{display:flex!important;flex-direction:column!important;align-items:center!important;gap:0}
+.bjpotbox small{font-size:11px;font-weight:800;color:#ffe08a;letter-spacing:.1em}
+.bjpotbox b{font-size:clamp(20px,6vw,30px);font-weight:900;line-height:1.1;background:linear-gradient(#fff6c8,#ffd24a 50%,#ff9c12);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
+.bjpotbox span{font-size:10px;color:#c9d1dc;text-align:center;line-height:1.35}.bjpotbox .bjmax{letter-spacing:0;font-weight:700;color:#ffd9a0;font-size:10.5px;margin-top:1px}
+.bjdealer{grid-area:dealer;position:relative;height:112px;display:flex;align-items:flex-end;justify-content:center}
+.bjdealer img{height:124px;width:auto;object-fit:contain;object-position:bottom;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6));transform:translateY(14px);position:relative;z-index:1}
+.bjdealer .bub{position:absolute;right:0;top:0;left:auto;max-width:100%;font-size:11px;line-height:1.4;transform:none;z-index:3;padding:4px 8px}
+.bjfelt{grid-area:felt;position:relative;z-index:2;aspect-ratio:4/5;max-height:480px;width:100%;overflow:hidden;
+ background:radial-gradient(ellipse at 50% 30%,#2a9058,#16653a 50%,#0c4527 90%);border:10px solid #5a3410;border-top-width:12px;border-radius:20px 20px 46% 46%/20px 20px 16% 16%;
+ box-shadow:inset 0 0 0 2px rgba(255,215,120,.5),inset 0 0 50px rgba(0,0,0,.5),0 8px 20px rgba(0,0,0,.6);box-sizing:border-box;--s:.2;--ox:0;--oy:0}
+.bjfelt.art{background:var(--bjtable) center/cover no-repeat}
+.bjsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.bjfelt.art .bjlines{display:none}
+.bjsvg text{font-weight:900;font-family:Georgia,'Noto Serif TC',serif}.bjsvg .a1{font-size:50px;fill:#f3d98a;letter-spacing:.06em}.bjsvg .a2{font-size:34px;fill:rgba(255,255,255,.7);letter-spacing:.08em}
+.bjabs{position:absolute;left:calc(var(--ox)*1px + 1264*var(--s)*1px);transform:translateX(-50%);z-index:2}
+.bjdlw{top:calc(var(--oy)*1px + 50*var(--s)*1px);display:grid;justify-items:center;gap:3px}
+.bjplw{top:calc(var(--oy)*1px + 700*var(--s)*1px)}
+.bjcircle{top:calc(var(--oy)*1px + 1064*var(--s)*1px);width:calc(388*var(--s)*1px);height:calc(388*var(--s)*1px);transform:translate(-50%,-50%);display:grid;place-items:end center;z-index:1}
+.bjcircle b{position:relative;z-index:2;font-size:12px;color:#fff;background:rgba(0,0,0,.65);padding:0 8px;border-radius:999px;transform:translateY(55%)}
+.bjstack{position:absolute;left:50%;top:50%;width:calc(150*var(--s)*1px);height:calc(150*var(--s)*1px);transform:translate(-50%,-30%)}
+.bjstack i{position:absolute;width:100%;height:100%;border-radius:50%;background:center/contain no-repeat;filter:drop-shadow(0 2px 2px rgba(0,0,0,.6))}
+.bjmsg{top:calc(var(--oy)*1px + 1330*var(--s)*1px);width:94%;min-height:20px;font-size:13px;color:#f2f5f0;line-height:1.45;text-align:center;text-shadow:0 1px 3px #000}
+.bjshoe{position:absolute;top:8px;right:10px;width:calc(150*var(--s)*1px);height:calc(200*var(--s)*1px);min-width:30px;min-height:40px;border-radius:5px 5px 9px 9px;background:linear-gradient(#3a2414,#1f130a);box-shadow:0 4px 8px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,200,90,.35);transform:rotate(-8deg);z-index:2}
+.bjshoe-c{position:absolute;left:12%;right:12%;top:10%;height:62%;border-radius:4px;background:var(--pkback,repeating-linear-gradient(45deg,#8e1b1b 0 6px,#a82626 6px 12px)) center/cover}
+.bjlbl{font-size:11px;color:#d9f0de;background:rgba(0,0,0,.45);padding:0 9px;border-radius:999px}.bjlbl b{color:#fff;font-size:13px}
+.bjhands{display:flex;gap:12px;justify-content:center}
+.bjh{position:relative;display:grid;justify-items:center;padding:3px 4px;border-radius:10px;border:2px solid transparent}
+.bjh.on{border-color:#ffd24a;box-shadow:0 0 14px rgba(255,210,74,.55)}.bjh.bust{opacity:.7}
+.bjcs{display:flex;justify-content:center}
+.bjc{width:calc(232*var(--s)*1px);aspect-ratio:5/7;margin-left:calc(-86*var(--s)*1px);perspective:600px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5))}.bjc:first-child{margin-left:0}
+.bjc.empty{border-radius:7px;border:2px dashed rgba(255,255,255,.3);margin-left:6px;filter:none}.bjc.empty:first-child{margin-left:0}
+.bjt{position:absolute;top:-10px;right:-14px;font-size:12px;font-weight:900;color:#fff;background:rgba(0,0,0,.75);border:1px solid rgba(255,215,120,.6);padding:0 7px;border-radius:999px;white-space:nowrap;z-index:3}.bjh.bust .bjt{color:#ff9a8a}
+.bjbig{font-size:19px;font-weight:900;color:#ffd24a;text-shadow:0 0 12px rgba(255,200,40,.8)}
+.bjtx{color:#ffd9a0}
+.bjctl{grid-area:ctl;display:grid;gap:6px;justify-items:center;margin-top:8px}
+.bjbet{font-size:12px;color:#dfe7dc}
+.bjact .btn small{display:block;font-size:10px;opacity:.85}.bjact .bjgo{min-width:170px}
+.bjsk{font-size:11.5px;color:#c9d1dc}
+.bjflash{position:absolute;inset:0;display:grid;place-content:center;gap:4px;pointer-events:none;animation:bjf 1.9s ease-out both;z-index:5;text-align:center}
+.bjflash b{font-size:34px;color:#ffd24a;text-shadow:0 0 18px rgba(255,200,40,.95),0 3px 0 #7a4a00;letter-spacing:.06em}.bjflash span{color:#fff3c8;font-weight:800}
+@keyframes bjf{0%{opacity:0;transform:scale(.4)}15%{opacity:1;transform:scale(1.08)}25%{transform:scale(1)}80%{opacity:1}100%{opacity:0}}
+@media(max-width:600px){.bjctl .dchips button[data-v]:not(.clr){width:42px!important;height:42px!important}}
+@media(min-width:900px){
+ .bjstage{grid-template-columns:minmax(0,1fr) 250px;grid-template-areas:"dealer pot" "felt ctl";gap:0 12px;padding:6px 12px 12px}
+ .bjdealer{height:118px}.bjdealer img{height:132px}.bjdealer .bub{right:auto;left:calc(50% + 60px);max-width:240px;top:10px}
+ .bjpotbox{align-self:end;margin-bottom:6px}
+ .bjfelt{aspect-ratio:3/2;max-height:none}
+ .bjctl{align-self:stretch;align-content:center;margin:0;padding:12px 8px;border-radius:14px;background:linear-gradient(rgba(42,26,16,.92),rgba(22,13,7,.95));border:2px solid #6b4a1e;box-shadow:inset 0 0 20px rgba(0,0,0,.6)}
+ .bjctl .dchips{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:8px}
+ .bjact{display:grid!important;grid-template-columns:1fr 1fr;gap:6px}.bjact .bjgo{grid-column:1/-1;min-width:0}
+}
+#bjchips.off{opacity:.45;pointer-events:none}
+#bjchips button[data-v="5000"]:not(.clr){background-image:var(--chip1)!important}
+#bjchips button[data-v="50000"]:not(.clr){background-image:var(--chip4)!important;color:#1d1d1d!important;font-size:12px!important}
 .dlbr.g1{border-radius:8px;margin-bottom:3px;background:linear-gradient(90deg,rgba(255,200,40,.28),rgba(255,255,255,.04));border:1px solid rgba(255,210,74,.45)}
 .dlbr.g1 .am{color:#ffd24a}.lbp .lbsub button{flex:1}
 .lbp .trbbody{max-height:none;flex:1;overflow:auto}
@@ -1667,6 +1725,37 @@ html,body{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-
 img,canvas{-webkit-touch-callout:none;-webkit-user-drag:none;user-drag:none}
 input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-user-select:text;user-select:text}
 </style>
+<style id="bj1009h">
+/* 1009-H 21 點重新排版:芳芳參考射龍門放中間、桌面底部不留白、要牌/停牌換顏色 */
+.bjstage{grid-template-columns:1fr!important;grid-template-areas:"top" "felt" "ctl"!important;padding:8px 8px 10px!important}
+.bjtop{grid-area:top;display:flex;flex-direction:column;align-items:center;position:relative;z-index:3;margin-bottom:6px}
+.bjmb{position:relative;z-index:3;background:#fff;color:#222;font-weight:800;font-size:13px;padding:5px 12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.4);max-width:92%;text-align:center;line-height:1.4}
+.bjmb:empty{display:none}
+.bjdealer{grid-area:auto!important;height:auto!important;display:block!important;margin:0 0 -18px;z-index:1;pointer-events:none}
+.bjdealer img{height:150px!important;width:128px!important;object-fit:cover;object-position:50% 0;transform:none!important;-webkit-mask-image:linear-gradient(#000 74%,transparent);mask-image:linear-gradient(#000 74%,transparent);display:block}
+.bjdealer .bub{display:none!important}
+.bjpotbox{grid-area:auto!important;align-self:center!important;flex-direction:row!important;align-items:center!important;gap:10px;padding:6px 20px 6px 8px!important;margin:0!important;border-radius:14px!important;position:relative;z-index:2;background:radial-gradient(ellipse at 50% 0,rgba(255,200,60,.25),rgba(0,0,0,.7) 70%)!important}
+.bjpotbox::before{content:"";width:58px;height:52px;background:var(--potgold) center/contain no-repeat;flex:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5))}
+.bjpotbox b{font-size:clamp(24px,7vw,34px)!important}
+.bjpotbox .dtax:empty{display:none}
+.bjfelt{aspect-ratio:1/1!important;max-height:none!important}
+.bjmsg{top:calc(var(--oy)*1px + 1296*var(--s)*1px)!important;font-size:13.5px;font-weight:700}
+.bjfelt.art{background:var(--bjtable) no-repeat!important;background-size:calc(2528px*var(--s)) auto!important;background-position:calc(var(--ox)*1px) calc(var(--oy)*1px)!important}
+.bjsvg{inset:auto!important;left:calc(var(--ox)*1px)!important;top:calc(var(--oy)*1px)!important;width:calc(2528px*var(--s))!important;height:calc(1696px*var(--s))!important}
+.bjctl{margin-top:8px!important}
+/* 要牌綠、停牌紅、加倍紫、分牌藍:一眼分得出來 */
+#bjact .btn{border-width:2px;text-shadow:0 1px 2px rgba(0,0,0,.45);font-weight:900}
+#bjact [data-bj=hit]{background:linear-gradient(#6fe39a,#1f9d55 60%,#157a40)!important;color:#fff!important;border-color:#b8ffd0!important;box-shadow:0 3px 0 #0d5a2c,0 0 12px rgba(80,220,130,.35)!important}
+#bjact [data-bj=stand]{background:linear-gradient(#ff8a7a,#d8392b 60%,#a8231a)!important;color:#fff!important;border-color:#ffd0c8!important;box-shadow:0 3px 0 #6e140d,0 0 12px rgba(255,90,70,.35)!important}
+#bjact [data-bj=double]{background:linear-gradient(#c79bff,#7b3fd6 60%,#5a2aa8)!important;color:#fff!important;border-color:#e6d2ff!important;box-shadow:0 3px 0 #3a1a70!important}
+#bjact [data-bj=split]{background:linear-gradient(#7fd0ff,#2a7fd0 60%,#1b5c9e)!important;color:#fff!important;border-color:#cdeaff!important;box-shadow:0 3px 0 #103a66!important}
+#bjact .btn:disabled{filter:grayscale(.8) brightness(.7);box-shadow:none!important}
+@media(min-width:900px){
+ .bjstage{grid-template-columns:minmax(0,1fr) 250px!important;grid-template-areas:"top top" "felt ctl"!important;gap:0 12px!important;padding:8px 12px 12px!important}
+ .bjfelt{aspect-ratio:2528/1440!important}
+ .bjdealer img{height:170px!important;width:146px!important}
+}
+</style>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -1704,7 +1793,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-D</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1009-H</span></small>
   </div>
  </div>
 </div>
@@ -1806,7 +1895,7 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
   </div>
   <div class="tab" data-tab="dragon" hidden>
    <section style="margin-top:12px">
-    <div class="castabs" id="castabs"><button data-c="dragon" class="on"><span class="cti" data-k="cards-fan">🃏</span> 射龍門</button><button data-c="train"><span class="cti" data-k="tr-icon">🚇</span> 無限列車</button></div>
+    <div class="castabs" id="castabs"><button data-c="dragon" class="on"><span class="cti" data-k="cards-fan">🃏</span> 射龍門</button><button data-c="train"><span class="cti" data-k="tr-icon">🚇</span> 無限列車</button><button data-c="bj"><span class="cti">♠️</span> 21 點</button></div>
     <div id="casD">
     <h2>射龍門 <span class="muted" style="font-size:13px;font-weight:400">全伺服器共用池底 · 企劃女神芳芳發牌</span></h2>
     <div class="dbox">
@@ -1856,6 +1945,45 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
      </details>
     </div>
     </div>
+    <div id="casJ" hidden>
+    <h2>21 點 <span class="muted" style="font-size:13px;font-weight:400">射龍門池底當莊家 · 企劃女神芳芳發牌</span></h2>
+    <div class="bjstage" id="bjstage">
+     <div class="bjtop"><div class="bjmb" id="bjbub">芳芳:21 點,比誰最接近 21!</div><div class="bjdealer"><img id="bjhost" alt="企劃女神芳芳"></div>
+     <div class="bjpotbox"><div class="dpw"><small>💰 全伺服器池底</small><b id="bjpot">—</b><span id="bjpotst"></span><span id="bjptax" class="dtax"></span><small class="bjmax" id="bjmaxt"></small></div></div></div>
+     <div class="bjfelt" id="bjfelt">
+      <svg class="bjsvg" viewBox="0 0 2528 1696" preserveAspectRatio="none" aria-hidden="true">
+       <g class="bjlines" fill="none" stroke="#e8cf8a" stroke-width="5"><path d="M632,283 Q1264,837 1896,283"/><path d="M632,400 Q1264,878 1896,400"/><circle cx="1264" cy="1064" r="194"/></g>
+       <path id="bjtp1" d="M560,330 Q1264,885 1968,330" fill="none"/><path id="bjtp2" d="M560,452 Q1264,948 1968,452" fill="none"/>
+       <text class="a1"><textPath href="#bjtp1" startOffset="50%" text-anchor="middle">BLACKJACK 黑傑克 1 賠 1.5</textPath></text>
+       <text class="a2"><textPath href="#bjtp2" startOffset="50%" text-anchor="middle">莊家 16 點以下要牌 · 17 點以上停牌 · 平手退回</textPath></text>
+      </svg>
+      <div class="bjshoe" title="發牌盒(6 副牌)"><div class="bjshoe-c"></div></div>
+      <div class="bjdlw bjabs"><div class="bjhand" id="bjdh"></div><div class="bjlbl">莊家 <b id="bjdt"></b></div></div>
+      <div class="bjplw bjabs"><div class="bjhands" id="bjph"></div></div>
+      <div class="bjcircle bjabs" id="bjcircle"><div class="bjstack" id="bjstack"></div><b id="bjbetv">1,000</b></div>
+      <div class="bjmsg bjabs" id="bjmsg">選好籌碼,按「發牌」開始</div>
+     </div>
+     <div class="bjctl">
+      <div class="bjbet"><small class="muted" id="bjbetm"></small></div>
+      <div class="dchips" id="bjchips"><button data-v="1000">1千</button><button data-v="5000">5千</button><button data-v="10000">1萬</button><button data-v="50000">5萬</button><button data-v="-1" class="allin">最大</button><button data-v="0" class="clr">清除</button></div>
+      <div class="dact bjact" id="bjact"></div>
+      <label class="sqskip bjsk"><input type="checkbox" id="bjsqsk"> 跳過 21 點瞇牌動畫</label>
+     </div>
+    </div>
+    <details class="drule dmore" id="bjmy"><summary>📊 我的 21 點戰績</summary><div id="bjmyb"></div></details>
+    <button class="btn lbgo" data-lbc="bj">🏆 21 點排行榜(今日最大 / 黑傑克次數)</button>
+    <details class="drule"><summary>📖 遊戲說明</summary><ol>
+     <li><b>射龍門池底當莊家</b>:贏的錢從池底拿,輸的錢丟進池底。池底滿 <b>2 萬</b>才開桌。</li><li><b>芳芳稅</b>:跟其他收入一樣,21 點贏的錢抽 <b>10%</b> 芳芳稅,丟回射龍門池底。</li><li><b>瞇牌</b>:加倍、或手上 13 點以上再要牌時,新的那張牌會用瞇牌慢慢揭曉(可以設定跳過)。</li>
+     <li><b>下注</b>:最低 1,000,最高是<b>池底的 5%</b>(上限 10 萬)。發牌時芳芳會先從池底保留下注的 2 倍,確保贏了一定領得到。</li>
+     <li><b>點數</b>:2~10 照牌面,J、Q、K 算 10,A 可以算 1 或 11。比莊家更接近 21 點就贏,超過 21 點就「爆牌」直接輸。</li>
+     <li><b>黑傑克</b>:前兩張剛好 21 點(A+10 點牌),<span class="up">1 賠 1.5</span>。一般贏 1 賠 1,平手退回下注。</li>
+     <li><b>要牌 / 停牌</b>:想再拿一張就「要牌」,夠了就「停牌」。拿到 21 點會自動停牌。</li>
+     <li><b>加倍</b>:前兩張的時候可以加倍下注,只再拿一張牌。</li>
+     <li><b>分牌</b>:前兩張點數一樣(10、J、Q、K 都算 10)可以分成兩手,各押一樣的錢。只能分一次,分牌後不能加倍;分 A 各補一張就結束。</li>
+     <li><b>莊家規則</b>:莊家 17 點以上一定停牌,16 點以下一定要牌。莊家前兩張是黑傑克時直接開牌。</li>
+     <li>發牌、牌堆(6 副牌)和莊家的蓋牌都在伺服器上,畫面上看不到下一張牌。牌局 15 分鐘沒動作會自動停牌結算。</li>
+    </ol></details>
+    </div>
    </section>
   </div>
   <div class="tab" data-tab="tarot" hidden>
@@ -1898,12 +2026,13 @@ input,textarea,select,[contenteditable]{-webkit-touch-callout:default;-webkit-us
 <div class="ov" id="lbov" hidden>
  <div class="box lbbox">
   <div class="lbh"><h2>🏆 排行榜</h2><button class="btn" id="lbx">關閉</button></div>
-  <div class="lbcat" id="lbcat"><button data-c="main" class="on">👔 玩家</button><button data-c="train">🚇 無限列車</button><button data-c="farm">🥬 偷菜</button><button data-c="dragon">🐉 射龍門</button></div>
+  <div class="lbcat" id="lbcat"><button data-c="main" class="on">👔 玩家</button><button data-c="train">🚇 無限列車</button><button data-c="farm">🥬 偷菜</button><button data-c="dragon">🐉 射龍門</button><button data-c="bj">♠️ 21點</button></div>
   <div class="lbp" id="lbp-main"><div class="chips lbtab" id="lbtab"><button data-s="coin" class="on">💰 金幣排行</button><button data-s="power">⚔️ 戰力排行</button></div><div class="muted" style="margin:-2px 0 6px;font-size:12px">點玩家可以查看他的完整裝備</div>
   <div class="lbme" id="lbme"></div>
   <div class="lblist" id="lblist"></div></div>
   <div class="lbp" id="lbp-train" hidden><div class="trbtabs lbsub" id="trtabs"><button data-t="day" class="on">今日</button><button data-t="all">歷史</button></div><div class="trbbody" id="trlb">讀取中…</div></div>
   <div class="lbp" id="lbp-farm" hidden><div class="trbtabs lbsub" id="fwbtabs"><button data-t="thieves" class="on">神偷榜</button><button data-t="victims">苦主榜</button></div><div class="trbbody" id="fwbl"></div><small class="muted">每週一 00:00 重新計算</small></div>
+  <div class="lbp" id="lbp-bj" hidden><div class="trbtabs lbsub" id="bjlbt"><button data-t="today" class="on">今日最大一把</button><button data-t="bjc">♠️ 黑傑克次數</button></div><div class="trbbody" id="bjlbb">讀取中…</div></div>
   <div class="lbp" id="lbp-dragon" hidden><div id="dlb"><div class="dlbt lbsub"><button data-l="today" class="on">今日最大一把</button><button data-l="g1">🎯 一線天榜</button><button data-l="hall">💥 全包名人堂</button></div><div id="dlbb" class="trbbody"><div class="muted">讀取中…</div></div></div></div>
  </div>
 </div>
@@ -2397,10 +2526,10 @@ async function dpSettle(kind,amt){if(DP.on){let r;try{r=await dpReq('/rest/v1/rp
 function dpAgo(t){const d=(Date.now()-new Date(t).getTime())/1000;if(!(d>=0))return'';if(d<60)return'剛剛';if(d<3600)return Math.floor(d/60)+' 分鐘前';if(d<86400)return Math.floor(d/3600)+' 小時前';return Math.floor(d/86400)+' 天前'}
 function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==null?'—':fmtC(DP.pot);
  $('dpotst').innerHTML=(DP.err?'<span style="color:#ff9a8a">連線失敗:'+escH(DP.err)+'</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機池底(網頁版才是全伺服器共用)');if($('dptax'))$('dptax').innerHTML=DP.tax!=null?'🧾 今日芳芳稅收 <i>+'+fmtC(DP.tax)+'</i>':'';
- const K={allwin:['💥全包成功','up big','+'],alllose:['💥全包失敗','down','+'],allpost:['💥全包撞柱','down','+'],win:['射中','up','+'],lose:['射偏','down','+'],post:['撞柱','down','+'],fold:['放棄','',''],seed:['芳芳補底','up','+'],ante:['丟底','','']};
+ const K={allwin:['💥全包成功','up big','+'],alllose:['💥全包失敗','down','+'],allpost:['💥全包撞柱','down','+'],win:['射中','up','+'],lose:['射偏','down','+'],post:['撞柱','down','+'],fold:['放棄','',''],seed:['芳芳補底','up','+'],ante:['丟底','',''],bjbj:['♠️黑傑克','up big','+'],bjwin:['♠️21點','up','+'],bjlose:['♠️21點','down','+']};
  /* 1008-J 丟底(ante)紀錄不顯示 */DP.log=(DP.log||[]).filter(r=>r&&r.kind!=='ante');
   $('dlog').innerHTML=DP.log.length?DP.log.map(r=>{const g1=+r.gap===1&&(r.kind==='win'||r.kind==='allwin');const k=g1?['🎯一線天','big g1']:K[r.kind]||[r.kind,'',''];const amt=+r.amount||0;
-  const txt=r.kind==='allwin'?'抱走整個池底 <b class="up">'+fmtC(amt)+'</b>':r.kind==='win'?'贏走 <b class="up">'+fmtC(amt)+'</b>':r.kind==='fold'?'底 '+fmtC(amt)+' 留在池裡':r.kind==='seed'?'補進 <b class="up">'+fmtC(amt)+'</b>':'丟進池裡 <b class="down">'+fmtC(amt)+'</b>';
+  const txt=r.kind==='allwin'?'抱走整個池底 <b class="up">'+fmtC(amt)+'</b>':(r.kind==='win'||r.kind==='bjwin'||r.kind==='bjbj')?'贏走 <b class="up">'+fmtC(amt)+'</b>':r.kind==='fold'?'底 '+fmtC(amt)+' 留在池裡':r.kind==='seed'?'補進 <b class="up">'+fmtC(amt)+'</b>':'丟進池裡 <b class="down">'+fmtC(amt)+'</b>';
   if(g1)return'<div class="dlr big g1"><span class="nm">'+escH(r.nick||'?')+'</span><span class="k big g1">'+k[0]+'</span><span class="tx">🎉 贏走 <b class="up">'+fmtC(amt)+'</b></span><span class="ag">'+dpAgo(r.t)+'</span></div>';
   return'<div class="dlr'+(r.kind==='allwin'?' big':'')+'"><span class="nm">'+escH(r.kind==='seed'?'芳芳':(r.nick||'?'))+'</span><span class="k '+k[1]+'">'+k[0]+'</span><span class="tx">'+txt+'</span><span class="ag">'+dpAgo(r.t)+'</span></div>'}).join(''):'<div class="muted" style="font-size:12px">還沒有人射過,第一槍就是你!</div>'}
 /* ===== 芳芳收稅:戰鬥收成、賣裝備、採收自己的農作物都抽 10%,補進射龍門池底 =====
@@ -2504,14 +2633,14 @@ function dLooksWin(c,bid){const g=DSHAPE[c.r];if(!g)return false;for(let r=1;r<=
 function dTxtCard(c){if(c.r<11)return cardH(c);const red=c.s==='♥'||c.s==='♦',si=SI(c.s);
  return'<div class="pc"><div class="k" style="background-image:url('+ART['pk-back']+')"></div><div class="f '+(red?'red':'blk')+'" style="background-image:url('+ART['pk-front']+')"><span class="r">'+RANKN[c.r]+(si?'<img src="'+si+'" alt="">':'<small>'+c.s+'</small>')+'</span><span class="r2">'+RANKN[c.r]+(si?'<img src="'+si+'" alt="">':'')+'</span>'+(si?'<img class="s" src="'+si+'" alt="'+c.s+'">':'<span class="s">'+c.s+'</span>')+'</div></div>'}
 /* ===== 射龍門:瞇牌動畫(全包=長版,一般射門=短版) ===== */
-function dSqueeze(c,o){o=o||{};const ALL=!!o.allin,SK=ALL?'sqSkip':'sqSkipN',PR=DS.ph==='pair',UP=o.bid==='dhi';return new Promise(done=>{
+function dSqueeze(c,o){o=o||{};const ALL=!!o.allin,SK=o.sk||(ALL?'sqSkip':'sqSkipN'),PR=DS.ph==='pair',UP=o.bid==='dhi';return new Promise(done=>{
  const red=c.s==='♥'||c.s==='♦';const html=dTxtCard(c);
  const ov=document.createElement('div');ov.className='ov sqov';
- ov.innerHTML=(ART['sq-bg']?'<div class="sqbg" style="background-image:url('+ART['sq-bg']+')"></div>':'')+'<div class="sqbox"><div class="sqt">'+(ALL?'💥 全包!':(PR?(UP?'⬆ 猜大 ':'⬇ 猜小 '):'🎯 射門 ')+fmtC(o.bet||0))+'</div>'+
-  '<div class="sqposts"><div class="sqmini">'+cardH(DS.a)+'</div><span>~</span><div class="sqmini">'+cardH(DS.b)+'</div></div>'+
+ ov.innerHTML=(ART['sq-bg']?'<div class="sqbg" style="background-image:url('+ART['sq-bg']+')"></div>':'')+'<div class="sqbox"><div class="sqt">'+(o.title||(ALL?'💥 全包!':(PR?(UP?'⬆ 猜大 ':'⬇ 猜小 '):'🎯 射門 ')+fmtC(o.bet||0)))+'</div>'+
+  (o.mini!=null?'<div class="sqposts">'+o.mini+'</div>':'<div class="sqposts"><div class="sqmini">'+cardH(DS.a)+'</div><span>~</span><div class="sqmini">'+cardH(DS.b)+'</div></div>')+
   '<div class="sqwrap" id="sqw"><div class="sqcard" id="sqc">'+html+'<div class="sqcurl"></div><div class="sqtop" id="sqtop" style="background-image:url('+ART['pk-back']+')"></div></div></div>'+
   '<div class="sqsay" id="sqsay">瞇…</div><div class="sqbtns"><button class="btn pri" id="sqgo">直接開牌</button></div>'+
-  '<label class="sqskip"><input type="checkbox" id="sqsk"'+(SAVE[SK]?' checked':'')+'> '+(ALL?'之後全包跳過瞇牌動畫':'之後一般射門跳過瞇牌動畫')+'</label></div>';
+  '<label class="sqskip"><input type="checkbox" id="sqsk"'+(SAVE[SK]?' checked':'')+'> '+(o.skl||(ALL?'之後全包跳過瞇牌動畫':'之後一般射門跳過瞇牌動畫'))+'</label></div>';
  document.body.appendChild(ov);sfx('cardDeal');
  const card=$('sqc'),pc=card.querySelector('.pc'),k=pc.querySelector('.k'),curl=card.querySelector('.sqcurl');pc.style.animation='none';
  $('sqsk').onchange=e=>{SAVE[SK]=e.target.checked;save()};
@@ -2521,8 +2650,9 @@ function dSqueeze(c,o){o=o||{};const ALL=!!o.allin,SK=ALL?'sqSkip':'sqSkipN',PR=
  const KEY=ALL?[[0,0],[900,0],[2400,.089],[3600,.089],[5000,.097],[6300,.097],[7500,.105],[8700,.105]]:[[0,0],[600,0],[1800,.089],[2800,.089],[4000,.097],[5200,.097]],END=KEY[KEY.length-1][0];
  const val=t=>{for(let i=1;i<KEY.length;i++){const a=KEY[i-1],b=KEY[i];if(t<=b[0]){const u=(t-a[0])/(b[0]-a[0]);const e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;return a[1]+(b[1]-a[1])*e}}return KEY[KEY.length-1][1]};
  const finish=()=>{if(fin)return;fin=true;if(c.r>=11){const op=card.querySelector('.pc');if(op){op.outerHTML=cardH(c);const np=card.querySelector('.pc');if(np)np.style.animation='none'}}top.classList.add('away');card.classList.add('rev');$('sqw').classList.add('rev');sfx('cardFlip');
+  if(o.judge){const J=o.judge(c);card.classList.add(J.good?'win':'lose');$('sqsay').textContent=J.say}else{
   const a=DS.a.r,b=DS.b.r,v=c.r;const good=PR?(v!==a&&(v>a)===UP):(v>a&&v<b);card.classList.add(good?'win':'lose');
-  $('sqsay').textContent=good?(PR?'猜對了!!!':'中了!!!'):v===a||v===b?'撞柱…':(PR?'猜錯了…':'射偏了…');
+  $('sqsay').textContent=good?(PR?'猜對了!!!':'中了!!!'):v===a||v===b?'撞柱…':(PR?'猜錯了…':'射偏了…')}
   setTimeout(()=>{ov.classList.add('out');setTimeout(()=>{ov.remove();done()},260)},1100)};
  $('sqgo').onclick=()=>{audioUnlock();finish()};
  const step=now=>{if(fin)return;const t=now-t0;set(val(t));
@@ -2897,6 +3027,127 @@ async function duSend(){if(!SOC.on()){toast('網頁版才能發挑戰書');retur
 /* 挑戰書:停在賭場「無限列車」頁時每 3 秒自動更新;其他頁面每 60 秒更新一次(紅點提醒用) */
 setInterval(()=>{try{if(!SOC.on()||!SAVE||$('home').hidden||document.visibilityState!=='visible')return;const onT=SAVE.tab==='dragon'&&SAVE.cas==='train';if(onT||Date.now()-DU.t>60000)duLoad(true)}catch(e){}},3000);
 setTimeout(()=>{try{if(SOC.on())duLoad(true)}catch(e){}},6000);
+/* ===== 1009-E 21 點:射龍門池底當莊家(伺服器發牌,單機版用同一套規則) ===== */
+const BJ={min:1000,cap:100000,open:20000,bet:1000,r:null,busy:false,srv:null,err:'',shown:{d:0,p:[0,0]},lb:'today'};
+const bjMax=()=>Math.max(0,Math.min(BJ.cap,Math.floor((DP.pot||0)*0.05/100)*100));
+const bjTot=h=>{let t=0,a=0;for(const c of h||[]){const r=c%13+1;if(r===1){a++;t+=11}else t+=r>=10?10:r}while(t>21&&a>0){t-=10;a--}return t};
+const bjVal=c=>{const r=c%13+1;return r===1?11:r>=10?10:r};
+const bjSoft=h=>{let t=0,a=0;for(const c of h||[]){const r=c%13+1;if(r===1){a++;t+=11}else t+=r>=10?10:r}while(t>21&&a>0){t-=10;a--}return a>0&&t<=21};
+const BJL={/* 單機引擎(測試版 / 沒連線):規則跟伺服器 bj_deal / bj_act 一模一樣 */
+ cards:h=>(h||[]).map(c=>({r:c%13+1,s:Math.floor(c/13)%4})),
+ view(R){if(!R)return null;const h=R.cur===2?R.h2:R.h1,two=!R.done&&h&&h.length===2;
+  return{id:R.id,bet:R.bet,done:R.done,net:R.net,res:R.res,cur:R.cur,dbl:R.dbl1,h1:this.cards(R.h1),h2:R.h2?this.cards(R.h2):null,t1:bjTot(R.h1),t2:R.h2?bjTot(R.h2):null,
+   dl:this.cards(R.done?R.dl:R.dl.slice(0,1)),td:bjTot(R.done?R.dl:R.dl.slice(0,1)),
+   can:{hit:!R.done,stand:!R.done,double:two&&!R.h2&&R.cur===1,split:two&&!R.h2&&R.cur===1&&bjVal(R.h1[0])===bjVal(R.h1[1])},pot:dpLocal().dpot}},
+ settle(R){if(R.done)return;const pnat=!R.h2&&R.h1.length===2&&bjTot(R.h1)===21,dnat=R.dl.length===2&&bjTot(R.dl)===21;let net=0,kind;
+  if(pnat||dnat){net=pnat&&dnat?0:pnat?Math.floor(R.bet*1.5):-R.bet;kind=pnat&&!dnat?'bjbj':net<0?'bjlose':'bjpush'}
+  else{const alive=bjTot(R.h1)<=21||(R.h2&&bjTot(R.h2)<=21);if(alive)while(bjTot(R.dl)<17){R.dl.push(R.deck[R.pos]);R.pos++}
+   const td=bjTot(R.dl);[R.h1,R.h2].forEach((h,i)=>{if(!h)return;const t=bjTot(h),b=i===0&&R.dbl1?R.bet*2:R.bet;if(t>21)net-=b;else if(td>21||t>td)net+=b;else if(t<td)net-=b});
+   kind=net>0?'bjwin':net<0?'bjlose':'bjpush'}
+  const S=dpLocal();S.dpot=S.dpot+R.reserve-net;R.done=true;R.net=net;R.res={bjbj:'bj',bjwin:'win',bjlose:'lose',bjpush:'push'}[kind];
+  if(kind!=='bjpush')dpLocalLog(kind,Math.abs(net),S.dpot);save()},
+ deal(bet,coin){const S=dpLocal();if(SAVE.bjr&&!SAVE.bjr.done)return Object.assign(this.view(SAVE.bjr),{resume:true});
+  if(S.dpot<BJ.open)throw{msg:'pot_small'};const mx=Math.min(BJ.cap,Math.floor(S.dpot*.05/100)*100);if(!(bet>=BJ.min&&bet<=mx))throw{msg:'bad_bet'};if((coin||0)<bet)throw{msg:'poor'};
+  let d;if(window.__BJDECK&&window.__BJDECK.length){d=window.__BJDECK.map(r=>(r-1)+13*Math.floor(Math.random()*4));window.__BJDECK=null;const f=[...Array(312).keys()].sort(()=>Math.random()-.5);d=d.concat(f)}
+  else{d=[...Array(312).keys()];for(let i=d.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[d[i],d[j]]=[d[j],d[i]]}}
+  S.dpot-=2*bet;const R=SAVE.bjr={id:Date.now(),bet,reserve:2*bet,deck:d,pos:4,h1:[d[0],d[2]],h2:null,dl:[d[1],d[3]],cur:1,dbl1:false,done:false};
+  if(bjTot(R.h1)===21||bjTot(R.dl)===21)this.settle(R);save();return this.view(R)},
+ act(a,coin){const R=SAVE.bjr;if(!R)throw{msg:'bad round'};if(R.done)return this.view(R);let h=R.cur===2?R.h2:R.h1,fin=false,st=false;
+  if(a==='hit'){h.push(R.deck[R.pos++]);if(bjTot(h)>=21)fin=true}
+  else if(a==='stand')fin=true;
+  else if(a==='double'){if(!(!R.h2&&R.cur===1&&h.length===2))throw{msg:'cant_double'};if((coin||0)<2*R.bet)throw{msg:'poor'};R.dbl1=true;h.push(R.deck[R.pos++]);fin=true}
+  else if(a==='split'){if(!(!R.h2&&R.cur===1&&h.length===2&&bjVal(h[0])===bjVal(h[1])))throw{msg:'cant_split'};if((coin||0)<2*R.bet)throw{msg:'poor'};
+   R.h2=[h[1],R.deck[R.pos+1]];h=R.h1=[h[0],R.deck[R.pos]];R.pos+=2;if(h[0]%13===0)st=true;else if(bjTot(h)>=21)fin=true}
+  else throw{msg:'bad act'};
+  if(fin&&!st){if(R.cur===1&&R.h2){R.cur=2;if(bjTot(R.h2)>=21)st=true}else st=true}
+  if(st)this.settle(R);save();return this.view(R)},
+ state(){return SAVE.bjr?this.view(SAVE.bjr):null}};
+const bjOn=()=>DP.on&&BJ.srv!==false;
+async function bjRpc(fn,b){return dpReq('/rest/v1/rpc/'+fn,b)}
+const bjErr=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||''),c=String((e&&e.code)||'');if(/pot_small/.test(m))return'池底不到 '+fmtC(BJ.open)+',芳芳先休息。先去射龍門把池底養大吧!';if(/bad_bet/.test(m))return'下注要在 '+fmtC(BJ.min)+' ~ '+fmtC(bjMax())+' 之間(池底的 5%)';if(/poor/.test(m))return'金幣不夠';if(/cant_split/.test(m))return'這手不能分牌';if(/cant_double/.test(m))return'這手不能加倍';if(/404|PGRST2|does not exist|function/i.test(c+m))return'21 點需要伺服器更新,請管理員執行 1009-E 的 SQL';return'連線失敗,稍後再試'};
+const BJS={deal:['發牌囉!','來,看看你的手氣','池底就是我的本錢,放馬過來'],bj:['黑傑克!今天你是贏家','A 配 10 點,漂亮!','哇,天生 21 點!'],bust:['爆了…貪心不足蛇吞象','超過 21 點囉','下次見好就收'],dbust:['我爆了!算你好運','哎呀,莊家爆牌','這把讓你贏'],win:['贏了,池底被你挖走一塊','好牌!','漂亮的停牌'],lose:['莊家贏,錢我收下了','差一點點','池底謝謝你的貢獻'],push:['平手,錢退給你','一樣大,再來一局'],dbj:['莊家黑傑克,不好意思囉'],split:['分牌!兩手一起拚'],double:['加倍!有膽識'],idle:['21 點,比誰最接近 21!','要牌還是停牌,全看你的膽量','莊家 17 點一定停牌喔']};
+function bjSay(k,pose){const t=pickL(BJS[k]||BJS.idle);if($('bjbub'))$('bjbub').textContent='芳芳:'+t;if($('bjhost'))$('bjhost').src=HI(pose||'host-1','fd')}
+const bjBack=()=>'<div class="pc" style="animation:none"><div class="k" style="transform:none;background-image:url('+ART['pk-back']+')"></div></div>';
+function bjCard(c,isNew,d){const h=cardH({r:c.r,s:SUITS[c.s]||SUITS[0]},d||0);return isNew?h:h.replace('<div class="pc" style="animation-delay:','<div class="pc" style="animation:none;transform:rotateY(180deg);animation-delay:')}
+function bjHandH(cards,old,tot,on,tag,dbl){return'<div class="bjh'+(on?' on':'')+(tot>21?' bust':'')+'"><div class="bjcs">'+cards.map((c,i)=>'<div class="bjc">'+bjCard(c,i>=old,(i-old)*.18)+'</div>').join('')+'</div><div class="bjt">'+(tag?tag+' · ':'')+(tot>21?'爆牌 '+tot:tot)+(dbl?' · 加倍':'')+'</div></div>'}
+const BJWH=1440;function bjLayout(){const f=$('bjfelt');if(!f||!f.offsetWidth)return;const W=f.clientWidth,H=f.clientHeight,k=Math.max(W/2528,H/BJWH);f.style.setProperty('--s',k.toFixed(5));f.style.setProperty('--ox',((W-2528*k)/2).toFixed(1));f.style.setProperty('--oy',Math.min(0,(H-BJWH*k)/2).toFixed(1))}
+addEventListener('resize',()=>{try{bjLayout()}catch(e){}});
+function bjStack(v){const C=[[100000,'chip4'],[10000,'chip3'],[5000,'chip1'],[1000,'chip2']];let h='',n=0;for(const [d,k] of C){let c=Math.floor(v/d);v-=c*d;while(c-->0&&n<8){h+='<i style="background-image:var(--'+k+');bottom:'+(n*5)+'px;left:'+((n%2)*3-1)+'px"></i>';n++}}return h}
+function bjRender(){const r=BJ.r,act=$('bjact');if(!act)return;bjLayout();$('bjpot').textContent=DP.pot==null?'—':fmtC(DP.pot);const mx=bjMax();
+ $('bjpotst').innerHTML=DP.err?'<span style="color:#ff9a8a">連線失敗</span>':DP.on?'🟢 全伺服器即時共用':'🟡 單機池底(網頁版才是全伺服器共用)';$('bjptax').innerHTML=DP.tax!=null?'🧾 今日芳芳稅收 <i>+'+fmtC(DP.tax)+'</i>':'';if($('bjsqsk'))$('bjsqsk').checked=!!SAVE.sqSkipB;
+ $('bjmaxt').textContent=(DP.pot||0)<BJ.open?'池底不到 '+fmtC(BJ.open)+',暫停開桌':'本把最多押 '+fmtC(mx)+'(池底 5%)';
+ const inHand=r&&!r.done;if(!inHand){BJ.bet=Math.max(BJ.min,Math.min(BJ.bet,mx||BJ.min))}
+ {const bv=inHand?r.bet*(r.dbl?2:1)*(r.h2?2:1):BJ.bet;$('bjbetv').textContent=fmtC(bv);$('bjstack').innerHTML=bjStack(bv)}$('bjbetm').textContent=(inHand?(r.h2?'分牌兩手各押 '+fmtC(r.bet)+' · ':r.dbl?'已加倍 · ':''):'')+'身上 '+fmtC(SAVE.coin||0)+' 金幣';
+ $('bjchips').classList.toggle('off',!!inHand||BJ.busy);
+ if(r){const sh=BJ.shown;const dh=r.dl.map((c,i)=>'<div class="bjc">'+bjCard(c,i>=sh.d,(i-sh.d)*.18+.1)+'</div>').join('')+(!r.done&&r.dl.length===1?'<div class="bjc">'+bjBack()+'</div>':'');
+  $('bjdh').innerHTML='<div class="bjcs">'+dh+'</div>';$('bjdt').textContent=r.done?(r.td>21?'爆牌 '+r.td:r.td):r.td+' + ?';
+  $('bjph').innerHTML=bjHandH(r.h1,sh.p[0],r.t1,!r.done&&r.cur===1&&!!r.h2,r.h2?'第 1 手':'',r.dbl)+(r.h2?bjHandH(r.h2,sh.p[1],r.t2,!r.done&&r.cur===2,'第 2 手'):'');
+  BJ.shown={d:r.done?r.dl.length:1,p:[r.h1.length,r.h2?r.h2.length:0]}}
+ else{$('bjdh').innerHTML='<div class="bjcs"><div class="bjc empty"></div><div class="bjc empty"></div></div>';$('bjdt').textContent='';$('bjph').innerHTML='<div class="bjh"><div class="bjcs"><div class="bjc empty"></div><div class="bjc empty"></div></div><div class="bjt">你</div></div>'}
+ const dis=BJ.busy?' disabled':'',coin=SAVE.coin||0;
+ if(inHand){const c=r.can;act.innerHTML='<button class="btn pri" data-bj="hit"'+(dis||(!c.hit?' disabled':''))+'>👆 要牌</button><button class="btn pri" data-bj="stand"'+(dis||(!c.stand?' disabled':''))+'>✋ 停牌</button>'+
+  '<button class="btn" data-bj="double"'+(dis||(!c.double||coin<r.bet?' disabled':''))+'>💰 加倍<small>+'+fmtC(r.bet)+'</small></button>'+(c.split?'<button class="btn" data-bj="split"'+(dis||(coin<r.bet?' disabled':''))+'>✂️ 分牌<small>+'+fmtC(r.bet)+'</small></button>':'')}
+ else act.innerHTML='<button class="btn pri bjgo" data-bj="deal"'+(dis||((DP.pot||0)<BJ.open||coin<BJ.bet?' disabled':''))+'>🃏 '+(r?'再來一局':'發牌')+'<small>押 '+fmtC(BJ.bet)+'</small></button>';
+ try{if($('bjmy').open)bjMyRender()}catch(e){}}
+function bjMsg(h){$('bjmsg').innerHTML=h}
+/* 開牌結果:先扣的本金 + 輸贏一起入帳(重新整理也不會漏算) */
+function bjFinish(r,quiet){const P=SAVE.bjPend;if(!P||P.id!==r.id)return;const gross=+r.net||0,tx=gross>0?taxIncome(gross):0;/* 1009-F 贏的錢跟其他收入一樣抽 10% 芳芳稅,丟回池底 */const back=P.st+gross-tx;SAVE.coin=Math.max(0,(SAVE.coin||0)+back);delete SAVE.bjPend;r.tax=tx;
+ const s=SAVE.bjs=SAVE.bjs||{n:0,w:0,l:0,p:0,bj:0,net:0,big:0,bigL:0,stk:0,maxW:0,maxL:0,dbl:0,spl:0};s.n++;const net=(+r.net||0)-(r.tax||0);s.net+=net;
+ if(r.res==='bj')s.bj++;if(net>0){s.w++;s.big=Math.max(s.big,net);s.stk=s.stk>0?s.stk+1:1}else if(net<0){s.l++;s.bigL=Math.max(s.bigL,-net);s.stk=s.stk<0?s.stk-1:-1}else{s.p++}s.maxW=Math.max(s.maxW,s.stk);s.maxL=Math.max(s.maxL,-s.stk);
+ save();renderHome();try{dqAdd('cas')}catch(e){}
+ const bust=r.t1>21&&(!r.h2||r.t2>21);
+ if(r.res==='bj'){bjMsg('<span class="bjbig">♠️ 黑傑克!</span><br><span class="up">從池底贏走 '+fmtC(gross)+' 金幣(1 賠 1.5)</span>'+bjTaxT(r));if(!quiet){sfx('fan4');bjSay('bj','host-4');bjFlash()}}
+ else if(net>0){bjMsg('<span class="up">'+(r.td>21?'莊家爆牌!':'你贏了!')+'從池底贏走 '+fmtC(gross)+' 金幣</span>'+bjTaxT(r));if(!quiet){sfx('casinoWin');bjSay(r.td>21?'dbust':'win','host-4')}}
+ else if(net<0){bjMsg('<span class="down">'+(bust?'爆牌!':r.dl&&r.dl.length===2&&r.td===21?'莊家黑傑克!':'莊家贏了,')+'輸掉 '+fmtC(-net)+' 金幣(進射龍門池底)</span>');if(!quiet){sfx(bust?'gong':'casinoLose');bjSay(bust?'bust':r.dl&&r.dl.length===2&&r.td===21?'dbj':'lose','host-2')}}
+ else{bjMsg('<span>平手,下注退回</span>');if(!quiet){sfx('chipsClear');bjSay('push','host-1')}}
+ if(s.stk>=3)bjMsg($('bjmsg').innerHTML+'<br><span class="dstk hot">🔥 連勝 '+s.stk+' 局</span>');else if(s.stk<=-3)bjMsg($('bjmsg').innerHTML+'<br><span class="dstk cold">🥶 連敗 '+(-s.stk)+' 局</span>');
+ try{dpRefresh()}catch(e){}}
+const bjTaxT=r=>r.tax>0?'<br><small class="bjtx">🧾 芳芳抽稅 10%:'+fmtC(r.tax)+'(丟回池底),實拿 '+fmtC((+r.net||0)-r.tax)+'</small>':'';
+function bjFlash(){const f=document.createElement('div');f.className='bjflash';f.innerHTML='<b>♠️ BLACKJACK</b><span>黑傑克 1 賠 1.5</span>';document.querySelector('#bjfelt').appendChild(f);setTimeout(()=>f.remove(),1900)}
+function bjApply(r){if(r&&r.pot!=null)DP.pot=+r.pot;BJ.r=r;bjRender();if(r&&r.done)bjFinish(r)}
+async function bjCall(fn){if(BJ.busy)return null;BJ.busy=true;bjRender();let r=null;try{r=await fn();BJ.err=''}catch(e){BJ.busy=false;sfx('error');const m=bjErr(e);toast('♠️ '+m);bjMsg('<span class="down">'+escH(m)+'</span>');if(/伺服器更新/.test(m))BJ.srv=false;bjRender();return null}BJ.busy=false;return r}
+async function bjDeal(){const bet=BJ.bet,coin=SAVE.coin||0,mx=bjMax();if((DP.pot||0)<BJ.open){toast('♠️ '+bjErr({msg:'pot_small'}));sfx('error');return}if(bet>mx||bet<BJ.min){toast('♠️ '+bjErr({msg:'bad_bet'}));sfx('error');return}if(coin<bet){toast('♠️ 金幣不夠,押 '+fmtC(bet)+' 需要 '+fmtC(bet)+' 金幣');sfx('error');return}
+ audioUnlock();const r=await bjCall(()=>bjOn()?bjRpc('bj_deal',{p_id:lbId(),p_key:fmKey(),p_nick:dpNick(),p_bet:bet,p_coin:coin}):BJL.deal(bet,coin));if(!r)return;
+ if(r.resume){toast('♠️ 你還有一局沒打完,接回上一局');if(!SAVE.bjPend||SAVE.bjPend.id!==r.id){SAVE.bjPend={id:r.id,st:r.bet*(r.dbl?2:1)*(r.h2?2:1)};SAVE.coin=Math.max(0,(SAVE.coin||0)-SAVE.bjPend.st);save();renderHome()}}
+ else{SAVE.bjPend={id:r.id,st:bet};SAVE.coin=Math.max(0,coin-bet);save();renderHome();BJ.shown={d:0,p:[0,0]}}
+ [0,.18,.36,.54].forEach(t=>setTimeout(()=>sfx('cardDeal'),t*1000));sfx('chips');bjSay('deal','host-1');bjMsg(r.done?'':'要牌還是停牌?');
+ setTimeout(()=>{if(r.done)bjFinish(r)},r.done?900:0);DP.pot=r.pot!=null?+r.pot:DP.pot;BJ.r=r;bjRender();if(r.done){/* 開局就有黑傑克:等翻牌動畫 */}}
+async function bjAct(a){const r0=BJ.r;if(!r0||r0.done)return;const coin=SAVE.coin||0;if((a==='double'||a==='split')&&coin<r0.bet){toast('♠️ 金幣不夠,'+(a==='double'?'加倍':'分牌')+'要再押 '+fmtC(r0.bet));sfx('error');return}
+ audioUnlock();const r=await bjCall(()=>bjOn()?bjRpc('bj_act',{p_id:lbId(),p_key:fmKey(),p_round:r0.id,p_act:a,p_coin:coin+(SAVE.bjPend?SAVE.bjPend.st:0)}):BJL.act(a,coin+(SAVE.bjPend?SAVE.bjPend.st:0)));if(!r)return;
+ if((a==='double'||a==='split')&&SAVE.bjPend&&SAVE.bjPend.id===r.id){SAVE.bjPend.st+=r0.bet;SAVE.coin=Math.max(0,coin-r0.bet);save();renderHome();sfx('chips');bjSay(a,'host-4')}
+ if((a==='hit'||a==='double')&&!SAVE.sqSkipB){const hi=r0.cur===2?'h2':'h1',old=r0[hi]||[],nh=r[hi]||[],pre=bjTot(old.map(c=>(c.r-1)+13*c.s));
+  if(nh.length===old.length+1&&(a==='double'||pre>=13)){const nc=nh[nh.length-1],cc={r:nc.r,s:SUITS[nc.s]||SUITS[0]};
+   const mini=old.map(c=>'<div class="sqmini">'+cardH({r:c.r,s:SUITS[c.s]||SUITS[0]})+'</div>').join('')+'<span>'+pre+' 點 +</span>';
+   await dSqueeze(cc,{sk:'sqSkipB',skl:'之後 21 點跳過瞇牌動畫',title:(a==='double'?'💰 加倍 ':'👆 要牌 ')+(r0.h2?'第 '+r0.cur+' 手':''),mini,judge:()=>{const t=bjTot(nh.map(c=>(c.r-1)+13*c.s));return{good:t<=21,say:t===21?'21 點!!!':t<=21?'安全!'+t+' 點':'爆牌…'+t+' 點'}}});
+   if(hi==='h1')BJ.shown.p[0]=nh.length;else BJ.shown.p[1]=nh.length}}
+ sfx(a==='stand'?'tab':'cardDeal');if(!r.done)bjMsg(r.h2?'第 '+r.cur+' 手:要牌還是停牌?':'要牌還是停牌?');
+ if(r.done&&r.dl.length>1)setTimeout(()=>sfx('tarotFlip'),150);bjApply(r)}
+/* 打開 21 點:接回進行中的牌局,或補上離線時自動結算的結果 */
+async function bjSync(){try{await dpFetch()}catch(e){}let r=null;try{r=bjOn()?await bjRpc('bj_state',{p_id:lbId(),p_key:fmKey()}):BJL.state()}catch(e){if(/404|PGRST2|function/i.test(String((e&&e.code)||'')+String((e&&e.msg)||'')))BJ.srv=false}
+ if(r&&r.done){if(SAVE.bjPend&&SAVE.bjPend.id===r.id){BJ.r=r;BJ.shown={d:r.dl.length,p:[r.h1.length,r.h2?r.h2.length:0]};bjRender();bjFinish(r,true);toast('♠️ 上一局已經自動結算:'+(r.net>0?'贏 '+fmtC(r.net):r.net<0?'輸 '+fmtC(-r.net):'平手'))}else if(!BJ.r){}}
+ else if(r){if(!SAVE.bjPend||SAVE.bjPend.id!==r.id){SAVE.bjPend={id:r.id,st:r.bet*(r.dbl?2:1)*(r.h2?2:1)};SAVE.coin=Math.max(0,(SAVE.coin||0)-SAVE.bjPend.st);save();renderHome()}BJ.r=r;BJ.shown={d:1,p:[r.h1.length,r.h2?r.h2.length:0]};bjMsg('接回上一局:要牌還是停牌?')}
+ bjRender()}
+function bjArt(){try{const R=document.documentElement.style;if(ART['pk-back'])R.setProperty('--pkback','url('+ART['pk-back']+')');if(ART['bj-table']){R.setProperty('--bjtable','url('+ART['bj-table']+')');$('bjfelt').classList.add('art')}if(ART['bj-room']){R.setProperty('--bjroom','url('+ART['bj-room']+')');$('bjstage').classList.add('art')}if(!ART['bj-table']&&typeof ensurePack==='function')try{ensurePack('extra')}catch(e){}}catch(e){}}
+function bjPanel(){bjArt();setTimeout(()=>{bjArt();bjLayout()},1500);{const s0=$('bjhost').getAttribute('src');if(!s0||s0===ART['host-1'])$('bjhost').src=HI('host-1','fd')}if(!BJ.r)bjSay('idle','host-1');bjRender();bjSync()}
+$('bjchips').onclick=e=>{const b=e.target.closest('[data-v]');if(!b||BJ.busy||(BJ.r&&!BJ.r.done))return;const v=+b.dataset.v,mx=bjMax(),coin=SAVE.coin||0;audioUnlock();
+ if(v===0)BJ.bet=BJ.min;else if(v<0)BJ.bet=Math.max(BJ.min,Math.min(mx,Math.floor(coin/100)*100));else{const nb=(BJ.bet===BJ.min&&!BJ.add?0:BJ.bet)+v;BJ.bet=Math.min(nb,mx,Math.max(BJ.min,Math.floor(coin/100)*100))}
+ BJ.add=v>0;BJ.bet=Math.max(BJ.min,BJ.bet);sfx(v===0?'chipsClear':'chips');bjRender()};
+$('bjsqsk').onchange=e=>{SAVE.sqSkipB=e.target.checked;save()};
+$('bjact').onclick=e=>{const b=e.target.closest('[data-bj]');if(!b||b.disabled)return;const a=b.dataset.bj;if(a==='deal')bjDeal();else bjAct(a)};
+function bjMyRender(){const s=SAVE.bjs||{n:0,w:0,l:0,p:0,bj:0,net:0,big:0,bigL:0,stk:0,maxW:0,maxL:0};const pct=(a,b)=>b?Math.round(a/b*100)+'%':'—';
+ $('bjmyb').innerHTML='<div class="dmy"><div><small>局數</small><b>'+fmtC(s.n)+'</b></div><div><small>勝率(不含平手)</small><b>'+pct(s.w,s.w+s.l)+'</b></div><div><small>累計輸贏</small><b class="'+(s.net>=0?'up':'down')+'">'+(s.net>=0?'+':'')+fmtC(s.net)+'</b></div><div><small>♠️ 黑傑克</small><b>'+s.bj+' 次</b></div>'+
+ '<div><small>單局最大贏</small><b class="up">+'+fmtC(s.big)+'</b></div><div><small>單局最大輸</small><b class="down">−'+fmtC(s.bigL)+'</b></div><div><small>勝 / 負 / 平</small><b>'+s.w+' / '+s.l+' / '+s.p+'</b></div><div><small>最長連勝 / 連敗</small><b>'+s.maxW+' / '+s.maxL+'</b></div></div>'}
+$('bjmy').addEventListener('toggle',()=>{if($('bjmy').open)bjMyRender()});
+/* 21 點排行榜 */
+const BJLB={d:null,t:0};
+async function bjLbRender(){const el=$('bjlbb');if(!el)return;document.querySelectorAll('#bjlbt button').forEach(b=>b.classList.toggle('on',b.dataset.t===BJ.lb));
+ try{if(!BJLB.d||Date.now()-BJLB.t>30000){if(DP.on)BJLB.d=await bjRpc('bj_board',{});else{const L=SAVE.dlog||[],d0=dLbDay(),c={};L.filter(r=>r.kind==='bjbj'&&Date.now()-new Date(r.t)<7*864e5).forEach(r=>{c[r.nick]=c[r.nick]||{nick:r.nick,n:0,t:r.t};c[r.nick].n++});
+   BJLB.d={today:L.filter(r=>(r.kind==='bjwin'||r.kind==='bjbj')&&r.t>=d0).sort((a,b)=>b.amount-a.amount).slice(0,10),bjc:Object.values(c).sort((a,b)=>b.n-a.n).slice(0,10)}}BJLB.t=Date.now()}}
+ catch(e){el.innerHTML='<p class="muted">'+escH(bjErr(e))+'</p>';return}
+ const rows=(BJLB.d&&BJLB.d[BJ.lb])||[],med=['🥇','🥈','🥉'],me=dpNick();
+ el.innerHTML=rows.length?rows.map((r,i)=>'<div class="trbr'+(r.nick===me?' me':'')+'"><span class="rk">'+(med[i]||(i+1))+'</span><span class="nm">'+escH(r.nick||'?')+'</span><span class="am">'+(BJ.lb==='today'?'+'+fmtC(+r.amount||0):(+r.n||0)+' 次')+'</span><small>'+(BJ.lb==='today'?(r.kind==='bjbj'?'♠️ 黑傑克 · ':'')+dpAgo(r.t):'最近一次 '+dpAgo(r.t))+'</small></div>').join('')+'<p class="muted" style="font-size:11px;margin:6px 0 0">'+(BJ.lb==='today'?'今天(台灣時間)21 點單局贏最多的前 10 名':'近 7 天拿到黑傑克最多次的前 10 名')+'</p>'
+  :'<p class="muted">'+(BJ.lb==='today'?'今天還沒有人在 21 點贏錢,第一個就是你!':'這週還沒有人拿到黑傑克')+'</p>'}
+$('bjlbt').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;BJ.lb=b.dataset.t;sfx('tab');bjLbRender()};
 /* ===== 塔羅 ===== */
 const TAROT=[['0','愚者','🃏','新的開始正在展開,帶著純真與好奇心踏出第一步,不必害怕未知','行事過於魯莽衝動,缺乏計畫,小心因一時興起而付出代價',4,2],
  ['I','魔術師','🪄','你已擁有所需的資源與能力,只要專注行動,就能把想法化為現實','才能尚未發揮,或身邊有人言行不一,需留意表面話語背後的意圖',5,2],
@@ -2994,8 +3245,8 @@ function lbSync(now){clearTimeout(LB.t);LB.t=setTimeout(async()=>{
  LB.busy=false;if(!LB.ro&&JSON.stringify(lbPayload())!==LB.last)lbSync()},now?300:2500)}
 /* 1008-Z 排行榜分類:玩家(金幣/戰力)、無限列車、偷菜、射龍門 */
 let LBC='main';
-function lbCat(c){LBC=c;document.querySelectorAll('#lbcat button').forEach(b=>b.classList.toggle('on',b.dataset.c===c));['main','train','farm','dragon'].forEach(k=>{const p=$('lbp-'+k);if(p)p.hidden=k!==c});
- try{if(c==='train'){document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===TRLB.tab));trLbInto($('trlb'),TRLB.tab)}else if(c==='farm')fwbRender(true);else if(c==='dragon')dLbRender()}catch(e){}}
+function lbCat(c){LBC=c;document.querySelectorAll('#lbcat button').forEach(b=>b.classList.toggle('on',b.dataset.c===c));['main','train','farm','dragon','bj'].forEach(k=>{const p=$('lbp-'+k);if(p)p.hidden=k!==c});
+ try{if(c==='train'){document.querySelectorAll('#trtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===TRLB.tab));trLbInto($('trlb'),TRLB.tab)}else if(c==='farm')fwbRender(true);else if(c==='dragon')dLbRender();else if(c==='bj')bjLbRender()}catch(e){}}
 $('lbcat').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');lbCat(b.dataset.c)};
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-lbc]');if(!b)return;audioUnlock();const c=b.dataset.lbc;lbOpen();lbCat(c)});
 function lbOpen(){$('lbov').hidden=false;sfx('open');if(LBC!=='main')lbCat(LBC);
@@ -4632,10 +4883,14 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1009-D';
+const GBUILD='1009-H';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['🃏','21 點排版更清爽','芳芳回到牌桌正上方(跟射龍門一樣),池底改成金罐橫條;牌桌下方不再留一大片空白;要牌換成綠色、停牌換成紅色、加倍紫色,一眼就分得出來'],
+['🎨','21 點牌桌換上新美術','21 點換上絨布牌桌和賭場包廂背景,牌、下注圈、桌布字都對齊桌面金線;整體排版縮短,手機一個畫面就看得到牌桌和按鈕'],
+['🎰','21 點牌桌改版','21 點換成真正的賭桌:芳芳站在桌後發牌、弧形的「BLACKJACK 1 賠 1.5」桌布字、下注圈疊籌碼;全伺服器池底和今日芳芳稅收也顯示在桌邊;要牌、加倍也有瞇牌動畫;21 點贏錢跟射龍門一樣抽 10% 芳芳稅,丟進池底'],
+['♠️','新遊戲:21 點','遊戲場新增 21 點!射龍門池底當莊家:贏的錢從池底拿、輸的錢進池底。黑傑克 1 賠 1.5、可以加倍和分牌,莊家 17 點停牌;排行榜也新增 21 點分類'],
 ['🛡️','報仇沒有特權了','去仇人的農場報仇,一樣會被他的皮過敏守衛擋下,採到的也一樣要繳 20% 贓款稅。皮過敏:「來報仇的也會被我擋下!」'],
 ['🛡️','皮過敏警戒提示修正','皮過敏警戒時頭上的 ❗、👀 和睡覺的 Zzz 不會再被切掉'],
 ['🎯','一線天排行榜','排行榜的射龍門分類新增「一線天榜」:射中一線天單把贏最多的前 10 名,金色標示'],
@@ -4652,10 +4907,6 @@ const GNOTES=[
 ['👑','首領裝備賣出前再確認','賣出首領專屬裝備時會多跳一次確認;一鍵賣出如果清單裡有首領裝備,可以選「一起賣掉」或「保留首領裝備」'],
 ['🚇','無限列車不限次數、金幣 1.5 倍','無限列車取消每天 5 場有獎次數,每一場都給金幣;每班金幣與撐完獎金再提高 1.5 倍(每班 18/24/36/48/60,撐完 +1,500)'],
 ['💰','賣出可以選到紅框','「一鍵賣出」和「撿到自動賣」都新增黃金框、紅框選項;選黃金框以上會再跟你確認一次,首領專屬裝備不會被自動賣掉'],
-['📢','池底公告不再洗版','射龍門池底要滿 50 萬金幣才會發公告,而且每 30 分鐘最多一次'],
-['🎁','年終獎金開獎變快','輪盤轉得更快(大約 1 秒);轉的時候可以按「⏩ 跳過動畫」直接看結果;開完 3 秒自動繼續戰鬥'],
-['🎯','戰鬥中不再被通知擋住','戰鬥中撿到裝備、自動賣出改成右上角戰利品欄的小字;射龍門池底公告、農場被偷、搶收公告、仇人作物成熟、新版本提醒等,都會等你打完回到首頁才跳出;戰鬥中的提示改成畫面上方的小條,也不會擋住手指拖曳'],
-['🤖','撿到裝備自動賣出','裝備頁的倉庫上方可以設定「撿到自動賣」:關閉、黑框、銀框以下、綠框以下、藍框以下。戰鬥中撿到這些框的裝備會直接換成金幣(一樣扣芳芳稅 10%),倉庫不會再一下就塞滿;首領專屬裝備永遠不會被自動賣掉。預設是黑框'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -4781,7 +5032,7 @@ if($('sbchips'))$('sbchips').onclick=e=>{const b=e.target.closest('[data-v]');if
  if(v===-1)SBS.bet=Math.max(1000,mx);else if(v===0)SBS.bet=1000;else SBS.bet=Math.min(Math.max(1000,mx),SBS.bet+v);audioUnlock();sfx(v?'chips':'chipsClear');renderSib()};
 if($('sbgo'))$('sbgo').onclick=()=>sbPlay();
 const SIB_CLOSED=true;
-function casSwitch(k){if(k==='sib'||(k!=='dragon'&&k!=='train'))k='dragon';SAVE.cas=k;$('casD').hidden=k!=='dragon';if($('casT'))$('casT').hidden=k!=='train';if(k==='train'){try{trPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
+function casSwitch(k){if(k==='sib'||(k!=='dragon'&&k!=='train'&&k!=='bj'))k='dragon';SAVE.cas=k;$('casD').hidden=k!=='dragon';if($('casT'))$('casT').hidden=k!=='train';if($('casJ'))$('casJ').hidden=k!=='bj';if(k==='bj'){try{bjPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='train'){try{trPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
 document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});
 $('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');casSwitch(b.dataset.c)};
 setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
@@ -5080,7 +5331,7 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
 /* 1008-A 資源檔依需要的順序一個一個載入(原本 7 個同時下載互搶頻寬);用到的功能會插隊先載 */
-var PK={extra:['assets-extra.js?v=1008X',function(){if(window.__artExtra)window.__artExtra()}],
+var PK={extra:['assets-extra.js?v=1009G',function(){if(window.__artExtra)window.__artExtra()}],
  hero2:['assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)}],
  hd:['assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)}],
  boss:['assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)}],
