@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z31">
+<meta name="gbuild" content="1010-Z34">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2058,7 +2058,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z31</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z34</span></small>
   </div>
  </div>
 </div>
@@ -5822,7 +5822,7 @@ const JRD=[{n:'小翼龍',m:2,w:42,sp:[110,150],sz:70,img:'jr-d1'},{n:'美頜龍
  {n:'甲龍',m:10,w:11,sp:[60,80],sz:108,img:'jr-d4'},{n:'劍龍',m:20,w:8,sp:[55,72],sz:122,img:'jr-d5'},{n:'三角龍',m:40,w:5.5,sp:[50,66],sz:134,img:'jr-d6'},
  {n:'暴龍',m:100,w:2.6,sp:[44,58],sz:176,img:'jr-d7',drop:5},{n:'暴龍王',m:300,w:1,sp:[38,50],sz:216,img:'jr-d8',drop:6},{n:'黃金霸王龍',m:0,w:.3,sp:[50,64],sz:190,img:'jr-gold',jack:.03}];
 /* 1010-Z30 子彈改成 10~1000(玩家身上普遍不到 10 萬);網子半徑跟著子彈金額變大 */
-const JRBET=[10,50,100,500,1000],JRNR=[40,48,58,72,88],JRTH=8e6,JRDROP=.2,JRSK=['droar','ddash','dfossil','dmeteor','drage','dthorn'];
+const JRBET=[10,50,100,500,1000],JRNR=[52,62,75,94,114],/* 1010-Z34 網子 ×1.3 */JRTH=8e6,JRDROP=.2,JRSK=['droar','ddash','dfossil','dmeteor','drage','dthorn'];
 const JR={open:false,bi:2,auto:false,d:[],b:[],fx:[],fire:false,aim:null,cd:0,t:0,sv:0,raf:0,W:0,H:0,spT:0};
 /* 1010-Z24 四人同場:座位 0~3 = 紅藍綠紫,大家都在下方一排;自己的砲台永遠在下方 */
 const JRC=['#ff5a5a','#4da6ff','#52e88a','#c77dff'],JRCN=['紅','藍','綠','紫'];
@@ -5833,13 +5833,13 @@ const jrDropP=(q,bet)=>{const i=Math.max(0,JRBET.indexOf(bet));try{return JDS[i]
 function jrDir(s,x,y){let a=Math.atan2(y-jrSY(),x-jrSX(s));const lo=-Math.PI+.12,hi=-.12;if(a>0)a=a>Math.PI/2?lo:hi;return Math.max(lo,Math.min(hi,a))}
 function jrFire(s,a,bet,g){const L=jrCH(s===JR.seat)*.62,x0=jrSX(s),y0=jrSY();JR.b.push({x:x0+Math.cos(a)*L,y:y0+Math.sin(a)*L,vx:Math.cos(a)*950,vy:Math.sin(a)*950,life:3,bet,s,g});JR.pa[s]=a}
 function jrSeats(L){const pl={};(L||[]).forEach(x=>{if(+x.seat!==JR.seat)pl[+x.seat]={nick:x.nick}});JR.pl=pl}
-async function jrJoin(){const r=await dpReq('/rest/v1/rpc/jr_join',{p_id:fmId(),p_key:fmKey(),p_nick:dpNick()});JR.room=+r.room;JR.seat=+r.seat;JR.since=+r.since||0;if(r.pot!=null)DP.pot=+r.pot;jrSeats(r.seats);JR.on=true}
+async function jrJoin(){const r=await dpReq('/rest/v1/rpc/jr_join',{p_id:fmId(),p_key:fmKey(),p_nick:dpNick()});JR.room=+r.room;JR.seat=+r.seat;if(r.pb!=null)JR.pb=+r.pb;JR.since=+r.since||0;if(r.pot!=null)DP.pot=+r.pot;jrSeats(r.seats);JR.on=true}
 async function jrSync(fin){if(!JR.on)return;JR.sy=1;const q=JR.q.splice(0),ev=JR.ev.splice(0),b=JR.accB,w=JR.accW,big=JR.big.splice(0);JR.accB=0;JR.accW=0;
  const back=()=>{JR.q=q.concat(JR.q).slice(-60);JR.accB+=b;JR.accW+=w;JR.big=big.concat(JR.big)};
  try{const body={p_id:fmId(),p_key:fmKey(),p_nick:dpNick(),p_shots:q,p_bet:b,p_win:w,p_big:big,p_since:JR.since,p_leave:!!fin};if(!JR.noev)body.p_ev=ev;let r;
   try{r=await dpReq('/rest/v1/rpc/jr_sync',body)}catch(e){if(!JR.noev&&e&&e.code==='http_404'){JR.noev=1;delete body.p_ev;r=await dpReq('/rest/v1/rpc/jr_sync',body)}else throw e}
   if(r&&r.kicked){back();if(!fin)await jrJoin().catch(()=>{})}
-  else if(r){if(r.pot!=null)DP.pot=+r.pot+JR.accB-JR.accW;jrSeats(r.seats);if(r.last!=null)JR.since=Math.max(JR.since,+r.last);
+  else if(r){if(r.pb!=null)JR.pb=+r.pb;if(r.pot!=null)DP.pot=+r.pot+JR.accB-JR.accW;jrSeats(r.seats);if(r.last!=null)JR.since=Math.max(JR.since,+r.last);
    if(JR.open)(r.shots||[]).forEach(x=>{if(+x.seat===JR.seat)return;if(+x.k===1){jrGhostCatch(x);return}const Q=JR.gq[x.seat]=JR.gq[x.seat]||[];if(Q.length<40)Q.push([+x.a,+x.bet])});
    if(r.feed)JR.feed=r.feed;jrHud()}}
  catch(e){/* 送失敗:放回去下次再送,池底的錢不會不見 */back()}
@@ -5850,8 +5850,8 @@ function jrGhostCatch(x){const T=JRD[+x.ti];if(!T||!JR.open)return;const px=Math
  if(T.m>=100||T.jack)sfx('coinsMany')}
 function jrPot(){try{return DP.on?(+DP.pot||0):dpLocal().dpot}catch(e){return 0}}
 function jrPotAdd(v){try{if(DP.on){DP.pot=(+DP.pot||0)+v}else{const s=dpLocal();s.dpot=Math.max(0,s.dpot+v);DP.pot=s.dpot}}catch(e){}}
-/* 1010-Z28 池底越高回本越多,慢慢把池底吐回 800 萬:800 萬以下 95%;以上 105% 起跳,每多 1000 萬 +10%,最高 125%(玩家看不到) */
-const jrRtp=()=>{const p=jrPot();return p<JRTH?.95:Math.min(1.25,1.05+(p-JRTH)/1e8)};
+/* 1010-Z32 回本率改由伺服器「池底自動調控」決定:池底 800 萬以下 95%;以上 100%~112%(伺服器每分鐘依進度算放水強度 JR.pb 0~1;單機測試版固定 0.5) */
+const jrRtp=()=>{const p=jrPot();if(p<=JRTH)return .95;const b=JR.on&&JR.pb!=null?JR.pb:.5;return 1+.12*Math.max(0,Math.min(1,b))};
 /* 打空的子彈也算進回本:用這次進場的命中率補回捕獲機率 */
 const jrHr=()=>JR.sh>60?Math.max(.4,Math.min(1,JR.hi/JR.sh)):.78;
 /* 1010-Z26 所有恐龍倍率跟著池底:池底每 1000 萬 = ×1,最低 ×0.5、最高 ×3(回本率不變,倍率越高越難抓) */
@@ -5943,10 +5943,13 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z31';
+const GBUILD='1010-Z34';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🕸️','侏儸紀網子變大','侏儸紀的捕獲網全部放大 1.3 倍,一網打盡更容易!'],
+['💎','賭石坊進新貨','芳芳最近進的原石品質不錯,切垮的少了一點,趁現在去賭石坊碰碰運氣!'],
+['🍀','芳芳今天手氣差','射龍門、21 點、侏儸紀的莊家最近手氣不太好,趁現在進場試試看!'],
 ['🚀','載入速度加快','進遊戲時先載入畫面要用的圖,再依你目前所在的分頁優先載入,其餘的在背景慢慢下載,進去後圖片不會再空白一陣子。'],
 ['🕸️','侏儸紀網子子彈!','子彈打中會張開網子,網子裡的恐龍都有機會抓到,子彈金額越大網子越大!子彈改成 10 / 50 / 100 / 500 / 1,000,小資也能玩很久;小恐龍變多,常常有錢進帳。同房玩家抓到恐龍時,畫面上也看得到他抓到哪一隻、贏了多少。'],
 ['☄️','恐龍技能特效登場!','暴龍頭骨盔、霸王龍鱗戰甲的 6 個恐龍技能換上全新戰鬥特效:恐龍咆哮震波、迅猛龍爪、化石護盾、隕石雨、原始狂暴火焰、鱗甲反刺。'],
@@ -5964,9 +5967,6 @@ const GNOTES=[
 ['💚','賭石更好賺了:回本 87% → 95%','芳芳進了一批好料:每種原石長期平均拿回的錢從 87% 提高到 95%。垮掉的機率變低、切出來會「漲」的機會變多(河邊石約 36%、老坑沙皮約 31%、蟒帶料約 29%、松花料約 27%),帝王料更常開出冰種,頂級玉的機率也比上一版高。'],
 ['🔄','賭石坊「換一批」不再擋到價格','小螢幕手機上,「換一批」按鈕會蓋到架上原石的價格。現在按鈕和補貨倒數移到店面下方右側,任何螢幕都看得清楚。'],
 ['💎','切出至尊、典藏玉全服恭喜','賭石切出高冰陽綠(至尊)或玻璃種帝王綠(典藏),會跟射中一線天一樣有全螢幕慶祝,全服玩家也會收到恭喜通知,點一下就能直接去賭石坊。一線天、池底公告也改成只要不在戰鬥中,任何畫面都會跳。'],
-['🐉','射龍門紀錄只顯示射龍門','射龍門下方的全服戰況會混到 21 點的輸贏,現在分開了:射龍門只看射龍門,21 點的紀錄在 21 點下方。'],
-['🏷️','排行榜稱號不再忽有忽無','同一位玩家用過好幾台裝置時,排行榜的金幣、戰力、在線三個頁面可能各抓到不同裝置的紀錄,所以稱號有時有、有時沒有。現在會統一顯示這位玩家最新的稱號。'],
-['⚡','手機變順了','倉庫裝備多的時候,每點一下(換裝、賣出、切換分頁)手機都會卡一下。原因是每張圖片都用很長的文字存在畫面裡,倉庫滿 300 格時一次要處理好幾 MB。現在圖片改成用到才轉成輕量網址,畫面處理量少了 90% 以上,低階手機也順很多。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6140,8 +6140,13 @@ setInterval(()=>{try{if(!SAVE||$('home').hidden||SAVE.tab!=='dragon'||document.v
 function jdOddTxt(t){const o=JDS[t].o,f=x=>x>=1?x.toFixed(1):x>=.1?x.toFixed(2):x.toFixed(3);return'📊 垮了 '+f(o[0])+'% · 冰種以上 '+f(o[8]+o[9]+o[10])+'% · 至尊 '+f(o[9])+'% · 典藏 '+f(o[10])+'%'}
 function jdData(){const D=SAVE.jd=SAVE.jd||{t:0,list:[],own:null};SAVE.jades=SAVE.jades||{};SAVE.jds=SAVE.jds||{n:0,spent:0,got:0,best:0,streak:0};return D}
 function jdPW(w){let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<w.length;i++){x-=w[i];if(x<0)return i}return 0}
+/* 1010-Z33 賭石也跟著「池底自動調控」:每分鐘向伺服器查放水強度(0~1),放水時崩的機率最多少 20%,少掉的照比例分給各種玉(畫面上的機率表不變) */
+function jdPB(){if(DP.on)return DP.pb!=null?Math.max(0,Math.min(1,+DP.pb)):0;try{return dpLocal().dpot>8e6?.5:0}catch(e){return 0}}
+function jdOdds(t){const o=JDS[t].o,b=jdPB();if(b<=0)return o;const c=o[0]*(1-.2*b),f=(100-c)/(100-o[0]);return o.map((v,i)=>i?v*f:c)}
+async function potPB(){if(!DP.on||(potPB.t&&Date.now()-potPB.t<60000))return;potPB.t=Date.now();try{const r=await dpReq('/rest/v1/rpc/pot_boost',{});if(r&&r.b!=null)DP.pb=+r.b}catch(e){}}
+setInterval(()=>{try{if(SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='jd')potPB()}catch(e){}},15000);
 function jdGen(){const D=jdData();const n=1+jdPW([10,15,25,25,25]);const L=[];
- for(let i=0;i<n;i++){const t=jdPW([30,28,20,14,8]),out=jdPW(JDS[t].o),thin=out===0&&Math.random()<.25;L.push({id:Date.now().toString(36)+i,t,out,thin,fake:thin?4+Math.floor(Math.random()*5):0,lit:0,win:false})}
+ for(let i=0;i<n;i++){const t=jdPW([30,28,20,14,8]),out=jdPW(jdOdds(t)),thin=out===0&&Math.random()<.25;L.push({id:Date.now().toString(36)+i,t,out,thin,fake:thin?4+Math.floor(Math.random()*5):0,lit:0,win:false})}
  L.sort((a,b)=>a.t-b.t);D.list=L;D.t=Date.now();JD.sel=-1;save()}
 const JDREF=600000;
 function jdSay(txt,f){const b=$('jdbub'),h=$('jdhost');if(b)b.textContent=txt;if(h){const k='ds-f'+(JDF[f]||1);h.src=ART[k]||HI(JDFB[JDF[f]||1]||'host-1','fd');h.classList.toggle('big',!!ART[k])}}
@@ -6155,7 +6160,7 @@ function jdOffer(s){const S=JDS[s.t];if(!s.win)return Math.round(S.p*.8/100)*100
  const e=pw?ev/pw:S.p;return Math.round(Math.max(S.p*.5,Math.min(S.p*1.8,e*.8))/100)*100}
 const taxIncomeP=v=>Math.floor(Math.max(0,v)*TAXR);
 function jdPay(c,why){if((SAVE.coin||0)<c){toast('金幣不夠,需要 '+fmtC(c));sfx('error');return false}SAVE.coin-=c;SAVE.jds.spent+=c;save();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);return true}
-function jdPanel(){const D=jdData();setTimeout(()=>jdFeed(true),0);try{ensurePack('ds')}catch(e){}if(!D.list.length&&!D.own)jdGen();jdRender();if(!jdPanel.s){jdPanel.s=1;jdSay(pick(JDL.idle),'idle')}}
+function jdPanel(){const D=jdData();potPB();setTimeout(()=>jdFeed(true),0);try{ensurePack('ds')}catch(e){}if(!D.list.length&&!D.own)jdGen();jdRender();if(!jdPanel.s){jdPanel.s=1;jdSay(pick(JDL.idle),'idle')}}
 function jdRender(){const D=jdData(),sh=$('jdshelf');if(!sh)return;const own=D.own;if(ART['ds-bg']&&!jdRender.bg){jdRender.bg=1;const sc=$('jdscene');sc.classList.add('hasbg');sc.style.setProperty('--jdbg','linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.05) 55%,rgba(0,0,0,.45)),url('+ART['ds-bg']+')')}
  sh.innerHTML=D.list.length?D.list.map((s,i)=>{const S=JDS[s.t];return'<button class="jdst'+(JD.sel===i&&!own?' on':'')+(own?' dim':'')+'" data-i="'+i+'"><img class="'+jdAlt(s).trim()+'" src="'+jdImg(jdSt(s))+'" alt=""><b>'+S.n+'</b><i>'+fmtC(S.p)+'</i>'+(s.lit?'<u>'+'★'.repeat(s.lit)+'</u>':'')+'</button>'}).join(''):'<div class="muted jdempty">架上的原石都賣完了,等一下會補貨</div>';
  const left=Math.max(0,JDREF-(Date.now()-D.t));$('jdref').textContent=left>0?'免費補貨 '+Math.floor(left/60000)+':'+String(Math.floor(left/1000)%60).padStart(2,'0'):'可以免費補貨';$('jdrefb').textContent=left>0?'🔄 換一批(1 萬)':'🔄 免費換一批';
