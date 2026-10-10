@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z30">
+<meta name="gbuild" content="1010-Z31">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2058,7 +2058,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z30</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z31</span></small>
   </div>
  </div>
 </div>
@@ -2407,7 +2407,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
  </div>
 </div>
 
-<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1006Q"><\/script><script src="sounds.js?v=1007F" async><\/script>')</script>
+<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1006Q"><\/script>')</script>
 <script>
 if(window.__PHONEHOST)throw new Error("phone-host");
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
@@ -5943,10 +5943,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z30';
+const GBUILD='1010-Z31';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🚀','載入速度加快','進遊戲時先載入畫面要用的圖,再依你目前所在的分頁優先載入,其餘的在背景慢慢下載,進去後圖片不會再空白一陣子。'],
 ['🕸️','侏儸紀網子子彈!','子彈打中會張開網子,網子裡的恐龍都有機會抓到,子彈金額越大網子越大!子彈改成 10 / 50 / 100 / 500 / 1,000,小資也能玩很久;小恐龍變多,常常有錢進帳。同房玩家抓到恐龍時,畫面上也看得到他抓到哪一隻、贏了多少。'],
 ['☄️','恐龍技能特效登場!','暴龍頭骨盔、霸王龍鱗戰甲的 6 個恐龍技能換上全新戰鬥特效:恐龍咆哮震波、迅猛龍爪、化石護盾、隕石雨、原始狂暴火焰、鱗甲反刺。'],
 ['🦖','侏儸紀手感微調','侏儸紀加班公園的捕獲手感小幅調整,趕快進場試試看!'],
@@ -5966,7 +5967,6 @@ const GNOTES=[
 ['🐉','射龍門紀錄只顯示射龍門','射龍門下方的全服戰況會混到 21 點的輸贏,現在分開了:射龍門只看射龍門,21 點的紀錄在 21 點下方。'],
 ['🏷️','排行榜稱號不再忽有忽無','同一位玩家用過好幾台裝置時,排行榜的金幣、戰力、在線三個頁面可能各抓到不同裝置的紀錄,所以稱號有時有、有時沒有。現在會統一顯示這位玩家最新的稱號。'],
 ['⚡','手機變順了','倉庫裝備多的時候,每點一下(換裝、賣出、切換分頁)手機都會卡一下。原因是每張圖片都用很長的文字存在畫面裡,倉庫滿 300 格時一次要處理好幾 MB。現在圖片改成用到才轉成輕量網址,畫面處理量少了 90% 以上,低階手機也順很多。'],
-['📊','稱號補算舊紀錄','舊版沒有記錄衝裝備、改車、算命的次數,現在用你身上留下的痕跡估一個起點:至尊、典藏裝備只能靠祈禱,照升上去平均要祈禱幾次來算;座駕照改裝等級算;算命舊版只留下最後一天有沒有算過,只能從現在開始累積。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6503,6 +6503,7 @@ window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDo
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
  try{if(!document.querySelector('#gov:not([hidden])')){renderHome();if(!$('home').hidden&&SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
 if(window.ART_EXTRA)window.__artExtra();
+/* 1010-Z31 畫面共用 UI 圖(從 extra 拆出來先載) */window.__artUI=function(){const X=window.ART_UI;if(!X||window.__artUIDone)return;window.__artUIDone=1;try{window.__artPack(X)}catch(e){Object.assign(ART,X)}try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}setTimeout(()=>{try{emjConvert(document.body)}catch(e){}},50);try{stkArtAll()}catch(e){}};if(window.ART_UI)window.__artUI();
 /* 1009-J 股市美術載入後更新 logo、分頁圖示、大廳背景 */{const o=window.__artExtra;window.__artExtra=function(){const r=o.apply(this,arguments);try{stkArtAll()}catch(e){}return r}}try{if(window.__artExtraDone)stkArtAll()}catch(e){}
 try{if(SAVE.tab==='dragon')casSwitch(SAVE.cas||'dragon')}catch(e){}
 try{if('serviceWorker' in navigator&&location.protocol==='https:'&&typeof ONLINE!=='undefined'&&ONLINE.supabaseKey&&!(window.claude&&window.claude.use))navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
@@ -6522,7 +6523,7 @@ lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classLis
 <script>
 (function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
 /* 1008-A 資源檔依需要的順序一個一個載入(原本 7 個同時下載互搶頻寬);用到的功能會插隊先載 */
-var PK={extra:['assets-extra.js?v=1009J',function(){if(window.__artExtra)window.__artExtra()}],
+var PK={ui:['assets-ui.js?v=1010Z31',function(){if(window.__artUI)window.__artUI()}],sounds:['sounds.js?v=1007F',function(){}],extra:['assets-extra.js?v=1010Z31',function(){if(window.__artExtra)window.__artExtra()}],
  hero2:['assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)}],
  hd:['assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)}],
  boss:['assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)}],
@@ -6537,16 +6538,19 @@ var PK={extra:['assets-extra.js?v=1009J',function(){if(window.__artExtra)window.
  ds:['assets-ds.js?v=1010Z',function(){if(window.__artPack&&window.ART_DS){window.__artPack(window.ART_DS);try{document.querySelectorAll('img[data-dsk]').forEach(i=>{if(ART[i.dataset.dsk])i.src=ART[i.dataset.dsk]});document.querySelectorAll('[data-dsbg]').forEach(d=>{if(ART['ds-bg'])d.style.setProperty('--pbg','url('+ART['ds-bg']+')')});if(SAVE&&SAVE.cas==='jd'&&!$('home').hidden){jdRender();jdSay($('jdbub').textContent,'idle')}document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}}}],
  fx:['assets-fx.js?v=1010T',function(){if(window.__artPack&&window.ART_FX){window.__artPack(window.ART_FX);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
  jx:['assets-jx.js?v=1009R',function(){if(window.__artPack&&window.ART_JX){window.__artPack(window.ART_JX);try{if(ART['bg-hero-j'])document.documentElement.style.setProperty('--hbg-j','url('+ART['bg-hero-j']+')');if(!$('home').hidden)renderHome()}catch(e){}}}]};
-var PKO=['extra','herobg','hero2','hd','boss','cars','stage2','train','mech','jx'],PKS={};/* 1008-D 恨鐵不成鋼的圖放最後背景下載;選了這隻角色才優先 */
-function pkLoad(n,next){if(PKS[n])return;PKS[n]=1;var p=PK[n];add(p[0],function(){try{p[1]()}catch(e){}PKS[n]=2;if(next)setTimeout(next,60)});}
-function pkNext(){for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
+/* 1010-Z31 載入加速:先載畫面共用的 UI 圖(1MB)→ 目前分頁要用的 → 音效 → 其餘背景一個一個載;有功能插隊時背景先暫停 */
+var PKO=['sounds','fx','extra','herobg','hero2','hd','boss','cars','stage2','train','ds','jr','stage3','mech','jx'],PKS={},PKA=0;/* 1008-D 恨鐵不成鋼的圖放最後背景下載;選了這隻角色才優先 */
+function pkTab(){var L=[];try{var t=SAVE.tab,c=SAVE.cas,h=SAVE.hero;if(t==='gacha')L.push('cars');if(t==='eq')L.push('herobg','hero2');if(t==='map')L.push('boss','hd');if(t==='dragon'){if(c==='jr')L.push('jr');if(c==='jd')L.push('ds');if(c==='train')L.push('train');if(c==='bj'||c==='dragon')L.push('extra')}if(t==='farm'||t==='tarot')L.push('extra');L.push(h==='a'?'mech':h==='j'?'jx':'hero3')}catch(e){}return L}
+function pkRef(n){try{if(n!=='ui'&&n!=='extra'&&pkTab().indexOf(n)<0)return;clearTimeout(pkRef.t);pkRef.t=setTimeout(function(){try{var H=$('home');if(!H||H.hidden||(typeof inBattle==='function'&&inBattle())||document.querySelector('#gov:not([hidden])'))return;var a=document.activeElement;if(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName))return;var y=H.scrollTop;renderHome();if(SAVE.tab)setTab(SAVE.tab);H.scrollTop=y}catch(e){}},200)}catch(e){}}
+function pkLoad(n,next){if(PKS[n]||!PK[n])return;PKS[n]=1;PKA++;var p=PK[n];add(p[0],function(){try{p[1]()}catch(e){}PKS[n]=2;PKA--;pkRef(n);setTimeout(next||pkNext,60)});}
+function pkNext(){if(PKA>0)return;for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
 window.ensurePack=function(){for(var i=0;i<arguments.length;i++)if(PK[arguments[i]])pkLoad(arguments[i])};
 function hook(name,fn){var o=window[name];if(typeof o!=='function')return;window[name]=function(){try{fn.apply(this,arguments)}catch(e){}return o.apply(this,arguments)}}
 hook('startRun',function(c){ensurePack('fx','hero3','hero2','hd','boss');try{if(Object.values(SAVE.eq||{}).some(function(id){var it=(SAVE.items||[]).find(function(i){return i.id===id});return it&&it.dino}))ensurePack('jr')}catch(e){}try{if(SAVE.hero==='a')ensurePack('mech');if(SAVE.hero==='j')ensurePack('jx')}catch(e){}if(c===1)ensurePack('stage2');if(c===2)ensurePack('stage3','jx');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
 hook('setTab',function(t){if(t==='eq')ensurePack('herobg');if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2','stage3')});
 hook('casSwitch',function(t){if(t==='train')ensurePack('train')});
-function go(){try{pkLoad('fx',pkNext);if(SAVE&&SAVE.hero!=='a'&&SAVE.hero!=='j')pkLoad('hero3',pkNext);if(SAVE&&SAVE.hero==='a')pkLoad('mech',pkNext);if(SAVE&&SAVE.hero==='j')pkLoad('jx',pkNext)}catch(e){}pkNext()}
-if(document.readyState==='complete')setTimeout(go,300);else window.addEventListener('load',function(){setTimeout(go,300)})})();
+function go(){var Q=['ui'].concat(pkTab());(function step(){var n=Q.shift();if(!n){pkNext();return}if(PKS[n]){step();return}pkLoad(n,step)})()}
+setTimeout(go,0)})();
 </script>
 </body>
 </html>
