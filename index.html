@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z2">
+<meta name="gbuild" content="1010-Z4">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1825,6 +1825,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
 <style id="ev1010s">
 /* 1010-E 雙十節紅包 */
 .ev1010{z-index:9000}
+.tabov{z-index:2147483000;background:rgba(5,7,12,.92)!important}.tabbox{max-width:360px;width:90vw;text-align:center;padding:20px 16px!important}.tabbox .tabic{font-size:44px}.tabbox h2{margin:6px 0;color:#ffe08a}.tabbox p{font-size:14px;line-height:1.6;color:#d6dde6;margin:0 0 14px}.tabbox .btn{width:100%;padding:12px;font-size:15px}
 /* 1010-T 芳芳賭石坊 */
 .jdscene{position:relative;border-radius:16px;padding:10px 10px 8px;min-height:250px;background:var(--jdbg,radial-gradient(ellipse at 50% 20%,#5a3b22,#2c1a10 65%,#170d07));background-size:cover;background-position:center;border:2px solid #7a5426;box-shadow:inset 0 0 40px rgba(0,0,0,.6);overflow:hidden}
 .jdhostw{display:flex;align-items:flex-end;gap:8px;min-height:120px}
@@ -2045,7 +2046,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z2</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z4</span></small>
   </div>
  </div>
 </div>
@@ -2487,7 +2488,13 @@ function restoreSave(){const R=SAVE._restore;delete SAVE._restore;SAVE.items=SAV
  SAVE._restored=Date.now();setTimeout(()=>{try{save();toast('♻️ 已從排行榜紀錄還原你的進度!')}catch(e){}},1500)}
 function freshSave(){const s={items:[],eq:{},parts:0,unlock:1,clear:[],auto:true,ch:0};const u=makeItem(1,0,'wpn',BASES.wpn[0]);s.items.push(u);s.eq.wpn=u.id;return s}
 function load(){try{const j=localStorage.getItem(KEY);if(!j)return null;const o=JSON.parse(j);/* 1007-Z 不完整的存檔(例如幾乎空白的雲端存檔)自動補齊欄位 */try{const f=freshSave();for(const k in f)if(o[k]===undefined||o[k]===null&&f[k]!==null)o[k]=f[k];if(!Array.isArray(o.items))o.items=f.items;if(!o.eq||typeof o.eq!=='object')o.eq=f.eq}catch(e){}return o}catch(e){return null}}
-function save(){try{SAVE._t=Date.now();localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}if(typeof cloudQueue==='function')cloudQueue();if(typeof lbSync==='function'&&typeof LB!=='undefined')lbSync()}
+/* 1010-Z3 同一個瀏覽器只讓一個分頁存檔:別的分頁一寫入存檔(或新分頁打開),這個分頁立刻停止存檔,避免舊進度蓋掉新進度(更新版本時常同時開著新舊兩個分頁) */
+const TABID=Math.random().toString(36).slice(2)+Date.now().toString(36);let TABDEAD=false;
+try{localStorage.setItem('shechu-tab',TABID)}catch(e){}
+window.addEventListener('storage',e=>{try{if((e.key==='shechu-tab'&&e.newValue&&e.newValue!==TABID)||e.key===KEY)tabDead()}catch(x){}});
+function tabDead(){if(TABDEAD)return;TABDEAD=true;try{if(typeof CL!=='undefined'&&CL){CL.noflush=true;clearTimeout(CL.timer)}}catch(e){}try{running=false}catch(e){}
+ try{const ov=document.createElement('div');ov.className='ov tabov';ov.innerHTML='<div class="box tabbox"><div class="tabic">🗂️</div><h2>帳號已在另一個分頁登入</h2><p>你在同一個瀏覽器又開了一個遊戲分頁,這個分頁已被登出,不會再存檔。<br>請改用另一個分頁玩;想留在這裡的話,按下面會接續最新進度。</p><button class="btn pri" id="tabre">🔄 在這個分頁重新登入(接續最新進度)</button></div>';document.body.appendChild(ov);document.getElementById('tabre').onclick=()=>location.reload()}catch(e){}}
+function save(){if(TABDEAD)return;try{SAVE._t=Date.now();localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}if(typeof cloudQueue==='function')cloudQueue();if(typeof lbSync==='function'&&typeof LB!=='undefined')lbSync()}
 const byId=id=>SAVE.items.find(i=>i.id===id);
 const isEq=it=>Object.values(SAVE.eq).includes(it.id);
 
@@ -5706,10 +5713,11 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z2';
+const GBUILD='1010-Z4';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🛡️','同一個瀏覽器開新分頁也會登出舊分頁','以前只有換裝置才會把舊的登出;同一個瀏覽器開兩個遊戲分頁時(例如更新版本時舊分頁還沒關),舊分頁會把舊進度存回去,造成升階、金幣等進度倒退。現在開新分頁,舊分頁一樣會被登出、不再存檔'],
 ['💎','芳芳賭石坊開張','遊樂場新增「賭石」:芳芳化身賭石鑑定家,在骨董商藏店裡擺 1~5 顆原石,聽她的話術、打燈、擦窗,敢不敢下刀全看你,各原石的開出機率都公開。高冰陽綠可打造至尊「陽綠玉珮」或直接賣 150 萬,玻璃種帝王綠可打造典藏「帝王綠玉鐲」或直接賣 300 萬,飾品帶全新玉石技能;切割機、擦窗、打燈、開出好玉都有專屬音效'],
 ['📈','換裝置股票不見已修正','股票改成跟著帳號走,換手機、電腦、瀏覽器都看得到;之前在別台裝置買的股票,打開股市會自動找回來'],
 ['📈','股東福利上線','六家公司都有股東福利:持股市值 10 萬起就有,分 10 級,最高 1000 萬(每家公司持股上限也提高到 1000 萬)。黑心科技加經驗、加班物流多掉裝備、韭菜銀行加結算金幣、芳芳娛樂城加暴擊、開心農場加收成、殭屍製藥戰鬥回血'],
@@ -5729,7 +5737,6 @@ const GNOTES=[
 ['🟢','排行榜可以看在線玩家','排行榜的玩家分類新增「🟢 在線玩家」:列出目前在線的所有玩家(不在前 200 名也看得到),點玩家一樣可以看裝備;點「目前在線 N 人」也能直接切過去'],
 ['✨','飛劍光暈加強、年終獎金不再出現邊條','九劍腎虛的飛劍外圈淡藍光加大加亮,劍身後面多一道藍色尾光,開 2 倍速也看得清楚;電腦版視窗比較矮時,年終獎金的格子會自動縮小,不會再跑出拉動的邊條'],
 ['🗡️','九劍腎虛開場就出劍','九劍腎虛的九把飛劍,開場怪一出現就會飛出去攻擊,不用等怪走近才啟動;怪靠近之後一樣優先打附近的,強度不變'],
-['🧩','技能選擇欄位更清楚','升級選技能時,上方的武器/補給欄重新排版:圖示不會再跑出格子,等級改成 Lv.1~Lv.4、滿級顯示金色 MAX、突破顯示粉紅色「突破」,旁邊標示已經拿了幾格(例如 3/6)'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
