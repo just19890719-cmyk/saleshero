@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z34">
+<meta name="gbuild" content="1010-Z35">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2058,7 +2058,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z34</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z35</span></small>
   </div>
  </div>
 </div>
@@ -4004,11 +4004,11 @@ function stkPerkNotice(){try{const d=twDay();if(d<SPN.from||d>SPN.to||!SAVE||!SA
 setInterval(stkPerkNotice,700);
 /* ===== 1010-Z8 稱號:依照玩家的遊玩方式自動給(50 個) ===== */
 var PSK=[{k:'fight',n:'打怪',i:'⚔️',c:'#ff8a5b'},{k:'dragon',n:'射龍門',i:'🐉',c:'#ffcf4a'},{k:'bj',n:'21 點',i:'♠️',c:'#dfe6ee'},{k:'jd',n:'賭石',i:'💎',c:'#4fd18b'},{k:'tarot',n:'算命',i:'🔮',c:'#c59bff'},
- {k:'forge',n:'衝裝備',i:'🙏',c:'#ffb347'},{k:'car',n:'買車',i:'🚗',c:'#5bc0ff'},{k:'stock',n:'股市',i:'📈',c:'#ff6b8a'},{k:'farm',n:'農場',i:'🌻',c:'#a5e05d'},{k:'train',n:'無限列車',i:'🚇',c:'#9fb4c8'}];
-var PSGAM=['dragon','bj','jd'],PSTH=[0,150,600,2000],PSDECAY=.92;
+ {k:'forge',n:'衝裝備',i:'🙏',c:'#ffb347'},{k:'car',n:'買車',i:'🚗',c:'#5bc0ff'},{k:'stock',n:'股市',i:'📈',c:'#ff6b8a'},{k:'farm',n:'農場',i:'🌻',c:'#a5e05d'},{k:'train',n:'無限列車',i:'🚇',c:'#9fb4c8'},{k:'jr',n:'侏儸紀',i:'🦖',c:'#7ed957'}];
+var PSGAM=['dragon','bj','jd','jr'],PSTH=[0,150,600,2000],PSDECAY=.92;
 var TTLS=[{n:'新進社畜',i:'🐣',t:'s0',d:'剛報到,遊玩紀錄還太少。多玩幾種玩法,稱號就會跟著你的玩法變。'},
- {n:'賭神降臨',i:'👑',t:'s2',d:'最近主要都在賭,而且射龍門+21 點+賭石累計贏超過 1,000 萬。'},
- {n:'散財童子',i:'💸',t:'s2',d:'最近主要都在賭,射龍門+21 點+賭石累計輸超過 1,000 萬。芳芳感謝你的貢獻。'},
+ {n:'賭神降臨',i:'👑',t:'s2',d:'最近主要都在賭,而且射龍門+21 點+賭石+侏儸紀累計贏超過 1,000 萬。'},
+ {n:'散財童子',i:'💸',t:'s2',d:'最近主要都在賭,射龍門+21 點+賭石+侏儸紀累計輸超過 1,000 萬。芳芳感謝你的貢獻。'},
  {n:'都是因為賭',i:'🎲',t:'s2',d:'最近的遊玩有 7 成以上都在射龍門、21 點、賭石。會變成這樣,都是因為賭。'},
  {n:'三賭通吃',i:'🃏',t:'s1',d:'射龍門、21 點、賭石三樣都很愛,各佔最近遊玩的 15% 以上。'},
  {n:'一刀富翁',i:'💚',t:'s1',d:'常常泡在賭石坊,而且親手切出過玻璃種帝王綠。'},
@@ -4017,8 +4017,9 @@ var TTLS=[{n:'新進社畜',i:'🐣',t:'s0',d:'剛報到,遊玩紀錄還太少�
  {n:'打工換賭本',i:'💼',t:'s1',d:'打怪佔 35% 以上、賭博也佔 30% 以上。白天上班打怪,賺的錢晚上全上賭桌。'},
  {n:'全能社畜',i:'🌈',t:'s1',d:'6 種以上玩法都有在玩,而且沒有一種超過 3 成。什麼都會一點的斜槓社畜。'}];
 (function(){const L=[['實習打怪員','加班狂戰士','殭屍收割機','打卡戰神'],['龍門見習生','門柱鑑賞家','一線天獵人','射龍門釘子戶'],['21點新手','算牌學徒','黑傑克常客','賭桌老江湖'],['撿石頭的','打燈達人','刀口舔玉','玉石大亨'],
- ['問事小社畜','塔羅信徒','命理研究員','芳芳的VIP'],['升階許願者','菩薩常客','衝裝狂人','神裝信仰者'],['看車不買族','首購族','換車成癮','車庫比家大'],['股市小白','當沖韭菜','波段操作手','社畜巴菲特'],['陽台農夫','偷菜小賊','開心農場主','菜園霸主'],['月台候車','逃票專家','列車跑者','鐵道之王']];
+ ['問事小社畜','塔羅信徒','命理研究員','芳芳的VIP'],['升階許願者','菩薩常客','衝裝狂人','神裝信仰者'],['看車不買族','首購族','換車成癮','車庫比家大'],['股市小白','當沖韭菜','波段操作手','社畜巴菲特'],['陽台農夫','偷菜小賊','開心農場主','菜園霸主'],['月台候車','逃票專家','列車跑者','鐵道之王'],['恐龍實習生','網子達人','暴龍獵人','侏儸紀園長']];
  PSK.forEach((c,ci)=>L[ci].forEach((n,ti)=>TTLS.push({n,i:c.i,t:'t'+ti,c:ci,lv:ti,d:'最近最常玩「'+c.n+'」'+(ti?',而且累計 '+PSTH[ti].toLocaleString()+' 點以上':'')+'。'})))})();
+/* 1010-Z35 侏儸紀專屬稱號(編號 54~57) */TTLS.push({n:'黃金獵人',i:'👑',t:'s2',d:'常常在侏儸紀打恐龍,而且親手抓過黃金霸王龍、抱走池底。'},{n:'屠龍勇者',i:'🦖',t:'s2',d:'常常在侏儸紀打恐龍,累計抓過 10 隻以上暴龍王。'},{n:'恐龍裝備控',i:'🪖',t:'s1',d:'暴龍頭骨盔、霸王龍鱗戰甲兩件恐龍專屬裝備都打到過。'},{n:'四賭通吃',i:'🎰',t:'s2',d:'射龍門、21 點、賭石、侏儸紀四樣都愛,各佔最近遊玩的 10% 以上。'});
 function psState(){const P=SAVE.ps=SAVE.ps||{};if(!P.l){P.l={};P.r={};P.got=[];
   /* 第一次:用舊戰績估一個起點,老玩家不會一開始都是「新進社畜」 */
   const ds=SAVE.dstat||{},bs=SAVE.bjs||{},js=SAVE.jds||{};const seed={dragon:(ds.n||0)*1,bj:(bs.n||0)*1.5,jd:(js.n||0)*2,train:((SAVE.trRuns||[]).length)*8,farm:(SAVE.fharv||0)*.5+(SAVE.fpick||0),
@@ -4030,9 +4031,9 @@ function psState(){const P=SAVE.ps=SAVE.ps||{};if(!P.l){P.l={};P.r={};P.got=[];
  if(!Array.isArray(P.got))P.got=[];return P}
 function psAdd(k,v){try{if(!SAVE)return;const P=psState();P.l[k]=+((P.l[k]||0)+v).toFixed(2);P.r[k]=+((P.r[k]||0)+v).toFixed(2);save();clearTimeout(psAdd.t);psAdd.t=setTimeout(()=>{try{ttlNow(true)}catch(e){}},1200)}catch(e){}}
 function psMix(P){P=P||psState();let sr=0,sl=0;for(const c of PSK){sr+=P.r[c.k]||0;sl+=P.l[c.k]||0}const src=sr>=20?P.r:P.l,s=sr>=20?sr:sl,m={};for(const c of PSK)m[c.k]=s?(src[c.k]||0)/s:0;return{m,tot:sl}}
-function psNet(){const ds=SAVE.dstat||{},bs=SAVE.bjs||{},js=SAVE.jds||{};return(+ds.net||0)+(+bs.net||0)+((+js.got||0)-(+js.spent||0))}
+function psNet(){const ds=SAVE.dstat||{},bs=SAVE.bjs||{},js=SAVE.jds||{},jr=SAVE.jrs||{};return(+ds.net||0)+(+bs.net||0)+((+js.got||0)-(+js.spent||0))+((+jr.got||0)-(+jr.spent||0))}
 function ttlCalc(){const P=psState(),{m,tot}=psMix(P);if(tot<50)return 0;const gam=PSGAM.reduce((a,k)=>a+m[k],0),gL=PSGAM.reduce((a,k)=>a+(P.l[k]||0),0),net=psNet(),js=SAVE.jds||{},bs=SAVE.bjs||{};
- if(net>=1e7&&gam>=.4)return 1;if(net<=-1e7&&gam>=.3)return 2;if(gam>=.7&&gL>=500)return 3;if(m.dragon>=.15&&m.bj>=.15&&m.jd>=.15)return 4;
+ if(net>=1e7&&gam>=.4)return 1;if(net<=-1e7&&gam>=.3)return 2;/* 1010-Z35 侏儸紀特殊稱號 */{const jr=SAVE.jrs||{};if(m.jr>=.15&&(jr.gold||0)>=1)return 54;if(m.jr>=.15&&(jr.k8||0)>=10)return 55;if(m.jr>=.1&&(jr.d5||0)>=1&&(jr.d6||0)>=1)return 56;if(m.dragon>=.1&&m.bj>=.1&&m.jd>=.1&&m.jr>=.1)return 57}if(gam>=.7&&gL>=500&&m.jr<.6)return 3;if(m.dragon>=.15&&m.bj>=.15&&m.jd>=.15)return 4;
  if(m.jd>=.2&&(js.best||0)>=10)return 5;if(m.bj>=.2&&(bs.bj||0)>=30)return 6;if(m.tarot>=.15&&gam>=.3)return 7;if(m.fight>=.35&&gam>=.3)return 8;
  const vals=PSK.map(c=>m[c.k]);if(vals.filter(x=>x>=.05).length>=6&&Math.max(...vals)<.3)return 9;
  let ci=0;PSK.forEach((c,i)=>{if(m[c.k]>m[PSK[ci].k])ci=i});const lp=P.l[PSK[ci].k]||0;const lv=lp>=PSTH[3]?3:lp>=PSTH[2]?2:lp>=PSTH[1]?1:0;return 10+ci*4+lv}
@@ -4040,12 +4041,12 @@ function ttlNow(push){const id=ttlCalc(),P=psState();if(!P.got.includes(id)){P.g
  if(P.cur!==id){P.cur=id;save();const el=$('ttlbar');if(el)el.innerHTML=ttlChip(id,true)}if(push)ttlPush();return id}
 function ttlChip(id,me){const T=TTLS[id]||TTLS[0];return'<span class="ttlc '+T.t+'"'+(me?' data-ttlme':'')+'><i>'+T.i+'</i>'+escH(T.n)+(me?'<b class="ttlq" title="看我的遊玩方式">!</b>':'')+'</span>'}
 function ttlMixHtml(mx){const L=PSK.map(c=>({c,v:+mx[c.k]||0})).sort((a,b)=>b.v-a.v);const gam=PSGAM.reduce((a,k)=>a+(+mx[k]||0),0);
- return'<div class="ttlgam"><span>🎲 賭性指數</span><b>'+Math.round(gam*100)+'%</b><small>(射龍門+21 點+賭石)</small></div><div class="ttlbars">'+L.map(x=>'<div class="ttlrow'+(x.v<.005?' z':'')+'"><span>'+x.c.i+' '+x.c.n+'</span><div class="ttlbg"><i style="width:'+Math.max(x.v>0?2:0,Math.round(x.v*100))+'%;background:'+x.c.c+'"></i></div><b>'+Math.round(x.v*100)+'%</b></div>').join('')+'</div>'}
+ return'<div class="ttlgam"><span>🎲 賭性指數</span><b>'+Math.round(gam*100)+'%</b><small>(射龍門+21 點+賭石+侏儸紀)</small></div><div class="ttlbars">'+L.map(x=>'<div class="ttlrow'+(x.v<.005?' z':'')+'"><span>'+x.c.i+' '+x.c.n+'</span><div class="ttlbg"><i style="width:'+Math.max(x.v>0?2:0,Math.round(x.v*100))+'%;background:'+x.c.c+'"></i></div><b>'+Math.round(x.v*100)+'%</b></div>').join('')+'</div>'}
 function ttlOpen(o){const me=!o;const P=psState(),id=me?ttlNow():(+o.ttl|0),T=TTLS[id]||TTLS[0];const mx=me?psMix(P).m:(o.pmix&&typeof o.pmix==='object'?Object.fromEntries(Object.entries(o.pmix).map(([k,v])=>[k,(+v||0)/100])):{});
- let extra='';if(me){const net=psNet();extra+='<div class="ttlnet">射龍門+21 點+賭石累計:<b class="'+(net>=0?'up':'down')+'">'+(net>=0?'+':'')+fmtC(net)+'</b></div>';
+ let extra='';if(me){const net=psNet();extra+='<div class="ttlnet">射龍門+21 點+賭石+侏儸紀累計:<b class="'+(net>=0?'up':'down')+'">'+(net>=0?'+':'')+fmtC(net)+'</b></div>';
   if(T.lv!=null&&T.lv<3){const k=PSK[T.c].k,need=Math.ceil(PSTH[T.lv+1]-(P.l[k]||0));if(need>0)extra+='<div class="ttlnext">再累積 <b>'+need.toLocaleString()+'</b> 點「'+PSK[T.c].n+'」→ 升級成「'+escH(TTLS[id+1].n)+'」</div>'}
   extra+='<details class="ttlbook"><summary>📖 稱號圖鑑(已獲得 '+P.got.length+' / '+TTLS.length+')</summary><div class="ttlall">'+TTLS.map((x,i)=>'<div class="ttla'+(P.got.includes(i)?' got':'')+'"><span class="ttlc '+x.t+'"><i>'+x.i+'</i>'+(P.got.includes(i)?escH(x.n):'???')+'</span><small>'+escH(x.d)+'</small></div>').join('')+'</div></details>'+
-   '<div class="ttlhow">稱號依照你<b>最近</b>的遊玩方式自動決定:打怪、射龍門、21 點、賭石、算命、衝裝備、買車、股市、農場、無限列車,玩得越多比重越高。大約每 15 秒的遊玩算 1 點,比重每天會慢慢淡化(保留 92%),換個玩法稱號就會跟著變。其他玩家在排行榜也看得到你的稱號和遊玩方式。</div>'}
+   '<div class="ttlhow">稱號依照你<b>最近</b>的遊玩方式自動決定:打怪、射龍門、21 點、賭石、算命、衝裝備、買車、股市、農場、無限列車、侏儸紀,玩得越多比重越高。大約每 15 秒的遊玩算 1 點,比重每天會慢慢淡化(保留 92%),換個玩法稱號就會跟著變。其他玩家在排行榜也看得到你的稱號和遊玩方式。</div>'}
  const ov=document.createElement('div');ov.className='ttlov';ov.innerHTML='<div class="ttlbox"><button class="ttlx" aria-label="關閉">✕</button><div class="ttlhd">'+(me?'我的稱號':escH(o.nick||'玩家')+' 的稱號')+'</div><div class="ttlbig">'+ttlChip(id)+'</div><p class="ttld">'+escH(T.d)+'</p>'+
   (Object.keys(mx).length?'<div class="ttlsub">'+(me?'我最近的遊玩方式':'他最近的遊玩方式')+'</div>'+ttlMixHtml(mx):'<p class="muted" style="text-align:center">這位玩家還沒有遊玩方式紀錄</p>')+extra+'</div>';
  ov.onclick=e=>{if(e.target===ov||e.target.closest('.ttlx'))ov.remove()};document.body.appendChild(ov);try{sfx('tab')}catch(e){}}
@@ -5848,6 +5849,7 @@ async function jrSync(fin){if(!JR.on)return;JR.sy=1;const q=JR.q.splice(0),ev=JR
 function jrGhostCatch(x){const T=JRD[+x.ti];if(!T||!JR.open)return;const px=Math.max(30,Math.min(JR.W-30,(+x.x||.5)*JR.W)),py=Math.max(60,Math.min(JR.H-150,(+x.y||.4)*JR.H)),s=+x.seat,p=JR.pl[s],nm=p?String(p.nick||'').slice(0,6):JRCN[s]+'座';
  JR.d.push({T,x:px,y:py,a:-Math.PI/2,v:0,w:0,fl:0,dead:.01,age:0,ph:0,gh:1});JR.fx.push({k:'net',s,x:px,y:py,t:0,d:.4,R:60},{k:'coins',x:px,y:py,t:0,d:.7,S:Math.min(220,80+T.sz*.5),al:.85},{k:'txt',x:px,y:py-26,t:0,d:1.3,s:nm+' +'+fmtC(+x.v||0),c:JRC[s],big:T.m>=40||T.jack});
  if(T.m>=100||T.jack)sfx('coinsMany')}
+function jrStat(){const J=SAVE.jrs=SAVE.jrs||{};for(const k of ['spent','got','n','gold','k7','k8','d5','d6'])J[k]=+J[k]||0;return J}
 function jrPot(){try{return DP.on?(+DP.pot||0):dpLocal().dpot}catch(e){return 0}}
 function jrPotAdd(v){try{if(DP.on){DP.pot=(+DP.pot||0)+v}else{const s=dpLocal();s.dpot=Math.max(0,s.dpot+v);DP.pot=s.dpot}}catch(e){}}
 /* 1010-Z32 回本率改由伺服器「池底自動調控」決定:池底 800 萬以下 95%;以上 100%~112%(伺服器每分鐘依進度算放水強度 JR.pb 0~1;單機測試版固定 0.5) */
@@ -5885,7 +5887,7 @@ function jrSpawn(any){const T=jrPick(),W=JR.W,H=JR.H,s=Math.random(),side=s<.4?0
  if(any){x=W*(.1+Math.random()*.8);y=H*(.08+Math.random()*.6)}
  JR.d.push({T,x,y,a,v:T.sp[0]+Math.random()*(T.sp[1]-T.sp[0]),w:(Math.random()-.5)*.25,fl:0,dead:0,age:0,ph:Math.random()*6})}
 function jrShoot(){const bet=JRBET[JR.bi];if((SAVE.coin||0)<bet){if(!JR.nm||performance.now()-JR.nm>2000){JR.nm=performance.now();toast('💸 金幣不夠這個子彈金額,調低一點吧');sfx('error')}JR.auto=false;$('jrauto')&&$('jrauto').classList.remove('on');return}
- SAVE.coin-=bet;JR.sh=(JR.sh||0)+1;jrPotAdd(bet);const a=jrDir(JR.seat,JR.aim?JR.aim.x:jrSX(JR.seat),JR.aim?JR.aim.y:0);jrFire(JR.seat,a,bet,0);
+ SAVE.coin-=bet;JR.sh=(JR.sh||0)+1;jrPotAdd(bet);/* 1010-Z35 稱號:侏儸紀戰績 */{const J=jrStat();J.spent+=bet;JR.psq=(JR.psq||0)+1;if(JR.psq>=50){JR.psq=0;try{psAdd('jr',1)}catch(e){}}}const a=jrDir(JR.seat,JR.aim?JR.aim.x:jrSX(JR.seat),JR.aim?JR.aim.y:0);jrFire(JR.seat,a,bet,0);
  if(JR.on){JR.q.push([Math.round(a*1000)/1000,bet]);JR.accB+=bet}sfx('pew');jrHud()}
 function jrCatch(d,bet,m){const T=d.T,pot=jrPot();m=m||jrM(T);let v=T.jack?Math.floor(pot*T.jack):Math.floor(bet*m);v=Math.max(0,Math.min(v,Math.floor(pot*.9)));
  d.dead=.01;jrPotAdd(-v);if(JR.on){JR.accW+=v;if(JR.ev.length<20)JR.ev.push([JRD.indexOf(T),Math.round(d.x/JR.W*1000)/1000,Math.round(d.y/JR.H*1000)/1000,v]);if(T.m>=20||T.jack)JR.big.push([T.n,T.jack?0:Math.round(m),v,T.jack?1:0])}SAVE.coin=(SAVE.coin||0)+v;JR.fx.push({k:'coins',x:d.x,y:d.y,t:0,d:.7,S:Math.min(260,90+T.sz*.6)},{k:'txt',x:d.x,y:d.y-30,t:0,d:1.2,s:'+'+fmtC(v),big:T.m>=40||T.jack});
@@ -5893,7 +5895,7 @@ function jrCatch(d,bet,m){const T=d.T,pot=jrPot();m=m||jrM(T);let v=T.jack?Math.
  if(T.m>=20||T.jack){const L=SAVE.jrlog=SAVE.jrlog||[];L.unshift({nick:dpNick(),n:T.n,m:Math.round(m),jack:!!T.jack,v,t:new Date().toISOString()});L.length=Math.min(L.length,6)}
  if(T.drop&&Math.random()<jrDropP(T.drop,bet))setTimeout(()=>jrDrop(T.drop),700);
  if(T.jack)try{setTimeout(()=>jrParty(v),300)}catch(e){}
- try{psAdd('dragon',.5)}catch(e){}if(performance.now()-JR.sv>3000){JR.sv=performance.now();save()}jrHud()}
+ {const J=jrStat();J.got+=v;J.n++;if(T.jack)J.gold++;if(T.m>=300)J.k8++;if(T.m>=100&&T.m<300)J.k7++}if(performance.now()-JR.sv>3000){JR.sv=performance.now();save()}jrHud()}
 /* 1010-Z30 網狀子彈:打中就張網,網子裡的恐龍都有機會抓到;一網抓幾隻都一樣的回本率(機率平分給網內每一隻) */
 function jrNet(b){const R=JRNR[Math.max(0,JRBET.indexOf(b.bet))]||58;JR.fx.push({k:'net',s:b.s,x:b.x,y:b.y,t:0,d:.4,R});
  const L=JR.d.filter(d=>!d.dead&&(d.x-b.x)**2+(d.y-b.y)**2<(R+d.T.sz*.3)**2);L.forEach(d=>d.fl=.12);if(!L.length)return;
@@ -5906,7 +5908,7 @@ function jrParty(v){const ov=document.createElement('div');ov.className='g1ov';l
  document.body.appendChild(ov);sfx('fan4');const close=()=>{if(ov.parentNode){ov.classList.add('out');setTimeout(()=>ov.remove(),300)}};ov.onclick=close;setTimeout(close,5000)}
 function jrDrop(q){const base=BOSSI.find(b=>b.ch==='dino'&&b.q===q);if(!base)return;const il=Math.max(20,...(SAVE.items||[]).map(i=>i.il||0))+2,it=makeItem(il,q,base.t,base);
  for(const st in it.st)it.st[st]=Math.round(it.st[st]*1.2*10)/10;const ex=Object.keys(STAT).filter(x=>!(x in it.st));if(ex.length){const x=pick(ex);it.st[x]=sv(x,il,RAR[q].m*.6)}
- it.boss=1;it.dino=1;it.name=base.b;it.sk=pick(JRSK);it.skl=q>=6?4:3;SAVE.items.push(it);save();sfx('rareLoot');
+ it.boss=1;it.dino=1;it.name=base.b;it.sk=pick(JRSK);try{const J=jrStat();J['d'+q]=(J['d'+q]||0)+1}catch(e){}it.skl=q>=6?4:3;SAVE.items.push(it);save();sfx('rareLoot');
  jrBanner('<img src="'+(ART[base.b]||'')+'" alt=""><br>掉落'+(q===6?'典藏':'至尊')+'裝備「'+base.b+'」<br><small>技能「'+SK[it.sk].n+'」Lv.'+it.skl+'</small>')}
 function jrLoop(now){if(!JR.open)return;const dt=Math.min(.05,(now-JR.last)/1000);JR.last=now;JR.t+=dt;JR.mwT=(JR.mwT||0)-dt;if(JR.mwT<=0){JR.mwT=.5;try{jrMw()}catch(e){}}try{jrUpdate(dt);jrDraw()}catch(e){console.error(e)}JR.raf=requestAnimationFrame(jrLoop)}
 function jrUpdate(dt){const W=JR.W,H=JR.H;JR.cd-=dt;if((JR.fire||JR.auto)&&JR.cd<=0){JR.cd=.2;jrShoot()}
@@ -5943,10 +5945,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z34';
+const GBUILD='1010-Z35';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🦖','侏儸紀稱號登場!','稱號系統加入侏儸紀:常打恐龍會升級成「恐龍實習生 → 網子達人 → 暴龍獵人 → 侏儸紀園長」。另外新增 4 個特殊稱號:抓過黃金霸王龍的「黃金獵人」、抓過 10 隻暴龍王的「屠龍勇者」、兩件恐龍裝備都打到的「恐龍裝備控」,以及射龍門、21 點、賭石、侏儸紀都愛的「四賭通吃」。'],
 ['🕸️','侏儸紀網子變大','侏儸紀的捕獲網全部放大 1.3 倍,一網打盡更容易!'],
 ['💎','賭石坊進新貨','芳芳最近進的原石品質不錯,切垮的少了一點,趁現在去賭石坊碰碰運氣!'],
 ['🍀','芳芳今天手氣差','射龍門、21 點、侏儸紀的莊家最近手氣不太好,趁現在進場試試看!'],
@@ -5966,7 +5969,6 @@ const GNOTES=[
 ['🚇','無限列車金幣 5 倍','無限列車每閃過一班列車的金幣變成原本的 5 倍(普通 90、困難 120、非常困難 180、地獄級別 240、終極煉獄 300),撐完全程 2 分鐘的通關獎金從 1,500 提高到 50,000!'],
 ['💚','賭石更好賺了:回本 87% → 95%','芳芳進了一批好料:每種原石長期平均拿回的錢從 87% 提高到 95%。垮掉的機率變低、切出來會「漲」的機會變多(河邊石約 36%、老坑沙皮約 31%、蟒帶料約 29%、松花料約 27%),帝王料更常開出冰種,頂級玉的機率也比上一版高。'],
 ['🔄','賭石坊「換一批」不再擋到價格','小螢幕手機上,「換一批」按鈕會蓋到架上原石的價格。現在按鈕和補貨倒數移到店面下方右側,任何螢幕都看得清楚。'],
-['💎','切出至尊、典藏玉全服恭喜','賭石切出高冰陽綠(至尊)或玻璃種帝王綠(典藏),會跟射中一線天一樣有全螢幕慶祝,全服玩家也會收到恭喜通知,點一下就能直接去賭石坊。一線天、池底公告也改成只要不在戰鬥中,任何畫面都會跳。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
