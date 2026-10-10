@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z4">
+<meta name="gbuild" content="1010-Z7">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1825,6 +1825,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
 <style id="ev1010s">
 /* 1010-E 雙十節紅包 */
 .ev1010{z-index:9000}
+.fdh{font-size:13px;font-weight:900;color:#ffd77a;margin:10px 2px 4px}.fdlog{max-width:none!important;margin:0 0 8px!important}
 .tabov{z-index:2147483000;background:rgba(5,7,12,.92)!important}.tabbox{max-width:360px;width:90vw;text-align:center;padding:20px 16px!important}.tabbox .tabic{font-size:44px}.tabbox h2{margin:6px 0;color:#ffe08a}.tabbox p{font-size:14px;line-height:1.6;color:#d6dde6;margin:0 0 14px}.tabbox .btn{width:100%;padding:12px;font-size:15px}
 /* 1010-T 芳芳賭石坊 */
 .jdscene{position:relative;border-radius:16px;padding:10px 10px 8px;min-height:250px;background:var(--jdbg,radial-gradient(ellipse at 50% 20%,#5a3b22,#2c1a10 65%,#170d07));background-size:cover;background-position:center;border:2px solid #7a5426;box-shadow:inset 0 0 40px rgba(0,0,0,.6);overflow:hidden}
@@ -2008,6 +2009,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
 .hsel{display:grid!important;grid-template-columns:auto 1fr 1fr;gap:8px 6px}.hsel .muted{grid-row:span 2}.hsel button{max-width:none!important}
 .dhero.hb-j{background:radial-gradient(ellipse at 50% 88%,rgba(255,214,150,.30),transparent 45%),radial-gradient(ellipse at 50% 20%,rgba(150,205,255,.18),transparent 60%),linear-gradient(#2a1f18,#120d0a)!important}.dhero.hb-j.hbj{background:linear-gradient(rgba(10,14,22,.15),rgba(10,14,22,.4)),var(--hbg-j) 50% 100%/cover no-repeat!important;background-color:#1a120d!important;border-radius:12px!important;overflow:hidden}.dhero .jdimg{height:84%!important;filter:drop-shadow(0 0 8px rgba(150,220,255,.55)) drop-shadow(0 6px 6px rgba(0,0,0,.35))}.dhero .jdimg.d2{height:86%!important}.jdoll{display:block;height:100%}.jdoll img{height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}
 .jph{display:grid;place-items:center;gap:6px;text-align:center}.jph b{font-size:84px;line-height:1;filter:drop-shadow(0 0 14px rgba(140,210,255,.9))}.jph small{font-size:12px;color:#bcd6ee;line-height:1.4}
+/* 1010-Z7 捲軸改成跟遊戲同色系的細捲軸(Windows 不再出現白色系統捲軸) */*{scrollbar-width:thin;scrollbar-color:#7a6430 #0b1018}::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:#0b1018}::-webkit-scrollbar-thumb{background:#7a6430;border-radius:8px;border:2px solid #0b1018}::-webkit-scrollbar-thumb:hover{background:#b8933f}::-webkit-scrollbar-button{display:none;height:0;width:0}
 </style>
 </head>
 <body>
@@ -2046,7 +2048,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z4</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z7</span></small>
   </div>
  </div>
 </div>
@@ -2223,6 +2225,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
       <label class="sqskip bjsk"><input type="checkbox" id="bjsqsk"> 跳過 21 點瞇牌動畫</label>
      </div>
     </div>
+    <div class="fdh">📜 全服即時紀錄</div><div class="dlog fdlog" id="bjlog"></div>
     <details class="drule dmore" id="bjmy"><summary>📊 我的 21 點戰績</summary><div id="bjmyb"></div></details>
     <button class="btn lbgo" data-lbc="bj">🏆 21 點排行榜(今日最大 / 黑傑克次數)</button>
     <details class="drule"><summary>📖 遊戲說明</summary><ol>
@@ -2244,6 +2247,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
      <div class="jdshelf" id="jdshelf"></div><div class="jdbar"><span id="jdref"></span><button class="btn" id="jdrefb">🔄 換一批</button></div></div>
     <div class="jddet" id="jddet"></div>
     <div class="jdstat" id="jdstat"></div>
+    <div class="fdh">📜 全服即時紀錄</div><div class="dlog fdlog" id="jdlog"></div>
     <div class="jdboxw" id="jdbox"></div>
     <details class="drule"><summary>📖 遊戲說明</summary><ol>
      <li><b>挑原石</b>:架上每次擺 1~5 顆原石,價格從 5,000 到 15 萬。越貴的原石,越容易開出好玉。架子每 10 分鐘免費補貨,也可以花 1 萬馬上換一批。</li>
@@ -3419,6 +3423,7 @@ function bjFinish(r,quiet){const P=SAVE.bjPend;if(!P||P.id!==r.id)return;const g
  const s=SAVE.bjs=SAVE.bjs||{n:0,w:0,l:0,p:0,bj:0,net:0,big:0,bigL:0,stk:0,maxW:0,maxL:0,dbl:0,spl:0};s.n++;const net=(+r.net||0)-(r.tax||0);s.net+=net;
  if(r.res==='bj')s.bj++;if(net>0){s.w++;s.big=Math.max(s.big,net);s.stk=s.stk>0?s.stk+1:1}else if(net<0){s.l++;s.bigL=Math.max(s.bigL,-net);s.stk=s.stk<0?s.stk-1:-1}else{s.p++}s.maxW=Math.max(s.maxW,s.stk);s.maxL=Math.max(s.maxL,-s.stk);
  save();renderHome();try{dqAdd('cas')}catch(e){}
+ /* 1010-Z7 單機(測試版)沒有伺服器紀錄,自己的輸贏直接放進 21 點全服紀錄 */if(!DP.on&&gross){try{BJF.l=[{nick:dpNick(),kind:r.res==='bj'?'bjbj':gross>0?'bjwin':'bjlose',amount:Math.abs(gross),t:new Date().toISOString()}].concat(BJF.l).slice(0,6);bjFeedRender()}catch(e){}}
  const bust=r.t1>21&&(!r.h2||r.t2>21),five=(r.h1.length>=5&&r.t1<=21)||(r.h2&&r.h2.length>=5&&r.t2<=21);
  if(r.res==='bj'){bjMsg('<span class="bjbig">♠️ 黑傑克!</span><br><span class="up">從池底贏走 '+fmtC(gross)+' 金幣(1 賠 1.5)</span>'+bjTaxT(r));if(!quiet){sfx('fan4');bjSay('bj','host-4');bjFlash()}}
  else if(net>0&&five){bjMsg('<span class="bjbig">🖐️ 過五關!</span><br><span class="up">5 張沒爆直接贏,從池底贏走 '+fmtC(gross)+' 金幣</span>'+bjTaxT(r));if(!quiet){sfx('casinoWin');bjSay('five','host-4')}}
@@ -4060,16 +4065,7 @@ $('sellall').onclick=()=>{const mq=sellQ(),list=SAVE.items.filter(i=>!isEq(i)&&i
   const bs=list.filter(i=>i.boss);if(!bs.length){sellL(list);return}
   setTimeout(()=>ask('👑 裡面有 '+bs.length+' 件首領專屬裝備:\n'+bs.slice(0,5).map(i=>'「'+i.name+'」').join('\n')+(bs.length>5?'\n…等 '+bs.length+' 件':'')+'\n只有打倒首領才拿得到,也要一起賣掉嗎?',()=>sellL(list),{yes:'一起賣掉',noTxt:'保留首領裝備',no:()=>sellL(list.filter(i=>!i.boss))}),60)})};
 $('asky').onclick=()=>{$('ask').hidden=true;const f=ASKF;ASKF=null;ASKN=null;if(f)f()};$('askn').onclick=()=>{$('ask').hidden=true;const f=ASKN;ASKF=null;ASKN=null;if(f)f()};
-$('besteq').onclick=()=>{audioUnlock();let n=0;
- for(const t of ['wpn','off','head','coat','shoe']){const p0=powerOf(pstats(1)),best=SAVE.items.filter(i=>i.type===t).map(i=>[i,powerWith(t,i)]).sort((a,b)=>b[1]-a[1])[0];const cur=byId(SAVE.eq[t]);if(best&&best[0]!==cur&&best[1]>p0){equip(best[0],t);n++}}
- const acc=SAVE.items.filter(i=>i.type==='acc').sort((a,b)=>ival(b)-ival(a)).slice(0,2);const curA=[byId(SAVE.eq.acc1),byId(SAVE.eq.acc2)];
- if(acc.length){const keep=new Set(acc.map(i=>i.id));const before=curA.map(i=>i&&i.id).join();
-  const sumNew=acc.reduce((s,i)=>s+ival(i),0),sumOld=curA.reduce((s,i)=>s+ival(i),0);
-  if(sumNew>sumOld+1e-9){const stay=curA.filter(i=>i&&keep.has(i.id));const add=acc.filter(i=>!stay.includes(i));const slots=['acc1','acc2'];const out={};
-   for(const sl of slots){const c=byId(SAVE.eq[sl]);if(c&&keep.has(c.id))out[sl]=c.id}
-   for(const it of add){const sl=slots.find(x=>!out[x]);if(sl)out[sl]=it.id}
-   delete SAVE.eq.acc1;delete SAVE.eq.acc2;Object.assign(SAVE.eq,out);n+=add.length}}
- save();renderHome();if(n){sfx('equip');toast('⚡ 已換上 '+n+' 件更好的裝備')}else{sfx('error');toast('身上已經是最好的裝備了')}};
+$('besteq').onclick=()=>{audioUnlock();/* 1010-Z7 一鍵換裝改用跟綠色▲同一套標準(實際戰力),飾品兩格一起比,技能滿級不再重複算 */const bak=Object.assign({},SAVE.eq),SL=['wpn','off','head','coat','shoe','acc1','acc2'];for(let pass=0;pass<8;pass++){let imp=false;for(const sl of SL){const t=sl.slice(0,3)==='acc'?'acc':sl;let bi=null,bv=powerOf(pstats(1))+.5;for(const it of SAVE.items){if(it.type!==t||SAVE.eq[sl]===it.id)continue;const v=powerWith(sl,it);if(v>bv){bv=v;bi=it}}if(bi){equip(bi,sl);imp=true}}if(!imp)break}const n=SL.filter(k=>SAVE.eq[k]&&SAVE.eq[k]!==bak[k]&&bak.acc1!==SAVE.eq[k]&&bak.acc2!==SAVE.eq[k]&&!Object.values(bak).includes(SAVE.eq[k])).length;const ch=SL.some(k=>SAVE.eq[k]!==bak[k]);save();renderHome();if(ch){sfx('equip');toast(n?'⚡ 已換上 '+n+' 件更好的裝備':'⚡ 已重新搭配身上的裝備')}else{sfx('error');toast('身上已經是最好的裝備了')}};
 const muteSet=on=>{SAVE.mute=on;save();volUI();if(SIL&&SAVE.mute)SIL.pause()};
 $('mute').onchange=$('mute2').onchange=e=>muteSet(e.target.checked);
 document.addEventListener('change',e=>{if(e.target&&e.target.id==='mute3'){muteSet(e.target.checked);if(!SAVE.mute){audioUnlock();setTimeout(()=>sfx('coins'),80)}}});
@@ -5713,11 +5709,13 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z4';
+const GBUILD='1010-Z7';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
-['🛡️','同一個瀏覽器開新分頁也會登出舊分頁','以前只有換裝置才會把舊的登出;同一個瀏覽器開兩個遊戲分頁時(例如更新版本時舊分頁還沒關),舊分頁會把舊進度存回去,造成升階、金幣等進度倒退。現在開新分頁,舊分頁一樣會被登出、不再存檔'],
+['⚡','一鍵換上較好裝備修正','有玩家反應倉庫明明有綠色 ▲ 的裝備,按「一鍵換上較好裝備」卻說已經是最好的。原因是舊算法只比一輪,換了一件之後其他部位的好壞會跟著變,飾品又用另一套標準。現在改成跟 ▲ 同一套標準(實際戰力),反覆比到沒有更好為止,按下去 ▲ 就會全部換上。電腦版的捲軸也換成跟遊戲同色系的細捲軸。'],
+['📜','賭石、21 點加上全服即時紀錄','跟射龍門一樣,賭石坊和 21 點下方會即時顯示全服玩家最近的結果:誰切開了冰種、誰開出帝王綠、誰拿到黑傑克、誰又輸進池底'],
+['🛡️','同一個瀏覽器開新分頁也會登出舊分頁','以前只有換裝置才會把舊的登出;同一個瀏覽器開兩個遊戲分頁時(例如更新版本時舊分頁還沒關),舊分頁會把舊進度存回去,造成升階、金幣等進度倒退。現在開新分頁,舊分頁一樣會被登出、不再存檔;被擠下線後一定要重新登入才能繼續玩'],
 ['💎','芳芳賭石坊開張','遊樂場新增「賭石」:芳芳化身賭石鑑定家,在骨董商藏店裡擺 1~5 顆原石,聽她的話術、打燈、擦窗,敢不敢下刀全看你,各原石的開出機率都公開。高冰陽綠可打造至尊「陽綠玉珮」或直接賣 150 萬,玻璃種帝王綠可打造典藏「帝王綠玉鐲」或直接賣 300 萬,飾品帶全新玉石技能;切割機、擦窗、打燈、開出好玉都有專屬音效'],
 ['📈','換裝置股票不見已修正','股票改成跟著帳號走,換手機、電腦、瀏覽器都看得到;之前在別台裝置買的股票,打開股市會自動找回來'],
 ['📈','股東福利上線','六家公司都有股東福利:持股市值 10 萬起就有,分 10 級,最高 1000 萬(每家公司持股上限也提高到 1000 萬)。黑心科技加經驗、加班物流多掉裝備、韭菜銀行加結算金幣、芳芳娛樂城加暴擊、開心農場加收成、殭屍製藥戰鬥回血'],
@@ -5735,8 +5733,6 @@ const GNOTES=[
 ['🗡️','九劍腎虛飛劍待命','飛劍改成只攻擊畫面上看得到的怪,不會再飛到畫面外;還沒有目標時,背後的九把劍會一把一把輪流發出淡藍光,表示劍已經準備好、等怪靠近'],
 ['✏️','帳號可以改顯示大小寫','雲端帳號旁邊新增「✏️ 大小寫」按鈕,可以把帳號改成想要的大小寫顯示(例如 hb210 → HB210),會跟著雲端存檔同步;登入時在帳號欄直接改大寫再登入也會記住'],
 ['🟢','排行榜可以看在線玩家','排行榜的玩家分類新增「🟢 在線玩家」:列出目前在線的所有玩家(不在前 200 名也看得到),點玩家一樣可以看裝備;點「目前在線 N 人」也能直接切過去'],
-['✨','飛劍光暈加強、年終獎金不再出現邊條','九劍腎虛的飛劍外圈淡藍光加大加亮,劍身後面多一道藍色尾光,開 2 倍速也看得清楚;電腦版視窗比較矮時,年終獎金的格子會自動縮小,不會再跑出拉動的邊條'],
-['🗡️','九劍腎虛開場就出劍','九劍腎虛的九把飛劍,開場怪一出現就會飛出去攻擊,不用等怪走近才啟動;怪靠近之後一樣優先打附近的,強度不變'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -5893,6 +5889,19 @@ const JD={sel:-1,busy:false};
 const jdImg=k=>ART[k]||'';
 function jdSt(s){const S=JDS[s.t];return s.win?(ART[S.w]?S.w:S.walt||S.w):(ART[S.img]?S.img:S.alt||S.img)}
 function jdAlt(s){const S=JDS[s.t];return(!ART[S.img]&&S.fx)?' '+S.fx:''}
+/* 1010-Z6 全服即時紀錄:賭石(jd_log)、21 點(dragon_log 的 bj 紀錄) */
+function feedRow(nick,badge,cls,txt,t){return'<div class="dlr'+(/big/.test(cls)?' big':'')+(/g1/.test(cls)?' g1':'')+'"><span class="nm">'+escH(nick||'?')+'</span><span class="k '+cls+'">'+badge+'</span><span class="tx">'+txt+'</span><span class="ag">'+dpAgo(t)+'</span></div>'}
+const JDFD={l:[],t:0};
+async function jdFeed(force){if(!DP.on){jdFeedRender();return}if(!force&&Date.now()-JDFD.t<8000)return;JDFD.t=Date.now();try{const l=await dpReq('/rest/v1/rpc/jd_feed',{});if(Array.isArray(l)){JDFD.l=l;jdFeedRender()}}catch(e){jdFeedRender()}}
+function jdFeedRender(){const el=$('jdlog');if(!el)return;el.innerHTML=JDFD.l.length?JDFD.l.map(r=>{const o=+r.jade||0,S=JDS[+r.stone]||JDS[0],J=JDJ[o],a=+r.amount||0;
+  return o>=9?feedRow(r.nick,'💎'+J.n,'up big g1','🎉 切開'+S.n+',價值 <b class="up">'+fmtC(a)+'</b>',r.t):o>=7?feedRow(r.nick,'✨'+J.n,'up','切開'+S.n+',價值 <b class="up">'+fmtC(a)+'</b>',r.t):o?feedRow(r.nick,J.n,'up','切開'+S.n+',價值 <b class="up">'+fmtC(a)+'</b>',r.t):feedRow(r.nick,'💥垮了','down',S.n+'垮了,賠掉 <b class="down">'+fmtC(a)+'</b>',r.t)}).join('')
+  :'<div class="muted" style="font-size:12px">'+(DP.on?'還沒有人切過,第一刀就是你!':'單機模式只看得到自己的紀錄(網頁版才是全服共用)')+'</div>'}
+function jdPost(t,o){JDFD.l=[{nick:dpNick(),stone:t,jade:o,amount:o?JDJ[o].v:JDS[t].p,t:new Date().toISOString()}].concat(JDFD.l).slice(0,6);jdFeedRender();if(DP.on)dpReq('/rest/v1/rpc/jd_post',{p_id:fmId(),p_key:fmKey(),p_nick:dpNick(),p_stone:t,p_jade:o}).then(()=>setTimeout(()=>jdFeed(true),1500)).catch(()=>{})}
+const BJF={l:[],t:0,rid:null};
+async function bjFeed(force){if(!DP.on){bjFeedRender();return}if(!force&&Date.now()-BJF.t<8000)return;BJF.t=Date.now();try{const l=await dpReq('/rest/v1/dragon_log?select=nick,kind,amount,t&kind=in.(bjwin,bjbj,bjlose)&order=id.desc&limit=6');if(Array.isArray(l)){BJF.l=l;bjFeedRender()}}catch(e){bjFeedRender()}}
+function bjFeedRender(){const el=$('bjlog');if(!el)return;el.innerHTML=BJF.l.length?BJF.l.map(r=>{const a=+r.amount||0;return r.kind==='bjbj'?feedRow(r.nick,'♠️黑傑克','up big g1','🎉 贏走 <b class="up">'+fmtC(a)+'</b>',r.t):r.kind==='bjwin'?feedRow(r.nick,'♠️贏了','up','贏走 <b class="up">'+fmtC(a)+'</b>',r.t):feedRow(r.nick,'♠️輸了','down','丟進池裡 <b class="down">'+fmtC(a)+'</b>',r.t)}).join('')
+  :'<div class="muted" style="font-size:12px">'+(DP.on?'還沒有人玩過 21 點,第一把就是你!':'單機模式沒有全服紀錄(網頁版才看得到)')+'</div>'}
+setInterval(()=>{try{if(!SAVE||$('home').hidden||SAVE.tab!=='dragon'||document.visibilityState!=='visible')return;if(SAVE.cas==='jd')jdFeed();else if(SAVE.cas==='bj'){bjFeed();const r=BJ.r;if(r&&r.done&&BJF.rid!==(r.id||r.t||1)){BJF.rid=r.id||r.t||1;setTimeout(()=>bjFeed(true),1200)}}}catch(e){}},2000);
 function jdOddTxt(t){const o=JDS[t].o,f=x=>x>=1?x.toFixed(1):x>=.1?x.toFixed(2):x.toFixed(3);return'📊 垮了 '+f(o[0])+'% · 冰種以上 '+f(o[8]+o[9]+o[10])+'% · 至尊 '+f(o[9])+'% · 典藏 '+f(o[10])+'%'}
 function jdData(){const D=SAVE.jd=SAVE.jd||{t:0,list:[],own:null};SAVE.jades=SAVE.jades||{};SAVE.jds=SAVE.jds||{n:0,spent:0,got:0,best:0,streak:0};return D}
 function jdPW(w){let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<w.length;i++){x-=w[i];if(x<0)return i}return 0}
@@ -5910,7 +5919,7 @@ function jdOffer(s){const S=JDS[s.t];if(!s.win)return Math.round(S.p*.8/100)*100
  const thinW=S.o[0]*.25*(1/5);if(fam===JDJ[4].f||fam===JDJ[5].f||fam===JDJ[6].f||fam===JDJ[7].f||fam===JDJ[8].f)pw+=thinW;
  const e=pw?ev/pw:S.p;return Math.round(Math.max(S.p*.5,Math.min(S.p*1.8,e*.8))/100)*100}
 function jdPay(c,why){if((SAVE.coin||0)<c){toast('金幣不夠,需要 '+fmtC(c));sfx('error');return false}SAVE.coin-=c;SAVE.jds.spent+=c;save();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin);return true}
-function jdPanel(){const D=jdData();try{ensurePack('ds')}catch(e){}if(!D.list.length&&!D.own)jdGen();jdRender();if(!jdPanel.s){jdPanel.s=1;jdSay(pick(JDL.idle),'idle')}}
+function jdPanel(){const D=jdData();setTimeout(()=>jdFeed(true),0);try{ensurePack('ds')}catch(e){}if(!D.list.length&&!D.own)jdGen();jdRender();if(!jdPanel.s){jdPanel.s=1;jdSay(pick(JDL.idle),'idle')}}
 function jdRender(){const D=jdData(),sh=$('jdshelf');if(!sh)return;const own=D.own;if(ART['ds-bg']&&!jdRender.bg){jdRender.bg=1;const sc=$('jdscene');sc.classList.add('hasbg');sc.style.setProperty('--jdbg','linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.05) 55%,rgba(0,0,0,.45)),url('+ART['ds-bg']+')')}
  sh.innerHTML=D.list.length?D.list.map((s,i)=>{const S=JDS[s.t];return'<button class="jdst'+(JD.sel===i&&!own?' on':'')+(own?' dim':'')+'" data-i="'+i+'"><img class="'+jdAlt(s).trim()+'" src="'+jdImg(jdSt(s))+'" alt=""><b>'+S.n+'</b><i>'+fmtC(S.p)+'</i>'+(s.lit?'<u>'+'★'.repeat(s.lit)+'</u>':'')+'</button>'}).join(''):'<div class="muted jdempty">架上的原石都賣完了,等一下會補貨</div>';
  const left=Math.max(0,JDREF-(Date.now()-D.t));$('jdref').textContent=left>0?'免費補貨 '+Math.floor(left/60000)+':'+String(Math.floor(left/1000)%60).padStart(2,'0'):'可以免費補貨';$('jdrefb').textContent=left>0?'🔄 換一批(1 萬)':'🔄 免費換一批';
@@ -5935,7 +5944,7 @@ function jdAct(a){const D=jdData();const s=D.own||(JD.sel>=0?D.list[JD.sel]:null
 function jdCut(){const D=jdData(),s=D.own;if(!s||JD.busy)return;JD.busy=true;const S=JDS[s.t];
  const ov=document.createElement('div');ov.className='ov jdov';ov.innerHTML='<div class="jdcut"><div class="jdstage"><div class="jdsaw"><img src="'+jdImg('ds-saw')+'" alt=""><div class="jdbw"><img src="'+jdImg('ds-blade')+'" alt=""></div><img src="'+jdImg('ds-guard')+'" alt=""></div><img class="jdrock'+jdAlt(s)+'" src="'+jdImg(jdSt(s))+'" alt=""><img class="jdspk" src="'+jdImg('ds-spark')+'" alt=""></div><div class="jdres"></div></div>';
  document.body.appendChild(ov);const st=ov.querySelector('.jdstage');setTimeout(()=>{st.classList.add('go');sfx('jdSaw')},250);setTimeout(()=>{sfx('jdCrack');st.classList.add('crack')},1550);
- setTimeout(()=>{const o=s.out,J=JDJ[o],R=SAVE.jds;D.own=null;R.n++;if(o){SAVE.jades['j'+o]=(SAVE.jades['j'+o]||0)+1;R.got+=J.v;if(o>R.best)R.best=o;R.streak=0}else R.streak=(R.streak||0)+1;save();
+ setTimeout(()=>{const o=s.out,J=JDJ[o],R=SAVE.jds;D.own=null;try{jdPost(s.t,o)}catch(e){}R.n++;if(o){SAVE.jades['j'+o]=(SAVE.jades['j'+o]||0)+1;R.got+=J.v;if(o>R.best)R.best=o;R.streak=0}else R.streak=(R.streak||0)+1;save();
   const big=o>=9,good=o>=7;st.innerHTML=(o?'<img class="jdout pop" src="'+jdImg('ds-j'+o)+'" alt="">':'<img class="jdout pop" src="'+jdImg('ds-crash')+'" alt=""><img class="jddust" src="'+jdImg('ds-dust')+'" alt="">');st.classList.toggle('jack',big);ov.classList.toggle('jack',big);
   const line=o?pick(JDL.cut[big?'jack':good?'big':o>=4?'mid':'small']):s.thin?pick(JDL.cut.thin):(R.streak>=3?'你連垮 '+R.streak+' 顆了……要不要先去打個怪,轉轉手氣?':pick(JDL.cut.crash));
   const fk=big?'jack':good?'wow':o?'hint':'sorry';const fi=ART['ds-f'+JDF[fk]]||HI(JDFB[JDF[fk]],'fd');
@@ -5962,7 +5971,7 @@ function jdInit(){if(jdInit.ok||!$('jdshelf'))return;jdInit.ok=1;try{$('jdodds')
  $('jdrefb').onclick=()=>{const D=jdData();if(D.own){toast('先處理手上已經買下的原石');return}const free=Date.now()-D.t>=JDREF;if(!free&&!jdPay(10000))return;jdGen();jdSay(pick(['新貨到了!剛從緬甸運來的。','補貨囉~這批皮殼都很漂亮。']),'hint');sfx('jdRefill');jdRender()}}
 setInterval(()=>{try{if(!SAVE||$('home').hidden||SAVE.tab!=='dragon'||SAVE.cas!=='jd'||document.visibilityState!=='visible'||JD.busy)return;const D=jdData();if(!D.own&&Date.now()-D.t>=JDREF&&!D.list.length)jdGen();jdRender()}catch(e){}},1000);
 
-function casSwitch(k){if(k==='sib'||(k!=='dragon'&&k!=='train'&&k!=='bj'&&k!=='stk'&&k!=='jd'))k='dragon';SAVE.cas=k;$('casD').hidden=k!=='dragon';if($('casJD'))$('casJD').hidden=k!=='jd';if(k==='jd'){['casT','casJ','casK'].forEach(x=>{if($(x))$(x).hidden=true});setTimeout(()=>{try{jdInit();jdPanel()}catch(e){console.error(e)}},0);save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if($('casT'))$('casT').hidden=k!=='train';if($('casJ'))$('casJ').hidden=k!=='bj';if($('casK'))$('casK').hidden=k!=='stk';if(k==='stk'){try{stkPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='bj'){try{bjPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='train'){try{trPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
+function casSwitch(k){if(k==='sib'||(k!=='dragon'&&k!=='train'&&k!=='bj'&&k!=='stk'&&k!=='jd'))k='dragon';SAVE.cas=k;$('casD').hidden=k!=='dragon';if($('casJD'))$('casJD').hidden=k!=='jd';if(k==='jd'){['casT','casJ','casK'].forEach(x=>{if($(x))$(x).hidden=true});setTimeout(()=>{try{jdInit();jdPanel()}catch(e){console.error(e)}},0);save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if($('casT'))$('casT').hidden=k!=='train';if($('casJ'))$('casJ').hidden=k!=='bj';if($('casK'))$('casK').hidden=k!=='stk';if(k==='stk'){try{stkPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='bj'){try{bjPanel()}catch(e){console.error(e)}try{bjFeed(true)}catch(e){}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}if(k==='train'){try{trPanel()}catch(e){console.error(e)}save();document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));return}document.querySelectorAll('#castabs button').forEach(b=>b.classList.toggle('on',b.dataset.c===k));try{if(k==='sib'){renderSib();if(SBS.ph==='idle')sbSay('idle','host-1');sbLogFetch()}else renderDragon()}catch(e){}save()}
 document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});
 $('castabs').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;audioUnlock();sfx('tab');casSwitch(b.dataset.c)};
 setInterval(()=>{if(!$('home').hidden&&SAVE&&SAVE.tab==='dragon'&&SAVE.cas==='sib'&&SBS.ph!=='rolling'&&SBS.ph!=='done')sbSay('idle','host-1')},8000);
@@ -6171,7 +6180,7 @@ function clModal(mode,pre){/* 1007-Z5 這台已經綁定帳號、只是被登出
  document.body.appendChild(ov);if(pre){const pd=acctDisp(pre);$('clu').value=pd;if(!reg&&SAVE.acct===pre)$('clerr').innerHTML='<span style="color:#9fd8ff">這台裝置綁定的帳號是「'+escH(pd)+'」,輸入密碼就能登入'+(pd===pre&&/[a-z]/.test(pd)?'<br><small style="color:#9aa6b4">想顯示大寫?直接在帳號欄改成大寫再登入,之後就會照你輸入的顯示</small>':'')+'</span>'}setTimeout(()=>(pre?$('clp'):$('clu')).focus(),50);
  const err=t=>{$('clerr').textContent=t;sfx('error')},close=()=>{ov.remove()};
  ov.addEventListener('keydown',e=>{if(e.key==='Enter')$('clok').click()});
- $('clx').onclick=close;
+ $('clx').onclick=()=>{close();if(!CL.u&&CL.kickU)setTimeout(clKickUI,0)};
  $('clok').onclick=async()=>{const uRaw=$('clu').value.trim(),u=uRaw.toLowerCase(),p=$('clp').value;try{if(/^[A-Za-z0-9_]{3,20}$/.test(uRaw))acctSetD(uRaw)}catch(e){}
   if(!/^[a-z0-9_]{3,20}$/.test(u))return err(CLERR['bad user']);if(p.length<(reg?6:4))return err(reg?'密碼至少要 6 個字':CLERR['bad pass']);
   if(reg&&SAVE.acct&&SAVE.acct!==u){err('');$('clerr').innerHTML='這台裝置的進度已經綁定帳號「'+escH(SAVE.acct)+'」,不能再綁到新帳號。<br>想用新帳號重新開始,可以<button class="btn" id="clreset" style="margin-top:6px;padding:5px 10px;font-size:13px">🧹 清除這台的進度,重新開始</button>';return}
@@ -6227,7 +6236,9 @@ function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);cons
  try{if(G&&!G.over&&!G.tr){const c0=CL.syncCoin!=null?CL.syncCoin:(SAVE.coin||0),ids=CL.syncIds||new Set((SAVE.items||[]).map(i=>i.id));running=true;endRun();const add=(SAVE.items||[]).filter(i=>!ids.has(i.id)),dc=Math.max(0,(SAVE.coin||0)-c0);
    if(ku&&(dc>0||add.length)){let P=[];try{P=JSON.parse(localStorage.getItem('clockin-pending')||'[]')}catch(e){}P.push({acct:ku,coin:dc,items:add,t:Date.now()});localStorage.setItem('clockin-pending',JSON.stringify(P.slice(-5)))}}
    else if(typeof running!=='undefined'&&running&&G&&!G.over){running=false}}catch(e){}
- document.querySelectorAll('.clov.kick').forEach(o=>o.remove());
+ CL.kickU=ku;clKickUI()}
+/* 1010-Z5 被擠下線後畫面一直鎖住:登入視窗按「取消」也會回到這個畫面,不能繼續玩 */
+function clKickUI(){const ku=CL.kickU||'';document.querySelectorAll('.clov.kick').forEach(o=>o.remove());
  const ov=document.createElement('div');ov.className='ov clov kick';ov.style.zIndex='99998';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>📱 帳號已在另一台裝置上線</h2><p>你的雲端帳號「'+escH(ku)+'」剛剛在<b>另一台裝置</b>登入,這台已經自動下線。</p><p class="muted" style="font-size:13px">要在這台繼續玩,請重新登入。<br>重新登入後,另一台會下線,這台會<b>自動接續最新的進度</b>。</p><div class="clbtns"><button class="btn pri" data-a="re">在這台繼續玩</button></div></div>';
  document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;clModal('in',ku)}}
 async function clCheck(){if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;if(Date.now()-(CL.ct||0)<8000)return;CL.ct=Date.now();
