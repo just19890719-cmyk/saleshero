@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-I">
+<meta name="gbuild" content="1010-I2">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1957,7 +1957,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-I</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-I2</span></small>
   </div>
  </div>
 </div>
@@ -3428,6 +3428,9 @@ const STKL={
   return{today:td>0?[{nick:me,amount:td,t:new Date().toISOString()}]:[],all:S.realized>0?[{nick:me,amount:S.realized,t:new Date().toISOString()}]:[]}}};
 const stkOn=()=>DP.on&&STK.srv!==false;
 async function stkRpc(fn,b){return dpReq('/rest/v1/rpc/'+fn,b)}
+/* 1010-I2 股票改綁帳號編號(跟農場同一組),換裝置不會再不見;第一次讀取時把同一組驗證碼的舊裝置持股自動搬回來 */
+function stkId(){return STK.legacy?lbId():fmId()}/* 伺服器還沒更新(沒有 stk_reclaim)時先沿用舊編號,避免股票看起來不見 */
+async function stkReclaim(){if(STK.rc||!stkOn())return;STK.rc=1;try{const r=await stkRpc('stk_reclaim',{p_id:stkId(),p_key:fmKey()});if(r&&+r.moved>0){toast('📈 已找回你在其他裝置買的 '+r.moved+' 檔股票');sfx('coins')}}catch(e){const m=String((e&&(e.msg||e.message))||'')+' '+String((e&&e.code)||'');if(/404|PGRST202|Could not find|does not exist/.test(m)){STK.rc=1;STK.legacy=true}else STK.rc=0}}
 const stkErr=e=>{const m=String((e&&e.msg)||(e&&e.message)||e||''),c=String((e&&e.code)||'');if(/poor/.test(m))return'金幣不夠';if(/cap/.test(m))return'每家公司最多只能投入 '+fmtC(STK.cap)+' 金幣';if(/no_qty/.test(m))return'持股不夠';if(/no_div/.test(m))return'目前沒有可以領的股利';if(/bad qty/.test(m))return'股數不對';if(/404|PGRST2|does not exist|function/i.test(c+m))return'股市需要伺服器更新,請管理員執行 1009-L 的 SQL';return'連線失敗,稍後再試'};
 const stkNonce=()=>'n'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 const stkHold=s=>{const me=STK.q&&STK.q.me;const h=me&&(me.hold||[]).find(x=>x.sym===s);return h||{qty:0,cost:0}};
@@ -3451,11 +3454,11 @@ function stkRender(){const q=STK.q,list=$('sklist');if(!list)return;stkClock();
  $('skme').innerHTML='<div><small>持股市值</small><b>'+fmtC(mv)+'</b></div><div><small>未實現損益</small><b class="'+stkCls(un)+'">'+(un>0?'+':un<0?'−':'')+fmtC(Math.abs(un))+(cost?' <em>('+(un>=0?'+':'−')+Math.abs(un/cost*100).toFixed(1)+'%)</em>':'')+'</b></div><div><small>已實現損益</small><b class="'+stkCls(me.realized)+'">'+(me.realized>0?'+':me.realized<0?'−':'')+fmtC(Math.abs(me.realized||0))+'</b></div>'+
   '<div><small>身上金幣</small><b>'+fmtC(SAVE.coin||0)+'</b></div>'+(me.div>0?'<button class="btn pri skdiv" id="skdiv"'+(STK.busy?' disabled':'')+'>🏦 領股利 '+fmtC(me.div)+'</button>':'');
  if(!$('skov').hidden)stkDetRender();try{if($('skmy').open)stkMyRender()}catch(e){}}
-async function stkLoad(force){if(STK.loading)return;STK.loading=true;try{const q=stkOn()?await stkRpc('stk_quote',{p_id:lbId(),p_key:fmKey()}):STKL.quote();if(q&&q.cos){STK.q=q;STK.err='';STK.skew=(+q.t||0)-stkNowT();if(q.pot!=null)DP.pot=+q.pot}STK.lt=Date.now()}
+async function stkLoad(force){if(STK.loading)return;STK.loading=true;try{await stkReclaim()}catch(e){}try{const q=stkOn()?await stkRpc('stk_quote',{p_id:stkId(),p_key:fmKey()}):STKL.quote();if(q&&q.cos){STK.q=q;STK.err='';STK.skew=(+q.t||0)-stkNowT();if(q.pot!=null)DP.pot=+q.pot}STK.lt=Date.now()}
  catch(e){const m=stkErr(e);if(/伺服器更新/.test(m)){STK.srv=false;STK.err=m;try{STK.q=STKL.quote()}catch(x){}}else STK.err=m;STK.lt=Date.now()}
  STK.loading=false;stkRender();if(!$('skov').hidden&&(force||!STK.ch||STK.chk!==STK.sel+STK.mode+(STK.q&&STK.q.t)))stkChartLoad()}
 /* 重新整理後補帳:送出交易後還沒收到結果就關掉,回來查伺服器有沒有成交 */
-async function stkRecover(){const P=SAVE.stkPend;if(!P)return;let x=null;try{x=stkOn()?await stkRpc('stk_tx_get',{p_id:lbId(),p_key:fmKey(),p_nonce:P.n}):STKL.txGet(P.n)}catch(e){return}
+async function stkRecover(){const P=SAVE.stkPend;if(!P)return;let x=null;try{x=stkOn()?await stkRpc('stk_tx_get',{p_id:stkId(),p_key:fmKey(),p_nonce:P.n}):STKL.txGet(P.n)}catch(e){return}
  if(x&&x.nonce){stkApply(x,true);toast('📈 補上一筆沒有入帳的'+(x.kind==='buy'?'買進':x.kind==='sell'?'賣出':'股利'))}else if(Date.now()-(P.t||0)>15000){delete SAVE.stkPend;save()}}
 function stkApply(x,quiet){const D=SAVE.stkDone=SAVE.stkDone||[];if(D.includes(x.nonce)){if(SAVE.stkPend&&SAVE.stkPend.n===x.nonce){delete SAVE.stkPend;save()}return 0}
  let tax=0;if(x.kind==='sell'&&x.pnl>0)tax=taxIncome(x.pnl);else if(x.kind==='div')tax=taxIncome(x.amount);
@@ -3469,14 +3472,14 @@ async function stkTrade(){const s=STK.sel,c=STK.q&&STK.q.cos.find(x=>x.sym===s);
  if(side==='buy'){const need=Math.ceil(qty*c.p)+Math.max(1,Math.ceil(Math.ceil(qty*c.p)*STK.fee));if(coin<need){toast('📈 金幣不夠,買 '+fmtC(qty)+' 股要 '+fmtC(need));sfx('error');return}if(h.cost+need>STK.cap){toast('📈 '+stkErr({msg:'cap'}));sfx('error');return}}
  else if(qty>h.qty){toast('📈 持股不夠,只有 '+fmtC(h.qty)+' 股');sfx('error');return}
  audioUnlock();const n=stkNonce();SAVE.stkPend={n,t:Date.now()};save();STK.busy=true;stkDetRender();let x=null;
- try{x=stkOn()?await stkRpc('stk_trade',{p_id:lbId(),p_key:fmKey(),p_nick:dpNick(),p_nonce:n,p_sym:s,p_side:side,p_qty:qty,p_coin:coin}):STKL.trade(n,s,side,qty,coin)}
+ try{x=stkOn()?await stkRpc('stk_trade',{p_id:stkId(),p_key:fmKey(),p_nick:dpNick(),p_nonce:n,p_sym:s,p_side:side,p_qty:qty,p_coin:coin}):STKL.trade(n,s,side,qty,coin)}
  catch(e){STK.busy=false;delete SAVE.stkPend;save();const m=stkErr(e);sfx('error');toast('📈 '+m);if(/伺服器更新/.test(m))STK.srv=false;stkDetRender();return}
  STK.busy=false;const tax=stkApply(x);STK.qty=0;
  if(x.kind==='buy'){sfx('chips');toast('📈 買進 '+stkCo(s).name+' '+fmtC(x.qty)+' 股 @ '+stkF(x.price)+',付出 '+fmtC(-x.amount)+'(含手續費 '+fmtC(x.fee)+')')}
  else{const np=x.pnl-tax;sfx(np>0?'casinoWin':np<0?'casinoLose':'coins');toast('📈 賣出 '+fmtC(x.qty)+' 股 @ '+stkF(x.price)+',拿回 '+fmtC(x.amount-tax)+(x.pnl>0?'(獲利 '+fmtC(x.pnl)+',芳芳稅 '+fmtC(tax)+')':x.pnl<0?'(虧損 '+fmtC(-x.pnl)+')':''))}
  STK.flash={k:x.kind,v:x.kind==='buy'?x.amount:x.pnl-tax,t:Date.now()};stkLoad(true)}
 async function stkClaim(){if(STK.busy)return;audioUnlock();const n=stkNonce();SAVE.stkPend={n,t:Date.now()};save();STK.busy=true;stkRender();let x=null;
- try{x=stkOn()?await stkRpc('stk_claim',{p_id:lbId(),p_key:fmKey(),p_nonce:n}):STKL.claim(n)}catch(e){STK.busy=false;delete SAVE.stkPend;save();sfx('error');toast('🏦 '+stkErr(e));stkRender();return}
+ try{x=stkOn()?await stkRpc('stk_claim',{p_id:stkId(),p_key:fmKey(),p_nonce:n}):STKL.claim(n)}catch(e){STK.busy=false;delete SAVE.stkPend;save();sfx('error');toast('🏦 '+stkErr(e));stkRender();return}
  STK.busy=false;const tax=stkApply(x);sfx('coinsMany');toast('🏦 領到韭菜銀行股利 '+fmtC(x.amount)+(tax?',芳芳稅 '+fmtC(tax)+',實拿 '+fmtC(x.amount-tax):''));stkRender()}
 /* 個股視窗 */
 function stkOpen(s){STK.sel=s;STK.qty=0;STK.ch=null;$('skov').hidden=false;sfx('open');stkDetRender();stkChartLoad()}
@@ -3518,7 +3521,7 @@ function stkSetQty(v){const c=STK.q&&STK.q.cos.find(x=>x.sym===STK.sel);if(!c)re
 function stkMyRender(){const s=SAVE.stks||{n:0,buy:0,sell:0,pnl:0,fee:0,tax:0,div:0,best:0,worst:0};
  $('skmyb').innerHTML='<div class="dmy"><div><small>交易次數</small><b>'+fmtC(s.n)+'</b></div><div><small>賣出已實現(稅後)</small><b class="'+stkCls(s.pnl)+'">'+(s.pnl>=0?'+':'−')+fmtC(Math.abs(s.pnl))+'</b></div><div><small>領到的股利(稅後)</small><b>'+fmtC(s.div)+'</b></div><div><small>付過的手續費</small><b>'+fmtC(s.fee)+'</b></div>'+
  '<div><small>單筆最大獲利</small><b class="skup">+'+fmtC(s.best)+'</b></div><div><small>單筆最大虧損</small><b class="skdn">−'+fmtC(-s.worst)+'</b></div><div><small>累計買進</small><b>'+fmtC(s.buy)+'</b></div><div><small>付過的芳芳稅</small><b>'+fmtC(s.tax)+'</b></div></div><div id="sktxl" class="sktxl"><div class="muted">讀取交易紀錄…</div></div>';
- (async()=>{let L=[];try{L=stkOn()?await stkRpc('stk_my_tx',{p_id:lbId(),p_key:fmKey()}):STKL.myTx()}catch(e){}const el=$('sktxl');if(!el)return;
+ (async()=>{let L=[];try{L=stkOn()?await stkRpc('stk_my_tx',{p_id:stkId(),p_key:fmKey()}):STKL.myTx()}catch(e){}const el=$('sktxl');if(!el)return;
   el.innerHTML=(L||[]).length?L.slice(0,15).map(x=>'<div class="sktx"><span>'+(x.kind==='buy'?'🔴 買進':x.kind==='sell'?'🟢 賣出':'🏦 股利')+'</span><span>'+(x.kind==='div'?'韭菜銀行':escH(stkCo(x.sym).name)+' '+fmtC(x.qty)+' 股 @ '+stkF(x.price))+'</span><b class="'+(x.kind==='sell'?stkCls(x.pnl):x.kind==='div'?'skup':'')+'">'+(x.kind==='sell'?(x.pnl>=0?'+':'−')+fmtC(Math.abs(x.pnl)):x.kind==='div'?'+'+fmtC(x.amount):'−'+fmtC(-x.amount))+'</b><small>'+dpAgo(x.t)+'</small></div>').join(''):'<div class="muted">還沒有交易紀錄</div>'})()}
 function stkPanel(){if(!ART['stk-HXT']&&typeof ensurePack==='function')try{ensurePack('extra')}catch(e){}stkArt();stkRender();stkLoad(true);stkRecover()}
 function stkArtAll(){stkArt();document.querySelectorAll('#castabs .cti[data-k="stk-icon"]').forEach(e=>{if(ART['stk-icon'])e.innerHTML='<img src="'+ART['stk-icon']+'" alt="">'});if(STK.q){stkRender();if(!$('skov').hidden)stkDetRender()}}
@@ -5435,10 +5438,11 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-I';
+const GBUILD='1010-I2';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER='2026.10.06e';
 const GNOTES=[
+['📈','換裝置股票不見已修正','股票改成跟著帳號走,換手機、電腦、瀏覽器都看得到;之前在別台裝置買的股票,打開股市會自動找回來'],
 ['🥊','男女主角戰鬥新美術','戰鬥中的男女主角換成跟選角立繪同一個人的新動作圖;男主角的拳頭帶著跳動的藍白電弧,女主角的紅色高跟鞋一直燃著火焰,出招打到最遠時特別猛'],
 ['📱','手機畫面拉遠、只打看得到的怪','手機直式畫面拉遠一點,左右看得更遠,怪從旁邊進來比較早看到;男女主角、恨鐵不成鋼也改成只攻擊畫面上看得到的怪,不會再還沒看到怪就出招;戰力徽章移到角色上方,不擋住角色'],
 ['🎉','恨鐵不成鋼、九劍腎虛常態開放、戰力更醒目','恨鐵不成鋼、九劍腎虛改為常態開放角色;雙十節紅包改成回到住處畫面才發,戰鬥中不會跳出;裝備頁的戰力改成金框徽章,數字放大發光,戰力提升時會閃一下'],
@@ -5458,7 +5462,6 @@ const GNOTES=[
 ['🏮','九劍腎虛新立繪、新背景','九劍腎虛的裝備頁換上同畫風的新立繪,背景是夜晚的中藥行,角色站在地上的光圈中間'],
 ['🗡️','九劍腎虛調整','飛劍放大、加上淡藍光暈,拖尾和打中的閃光變小,戰鬥中看得清楚是九把劍在穿梭;強度下修到跟恨鐵不成鋼差不多;裝備頁立繪改成跟戰鬥同畫風'],
 ['🗡️','新角色:九劍腎虛','新角色「九劍腎虛」免費體驗!一臉腎虛的古風公子,召喚九把飛劍在怪物之間來回穿梭斬擊,強度跟恨鐵不成鋼一樣'],
-['🎲','裝備技能更隨機、更多種','首領裝備以外,裝備的技能種類和等級都是隨機的,技能從 3 種增加到 7 種(新增光劍、鋼筆、打火機、相機):稀有 Lv.1~2、傳說 Lv.1~3、神話 Lv.2~3,同品質也有高低,值得一直刷來組技能;祈禱升階有機會順便提升技能等級,不會變低。已經拿到的裝備等級不變'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
