@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z10">
+<meta name="gbuild" content="1010-Z11">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2051,7 +2051,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z10</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z11</span></small>
   </div>
  </div>
 </div>
@@ -2417,6 +2417,12 @@ for(const [o,n] of [['萬寶龍鋼筆','萬能鋼筆'],['寶格麗公事包','�
 /* 1008-A 圖片改成用到才解碼(原本開遊戲就把幾百張圖全部解碼,手機很吃 CPU 和記憶體) */
 const IMGT={};let IMGW=0;function imgLoaded(){if(IMGW)return;IMGW=1;requestAnimationFrame(()=>{IMGW=0;try{SC.clear()}catch(e){}})}
 const IMG=new Proxy(IMGT,{get(t,k){if(typeof k!=='string')return t[k];let v=t[k];if(v===undefined&&ART[k]){v=new Image();v.decoding='async';v.onload=imgLoaded;v.src=ART[k];t[k]=v}return v},set(t,k,v){t[k]=v;return true},has(t,k){return k in t||(typeof k==='string'&&k in ART)},deleteProperty(t,k){delete t[k];return true}});
+/* 1010-Z11 圖片改用 blob 網址(用到才轉):原本每張圖是一大串 base64 文字,倉庫 300 格時畫面字串高達 4~5MB,手機每點一下都要重排好幾百毫秒 */
+function artBlob(d){try{const i=d.indexOf(','),mime=d.slice(5,d.indexOf(';')),bin=atob(d.slice(i+1)),n=bin.length,u=new Uint8Array(n);for(let j=0;j<n;j++)u[j]=bin.charCodeAt(j);return URL.createObjectURL(new Blob([u],{type:mime}))}catch(e){return d}}
+function artLazy(keys){for(const k of keys){const pd=Object.getOwnPropertyDescriptor(ART,k);if(!pd||!('value' in pd))continue;const d=pd.value;if(typeof d!=='string'||d.length<1500||d.charCodeAt(0)!==100||d.slice(0,5)!=='data:'||d.slice(0,60).indexOf(';base64,')<0)continue;let raw=d;
+ Object.defineProperty(ART,k,{configurable:true,enumerable:true,get(){const v=artBlob(raw);raw=null;Object.defineProperty(ART,k,{value:v,writable:true,enumerable:true,configurable:true});return v},set(v){raw=null;Object.defineProperty(ART,k,{value:v,writable:true,enumerable:true,configurable:true})}})}}
+try{artLazy(Object.keys(ART))}catch(e){}
+
 function imgWarm(keys){for(const k of keys)if(k)IMG[k]}
 (()=>{const R=document.documentElement.style;for(const k of ['hud-hp','hud-timer','hud-pause','btn-gold','btn-navy','btn-gray'])if(ART[k])R.setProperty('--'+k,'url('+ART[k]+')')})();
 if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h){this.rect(x,y,w,h)};
@@ -5277,7 +5283,7 @@ function hdN(){for(const n in HDN)for(const a in HDN[n]){const k=n+'-'+a+'-1';if
 function heroHD(){if(!ART['主角HD-idle-1'])return;const L=p=>{const a=[];for(let i=1;ART['主角HD-'+p+'-'+i];i++)a.push('主角HD-'+p+'-'+i);return a};
  const idle=L('idle'),run=L('run'),atk=L('atk');if(!idle.length||!run.length||!atk.length)return;
  ANIM.idle=idle;ANIM.run=run;ANIM.atk=atk;HERO_HD=true;SC.clear();try{if($('lgh'))$('lgh').src=ART[heroIdleKey()]}catch(e){}}
-window.__artPack=function(X){if(!X)return;/* 1006-R 新版美術(n2- 開頭)優先,之後載入的舊圖不能蓋掉 */const NL=window.__NL||(window.__NL=new Set());for(const k in X)if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k];X['__n2_'+r]=1}for(const r of NL)if(!X['__n2_'+r])delete X[r];for(const k in X)if(k.startsWith('__n2_'))delete X[k];try{for(const [o,n] of BRANDREN)if(X[o]&&!X[n]&&!ART[n])X[n]=X[o]}catch(e){}Object.assign(ART,X);for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X)delete IMGT[k];SC.clear();if(X['主角HD-idle-1'])heroHD();try{if(X['st-atk'])for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">'}catch(e){}try{hdN()}catch(e){}
+window.__artPack=function(X){if(!X)return;/* 1006-R 新版美術(n2- 開頭)優先,之後載入的舊圖不能蓋掉 */const NL=window.__NL||(window.__NL=new Set());for(const k in X)if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k];X['__n2_'+r]=1}for(const r of NL)if(!X['__n2_'+r])delete X[r];for(const k in X)if(k.startsWith('__n2_'))delete X[k];try{for(const [o,n] of BRANDREN)if(X[o]&&!X[n]&&!ART[n])X[n]=X[o]}catch(e){}Object.assign(ART,X);try{artLazy(Object.keys(X))}catch(e){}for(const n in HDN)if(X[n+'-walk-1'])ART['__hd_'+n]=1;for(const k in X)delete IMGT[k];SC.clear();if(X['主角HD-idle-1'])heroHD();try{if(X['st-atk'])for(const k in STI)if(ART['st-'+k])STI[k]='<img class="si" src="'+ART['st-'+k]+'" alt="">'}catch(e){}try{hdN()}catch(e){}
  try{if(X['bg-home'])document.documentElement.style.setProperty('--homebg','url('+X['bg-home']+')')}catch(e){}try{document.querySelectorAll('img.pico').forEach(i=>{if(ART['金幣'])i.src=ART['金幣']});if(!$('home').hidden)renderHome()}catch(e){}try{if(!$('lbov').hidden&&LB.rows&&LB.rows.length)lbRender()}catch(e){}};
 function update(dt){
  const S=G.S;G.t+=dt;G.dtl=dt;G.atk-=dt;if(G.dh&&G.dh.length)for(let i=G.dh.length-1;i>=0;i--){if((G.dh[i].t-=dt)<=0){const f=G.dh[i].f;G.dh.splice(i,1);try{f()}catch(e){}}}G.hurt-=dt;G.inv-=dt;
@@ -5766,10 +5772,11 @@ function g1Party(paid,allin){const ov=document.createElement('div');ov.className
 
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z10';
+const GBUILD='1010-Z11';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['⚡','手機變順了','倉庫裝備多的時候,每點一下(換裝、賣出、切換分頁)手機都會卡一下。原因是每張圖片都用很長的文字存在畫面裡,倉庫滿 300 格時一次要處理好幾 MB。現在圖片改成用到才轉成輕量網址,畫面處理量少了 90% 以上,低階手機也順很多。'],
 ['📊','稱號補算舊紀錄','舊版沒有記錄衝裝備、改車、算命的次數,現在用你身上留下的痕跡估一個起點:至尊、典藏裝備只能靠祈禱,照升上去平均要祈禱幾次來算;座駕照改裝等級算;算命舊版只留下最後一天有沒有算過,只能從現在開始累積。'],
 ['🏷️','稱號小修正','排行榜上的稱號改到暱稱下面一行,長暱稱也不會被切掉。股市的遊玩比重補上舊的交易紀錄;算命、衝裝備以前沒有紀錄,從這版開始累積。'],
 ['🏷️','稱號上線:你是哪一種社畜?','角色裝備的戰力上方多了「稱號」,共 50 個,會依照你最近的遊玩方式自動變:打怪、射龍門、21 點、賭石、算命、衝裝備、買車、股市、農場、無限列車。點稱號旁的「!」可以看自己的遊玩比例和賭性指數,還有稱號圖鑑。排行榜上也看得到每個人的稱號,點一下就能看他平常都在玩什麼——是不是都是因為賭?'],
@@ -5789,7 +5796,6 @@ const GNOTES=[
 ['🇹🇼','雙十節紅包、新封面','2026 年 10 月 10 日當天只要登入,每人送 10 萬金幣(公司不給的,遊戲給!);封面換成四位主角的宣傳海報,九劍腎虛從打卡鐘炸開的時空裂縫穿越而來'],
 ['🛠️','修正戰鬥卡住、男女主角新立繪、封面新標題','修正拿到迴紋針、奶瓶、列車或首領裝備技能時戰鬥會停住的問題;裝備頁換上男主角(雷電拳)、女主角(烈焰飛踢)的新立繪;封面的霓虹燈招牌改成電影片名風格的金屬標題'],
 ['🎨','雷電拳、烈焰飛踢換上正式美術和音效','雷電拳勁、落雷、電擊爆閃、火焰踢氣、火環、火焰爆炸都換成正式美術圖,技能圖示也換新;出拳、連鎖電擊、落雷、飛踢、火環都有專屬音效'],
-['⚡','男主角雷電拳、女主角烈焰飛踢、四角色平衡','男主角改成「雷電拳」:遠距離打出雷電拳勁並連鎖電擊,第三拳招來落雷;女主角改成「烈焰飛踢」:踢出貫穿的火焰踢氣,迴旋踢放出火環;腎虛公子改名「九劍腎虛」,修正飛劍收不回來的問題;四個角色打完一關的總傷害調整到差不多'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6320,7 +6326,7 @@ async function clBoot(){clUI();try{if(CL.u&&SAVE.acct!==CL.u){SAVE.acct=CL.u;sav
   CL.lastOk=Date.now();CL.err='';clUI()}
  catch(e){CL.err=clMsg(e);CL.ready=true;if(/token/i.test(String(e.msg||'')))clKick();clUI()}}
 
-window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;{const NL=window.__NL||(window.__NL=new Set());for(const k of Object.keys(X))if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k]}}Object.assign(ART,X);try{SC.clear()}catch(e){}setTimeout(()=>{try{emjConvert(document.body)}catch(e){}},50);for(const k in X)delete IMGT[k];
+window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;{const NL=window.__NL||(window.__NL=new Set());for(const k of Object.keys(X))if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k]}}Object.assign(ART,X);try{artLazy(Object.keys(X))}catch(e){}try{SC.clear()}catch(e){}setTimeout(()=>{try{emjConvert(document.body)}catch(e){}},50);for(const k in X)delete IMGT[k];
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
  try{if(!document.querySelector('#gov:not([hidden])')){renderHome();if(!$('home').hidden&&SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
 if(window.ART_EXTRA)window.__artExtra();
