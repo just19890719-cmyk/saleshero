@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z45">
+<meta name="gbuild" content="1010-Z46">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z45</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z46</span></small>
   </div>
  </div>
 </div>
@@ -3817,7 +3817,9 @@ async function lbInit(){
  try{const c=window.claude;if(!c||!c.use){LB.ready=true;return}
  const [u,d]=await Promise.all([c.use('user'),c.use('db')]);LB.user=u;LB.db=d;if(u)LB.uid=await u.id()}catch(e){}LB.ready=true;lbSync(true);if(!$('lbov').hidden)lbOpen()}
 /* 1007-Z2 排行榜同名只顯示一筆:優先自己,其次最近更新的那筆 */
-function lbDedupe(rows){try{const m=new Map(),tt=new Map();for(const r of rows||[]){const k=String(r.nick||'').trim();if(!k){continue}const o=m.get(k);if(!o||r.id===LB.uid||(o.id!==LB.uid&&(+r.t||0)>(+o.t||0)))m.set(k,r);/* 1010-Z12 同一個人有好幾台裝置的紀錄時,稱號從有上傳過的那一筆帶過來 */if(r.ttl!=null&&r.ttl!==''){const p=tt.get(k);if(!p||(+r.t||0)>(+p.t||0))tt.set(k,r)}}for(const [k,r] of m){if((r.ttl==null||r.ttl==='')&&tt.has(k)){const s=tt.get(k);r.ttl=s.ttl;r.pmix=s.pmix}}return [...m.values()].sort((a,b)=>(b.coin||0)-(a.coin||0))}catch(e){return rows}}
+/* 1010-Z46 哪一筆比較新:先看伺服器記的最後更新時間 seen(離線也不會被蓋掉);都沒有時看 t(離線時 t=1 比不出來);再比不出來就選戰力最高的 */
+function lbNewer(r,o){const rs=r.seen?Date.parse(r.seen)||0:0,os=o.seen?Date.parse(o.seen)||0:0;if(rs||os)return rs>os;const rt=+r.t||0,ot=+o.t||0;if((rt>1||ot>1)&&rt!==ot)return rt>ot;return(+r.power||0)>(+o.power||0)}
+function lbDedupe(rows){try{const m=new Map(),tt=new Map();for(const r of rows||[]){const k=String(r.nick||'').trim();if(!k){continue}const o=m.get(k);if(!o||r.id===LB.uid||(o.id!==LB.uid&&lbNewer(r,o)))m.set(k,r);/* 1010-Z12 同一個人有好幾台裝置的紀錄時,稱號從有上傳過的那一筆帶過來 */if(r.ttl!=null&&r.ttl!==''){const p=tt.get(k);if(!p||(+r.t||0)>(+p.t||0))tt.set(k,r)}}for(const [k,r] of m){if((r.ttl==null||r.ttl==='')&&tt.has(k)){const s=tt.get(k);r.ttl=s.ttl;r.pmix=s.pmix}}return [...m.values()].sort((a,b)=>(b.coin||0)-(a.coin||0))}catch(e){return rows}}
 function lbPayload(){const eq=SLOTS.map(sl=>{const it=byId(SAVE.eq[sl.k]);return it?{b:it.b,q:it.q,n:it.name}:null});
  const rl=SAVE.ride&&rideLv(SAVE.ride)?{id:SAVE.ride,lv:rideLv(SAVE.ride)}:null;
  return Object.assign(LB.noMotto?{}:{motto:SAVE.motto||''},{nick:(SAVE.pname||'').slice(0,12),coin:Math.floor(SAVE.coin||0),power:power(),eq,ride:rl,clear:(SAVE.clear||[]).length})}
@@ -5993,10 +5995,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z45';
+const GBUILD='1010-Z46';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🏆','排行榜顯示修正','同一位玩家用好幾台裝置玩時,排行榜會顯示他最後在玩的那台的進度(原本有時會顯示到舊裝置的資料)。'],
 ['🦖','恐龍裝備不再遺失','侏儸紀打到的恐龍裝備會在抓到的當下就放進倉庫;一鍵賣出不會賣掉恐龍裝備;雲端同步失敗會自動重試;在侏儸紀被擠下線時,還沒存到雲端的金幣和裝備會在重新登入後自動補發。'],
 ['🛠️','穩定性修正','修正網路不穩時圖片可能一直載不出來、儲存空間不足時可能不斷重新整理、同時開兩個遊戲分頁可能互相蓋掉進度,以及芳芳稅可能重複送出的問題。'],
 ['🎨','夢想車技能特效','夢想車庫 6 個專屬技能換上全新技能圖示和戰鬥特效:紅色閃電、皇家護盾、電場光環、越野衝撞、追蹤飛彈、黃金風暴。'],
@@ -6016,7 +6019,6 @@ const GNOTES=[
 ['🎯','侏儸紀準心上線!','侏儸紀換上四色專屬準心,瞄哪裡一目了然;侏儸紀頁的池底改成跟射龍門一樣的全服即時池底。下方選單的股市也換上新圖示。'],
 ['📈','侏儸紀倍率跟著池底漲!','所有恐龍的倍率改成跟著全服池底變動:池底每 1000 萬 = 原本倍率 ×1,池底越多倍率越高(最高 ×3,暴龍王最高 ×900)。遊戲右上角新增可以縮小的倍率視窗,隨時看即時池底和每隻恐龍現在的倍率。'],
 ['🎯','侏儸紀新砲台上線!','四個座位換上全新的紅、藍、綠、紫能量砲台、子彈和捕獲網,砲台都架在專屬底座上。恐龍專屬裝備的掉落率改成跟賭石一樣:子彈越大,掉落機率越高(1 萬子彈 = 帝王料開出至尊、典藏的機率)。'],
-['🦖','侏儸紀四人同場!','侏儸紀改成最多 4 人一起打:每個人的砲台、子彈顏色不同(紅、藍、綠、紫),大家都排在畫面下方,看得到別人的子彈飛過去。子彈碰到螢幕邊緣就消失,不再反彈。獎金一樣由射龍門池底支付,全服捕獲紀錄同步更新。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
