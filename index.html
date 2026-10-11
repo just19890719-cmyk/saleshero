@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z40">
+<meta name="gbuild" content="1010-Z43">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -1987,6 +1987,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
 #spdbtn b{font-size:14px;font-weight:900;letter-spacing:-.5px;font-style:italic}
 #spdbtn.on{background:linear-gradient(#ffe08a,#f0a000);border-color:#fff3c0;color:#2a1700;box-shadow:0 0 12px rgba(255,200,40,.8);animation:spdp 1.2s ease-in-out infinite}
 #spdbtn:active{transform:scale(.92)}
+#spdbtn.on.x3{background:linear-gradient(#ffb36b,#e8430f);border-color:#ffe0c0;color:#fff;box-shadow:0 0 14px rgba(255,90,30,.9)}
 @keyframes spdp{50%{box-shadow:0 0 20px rgba(255,200,40,1)}}
 </style>
 <style id="l1009">
@@ -2058,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z40</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z43</span></small>
   </div>
  </div>
 </div>
@@ -2498,6 +2499,7 @@ const SK={
  rose:{n:'玫瑰荊棘',d:'貼近你的敵人會被玫瑰藤蔓纏住,定住並持續扣血',egg:1},hop:{n:'殭屍跳',d:'定時像殭屍一樣跳起來,落地震開並傷害周圍的敵人,跳起來時無敵',egg:1},gold:{n:'撈金',d:'戰鬥結算金幣增加;擊倒一定數量的敵人就降下金幣雨砸敵人',egg:1},
  jshield:{n:'翡翠護體',d:'定時產生一層翡翠護盾,擋下一次傷害',egg:1},jburst:{n:'玉碎反擊',d:'每場一次:快要倒下時玉碎爆開,震飛周圍敵人並回復大量生命',egg:1},jtoad:{n:'招財進寶',d:'戰鬥結算金幣大幅增加',egg:1},
  jregen:{n:'玉氣迴流',d:'3 秒沒受傷,就開始快速回復生命',egg:1},jbeam:{n:'綠光天罰',d:'定時從天上降下翡翠光柱,轟擊多個敵人',egg:1},jluck:{n:'開運加持',d:'暴擊傷害提高',egg:1},
+ rbolt:{n:'紅色閃電',d:'定時降下紅色閃電,連鎖劈中多個敵人',egg:1,ic:'ride-italia'},rroyal:{n:'皇家護駕',d:'定時回復生命,並在 3 秒內受到的傷害 -30%',egg:1,ic:'ride-limo'},rvolt:{n:'超充電場',d:'定時放出電場震波,傷害並麻痺周圍敵人',egg:1,ic:'ride-ev'},rram:{n:'越野衝撞',d:'定時往最近的敵人方向衝撞,把一整排敵人撞飛',egg:1,ic:'ride-offroad'},rmiss:{n:'特務飛彈',d:'定時發射追蹤飛彈,炸飛多個敵人',egg:1,ic:'ride-classic'},rgold:{n:'黃金風暴',d:'定時從天降下金條,砸向多個敵人',egg:1,ic:'ride-gold'},
  droar:{n:'恐龍咆哮',d:'定時咆哮,震退周圍敵人並短暫暈眩',egg:1},ddash:{n:'迅猛衝刺',d:'定時用迅猛龍爪撕裂附近多個敵人',egg:1},dfossil:{n:'化石護甲',d:'受到的傷害降低',egg:1},dmeteor:{n:'隕石雨',d:'定時降下隕石,轟炸多個敵人',egg:1},drage:{n:'原始狂暴',d:'生命低於一半時,傷害大幅提高',egg:1},dthorn:{n:'鱗甲反刺',d:'受到傷害時,鱗片反刺傷害周圍敵人',egg:1},
  cry:{n:'巨嬰大哭',d:'受到傷害時有機率大哭,哭出震波震開並傷害周圍的敵人',egg:1,ic:'黃金奶嘴'},guilt:{n:'情緒勒索',d:'身邊的敵人被勒索到腳軟,移動變慢',egg:1,ic:'慣老闆口水巾'},bottle:{n:'奶瓶亂丟',d:'定時往四周丟出奶瓶砸敵人',egg:1,ic:'搖搖奶瓶'}};
 const ENE=[{n:'奧客喪屍',e:'🧟',hp:20,sp:46,r:20,dmg:9},{n:'菜市場大媽喪屍',e:'🧟‍♀️',hp:30,sp:40,r:21,dmg:11},{n:'吸毒喪屍',e:'🧟',hp:12,sp:78,r:19,dmg:7},
@@ -2565,7 +2567,7 @@ function equip(it,slot){slot=slot||slotFor(it);for(const k in SAVE.eq)if(SAVE.eq
 function pstats(lv){
  const s={atk:12,hp:130,def:0,aspd:0,crit:5,spd:0,pick:0,regen:0,sk:{},wpn:heroA()?'mech':heroJ()?'sword9':heroF()?'kick':'fist'};
  for(const k in SAVE.eq){const it=byId(SAVE.eq[k]);if(!it)continue;for(const st in it.st)s[st]+=ist(it,st);if(it.sk)s.sk[it.sk]=(s.sk[it.sk]||0)+it.skl;if(k==='wpn')s.wpn=it.w}
- const rd=RIDES.find(r=>r.id===SAVE.ride),rl=rd&&rideLv(rd.id);if(rd&&rl){const b=rideBonus(rd,rl);for(const k in b)s[k]+=b[k];}
+ const rd=RIDES.find(r=>r.id===SAVE.ride),rl=rd&&rideLv(rd.id);if(rd&&rl){const b=rideBonus(rd,rl);for(const k in b)s[k]+=b[k];if(rd.rsk)s.sk[rd.rsk]=(s.sk[rd.rsk]||0)+Math.min(5,rl)}
  {const n=shopOwned();if(n){const m=1+.01*n;s.atk*=m;s.hp*=m;s.def*=m;s.regen*=m}}
  s.aspd=Math.min(s.aspd,200);s.crit=Math.min(s.crit,75);s.spd=Math.min(s.spd,100);
  return s;
@@ -2601,19 +2603,19 @@ const RIDES=[
  {id:'roadster',n:'雙門敞篷跑車',q:3,w:1.66,st:{spd:[24,3],pick:[30,5]},d:'吹著風收寶石,吸取範圍提升'},
  {id:'x5',n:'德系豪華休旅',q:4,w:1,st:{spd:[22,3],hp:[80,20],def:[10,3]},d:'重裝休旅,生命與防禦大幅提升'},
  {id:'gle',n:'德系尊榮休旅',q:4,w:1,st:{spd:[22,3],atk:[6,2],hp:[50,15]},d:'豪華休旅,攻擊與生命提升'},
- {id:'italia',n:'義式超跑',q:5,shop:300000,st:{spd:[30,4],crit:[8,2],aspd:[10,3]},d:'紅色閃電,暴擊與攻速大幅提升'},
- {id:'limo',n:'英式豪華轎車',q:5,shop:500000,st:{spd:[24,3],hp:[120,30],regen:[1,.3]},d:'皇室座駕,生命與回復大幅提升'},
- {id:'ev',n:'電動超跑',q:5,shop:800000,st:{spd:[32,4],aspd:[15,3],pick:[40,10]},d:'零到百 2 秒,攻速與吸取範圍提升'},
- {id:'offroad',n:'越野霸主',q:5,shop:1200000,st:{spd:[26,3],def:[15,4],hp:[150,30]},d:'坦克般的防禦與生命'},
- {id:'classic',n:'經典古董跑車',q:6,shop:3000000,st:{spd:[30,4],atk:[10,3],crit:[10,2]},sp:'開場自帶護盾,擋一次傷害',d:'傳奇特務的座駕'},
- {id:'gold',n:'鍍金限量超跑',q:6,shop:8000000,st:{spd:[34,4],atk:[12,3],aspd:[15,3],pick:[50,10]},sp:'戰鬥金幣 +5%',d:'全世界最閃亮的車'}];
+ {id:'italia',n:'義式超跑',q:5,shop:300000,st:{spd:[30,4],crit:[8,2],aspd:[10,3]},d:'紅色閃電,暴擊與攻速大幅提升',rsk:'rbolt'},
+ {id:'limo',n:'英式豪華轎車',q:5,shop:500000,st:{spd:[24,3],hp:[120,30],regen:[1,.3]},d:'皇室座駕,生命與回復大幅提升',rsk:'rroyal'},
+ {id:'ev',n:'電動超跑',q:5,shop:800000,st:{spd:[32,4],aspd:[15,3],pick:[40,10]},d:'零到百 2 秒,攻速與吸取範圍提升',rsk:'rvolt'},
+ {id:'offroad',n:'越野霸主',q:5,shop:1200000,st:{spd:[26,3],def:[15,4],hp:[150,30]},d:'坦克般的防禦與生命',rsk:'rram'},
+ {id:'classic',n:'經典古董跑車',q:6,shop:3000000,st:{spd:[30,4],atk:[10,3],crit:[10,2]},sp:'開場自帶護盾,擋一次傷害',d:'傳奇特務的座駕',rsk:'rmiss'},
+ {id:'gold',n:'鍍金限量超跑',q:6,shop:8000000,st:{spd:[34,4],atk:[12,3],aspd:[15,3],pick:[50,10]},sp:'戰鬥金幣 +5%',d:'全世界最閃亮的車',rsk:'rgold'}];
 const GRIDES=RIDES.filter(r=>!r.shop),SRIDES=RIDES.filter(r=>r.shop);
 const TUNE={cost:[.1,.2,.3,.4],rate:[1,.8,.6,.4],pity:.1};
 const shopOwned=()=>SRIDES.filter(r=>rideLv(r.id)).length;
 const RMAX=5,G1=500,G10=4500,PITY=100;
 const rideLv=id=>(SAVE.rides||{})[id]||0;
-function rideBonus(r,lv){const o={};for(const k in r.st)o[k]=r.st[k][0]+r.st[k][1]*(lv-1);return o}
-function rideText(r,lv){const b=rideBonus(r,Math.max(1,lv));return Object.entries(b).map(([k,v])=>STAT[k].n+'+'+(k==='regen'?v.toFixed(1):Math.round(v))+(STAT[k].p?'%':'')).join('、')}
+function rideBonus(r,lv){const o={};for(const k in r.st)o[k]=r.st[k][0]+r.st[k][1]*(lv-1);/* 1010-Z42 夢想車庫(至尊/典藏)素質 ×1.2 */if(r.q>=5)for(const k in o)o[k]=Math.round(o[k]*1.2*10)/10;return o}
+function rideText(r,lv,noSk){const b=rideBonus(r,Math.max(1,lv));return Object.entries(b).map(([k,v])=>STAT[k].n+'+'+(k==='regen'?v.toFixed(1):Math.round(v))+(STAT[k].p?'%':'')).join('、')+(r.rsk&&!noSk?'、🚗「'+SK[r.rsk].n+'」Lv.'+Math.max(1,Math.min(5,lv)):'')}
 function rollRide(minQ){
  SAVE.pity=(SAVE.pity||0)+1;let pool=GRIDES.filter(r=>r.q>=(minQ||0));
  if(SAVE.pity>=PITY)pool=GRIDES.filter(r=>r.q>=4);
@@ -2687,7 +2689,7 @@ function renderShop(){if(!$('scars'))return;if(ART['showroom-bg'])$('sbg').src=A
  const n=shopOwned();$('scol').innerHTML='🏆 車庫收藏 <b>'+n+' / '+SRIDES.length+'</b> · 加成:攻擊、生命、防禦、回復 <b>+'+n+'%</b>';
  $('scars').innerHTML=SRIDES.map(r=>{const lv=rideLv(r.id),on=SAVE.ride===r.id,c=RAR[r.q].c,price=r.shop,canBuy=(SAVE.coin||0)>=price,tc=tuneCost(r),tr=tuneRate(r.id);
   return'<div class="scar q'+r.q+(lv?' own':'')+(on?' on':'')+'" style="--rc:'+c+'"><span class="sq">'+RAR[r.q].n+'</span>'+(on?'<span class="rused">使用中</span>':'')+(lv?'<span class="slv">Lv.'+lv+'</span>':'')+
-   '<div class="sim">'+(r.q>=5?'<span class="rqs"></span>':'')+(r.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+'<img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"></div><b class="sn">'+r.n+'</b><small class="sd">'+r.d+'</small><div class="sst">'+rideText(r,Math.max(1,lv))+(r.sp?'<br><span class="ssp">✨ '+r.sp+'</span>':'')+'</div>'+
+   '<div class="sim">'+(r.q>=5?'<span class="rqs"></span>':'')+(r.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+'<img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"></div><b class="sn">'+r.n+'</b><small class="sd">'+r.d+'</small><div class="sst">'+rideText(r,Math.max(1,lv),1)+(r.sp?'<br><span class="ssp">✨ '+r.sp+'</span>':'')+(r.rsk?'<br><span class="ssp rsk">🚗 專屬技能「'+SK[r.rsk].n+'」Lv.'+Math.max(1,Math.min(5,lv))+':'+SK[r.rsk].d+'</span>':'')+'</div>'+
    (lv?'<div class="sbt">'+(on?'<button class="btn" data-ride="">卸下</button>':'<button class="btn pri" data-ride="'+r.id+'">裝備</button>')+(lv<RMAX?'<button class="btn stune" data-tune="'+r.id+'"'+((SAVE.coin||0)<tc?' disabled':'')+'>🔧 改裝 Lv.'+(lv+1)+'<small>💰'+fmtC(tc)+' · 成功率 '+Math.round(tr*100)+'%</small></button>':'<button class="btn" disabled>🏁 已改滿</button>')+'</div>'
    :'<div class="sbt"><button class="btn pri sbuy" data-buy="'+r.id+'"'+(canBuy?'':' disabled')+'>購買<small>💰 '+fmtC(price)+'</small></button></div>')+'</div>'}).join('')}
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#gtabs [data-g]');if(t){audioUnlock();sfx('tab');gTab(t.dataset.g);return}
@@ -4718,6 +4720,14 @@ function combat(dt){
  const x3go=S.sk.gold;if(x3go){if(!G.goldK)G.goldK=Math.max(30,50-5*x3go);if(G.kills>=G.goldK){G.goldK=G.kills+Math.max(30,50-5*x3go);const n=6+2*x3go,ts=nearV(14,600);for(let i=0;i<n;i++){const tt=ts.length?ts[i%ts.length]:null;G.coinR.push({x:tt?tt.x+rnd(-14,14):G.x+rnd(-220,220),y:tt?tt.y+rnd(-8,8):G.y+rnd(-160,160),t:-i*.07,d:.45,dmg:A*(1.2+.3*x3go)})}G.fx.push({k:'txt',x:G.x,y:G.y-140,s:'💰 撈金!金幣雨!',t:0,d:1.2});sfx('coinsMany')}}
  if(G.gfx)for(let i=G.gfx.length-1;i>=0;i--){G.gfx[i].t+=dt;if(G.gfx[i].t>=G.gfx[i].d)G.gfx.splice(i,1)}
  if(G.coinR)for(let i=G.coinR.length-1;i>=0;i--){const c=G.coinR[i];c.t+=dt;if(c.t>=c.d){aoe(c.x,c.y,55,c.dmg,80);G.fx.push({k:'himg',img:'x3-coinboom',x:c.x,y:c.y-20,S:80,t:0,d:.4,s0:.6,s1:1.2});sfxT('fiHit',60);G.coinR.splice(i,1)}}
+ /* 1010-Z42 夢想車庫專屬技能(技能等級 = 車子等級) */
+ if(G.rms)for(let i=G.rms.length-1;i>=0;i--){const m=G.rms[i];m.t+=dt;if(m.e&&m.e.hp>0){m.tx=m.e.x;m.ty=m.e.y}if(m.t>=m.d){aoe(m.tx,m.ty,m.R,m.dmg,m.kb);cFx(m.fx,m.tx,m.ty-20,m.S,.4,{s0:.6,s1:1.15});sfxT(m.snd||'boom',60);G.rms.splice(i,1)}}
+ {const rb=S.sk.rbolt;if(rb&&rdy('crb')){const ts=nearV(3+rb,520);if(ts.length){for(const e of ts){hit(e,A*(2+.4*rb),120,Math.atan2(e.y-G.y,e.x-G.x));cFx('rbolt',e.x,e.y-e.r*1.6,120,.35,{s0:.85,s1:1.05})}sfx('crit');cd('crb',Math.max(3,6.5-.6*rb)*cdm)}else G.wt.crb=.4}
+  const rr=S.sk.rroyal;if(rr&&rdy('crr')){G.hp=Math.min(G.S.hp,G.hp+G.S.hp*(.05+.02*rr));G.royT=G.t+3;cFx('rroyal',G.x,G.y-30,190,1,{s0:.8,s1:1.05});G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'👑 皇家護駕',t:0,d:1});sfx('equip');cd('crr',Math.max(6,11-rr)*cdm)}
+  const rv=S.sk.rvolt;if(rv&&rdy('crv')){const R=(150+15*rv)*ar;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y;if(dx*dx+dy*dy<(R+e.r)**2){hit(e,A*(1+.3*rv),90,Math.atan2(dy,dx));if(!e.b)e.stunT=Math.max(e.stunT||0,G.t+.5)}}cFx('rvolt',G.x,G.y-20,R*2.1,.5,{s0:.4,s1:1.05});sfx('zbHit');cd('crv',Math.max(3,5.5-.4*rv)*cdm)}
+  const ro=S.sk.rram;if(ro&&rdy('cro')){const t0=nearV(1,600)[0];if(t0){const a=Math.atan2(t0.y-G.y,t0.x-G.x),c=Math.cos(a),s0=Math.sin(a);for(const d of [60,140,220,300])aoe(G.x+c*d,G.y+s0*d,85,A*(2.5+.5*ro),420);cFx('rram',G.x+c*150,G.y+s0*150-20,300,.45,{s0:.7,s1:1.05,rot:a});shake(6);sfx('boom');cd('cro',Math.max(3.5,7.5-.6*ro)*cdm)}else G.wt.cro=.4}
+  const rm=S.sk.rmiss;if(rm&&rdy('crm')){const ts=nearV(3+rm,640);if(ts.length){G.rms=G.rms||[];ts.forEach((e,i)=>{const d=.45+i*.06,sx=G.x,sy=G.y-40,a=Math.atan2(e.y-sy,e.x-sx);G.rms.push({e,tx:e.x,ty:e.y,t:0,d,R:75,S:150,dmg:A*(2+.5*rm),kb:170,fx:'rboom'});cFx('rmiss',sx,sy,70,d,{s0:1,s1:1,vx:(e.x-sx)/d,vy:(e.y-sy)/d,rot:a+Math.PI/2})});sfx('pew');cd('crm',Math.max(3,5.5-.4*rm)*cdm)}else G.wt.crm=.4}
+  const rg=S.sk.rgold;if(rg&&rdy('crg')){const ts=nearV(6+2*rg,600);if(ts.length){G.rms=G.rms||[];for(let i=0;i<6+2*rg;i++){const e=ts[i%ts.length],x=e.x+rnd(-20,20),y=e.y+rnd(-10,10),d=.4+i*.05;G.rms.push({e:null,tx:x,ty:y,t:0,d,R:60,S:120,dmg:A*(1.5+.4*rg),kb:90,fx:'rgoldb',snd:'coins'});cFx('rgold',x,y-300,80,d,{s0:1,s1:1,vy:300/d})}G.fx.push({k:'txt',x:G.x,y:G.y-140,s:'🪙 黃金風暴!',t:0,d:1});sfx('coinsMany');cd('crg',Math.max(5,9-.6*rg)*cdm)}else G.wt.crg=.4}}
  /* 1010-Z23 恐龍技能 */
  const xdr=S.sk.droar;if(xdr&&rdy('bdr')){const R=230;for(const e of G.en){const dx=e.x-G.x,dy=e.y-G.y;if(dx*dx+dy*dy<(R+e.r)**2){hit(e,A*(1+.3*xdr),280,Math.atan2(dy,dx));if(!e.b)e.stunT=G.t+.8+.2*xdr}}G.fx.push({k:'ring',x:G.x,y:G.y-30,R,t:0,d:.45,c:'255,180,80'});dFx('droar',G.x,G.y-30,2*R+30,.55);sfx('roar');shake(6);cd('bdr',Math.max(5,9-xdr)*cdm)}
  const xdd=S.sk.ddash;if(xdd&&rdy('bdd')){const ts=nearV(3+xdd,430);if(ts.length){for(const e of ts){hit(e,A*(3+xdd),180,Math.atan2(e.y-G.y,e.x-G.x));dFx('ddash',e.x,e.y-e.r*.5,130,.35,{s0:.7,s1:1.05})}sfx('slashHit');cd('bdd',Math.max(3.5,7-.8*xdd)*cdm)}else G.wt.bdd=.4}
@@ -4790,7 +4800,7 @@ function bossInit(e){const a=Math.random()*Math.PI*2,dd=Math.min(W,H)/2+50;e.x=G
  e.b={st:'walk',t:0,cd:3.4,mcd:1,seq:0,p2:false};G.bossE=e;G.lanes=[];G.bw=[];G.bIntro=2.8;G.bhpD=1;
  try{G.hudB=$('hud').getBoundingClientRect().bottom}catch(x){G.hudB=70}sfx('bossRoar');setTimeout(()=>sfx('warn'),300);shake(6)}
 function babyCry(){const c=G&&G.S&&G.S.sk&&G.S.sk.cry;if(!c||Math.random()>=.2+.1*c)return;const R=(120+20*c)*(G.S.area||1);aoe(G.x,G.y,R,G.S.atk*(1+.4*c),320);G.fx.push({k:'himg',img:'e2-ring',x:G.x,y:G.y,S:R*2,t:0,d:.4,flat:1,add:1,s0:.3,s1:1.1});G.fx.push({k:'txt',x:G.x,y:G.y-120,s:'哇~~!',t:0,d:.8});sfx('b2cry');shake(4)}
-function pHurt(dmg,snd){if(!G||G.over||G.inv>0)return false;const S=G.S;
+function pHurt(dmg,snd){if(!G||G.over||G.inv>0)return false;const S=G.S;if(G.royT>G.t)dmg*=.7;/* 1010-Z42 皇家護駕 */
  if(G.shield>0){G.shield--;G.inv=.5;sfx('shieldHit');G.fx.push({k:'ring',x:G.x,y:G.y-30,R:50,t:0,d:.3,c:'120,200,255'});return false}
  if(S.sk&&S.sk.dfossil){dmg*=1-(.08+.04*S.sk.dfossil);if(!G.dfT||G.t-G.dfT>.5){G.dfT=G.t;try{dFx('dfossil',G.x,G.y-30,150,.45,{s0:.85,s1:1.05})}catch(e){}}}G.hp-=dmg*100/(100+S.def)*(1-(S.dr||0));if(S.sk&&S.sk.dthorn){aoe(G.x,G.y,130,S.atk*(1+.5*S.sk.dthorn),160);dFx('dthorn',G.x,G.y-20,270,.4,{s0:.4,s1:1.05})}G.inv=.6;G.lhT=G.t;sfx(snd||'zbAtk1');sfx('hurt');sfx('hurtThud');G.hurt=.2;hitStop(.06);shake(5);
  if(S.sk&&S.sk.jburst&&!G.jbUsed&&G.hp<S.hp*.3){G.jbUsed=1;G.hp=Math.max(1,G.hp)+S.hp*(.3+.05*S.sk.jburst);G.hp=Math.min(S.hp,G.hp);G.inv=1.2;aoe(G.x,G.y,240,S.atk*(4+S.sk.jburst),320);G.fx.push({k:'himg',img:'sk-jburst',x:G.x,y:G.y-60,S:160,t:0,d:.6,s0:.4,s1:1.4,add:1});G.fx.push({k:'txt',x:G.x,y:G.y-150,s:'玉碎反擊!',t:0,d:1.2});sfx('boom');shake(10)}/* 1010-T 玉石技能:每場救你一次 */
@@ -5609,9 +5619,9 @@ function draw(){
  bossHud();bossArrow();
  if(joy){ctx.save();ctx.scale(1/VZ,1/VZ);ctx.fillStyle='rgba(255,255,255,.15)';ctx.beginPath();ctx.arc(joy.ox,joy.oy,55,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(255,255,255,.45)';ctx.beginPath();ctx.arc(joy.x,joy.y,24,0,Math.PI*2);ctx.fill();ctx.restore()}
 }
-const spd2On=()=>!!(SAVE&&SAVE.spd2&&G&&!G.tr);
-function spdUI(){const b=$('spdbtn');if(!b)return;const show=!$('pbtn').hidden&&!!G&&!G.tr;if(b.hidden===show)b.hidden=!show;const on=!!(SAVE&&SAVE.spd2);if(b.classList.contains('on')!==on){b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.title=on?'2 倍速中(點一下回到正常速度)':'切換 2 倍速'}}
-$('spdbtn').onclick=e=>{e.stopPropagation();audioUnlock();SAVE.spd2=!SAVE.spd2;save();sfx('tab');spdUI();toast(SAVE.spd2?'⏩ 2 倍速:怪物、子彈、時間都變 2 倍快':'▶ 回到正常速度')};
+/* 1010-Z41 戰鬥倍速:正常 → 2 倍 → 3 倍 */const spdN=()=>(SAVE&&G&&!G.tr)?(SAVE.spd3?3:SAVE.spd2?2:1):1,spd2On=()=>spdN()>1;
+function spdUI(){const b=$('spdbtn');if(!b)return;const show=!$('pbtn').hidden&&!!G&&!G.tr;if(b.hidden===show)b.hidden=!show;const x3=!!(SAVE&&SAVE.spd3),on=x3||!!(SAVE&&SAVE.spd2),lb=x3?'3x':'2x';if(b.classList.contains('on')!==on||b.classList.contains('x3')!==x3||b.textContent!==lb){b.classList.toggle('on',on);b.classList.toggle('x3',x3);b.innerHTML='<b>'+lb+'</b>';b.setAttribute('aria-pressed',on);b.title=x3?'3 倍速中(點一下回到正常速度)':on?'2 倍速中(點一下切到 3 倍速)':'切換 2 倍速'}}
+$('spdbtn').onclick=e=>{e.stopPropagation();audioUnlock();if(SAVE.spd3){SAVE.spd3=false;SAVE.spd2=false}else if(SAVE.spd2){SAVE.spd2=false;SAVE.spd3=true}else SAVE.spd2=true;save();sfx('tab');spdUI();toast(SAVE.spd3?'⏩⏩ 3 倍速:怪物、子彈、時間都變 3 倍快':SAVE.spd2?'⏩ 2 倍速:怪物、子彈、時間都變 2 倍快(再點一下 3 倍速)':'▶ 回到正常速度')};
 function hud(){spdUI();
  if(!G)return;
  $('hpi').style.width=Math.max(0,G.hp/G.S.hp*100)+'%';$('xpi').style.width=Math.min(100,G.xp/needXp(G.lv)*100)+'%';
@@ -5629,7 +5639,7 @@ function quality(raw,dt){
 }
 function loop(now){
  const raw=(now-last)/1000,dt=Math.min(.05,raw)*(window.__slow?.25:1);last=now;quality(raw,dt);
- if(G&&running&&!G.over){const n=spd2On()?2:1;/* 1009-K 2 倍速:同一幀跑兩次遊戲邏輯,碰撞判定不會漏 */for(let i=0;i<n&&G&&running&&!G.over;i++){if(G.hs>0){G.hs-=dt;update(dt*.07)}else update(dt)}}
+ if(G&&running&&!G.over){const n=spdN();/* 1009-K 2 倍速:同一幀跑兩次遊戲邏輯,碰撞判定不會漏(1010-Z41 3 倍速跑三次) */for(let i=0;i<n&&G&&running&&!G.over;i++){if(G.hs>0){G.hs-=dt;update(dt*.07)}else update(dt)}}
  if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').className=''}
  if(G)draw();hudT-=dt;if(hudT<=0){hudT=.1;hud()}requestAnimationFrame(loop);
 }
@@ -5961,6 +5971,10 @@ function jrDraw(){const c=$('jrc').getContext('2d');JR.ctx=c;const W=JR.W,H=JR.H
   c.save();c.font='900 '+(me?13:12)+'px system-ui,sans-serif';c.textAlign='center';c.lineWidth=3;c.strokeStyle='rgba(0,0,0,.85)';const nm=p?(me?'⭐ 你':String(p.nick||'').slice(0,6)):'空位';const ty=H-JR.sab-6;c.strokeText(nm,x,ty);c.fillStyle=p?JRC[s]:'#8a96a3';c.fillText(nm,x,ty);c.restore()}
  c.restore()}
 /* 1010-Z29 恐龍技能戰鬥特效(AI 美術圖;沒載到時退回技能圖示) */
+/* 1010-Z42 夢想車庫技能特效(AI 美術圖 fx-*;圖還沒到時先用 emoji 代替) */
+const CFXE={rbolt:'⚡',rroyal:'👑',rvolt:'🔋',rram:'💨',rmiss:'🚀',rboom:'💥',rgold:'🪙',rgoldb:'✨'};
+function cFx(k,x,y,S,d,o){let img='fx-'+k;if(!(img in ART)){img='fxe-'+k;if(!(img in ART)){try{const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');g.font='100px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(CFXE[k]||'✨',64,70);ART[img]=c.toDataURL()}catch(e){return}}S=Math.min(S,k==='rvolt'||k==='rroyal'?S:110)}
+ G.fx.push(Object.assign({k:'himg',img,x,y,S,t:0,d,s0:.5,s1:1.1},o||{}))}
 function dFx(k,x,y,S,d,o){const a=('fx-'+k) in ART;G.fx.push(Object.assign({k:'himg',img:a?'fx-'+k:'sk-'+k,x,y,S:a?S:70,t:0,d,s0:a?.3:.5,s1:a?1:1.2},o||{}))}
 window.dFx=dFx;
 $('jrgo')&&($('jrgo').onclick=()=>{audioUnlock();jrOpen()});
@@ -5968,10 +5982,13 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z40';
+const GBUILD='1010-Z43';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🎨','夢想車技能特效','夢想車庫 6 個專屬技能換上全新技能圖示和戰鬥特效:紅色閃電、皇家護盾、電場光環、越野衝撞、追蹤飛彈、黃金風暴。'],
+['🚗','夢想車庫大升級!','夢想車庫的至尊、典藏座駕素質全部提升 20%,而且每台都有專屬戰鬥技能(技能等級 = 車子等級):義式超跑「紅色閃電」、英式豪華轎車「皇家護駕」、電動超跑「超充電場」、越野霸主「越野衝撞」、經典古董跑車「特務飛彈」、鍍金限量超跑「黃金風暴」。'],
+['⏩','戰鬥 3 倍速','戰鬥右上角的倍速按鈕新增 3 倍速:點一下 2 倍速、再點一下 3 倍速、再點一下回到正常速度。'],
 ['🎁','侏儸紀掉寶標示','侏儸紀的恐龍倍率表和遊戲右上角的倍率視窗,會標出哪些恐龍會掉裝備:暴龍掉至尊頭盔、暴龍王掉典藏戰甲,黃金霸王龍必掉一件典藏恐龍裝備。'],
 ['👑','侏儸紀三大獎!','暴龍、暴龍王、黃金霸王龍改成直接抱走池底的 1% / 2% / 3%,子彈越大越容易抓到!黃金霸王龍還必掉一件典藏恐龍裝備(暴龍頭骨盔或霸王龍鱗戰甲)。'],
 ['🦖','侏儸紀同房同步!','同一房間的玩家現在看到的恐龍完全一樣,同房幾個人,恐龍就有幾倍多!誰先抓到,大家畫面上那一隻都會倒下,並顯示他的顏色和獎金。'],
@@ -5989,9 +6006,6 @@ const GNOTES=[
 ['🦖','侏儸紀四人同場!','侏儸紀改成最多 4 人一起打:每個人的砲台、子彈顏色不同(紅、藍、綠、紫),大家都排在畫面下方,看得到別人的子彈飛過去。子彈碰到螢幕邊緣就消失,不再反彈。獎金一樣由射龍門池底支付,全服捕獲紀錄同步更新。'],
 ['🦖','侏儸紀加班公園開園!','遊樂場新增「侏儸紀」:按住畫面射恐龍,打中有機會捕獲,獎金 = 子彈金額 × 恐龍倍率,由射龍門池底支付!黃金霸王龍直接抱走池底 3%,暴龍、暴龍王還會掉落至尊頭盔、典藏戰甲。股市搬到下方選單,在塔羅牌旁邊。'],
 ['👑','榜一專屬金框掃光','排行榜每個分頁的第一名(金幣、戰力、無限列車、偷菜、射龍門、21 點、股神),整個欄位都會有金色邊框和掃光特效。另外修正股東福利公告在手機上右邊被切掉的問題。'],
-['😈','仇人名單成熟數更準','仇人名單上的「有幾塊作物成熟」以前最久 2 分鐘才更新,常常點進去才發現已經被收走。現在在農場頁每 30 秒更新一次,逛完仇人的農場也會馬上更新。'],
-['🖼️','圖片載入更保險','少數瀏覽器或內嵌視窗會擋掉新的輕量圖片網址,導致主角、喪屍、背景都看不到。現在遊戲會先自動測試,不支援的環境就改用原本的圖片,任何地方都看得到圖。'],
-['📋','每日任務獎勵大加碼','每日任務每完成一項都送 3,000 金幣,三項全部完成再加送 20,000 金幣,一天最多 29,000!'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6557,7 +6571,7 @@ var PK={ui:['assets-ui.js?v=1010Z31',function(){if(window.__artUI)window.__artUI
  hero2:['assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)}],
  hd:['assets-hd.js?v=1005Y',function(){if(window.__artPack&&window.ART_HD)window.__artPack(window.ART_HD)}],
  boss:['assets-boss.js?v=1005ZU',function(){if(window.__artPack&&window.ART_BOSS)window.__artPack(window.ART_BOSS)}],
- cars:['assets-cars.js?v=1006K',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
+ cars:['assets-cars.js?v=1010Z43',function(){if(window.__artPack&&window.ART_CARS){window.__artPack(window.ART_CARS);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
  stage2:['assets-stage2.js?v=1007B',function(){if(window.__artPack&&window.ART_STAGE2){window.__artPack(window.ART_STAGE2);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
  train:['assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}}],
  herobg:['assets-herobg.js?v=1008G',function(){if(window.__artPack&&window.ART_HEROBG){window.__artPack(window.ART_HEROBG);try{const r=document.documentElement.style;for(const k of ['m','f','a'])if(ART['bg-hero-'+k])r.setProperty('--hbg-'+k,'url('+ART['bg-hero-'+k]+')');if(!$('home').hidden)renderHome()}catch(e){}}}],
@@ -6576,7 +6590,7 @@ function pkLoad(n,next){if(PKS[n]||!PK[n])return;PKS[n]=1;PKA++;var p=PK[n];add(
 function pkNext(){if(PKA>0)return;for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
 window.ensurePack=function(){for(var i=0;i<arguments.length;i++)if(PK[arguments[i]])pkLoad(arguments[i])};
 function hook(name,fn){var o=window[name];if(typeof o!=='function')return;window[name]=function(){try{fn.apply(this,arguments)}catch(e){}return o.apply(this,arguments)}}
-hook('startRun',function(c){ensurePack('fx','hero3','hero2','hd','boss');try{if(Object.values(SAVE.eq||{}).some(function(id){var it=(SAVE.items||[]).find(function(i){return i.id===id});return it&&it.dino}))ensurePack('jr')}catch(e){}try{if(SAVE.hero==='a')ensurePack('mech');if(SAVE.hero==='j')ensurePack('jx')}catch(e){}if(c===1)ensurePack('stage2');if(c===2)ensurePack('stage3','jx');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
+hook('startRun',function(c){ensurePack('fx','hero3','hero2','hd','boss');try{const R0=RIDES.find(r=>r.id===SAVE.ride);if(R0&&R0.rsk)ensurePack('cars')}catch(e){}try{if(Object.values(SAVE.eq||{}).some(function(id){var it=(SAVE.items||[]).find(function(i){return i.id===id});return it&&it.dino}))ensurePack('jr')}catch(e){}try{if(SAVE.hero==='a')ensurePack('mech');if(SAVE.hero==='j')ensurePack('jx')}catch(e){}if(c===1)ensurePack('stage2');if(c===2)ensurePack('stage3','jx');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
 hook('setTab',function(t){if(t==='eq')ensurePack('herobg');if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2','stage3')});
 hook('casSwitch',function(t){if(t==='train')ensurePack('train')});
 function go(){var Q=['ui'].concat(pkTab());(function step(){var n=Q.shift();if(!n){pkNext();return}if(PKS[n]){step();return}pkLoad(n,step)})()}
