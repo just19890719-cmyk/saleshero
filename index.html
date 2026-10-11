@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z47">
+<meta name="gbuild" content="1010-Z48">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z47</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z48</span></small>
   </div>
  </div>
 </div>
@@ -2408,7 +2408,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
  </div>
 </div>
 
-<script>if(!window.__PHONEHOST)document.write('<script src="assets.js?v=1006Q"><\/script>')</script>
+<script>window.ART=window.ART||{};if(!window.__PHONEHOST){var __as=document.createElement('script');__as.src='assets.js?v=1010Z48';__as.async=true;document.head.appendChild(__as)}</script>
 <script>
 if(window.__PHONEHOST)throw new Error("phone-host");
 /* ================== 網頁版設定(上傳 GitHub 前請填寫) ==================
@@ -5995,10 +5995,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z47';
+const GBUILD='1010-Z48';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['⚡','開啟速度再加快','遊戲主畫面不再等第一包美術圖下載完才出現:頁面先開、圖到了自動補上,4G 行動網路下開啟約快 2 秒。'],
 ['☁️','換裝置進度保護大升級','伺服器會核對存檔版本,舊裝置再也蓋不掉新進度;就算被別台裝置搶先,這台多賺的金幣和裝備也會自動補發;裝置時間亂掉、瀏覽器清資料也不會弄丟進度;存檔太大會直接提醒你。'],
 ['🏆','排行榜顯示修正','同一位玩家用好幾台裝置玩時,排行榜會顯示他最後在玩的那台的進度(原本有時會顯示到舊裝置的資料)。'],
 ['🦖','恐龍裝備不再遺失','侏儸紀打到的恐龍裝備會在抓到的當下就放進倉庫;一鍵賣出不會賣掉恐龍裝備;雲端同步失敗會自動重試;在侏儸紀被擠下線時,還沒存到雲端的金幣和裝備會在重新登入後自動補發。'],
@@ -6018,7 +6019,6 @@ const GNOTES=[
 ['☄️','恐龍技能特效登場!','暴龍頭骨盔、霸王龍鱗戰甲的 6 個恐龍技能換上全新戰鬥特效:恐龍咆哮震波、迅猛龍爪、化石護盾、隕石雨、原始狂暴火焰、鱗甲反刺。'],
 ['🦖','侏儸紀手感微調','侏儸紀加班公園的捕獲手感小幅調整,趕快進場試試看!'],
 ['🎯','侏儸紀準心上線!','侏儸紀換上四色專屬準心,瞄哪裡一目了然;侏儸紀頁的池底改成跟射龍門一樣的全服即時池底。下方選單的股市也換上新圖示。'],
-['📈','侏儸紀倍率跟著池底漲!','所有恐龍的倍率改成跟著全服池底變動:池底每 1000 萬 = 原本倍率 ×1,池底越多倍率越高(最高 ×3,暴龍王最高 ×900)。遊戲右上角新增可以縮小的倍率視窗,隨時看即時池底和每隻恐龍現在的倍率。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6607,6 +6607,13 @@ try{heroHD()}catch(e){}try{if(ART['__hdsingle']){for(const n in HDN)ART['__hd_'+
 function gqRun(){try{if(TABDEAD||!Array.isArray(SAVE.gq)||!SAVE.gq.length)return;if(inBattle()){setTimeout(gqRun,5000);return}if(CL&&CL.on&&CL.u&&!CL.ready){setTimeout(gqRun,2000);return}
  const L=SAVE.gq.splice(0),got=[];for(const g of L){if(g&&g.k==='dino'){const it=jrDrop(+g.q||6,g.ty==='head'?'head':g.ty==='coat'?'coat':null,1);if(it)got.push(it.name)}}
  delete SAVE.gq;save();try{renderHome()}catch(e){}if(got.length){sfx('rareLoot');toast('🎁 管理員補發:'+got.map(n=>'「'+n+'」').join('、')+',已放進倉庫!')}}catch(e){console.error(e)}}
+/* 1010-Z48 首屏加速:assets.js 改成非同步載入,頁面先開、圖到了再補上 */
+window.__artBase=function(){if(window.__artBaseDone)return;window.__artBaseDone=1;try{for(const k in ART)delete IMGT[k]}catch(e){}try{SC.clear()}catch(e){}try{artVars(false)}catch(e){}
+ try{const li=$('login');if(li&&!li.hidden){const ai=k=>ART[k]||'';if($('lgh')&&ai(heroIdleKey()))$('lgh').src=ai(heroIdleKey());if($('lgz1')&&ai('奧客喪屍-atk-1')){$('lgz1').src=ai('奧客喪屍-atk-1');$('lgz1').hidden=false}if($('lgz2')&&ai('菜市場大媽喪屍-atk-1')){$('lgz2').src=ai('菜市場大媽喪屍-atk-1');$('lgz2').hidden=false}try{mqBulbs()}catch(e){}}}catch(e){}
+ try{emjConvert(document.body)}catch(e){}
+ try{if(!document.querySelector('#gov:not([hidden])')&&$('home')&&!$('home').hidden){renderHome();if(SAVE.tab)setTab(SAVE.tab)}}catch(e){}};
+function __artAll(){try{return Object.keys(ART).length>50}catch(e){return false}}
+if(__artAll())__artBase();else{var __abI=setInterval(function(){if(__artAll()){clearInterval(__abI);__artBase()}},250);setTimeout(function(){clearInterval(__abI)},30000)}
 lbInit();requestAnimationFrame(loop);showLogin();clBoot();setTimeout(gqRun,3500);document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 <script>
