@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z43">
+<meta name="gbuild" content="1010-Z44">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z43</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z44</span></small>
   </div>
  </div>
 </div>
@@ -2521,14 +2521,22 @@ function restoreSave(){const R=SAVE._restore;delete SAVE._restore;SAVE.items=SAV
  if(!SAVE.eq.wpn){const u=makeItem(1,0,'wpn',BASES.wpn[0]);SAVE.items.push(u);SAVE.eq.wpn=u.id}
  SAVE._restored=Date.now();setTimeout(()=>{try{save();toast('♻️ 已從排行榜紀錄還原你的進度!')}catch(e){}},1500)}
 function freshSave(){const s={items:[],eq:{},parts:0,unlock:1,clear:[],auto:true,ch:0};const u=makeItem(1,0,'wpn',BASES.wpn[0]);s.items.push(u);s.eq.wpn=u.id;return s}
-function load(){try{const j=localStorage.getItem(KEY);if(!j)return null;const o=JSON.parse(j);/* 1007-Z 不完整的存檔(例如幾乎空白的雲端存檔)自動補齊欄位 */try{const f=freshSave();for(const k in f)if(o[k]===undefined||o[k]===null&&f[k]!==null)o[k]=f[k];if(!Array.isArray(o.items))o.items=f.items;if(!o.eq||typeof o.eq!=='object')o.eq=f.eq}catch(e){}return o}catch(e){return null}}
+function load(){let j;try{j=localStorage.getItem(KEY)}catch(e){return null}if(!j)return null;try{const o=JSON.parse(j);/* 1007-Z 不完整的存檔(例如幾乎空白的雲端存檔)自動補齊欄位 */try{const f=freshSave();for(const k in f)if(o[k]===undefined||o[k]===null&&f[k]!==null)o[k]=f[k];if(!Array.isArray(o.items))o.items=f.items;if(!o.eq||typeof o.eq!=='object')o.eq=f.eq}catch(e){}return o}catch(e){/* 1010-Z44 存檔損毀:原文另存起來;有雲端帳號時強制改用雲端進度,不會把空白進度上傳蓋掉雲端 */window.__SAVEBAD=1;try{localStorage.setItem('clockin-hero-bad',j)}catch(x){}try{console.warn('[save] 本機存檔損毀,原文已另存 clockin-hero-bad')}catch(x){}return null}}
 /* 1010-Z3 同一個瀏覽器只讓一個分頁存檔:別的分頁一寫入存檔(或新分頁打開),這個分頁立刻停止存檔,避免舊進度蓋掉新進度(更新版本時常同時開著新舊兩個分頁) */
 const TABID=Math.random().toString(36).slice(2)+Date.now().toString(36);let TABDEAD=false;
 try{localStorage.setItem('shechu-tab',TABID)}catch(e){}
 window.addEventListener('storage',e=>{try{if((e.key==='shechu-tab'&&e.newValue&&e.newValue!==TABID)||e.key===KEY)tabDead()}catch(x){}});
-function tabDead(){if(TABDEAD)return;TABDEAD=true;try{if(typeof CL!=='undefined'&&CL){CL.noflush=true;clearTimeout(CL.timer)}}catch(e){}try{running=false}catch(e){}
+function tabDead(){if(TABDEAD)return;TABDEAD=true;try{if(typeof CL!=='undefined'&&CL){CL.noflush=true;clearTimeout(CL.timer)}}catch(e){}try{clearTimeout(DP.taxT)}catch(e){}try{JR.auto=false}catch(e){}try{running=false}catch(e){}
  try{const ov=document.createElement('div');ov.className='ov tabov';ov.innerHTML='<div class="box tabbox"><div class="tabic">🗂️</div><h2>帳號已在另一個分頁登入</h2><p>你在同一個瀏覽器又開了一個遊戲分頁,這個分頁已被登出,不會再存檔。<br>請改用另一個分頁玩;想留在這裡的話,按下面會接續最新進度。</p><button class="btn pri" id="tabre">🔄 在這個分頁重新登入(接續最新進度)</button></div>';document.body.appendChild(ov);document.getElementById('tabre').onclick=()=>location.reload()}catch(e){}}
-function save(){if(TABDEAD)return;try{SAVE._t=Date.now();localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}if(typeof cloudQueue==='function')cloudQueue();if(typeof lbSync==='function'&&typeof LB!=='undefined')lbSync()}
+/* 1010-Z44 另一個分頁已經接手(例如舊分頁在背景時沒收到通知)→ 這個分頁不再寫入存檔 */
+function tabLost(){try{const v=localStorage.getItem('shechu-tab');return!!v&&v!==TABID}catch(e){return false}}
+document.addEventListener('visibilitychange',()=>{try{if(document.visibilityState==='visible'&&!TABDEAD&&tabLost())tabDead()}catch(e){}});
+/* 1010-Z44 本機存檔失敗時提醒(戰鬥中不跳,等戰鬥結束;10 分鐘最多一次) */
+let SVERR=0;
+function saveErr(e){const f=!SVERR;SVERR=Date.now();try{console.warn('[save] 本機存檔失敗',e)}catch(x){}if(f)svWarn()}
+function svWarn(){if(!SVERR||TABDEAD)return;try{if(inBattle()){clearTimeout(svWarn.t);svWarn.t=setTimeout(svWarn,5000);return}}catch(x){}if(Date.now()-(svWarn.last||0)<600000)return;svWarn.last=Date.now();
+ try{toast('⚠️ 這台裝置的儲存空間不足,進度沒有存到本機'+((typeof CL!=='undefined'&&CL&&CL.u)?'(雲端帳號仍會同步)':',請盡快綁定雲端帳號'))}catch(x){}}
+function save(){if(TABDEAD)return;if(tabLost()){tabDead();return}try{SAVE._t=Date.now();localStorage.setItem(KEY,JSON.stringify(SAVE));SVERR=0}catch(e){saveErr(e)}if(typeof cloudQueue==='function')cloudQueue();if(typeof lbSync==='function'&&typeof LB!=='undefined')lbSync()}
 const byId=id=>SAVE.items.find(i=>i.id===id);
 const isEq=it=>Object.values(SAVE.eq).includes(it.id);
 
@@ -2895,16 +2903,18 @@ function dpRenderPot(){const v=$('dpotv');if(!v)return;v.textContent=DP.pot==nul
 const TAXR=.1,TAXSTEAL=.2;DP.tax=null;/* 偷菜的「贓款稅」20% */
 function taxIncome(gross,rate){gross=Math.max(0,Math.floor(gross||0));const t=Math.floor(gross*(rate||TAXR));if(t>0){SAVE.taxQ=(SAVE.taxQ||0)+t;SAVE.taxTot=(SAVE.taxTot||0)+t;clearTimeout(DP.taxT);DP.taxT=setTimeout(taxFlush,4000)}return t}
 const taxTxt=t=>t>0?'(芳芳抽稅 '+fmtC(t)+',已丟進射龍門池底)':'';
-async function taxFlush(){const q=Math.floor(SAVE.taxQ||0);if(q<=0||DP.taxBusy)return;DP.taxBusy=true;const amt=Math.min(q,50000);
+async function taxFlush(){if(TABDEAD)return;const q=Math.floor(SAVE.taxQ||0);if(q<=0||DP.taxBusy)return;DP.taxBusy=true;const amt=Math.min(q,50000);
+ /* 1010-Z44 先扣再送:送出前先從存檔扣掉,確定失敗才加回(寧可少收,也不重複進池底) */SAVE.taxQ=Math.max(0,(SAVE.taxQ||0)-amt);save();
  try{if(DP.on){const r=await dpReq('/rest/v1/rpc/dragon_tax',{p_amt:amt});if(r&&r.pot!=null)DP.pot=+r.pot;if(r&&r.tax!=null)DP.tax=+r.tax}
   else{const s=dpLocal(),d=new Date().toDateString();s.dpot+=amt;if(s.dtaxD!==d){s.dtaxD=d;s.dtax=0}s.dtax+=amt;DP.pot=s.dpot;DP.tax=s.dtax}
-  SAVE.taxQ=Math.max(0,(SAVE.taxQ||0)-amt);save();try{dpRenderPot()}catch(e){}
+  try{dpRenderPot()}catch(e){}
   if((SAVE.taxQ||0)>0){DP.taxBusy=false;setTimeout(taxFlush,1500);return}}
- catch(e){}DP.taxBusy=false}
+ catch(e){if(!TABDEAD){SAVE.taxQ=(SAVE.taxQ||0)+amt;save()}}DP.taxBusy=false}
 setInterval(()=>{try{if(SAVE&&(SAVE.taxQ||0)>0&&document.visibilityState==='visible')taxFlush()}catch(e){}},60000);
 /* 關掉或切走網頁時,把還沒送出的稅金用 keepalive 送出(先送再扣;若沒送到,下次上線會再補) */
-document.addEventListener('visibilitychange',()=>{try{if(document.visibilityState!=='hidden'||!DP.on||DP.taxBusy)return;const q=Math.min(Math.floor(SAVE.taxQ||0),50000);if(q<=0)return;
- clearTimeout(DP.taxT);fetch(dpU('/rest/v1/rpc/dragon_tax'),{method:'POST',headers:dpH(),body:JSON.stringify({p_amt:q}),keepalive:true}).then(r=>{if(r.ok){SAVE.taxQ=Math.max(0,(SAVE.taxQ||0)-q);save()}}).catch(()=>{})}catch(e){}});
+document.addEventListener('visibilitychange',()=>{try{if(TABDEAD||document.visibilityState!=='hidden'||!DP.on||DP.taxBusy)return;const q=Math.min(Math.floor(SAVE.taxQ||0),50000);if(q<=0)return;
+ /* 1010-Z44 先扣再送:沒網路就不送(留著下次);伺服器明確拒絕才加回;送出後頁面被凍結也不會重送 */
+ clearTimeout(DP.taxT);if(navigator.onLine===false)return;SAVE.taxQ=Math.max(0,(SAVE.taxQ||0)-q);save();fetch(dpU('/rest/v1/rpc/dragon_tax'),{method:'POST',headers:dpH(),body:JSON.stringify({p_amt:q}),keepalive:true}).then(r=>{if(!r.ok&&!TABDEAD){SAVE.taxQ=(SAVE.taxQ||0)+q;save()}}).catch(()=>{})}catch(e){}});
 setTimeout(()=>{try{if(SAVE&&(SAVE.taxQ||0)>0)taxFlush()}catch(e){}},8000);
 async function dpRefresh(){try{await dpFetch();DP.err=''}catch(e){DP.err=String(e.code||e.message||e)}dpRenderPot();renderDragon()}
 const dMult=()=>DS.ph==='pair'?3:2;
@@ -5867,7 +5877,7 @@ const jrPP=T=>T.jack||T.pp||0;
 function jrPot(){try{return DP.on?(+DP.pot||0):dpLocal().dpot}catch(e){return 0}}
 function jrPotAdd(v){try{if(DP.on){DP.pot=(+DP.pot||0)+v}else{const s=dpLocal();s.dpot=Math.max(0,s.dpot+v);DP.pot=s.dpot}}catch(e){}}
 /* 1010-Z32 回本率改由伺服器「池底自動調控」決定:池底 800 萬以下 95%;以上 100%~112%(伺服器每分鐘依進度算放水強度 JR.pb 0~1;單機測試版固定 0.5) */
-const jrRtp=()=>{const p=jrPot();if(p<=JRTH)return .95;const b=JR.on&&JR.pb!=null?JR.pb:.5;return 1+.12*Math.max(0,Math.min(1,b))};
+const jrRtp=()=>{const p=jrPot();if(p<=JRTH)return .95;const b=JR.on&&JR.pb!=null?JR.pb:.5;if(b<0)return .95;/* 1010-Z44 池底漲潮(存水)期:伺服器回傳 -1 → 回本 95% */return 1+.12*Math.max(0,Math.min(1,b))};
 /* 打空的子彈也算進回本:用這次進場的命中率補回捕獲機率 */
 const jrHr=()=>JR.sh>60?Math.max(.4,Math.min(1,JR.hi/JR.sh)):.78;
 /* 1010-Z26 所有恐龍倍率跟著池底:池底每 1000 萬 = ×1,最低 ×0.5、最高 ×3(回本率不變,倍率越高越難抓) */
@@ -5982,10 +5992,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z43';
+const GBUILD='1010-Z44';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🛠️','穩定性修正','修正網路不穩時圖片可能一直載不出來、儲存空間不足時可能不斷重新整理、同時開兩個遊戲分頁可能互相蓋掉進度,以及芳芳稅可能重複送出的問題。'],
 ['🎨','夢想車技能特效','夢想車庫 6 個專屬技能換上全新技能圖示和戰鬥特效:紅色閃電、皇家護盾、電場光環、越野衝撞、追蹤飛彈、黃金風暴。'],
 ['🚗','夢想車庫大升級!','夢想車庫的至尊、典藏座駕素質全部提升 20%,而且每台都有專屬戰鬥技能(技能等級 = 車子等級):義式超跑「紅色閃電」、英式豪華轎車「皇家護駕」、電動超跑「超充電場」、越野霸主「越野衝撞」、經典古董跑車「特務飛彈」、鍍金限量超跑「黃金風暴」。'],
 ['⏩','戰鬥 3 倍速','戰鬥右上角的倍速按鈕新增 3 倍速:點一下 2 倍速、再點一下 3 倍速、再點一下回到正常速度。'],
@@ -6005,7 +6016,6 @@ const GNOTES=[
 ['🎯','侏儸紀新砲台上線!','四個座位換上全新的紅、藍、綠、紫能量砲台、子彈和捕獲網,砲台都架在專屬底座上。恐龍專屬裝備的掉落率改成跟賭石一樣:子彈越大,掉落機率越高(1 萬子彈 = 帝王料開出至尊、典藏的機率)。'],
 ['🦖','侏儸紀四人同場!','侏儸紀改成最多 4 人一起打:每個人的砲台、子彈顏色不同(紅、藍、綠、紫),大家都排在畫面下方,看得到別人的子彈飛過去。子彈碰到螢幕邊緣就消失,不再反彈。獎金一樣由射龍門池底支付,全服捕獲紀錄同步更新。'],
 ['🦖','侏儸紀加班公園開園!','遊樂場新增「侏儸紀」:按住畫面射恐龍,打中有機會捕獲,獎金 = 子彈金額 × 恐龍倍率,由射龍門池底支付!黃金霸王龍直接抱走池底 3%,暴龍、暴龍王還會掉落至尊頭盔、典藏戰甲。股市搬到下方選單,在塔羅牌旁邊。'],
-['👑','榜一專屬金框掃光','排行榜每個分頁的第一名(金幣、戰力、無限列車、偷菜、射龍門、21 點、股神),整個欄位都會有金色邊框和掃光特效。另外修正股東福利公告在手機上右邊被切掉的問題。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6511,7 +6521,7 @@ function clLogoutAsk(){const ov=document.createElement('div');ov.className='ov';
 function devWipe(){try{clSet(null,null)}catch(e){}try{['clockin-hero-v1','clockin-uid','shechu-acct','shechu-annx'].forEach(k=>localStorage.removeItem(k));sessionStorage.clear()}catch(e){}toast('🧹 已清除這台裝置的進度');setTimeout(()=>location.reload(),600)}
 function devReset(){document.querySelectorAll('.clov').forEach(o=>o.remove());const u=SAVE.acct||'';ask('確定要清除這台裝置的進度嗎?\n'+(u?'帳號「'+u+'」在雲端的進度不會受影響,之後可以再登入。\n':'')+'清除後會變成新玩家,可以重新取名、建立新帳號。',async()=>{if(CL.u){try{await clFlush()}catch(e){}}devWipe()})}
 
-function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);const ku=CL.u||SAVE.acct||'';clSet(null,null);
+function clKick(){if(TABDEAD||CL.kicked)return;/* 1010-Z44 已停用的分頁不處理(原本會刪掉共用的登入資料、重複寫入補發獎勵) */CL.kicked=true;clearTimeout(CL.timer);const ku=CL.u||SAVE.acct||'';clSet(null,null);
  /* 1007-Z6 被踢下線:畫面鎖住,只能在這台重新登入(會接續另一台的最新進度),避免兩邊進度分岔 */
  /* 1007-Z8 戰鬥中被踢:先把這場結算,獎勵暫存在這台;之後在這台重新登入時自動補發到帳號 */
  try{if(G&&!G.over&&!G.tr){const c0=CL.syncCoin!=null?CL.syncCoin:(SAVE.coin||0),ids=CL.syncIds||new Set((SAVE.items||[]).map(i=>i.id));running=true;endRun();const add=(SAVE.items||[]).filter(i=>!ids.has(i.id)),dc=Math.max(0,(SAVE.coin||0)-c0);
@@ -6522,7 +6532,7 @@ function clKick(){if(CL.kicked)return;CL.kicked=true;clearTimeout(CL.timer);cons
 function clKickUI(){const ku=CL.kickU||'';document.querySelectorAll('.clov.kick').forEach(o=>o.remove());
  const ov=document.createElement('div');ov.className='ov clov kick';ov.style.zIndex='99998';ov.innerHTML='<div class="box clbox" style="text-align:center"><h2>📱 帳號已在另一台裝置上線</h2><p>你的雲端帳號「'+escH(ku)+'」剛剛在<b>另一台裝置</b>登入,這台已經自動下線。</p><p class="muted" style="font-size:13px">要在這台繼續玩,請重新登入。<br>重新登入後,另一台會下線,這台會<b>自動接續最新的進度</b>。</p><div class="clbtns"><button class="btn pri" data-a="re">在這台繼續玩</button></div></div>';
  document.body.appendChild(ov);sfx('error');ov.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;ov.remove();CL.kicked=false;clModal('in',ku)}}
-async function clCheck(){if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;if(Date.now()-(CL.ct||0)<8000)return;CL.ct=Date.now();
+async function clCheck(){if(TABDEAD)return;if(!CL.on||!CL.u||!CL.ready||CL.kicked||CL.busy||document.visibilityState!=='visible')return;if(Date.now()-(CL.ct||0)<8000)return;CL.ct=Date.now();
  if(CL.stampOK===false){try{const ok=await clRpc('acct_ping',{p_user:CL.u,p_token:CL.t});if(ok===false){clKick();return}}catch(e){if(/token/i.test(String((e&&e.msg)||''))){clKick();return}}}
  if(!CL.busy){CL.busy=true;await clGuard();CL.busy=false}}
 setInterval(clCheck,30000);
@@ -6532,16 +6542,19 @@ addEventListener('focus',()=>setTimeout(clCheck,300));
 async function clBoot(){clUI();try{if(CL.u&&SAVE.acct!==CL.u){SAVE.acct=CL.u;save()}}catch(e){}if(!CL.on||!CL.u){CL.ready=true;return}
  let just=false;try{just=sessionStorage.getItem('shechu-justlogin')==='1';sessionStorage.removeItem('shechu-justlogin')}catch(e){}
  if(just){CL.ready=true;CL.gt=Date.now();toast('☁️ 已登入 '+acctDisp(CL.u)+',雲端進度載入完成');return}
- try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});
+ try{const r=await clRpc('acct_load',{p_user:CL.u,p_token:CL.t});if(TABDEAD)return;
   if(r.lb_id)try{localStorage.setItem('clockin-uid',r.lb_id)}catch(e){}
   const ct=r.save?+(r.save._t||r.save_t||0):0,sy=clSyncGet();
-  if(r.save&&ct>sy+500){let g=false;try{g=sessionStorage.getItem('shechu-pull')==='1'}catch(e){}
-   if(!g){try{localStorage.setItem(KEY,JSON.stringify(r.save));sessionStorage.setItem('shechu-pull','1')}catch(e){}clSyncSet(ct);location.reload();return}}
+  if(r.save&&(ct>sy+500||window.__SAVEBAD)){let g=false;try{g=sessionStorage.getItem('shechu-pull')==='1'}catch(e){}
+   if(!g){let ok=false;try{localStorage.setItem(KEY,JSON.stringify(r.save));ok=true}catch(e){try{console.warn('[save] 雲端進度寫不進本機',e)}catch(x){}}
+    /* 1010-Z44 寫不進本機(空間不足)時不重新整理(原本會無限重整),也不上傳這台的舊進度 */
+    if(!ok){CL.noflush=true;CL.ready=true;CL.err='這台裝置儲存空間不足,無法載入雲端進度';clUI();try{toast('⚠️ 這台裝置儲存空間不足,無法載入雲端進度,請清出空間後重新整理')}catch(e){}return}
+    try{sessionStorage.setItem('shechu-pull','1')}catch(e){}clSyncSet(ct);location.reload();return}}
   try{sessionStorage.removeItem('shechu-pull')}catch(e){}
   CL.ready=true;CL.gt=Date.now();if(r.save&&!(ct>sy+500)&&Math.abs(ct-sy)>1&&!((+(SAVE._t||0))>Math.max(ct,sy)+500))clSyncSet(ct);
   if(!r.save||(+(SAVE._t||0))>Math.max(ct,sy)+500||CL.dirty){CL.dirty=false;clFlush()}
   CL.lastOk=Date.now();CL.err='';clUI()}
- catch(e){CL.err=clMsg(e);CL.ready=true;if(/token/i.test(String(e.msg||'')))clKick();clUI()}}
+ catch(e){CL.err=clMsg(e);CL.ready=true;if(/token/i.test(String(e.msg||'')))clKick();/* 1010-Z44 存檔損毀又連不上:先不上傳,避免空白進度蓋掉雲端 */if(window.__SAVEBAD){CL.noflush=true;CL.err='本機存檔損毀,請連上網路後重新整理,以載入雲端進度'}clUI()}}
 
 window.__artExtra=function(){const X=window.ART_EXTRA;if(!X||window.__artExtraDone)return;window.__artExtraDone=1;{const NL=window.__NL||(window.__NL=new Set());for(const k of Object.keys(X))if(k.startsWith('n2-')){const r=k.slice(3);X[r]=X[k];NL.add(r);delete X[k]}}Object.assign(ART,X);try{artLazy(Object.keys(X))}catch(e){}try{SC.clear()}catch(e){}setTimeout(()=>{try{emjConvert(document.body)}catch(e){}},50);for(const k in X)delete IMGT[k];
  try{artVars(false)}catch(e){}try{document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}
@@ -6565,7 +6578,7 @@ try{heroHD()}catch(e){}try{if(ART['__hdsingle']){for(const n in HDN)ART['__hd_'+
 lbInit();requestAnimationFrame(loop);showLogin();clBoot();document.body.classList.add('gready');if(GIFT2)setTimeout(()=>toast('💰 測試用:送你 1,000,000 金幣!'),GIFT?2600:400);if(GIFT)setTimeout(()=>{toast('🎁 開工見面禮:送你 1000 金幣!');$('gbub').textContent='開工送你 1000 金幣,快來抽!'},400);
 </script>
 <script>
-(function(){if(window.__PHONEHOST)return;function add(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;document.body.appendChild(s)}
+(function(){if(window.__PHONEHOST)return;function add(src,cb,eb){var s=document.createElement('script');s.src=src;s.async=true;if(cb)s.onload=cb;s.onerror=function(){try{s.remove()}catch(e){}if(eb)eb()};document.body.appendChild(s)}
 /* 1008-A 資源檔依需要的順序一個一個載入(原本 7 個同時下載互搶頻寬);用到的功能會插隊先載 */
 var PK={ui:['assets-ui.js?v=1010Z31',function(){if(window.__artUI)window.__artUI()}],sounds:['sounds.js?v=1007F',function(){}],extra:['assets-extra.js?v=1010Z31',function(){if(window.__artExtra)window.__artExtra()}],
  hero2:['assets-hero2.js?v=1006Z',function(){if(window.__artPack&&window.ART_HERO2)window.__artPack(window.ART_HERO2)}],
@@ -6586,9 +6599,14 @@ var PK={ui:['assets-ui.js?v=1010Z31',function(){if(window.__artUI)window.__artUI
 var PKO=['sounds','fx','extra','herobg','hero2','hd','boss','cars','stage2','train','ds','jr','stage3','mech','jx'],PKS={},PKA=0;/* 1008-D 恨鐵不成鋼的圖放最後背景下載;選了這隻角色才優先 */
 function pkTab(){var L=[];try{var t=SAVE.tab,c=SAVE.cas,h=SAVE.hero;if(t==='gacha')L.push('cars');if(t==='eq')L.push('herobg','hero2');if(t==='map')L.push('boss','hd');if(t==='dragon'){if(c==='jr')L.push('jr');if(c==='jd')L.push('ds');if(c==='train')L.push('train');if(c==='bj'||c==='dragon')L.push('extra')}if(t==='farm'||t==='tarot')L.push('extra');L.push(h==='a'?'mech':h==='j'?'jx':'hero3')}catch(e){}return L}
 function pkRef(n){try{if(n!=='ui'&&n!=='extra'&&pkTab().indexOf(n)<0)return;clearTimeout(pkRef.t);pkRef.t=setTimeout(function(){try{var H=$('home');if(!H||H.hidden||(typeof inBattle==='function'&&inBattle())||document.querySelector('#gov:not([hidden])'))return;var a=document.activeElement;if(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName))return;var y=H.scrollTop;renderHome();if(SAVE.tab)setTab(SAVE.tab);H.scrollTop=y}catch(e){}},200)}catch(e){}}
-function pkLoad(n,next){if(PKS[n]||!PK[n])return;PKS[n]=1;PKA++;var p=PK[n];add(p[0],function(){try{p[1]()}catch(e){}PKS[n]=2;PKA--;pkRef(n);setTimeout(next||pkNext,60)});}
+/* 1010-Z44 資源包載入失敗或卡住時不再讓整條佇列停住:失敗自動重試 2 次(3、6 秒後);30 秒還沒好先讓出佇列(不重複下載,晚到的照常套用);狀態 3 = 失敗 */
+var PKF={};
+function pkLoad(n,next){if(PKS[n]===1||PKS[n]===2||!PK[n])return;PKS[n]=1;PKA++;var p=PK[n],held=true,rel=function(){if(held){held=false;PKA--;setTimeout(next||pkNext,60)}},to=setTimeout(rel,30000);
+ add(p[0],function(){clearTimeout(to);try{p[1]()}catch(e){}PKS[n]=2;pkRef(n);rel()},function(){clearTimeout(to);PKS[n]=3;PKF[n]=(PKF[n]||0)+1;try{console.warn('[pack] 載入失敗',n,PKF[n])}catch(e){}if(PKF[n]<=2)setTimeout(function(){if(PKS[n]===3){PKS[n]=0;pkLoad(n)}},3000*PKF[n]);rel()})}
 function pkNext(){if(PKA>0)return;for(var i=0;i<PKO.length;i++){var n=PKO[i];if(!PKS[n]){pkLoad(n,pkNext);return}}}
 window.ensurePack=function(){for(var i=0;i<arguments.length;i++)if(PK[arguments[i]])pkLoad(arguments[i])};
+/* 1010-Z44 網路恢復時,把載入失敗的資源包重新載入 */addEventListener('online',function(){for(var k in PKS)if(PKS[k]===3){PKF[k]=0;PKS[k]=0;pkLoad(k)}});
+window.__pk={PK:PK,PKS:PKS,PKF:PKF,pkLoad:pkLoad,pkNext:pkNext,pka:function(){return PKA}};
 function hook(name,fn){var o=window[name];if(typeof o!=='function')return;window[name]=function(){try{fn.apply(this,arguments)}catch(e){}return o.apply(this,arguments)}}
 hook('startRun',function(c){ensurePack('fx','hero3','hero2','hd','boss');try{const R0=RIDES.find(r=>r.id===SAVE.ride);if(R0&&R0.rsk)ensurePack('cars')}catch(e){}try{if(Object.values(SAVE.eq||{}).some(function(id){var it=(SAVE.items||[]).find(function(i){return i.id===id});return it&&it.dino}))ensurePack('jr')}catch(e){}try{if(SAVE.hero==='a')ensurePack('mech');if(SAVE.hero==='j')ensurePack('jx')}catch(e){}if(c===1)ensurePack('stage2');if(c===2)ensurePack('stage3','jx');try{const A=(typeof heroA==='function'&&heroA())?(armorEnsure(),ANIMA):(typeof heroF==='function'&&heroF())?ANIMF:ANIMM;imgWarm([].concat.apply([],Object.values(A).filter(Array.isArray)));const ch=CH[c||0];(ch.pool||[]).concat(ch.elite||[]).forEach(function(i){const E=EANIM[ENE[i].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))});if(ch.boss!=null){const E=EANIM[BOSS[ch.boss].n];if(E)imgWarm([].concat.apply([],Object.values(E).filter(Array.isArray)))}}catch(e){}});
 hook('setTab',function(t){if(t==='eq')ensurePack('herobg');if(t==='gacha')ensurePack('cars');if(t==='map')ensurePack('stage2','stage3')});
