@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1010-Z50">
+<meta name="gbuild" content="1013-Z51">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1010-Z50</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1013-Z51</span></small>
   </div>
  </div>
 </div>
@@ -2698,8 +2698,8 @@ function renderShop(){if(!$('scars'))return;if(ART['showroom-bg'])$('sbg').src=A
  $('scars').innerHTML=SRIDES.map(r=>{const lv=rideLv(r.id),on=SAVE.ride===r.id,c=RAR[r.q].c,price=r.shop,canBuy=(SAVE.coin||0)>=price,tc=tuneCost(r),tr=tuneRate(r.id);
   return'<div class="scar q'+r.q+(lv?' own':'')+(on?' on':'')+'" style="--rc:'+c+'"><span class="sq">'+RAR[r.q].n+'</span>'+(on?'<span class="rused">使用中</span>':'')+(lv?'<span class="slv">Lv.'+lv+'</span>':'')+
    '<div class="sim">'+(r.q>=5?'<span class="rqs"></span>':'')+(r.q>=6?'<i class="rqspark a">✦</i><i class="rqspark b">✦</i><i class="rqspark c">✦</i>':'')+'<img src="'+(ART['ride-'+r.id]||'')+'" alt="'+r.n+'"></div><b class="sn">'+r.n+'</b><small class="sd">'+r.d+'</small><div class="sst">'+rideText(r,Math.max(1,lv),1)+(r.sp?'<br><span class="ssp">✨ '+r.sp+'</span>':'')+(r.rsk?'<br><span class="ssp rsk">🚗 專屬技能「'+SK[r.rsk].n+'」Lv.'+Math.max(1,Math.min(5,lv))+':'+SK[r.rsk].d+'</span>':'')+'</div>'+
-   (lv?'<div class="sbt">'+(on?'<button class="btn" data-ride="">卸下</button>':'<button class="btn pri" data-ride="'+r.id+'">裝備</button>')+(lv<RMAX?'<button class="btn stune" data-tune="'+r.id+'"'+((SAVE.coin||0)<tc?' disabled':'')+'>🔧 改裝 Lv.'+(lv+1)+'<small>💰'+fmtC(tc)+' · 成功率 '+Math.round(tr*100)+'%</small></button>':'<button class="btn" disabled>🏁 已改滿</button>')+'</div>'
-   :'<div class="sbt"><button class="btn pri sbuy" data-buy="'+r.id+'"'+(canBuy?'':' disabled')+'>購買<small>💰 '+fmtC(price)+'</small></button></div>')+'</div>'}).join('')}
+   (lv?'<div class="sbt">'+(on?'<button class="btn" data-ride="">卸下</button>':'<button class="btn pri" data-ride="'+r.id+'">裝備</button>')+(lv<RMAX?'<button class="btn stune" data-tune="'+r.id+'" data-need="'+tc+'"'+((SAVE.coin||0)<tc?' disabled':'')+'>🔧 改裝 Lv.'+(lv+1)+'<small>💰'+fmtC(tc)+' · 成功率 '+Math.round(tr*100)+'%</small></button>':'<button class="btn" disabled>🏁 已改滿</button>')+'</div>'
+   :'<div class="sbt"><button class="btn pri sbuy" data-buy="'+r.id+'" data-need="'+price+'"'+(canBuy?'':' disabled')+'>購買<small>💰 '+fmtC(price)+'</small></button></div>')+'</div>'}).join('')}
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#gtabs [data-g]');if(t){audioUnlock();sfx('tab');gTab(t.dataset.g);return}
  const rb=e.target.closest&&e.target.closest('#scars [data-ride]');if(rb){SAVE.ride=rb.dataset.ride||null;audioUnlock();sfx(SAVE.ride?'engine':'unequip');save();renderHome();renderShop();return}
  const bb=e.target.closest&&e.target.closest('[data-buy]');if(bb&&!bb.disabled){const r=RIDES.find(x=>x.id===bb.dataset.buy);if(!r||rideLv(r.id))return;audioUnlock();
@@ -2709,6 +2709,8 @@ document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest
    if(Math.random()<rate){SAVE.rides[r.id]=lv+1;SAVE.tp[r.id]=0;if(lv+1>=RMAX)carNews('tune5',r.id);sfx('evo');sSay('ok',1);toast('🔧 改裝成功!「'+r.n+'」升到 Lv.'+(lv+1)+(lv+1>=RMAX?',已改滿!':''))}
    else{SAVE.tp[r.id]=(SAVE.tp[r.id]||0)+1;sfx('wahwah');sSay('fail',2);toast('💥 改裝失敗…下次成功率 +10%')}
    save();renderHome();renderShop()});return}});
+/* Z51 車庫按鈕依目前金幣即時更新可按狀態(修:金幣夠了改裝鈕仍是灰色) */
+setInterval(()=>{try{const sc=$('scars');if(!sc||!sc.offsetParent)return;const c=SAVE.coin||0;sc.querySelectorAll('[data-need]').forEach(b=>{const d=c<(+b.dataset.need||0);if(b.disabled!==d)b.disabled=d})}catch(e){}},400);
 setInterval(()=>{try{if(!$('home').hidden&&SAVE.tab==='gacha'&&!$('gShop').hidden&&Math.random()<.5)sSay('idle',1)}catch(e){}},7000);
 let gLast=1;
 function gacha(n){/* 1007-K 揭幕動畫進行中不能再抽(避免連點重複扣款) */if(!$('gov').hidden&&$('gbtns').hidden)return;if(gacha.lock&&Date.now()-gacha.lock<600)return;gacha.lock=Date.now();if(!ART['gr-frame']||!ART['uv-tt']){toast('🚪 車庫還在準備中,請稍等幾秒再抽');return}
@@ -5995,10 +5997,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1010-Z50';
+const GBUILD='1013-Z51';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🔧','車庫改裝按鈕修正','修正金幣足夠時,車庫的「改裝」「購買」按鈕仍是灰色、按不下去的問題;現在金幣一變動,按鈕會立刻跟著更新。'],
 ['🛠️','緊急修正','修正上一版部分畫面(金幣數量、排行榜按鈕、分頁圖示)可能顯示不出來的問題;回訪快取與音效不受影響。'],
 ['🚀','回訪秒開+過熱保護','玩過一次之後,再次開啟遊戲幾乎不用重新下載(圖和音效都存在手機裡,斷網也打得開);效能較弱的手機開三倍速時,會自動以兩倍運作,減少發燙和卡頓。'],
 ['⚡','開啟速度再加快','遊戲主畫面不再等第一包美術圖下載完才出現:頁面先開、圖到了自動補上,4G 行動網路下開啟約快 2 秒。'],
@@ -6018,7 +6021,6 @@ const GNOTES=[
 ['🍀','芳芳今天手氣差','射龍門、21 點、侏儸紀的莊家最近手氣不太好,趁現在進場試試看!'],
 ['🚀','載入速度加快','進遊戲時先載入畫面要用的圖,再依你目前所在的分頁優先載入,其餘的在背景慢慢下載,進去後圖片不會再空白一陣子。'],
 ['🕸️','侏儸紀網子子彈!','子彈打中會張開網子,網子裡的恐龍都有機會抓到,子彈金額越大網子越大!子彈改成 10 / 50 / 100 / 500 / 1,000,小資也能玩很久;小恐龍變多,常常有錢進帳。同房玩家抓到恐龍時,畫面上也看得到他抓到哪一隻、贏了多少。'],
-['☄️','恐龍技能特效登場!','暴龍頭骨盔、霸王龍鱗戰甲的 6 個恐龍技能換上全新戰鬥特效:恐龍咆哮震波、迅猛龍爪、化石護盾、隕石雨、原始狂暴火焰、鱗甲反刺。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
