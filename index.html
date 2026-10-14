@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1013-Z51">
+<meta name="gbuild" content="1014-Z52">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1013-Z51</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1014-Z52</span></small>
   </div>
  </div>
 </div>
@@ -4105,7 +4105,7 @@ function detail(){
  const ds=cmp?powerWith(slotFor(it),it)-power():null;
   const slk=eq?Object.keys(SAVE.eq).find(k=>SAVE.eq[k]===it.id):null,sln=slk?(SLOTS.find(x=>x.k===slk)||{}).n:'';
  d.innerHTML='<div class="card"><button id="dclose" data-a="close" aria-label="關閉">×</button><div class="dtag '+(eq?'on':'st')+'">'+(eq?'🧍 身上穿戴中'+(sln?' · '+sln:''):'📦 倉庫裡的裝備')+'</div><div class="ch2" style="background:linear-gradient(120deg,'+RAR[it.q].c+',#1a1f28)"><div class="ic icm mq'+it.q+(it.boss?' bossi':'')+'">'+icon(it.b,it.e)+'</div><div><b>'+it.name+(it.up?' +'+it.up:'')+'</b><small>'+RAR[it.q].n+' '+TYPEN[it.type]+' · 物品等級 '+it.il+(eq?' · 穿戴中':'')+'</small>'+(it.w?'<br><small>攻擊方式:'+WPN[it.w]+'</small>':'')+'</div></div>'+
-  (it.egg?'<div class="muted">✨ 生活彩蛋裝備</div>':'')+(it.boss?((()=>{const bb=BOSSI.find(z=>z.b===it.b);return bb&&bb.ch==='jade'?'<div class="bossnote">💎 賭石專屬飾品 · 芳芳鑑定打造</div>':bb&&bb.ch!=null?'<div class="bossnote">🏮 第三關「夜市」專屬裝備 · 夜市精英怪掉落</div>':'<div class="bossnote">👑 首領專屬裝備 · '+(bb&&BOSS[bb.bi]?BOSS[bb.bi].n:'首領')+'掉落</div>'})()):'')+'<ul>'+li+'</ul>'+
+  (it.egg?'<div class="muted">✨ 生活彩蛋裝備</div>':'')+(it.boss?((()=>{const bb=BOSSI.find(z=>z.b===it.b);return bb&&bb.ch==='jade'?'<div class="bossnote">💎 賭石專屬飾品 · 芳芳鑑定打造</div>':bb&&bb.ch==='dino'?'<div class="bossnote">🦖 侏儸紀專屬裝備 · '+(bb.q>=6?'暴龍王':'暴龍')+'掉落</div>':bb&&bb.ch!=null?'<div class="bossnote">🏮 第三關「夜市」專屬裝備 · 夜市精英怪掉落</div>':'<div class="bossnote">👑 首領專屬裝備 · '+(bb&&BOSS[bb.bi]?BOSS[bb.bi].n:'首領')+'掉落</div>'})()):'')+'<ul>'+li+'</ul>'+
   (it.sk?'<div class="skill">'+skI(it.sk)+'<span>技能「'+SK[it.sk].n+'」Lv.'+it.skl+':'+SK[it.sk].d+(it.boss?'':'<small class="sklr">🎲 技能隨機 · '+(RAR[it.q]?RAR[it.q].n:'')+'技能等級 '+sklRange(it.q)+'</small>')+'</span></div>':'')+
   (cmp?'<div class="muted">與目前穿戴相比,戰力 <b class="'+(ds>=0?'up':'down')+'">'+(ds>=0?'+':'')+fmt(ds)+'</b></div>':'')+
   '<div class="tools" style="margin-top:8px">'+(eq?'<button class="btn" data-a="un">卸下</button>':'<button class="btn pri" data-a="eq">裝備</button>')+
@@ -5896,7 +5896,7 @@ function jrPanel(){try{ensurePack('jr')}catch(e){}const el=$('jrinfo');if(!el)re
  const lg=$('jrlog');if(lg){const L=(DP.on&&JR.feed)||SAVE.jrlog||[];lg.innerHTML=L.length?L.map(r=>feedRow(r.nick,r.jack?'👑頭獎':'🦖'+r.n,r.m>=100||r.jack?'up big g1':'up','捕獲'+r.n+' 贏走 <b class="up">'+fmtC(r.v)+'</b>',r.t)).join(''):'<div class="muted" style="font-size:12px">還沒有人捕獲大恐龍,第一隻就是你!</div>'}}
 async function jrOpen(){if(inBattle()||JR.joining)return;try{ensurePack('jr')}catch(e){}if(!ART['jr-d1']){toast('🦖 恐龍還在進場,請稍等幾秒');return}
  JR.gq={};JR.gt={};JR.pa={};JR.sh=0;JR.hi=0;JR.q=[];JR.accB=0;JR.accW=0;JR.big=[];
- if(DP.on){JR.joining=1;try{await jrJoin()}catch(e){JR.joining=0;toast(e&&e.code==='http_404'?'🦖 侏儸紀加班公園測試中,即將開放!':'🦖 連線失敗,請稍後再試');return}JR.joining=0}else{JR.on=false;JR.seat=1;JR.pl={}}
+ if(DP.on){JR.joining=1;try{await Promise.race([jrJoin(),new Promise((_,rj)=>setTimeout(()=>rj({code:'timeout'}),10000))])}catch(e){JR.joining=0;JR.on=false;let why=e&&(e.code||e.message)||'unknown',m=e&&e.msg?String(e.msg).slice(0,60):'';try{SAVE.jrerr={t:Date.now(),c:String(why),m}}catch(x){}toast(e&&e.code==='http_404'?'🦖 侏儸紀加班公園測試中,即將開放!':'🦖 連線失敗('+why+(m?':'+m:'')+'),請截圖給作者');return}JR.joining=0}else{JR.on=false;JR.seat=1;JR.pl={}}
  let ov=$('jrov');if(!ov){ov=document.createElement('div');ov.id='jrov';ov.innerHTML='<canvas id="jrc"></canvas><div class="jrtop"><button class="btn" id="jrx">✕ 離開</button><div class="jrcoin"><span>💰</span><b id="jrcoin"></b></div><div class="jrrt" id="jrrt"></div></div><div class="jrfeed" id="jrfeed"></div><div class="jrmw" id="jrmw"><button class="jrmwh" id="jrmwh"><span class="jrmwl" id="jrmwl"></span><span>池底 <b id="jrmwp"></b></span><i>▾</i></button><div class="jrmwx"><div class="jrmws">恐龍倍率跟著池底變 · 目前 <b id="jrmwf"></b></div><div class="jrmwb" id="jrmwb"></div></div></div><div class="jrbar"><button class="btn" data-jb="-1">−</button><div class="jrbet"><small>每發</small><b id="jrbet"></b></div><button class="btn" data-jb="1">+</button><button class="btn jrauto" id="jrauto">🤖 自動</button></div><div class="jrbanner" id="jrban" hidden></div>';document.body.appendChild(ov);
   $('jrx').onclick=jrClose;$('jrmwh').onclick=()=>{SAVE.jrmwc=!SAVE.jrmwc;$('jrmw').classList.toggle('min',!!SAVE.jrmwc);sfx('tab');save()};ov.querySelector('.jrbar').onclick=e=>{const b=e.target.closest('[data-jb]');if(b){JR.bi=Math.max(0,Math.min(JRBET.length-1,JR.bi+(+b.dataset.jb)));sfx('tab');jrHud()}};
   $('jrauto').onclick=()=>{JR.auto=!JR.auto;$('jrauto').classList.toggle('on',JR.auto);sfx('tab');if(JR.auto&&!JR.aim)JR.aim={x:JR.W/2,y:JR.H*.4}};
@@ -5997,10 +5997,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1013-Z51';
+const GBUILD='1014-Z52';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🦖','恐龍裝備標示修正','暴龍頭骨盔、霸王龍鱗戰甲的來源標示,從誤植的「夜市」改回「侏儸紀專屬裝備」;侏儸紀若連線失敗,現在會顯示原因,方便排查。'],
 ['🔧','車庫改裝按鈕修正','修正金幣足夠時,車庫的「改裝」「購買」按鈕仍是灰色、按不下去的問題;現在金幣一變動,按鈕會立刻跟著更新。'],
 ['🛠️','緊急修正','修正上一版部分畫面(金幣數量、排行榜按鈕、分頁圖示)可能顯示不出來的問題;回訪快取與音效不受影響。'],
 ['🚀','回訪秒開+過熱保護','玩過一次之後,再次開啟遊戲幾乎不用重新下載(圖和音效都存在手機裡,斷網也打得開);效能較弱的手機開三倍速時,會自動以兩倍運作,減少發燙和卡頓。'],
@@ -6020,7 +6021,6 @@ const GNOTES=[
 ['💎','賭石坊進新貨','芳芳最近進的原石品質不錯,切垮的少了一點,趁現在去賭石坊碰碰運氣!'],
 ['🍀','芳芳今天手氣差','射龍門、21 點、侏儸紀的莊家最近手氣不太好,趁現在進場試試看!'],
 ['🚀','載入速度加快','進遊戲時先載入畫面要用的圖,再依你目前所在的分頁優先載入,其餘的在背景慢慢下載,進去後圖片不會再空白一陣子。'],
-['🕸️','侏儸紀網子子彈!','子彈打中會張開網子,網子裡的恐龍都有機會抓到,子彈金額越大網子越大!子彈改成 10 / 50 / 100 / 500 / 1,000,小資也能玩很久;小恐龍變多,常常有錢進帳。同房玩家抓到恐龍時,畫面上也看得到他抓到哪一隻、贏了多少。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
