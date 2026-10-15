@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1015-B">
+<meta name="gbuild" content="1015-D">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-B</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-D</span></small>
   </div>
  </div>
 </div>
@@ -2514,7 +2514,7 @@ const ENE=[{n:'奧客喪屍',e:'🧟',hp:20,sp:46,r:20,dmg:9},{n:'菜市場大�
  {n:'前世男友',e:'🧟',hp:45,sp:44,r:21,dmg:11,ai:'ghost'},{n:'前世女友',e:'🧟',hp:45,sp:44,r:21,dmg:11,ai:'ghost'}];
 const ELITE=[{n:'暴怒奧客喪屍',e:'😡',hp:30,sp:60,r:20,dmg:12}];
 const BOSS=[{n:'捷運站長喪屍',e:'👮',hp:2600,sp:44,r:40,dmg:15},{n:'巨嬰慣老闆',e:'👶',hp:3600,sp:40,r:46,dmg:18},{n:'前任之王',e:'👑',hp:5200,sp:42,r:50,dmg:21}];/* 1015 第三關首領:前任之王(一階段)→冥婚鬼新娘(二階段) */
-const CH=[{n:'捷運站',g:'#565c64',bg:'bg-mrt',bgS:460,pool:[0,0,1,2],boss:0,m:2},{n:'辦公大樓',g:'#4a5560',bg:'bg-office',bgS:640,pool:[3,3,4,5,6],elite:[3,4,5,6],boss:1,m:5.4,bA:260,rw:{coin:1.6,drop:1.75,eliteW:[20,38,30,11,1],bossW:[0,0,30,52,18],bossN:4,first:2000,win:400}},{n:'夜市',g:'#3b2f36',bg:'bg-nightmarket',bgS:1200,lane:{c:.542,hw:.205,sw:.795},pool:[7,7,8,9,10],elite:[11,12],boss:2,bA:340,final:1,m:9,hm:14.5,hmE:7.9,mA:153,mE:5,ex3:1,rw:{coin:2.2,drop:2,eliteW:[10,30,40,17,3],bossW:[0,0,15,50,35],bossN:5,first:5000,win:900}}];
+const CH=[{n:'捷運站',g:'#565c64',bg:'bg-mrt',bgS:460,pool:[0,0,1,2],boss:0,m:2},{n:'辦公大樓',g:'#4a5560',bg:'bg-office',bgS:640,pool:[3,3,4,5,6],elite:[3,4,5,6],boss:1,m:5.4,bA:260,rw:{coin:1.6,drop:1.75,eliteW:[20,38,30,11,1],bossW:[0,0,30,52,18],bossN:4,first:2000,win:400}},{n:'夜市',g:'#3b2f36',bg:'bg-nightmarket',bgS:1200,lane:{c:.542,hw:.205,sw:.795},pool:[7,7,8,9,10],elite:[11,12],boss:2,bA:340,final:1,m:9,mA:5,mE:4,ex3:1,rw:{coin:2.2,drop:2,eliteW:[10,30,40,17,3],bossW:[0,0,15,50,35],bossN:5,first:5000,win:900}}];
 const DUR=180;
 
 /* ===== 存檔 ===== */
@@ -6046,7 +6046,7 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1015-B';
+const GBUILD='1015-D';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
@@ -6098,6 +6098,13 @@ function verNotice(){if(inBattle()){setTimeout(verNotice,3000);return}let seen='
 
 /* ===== 1005-ZZZC 公告中心:左上角「📢 公告」,看更新內容和系統訊息 ===== */
 function annDot(){const d=$('anndot');if(d)d.hidden=(SAVE&&SAVE.annSeen)===GVER}
+/* 1015-D 公告置頂改成第三關夜市(取代侏儸紀宣傳卡) */
+function s3PromoFill(){document.querySelectorAll('img[data-s3k]').forEach(i=>{if(ART[i.dataset.s3k])i.src=ART[i.dataset.s3k]});document.querySelectorAll('[data-s3bg]').forEach(d=>{if(ART['bg-nightmarket'])d.style.setProperty('--pbg','url('+ART['bg-nightmarket']+')')})}
+function s3Promo(){if(twDay()>'2026-11-20')return'';try{if(!ART['bg-nightmarket'])ensurePack('stage3');if(!ART['冥婚紅蓋頭'])ensurePack('stage3b')}catch(e){}const I=k=>'<img data-s3k="'+k+'" src="'+(ART[k]||'')+'" alt="">';
+ return'<div class="jdpromo" data-s3bg="1" style="'+(ART['bg-nightmarket']?'--pbg:url('+ART['bg-nightmarket']+')':'')+'"><div class="jpf">'+I('前任之王-walk-1')+'</div><div class="jpm"><div class="jpt">🌃 第三關「夜市」開放!</div><div class="jps">通關第二關解鎖 · 首領「前任之王」打到一半變身「冥婚鬼新娘」</div>'+
+  '<div class="jpr"><div class="jpi"><b>難度 ★★★★★ 目前最高</b><small>怪物強度約第二關的 1.7 倍;小怪血量約首領的 1/20,不再一碰就死;精英「前世男友、前世女友」成對出現,要集中打</small></div></div>'+
+  '<div class="jpr"><div class="jpi">'+I('冥婚紅蓋頭')+'<b>冥婚紅蓋頭</b><small>首領掉落</small></div><div class="jpi">'+I('前任之王的玫瑰權杖')+'<b>玫瑰權杖</b><small>首領掉落</small></div><div class="jpi">'+I('月老斷線剪')+'<b>月老斷線剪</b><small>首領掉落</small></div></div>'+
+  '<div class="jpk">打倒首領必掉第三關專屬裝備(稀有~神話,帶專屬技能)!另外夜市還會掉六件神話級夜市專屬裝備:渣男雙機、前女友的手機、鎮屍符道士帽、死纏爛打連帽外套、紅嫁衣繡花鞋、撈金名牌包。首領新招:鎮屍符會讓你定身 1 秒,看到紅圈快閃開!</div><button class="btn pri" data-gos3="1">🌃 去夜市出擊</button></div></div>'}
 /* 1010-W 公告裡的賭石坊宣傳卡(到 10/24) */
 function jdPromo(){/* 1010-Z29 公告置頂改成侏儸紀 */if(twDay()>'2026-10-31')return'';try{if(!ART['jr-bg'])ensurePack('jr')}catch(e){}const I=k=>'<img data-jrk="'+k+'" src="'+(ART[k]||'')+'" alt="">';let sk='';try{sk=JRSK.map(k=>'<img data-jrk="sk-'+k+'" src="'+(ART['sk-'+k]||'')+'" title="'+SK[k].n+'" alt="">').join('')}catch(e){}
  return'<div class="jdpromo" data-jrpbg="1" style="'+(ART['jr-bg']?'--pbg:url('+ART['jr-bg']+')':'')+'"><div class="jpf">'+I('jr-d8')+'</div><div class="jpm"><div class="jpt">🦖 侏儸紀加班公園 開園!</div><div class="jps">遊樂場 →「侏儸紀」· 最多 4 人同場打恐龍</div>'+
@@ -6108,9 +6115,9 @@ function jdPromo(){/* 1010-Z29 公告置頂改成侏儸紀 */if(twDay()>'2026-10
 function annOpen(tab){sfx('open');SAVE.annSeen=GVER;save();annDot();const ov=document.createElement('div');ov.className='ov annov';
  const notes=GNOTES.filter(n=>!(n[0]==='🥮'&&Date.now()>=GIFT_MID_END)).map(n=>'<div class="vnr"><span>'+n[0]+'</span><div><b>'+n[1]+'</b><small>'+n[2]+'</small></div></div>').join('');
  const logs=(SAVE.syslog||[]).map(l=>'<div class="annr"><span>'+escH(l.m)+'</span><small>'+dpAgo(new Date(l.t).toISOString())+'</small></div>').join('')||'<p class="muted">目前沒有系統訊息</p>';
- ov.innerHTML='<div class="box annbox"><h2>📢 公告</h2><div class="trbtabs"><button data-t="up">更新內容</button><button data-t="sys">系統訊息</button></div><div class="annbody" data-p="up">'+jdPromo()+'<p class="muted" style="margin:0 0 4px;font-size:12px">目前版本 '+GBUILD+'</p>'+notes+'</div><div class="annbody" data-p="sys" hidden>'+logs+'</div><button class="btn pri" data-x="1">關閉</button></div>';
+ ov.innerHTML='<div class="box annbox"><h2>📢 公告</h2><div class="trbtabs"><button data-t="up">更新內容</button><button data-t="sys">系統訊息</button></div><div class="annbody" data-p="up">'+s3Promo()+'<p class="muted" style="margin:0 0 4px;font-size:12px">目前版本 '+GBUILD+'</p>'+notes+'</div><div class="annbody" data-p="sys" hidden>'+logs+'</div><button class="btn pri" data-x="1">關閉</button></div>';
  document.body.appendChild(ov);const sw=t=>{ov.querySelectorAll('.trbtabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));ov.querySelectorAll('.annbody').forEach(p=>p.hidden=p.dataset.p!==t)};sw(tab||'up');
- ov.onclick=e=>{if(e.target.closest('[data-gojd]')){const gj=e.target.closest('[data-gojd]').dataset.gojd==='jr'?'jr':'jd';ov.remove();try{SAVE.tab='dragon';setTab('dragon');casSwitch(gj);renderHome()}catch(x){}return}const b=e.target.closest('[data-t]');if(b){sfx('tab');sw(b.dataset.t);return}if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}}}
+ ov.onclick=e=>{if(e.target.closest('[data-gos3]')){ov.remove();try{SAVE.tab='map';setTab('map');renderHome()}catch(x){}return}if(e.target.closest('[data-gojd]')){const gj=e.target.closest('[data-gojd]').dataset.gojd==='jr'?'jr':'jd';ov.remove();try{SAVE.tab='dragon';setTab('dragon');casSwitch(gj);renderHome()}catch(x){}return}const b=e.target.closest('[data-t]');if(b){sfx('tab');sw(b.dataset.t);return}if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}}}
 setTimeout(()=>{const b=$('annbtn');if(b)b.onclick=()=>{audioUnlock();annOpen()};try{annDot()}catch(e){}},0);
 setInterval(()=>{try{const L=$('login');if(L&&!L.hidden)return;if(inBattle()||$('home').hidden)return;let s='';try{s=localStorage.getItem('shechu-ver')||''}catch(e){}if(s!==GVER&&!document.querySelector('.ov:not([hidden])'))verNotice()}catch(e){}},2500);
 /* ===== 即時公告跑馬燈 ===== */
@@ -6679,8 +6686,8 @@ var PK={ui:['assets-ui.js?v=1010Z31',function(){if(window.__artUI)window.__artUI
  train:['assets-train.js?v=1005ZZX',function(){if(window.__artPack&&window.ART_TRAIN){window.__artPack(window.ART_TRAIN);try{trArtReady()}catch(e){}}}],
  herobg:['assets-herobg.js?v=1008G',function(){if(window.__artPack&&window.ART_HEROBG){window.__artPack(window.ART_HEROBG);try{const r=document.documentElement.style;for(const k of ['m','f','a'])if(ART['bg-hero-'+k])r.setProperty('--hbg-'+k,'url('+ART['bg-hero-'+k]+')');if(!$('home').hidden)renderHome()}catch(e){}}}],
  mech:['assets-mech.js?v=1008G',function(){if(window.__artPack&&window.ART_MECH){window.__artPack(window.ART_MECH);try{if(!$('home').hidden)renderHome()}catch(e){}}}],
- stage3:['assets-stage3.js?v=1010Q',function(){if(window.__artPack&&window.ART_STAGE3){window.__artPack(window.ART_STAGE3);try{ex3Art()}catch(e){}try{if(!$('home').hidden)renderHome()}catch(e){}}}],
- stage3b:['assets-boss3.js?v=1015A',function(){if(window.__artPack&&window.ART_BOSS3){window.__artPack(window.ART_BOSS3)}}],/* 1015 第三關首領圖包:只在打第三關時載入 */
+ stage3:['assets-stage3.js?v=1010Q',function(){if(window.__artPack&&window.ART_STAGE3){window.__artPack(window.ART_STAGE3);try{s3PromoFill()}catch(e){}try{ex3Art()}catch(e){}try{if(!$('home').hidden)renderHome()}catch(e){}}}],
+ stage3b:['assets-boss3.js?v=1015A',function(){if(window.__artPack&&window.ART_BOSS3){window.__artPack(window.ART_BOSS3);try{s3PromoFill()}catch(e){}}}],/* 1015 第三關首領圖包:只在打第三關時載入 */
  hero3:['assets-hero3.js?v=1010I',function(){if(window.__artPack&&window.ART_HERO3){window.__artPack(window.ART_HERO3);try{hero3On()}catch(e){}}}],
  jr:['assets-jr.js?v=1010Z29',function(){if(window.__artPack&&window.ART_JR){window.__artPack(window.ART_JR);try{document.querySelectorAll('img[data-jrk]').forEach(i=>{if(ART[i.dataset.jrk])i.src=ART[i.dataset.jrk]});document.querySelectorAll('[data-jrpbg]').forEach(d=>d.style.setProperty('--pbg','url('+ART['jr-bg']+')'));document.querySelectorAll('[data-jrbg]').forEach(d=>d.style.setProperty('--jrbg','url('+ART['jr-bg']+')'));const o=document.getElementById('jrov');if(o)o.style.setProperty('--jrbg','url('+ART['jr-bg']+')');document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'});if(SAVE&&SAVE.cas==='jr')jrPanel()}catch(e){}}}],
  ds:['assets-ds.js?v=1010Z',function(){if(window.__artPack&&window.ART_DS){window.__artPack(window.ART_DS);try{document.querySelectorAll('img[data-dsk]').forEach(i=>{if(ART[i.dataset.dsk])i.src=ART[i.dataset.dsk]});document.querySelectorAll('[data-dsbg]').forEach(d=>{if(ART['ds-bg'])d.style.setProperty('--pbg','url('+ART['ds-bg']+')')});if(SAVE&&SAVE.cas==='jd'&&!$('home').hidden){jdRender();jdSay($('jdbub').textContent,'idle')}document.querySelectorAll('#castabs .cti').forEach(e=>{if(ART[e.dataset.k])e.innerHTML='<img src="'+ART[e.dataset.k]+'" alt="">'})}catch(e){}}}],
