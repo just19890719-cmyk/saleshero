@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1015-E">
+<meta name="gbuild" content="1015-F">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-E</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-F</span></small>
   </div>
  </div>
 </div>
@@ -2592,7 +2592,7 @@ function powerOf(S){const sk=S.sk||{};let skl=0;for(const k in sk)skl+=Math.min(
  const U=(1+Math.min(S.spd,100)/100*.3)*(1+Math.max(0,S.pick)/100*.05);
  return Math.round(Math.sqrt(Math.max(0,O*D))*U*PWK)}
 let PWC={k:'',v:0};
-const power=()=>{let k=(SAVE.ride||'')+':'+rideLv(SAVE.ride||'')+':'+(SAVE.hero||'');for(const s in SAVE.eq){const it=byId(SAVE.eq[s]);k+='|'+s+(it?it.id+it.q+'.'+it.il+'.'+it.up+'.'+(it.skl||0)+'.'+Object.keys(it.st).length:'')}try{k+='|'+shopOwned()}catch(e){}if(k===PWC.k)return PWC.v;PWC={k,v:powerOf(pstats(1))};return PWC.v};
+const power=()=>{let k=(SAVE.ride||'')+':'+rideLv(SAVE.ride||'')+':'+(SAVE.hero||'');for(const s in SAVE.eq){const it=byId(SAVE.eq[s]);k+='|'+s+(it?it.id+it.q+'.'+it.il+'.'+it.up+'.'+(it.skl||0)+'.'+JSON.stringify(it.st):'')}try{k+='|'+shopOwned()}catch(e){}if(k===PWC.k)return PWC.v;PWC={k,v:powerOf(pstats(1))};return PWC.v};
 function powerWith(slot,it){const bak=Object.assign({},SAVE.eq);try{for(const k in SAVE.eq)if(it&&SAVE.eq[k]===it.id)delete SAVE.eq[k];if(it)SAVE.eq[slot]=it.id;else delete SAVE.eq[slot];return powerOf(pstats(1))}finally{for(const k in SAVE.eq)delete SAVE.eq[k];Object.assign(SAVE.eq,bak)}}
 const IVC=new Map();
 function ival(it){if(!it)return 0;const key=it.id+'|'+it.q+'|'+it.il+'|'+it.up+'|'+(it.skl||0)+'|'+Object.keys(it.st).length;let v=IVC.get(key);if(v!=null)return v;
@@ -3870,6 +3870,7 @@ const lbPw=r=>lbPwOk(r)?fmt(+r.power||0):'<span class="lbpend">待更新</span>'
 function lbOnline(){const m=new Map(),tt=new Map();for(const r of (LB.rows||[]).concat(LB.onRows||[])){if(!r||!r.id)continue;const o=m.get(r.id);if(!o||(+r.t||0)>(+o.t||0))m.set(r.id,r);if(r.ttl!=null&&r.ttl!==''&&r.nick)tt.set(r.nick,r)}for(const r of m.values())if((r.ttl==null||r.ttl==='')&&r.nick&&tt.has(r.nick)){r.ttl=tt.get(r.nick).ttl;r.pmix=tt.get(r.nick).pmix}return[...m.values()].filter(lbOn).sort((a,b)=>(b.id===LB.uid)-(a.id===LB.uid)||(+b.coin||0)-(+a.coin||0))}
 async function lbRender(){
  const OL=LB.sort==='online';
+ try{const me0=LB.rows.find(r=>r.id===LB.uid);if(me0)me0.power=power()}catch(e){}/* 1015-F 自己那一列直接用裝備頁的即時戰力,不會跟裝備頁對不上 */
  const rows=OL?lbOnline():LB.rows.slice().sort((a,b)=>LB.sort==='power'?((lbPwOk(b)-lbPwOk(a))||(+b.power||0)-(+a.power||0)):(+b[LB.sort]||0)-(+a[LB.sort]||0));
  if(!rows.length){$('lblist').innerHTML='<div class="lbmsg">'+(OL?'目前沒有其他玩家在線':'還沒有人上榜,快來搶第一名!')+'</div>';return}
  let ps={};try{if(LB.user&&!LB.sb)ps=await LB.user.profiles(rows.filter(r=>!r.nick).map(r=>r.id))||{}}catch(e){}
@@ -4081,7 +4082,7 @@ function ttlLB(r){const me=r.id===LB.uid;let id=me?(psState().cur!=null?psState(
 function renderHome(){migItems();
  renderGacha();if(SAVE.tab==='eq')renderPray();if($('hcoins'))$('hcoins').textContent=fmtC(SAVE.coin||0);
   const s=pstats(1),wi=byId(SAVE.eq.wpn);
-  $('slots').innerHTML='<div class="ttlbar" id="ttlbar">'+ttlChip((()=>{try{return ttlNow()}catch(e){return 0}})(),true)+'</div><div class="pwbar"><div class="pw'+((()=>{const p=power(),u=window.__pw0!=null&&p>window.__pw0;window.__pw0=p;return u?' up':''})())+'"><span class="muted">戰力</span><b id="power">'+fmt(power())+'</b></div></div><div class="doll"><div class="dcol">'+['head','coat','shoe'].map(slotHtml).join('')+'</div>'+
+  $('slots').innerHTML='<div class="ttlbar" id="ttlbar">'+ttlChip((()=>{try{return ttlNow()}catch(e){return 0}})(),true)+'</div><div class="pwbar"><div class="pw'+((()=>{const p=power(),u=window.__pw0!=null&&p>window.__pw0;window.__pw0=p;return u?' up':''})())+'"><span class="muted">戰力</span><b id="power">'+fmt(power())+(()=>{try{if(LB&&LB.db&&!LB.ro)lbSync()}catch(e){}return''})()+'</b></div></div><div class="doll"><div class="dcol">'+['head','coat','shoe'].map(slotHtml).join('')+'</div>'+
    '<div class="dhero'+(heroJ()&&ART['bg-hero-j']?' hbj':'')+' hb-'+(heroJ()?'j':heroA()?'a':heroF()?'f':'m')+(ART['bg-hero-m']?' hbon':'')+'">'+(heroJ()?(jEnsure(),(ART['腎虛-doll2']||ART['腎虛-idle-1'])?'<img class="jdimg'+(ART['腎虛-doll2']?' d2':'')+'" src="'+(ART['腎虛-doll2']||ART['腎虛-idle-1'])+'" alt="">':'<span class="jph"><b>🗡️</b><small>九劍腎虛<br>圖片載入中…</small></span>'):heroA()?(armorEnsure(),ART['裝甲-doll']?(mshStart(),'<span class="msh"><img src="'+ART['裝甲-doll']+'" alt=""><canvas class="mshc"></canvas></span>'):'<span style="font-size:90px">🤖</span>'):ART[heroF()?'女主角-doll2':'男主角-doll2']?'<img class="hdimg '+(heroF()?'hf':'hm')+'" src="'+ART[heroF()?'女主角-doll2':'男主角-doll2']+'" alt="">':icon(heroF()&&ART['女主角-doll']?'女主角-doll':(!heroF()&&ART['男主角-doll']?'男主角-doll':ANIM.idle[0]),'<span style="font-size:90px">'+(heroF()?'👩‍💼':'🧑‍💼')+'</span>'))+'</div>'+
    '<div class="dcol">'+['off','acc1','acc2'].map(slotHtml).join('')+'</div></div>'+
    '<div class="hsel"><span class="muted">角色</span><button data-hero="m"'+(heroF()||heroA()||heroJ()?'':' class="on"')+'>👔 男主角</button><button data-hero="f"'+(heroF()?' class="on"':'')+'>👠 女主角</button><button data-hero="a"'+(heroA()?' class="on"':'')+'>🤖 恨鐵不成鋼<i class="freeb">New</i></button><button data-hero="j"'+(heroJ()?' class="on"':'')+'>🗡️ 九劍腎虛<i class="freeb">New</i></button></div>'+
@@ -6046,10 +6047,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1015-E';
+const GBUILD='1015-F';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['⚔️','戰力顯示修正','修正裝備頁的戰力和排行榜戰力對不上的問題:換裝、洗練後會立刻更新並同步到排行榜;排行榜上你自己那一列直接顯示裝備頁的即時戰力。'],
 ['🌃','第三關「夜市」開放!','通關第二關就能挑戰:一群糾纏不清的前任們擋在夜市巷弄,首領「前任之王」打到一半會變身成「冥婚鬼新娘」,被她的鎮屍符貼到會定身 1 秒。通關可獲得全新的夜市首領裝備。'],
 ['🦖','恐龍裝備標示修正','暴龍頭骨盔、霸王龍鱗戰甲的來源標示,從誤植的「夜市」改回「侏儸紀專屬裝備」;侏儸紀若連線失敗,現在會顯示原因,方便排查。'],
 ['🔧','車庫改裝按鈕修正','修正金幣足夠時,車庫的「改裝」「購買」按鈕仍是灰色、按不下去的問題;現在金幣一變動,按鈕會立刻跟著更新。'],
@@ -6069,7 +6071,6 @@ const GNOTES=[
 ['🦖','侏儸紀稱號登場!','稱號系統加入侏儸紀:常打恐龍會升級成「恐龍實習生 → 網子達人 → 暴龍獵人 → 侏儸紀園長」。另外新增 4 個特殊稱號:抓過黃金霸王龍的「黃金獵人」、抓過 10 隻暴龍王的「屠龍勇者」、兩件恐龍裝備都打到的「恐龍裝備控」,以及射龍門、21 點、賭石、侏儸紀都愛的「四賭通吃」。'],
 ['🕸️','侏儸紀網子變大','侏儸紀的捕獲網全部放大 1.3 倍,一網打盡更容易!'],
 ['💎','賭石坊進新貨','芳芳最近進的原石品質不錯,切垮的少了一點,趁現在去賭石坊碰碰運氣!'],
-['🍀','芳芳今天手氣差','射龍門、21 點、侏儸紀的莊家最近手氣不太好,趁現在進場試試看!'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6098,7 +6099,7 @@ function verNotice(){if(inBattle()){setTimeout(verNotice,3000);return}let seen='
 
 /* ===== 1005-ZZZC 公告中心:左上角「📢 公告」,看更新內容和系統訊息 ===== */
 function annDot(){const d=$('anndot');if(d)d.hidden=(SAVE&&SAVE.annSeen)===GVER}
-/* 1015-E 公告置頂改成第三關夜市(取代侏儸紀宣傳卡) */
+/* 1015-F 公告置頂改成第三關夜市(取代侏儸紀宣傳卡) */
 function s3PromoFill(){document.querySelectorAll('img[data-s3k]').forEach(i=>{if(ART[i.dataset.s3k])i.src=ART[i.dataset.s3k]});document.querySelectorAll('[data-s3bg]').forEach(d=>{if(ART['bg-nightmarket'])d.style.setProperty('--pbg','url('+ART['bg-nightmarket']+')')})}
 function s3Promo(){if(twDay()>'2026-11-20')return'';try{if(!ART['bg-nightmarket'])ensurePack('stage3');if(!ART['冥婚紅蓋頭'])ensurePack('stage3b')}catch(e){}const I=k=>'<img data-s3k="'+k+'" src="'+(ART[k]||'')+'" alt="">';
  return'<div class="jdpromo" data-s3bg="1" style="'+(ART['bg-nightmarket']?'--pbg:url('+ART['bg-nightmarket']+')':'')+'"><div class="jpf">'+I('前任之王-walk-1')+'</div><div class="jpm"><div class="jpt">🌃 第三關「夜市」開放!</div><div class="jps">通關第二關解鎖 · 首領「前任之王」打到一半變身「冥婚鬼新娘」</div>'+
