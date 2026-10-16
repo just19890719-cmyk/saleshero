@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1015-F">
+<meta name="gbuild" content="1015-H">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-F</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-H</span></small>
   </div>
  </div>
 </div>
@@ -2875,10 +2875,12 @@ DL.allin=(DL.allin||[]).concat(['梭哈是一種智慧!','全包!!這就是男�
 DL.idle=DL.idle.concat(['偷菜的贓款稅抽兩成,芳芳最討厭小偷了(但錢照收)','大家的稅金都在這池子裡,不射回來嗎?','打怪、賣裝、收菜都有抽一成,池底只會越來越肥','芳芳收稅,天經地義(並沒有)']);
 DL.broke=DL.broke.concat(['沒錢了?去打幾隻喪屍就有了,快去快回','錢包空空,夢想還在,先去上班吧']);
 const DP={on:false,pot:null,log:[],busy:false,err:'',t:0};
+/* 1015-H 射龍門按鈕卡死保護:忙碌狀態超過 25 秒(請求卡住或動畫出錯)自動解除 */
+(function(){let b=false,t0=0;Object.defineProperty(DP,'busy',{get(){return b},set(v){v=!!v;if(v&&!b)t0=Date.now();b=v},enumerable:true});setInterval(()=>{try{if(b&&Date.now()-t0>25000){b=false;try{if(typeof renderDragon==='function')renderDragon()}catch(e){}try{toast('⚠️ 射龍門連線逾時,已解除卡住,請重新操作')}catch(e){}}}catch(e){}},1000)})();
 (function(){try{DP.on=typeof ONLINE!=='undefined'&&!!(ONLINE.supabaseUrl&&ONLINE.supabaseKey)&&!(window.claude&&window.claude.use)}catch(e){DP.on=false}})();
 function dpH(){const h={apikey:ONLINE.supabaseKey,'Content-Type':'application/json'};if(/^eyJ/.test(ONLINE.supabaseKey))h.Authorization='Bearer '+ONLINE.supabaseKey;return h}
 const dpU=p=>ONLINE.supabaseUrl.replace(/\/+$/,'')+p;
-async function dpReq(path,body){const r=await fetch(dpU(path),body?{method:'POST',headers:dpH(),body:JSON.stringify(body)}:{headers:dpH()});
+async function dpReq(path,body){/* 1015-H 20 秒沒回應就當連線失敗,避免按鈕一直鎖住 */const ac=typeof AbortController!=='undefined'?new AbortController():null,tm=ac?setTimeout(()=>ac.abort(),20000):0;let r;try{r=await fetch(dpU(path),Object.assign(body?{method:'POST',headers:dpH(),body:JSON.stringify(body)}:{headers:dpH()},ac?{signal:ac.signal}:{}))}catch(e){clearTimeout(tm);throw{code:(e&&e.name==='AbortError')?'timeout':'network',msg:String(e&&e.message||e)}}clearTimeout(tm);
  if(!r.ok){let t='';try{t=await r.text()}catch(x){}throw{code:'http_'+r.status,msg:t}}const tx=await r.text();return tx?JSON.parse(tx):null}
 const dpNick=()=>(SAVE.pname||'匿名社畜').slice(0,12);
 /* 本機池底(claude.ai 版或連不上時) */
@@ -3040,7 +3042,8 @@ function dSqueeze(c,o){o=o||{};const ALL=!!o.allin,SK=o.sk||(ALL?'sqSkip':'sqSki
  set(0);requestAnimationFrame(step)})}
 /* 1008-I 伺服器模式時牌堆用「完整一副牌」計算機率(等同伺服器的無限副牌),賠率、上限才會跟伺服器一致 */
 function dFullDeck(){DK=[];for(const s of SUITS)for(let r=1;r<=13;r++)DK.push({r,s})}
-async function dShoot(bid,allin){if(DP.busy||!(DS.ph==='posts'||DS.ph==='pair'))return;if(DP.srv===true&&!DS.round){toast('這局已經結束,請重新丟底發牌');return}/* 1008-J 防止連點或發牌還沒完成就開槍 */const pair=DS.ph==='pair',coin0=SAVE.coin||0;let bet=allin?(DP.pot||0):DS.bet;DP.busy=true;renderDragon();
+async function dShoot(bid,allin){try{return await dShoot0(bid,allin)}catch(err){console.error(err);DP.busy=false;try{DS.ph='done';DS.round=null;$('dinfo').innerHTML='<span class="down">這把發生錯誤,請重新丟底發牌</span>';renderDragon()}catch(e){}}}
+async function dShoot0(bid,allin){if(DP.busy||!(DS.ph==='posts'||DS.ph==='pair'))return;if(DP.srv===true&&!DS.round){toast('這局已經結束,請重新丟底發牌');return}/* 1008-J 防止連點或發牌還沒完成就開槍 */const pair=DS.ph==='pair',coin0=SAVE.coin||0;let bet=allin?(DP.pot||0):DS.bet;DP.busy=true;renderDragon();
   const SRV=!!(DS.round&&DP.srv);let SR=null;const SQ=dSqPlan(bid);
   if(SRV){try{SR=await dpReq('/rest/v1/rpc/dragon_shoot',{p_id:lbId(),p_key:fmKey(),p_nick:dpNick(),p_round:DS.round,p_bid:bid,p_bet:bet,p_allin:!!allin,p_coin:coin0});DP.err=''}
    catch(err){DP.busy=false;DP.err=String(err.code||err.message||err);DS.ph='done';DS.round=null;$('dinfo').innerHTML='<span class="down">連線失敗,這把沒有開牌,下注也沒有扣</span>';sfx('error');renderDragon();return}
@@ -3870,7 +3873,7 @@ const lbPw=r=>lbPwOk(r)?fmt(+r.power||0):'<span class="lbpend">待更新</span>'
 function lbOnline(){const m=new Map(),tt=new Map();for(const r of (LB.rows||[]).concat(LB.onRows||[])){if(!r||!r.id)continue;const o=m.get(r.id);if(!o||(+r.t||0)>(+o.t||0))m.set(r.id,r);if(r.ttl!=null&&r.ttl!==''&&r.nick)tt.set(r.nick,r)}for(const r of m.values())if((r.ttl==null||r.ttl==='')&&r.nick&&tt.has(r.nick)){r.ttl=tt.get(r.nick).ttl;r.pmix=tt.get(r.nick).pmix}return[...m.values()].filter(lbOn).sort((a,b)=>(b.id===LB.uid)-(a.id===LB.uid)||(+b.coin||0)-(+a.coin||0))}
 async function lbRender(){
  const OL=LB.sort==='online';
- try{const me0=LB.rows.find(r=>r.id===LB.uid);if(me0)me0.power=power()}catch(e){}/* 1015-F 自己那一列直接用裝備頁的即時戰力,不會跟裝備頁對不上 */
+ try{const me0=LB.rows.find(r=>r.id===LB.uid);if(me0)me0.power=power()}catch(e){}/* 1015-H 自己那一列直接用裝備頁的即時戰力,不會跟裝備頁對不上 */
  const rows=OL?lbOnline():LB.rows.slice().sort((a,b)=>LB.sort==='power'?((lbPwOk(b)-lbPwOk(a))||(+b.power||0)-(+a.power||0)):(+b[LB.sort]||0)-(+a[LB.sort]||0));
  if(!rows.length){$('lblist').innerHTML='<div class="lbmsg">'+(OL?'目前沒有其他玩家在線':'還沒有人上榜,快來搶第一名!')+'</div>';return}
  let ps={};try{if(LB.user&&!LB.sb)ps=await LB.user.profiles(rows.filter(r=>!r.nick).map(r=>r.id))||{}}catch(e){}
@@ -4098,7 +4101,7 @@ function renderHome(){migItems();
   $('sth').innerHTML='倉庫 <span class="'+(SAVE.items.length>=STASHMAX*.9?'stfull':'')+'">('+SAVE.items.length+' / '+STASHMAX+')</span>';
   $('stash').innerHTML=list.length?list.map(it=>tile(it,sel===it.id,1)).join(''):'<span class="muted">'+(all.length?'這個分類沒有裝備。':'倉庫是空的,出擊打怪就會掉裝備。')+'</span>';
  $('mute').checked=$('mute2').checked=!!SAVE.mute;volUI();
- {const mv=window.__mv!=null?window.__mv:(SAVE.ch||0);$('chs').innerHTML=CH.map((c,i)=>{const lk=i>=SAVE.unlock;return'<button class="ch'+(mv===i?' cur':'')+(lk&&!c.wip?' lock':'')+(!lk&&!c.wip?' hasgo':'')+'" data-c="'+i+'"'+(ART['stage-'+i]?' style="--stg:url('+ART['stage-'+i]+')"':'')+(c.wip?' disabled':'')+'><b>'+(i+1)+'. '+c.n+(c.final?' 👑':'')+'</b><span class="muted">'+(c.wip?'🚧 製作中,敬請期待':lk?'🔒 通關上一區解鎖・點擊看情報':SAVE.clear.includes(i)?'✅ 已通關':'點擊看情報')+'</span>'+(!lk&&!c.wip?'<span class="go" data-go="'+i+'">⚔️ 出擊</span>':'')+'</button>'}).join('')}
+ {const mv=window.__mv!=null?window.__mv:(SAVE.ch||0);$('chs').innerHTML=CH.map((c,i)=>{const lk=i>=SAVE.unlock;return'<button class="ch'+(mv===i?' cur':'')+(lk&&!c.wip?' lock':'')+(!lk&&!c.wip?' hasgo':'')+'" data-c="'+i+'"'+(ART['stage-'+i]?' style="--stg:url('+ART['stage-'+i]+')"':'')+(c.wip?' disabled':'')+'><b>'+(i+1)+'. '+c.n+(c.final?' 👑':'')+'</b><span class="muted">'+(c.wip?'🚧 製作中,敬請期待':lk?'🔒 通關上一區解鎖・點擊看情報':SAVE.clear.includes(i)?'✅ 已通關':'點擊看情報')+'</span>'+(!lk&&!c.wip?'<span class="go" data-go="'+i+'">⚔️ 出擊</span>':'')+'</button>'}).join('')+(()=>{const ok=(SAVE.clear||[]).includes(0),E=SAVE.endless;return'<button class="ch'+(ok?' hasgo':' lock')+'" data-en="1"><b>♾️ 無盡挑戰</b><span class="muted">'+(ok?(E&&E.t?'最佳:撐 '+fmtT(E.t)+' · 擊破首領 '+(E.b||0)+' 隻 · 擊倒 '+E.k:'怪物越來越強,每 3 分鐘一隻首領,打到倒下為止'):'🔒 通關第一區解鎖')+'</span>'+(ok?'<span class="go" data-en="1">♾️ 挑戰</span>':'')+'</button>'})()}
    detail();renderMons();try{renderDaily()}catch(e){}
 }
 function detail(){
@@ -4188,7 +4191,7 @@ $('stest').onclick=()=>{audioUnlock();const go=()=>{if(SAVE.mute){toast('音效�
  for(const k in SFT)SFT[k]=0;['punch','swing','throw','boom','laser'].forEach((k,i)=>setTimeout(()=>{SFT[k]=0;sfx(k)},i*350));toast('播放中:拳、傘、筆、爆炸、雷射')};
  setTimeout(go,120)};
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#fwbtabs [data-t]');if(!b)return;FWB.tab=b.dataset.t;sfx('tab');fwbRender(false)});
-$('chs').onclick=e=>{const g=e.target.closest('[data-go]');if(g){audioUnlock();startRun(+g.dataset.go);return}const b=e.target.closest('[data-c]');if(b&&!b.disabled){window.__mv=+b.dataset.c;sfx('tab');renderHome();try{$('mons').scrollIntoView({behavior:'smooth',block:'start'})}catch(x){}}};
+$('chs').onclick=e=>{if(e.target.closest('[data-en]')){if((SAVE.clear||[]).includes(0)){audioUnlock();startEndless()}else toast('🔒 先通關第一區才能挑戰無盡模式');return}const g=e.target.closest('[data-go]');if(g){audioUnlock();startRun(+g.dataset.go);return}const b=e.target.closest('[data-c]');if(b&&!b.disabled){window.__mv=+b.dataset.c;sfx('tab');renderHome();try{$('mons').scrollIntoView({behavior:'smooth',block:'start'})}catch(x){}}};
 $('reset').onclick=()=>ask('確定要清除所有裝備與進度嗎?\n這個動作無法復原',()=>{SAVE=freshSave();SAVE.coin=1000;SAVE.rides={};SAVE.pity=0;SAVE.ride=null;SAVE.gift1=1;SAVE.tab='eq';sel=null;PSEL=null;save();renderHome()});
 
 /* ===== 戰鬥 ===== */
@@ -4204,9 +4207,13 @@ function startRun(c){
  G={c,dead:[],pt:[],dc:[],shk:0,t:0,x:0,y:0,face:1,lv:1,xp:0,kills:0,en:[],gems:[],drops:[],bul:[],lob:[],fx:[],orbs:[],wt:0,skt:{},atk:0,hurt:0,inv:0,shield:false,dealK:0,spawn:0,elite:45,boss:false,loot:[],moving:false,over:false};
   G.base=pstats(1);initSkills();try{hlootRender()}catch(e){}
  $('home').hidden=true;$('hud').hidden=false;$('pbtn').hidden=false;$('hch').textContent=(c+1)+'. '+CH[c].n;sfx('clockIn');G.tw=-1;
+ if(window.__ENDLESS){window.__ENDLESS=0;G.endless=1;G.nb=180;G.ebi=0;G.eb=0;$('hch').textContent='♾️ 無盡 · '+CH[c].n}
  running=true;last=performance.now();
  if(window.__TR){window.__TR=0;trInit()}
 }
+/* 1015-H 無盡挑戰:用已解鎖的最高關卡場地,怪物血量隨時間一直變強,每 3 分鐘一隻首領(依序輪流),打到倒下為止 */
+function endlessStage(){return Math.max(0,Math.min(2,(SAVE.unlock||1)-1))}
+function startEndless(){window.__ENDLESS=1;startRun(endlessStage())}
 const mult=()=>CH[G.c]&&CH[G.c].m?CH[G.c].m:Math.pow(1.7,G.c);/* 1006-Y 每關可個別設定難度倍率 */
 /* 1006-E 難度調校參數:第一關不要太簡單,但保留刷怪爽度(血量成長溫和、傷害與密度提高) */
 var BAL={hp:.7,hpG:.5,dmg:1.15,dmgG:150,spawn:2.0,spawnG:10,elite:35,eliteHp:8,bossAtk:380};
@@ -4229,7 +4236,7 @@ function drawArena(){if(!G||G.tr)return;const A=ARN(),O=4000;if(A.ln){const X=A.
  ctx.lineWidth=2;ctx.strokeStyle='rgba(255,210,60,.45)';ctx.strokeRect(-A.x+2,-A.y+2,2*A.x-4,2*A.y-4);ctx.restore()}
 function spawn(def,kind){
  const a=Math.random()*Math.PI*2,d=Math.hypot(W,H)/2+60,s=kind==='boss'?mult():mult()*BAL.hp*(1+G.t/60*BAL.hpG)*(kind==='elite'?BAL.eliteHp:1)*(CH[G.c]&&CH[G.c].hm?(kind==='elite'?CH[G.c].hmE||CH[G.c].hm:CH[G.c].hm):1);/* 1015 每關可設小怪血量倍率 hm(精英 hmE) */
- const sp0=ringPos(d);let HPX=def.hp*s;const cc=CH[G.c];if(cc&&cc.mA&&kind!=='boss')HPX=G.S.atk*cc.mA*(kind==='elite'?(cc.mE||5):1);/* 1015 小怪血量跟玩家攻擊力連動(像首領一樣),避免高攻擊一摸就死 */G.en.push({ai:def.ai,x:sp0[0],y:sp0[1],hp:HPX,max:HPX,sp:def.sp,r:def.r*(kind==='elite'?1.5:1),dmg:def.dmg*BAL.dmg*mult()*(1+G.t/BAL.dmgG),n:def.n,e:def.e,kind,fl:0,kx:0,ky:0,oh:0,ph:Math.random()*8,at:0});
+ const sp0=ringPos(d);let HPX=def.hp*s;const cc=CH[G.c];if(G.endless&&kind!=='boss')HPX=G.S.atk*3*(kind==='elite'?8.5:1)*(1+G.t/45);else if(cc&&cc.mA&&kind!=='boss')HPX=G.S.atk*cc.mA*(kind==='elite'?(cc.mE||5):1);/* 1015 小怪血量跟玩家攻擊力連動(像首領一樣),避免高攻擊一摸就死 */G.en.push({ai:def.ai,x:sp0[0],y:sp0[1],hp:HPX,max:HPX,sp:def.sp,r:def.r*(kind==='elite'?1.5:1),dmg:def.dmg*BAL.dmg*mult()*(1+G.t/BAL.dmgG),n:def.n,e:def.e,kind,fl:0,kx:0,ky:0,oh:0,ph:Math.random()*8,at:0});
 }
 function hit(e,dmg,kb,ang){
  if(e.hp<=0)return;if(e.vulnT>G.t)dmg*=1.3;const cr=Math.random()*100<G.S.crit;if(cr)dmg*=1.8+(G.S.sk&&G.S.sk.jluck?.2+.15*G.S.sk.jluck:0);if(G.S.sk&&G.S.sk.drage&&G.hp<G.S.hp*.5){dmg*=1.2+.1*G.S.sk.drage;if(!G.drT||G.t-G.drT>1.2){G.drT=G.t;try{dFx('drage',G.x,G.y-10,170,.6,{s0:.8,s1:1.1})}catch(e){}}}sfx(cr?'crit':'zbHit');
@@ -4945,10 +4952,14 @@ function bossTick(e,dt,dx,dy,d){const B=e.b;B.t+=dt;B.cd-=dt;B.mcd-=dt;e.fl-=dt;
    const px=G.x-e.x,py=G.y-e.y;if(Math.hypot(px,py)<e.r+85&&Math.cos(Math.atan2(py,px)-B.sl.a)>-.2&&pHurt(e.dmg))return true}if(B.sl.t>.7)B.sl=null}
  if(d<e.r+16&&pHurt(e.dmg*.8))return true;
  return false}
+function endlessBoss(){const idx=G.ebi%(endlessStage()+1),b=BOSS[idx];G.boss=true;G.eb=idx;
+ {let n=0;for(const z of G.en)if(z.kind!=='boss'&&z.hp>0){z.hp=0;z.noLoot=true;z.quiet=true;n++}if(n){shake(10);sfx('impact');setTimeout(()=>sfx('ko'),120);G.fx.push({k:'bossclear',t:0,d:1.1});G.combo=0}}
+ spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*(CH[idx].bA||BAL.bossAtk))*(CH[idx].m||mult())*(1+.6*G.ebi);bossInit(be);be.b.k=idx;toast('♾️ 第 '+(G.ebi+1)+' 隻首領出現!')}
+function endlessNext(){G.drops=[];G.loot.sort((a,b)=>(b.boss?1:0)-(a.boss?1:0));G.bossDown=null;G.bossE=null;G.boss=false;G.ebi++;G.nb=G.t+180;G.inv=2.5;G.hp=Math.min(G.S.hp,G.hp+G.S.hp*.5);G.bossClr=G.ebi;toast('♾️ 首領擊破!生命回復一半,第 '+(G.ebi+1)+' 隻 3 分鐘後登場');sfx('chestWin')}
 function bossDown(e){G.bossDown={t:0};G.bossE=null;G.lanes=[];G.bw=[];G.b3z=[];if(e.stole>0){G.coinB=(G.coinB||0)+e.stole;G.fx.push({k:'txt',x:e.x,y:e.y-110,s:'+'+e.stole+' 拿回來了',t:0,d:1.2});sfx('coins')}for(const o of G.en)if(o!==e){o.hp=0;o.noLoot=1}
  toast('🎉 首領擊破!');sfx('gong');sfx('impact');shake(14);hitStop(.3);G.inv=9;
  if(G.drops.some(x=>x.boss===2))setTimeout(()=>{if(G&&!G.over){toast('✨ 首領專屬寶物掉落!');sfx('chestWin')}},900)}
-function bossDrops(e,il){const c=G.c;SAVE.bk=SAVE.bk||{};const first=!SAVE.bk[c];SAVE.bk[c]=(SAVE.bk[c]||0)+1;if(first)G.bossFirst=1;
+function bossDrops(e,il){const c=G.endless?G.eb:G.c;SAVE.bk=SAVE.bk||{};const first=!SAVE.bk[c];SAVE.bk[c]=(SAVE.bk[c]||0)+1;if(first)G.bossFirst=1;
  const RW=CH[c].rw||{};const list=[];for(let i=0;i<(RW.bossN||3);i++)list.push({it:makeItem(il,rollQ(RW.bossW||[0,0,75,22,3])),boss:1});
  const pool0=BOSSI.filter(b=>b.bi===CH[c].boss);
  if(pool0.length&&(first||(SAVE.bp||0)>=5||Math.random()<.15)){SAVE.bp=0;const own=new Set(SAVE.items.filter(i=>i.boss).map(i=>i.b));let pool=pool0.filter(b=>!own.has(b.b));if(!pool.length)pool=pool0;
@@ -4971,7 +4982,7 @@ function bossUpdate(dt){if(!G)return;
  for(const d of G.drops)if(d.pt!==undefined&&d.pt<1){d.pt=Math.min(1,d.pt+dt/.7);if(d.pt>=1){sfx(d.boss===2?'fan3':'item');if(d.boss===2)shake(4)}}
  if(G.bossDown){const B=G.bossDown;B.t+=dt;G.inv=9;
   if(B.t>1.4){/* 1006-V 首領倒下後只吸道具,經驗寶石不再吸(戰鬥已結束) */for(const d of G.drops){if(d.pt<1)continue;const dx=G.x-d.x,dy=G.y-d.y,dd=Math.hypot(dx,dy)||1,v=Math.min(dd/dt,620);d.x+=dx/dd*v*dt;d.y+=dy/dd*v*dt}}
-  if((B.t>2.4&&!G.drops.length)||B.t>5.5){for(const d of G.drops)if(d.it)takeItem(d.it);G.drops=[];G.loot.sort((a,b)=>(b.boss?1:0)-(a.boss?1:0));endRun(true)}}}
+  if((B.t>2.4&&!G.drops.length)||B.t>5.5){for(const d of G.drops)if(d.it)takeItem(d.it);if(G.endless){endlessNext();return}G.drops=[];G.loot.sort((a,b)=>(b.boss?1:0)-(a.boss?1:0));endRun(true)}}}
 function trainLen(h){const im=IMG['boss-train'];if(!im||!im.naturalWidth)return h*1.4;const w=h*im.naturalWidth/im.naturalHeight;return w+w*.78}
 function drawTrain(x,y,h,al){const im=IMG['boss-train'];
  if(!im||!im.naturalWidth){ctx.font=Math.round(h*.9)+'px serif';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('🚇🚃',x,y);return}
@@ -5393,7 +5404,8 @@ function update(dt){
  if(G.moving){const k=Math.min(1,ml)/ml,sp=150*(1+S.spd/100)*(G.cardT>0?1.25+.08*(S.sk.card||0):1)*(G.slowT>0?.6:1)*(G.stunT>0?0:1)*(G.bV>0?1.25:1);G.x+=mx*k*sp*dt;G.y+=my*k*sp*dt;if(G.atk<=0&&Math.abs(mx)>.1)G.face=mx>0?1:-1}arenaClamp();
  G.hp=Math.min(S.hp,G.hp+(S.regen+S.hp*(G.pkReg||0))*dt);
  const ch=CH[G.c];
- if(G.tr){trTick(dt)}else if(G.t<DUR){
+ if(G.endless&&!G.boss&&G.t>=G.nb)endlessBoss();
+ if(G.tr){trTick(dt)}else if(G.endless?!G.boss:G.t<DUR){
   G.spawn+=dt*(BAL.spawn+G.t/BAL.spawnG);while(G.spawn>=1){G.spawn--;if(G.en.length<Q.cap)spawn(ENE[pick(ch.pool)],'n')}
   if(G.t>=G.elite){G.elite+=BAL.elite;spawn(ch.elite?ENE[pick(ch.elite)]:pick(ELITE),'elite');toast('精英怪出現!');sfx('eliteRoar')}
  }else if(!G.boss){G.boss=true;const b=BOSS[CH[G.c].boss];if(!b){toast('撐過 3 分鐘,通關!');endRun(true);return}{let n=0;for(const z of G.en)if(z.kind!=='boss'&&z.hp>0){z.hp=0;z.noLoot=true;z.quiet=true;n++}if(n){shake(10);sfx('impact');setTimeout(()=>sfx('ko'),120);G.fx.push({k:'bossclear',t:0,d:1.1});G.combo=0}}/* 1008-W 首領出場,小怪全部倒下 */spawn(b,'boss');const be=G.en[G.en.length-1];be.hp=be.max=Math.max(b.hp,G.S.atk*(CH[G.c].bA||BAL.bossAtk))*mult();bossInit(be);be.b.k=CH[G.c].boss}
@@ -5441,17 +5453,18 @@ function update(dt){
 function endRun(win){setTimeout(()=>{try{if(FUPD.remote)fupdShow()}catch(e){}},2500);
  if(G&&G.tr&&!G.over){trEnd(win===true);return}
  if(!G||G.over)return;try{$('olh').hidden=false;$('oloot').hidden=false;$('over').classList.remove('trover');$('replay').textContent='⚔️ 再打一場'}catch(e){}G.over=true;running=false;joy=null;
- const RW=CH[G.c].rw||{};const coinG=Math.round(((G.kills+G.t/3)*(RW.coin||1)+(win?(RW.win||100*(G.c+1)):0)+(win&&G.bossFirst?(RW.first||1000):0))*(SAVE.ride==='gold'&&rideLv('gold')?1.05:1)*(1+stkPk().coin)*(1+(G.S&&G.S.sk&&G.S.sk.gold?.1+.1*G.S.sk.gold:0))*(1+(G.S&&G.S.sk&&G.S.sk.jtoad?.15+.05*G.S.sk.jtoad:0))),coinT=taxIncome(coinG+(G.coinB||0));SAVE.coin=Math.max(0,(SAVE.coin||0)+coinG-coinT);
+ const RW=CH[G.c].rw||{};const coinG=Math.round(((G.kills+G.t/3)*(RW.coin||1)+(G.endless?(G.ebi||0)*(RW.win||100*(G.c+1)):0)+(win?(RW.win||100*(G.c+1)):0)+(win&&G.bossFirst?(RW.first||1000):0))*(SAVE.ride==='gold'&&rideLv('gold')?1.05:1)*(1+stkPk().coin)*(1+(G.S&&G.S.sk&&G.S.sk.gold?.1+.1*G.S.sk.gold:0))*(1+(G.S&&G.S.sk&&G.S.sk.jtoad?.15+.05*G.S.sk.jtoad:0))),coinT=taxIncome(coinG+(G.coinB||0));SAVE.coin=Math.max(0,(SAVE.coin||0)+coinG-coinT);
  try{psAdd('fight',Math.max(1,Math.min(40,(G.t||0)/15)));dqAdd('runs');dqAdd('kills',G.kills);if(win)dqAdd('win');SAVE.tut=1}catch(e){}
  if(win){if(!SAVE.clear.includes(G.c))SAVE.clear.push(G.c);SAVE.unlock=Math.max(SAVE.unlock,Math.min(CH.length,G.c+2))}
+ if(G.endless){const E=SAVE.endless=SAVE.endless||{t:0,k:0,b:0},nb=!E.t||G.t>E.t;G.newBest=nb;if(G.t>E.t)E.t=G.t;if(G.kills>E.k)E.k=G.kills;if((G.ebi||0)>E.b)E.b=G.ebi||0;E.n=(E.n||0)+1}
  save();
- $('otitle').textContent=win?'🎉 通關!準時下班!':win===false?'倒下了…喝口咖啡再出發吧':'撤退回家';
- $('ores').innerHTML='<span>區域</span><b>'+CH[G.c].n+'</b><span>撐過時間</span><b>'+fmtT(G.t)+'</b><span>擊倒怪物</span><b>'+G.kills+'</b><span>獲得金幣</span><b style="color:#ffd77a">+'+fmtC(coinG+(G.coinB||0))+'</b>'+(coinT>0?'<span>芳芳收稅</span><b style="color:#ff9a8a">−'+fmtC(coinT)+' <small style="color:#cfd6de;font-weight:400">→ 射龍門池底</small></b>':'')+'<span>撿到裝備</span><b>'+G.loot.length+' 件</b>'+(G.asN?'<span>自動賣出</span><b style="color:#ffd77a">'+G.asN+' 件 +'+fmtC(G.asV)+' <small style="color:#cfd6de;font-weight:400">(已扣稅'+(G.stFull?',含倉庫滿':'')+')</small></b>':'')+'<span>等級</span><b>Lv.'+G.lv+'</b><span>技能</span><b>'+Object.keys(G.ws).map(k=>wName(k)+' '+G.ws[k]+'★').join('、')+'</b>';$('oloot').innerHTML=G.loot.length?G.loot.slice(0,30).map(it=>tile(it,false)).join(''):'<span class="muted">這局沒有撿到裝備。</span>';
+ $('otitle').textContent=G.endless?(G.newBest?'♾️ 新紀錄!撐了 '+fmtT(G.t):'♾️ 無盡挑戰結束'):win?'🎉 通關!準時下班!':win===false?'倒下了…喝口咖啡再出發吧':'撤退回家';
+ $('ores').innerHTML='<span>區域</span><b>'+(G.endless?'♾️ 無盡 · ':'')+CH[G.c].n+'</b>'+(G.endless?'<span>擊破首領</span><b>'+(G.ebi||0)+' 隻</b>':'')+'<span>撐過時間</span><b>'+fmtT(G.t)+'</b><span>擊倒怪物</span><b>'+G.kills+'</b><span>獲得金幣</span><b style="color:#ffd77a">+'+fmtC(coinG+(G.coinB||0))+'</b>'+(coinT>0?'<span>芳芳收稅</span><b style="color:#ff9a8a">−'+fmtC(coinT)+' <small style="color:#cfd6de;font-weight:400">→ 射龍門池底</small></b>':'')+'<span>撿到裝備</span><b>'+G.loot.length+' 件</b>'+(G.asN?'<span>自動賣出</span><b style="color:#ffd77a">'+G.asN+' 件 +'+fmtC(G.asV)+' <small style="color:#cfd6de;font-weight:400">(已扣稅'+(G.stFull?',含倉庫滿':'')+')</small></b>':'')+'<span>等級</span><b>Lv.'+G.lv+'</b><span>技能</span><b>'+Object.keys(G.ws).map(k=>wName(k)+' '+G.ws[k]+'★').join('、')+'</b>';$('oloot').innerHTML=G.loot.length?G.loot.slice(0,30).map(it=>tile(it,false)).join(''):'<span class="muted">這局沒有撿到裝備。</span>';
  
  $('over').hidden=false;$('pause').hidden=true;$('pbtn').hidden=true;toastT=0;$('toast').className='';if(win)sfx('win');else if(win===false){sfx('die');setTimeout(()=>sfx('lose'),700)}else sfx('retreat');
 }
 $('gohome').onclick=()=>{setTimeout(()=>{try{potWatch()}catch(e){}try{fmRipeWatch()}catch(e){}},1500);CHOOSING=CHESTING=false;$('lvup').hidden=true;$('chest').hidden=true;G=null;$('over').hidden=true;$('hud').hidden=true;$('home').hidden=false;renderHome()};
-$('replay').onclick=()=>{const c=G?G.c:(SAVE.ch||0),wt=!!(G&&G.tr);$('gohome').onclick();audioUnlock();if(wt)startTrain();else startRun(c)};
+$('replay').onclick=()=>{const c=G?G.c:(SAVE.ch||0),wt=!!(G&&G.tr),en=!!(G&&G.endless);$('gohome').onclick();audioUnlock();if(wt)startTrain();else if(en)startEndless();else startRun(c)};
 function setPause(p){if(!G||G.over||CHOOSING||CHESTING)return;running=!p;sfx(p?'open':'close');$('pause').hidden=!p;if(p)renderPauseSkills()}
 $('pbtn').onclick=()=>setPause(true);$('resume').onclick=()=>setPause(false);
 $('retreat').onclick=()=>{$('pause').hidden=true;endRun(null)};
@@ -5690,8 +5703,8 @@ function hud(){spdUI();
  if(!G)return;
  $('hpi').style.width=Math.max(0,G.hp/G.S.hp*100)+'%';$('xpi').style.width=Math.min(100,G.xp/needXp(G.lv)*100)+'%';
  {const ht=G.tr?'❤️'.repeat(Math.max(0,G.tr.hp))+'🖤'.repeat(Math.max(0,TR.hp-G.tr.hp)):fmt(Math.max(0,Math.ceil(G.hp)))+' / '+fmt(Math.ceil(G.S.hp)),xt=G.tr?(trLevel(Math.min(G.t,TR.dur-.01)).ic+' '+trLevel(Math.min(G.t,TR.dur-.01)).nm):'Lv.'+G.lv;if($('hpt')&&$('hpt').textContent!==ht)$('hpt').textContent=ht;if($('xpt')&&$('xpt').textContent!==xt)$('xpt').textContent=xt}
- {const rem=Math.ceil((G.tr?TR.dur:DUR)-G.t);if(rem<=10&&rem>0&&rem!==G.tw&&running){G.tw=rem;sfx('warn')}}
- $('timer').textContent=G.tr?fmtT(Math.max(0,TR.dur-G.t)):G.t>=DUR?(BOSS[CH[G.c].boss]?'首領戰':'00:00'):fmtT(DUR-G.t);{const hk=$('hk');if(hk&&hk._k!==G.kills){const d=G.kills-(hk._k||0);hk._k=G.kills;hk.innerHTML=(G.tr?'閃過 ':'擊倒 ')+'<b>'+G.kills+'</b>';hk.classList.remove('pop','big');void hk.offsetWidth;hk.classList.add(d>=5?'big':'pop')}}
+ {const rem=Math.ceil((G.tr?TR.dur:DUR)-G.t);if(!G.endless&&rem<=10&&rem>0&&rem!==G.tw&&running){G.tw=rem;sfx('warn')}}
+ $('timer').textContent=G.tr?fmtT(Math.max(0,TR.dur-G.t)):G.endless?fmtT(G.t):G.t>=DUR?(BOSS[CH[G.c].boss]?'首領戰':'00:00'):fmtT(DUR-G.t);{const hk=$('hk');if(hk&&hk._k!==G.kills){const d=G.kills-(hk._k||0);hk._k=G.kills;hk.innerHTML=(G.tr?'閃過 ':'擊倒 ')+'<b>'+G.kills+'</b>';hk.classList.remove('pop','big');void hk.offsetWidth;hk.classList.add(d>=5?'big':'pop')}}
 }
 let hudT=0,ftAvg=.016,slowT=0;
 function quality(raw,dt){
@@ -6047,10 +6060,12 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1015-F';
+const GBUILD='1015-H';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['🎯','射龍門按鈕卡住修正','修正射龍門有時按鈕變灰、按不下「射門」的問題:連線超過 20 秒沒回應會視為失敗,畫面卡住超過 25 秒會自動解除,並加上錯誤保護。'],
+['♾️','新玩法:無盡挑戰!','地圖最下方新增「無盡挑戰」(通關第一區解鎖):沒有時間限制,怪物會隨時間越來越強,每 3 分鐘出現一隻首領(依序輪流),擊破可回復一半生命並掉落寶物,一路打到倒下為止!紀錄撐過時間、擊破首領數、擊倒數,首領越多結算金幣越多。'],
 ['⚔️','戰力顯示修正','修正裝備頁的戰力和排行榜戰力對不上的問題:換裝、洗練後會立刻更新並同步到排行榜;排行榜上你自己那一列直接顯示裝備頁的即時戰力。'],
 ['🌃','第三關「夜市」開放!','通關第二關就能挑戰:一群糾纏不清的前任們擋在夜市巷弄,首領「前任之王」打到一半會變身成「冥婚鬼新娘」,被她的鎮屍符貼到會定身 1 秒。通關可獲得全新的夜市首領裝備。'],
 ['🦖','恐龍裝備標示修正','暴龍頭骨盔、霸王龍鱗戰甲的來源標示,從誤植的「夜市」改回「侏儸紀專屬裝備」;侏儸紀若連線失敗,現在會顯示原因,方便排查。'],
@@ -6069,8 +6084,6 @@ const GNOTES=[
 ['👑','侏儸紀三大獎!','暴龍、暴龍王、黃金霸王龍改成直接抱走池底的 1% / 2% / 3%,子彈越大越容易抓到!黃金霸王龍還必掉一件典藏恐龍裝備(暴龍頭骨盔或霸王龍鱗戰甲)。'],
 ['🦖','侏儸紀同房同步!','同一房間的玩家現在看到的恐龍完全一樣,同房幾個人,恐龍就有幾倍多!誰先抓到,大家畫面上那一隻都會倒下,並顯示他的顏色和獎金。'],
 ['🦖','侏儸紀稱號登場!','稱號系統加入侏儸紀:常打恐龍會升級成「恐龍實習生 → 網子達人 → 暴龍獵人 → 侏儸紀園長」。另外新增 4 個特殊稱號:抓過黃金霸王龍的「黃金獵人」、抓過 10 隻暴龍王的「屠龍勇者」、兩件恐龍裝備都打到的「恐龍裝備控」,以及射龍門、21 點、賭石、侏儸紀都愛的「四賭通吃」。'],
-['🕸️','侏儸紀網子變大','侏儸紀的捕獲網全部放大 1.3 倍,一網打盡更容易!'],
-['💎','賭石坊進新貨','芳芳最近進的原石品質不錯,切垮的少了一點,趁現在去賭石坊碰碰運氣!'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6099,7 +6112,7 @@ function verNotice(){if(inBattle()){setTimeout(verNotice,3000);return}let seen='
 
 /* ===== 1005-ZZZC 公告中心:左上角「📢 公告」,看更新內容和系統訊息 ===== */
 function annDot(){const d=$('anndot');if(d)d.hidden=(SAVE&&SAVE.annSeen)===GVER}
-/* 1015-F 公告置頂改成第三關夜市(取代侏儸紀宣傳卡) */
+/* 1015-H 公告置頂改成第三關夜市(取代侏儸紀宣傳卡) */
 function s3PromoFill(){document.querySelectorAll('img[data-s3k]').forEach(i=>{if(ART[i.dataset.s3k])i.src=ART[i.dataset.s3k]});document.querySelectorAll('[data-s3bg]').forEach(d=>{if(ART['bg-nightmarket'])d.style.setProperty('--pbg','url('+ART['bg-nightmarket']+')')})}
 function s3Promo(){if(twDay()>'2026-11-20')return'';try{if(!ART['bg-nightmarket'])ensurePack('stage3');if(!ART['冥婚紅蓋頭'])ensurePack('stage3b')}catch(e){}const I=k=>'<img data-s3k="'+k+'" src="'+(ART[k]||'')+'" alt="">';
  return'<div class="jdpromo" data-s3bg="1" style="'+(ART['bg-nightmarket']?'--pbg:url('+ART['bg-nightmarket']+')':'')+'"><div class="jpf">'+I('前任之王-walk-1')+'</div><div class="jpm"><div class="jpt">🌃 第三關「夜市」開放!</div><div class="jps">通關第二關解鎖 · 首領「前任之王」打到一半變身「冥婚鬼新娘」</div>'+
