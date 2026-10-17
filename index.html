@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 <title>社畜特攻隊</title>
-<meta name="gbuild" content="1015-H">
+<meta name="gbuild" content="1015-I">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1005X">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1005X">
@@ -2059,7 +2059,7 @@ html body #login.poster .mqrib p{color:#f3e6c9!important;text-shadow:0 2px 6px #
     <text x="22" y="56" font-family="'Great Vibes','Segoe Script','Brush Script MT','Snell Roundhand',cursive" font-size="58" font-style="italic" fill="url(#sgg)">Kao</text>
     <path class="sw" d="M14 66 C 60 80, 130 78, 176 60 S 214 36, 222 30" fill="none" stroke="url(#sgg)" stroke-width="2.4" stroke-linecap="round"/>
     <path class="sw2" d="M150 70 l 14 -4" fill="none" stroke="url(#sgg)" stroke-width="2" stroke-linecap="round"/></svg></div>
-   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-H</span></small>
+   <small>© 2026 Kao. All rights reserved. · 版本 <span id="gbuild">1015-I</span></small>
   </div>
  </div>
 </div>
@@ -6060,10 +6060,11 @@ try{if(SAVE.cas==='jr')jrPanel()}catch(e){}
 try{const _dpr=dpRenderPot;dpRenderPot=function(){const r=_dpr.apply(this,arguments);try{if(SAVE.cas==='jr'&&SAVE.tab==='dragon')jrPanel()}catch(e){}return r}}catch(e){}
 
 /* ===== 改版公告 ===== */
-const GBUILD='1015-H';
+const GBUILD='1015-I';
 try{if($('gbuild'))$('gbuild').textContent=GBUILD}catch(e){}
 const GVER=GBUILD;/* 1010-K 跟遊戲版本號連動,每次改版都會跳公告 */
 const GNOTES=[
+['💌','停止更新公告','感謝各位的遊玩體驗!本遊戲將不再更新,創作者要去開發另一款真正搬得上檯面的遊戲。遊戲內容與排行榜會照常保留,謝謝你們的陪伴。'],
 ['🎯','射龍門按鈕卡住修正','修正射龍門有時按鈕變灰、按不下「射門」的問題:連線超過 20 秒沒回應會視為失敗,畫面卡住超過 25 秒會自動解除,並加上錯誤保護。'],
 ['♾️','新玩法:無盡挑戰!','地圖最下方新增「無盡挑戰」(通關第一區解鎖):沒有時間限制,怪物會隨時間越來越強,每 3 分鐘出現一隻首領(依序輪流),擊破可回復一半生命並掉落寶物,一路打到倒下為止!紀錄撐過時間、擊破首領數、擊倒數,首領越多結算金幣越多。'],
 ['⚔️','戰力顯示修正','修正裝備頁的戰力和排行榜戰力對不上的問題:換裝、洗練後會立刻更新並同步到排行榜;排行榜上你自己那一列直接顯示裝備頁的即時戰力。'],
@@ -6083,7 +6084,6 @@ const GNOTES=[
 ['🎁','侏儸紀掉寶標示','侏儸紀的恐龍倍率表和遊戲右上角的倍率視窗,會標出哪些恐龍會掉裝備:暴龍掉至尊頭盔、暴龍王掉典藏戰甲,黃金霸王龍必掉一件典藏恐龍裝備。'],
 ['👑','侏儸紀三大獎!','暴龍、暴龍王、黃金霸王龍改成直接抱走池底的 1% / 2% / 3%,子彈越大越容易抓到!黃金霸王龍還必掉一件典藏恐龍裝備(暴龍頭骨盔或霸王龍鱗戰甲)。'],
 ['🦖','侏儸紀同房同步!','同一房間的玩家現在看到的恐龍完全一樣,同房幾個人,恐龍就有幾倍多!誰先抓到,大家畫面上那一隻都會倒下,並顯示他的顏色和獎金。'],
-['🦖','侏儸紀稱號登場!','稱號系統加入侏儸紀:常打恐龍會升級成「恐龍實習生 → 網子達人 → 暴龍獵人 → 侏儸紀園長」。另外新增 4 個特殊稱號:抓過黃金霸王龍的「黃金獵人」、抓過 10 隻暴龍王的「屠龍勇者」、兩件恐龍裝備都打到的「恐龍裝備控」,以及射龍門、21 點、賭石、侏儸紀都愛的「四賭通吃」。'],
 ];
 /* ===== 禮物:新帳號開局獎金 8,888、中秋節賭金 10,000 =====
    存在存檔裡(SAVE.gNew / SAVE.gMid),跟著雲端帳號走,每個帳號各領一次,不需要伺服器 SQL。
@@ -6114,6 +6114,9 @@ function verNotice(){if(inBattle()){setTimeout(verNotice,3000);return}let seen='
 function annDot(){const d=$('anndot');if(d)d.hidden=(SAVE&&SAVE.annSeen)===GVER}
 /* 1015-H 公告置頂改成第三關夜市(取代侏儸紀宣傳卡) */
 function s3PromoFill(){document.querySelectorAll('img[data-s3k]').forEach(i=>{if(ART[i.dataset.s3k])i.src=ART[i.dataset.s3k]});document.querySelectorAll('[data-s3bg]').forEach(d=>{if(ART['bg-nightmarket'])d.style.setProperty('--pbg','url('+ART['bg-nightmarket']+')')})}
+function byePromo(){try{if(!ART['bg-nightmarket'])ensurePack('stage3')}catch(e){}
+ return'<div class="jdpromo" data-s3bg="1" style="'+(ART['bg-nightmarket']?'--pbg:url('+ART['bg-nightmarket']+')':'')+'"><div class="jpm" style="width:100%"><div class="jpt">💌 給所有社畜的一封信</div><div class="jps">《社畜特攻隊》停止更新公告</div>'+
+  '<div class="jpk" style="font-size:14px;line-height:1.7">感謝各位的遊玩體驗!<br>本遊戲將不再更新。<br>創作者要去開發另一款真正搬得上檯面的遊戲,<br>希望到時候還能在新作裡遇見你們。<br><br>遊戲內容與排行榜會照常保留,繼續打你的夜市、拚你的無盡挑戰吧。<br><b>謝謝你們陪我一起加班 🙇</b></div></div></div>'}
 function s3Promo(){if(twDay()>'2026-11-20')return'';try{if(!ART['bg-nightmarket'])ensurePack('stage3');if(!ART['冥婚紅蓋頭'])ensurePack('stage3b')}catch(e){}const I=k=>'<img data-s3k="'+k+'" src="'+(ART[k]||'')+'" alt="">';
  return'<div class="jdpromo" data-s3bg="1" style="'+(ART['bg-nightmarket']?'--pbg:url('+ART['bg-nightmarket']+')':'')+'"><div class="jpf">'+I('前任之王-walk-1')+'</div><div class="jpm"><div class="jpt">🌃 第三關「夜市」開放!</div><div class="jps">通關第二關解鎖 · 首領「前任之王」打到一半變身「冥婚鬼新娘」</div>'+
   '<div class="jpr"><div class="jpi"><b>難度 ★★★★★ 目前最高</b><small>怪物強度約第二關的 1.7 倍;小怪血量約首領的 1/20,不再一碰就死;精英「前世男友、前世女友」成對出現,要集中打</small></div></div>'+
@@ -6129,7 +6132,7 @@ function jdPromo(){/* 1010-Z29 公告置頂改成侏儸紀 */if(twDay()>'2026-10
 function annOpen(tab){sfx('open');SAVE.annSeen=GVER;save();annDot();const ov=document.createElement('div');ov.className='ov annov';
  const notes=GNOTES.filter(n=>!(n[0]==='🥮'&&Date.now()>=GIFT_MID_END)).map(n=>'<div class="vnr"><span>'+n[0]+'</span><div><b>'+n[1]+'</b><small>'+n[2]+'</small></div></div>').join('');
  const logs=(SAVE.syslog||[]).map(l=>'<div class="annr"><span>'+escH(l.m)+'</span><small>'+dpAgo(new Date(l.t).toISOString())+'</small></div>').join('')||'<p class="muted">目前沒有系統訊息</p>';
- ov.innerHTML='<div class="box annbox"><h2>📢 公告</h2><div class="trbtabs"><button data-t="up">更新內容</button><button data-t="sys">系統訊息</button></div><div class="annbody" data-p="up">'+s3Promo()+'<p class="muted" style="margin:0 0 4px;font-size:12px">目前版本 '+GBUILD+'</p>'+notes+'</div><div class="annbody" data-p="sys" hidden>'+logs+'</div><button class="btn pri" data-x="1">關閉</button></div>';
+ ov.innerHTML='<div class="box annbox"><h2>📢 公告</h2><div class="trbtabs"><button data-t="up">更新內容</button><button data-t="sys">系統訊息</button></div><div class="annbody" data-p="up">'+byePromo()+'<p class="muted" style="margin:0 0 4px;font-size:12px">目前版本 '+GBUILD+'</p>'+notes+'</div><div class="annbody" data-p="sys" hidden>'+logs+'</div><button class="btn pri" data-x="1">關閉</button></div>';
  document.body.appendChild(ov);const sw=t=>{ov.querySelectorAll('.trbtabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));ov.querySelectorAll('.annbody').forEach(p=>p.hidden=p.dataset.p!==t)};sw(tab||'up');
  ov.onclick=e=>{if(e.target.closest('[data-gos3]')){ov.remove();try{SAVE.tab='map';setTab('map');renderHome()}catch(x){}return}if(e.target.closest('[data-gojd]')){const gj=e.target.closest('[data-gojd]').dataset.gojd==='jr'?'jr':'jd';ov.remove();try{SAVE.tab='dragon';setTab('dragon');casSwitch(gj);renderHome()}catch(x){}return}const b=e.target.closest('[data-t]');if(b){sfx('tab');sw(b.dataset.t);return}if(e.target.closest('[data-x]')||e.target===ov){ov.remove();sfx('close')}}}
 setTimeout(()=>{const b=$('annbtn');if(b)b.onclick=()=>{audioUnlock();annOpen()};try{annDot()}catch(e){}},0);
